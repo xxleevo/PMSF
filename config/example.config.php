@@ -311,7 +311,11 @@ $pokemonToExclude = [];
 $noDeleteGyms = false;
 $noDeletePokestops = false;
 
-$raidBosses = [320, 307, 129, 296, 281, 315, 103, 303, 221, 232, 68, 26, 114, 112, 248, 359, 105, 377];
+if ($copyrightSafe === true) {
+    $raidBosses = [152, 155, 158, 129, 191, 193, 103, 281, 303, 204, 315, 232, 68, 221, 26, 114, 359, 105, 112, 217, 248, 377, 250];  // This array is used if $copyrightSafe is true
+} else {
+    $raidBosses = [ "152_00", "155_00", "158_00", "129_00", "191_00", "193_00", "103_61", "281_00", "303_00", "204_00", "315_00", "232_00", "068_00", "221_00", "026_61", "114_00", "359_00", "105_61", "112_00", "217_00", "248_00", "377_00" ]; // This array is used if $copyrightSafe is false
+}
 
 $sendWebhook = false;				// Sends Raids & Pokémon. Needs a 3th party program like pokealarm.
 $webhookUrl = null;                             //['url-1','url-2']
