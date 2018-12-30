@@ -40,6 +40,8 @@ if ( $blockIframe ) {
              type="image/x-icon">';
     }
     ?>
+	<!-- font awesome icons -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <!-- non-retina iPhone pre iOS 7 -->
     <link rel="apple-touch-icon" href="static/appicons/114x114.png"
           sizes="57x57">
@@ -187,24 +189,24 @@ if ( $blockIframe ) {
     <script>
         var token = '<?php echo ( ! empty( $_SESSION['token'] ) ) ? $_SESSION['token'] : ""; ?>';
     </script>
-    <link href="node_modules/leaflet-geosearch/assets/css/leaflet.css" rel="stylesheet" />
+    <link href="https://unpkg.com/leaflet-geosearch@2.7.0/assets/css/leaflet.css" rel="stylesheet" />
     <link rel="stylesheet" href="static/dist/css/app.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css">
-    <link rel="stylesheet" href="node_modules/datatables/media/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
     <script src="static/js/vendor/modernizr.custom.js"></script>
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Leaflet -->
-    <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-    <link href='static/css/leaflet.fullscreen.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 </head>
 <body id="top">
 <div class="wrapper">
     <!-- Header -->
-    <header id="header">
-        <a href="#nav"><span class="label"><?php echo i8ln( 'Options' ) ?></span></a>
+    <header id="header" style = "background-image: linear-gradient(to top, #686868 0%, #121212 100%)">
+        <a href="#nav"><b><span class="label" style="color:white"><?php echo i8ln('Menü') ?></span></b></a>
 
         <h1><a href="#"><?= $title ?><img src="<?= $raidmapLogo ?>" height="35" width="auto" border="0" style="float: right; margin-left: 5px; margin-top: 10px;"></a></h1>
         <?php
@@ -253,8 +255,8 @@ if ( $blockIframe ) {
                 } else {
                     header('Location: ./logout.php');
                 }
-
-                echo "<span style='color: {$color};'>" . substr($_SESSION['user']->user, 0, 3) . "...</span>";
+				echo "<span style='color: {$color};'><i class='fa fa-check fa-fw'></i></span>";
+                //echo "<span style='color: {$color};'>" . substr($_SESSION['user']->user, 0, 3) . "...</span>";
             } else {
                 echo "<a href='./user'>" . i8ln('Login') . "</a>";
             }
@@ -274,11 +276,11 @@ if ( $blockIframe ) {
             if ( ! $noPokemon || ! $noNests ) {
                 if ( ! $noNests ) {
                 ?>
-                <h3><?php echo i8ln( 'Pokemon &amp; Nests' ) ?></h3>
+                <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i><?php echo i8ln('Pokemon & Nester') ?></h3>
                 <?php
                 } else {
                 ?>
-                <h3><?php echo i8ln( 'Pokemon' ) ?></h3>
+                <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i><?php echo i8ln('Pokemon') ?></h3>
                 <?php
                 } ?>
                 <div>
@@ -426,11 +428,11 @@ if ( $blockIframe ) {
             if ( ! $noPokestops ) {
                 if ( ! $noQuests ) {
                 ?>
-		<h3><?php echo i8ln( 'Pokestops &amp; Quests' ); ?></h3>
+		<h3 style="font-weight: bold"><i class="fa fa-map-pin fa-fw"></i><?php echo i8ln( 'Pokestops &amp; Quests' ); ?></h3>
                 <?php
                 } else {
                 ?>
-		<h3><?php echo i8ln( 'Pokestops' ); ?></h3>
+		<h3 style="font-weight: bold"><i class="fa fa-map-pin fa-fw"></i><?php echo i8ln( 'Pokestops' ); ?></h3>
                 <?php
                 } ?>
 		<div>
@@ -570,7 +572,7 @@ if ( $blockIframe ) {
             <?php
             if ( ! $noRaids || ! $noGyms ) {
                 ?>
-                <h3><?php echo i8ln( 'Gym &amp; Raid' ); ?></h3>
+				<h3 style="font-weight: bold"><i class="fa fa-shield fa-fw"></i><?php echo i8ln('Arenen &amp; Raids') ?></h3>
                 <div>
                     <?php
                     if ( ! $noRaids ) {
@@ -808,10 +810,10 @@ if ( $blockIframe ) {
             <?php
             if ( ! $noSearchLocation || ! $noNests || ! $noStartMe || ! $noStartLast || ! $noFollowMe || ! $noPokestops || ! $noScannedLocations || ! $noSpawnPoints || ! $noRanges || ! $noWeatherOverlay || ! $noSpawnArea ) {
                 if ( ! $noSearchLocation ) {
-                    echo '<h3>' . i8ln( 'Location &amp; Search' ) . '</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>Location</h3>
                     <div>';
                 } else {
-                    echo '<h3>' . i8ln( 'Location' ) . '</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>Location</h3>
                     <div>';
 		} ?>
                 <?php
@@ -954,7 +956,7 @@ if ( $blockIframe ) {
             ?>
             <?php
             if ( ! $noNotifyPokemon || ! $noNotifyRarity || ! $noNotifyIv || ! $noNotifyLevel || ! $noNotifySound || ! $noNotifyRaid || ! $noNotifyBounce || ! $noNotifyNotification ) {
-                echo '<h3>' . i8ln( 'Notification' ) . '</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-star fa-fw"></i>'.i8ln('Favoriten').'</h3>
             <div>';
             }
             ?>
@@ -1092,7 +1094,7 @@ if ( $blockIframe ) {
 
             <?php
             if ( ! $noMapStyle || ! $noDirectionProvider || ! $noIconSize || ! $noIconNotifySizeModifier || ! $noGymStyle || ! $noLocationStyle ) {
-                echo '<h3>' . i8ln( 'Style' ) . '</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-map-o fa-fw"></i>'.i8ln('Style').'</h3>
             <div>';
             }
             ?>
@@ -1168,9 +1170,41 @@ if ( $blockIframe ) {
                 echo '</div>';
             }
             ?>
+			<h3 style="font-weight: bold"><i class="fa fa-sliders fa-fw"></i><?php echo i8ln('Einstellungen') ?></h3>
+            <div>
+				<span style="color: #3b3b3b"><b style="font-size:17px">Zurücksetzen:</b><br>Alle Einstellungen des Menüs werden auf Standard zurückgesetzt.</span>
+				<div>
+					<center>
+						<button class="settings"
+								onclick="confirm('Möchtest du die Einstellungen auf Standard zurücksetzen?') ? (localStorage.clear(), window.location.reload()) : false">
+							<i class="fa fa-refresh" aria-hidden="true"></i> <?php echo i8ln('Zurücksetzen') ?>
+						</button>
+					</center>
+				</div>
+				<br>
+				<span style="color: #3b3b3b"><b style="font-size:17px">Exportieren:</b><br>Speichere deine Einstellungen des Menüs indem du sie als Datei downloadest.<br></span>
+				<span style="color: #3b3b3b"><b style="font-size:17px">Importieren:</b><br>Lade eine Datei hoch, um zuvor gespeicherte Einstellungen wieder herzustellen.</span>
+				<div>
+					<center>
+						<button class="settings"
+								onclick="download('<?= addslashes($title) ?>', JSON.stringify(JSON.stringify(localStorage)))">
+							<i class="fa fa-upload" aria-hidden="true"></i> <?php echo i8ln('Exportieren') ?>
+						</button>
+					</center>
+				</div>
+				<div>
+					<center>
+						<input id="fileInput" type="file" style="display:none;" onchange="openFile(event)"/>
+						<button class="settings"
+								onclick="document.getElementById('fileInput').click()">
+							<i class="fa fa-download" aria-hidden="true"></i> <?php echo i8ln('Importieren') ?>
+						</button>
+					</center>
+				</div>
+			</div>
             <?php
             if ( ! $noAreas ) {
-                echo '<h3>' . i8ln( 'Areas' ) . '</h3>';
+			echo '<h3 style="font-weight: bold"><i class="fa fa-globe fa-fw"></i>'.i8ln('Orte').'</h3>';
                 $count = sizeof( $areas );
                 if ( $count > 0 ) {
                     echo '<div class="form-control switch-container area-container"><ul>';
@@ -1182,31 +1216,8 @@ if ( $blockIframe ) {
             }
             ?>
         </div>
-        <div>
-            <center>
-                <button class="settings"
-                        onclick="confirm('Are you sure you want to reset settings to default values?') ? (localStorage.clear(), window.location.reload()) : false">
-                    <i class="fa fa-refresh" aria-hidden="true"></i> <?php echo i8ln( 'Reset Settings' ) ?>
-                </button>
-            </center>
-        </div>
-        <div>
-            <center>
-                <button class="settings"
-                        onclick="download('<?= addslashes( $title ) ?>', JSON.stringify(JSON.stringify(localStorage)))">
-                    <i class="fa fa-upload" aria-hidden="true"></i> <?php echo i8ln( 'Export Settings' ) ?>
-                </button>
-            </center>
-        </div>
-        <div>
-            <center>
-                <input id="fileInput" type="file" style="display:none;" onchange="openFile(event)"/>
-                <button class="settings"
-                        onclick="document.getElementById('fileInput').click()">
-                    <i class="fa fa-download" aria-hidden="true"></i> <?php echo i8ln( 'Import Settings' ) ?>
-                </button>
-            </center>
-        </div>
+
+
         <?php
         if (($noNativeLogin === false) && !empty($_SESSION['user']->id)) {
             ?>
@@ -1399,160 +1410,61 @@ if ( $blockIframe ) {
         <div class="quest-modal" style="display: none;">
             <input type="hidden" value="" name="questPokestop" class="questPokestop"/>
             <?php
-            $json   = file_get_contents( 'static/dist/data/questtype.min.json' );
-            $questtypes  = json_decode( $json, true );
-
-            $json    = file_get_contents( 'static/dist/data/rewardtype.min.json' );
-            $rewardtypes   = json_decode( $json, true );
-
-            $json    = file_get_contents( 'static/dist/data/conditiontype.min.json' );
-            $conditiontypes   = json_decode( $json, true );
-
-	    $json    = file_get_contents( 'static/dist/data/pokemon.min.json' );
-	    $encounters = json_decode( $json, true );
-
-	    $json    = file_get_contents( 'static/dist/data/items.min.json' );
-	    $items = json_decode( $json, true );
+            $quests = array();
+            $json   = file_get_contents( 'static/dist/data/quests.min.json' );
+            $input  = json_decode( $json, true );
+            foreach ( $input as $key => $value ) {
+                $quests[ $value['cat'] ][] = array(
+                    'id'   => $key,
+                    'name' => $value['name']
+                );
+            }
+            $rewards = array();
+            $json    = file_get_contents( 'static/dist/data/rewards.min.json' );
+            $input   = json_decode( $json, true );
+            foreach ( $input as $key => $value ) {
+                $rewards[ $value['cat'] ][] = array(
+                    'id'   => $key,
+                    'name' => $value['name']
+                );
+            }
             ?>
-            <label for="questTypeList"><?php echo i8ln( 'Quest' ); ?>
-            <select id="questTypeList" name="questTypeList" class="questTypeList">
-                <option />
+            <select name="questList" class="questList">
+                <option value="NULL"><?php echo i8ln( 'Choose a Quest' ); ?></option>
                 <?php
-                foreach ( $questtypes as $key => $value ) {
-                    if ( ! in_array( $key, $hideQuestTypes ) ) {
+                foreach ( $quests as $key => $value ) {
                     ?>
-                        <option value="<?php echo $key; ?>"><?php echo i8ln( $value['text'] ); ?></option>
+                    <optgroup label="<?php echo $key; ?>">
+                        <?php
+                        foreach ( $value as $t ) {
+                            ?>
+                            <option value="<?php echo $t['id']; ?>"><?php echo i8ln( $t['name'] ); ?></option>
+                            <?php
+                        }
+                        ?>
+                    </optgroup>
                     <?php
-                    }
                 }
                 ?>
-	    </select>
-            <select id="questAmountList" name="questAmountList" class="questAmountList">
-                <option />
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-	    </select>
-            </label>
-            <label for="conditionTypeList"><?php echo i8ln( 'Conditions' ); ?>
-            <select id="conditionTypeList" name="conditionTypeList" class="conditionTypeList">
-                <option />
-                <?php
-                foreach ( $conditiontypes as $key => $value ) {
-                    if ( ! in_array( $key, $hideConditionTypes ) ) {
-                    ?>
-                        <option value="<?php echo $key; ?>"><?php echo i8ln( $value['text'] ); ?></option>
-                    <?php
-                    }
-                }
-                ?>
-	    </select>
-            <select id="pokeCatchList" name="pokeCatchList" class="pokeCatchList" multiple></select>
-	    <select id="typeCatchList" name="typeCatchList" class="typeCatchList" multiple>
-                <option value="1"><?php echo i8ln( 'Normal' ); ?></option>
-                <option value="2"><?php echo i8ln( 'Fighting' ); ?></option>
-                <option value="3"><?php echo i8ln( 'Flying' ); ?></option>
-                <option value="4"><?php echo i8ln( 'Poison' ); ?></option>
-                <option value="5"><?php echo i8ln( 'Ground' ); ?></option>
-                <option value="6"><?php echo i8ln( 'Rock' ); ?></option>
-                <option value="7"><?php echo i8ln( 'Bug' ); ?></option>
-                <option value="8"><?php echo i8ln( 'Ghost' ); ?></option>
-                <option value="9"><?php echo i8ln( 'Steel' ); ?></option>
-                <option value="10"><?php echo i8ln( 'Fire' ); ?></option>
-                <option value="11"><?php echo i8ln( 'Water' ); ?></option>
-                <option value="12"><?php echo i8ln( 'Grass' ); ?></option>
-                <option value="13"><?php echo i8ln( 'Electric' ); ?></option>
-                <option value="14"><?php echo i8ln( 'Psychic' ); ?></option>
-                <option value="15"><?php echo i8ln( 'Ice' ); ?></option>
-                <option value="16"><?php echo i8ln( 'Dragon' ); ?></option>
-                <option value="17"><?php echo i8ln( 'Dark' ); ?></option>
-                <option value="18"><?php echo i8ln( 'Fairy' ); ?></option>
             </select>
-            <select id="raidLevelList" name="raidLevelList" class="raidLevelList">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-	    </select>
-	    <select id="throwTypeList" name="throwTypeList" class="throwTypeList">
-		<option />
-                <option value="10"><?php echo i8ln( 'Nice' ); ?></option>
-                <option value="11"><?php echo i8ln( 'Great' ); ?></option>
-                <option value="12"><?php echo i8ln( 'Excellent' ); ?></option>
-            </select>
-            <select id="curveThrow" class="curveThrow" class="curveThrow">
-		<option />
-                <option value="0"><?php echo i8ln( 'Without curve throw' ); ?></option>
-                <option value="1"><?php echo i8ln( 'With curve throw' ); ?></option>
-            </select>
-            </label>
-            <label for="rewardTypeList"><?php echo i8ln( 'Reward' ); ?>
-            <select id="rewardTypeList" name="rewardTypeList" class="rewardTypeList">
-                <option />
+            <select name="rewardList" class="rewardList">
+                <option value="NULL"><?php echo i8ln( 'Choose a Reward' ); ?></option>
                 <?php
-                foreach ( $rewardtypes as $key => $value ) {
-                    if ( ! in_array( $key, $hideRewardTypes ) ) {
+                foreach ( $rewards as $key => $value ) {
                     ?>
-                        <option value="<?php echo $key; ?>"><?php echo i8ln( $value['text'] ); ?></option>
+                    <optgroup label="<?php echo $key; ?>">
+                        <?php
+                        foreach ( $value as $t ) {
+                            ?>
+                            <option value="<?php echo $t['id']; ?>"><?php echo i8ln( $t['name'] ); ?></option>
+                            <?php
+                        }
+                        ?>
+                    </optgroup>
                     <?php
-                    }
                 }
                 ?>
-	    </select>
-            <select id="pokeQuestList" name="pokeQuestList" class="pokeQuestList">
-                <option />
-                <?php
-                foreach ( $encounters as $key => $value ) {
-                    if ( in_array( $key, $showEncounters ) ) {
-                    ?>
-                        <option value="<?php echo $key; ?>"><?php echo i8ln( $value['name'] ); ?></option>
-                    <?php
-                    }
-                }
-                ?>
-	    </select>
-            <select id="itemQuestList" name="itemQuestList" class="itemQuestList">
-                <option />
-                <?php
-                foreach ( $items as $key => $value ) {
-                    if ( in_array( $key, $showItems ) ) {
-                    ?>
-                        <option value="<?php echo $key; ?>"><?php echo i8ln( $value['name'] ); ?></option>
-                    <?php
-                    }
-                }
-                ?>
-	    </select>
-            <select id="itemAmountList" name="itemAmountList" class="itemAmountList">
-                <option />
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
             </select>
-            <select id="dustQuestList" name="dustQuestList" class="dustQuestList">
-                <option />
-                <option value="200">200</option>
-                <option value="500">500</option>
-                <option value="1000">1000</option>
-                <option value="1500">1500</option>
-                <option value="2000">2000</option>
-	    </select>
-            </label>
             <div class="button-container">
                 <button type="button" onclick="manualQuestData(event);" class="submitting-quest"><i
                         class="fa fa-binoculars"
@@ -1749,23 +1661,23 @@ if ( $blockIframe ) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.1/js/select2.full.min.js"></script>
-<script src="node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="node_modules/moment/min/moment-with-locales.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
 <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
 <script src="node_modules/push.js/bin/push.min.js"></script>
 <script src="node_modules/long/src/long.js"></script>
-<script src="node_modules/leaflet/dist/leaflet.js"></script>
-<script src="node_modules/leaflet-geosearch/dist/bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet-geosearch@2.7.0/dist/bundle.min.js"></script>
 <script src="static/js/vendor/s2geometry.js"></script>
 <script src="static/dist/js/app.min.js"></script>
 <script src="static/js/vendor/classie.js"></script>
-<script src="node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
-<script src='static/js/vendor/Leaflet.fullscreen.min.js'></script>
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+<script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 <script src="static/js/vendor/smoothmarkerbouncing.js"></script>
 <script src='https://maps.googleapis.com/maps/api/js?key=<?php $gmapsKey ?> ' async defer></script>
-<script src="static/js/vendor/Leaflet.GoogleMutant.js"></script>
-<script src="static/js/vendor/turf.min.js"></script>
+<script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
 <script>
     var centerLat = <?= $startingLat; ?>;
     var centerLng = <?= $startingLng; ?>;
@@ -1877,6 +1789,7 @@ if ( $blockIframe ) {
 <script src="static/dist/js/map.common.min.js"></script>
 <script src="static/dist/js/map.min.js"></script>
 <script src="static/dist/js/stats.min.js"></script>
+<script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
 <script>
 $( document ).ready(function() {
     initMap()
