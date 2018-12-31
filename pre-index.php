@@ -1204,6 +1204,29 @@ if ( $blockIframe ) {
 				</div>
 			</div>
             <?php
+			if (($noDiscordLogin === false) && !empty($_SESSION['user']->id)) {
+                echo '<h3 style="font-weight: bold"><i class="fa fa-key fa-fw"></i>'.i8ln('Authentifizierung').'</h3>
+            <div>';
+            ?>
+            <div><center><p>
+            <?php
+            echo '<b>Eingeloggt:</b> via Discord<br>
+			<b>User:</b> ' . $_SESSION['user']->user . "";
+            ?>
+			</p></center></div>
+			<div>
+                <center>
+                    <button class="settings"
+                            onclick="document.location.href='logout.php'">
+                        <i class="fa" aria-hidden="true"></i> <?php echo i8ln('Logout'); ?>
+                    </button>
+                </center>
+            </div><br>
+        <?php
+		echo '</div>';
+        }
+        ?>
+            <?php
             if ( ! $noAreas ) {
 			echo '<h3 style="font-weight: bold"><i class="fa fa-globe fa-fw"></i>'.i8ln('Orte').'</h3>';
                 $count = sizeof( $areas );
@@ -1216,6 +1239,7 @@ if ( $blockIframe ) {
                 }
             }
             ?>
+
         </div>
         <?php
         if (($noNativeLogin === false) && !empty($_SESSION['user']->id)) {
@@ -1247,25 +1271,6 @@ if ( $blockIframe ) {
                 echo "<span style='color: red;'>" . i8ln('Membership expired on') . " {$time}</span>";
             } ?>
             </p></center></div>
-        <?php
-        }
-        ?>
-        <?php
-        if (($noDiscordLogin === false) && !empty($_SESSION['user']->id)) {
-            ?>
-            <div>
-                <center>
-                    <button class="settings"
-                            onclick="document.location.href='logout.php'">
-                        <i class="fa" aria-hidden="true"></i> <?php echo i8ln('Logout'); ?>
-                    </button>
-                </center>
-            </div><br>
-            <div><center><p>
-            <?php
-            echo 'Logged in as: ' . $_SESSION['user']->user . "<br>";
-            ?>
-	    </p></center></div>
         <?php
         }
         ?>
