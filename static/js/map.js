@@ -153,7 +153,7 @@ var toastrOptions = {
 createjs.Sound.registerSound('static/sounds/ding.mp3', 'ding')
 
 var pokemonTypes = [i8ln('unset'), i8ln('Normal'), i8ln('Fighting'), i8ln('Flying'), i8ln('Poison'), i8ln('Ground'), i8ln('Rock'), i8ln('Bug'), i8ln('Ghost'), i8ln('Steel'), i8ln('Fire'), i8ln('Water'), i8ln('Grass'), i8ln('Electric'), i8ln('Psychic'), i8ln('Ice'), i8ln('Dragon'), i8ln('Dark'), i8ln('Fairy')]
-var genderType = ['♂', '♀', '⚲']
+var genderType = ['♂', '♀', 'N/A']
 var forms = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?', i8ln('Normal'), i8ln('Sunny'), i8ln('Rainy'), i8ln('Snowy'), i8ln('Normal'), i8ln('Attack'), i8ln('Defense'), i8ln('Speed'), i8ln('1'), i8ln('2'), i8ln('3'), i8ln('4'), i8ln('5'), i8ln('6'), i8ln('7'), i8ln('8'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Frost'), i8ln('Fan'), i8ln('Mow'), i8ln('Wash'), i8ln('Heat'), i8ln('Plant'), i8ln('Sandy'), i8ln('Trash'), i8ln('Altered'), i8ln('Origin'), i8ln('Sky'), i8ln('Land'), i8ln('Overcast'), i8ln('Sunny'), i8ln('West sea'), i8ln('East sea'), i8ln('West sea'), i8ln('East sea'), i8ln('Arceus Normal'), i8ln('Archeus Fighting'), i8ln('Archeus Flying'), i8ln('Archeus Poison'), i8ln('Archeus Ground'), i8ln('Archeus Rock'), i8ln('Archeus Bug'), i8ln('Archeus Ghost'), i8ln('Archeus Steel'), i8ln('Archeus Fire'), i8ln('Archeus Water'), i8ln('Archeus Grass'), i8ln('Archeus Electric'), i8ln('Archeus Psychic'), i8ln('Archeus Ice'), i8ln('Archeus Dragon'), i8ln('Archeus Dark'), i8ln('Archeus Fairy')]
 var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.3210876, 0.34921268, 0.37523559, 0.39956728, 0.42250001, 0.44310755, 0.46279839, 0.48168495, 0.49985844, 0.51739395, 0.53435433, 0.55079269, 0.56675452, 0.58227891, 0.59740001, 0.61215729, 0.62656713, 0.64065295, 0.65443563, 0.667934, 0.68116492, 0.69414365, 0.70688421, 0.71939909, 0.7317, 0.73776948, 0.74378943, 0.74976104, 0.75568551, 0.76156384, 0.76739717, 0.7731865, 0.77893275, 0.7846369, 0.79030001]
 var throwType = JSON.parse('{"10": "Nice", "11": "Great", "12": "Excellent"}')
@@ -678,9 +678,9 @@ function pokemonLabel(item) {
     if (atk != null && def != null && sta != null) {
         var iv = getIv(atk, def, sta)
         details =
-            '<div><center>' +
-            'IV: ' + iv.toFixed(1) + '% (' + atk + '/' + def + '/' + sta + ')' +
-            '</center></div>'
+            '<div>' +
+            '<b><font size="4"> IV: ' + iv.toFixed(1) + '%</font></b>(' + atk + '/' + def + '/' + sta + ')' +
+            '</div>'
 
         if (cp != null && (cpMultiplier != null || level != null)) {
             var pokemonLevel
@@ -690,37 +690,36 @@ function pokemonLabel(item) {
                 pokemonLevel = getPokemonLevel(cpMultiplier)
             }
             details +=
-                '<div><center>' +
-                i8ln('CP') + ' : ' + cp + ' | ' + i8ln('Level') + ' : ' + pokemonLevel +
-                '</center></div>'
+                '<div>' +
+                '<b>' + i8ln('WP') + ' : ' + cp + ' | Level: ' + pokemonLevel + '</b>' +
+                '</div>'
         }
         details +=
-            '<div><center>' +
+            '<div>' +
             i8ln('Moves') + ' : ' + pMove1 + ' / ' + pMove2 +
-            '</center></div>'
+            '</div>'
     }
     if (weatherBoostedCondition !== 0) {
         details +=
-            '<div><center>' +
-            i8ln('Weather Boost') + ': ' + i8ln(weather[weatherBoostedCondition]) +
-            '</center></div>'
+            '<div>' +
+            i8ln('Wetter') + ': ' + i8ln(weather[weatherBoostedCondition]) +
+            '</div>'
     }
     if (gender != null) {
         details +=
-            '<div><center>' +
-            i8ln('Gender') + ': ' + genderType[gender - 1]
+            '<div>'
         if (weight != null) {
-            details += ' | ' + i8ln('Weight') + ': ' + weight.toFixed(2) + 'kg'
+            details += '' + i8ln('Gewicht') + ': ' + weight.toFixed(2) + 'kg'
         }
         if (height != null) {
-            details += ' | ' + i8ln('Height') + ': ' + height.toFixed(2) + 'm'
+            details += ' | ' + i8ln('Größe') + ': ' + height.toFixed(2) + 'm'
         }
         details +=
-            '</center></div>'
+            '</div>'
     }
     var contentstring =
-        '<div><center>' +
-        '<b>' + name + '</b>'
+        '<div>' +
+        '<b><font size="4">' + name + '</font></b>'
     if (form !== null && form > 0 && forms.length > form) {
         // todo: check how rocket map handles this (if at all):
         if (id === 132) {
@@ -735,36 +734,48 @@ function pokemonLabel(item) {
     }
     contentstring += '<span> - </span>' +
         '<small>' +
-        '<a href="https://pokemon.gameinfo.io/' + languageSite + '/pokemon/' + id + '" target="_blank" title="' + i8ln('View in Pokedex') + '">#' + id + '</a>' +
-        '</small>'
+        '<a href="https://pokemon.gameinfo.io/' + languageSite + '/pokemon/' + id + '" target="_blank" title="' + i8ln('View in Pokedex') + ' " style="font-size:20px"><i class="fa fa-slack" aria-hidden="true"></i>' + id + '</a>' +
+        '</small>' +
+        '<span><font size="4" style="font-weight: bold"><b> ' 
+		if (genderType[gender-1] == '♂') {
+		contentstring += '<i class="fa fa-mars fa-fw">'
+		}
+		else if(genderType[gender-1] == '♀') {
+		contentstring += '<i class="fa fa-venus fa-fw">'
+		}
+		else{
+		contentstring += '<i class="fa fa-genderless fa-fw">'
+		}
+		contentstring += '</i></b></font></span>'+
+        '<span> - </span>' +
+        '<small>' + typesDisplay + '</small>' +
+        '</div>' 
     if (noRarityDisplay === false) {
         contentstring += '<span> ' + rarityDisplay + '</span>'
     }
-    contentstring += '<span> - </span>' +
-        '<small>' + typesDisplay + '</small>' +
-        '</center></div>' +
-        '<div><center><img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png" style="width:50px;margin-top:10px;"/></center></div>' +
-        details
     if (pokemonReportTime === true) {
         contentstring += '<div><center><b>' +
             i8ln('Reported at') + ' ' + getTimeStr(reportTime) +
             '</b></center></div>'
     } else {
-        contentstring += '<div><center><b>' +
-            i8ln('Aprox Despawn Time:') + ' ' + getTimeStr(disappearTime) +
-            ' <span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
-            '</b></center></div>'
+        contentstring += '<div>' +
+        '<br> <span class="label-countdown" style="background-color: #fffaaa;font-size: 15px;font-weight: bold" disappears-at="' + disappearTime + '">(00m00s)</span>' + i8ln(' verbleibend') +'<br>' +
+        '<font size="1" style="font-weight: normal;">'+ i8ln('(Despawn um ') + getTimeStr(disappearTime) + i8ln(')') + '</font><br><br>' +
+        //    i8ln('Aprox Despawn Time:') + ' ' + getTimeStr(disappearTime) +
+        //    ' <span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
+            '</div>'
     }
-
-    contentstring += '<div><center>' +
-        i8ln('Location') + ': <a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ', ' + longitude + ')" title="' + i8ln('View in Maps') + '">' + coordText + '</a>' +
-        '</center></div>' +
-        '<div><center>' +
-        '<a href="javascript:excludePokemon(' + id + ')">' + i8ln('Exclude') + '</a>&nbsp&nbsp' +
-        '<a href="javascript:notifyAboutPokemon(' + id + ')">' + i8ln('Notify') + '</a>&nbsp&nbsp' +
-        '<a href="javascript:removePokemonMarker(\'' + encounterId + '\')">' + i8ln('Remove') + '</a>&nbsp&nbsp' +
-        '<a href="javascript:void(0);" onclick="javascript:toggleOtherPokemon(' + id + ');" title="' + i8ln('Toggle display of other Pokemon') + '">' + i8ln('Toggle Others') + '</a>' +
-        '</center></div>'
+    contentstring += 
+	details +
+        '<br><div>' +
+		'<span style="font-weight: bold">Optionen für ' + name + ':</span><br>' +
+			'<a href="javascript:excludePokemon(' + id + ')" title="Alle dieser Spezies ausblenden"><i class="fa fa-ban" aria-hidden="true" style="font-size:32px"></i></a>&nbsp&nbsp' +
+			'<a href="javascript:notifyAboutPokemon(' + id + ')" title="Favorisieren"><i class="fa fa-star" aria-hidden="true" style="font-size:32px"></i></a>&nbsp&nbsp' +
+			'<a href="javascript:removeNotifyAboutPokemon(' + id + ')" title="Favorisierung aufheben"><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></a>&nbsp&nbsp' +
+			'<a href="javascript:removePokemonMarker(\'' + encounterId + '\')" title="Dieses entfernen"><i class="fa fa-trash" aria-hidden="true" style="font-size:32px"></i></a>&nbsp&nbsp' +
+			'<a href="javascript:void(0);" onclick="javascript:toggleOtherPokemon(' + id + ');" title="Andere Arten aus/einblenden"><i class="fa fa-retweet" aria-hidden="true" style="font-size:32px"></i></a>&nbsp&nbsp' +
+			'<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ', ' + longitude + ')" title="Route zum Ort aufrufen"><i class="fa fa-map" aria-hidden="true" style="font-size:32px"></i></a><br>' +
+		'</div>'
     return contentstring
 }
 
@@ -1168,7 +1179,7 @@ function pokestopLabel(item) {
         str += '<center><div>' + i8ln('Convert to Gym') + '<i class="fa fa-refresh convert-pokestop" style="margin-top: 2px; vertical-align: middle; font-size: 1.5em;" onclick="openConvertPokestopModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'
     }
     str += '<div>' +
-        i8ln('Location:') + ' ' + '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item['latitude'] + ',' + item['longitude'] + ')" title="' + i8ln('View in Maps') + '">' + item['latitude'] + ', ' + item['longitude'] + '</a> - <a href="./?lat=' + item['latitude'] + '&lon=' + item['longitude'] + '&zoom=16">Share link</a>' +
+        i8ln('Location:') + ' ' + '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item['latitude'] + ',' + item['longitude'] + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a> - <a href="./?lat=' + item['latitude'] + '&lon=' + item['longitude'] + '&zoom=16">Share link</a>' +
         '</div>'
     if ((!noWhatsappLink) && (item['quest_id'] && item['reward_id'] !== null)) {
         str += '<div>' +
@@ -6213,4 +6224,19 @@ function checkAndCreateSound(pokemonId = 0) {
         }
     }
 }
-//
+//Eigener Code
+function removeNotifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
+    //altes Ding entfernen
+    var arr = $selectPokemonNotify.val().split(',')
+    var index = arr.indexOf(id.toString())
+    if(index && index >= 0) {
+        arr.splice(index, 1)
+        
+        $selectPokemonNotify.val(
+            arr.join(',')
+        ).trigger('change')
+    }
+  
+    //neues Ding auch entfernen
+    $('label[for="notify-pokemon"] .pokemon-list .pokemon-icon-sprite[data-value="' + id + '"]').removeClass('active')
+}
