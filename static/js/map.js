@@ -302,6 +302,8 @@ function initMap() { // eslint-disable-line no-unused-vars
 
         redrawPokemon(mapData.pokemons)
         redrawPokemon(mapData.lurePokemons)
+		//For Gyms on zoom
+		updateGymIcons()
         if (this.getZoom() > 13) {
             // hide weather markers
             $.each(weatherMarkers, function (index, marker) {
@@ -1405,6 +1407,40 @@ function getGymMarkerIcon(item) {
     var level = 6 - item['slots_available']
     var raidForm = item['form']
     var formStr = ''
+	//Dynamic Sizes
+		//Raid,Gym,Eggsizes
+		// If you want to change base sizes or positions, do it HERE.
+		var gymSize = 48;
+		var raidBossSize = 40;
+		var raidBossPosRight = 12; // the distance from the right corner
+		var eggUnknownSize = 35;
+		var eggUnknownPosRight = 18;// the distance from the right corner
+		var eggUnknownPosTop = -11;// the distance from the top corner <- in this case the icon is a little bit above the gym
+
+		// If you want to keep the scaling on mapzoom, dont touch these settings
+		var dynamicRaidBossSize = (raidBossSize/6) + ((raidBossSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicRaidBossPosRight = (raidBossPosRight/6) + ((raidBossPosRight/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicEggUnknownSize = (eggUnknownSize/6) + ((eggUnknownSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicEggUnknownPosRight = (eggUnknownPosRight/6) + ((eggUnknownPosRight/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicEggUnknownPosTop = (eggUnknownPosTop/6) + ((eggUnknownPosTop/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicGymSize = (gymSize/6) + ((gymSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		
+		// Egg icon Sizes
+		var eggSize = 30;
+		var dynamicEggSize = (eggSize/6) + ((eggSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var eggPosTop = 2;
+		var dynamicEggPosTop = (eggPosTop/6) + ((eggPosTop/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var eggPosRight = 14;
+		var dynamicEggPosRight = (eggPosRight/6) + ((eggPosRight/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		
+		//Ex icon sizes
+		var exSize = 38;
+		var dynamicExSize = (exSize/6) + ((exSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var exPos = 25;
+		var dynamicExPos = (exPos/6) + ((exPos/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var exPosBot = 1;
+		var dynamicExPosBot = (exPosBot/6) + ((exPosBot/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		
     if (raidForm <= 10 || raidForm == null || raidForm === '0') {
         formStr = '00'
     } else {
@@ -1429,23 +1465,24 @@ function getGymMarkerIcon(item) {
     var exIcon = ''
     var fortMarker = ''
     if ((((park !== '0' && park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
-        exIcon = '<img src="static/images/ex.png" style="position:absolute;right:25px;bottom:2px;"/>'
+        exIcon = '<img src="static/images/ex.png" style="width:' + dynamicExSize + 'px;height:auto;position:absolute;right:'+dynamicExPos+'px;bottom:' + dynamicExPosBot + 'px;"/>'
     }
     var smallExIcon = ''
     if ((((park !== '0' && park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
         smallExIcon = '<img src="static/images/ex.png" style="width:26px;position:absolute;right:35px;bottom:13px;"/>'
     }
     var html = ''
+	var relativeIconSize = (50/6)+((50/6)*(map.getZoom()-10))
     if (item['raid_pokemon_id'] != null && item.raid_end > Date.now()) {
         html = '<div style="position:relative;">' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:50px;height:auto;"/>' +
+            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
-            '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png" style="width:50px;height:auto;position:absolute;top:-15px;right:0px;"/>' +
+            '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png" style="width:'+dynamicRaidBossSize+'px;height:auto;position:absolute;top:-6px;right:'+dynamicRaidBossPosRight+'px;"/>' +
             '</div>'
         fortMarker = L.divIcon({
-            iconSize: [50, 50],
-            iconAnchor: [25, 45],
-            popupAnchor: [0, -70],
+            iconSize: [relativeIconSize,relativeIconSize],
+            iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
+            popupAnchor: [0, -40],
             className: 'raid-marker',
             html: html
         })
@@ -1459,13 +1496,13 @@ function getGymMarkerIcon(item) {
             hatchedEgg = 'hatched_legendary'
         }
         html = '<div style="position:relative;">' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:50px;height:auto;"/>' +
+            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
-            '<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:35px;height:auto;position:absolute;top:-11px;right:18px;"/>' +
+            '<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:'+dynamicEggUnknownSize+'px;height:auto;position:absolute;top:'+dynamicEggUnknownPosTop+'px;right:'+dynamicEggUnknownPosRight+'px;"/>' +
             '</div>'
         fortMarker = L.divIcon({
-            iconSize: [50, 50],
-            iconAnchor: [25, 45],
+            iconSize: [relativeIconSize,relativeIconSize],
+            iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
             popupAnchor: [0, -40],
             className: 'active-egg-marker',
             html: html
@@ -1480,26 +1517,26 @@ function getGymMarkerIcon(item) {
             raidEgg = 'legendary'
         }
         html = '<div style="position:relative;">' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:50px;height:auto;"/>' +
+            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
-            '<img src="static/raids/egg_' + raidEgg + '.png" style="width:25px;height:auto;position:absolute;top:6px;right:18px;"/>' +
+            '<img src="static/raids/egg_' + raidEgg + '.png" style="width:'+dynamicEggSize+'px;height:auto;position:absolute;top:'+dynamicEggPosTop+'px;right:'+dynamicEggPosRight+'px;"/>' +
             '</div>'
         fortMarker = L.divIcon({
-            iconSize: [50, 50],
-            iconAnchor: [25, 45],
+            iconSize: [relativeIconSize,relativeIconSize],
+            iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
             popupAnchor: [0, -40],
             className: 'egg-marker',
             html: html
         })
     } else {
         html = '<div>' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:35px;height:auto;"/>' +
-            smallExIcon +
+            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
+            exIcon +
             '</div>'
         fortMarker = L.divIcon({
-            iconSize: [50, 50],
-            iconAnchor: [17, 30],
-            popupAnchor: [0, -35],
+            iconSize: [relativeIconSize,relativeIconSize],
+            iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
+            popupAnchor: [0, -40],
             className: 'egg-marker',
             html: html
         })
