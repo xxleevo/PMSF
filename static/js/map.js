@@ -427,7 +427,7 @@ function createLocationMarker() {
     var lat = 'lat' in position ? position.lat : centerLat
     var lng = 'lng' in position ? position.lng : centerLng
 
-    var locationMarker = L.marker([lat, lng]).addTo(markersnotify).bindPopup('<div><b>My location</b></div>')
+    var locationMarker = L.marker([lat, lng]).addTo(markersnotify)//.bindPopup('<div><b>My location</b></div>')
     addListeners(locationMarker)
 
     locationMarker.on('dragend', function () {
