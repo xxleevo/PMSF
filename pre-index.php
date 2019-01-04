@@ -1151,8 +1151,11 @@ if ( $blockIframe ) {
                 echo '<div class="form-control switch-container">
                 <h3>Arenen Style</h3>
                 <select name="gym-marker-style" id="gym-marker-style">
-                    <option value="ingame">' . i8ln( 'In-Game' ) . '</option>
-                    <option value="shield">' . i8ln( 'Shield' ) . '</option>
+                    <option value="classic">Classic</option>
+                    <option value="beasts">Biester</option>
+                    <option value="ingame">Ingame</option>
+                    <option value="idol">Idol</option>
+                    <option value="shield">Schilder</option>
                 </select>
             </div>';
             }
