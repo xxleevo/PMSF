@@ -1153,9 +1153,10 @@ if ( $blockIframe ) {
                 <select name="gym-marker-style" id="gym-marker-style">
                     <option value="classic">Classic</option>
                     <option value="beasts">Biester</option>
-                    <option value="ingame">Ingame</option>
                     <option value="idol">Idol</option>
+                    <option value="elements">Elemente</option>
                     <option value="shield">Schilder</option>
+                    <option value="ingame">Ingame</option>
                 </select>
             </div>';
             }
