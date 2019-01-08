@@ -421,6 +421,8 @@ if ( $blockIframe ) {
                             } ?>
                         </div>
                     </div>
+					Blende mehr Pokemon aus, um die Performance der Ladezeit zu erhöhen.<br><br>
+					Unter 'Immer anzeigen' kannst du Pokemon auswählen, die trotz IV/Lvl Filter dennoch angezeigt werden sollen.
                 </div>
                 <?php
             }
