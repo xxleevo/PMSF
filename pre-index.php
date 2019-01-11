@@ -1222,7 +1222,7 @@ if ( $blockIframe ) {
 					<p style="height:30px"><img src="static/forts/Pstop-quest-small.png" alt ="" style="height:30px;width: auto;float:left"/><b style="font-size:17px">00:00-05:30 :</b>  Questscan</p> 
 					<p style="height:30px"><img src="static/icons/pokemon_icon_025_00.png" alt ="" style="height:30px;width: auto;float:left"/><b style="font-size:17px">05:30-23:59 :</b>  Pokemon & IV </p> 
 					<br>
-					Während <b>Quests</b> gescannt werden, werden Pokemon nicht auf IV gescannt. Pokemon werden nur dort gescannt, wo der Scanner auch gerade Quests am scannen ist.
+					Während <b>Quests</b> gescannt werden, werden Pokemon nicht auf IV gescannt. Pokemon werden nur dort gescannt, wo der Scanner auch gerade Quests scannt.
 					<br>
 					<br>
 					Während der <b>Pokemon & IV-Scan</b> aktiv ist wird der Dortmunder Scanradius wie gewöhnlich auf Pokemon sowie ausgewählte Pokemon auf IV gescannt.
