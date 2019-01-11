@@ -212,7 +212,7 @@ if ( $blockIframe ) {
         <?php
         if ( $discordUrl != "" ) {
             echo '<a href="' . $discordUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle;padding:0 5px;">
-            <img src="static/images/discord.png" border="0" style="float: right;">
+            <img src="static/images/discord_big.png" border="0" style="float: right; width: 36px; height: auto;">
         </a>';
         }
         if ( $paypalUrl != "" ) {
@@ -255,11 +255,17 @@ if ( $blockIframe ) {
                 } else {
                     header('Location: ./logout.php');
                 }
-
+				//$userAccessLevel = $manualdb->get( "users", [ 'access_level' ], [ 'expire_timestamp' => $_SESSION['user']->expire_timestamp ] );
+				if ($userAccessLevel['access_level'] == 1) {
 				echo "<span style='color: {$color};'><i class='fa fa-check fa-fw'></i></span>";
+				} else{
+				echo "<span style='color: red;'><i class='fa fa-times fa-fw'></i></span>";
+				}
+				
+
                 //echo "<span style='color: {$color};'>" . substr($_SESSION['user']->user, 0, 3) . "...</span>";
             } else {
-                echo "<a href='./user'>" . i8ln('Login') . "</a>";
+                echo "<a href='./user'> Login </a>";
             }
         }
         ?>
@@ -1208,6 +1214,23 @@ if ( $blockIframe ) {
 					</center>
 				</div>
 			</div>
+			
+			<?php
+			if (!$noQuests && !$noPokemon){
+                echo '<h3 style="font-weight: bold"><i class="fa fa-clock-o fa-fw"></i>Scanzeiten</h3>
+				<div>
+					<p style="height:30px"><img src="static/forts/Pstop-quest-small.png" alt ="" style="height:30px;width: auto;float:left"/><b style="font-size:17px">00:00-05:30 :</b>  Questscan</p> 
+					<p style="height:30px"><img src="static/icons/pokemon_icon_025_00.png" alt ="" style="height:30px;width: auto;float:left"/><b style="font-size:17px">05:30-23:59 :</b>  Pokemon & IV </p> 
+					<br>
+					Während <b>Quests</b> gescannt werden, werden Pokemon nicht auf IV gescannt. Pokemon werden nur dort gescannt, wo der Scanner auch gerade Quests am scannen ist.
+					<br>
+					<br>
+					Während der <b>Pokemon & IV-Scan</b> aktiv ist wird der Dortmunder Scanradius wie gewöhnlich auf Pokemon sowie ausgewählte Pokemon auf IV gescannt.
+				</div>';
+			}
+			?>
+
+			
             <?php
 			if (($noDiscordLogin === false) && !empty($_SESSION['user']->id)) {
                 echo '<h3 style="font-weight: bold"><i class="fa fa-key fa-fw"></i>Authentifizierung</h3>
