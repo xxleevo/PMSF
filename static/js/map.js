@@ -483,7 +483,7 @@ function buildScanPolygons() {
     $.getJSON(geoJSONfile, function (data) {
         var geoPolys = L.geoJson(data, {
             onEachFeature: function (features, featureLayer) {
-                featureLayer.bindPopup(features.properties.name)
+                //featureLayer.bindPopup(features.properties.name)
             }
         })
         scanAreaGroup.addLayer(geoPolys)
@@ -1422,6 +1422,7 @@ function getGymMarkerIcon(item) {
     var level = 6 - item['slots_available']
     var raidForm = item['form']
     var formStr = ''
+    var lastScanned = item['last_scanned']
 	//Dynamic Sizes
 		//Raid,Gym,Eggsizes
 		// If you want to change base sizes or positions, do it HERE.
