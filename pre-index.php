@@ -881,7 +881,7 @@ if ( $blockIframe ) {
                 <?php
                 if ( ! $noScanPolygon ) {
                     echo '<div class="form-control switch-container">
-                    <h3> Scangebiet (Pokemon) </h3>
+                    <h3> Scangebiet (Pkmn,Arenen,Stops,Raids) </h3>
                     <div class="onoffswitch">
                         <input id="scan-area-switch" type="checkbox" name="scan-area-switch" class="onoffswitch-checkbox">
                         <label class="onoffswitch-label" for="scan-area-switch">
