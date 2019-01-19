@@ -283,11 +283,11 @@ if ( $blockIframe ) {
             if ( ! $noPokemon || ! $noNests ) {
                 if ( ! $noNests ) {
                 ?>
-                <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i><?php echo i8ln('Pokemon & Nester') ?></h3>
+                <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Pokemon & Nester</h3>
                 <?php
                 } else {
                 ?>
-                <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i><?php echo i8ln('Pokemon') ?></h3>
+                <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Pokemon</h3>
                 <?php
                 } ?>
                 <div>
@@ -437,11 +437,11 @@ if ( $blockIframe ) {
             if ( ! $noPokestops ) {
                 if ( ! $noQuests ) {
                 ?>
-		<h3 style="font-weight: bold"><i class="fa fa-map-pin fa-fw"></i>Pokestops &amp; Quests</h3>
+		<h3 style="font-weight: bold"><i class="fa fa-map-pin fa-fw"></i>&nbsp;Pokestops &amp; Quests</h3>
                 <?php
                 } else {
                 ?>
-		<h3 style="font-weight: bold"><i class="fa fa-map-pin fa-fw"></i>Pokestops</h3>
+		<h3 style="font-weight: bold"><i class="fa fa-map-pin fa-fw"></i>&nbsp;Pokestops</h3>
                 <?php
                 } ?>
 		<div>
@@ -581,7 +581,7 @@ if ( $blockIframe ) {
             <?php
             if ( ! $noRaids || ! $noGyms ) {
                 ?>
-				<h3 style="font-weight: bold"><i class="fa fa-shield fa-fw"></i>Arenen &amp; Raids</h3>
+				<h3 style="font-weight: bold"><i class="fa fa-shield fa-fw"></i>&nbsp;Arenen &amp; Raids</h3>
                 <div>
                     <?php
                     if ( ! $noRaids ) {
@@ -832,10 +832,10 @@ if ( $blockIframe ) {
             <?php
             if ( ! $noSearchLocation || ! $noNests || ! $noStartMe || ! $noStartLast || ! $noFollowMe || ! $noPokestops || ! $noScannedLocations || ! $noSpawnPoints || ! $noRanges || ! $noWeatherOverlay || ! $noSpawnArea ) {
                 if ( ! $noSearchLocation ) {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>Location</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location</h3>
                     <div>';
                 } else {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>Location</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location</h3>
                     <div>';
 		} ?>
                 <?php
@@ -978,7 +978,7 @@ if ( $blockIframe ) {
             ?>
             <?php
             if ( ! $noNotifyPokemon || ! $noNotifyRarity || ! $noNotifyIv || ! $noNotifyLevel || ! $noNotifySound || ! $noNotifyRaid || ! $noNotifyBounce || ! $noNotifyNotification ) {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-star fa-fw"></i>'.i8ln('Favoriten').'</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-star fa-fw"></i>&nbsp;Favoriten</h3>
             <div>';
             }
             ?>
@@ -1116,7 +1116,7 @@ if ( $blockIframe ) {
 
             <?php
             if ( ! $noMapStyle || ! $noDirectionProvider || ! $noIconSize || ! $noIconNotifySizeModifier || ! $noGymStyle || ! $noLocationStyle ) {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-map-o fa-fw"></i>Style</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-map-o fa-fw"></i>&nbsp;Style</h3>
             <div>';
             }
             ?>
@@ -1196,7 +1196,7 @@ if ( $blockIframe ) {
                 echo '</div>';
             }
             ?>
-			<h3 style="font-weight: bold"><i class="fa fa-sliders fa-fw"></i>Einstellungen</h3>
+			<h3 style="font-weight: bold"><i class="fa fa-sliders fa-fw"></i>&nbsp;Einstellungen</h3>
             <div>
 				<span style="color: #3b3b3b"><b style="font-size:17px">Zurücksetzen:</b><br>Alle Einstellungen des Menüs werden auf Standard zurückgesetzt.</span>
 				<div>
@@ -1231,7 +1231,7 @@ if ( $blockIframe ) {
 			
 			<?php
 			if (!$noQuests && !$noPokemon){
-                echo '<h3 style="font-weight: bold"><i class="fa fa-clock-o fa-fw"></i>Scanzeiten</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-clock-o fa-fw"></i>&nbsp;Scanzeiten</h3>
 				<div>
 					<p style="height:30px"><img src="static/forts/Pstop-quest-small.png" alt ="" style="height:30px;width: auto;float:left"/><b style="font-size:17px">00:00-05:30 :</b>  Questscan</p> 
 					<p style="height:30px"><img src="static/icons/pokemon_icon_025_00.png" alt ="" style="height:30px;width: auto;float:left"/><b style="font-size:17px">05:30-23:59 :</b>  Pokemon & IV </p> 
@@ -1247,7 +1247,7 @@ if ( $blockIframe ) {
 			
             <?php
 			if (($noDiscordLogin === false) && !empty($_SESSION['user']->id)) {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-key fa-fw"></i>Authentifizierung</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-key fa-fw"></i>&nbsp;Authentifizierung</h3>
             <div>';
             ?>
             <div><center><p>
@@ -1270,7 +1270,7 @@ if ( $blockIframe ) {
         ?>
             <?php
             if ( ! $noAreas ) {
-			echo '<h3 style="font-weight: bold"><i class="fa fa-globe fa-fw"></i>Orte</h3>';
+			echo '<h3 style="font-weight: bold"><i class="fa fa-globe fa-fw"></i>&nbsp;Orte</h3>';
                 $count = sizeof( $areas );
                 if ( $count > 0 ) {
                     echo '<div class="form-control switch-container area-container"><ul>';
