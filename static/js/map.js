@@ -259,6 +259,17 @@ function removePokemonMarker(encounterId) { // eslint-disable-line no-unused-var
     markersnotify.removeLayer(mapData.pokemons[encounterId].marker)
     mapData.pokemons[encounterId].hidden = true
 }
+//[selfmade] function to temp remove stop from map
+function removePokestopMarker(pokestopId) { // eslint-disable-line no-unused-vars
+    if (mapData.pokestops[pokestopId].marker.rangeCircle) {
+        markers.removeLayer(mapData.pokestops[pokestopId].marker.rangeCircle)
+        markersnotify.removeLayer(mapData.pokestops[pokestopId].marker.rangeCircle)
+        delete mapData.pokestops[pokestopId].marker.rangeCircle
+    }
+    markers.removeLayer(mapData.pokestops[pokestopId].marker)
+    markersnotify.removeLayer(mapData.pokestops[pokestopId].marker)
+    mapData.pokestops[pokestopId].hidden = true
+}
 
 function createServiceWorkerReceiver() {
     navigator.serviceWorker.addEventListener('message', function (event) {
@@ -1141,6 +1152,8 @@ function getQuest(item) {
 
 function pokestopLabel(item) {
     var str
+	//[selfmade] saving the pokestop ID for temp removing it
+	var pokestopId = item['pokestop_id']
     if (item['pokestop_name'] === null) {
         item['pokestop_name'] = 'Pokéstop'
     }
@@ -1175,6 +1188,8 @@ function pokestopLabel(item) {
     }
     if (!noQuests && item['quest_type'] !== 0) {
         str += getQuest(item)
+		//[selfmade]Option to delete Pokestop temporarily from map
+		str += ' <a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a>'
     }
     if (!noDeletePokestops) {
         str += '<i class="fa fa-trash-o delete-pokestop" onclick="deletePokestop(event);" data-id="' + item['pokestop_id'] + '"></i>'
