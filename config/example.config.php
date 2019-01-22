@@ -199,8 +199,12 @@ $noRanges = false;                                                  // true/fals
 $enableRanges = 'false';                                            // true/false
 
 $noScanPolygon = true;
+$noScanPolygonQuest = true;
 $enableScanPolygon = 'false';
+$enableScanPolygonQuest = 'false';
 $geoJSONfile = 'custom/scannerarea.json';			    // path to geoJSON file create your own on http://geojson.io/ adjust filename
+$geoJSONfileQuest = 'geofences/questarea.json';			    // path to geoJSON file create your own on http://geojson.io/ adjust filename
+
 /* Location & Search Settings */
 
 $noSearchLocation = false;                                          // true/false
