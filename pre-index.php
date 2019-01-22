@@ -1927,7 +1927,6 @@ if ( $blockIframe ) {
     var enableScanPolygon = <?php echo $noScanPolygon ? 'false' : $enableScanPolygon ?>;
 	//v2 xxleevo
     var enableScanPolygonQuest = <?php echo $noScanPolygonQuest ? 'false' : $enableScanPolygonQuest ?>;
-    var geoJSONfileQuest = '<?php echo $noScanPolygonQuest ? '' : $geoJSONfileQuest ?>';
 	// --end of edited/added code
     var geoJSONfile = '<?php echo $noScanPolygon ? '' : $geoJSONfile ?>';
 	//v2 xxleevo

@@ -363,6 +363,9 @@ function initMap() { // eslint-disable-line no-unused-vars
     updateWeatherOverlay()
     updateS2Overlay()
     buildScanPolygons()
+	//v2 xxleevo
+    buildScanPolygonQuest()
+	// --end of edited/added code
 
     map.on('moveend', function () {
         updateS2Overlay()
@@ -501,6 +504,10 @@ function buildScanPolygons() {
         var geoPolys = L.geoJson(data, {
             onEachFeature: function (features, featureLayer) {
                 //featureLayer.bindPopup(features.properties.name)
+				featureLayer.setStyle({
+					color: '#29c55b'
+					}
+				);
             }
         })
         scanAreaGroup.addLayer(geoPolys)
@@ -516,6 +523,10 @@ function buildScanPolygonQuest() {
         var geoPolyQuest = L.geoJson(data, {
             onEachFeature: function (features, featureLayer) {
                 //featureLayer.bindPopup(features.properties.name)
+				featureLayer.setStyle({
+					color: '#2f5cff'
+					}
+				);
             }
         })
         scanAreaGroupQuest.addLayer(geoPolyQuest)
