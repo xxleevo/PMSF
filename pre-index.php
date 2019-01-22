@@ -894,16 +894,33 @@ if ( $blockIframe ) {
                 } ?>
                 <?php
                 if ( ! $noScanPolygon ) {
-                    echo '<div class="form-control switch-container">
+                    echo '
+					<div class="form-control switch-container">
                     <h3> Scangebiet (Pkmn,Arenen,Stops,Raids) </h3>
-                    <div class="onoffswitch">
-                        <input id="scan-area-switch" type="checkbox" name="scan-area-switch" class="onoffswitch-checkbox">
-                        <label class="onoffswitch-label" for="scan-area-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
+						<div class="onoffswitch">
+							<input id="scan-area-switch" type="checkbox" name="scan-area-switch" class="onoffswitch-checkbox">
+							<label class="onoffswitch-label" for="scan-area-switch">
+								<span class="switch-label" data-on="On" data-off="Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>
+					';
+                } ?>
+                <?php
+                if ( ! $noScanPolygonQuest ) {
+                    echo '
+					<div class="form-control switch-container">
+                    <h3> Scangebiet (Quests) </h3>
+						<div class="onoffswitch">
+							<input id="scan-area-quest-switch" type="checkbox" name="scan-area-quest-switch" class="onoffswitch-checkbox">
+							<label class="onoffswitch-label" for="scan-area-quest-switch">
+								<span class="switch-label" data-on="On" data-off="Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>
+					';
                 } ?>
                 <?php
                 if ( ! $noSearchLocation ) {
@@ -1908,7 +1925,14 @@ if ( $blockIframe ) {
     var enableSpawnpoints = <?php echo $noSpawnPoints ? 'false' : $enableSpawnPoints ?>;
     var enableRanges = <?php echo $noRanges ? 'false' : $enableRanges ?>;
     var enableScanPolygon = <?php echo $noScanPolygon ? 'false' : $enableScanPolygon ?>;
+	//v2 xxleevo
+    var enableScanPolygonQuest = <?php echo $noScanPolygonQuest ? 'false' : $enableScanPolygonQuest ?>;
+    var geoJSONfileQuest = '<?php echo $noScanPolygonQuest ? '' : $geoJSONfileQuest ?>';
+	// --end of edited/added code
     var geoJSONfile = '<?php echo $noScanPolygon ? '' : $geoJSONfile ?>';
+	//v2 xxleevo
+    var geoJSONfileQuest = '<?php echo $noScanPolygonQuest ? '' : $geoJSONfileQuest ?>';
+	// --end of edited/added code
     var notifySound = <?php echo $noNotifySound ? 'false' : $notifySound ?>;
     var criesSound = <?php echo $noCriesSound ? 'false' : $criesSound ?>;
     var enableStartMe = <?php echo $noStartMe ? 'false' : $enableStartMe ?>;

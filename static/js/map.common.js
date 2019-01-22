@@ -1075,6 +1075,13 @@ var StoreOptions = {
             default: enableScanPolygon,
             type: StoreTypes.Boolean
         },
+	//v2 xxleevo
+    'showScanPolygonQuest':
+        {
+            default: enableScanPolygonQuest,
+            type: StoreTypes.Boolean
+        },
+	// --end of edited/added code
     'playSound':
         {
             default: notifySound,

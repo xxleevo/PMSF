@@ -169,6 +169,9 @@ var exLayerGroup = new L.LayerGroup()
 var gymLayerGroup = new L.LayerGroup()
 var stopLayerGroup = new L.LayerGroup()
 var scanAreaGroup = new L.LayerGroup()
+//v2 xxleevo
+var scanAreaGroupQuest = new L.LayerGroup()
+// --end of edited/added code
 var scanAreas = []
 /*
  text place holders:
@@ -287,8 +290,10 @@ function initMap() { // eslint-disable-line no-unused-vars
         minZoom: minZoom,
         maxZoom: maxZoom,
         zoomControl: false,
-        layers: [weatherLayerGroup, exLayerGroup, gymLayerGroup, stopLayerGroup, scanAreaGroup]
-    })
+		//v2 xxleevo
+        layers: [weatherLayerGroup, exLayerGroup, gymLayerGroup, stopLayerGroup, scanAreaGroup, scanAreaGroupQuest]
+		// --end of edited/added code
+	})
 
     setTileLayer(Store.get('map_style'))
     markers = L.markerClusterGroup({
@@ -501,6 +506,22 @@ function buildScanPolygons() {
         scanAreaGroup.addLayer(geoPolys)
     })
 }
+//v2 - xxleevo
+function buildScanPolygonQuest() {
+    if (!Store.get(['showScanPolygonQuest'])) {
+        return false
+    }
+	
+    $.getJSON(geoJSONfileQuest, function (data) {
+        var geoPolyQuest = L.geoJson(data, {
+            onEachFeature: function (features, featureLayer) {
+                //featureLayer.bindPopup(features.properties.name)
+            }
+        })
+        scanAreaGroupQuest.addLayer(geoPolyQuest)
+    })
+}
+// --end of edited/added code
 
 function initSidebar() {
     $('#gyms-switch').prop('checked', Store.get('showGyms'))
@@ -551,6 +572,9 @@ function initSidebar() {
     $('#direction-provider').val(Store.get('directionProvider'))
     $('#ranges-switch').prop('checked', Store.get('showRanges'))
     $('#scan-area-switch').prop('checked', Store.get('showScanPolygon'))
+	//v2 xxleevo
+    $('#scan-area-quest-switch').prop('checked', Store.get('showScanPolygonQuest'))
+	// --end of edited/added code
     $('#sound-switch').prop('checked', Store.get('playSound'))
     $('#cries-switch').prop('checked', Store.get('playCries'))
     $('#cries-switch-wrapper').toggle(Store.get('playSound'))
@@ -6278,6 +6302,16 @@ $(function () {
             scanAreaGroup.clearLayers()
         }
     })
+	//v2 - xxleevo
+    $('#scan-area-quest-switch').change(function () {
+        Store.set('showScanPolygonQuest', this.checked)
+        if (this.checked) {
+            buildScanPolygonQuest()
+        } else {
+            scanAreaGroupQuest.clearLayers()
+        }
+    })
+	// --end of edited/added code
     $('#pokestops-switch').change(function () {
         var options = {
             'duration': 500
