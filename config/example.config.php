@@ -200,8 +200,16 @@ $enableRanges = 'false';                                            // true/fals
 
 $noScanPolygon = true;
 $noScanPolygonQuest = true;
+$noScanPolygonPvp = false;
+
+$pvptext1 = '';								// font size 4 good for header - name your marker "1" in the geojson, this text will be the popup text. if no text is given, it will be "no further information"
+$pvptext2 = '';								// font size 4 good for header - name your marker "2" in the geojson, this text will be the popup text. if no text is given, it will be "no further information"
+$pvptext3 = '';								// font size 4 good for header - name your marker "3" in the geojson, this text will be the popup text. if no text is given, it will be "no further information"
+$pvptext4 = '';								// font size 4 good for header - name your marker "4" in the geojson, this text will be the popup text. if no text is given, it will be "no further information"
+
 $enableScanPolygon = 'false';
 $enableScanPolygonQuest = 'false';
+$enableScanPolygonPvp = 'false';
 $geoJSONfile = 'custom/scannerarea.json';			    // path to geoJSON file create your own on http://geojson.io/ adjust filename
 $geoJSONfileQuest = 'geofences/questarea.json';			    // path to geoJSON file create your own on http://geojson.io/ adjust filename
 

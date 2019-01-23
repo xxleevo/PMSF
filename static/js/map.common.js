@@ -1082,6 +1082,13 @@ var StoreOptions = {
             type: StoreTypes.Boolean
         },
 	// --end of edited/added code
+	//v3 xxleevo
+    'showScanPolygonPvp':
+        {
+            default: enableScanPolygonPvp,
+            type: StoreTypes.Boolean
+        },
+	// --end of edited/added code
     'playSound':
         {
             default: notifySound,

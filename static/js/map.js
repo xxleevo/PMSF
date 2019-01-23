@@ -172,6 +172,9 @@ var scanAreaGroup = new L.LayerGroup()
 //v2 xxleevo
 var scanAreaGroupQuest = new L.LayerGroup()
 // --end of edited/added code
+//v3 xxleevo
+var scanAreaGroupPvp = new L.LayerGroup()
+// --end of edited/added code
 var scanAreas = []
 /*
  text place holders:
@@ -290,8 +293,8 @@ function initMap() { // eslint-disable-line no-unused-vars
         minZoom: minZoom,
         maxZoom: maxZoom,
         zoomControl: false,
-		//v2 xxleevo
-        layers: [weatherLayerGroup, exLayerGroup, gymLayerGroup, stopLayerGroup, scanAreaGroup, scanAreaGroupQuest]
+		//v2 - v3 xxleevo
+        layers: [weatherLayerGroup, exLayerGroup, gymLayerGroup, stopLayerGroup, scanAreaGroup, scanAreaGroupQuest,scanAreaGroupPvp]
 		// --end of edited/added code
 	})
 
@@ -365,6 +368,9 @@ function initMap() { // eslint-disable-line no-unused-vars
     buildScanPolygons()
 	//v2 xxleevo
     buildScanPolygonQuest()
+	// --end of edited/added code
+	//v3 xxleevo
+    buildScanPolygonPvp()
 	// --end of edited/added code
 
     map.on('moveend', function () {
@@ -533,6 +539,70 @@ function buildScanPolygonQuest() {
     })
 }
 // --end of edited/added code
+//v3 - xxleevo
+function buildScanPolygonPvp() {
+    if (!Store.get(['showScanPolygonPvp'])) {
+        return false
+    }
+	
+    $.getJSON(geoJSONfilePvp, function (data) {
+        var geoPolyPvp = L.geoJson(data, {
+            onEachFeature: function (features, featureLayer) {
+				if (features.properties.name == 1){
+					if(pvptext1 != null && pvptext1 != ''){
+						featureLayer.bindPopup(pvptext1)
+					}
+					else{
+					featureLayer.bindPopup('no additional information found.')
+					}
+				}
+				else if (features.properties.name == 2){
+					if(pvptext2 != null && pvptext2 != ''){
+						featureLayer.bindPopup(pvptext2)
+					}
+					else{
+					featureLayer.bindPopup('no additional information found.')
+					}
+				}
+				else if (features.properties.name == 3){
+					if(pvptext3 != null && pvptext3 != ''){
+						featureLayer.bindPopup(pvptext3)
+					}
+					else{
+					featureLayer.bindPopup('no additional information found.')
+					}
+				}
+				else if (features.properties.name == 4){
+					if(pvptext4 != null && pvptext4 != ''){
+						featureLayer.bindPopup(pvptext4)
+					}
+					else{
+					featureLayer.bindPopup('no additional information found.')
+					}
+				}
+				//featureLayer.setStyle({
+				//	marker-color: 'fd0000'
+				//	}
+				//);
+				
+				else{
+                //featureLayer.bindPopup(features.properties.name)
+				}
+				//if(features.properties.name){
+				//	if((features.properties.name).match(/polygon.*/)){
+
+				//		featureLayer.setStyle({
+				//			color: '#e23d4b'
+				//			}
+				//		);
+				//	}
+				//}
+            }
+        })
+        scanAreaGroupPvp.addLayer(geoPolyPvp)
+    })
+}
+// --end of edited/added code
 
 function initSidebar() {
     $('#gyms-switch').prop('checked', Store.get('showGyms'))
@@ -585,6 +655,9 @@ function initSidebar() {
     $('#scan-area-switch').prop('checked', Store.get('showScanPolygon'))
 	//v2 xxleevo
     $('#scan-area-quest-switch').prop('checked', Store.get('showScanPolygonQuest'))
+	// --end of edited/added code
+	//v3 xxleevo
+    $('#scan-area-pvp-switch').prop('checked', Store.get('showScanPolygonPvp'))
 	// --end of edited/added code
     $('#sound-switch').prop('checked', Store.get('playSound'))
     $('#cries-switch').prop('checked', Store.get('playCries'))
@@ -6320,6 +6393,16 @@ $(function () {
             buildScanPolygonQuest()
         } else {
             scanAreaGroupQuest.clearLayers()
+        }
+    })
+	// --end of edited/added code
+	//v3 - xxleevo
+    $('#scan-area-pvp-switch').change(function () {
+        Store.set('showScanPolygonPvp', this.checked)
+        if (this.checked) {
+            buildScanPolygonPvp()
+        } else {
+            scanAreaGroupPvp.clearLayers()
         }
     })
 	// --end of edited/added code

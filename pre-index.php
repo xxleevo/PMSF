@@ -832,10 +832,10 @@ if ( $blockIframe ) {
             <?php
             if ( ! $noSearchLocation || ! $noNests || ! $noStartMe || ! $noStartLast || ! $noFollowMe || ! $noPokestops || ! $noScannedLocations || ! $noSpawnPoints || ! $noRanges || ! $noWeatherOverlay || ! $noSpawnArea ) {
                 if ( ! $noSearchLocation ) {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location &amp; Gebiete</h3>
                     <div>';
                 } else {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location &amp; Gebiete</h3>
                     <div>';
 		} ?>
                 <?php
@@ -893,36 +893,6 @@ if ( $blockIframe ) {
                 </div>';
                 } ?>
                 <?php
-                if ( ! $noScanPolygon ) {
-                    echo '
-					<div class="form-control switch-container">
-                    <h3> Scangebiet (Pkmn,Arenen,Stops,Raids) </h3>
-						<div class="onoffswitch">
-							<input id="scan-area-switch" type="checkbox" name="scan-area-switch" class="onoffswitch-checkbox">
-							<label class="onoffswitch-label" for="scan-area-switch">
-								<span class="switch-label" data-on="On" data-off="Off"></span>
-								<span class="switch-handle"></span>
-							</label>
-						</div>
-					</div>
-					';
-                } ?>
-                <?php
-                if ( ! $noScanPolygonQuest ) {
-                    echo '
-					<div class="form-control switch-container">
-                    <h3> Scangebiet (Quests) </h3>
-						<div class="onoffswitch">
-							<input id="scan-area-quest-switch" type="checkbox" name="scan-area-quest-switch" class="onoffswitch-checkbox">
-							<label class="onoffswitch-label" for="scan-area-quest-switch">
-								<span class="switch-label" data-on="On" data-off="Off"></span>
-								<span class="switch-handle"></span>
-							</label>
-						</div>
-					</div>
-					';
-                } ?>
-                <?php
                 if ( ! $noSearchLocation ) {
                     echo '<div class="form-control switch-container" style="display:{{is_fixed}}">
                 <label for="next-location">
@@ -975,6 +945,57 @@ if ( $blockIframe ) {
                         </label>
                     </div>
                 </div>';
+                } ?>
+				<?php
+				if ( ! $noScanPolygonQuest || ! $noScanPolygonPvp || ! $noScanPolygon){
+					echo '<h3><center><u> Gebiete </u></center></h3>';
+				} ?>
+                <?php
+				
+                if ( ! $noScanPolygon ) {
+                    echo '
+					<div class="form-control switch-container">
+                    <h3> Scangebiet (Pkmn,Arenen,Stops,Raids) </h3>
+						<div class="onoffswitch">
+							<input id="scan-area-switch" type="checkbox" name="scan-area-switch" class="onoffswitch-checkbox">
+							<label class="onoffswitch-label" for="scan-area-switch">
+								<span class="switch-label" data-on="On" data-off="Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>
+					';
+                } ?>
+                <?php
+
+                if ( ! $noScanPolygonQuest ) {
+                    echo '
+					<div class="form-control switch-container">
+                    <h3> Scangebiet (Quests) </h3>
+						<div class="onoffswitch">
+							<input id="scan-area-quest-switch" type="checkbox" name="scan-area-quest-switch" class="onoffswitch-checkbox">
+							<label class="onoffswitch-label" for="scan-area-quest-switch">
+								<span class="switch-label" data-on="On" data-off="Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>
+					';
+                } ?>
+                <?php
+                if ( ! $noScanPolygonPvp ) {
+                    echo '
+					<div class="form-control switch-container">
+                    <h3> Pvp-Gebiete </h3>
+						<div class="onoffswitch">
+							<input id="scan-area-pvp-switch" type="checkbox" name="scan-area-pvp-switch" class="onoffswitch-checkbox">
+							<label class="onoffswitch-label" for="scan-area-pvp-switch">
+								<span class="switch-label" data-on="On" data-off="Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>
+					';
                 } ?>
                 <?php
                 if ( ! $noSpawnArea ) {
@@ -1928,9 +1949,20 @@ if ( $blockIframe ) {
 	//v2 xxleevo
     var enableScanPolygonQuest = <?php echo $noScanPolygonQuest ? 'false' : $enableScanPolygonQuest ?>;
 	// --end of edited/added code
+	//v3 xxleevo
+    var enableScanPolygonPvp = <?php echo $noScanPolygonPvp ? 'false' : $enableScanPolygonPvp ?>;
+	// --end of edited/added code
     var geoJSONfile = '<?php echo $noScanPolygon ? '' : $geoJSONfile ?>';
 	//v2 xxleevo
     var geoJSONfileQuest = '<?php echo $noScanPolygonQuest ? '' : $geoJSONfileQuest ?>';
+	// --end of edited/added code
+	//v3 xxleevo
+    var geoJSONfilePvp = '<?php echo $noScanPolygonPvp ? '' : $geoJSONfilePvp ?>';
+	// --end of edited/added code
+    var pvptext1 = '<?php echo $noScanPolygonPvp ? '' : $pvptext1 ?>';
+    var pvptext2 = '<?php echo $noScanPolygonPvp ? '' : $pvptext2 ?>';
+    var pvptext3 = '<?php echo $noScanPolygonPvp ? '' : $pvptext3 ?>';
+    var pvptext4 = '<?php echo $noScanPolygonPvp ? '' : $pvptext4 ?>';
 	// --end of edited/added code
     var notifySound = <?php echo $noNotifySound ? 'false' : $notifySound ?>;
     var criesSound = <?php echo $noCriesSound ? 'false' : $criesSound ?>;
