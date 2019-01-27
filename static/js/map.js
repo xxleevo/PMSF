@@ -509,9 +509,8 @@ function buildScanPolygons() {
     $.getJSON(geoJSONfile, function (data) {
         var geoPolys = L.geoJson(data, {
             onEachFeature: function (features, featureLayer) {
-                //featureLayer.bindPopup(features.properties.name)
                 featureLayer.setStyle({color: features.properties.stroke, fillColor: features.properties.fill})
-                featureLayer.bindPopup(features.properties.name)
+                //featureLayer.bindPopup(features.properties.name)
             }
         })
         scanAreaGroup.addLayer(geoPolys)
@@ -526,11 +525,8 @@ function buildScanPolygonQuest() {
     $.getJSON(geoJSONfileQuest, function (data) {
         var geoPolyQuest = L.geoJson(data, {
             onEachFeature: function (features, featureLayer) {
+                featureLayer.setStyle({color: features.properties.stroke, fillColor: features.properties.fill})
                 //featureLayer.bindPopup(features.properties.name)
-				featureLayer.setStyle({
-					color: '#2f5cff'
-					}
-				);
             }
         })
         scanAreaGroupQuest.addLayer(geoPolyQuest)
