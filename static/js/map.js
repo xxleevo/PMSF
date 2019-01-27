@@ -192,7 +192,7 @@ var notifyNoIvTitle = '<pkm>'
  <dist>  - disappear time
  <udist> - time until disappear
  */
-var notifyText = 'disappears at <dist> (<udist>)'
+var notifyText = 'Despawn vorraussichtlich um <dist> (<udist>)'
 
 var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider
 var searchProvider = new OpenStreetMapProvider()
@@ -580,10 +580,6 @@ function buildScanPolygonPvp() {
 					featureLayer.bindPopup('no additional information found.')
 					}
 				}
-				//featureLayer.setStyle({
-				//	marker-color: 'fd0000'
-				//	}
-				//);
 				
 				else{
                 //featureLayer.bindPopup(features.properties.name)
@@ -880,8 +876,9 @@ function pokemonLabel(item) {
             '</b></center></div>'
     } else {
         contentstring += '<div>' +
-        '<br> <span class="label-countdown" style="background-color: #fffaaa;font-size: 15px;font-weight: bold" disappears-at="' + disappearTime + '">(00m00s)</span>' + i8ln(' verbleibend') +'<br>' +
-        '<font size="1" style="font-weight: normal;">'+ i8ln('(Despawn um ') + getTimeStr(disappearTime) + i8ln(')') + '</font><br><br>' +
+		'<br>Vorraussichtliche Restzeit:' +
+        '<br> <span class="label-countdown" style="background-color: #fffaaa;font-size: 15px;font-weight: bold" disappears-at="' + disappearTime + '">(00m00s)</span> verbleibend <br>' +
+        '<font size="1" style="font-weight: normal;">(Vorraussichtlicher Despawn um' + getTimeStr(disappearTime) + ')' + '</font><br><br>' +
         //    i8ln('Aprox Despawn Time:') + ' ' + getTimeStr(disappearTime) +
         //    ' <span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
             '</div>'
