@@ -872,7 +872,7 @@ function pokemonLabel(item) {
         contentstring += '<div>' +
 		'<br>Vorraussichtliche Restzeit:' +
         '<br> <span class="label-countdown" style="background-color: #fffaaa;font-size: 15px;font-weight: bold" disappears-at="' + disappearTime + '">(00m00s)</span> verbleibend <br>' +
-        '<font size="1" style="font-weight: normal;">(Vorraussichtlicher Despawn um' + getTimeStr(disappearTime) + ')' + '</font><br><br>' +
+        '<font size="1" style="font-weight: normal;">(Vorraussichtlicher Despawn um ' + getTimeStr(disappearTime) + ')' + '</font><br><br>' +
         //    i8ln('Aprox Despawn Time:') + ' ' + getTimeStr(disappearTime) +
         //    ' <span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
             '</div>'
