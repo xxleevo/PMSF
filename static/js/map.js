@@ -998,9 +998,9 @@ function gymLabel(item) {
 
     var park = ''
     if ((item['park'] !== '0' && item['park'] !== 'None' && item['park'] !== undefined && item['park']) && (noParkInfo === false)) {
-        if (item['park'] === 1) {
+        if (item['park'] == 1) {
             // RM only stores boolean, so just call it "Park Gym"
-            park = i8ln('Park Gym')
+            park = i8ln('Parkarena')
         } else {
             park = i8ln('Park') + ': ' + item['park']
         }
@@ -1048,7 +1048,7 @@ function gymLabel(item) {
             park +
             '</div>' +
             '<div>' +
-            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + latitude.toFixed(6) + ' , ' + longitude.toFixed(7) + '</a> - <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">Share link</a>' +
+            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a> - <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">Maplink</a>' +
             '</div>' +
             '<div>' +
 
@@ -1101,7 +1101,7 @@ function gymLabel(item) {
             memberStr +
             '</div>' +
             '<div>' +
-            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + latitude.toFixed(6) + ' , ' + longitude.toFixed(7) + '</a> - <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">Share link</a>' +
+            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a> - <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">Maplink</a>' +
             '</div>' +
             '<div>' +
 
@@ -5236,7 +5236,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             '</div>' +
             lastScannedStr +
             '<div>' +
-            '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Get directions') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">Share link</a>' +
+            '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Get directions') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">Maplink</a>' +
             '</div>' +
             '</center>'
 
