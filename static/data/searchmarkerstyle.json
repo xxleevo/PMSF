@@ -38,5 +38,13 @@
   "pokeball": {
     "name": "Pokeball",
     "icon": "static/marker_icons/pokeball.gif"
+  },
+  "stars": {
+    "name": "Sterne",
+    "icon": "static/marker_icons/stars.gif"
+  },
+  "handy": {
+    "name": "Handy",
+    "icon": "static/marker_icons/handy.gif"
   }
 }
