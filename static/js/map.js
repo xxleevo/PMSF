@@ -1923,7 +1923,7 @@ function getPokestopMarkerIcon(item) {
             popupAnchor: [0, -35],
             className: 'stop-marker',
             html: '<div>' +
-            '<img src="static/forts/Pstop.png"' +
+            '<img src="static/forts/Pstop.png" style="width:32px;height:auto;" />' +
             '</div>'
         })
     }
