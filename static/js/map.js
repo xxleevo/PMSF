@@ -5726,7 +5726,7 @@ $(function () {
     $selectMinRaidLevel = $('#min-level-raids-filter-switch')
 
     $selectMinRaidLevel.select2({
-        placeholder: 'Minimum Raid Level',
+        placeholder: 'Min. Level angeben...',
         minimumResultsForSearch: Infinity
     })
 
@@ -5739,7 +5739,7 @@ $(function () {
     $selectMaxRaidLevel = $('#max-level-raids-filter-switch')
 
     $selectMaxRaidLevel.select2({
-        placeholder: 'Maximum Raid Level',
+        placeholder: 'Max. Level angeben...',
         minimumResultsForSearch: Infinity
     })
 

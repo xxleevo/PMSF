@@ -616,6 +616,7 @@ if ( $blockIframe ) {
                         <div class="form-control switch-container" id="min-level-raids-filter-wrapper">
                             <h3>Min. Raid Level</h3>
                             <select name="min-level-raids-filter-switch" id="min-level-raids-filter-switch">
+								<option value ="">Einstellung angeben...</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -626,6 +627,7 @@ if ( $blockIframe ) {
                         <div class="form-control switch-container" id="max-level-raids-filter-wrapper">
                             <h3>Max. Raid Level</h3>
                             <select name="max-level-raids-filter-switch" id="max-level-raids-filter-switch">
+								<option value ="">Einstellung angeben...</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -1310,7 +1312,7 @@ if ( $blockIframe ) {
 		echo '</div>';
         }
         ?>
-            <?php
+        <?php
             if ( ! $noAreas ) {
 			echo '<h3 style="font-weight: bold"><i class="fa fa-globe fa-fw"></i>&nbsp;Orte</h3>';
                 $count = sizeof( $areas );
@@ -1322,9 +1324,15 @@ if ( $blockIframe ) {
                     echo '</ul></div>';
                 }
             }
-            ?>
-
+        ?>
         </div>
+        <?php
+        if ( $infopageUrl != "" ) {
+            echo '<p><center><a href="' . $infopageUrl . '" target="_blank" style="background-color: #555555;border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;">
+            <i class="fa fa-info-circle fa-fw"></i>Unsere Infopage
+        </a></center></p>';
+        }
+        ?>
         <?php
         if (($noNativeLogin === false) && !empty($_SESSION['user']->id)) {
             ?>

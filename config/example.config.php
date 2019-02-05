@@ -71,6 +71,10 @@ $worldopoleUrl = "";                                                // Link to W
 /* StatsToggle */
 $noStatsToggle = false;                                             // Enables or disables the stats button in the header.
 
+
+/* Infopage toggle */
+$infopageUrl = ""; //A page which is shown at the bottom of the menu 
+
 /* MOTD */
 $noMotd = true;
 $motdTitle = "Message of the Day";
