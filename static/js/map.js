@@ -1025,7 +1025,7 @@ function gymLabel(item) {
 
     var lastModifiedStr = getDateStr(lastModified) + ' ' + getTimeStr(lastModified)
 
-    var nameStr = (name ? '<div>' + name + '</div>' : '')
+    var nameStr = (name ? '<div><b>' + name + '</b></div>' : '')
 
     var gymColor = ['0, 0, 0, .4', '74, 138, 202, .6', '240, 68, 58, .6', '254, 217, 40, .6']
     var str
