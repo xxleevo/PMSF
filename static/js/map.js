@@ -918,7 +918,7 @@ function gymLabel(item) {
         if (raidStarted) {
             var cpStr = ''
             if (item.raid_pokemon_cp > 0) {
-                cpStr = ' CP ' + item.raid_pokemon_cp
+                cpStr = ' WP ' + item.raid_pokemon_cp
             }
             raidStr += '<br>' + item.raid_pokemon_name
             if (form !== null && form > 0 && forms.length > form) {
@@ -5118,7 +5118,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             if (raidStarted) {
                 var cpStr = ''
                 if (result.raid_pokemon_cp > 0) {
-                    cpStr = ' CP ' + result.raid_pokemon_cp
+                    cpStr = ' WP ' + result.raid_pokemon_cp
                 }
                 raidStr += '<br>' + result.raid_pokemon_name
                 if (form !== null && form > 0 && forms.length > form) {
