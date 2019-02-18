@@ -1976,6 +1976,9 @@ if ( $blockIframe ) {
     var pvptext3 = '<?php echo $noScanPolygonPvp ? '' : $pvptext3 ?>';
     var pvptext4 = '<?php echo $noScanPolygonPvp ? '' : $pvptext4 ?>';
 	// --end of edited/added code
+	//v4 xxleevo
+	var verifiedDespawnTimer = '<?php echo $noVerifiedDespawnTimer ?>';
+	// --end of edited/added code
     var notifySound = <?php echo $noNotifySound ? 'false' : $notifySound ?>;
     var criesSound = <?php echo $noCriesSound ? 'false' : $criesSound ?>;
     var enableStartMe = <?php echo $noStartMe ? 'false' : $enableStartMe ?>;
