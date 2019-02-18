@@ -751,6 +751,10 @@ function pokemonLabel(item) {
     var latitude = item['latitude']
     var longitude = item['longitude']
     var disappearTime = item['disappear_time']
+	//v4 -- edited by xxleevo
+	// if not verified, getting 0 - if rdm hasnt the field for verified despawn timers, getting NULL
+	var verifiedDespawn = item['is_verified_despawn']
+	//v4 -- end of code block 
     var reportTime = disappearTime - 1800000
     var atk = item['individual_attack']
     var def = item['individual_defense']
@@ -869,6 +873,14 @@ function pokemonLabel(item) {
             i8ln('Reported at') + ' ' + getTimeStr(reportTime) +
             '</b></center></div>'
     } else {
+		//changes for v4 -- by xxleevo
+		if (verifiedDespawn == 1){
+        contentstring += '<div>' +
+		'<br>Verifizierte Restzeit:' +
+        '<br> <span class="label-countdown" style="background-color: #fffaaa;font-size: 15px;font-weight: bold" disappears-at="' + disappearTime + '">(00m00s)</span> verbleibend <br>' +
+        '<font size="1" style="font-weight: normal;">(Despawn um ' + getTimeStr(disappearTime) + ')' + '</font><br><br>' +
+            '</div>'
+		} else {
         contentstring += '<div>' +
 		'<br>Vorraussichtliche Restzeit:' +
         '<br> <span class="label-countdown" style="background-color: #fffaaa;font-size: 15px;font-weight: bold" disappears-at="' + disappearTime + '">(00m00s)</span> verbleibend <br>' +
@@ -876,6 +888,8 @@ function pokemonLabel(item) {
         //    i8ln('Aprox Despawn Time:') + ' ' + getTimeStr(disappearTime) +
         //    ' <span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
             '</div>'
+		}
+		//v4 -- end of code block editing
     }
     contentstring += 
 	details +

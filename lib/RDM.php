@@ -10,13 +10,20 @@ class RDM extends Scanner
         $conds = array();
         $params = array();
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
+		
+	    $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weight, weather AS weather_boosted_condition";
 
-        $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weight, weather AS weather_boosted_condition";
         global $noHighLevelData;
         if (!$noHighLevelData) {
             $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level";
         }
-
+		//v4 -- edited by xxleevo
+		global $verifiedDespawnTimer;
+		if ($verifiedDespawnTimer) {
+            $select .= ", expire_timestamp_verified AS is_verified_despawn";
+		}
+		//v4 end of code block
+		
         $conds[] = "lat > :swLat AND lon > :swLng AND lat < :neLat AND lon < :neLng AND expire_timestamp > :time";
         $params[':swLat'] = $swLat;
         $params[':swLng'] = $swLng;
@@ -90,7 +97,13 @@ class RDM extends Scanner
         if (!$noHighLevelData) {
             $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level";
         }
-
+		//v4 -- edited by xxleevo
+		global $verifiedDespawnTimer;
+		if ($verifiedDespawnTimer) {
+            $select .= ", expire_timestamp_verified AS is_verified_despawn";
+		}
+		//v4 end of code block
+		
         $conds[] = "lat > :swLat AND lon > :swLng AND lat < :neLat AND lon < :neLng AND expire_timestamp > :time";
         $params[':swLat'] = $swLat;
         $params[':swLng'] = $swLng;
