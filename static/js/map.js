@@ -1320,7 +1320,8 @@ function pokestopLabel(item) {
         str += '<center><div>' + i8ln('Convert to Gym') + '<i class="fa fa-refresh convert-pokestop" style="margin-top: 2px; vertical-align: middle; font-size: 1.5em;" onclick="openConvertPokestopModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'
     }
 	if (item['lure_expiration'] > Date.now()) {
-		lureEndStr = getTimeStr(Math.floor(item['lure_expiration'] / 1000))
+		lureEndStr = getTimeStr(item['lure_expiration'])
+		//lureEndStr = getTimeStr(Math.floor(item['lure_expiration'] / 1000))
         str +=
         '<img style="padding:5px;position:absolute;left:10px;top:15px;height:50px;" src="static/forts/LureModule.png"/>' +
         '<div style="font-weight:900;">' +
