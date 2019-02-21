@@ -1166,7 +1166,7 @@ function getReward(item) {
         if (reward['shiny'] === true) {
             shinyStr = '_shiny'
         }
-        rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
+        rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
     } else if (item['quest_reward_type'] === 3) {
         rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + 'rewards/reward_stardust.png"/>'
     } else if (item['quest_reward_type'] === 2) {
@@ -1319,6 +1319,15 @@ function pokestopLabel(item) {
     if (!noConvertPokestops) {
         str += '<center><div>' + i8ln('Convert to Gym') + '<i class="fa fa-refresh convert-pokestop" style="margin-top: 2px; vertical-align: middle; font-size: 1.5em;" onclick="openConvertPokestopModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'
     }
+	if (item['lure_expiration'] > Date.now()) {
+		lureEndStr = getTimeStr(Math.floor(item['lure_expiration'] / 1000))
+        str +=
+        '<img style="padding:5px;position:absolute;left:10px;top:15px;height:50px;" src="static/forts/LureModule.png"/>' +
+        '<div style="font-weight:900;">' +
+        'Lockmodul bis' + ': ' + lureEndStr +
+        ' <span class="label-countdown" disappears-at="' + item['lure_expiration'] + '">(00m00s)</span>' +
+        '</div>'
+	}
     str += '<div>' +
         i8ln('Ort:') + ' ' + '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item['latitude'] + ',' + item['longitude'] + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a> - <a href="./?lat=' + item['latitude'] + '&lon=' + item['longitude'] + '&zoom=16">Maplink</a>' +
         '</div>'
@@ -1894,13 +1903,13 @@ function getPokestopMarkerIcon(item) {
 			if(lure > Date.now() / 1000){
 				html = '<div style="position:relative;">' +
 					'<img src="static/forts/Pstop-Lured_new.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
-					'<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+					'<img src="' + iconpath + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
 					'</div>'
 			}
 			else{
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/Pstop-quest-small.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
-                '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+                '<img src="' + iconpath + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
 			}
             stopMarker = L.divIcon({
