@@ -1265,28 +1265,68 @@ function getQuest(item) {
 
 function pokestopLabel(item) {
     var str
-	//[selfmade] saving the pokestop ID for temp removing it
 	var pokestopId = item['pokestop_id']
-	//v5 - xxleevo lure
-	var lureEndStr = ''
-	//v5 end of code block
     if (item['pokestop_name'] === null) {
         item['pokestop_name'] = 'Pokéstop'
     }
-    var stopImage = ''
-    if (item['url'] !== null) {
-        stopImage = '<img height="70px" style="padding: 5px;" src="' + item['url'] + '">'
-    }
+	var stopName = ''
+	if (item['lure_expiration'] > Date.now()){
+        stopName = '<b class="pokestop-lure-name">' +
+        item['pokestop_name'] +
+		'</b>'
+	}else if(!noQuests && item['quest_type'] !== 0){
+        stopName = '<b class="pokestop-quest-name">' +
+        item['pokestop_name'] +
+		'</b>'
+	}else {
+        stopName = '<b class="pokestop-name">' +
+        item['pokestop_name'] +
+		'</b>'
+	}
+	var stopImage = ''
+	var lureEndStr = ''
+    if (item['lure_expiration'] > Date.now() && item['url'] !== null) {
+		stopImage = '<img class="pokestop-lure-image" src="' + item['url'] + '">'
+    } else if(!noQuests && item['quest_type'] !== 0 && item['url'] !== null){
+		stopImage = '<img class="pokestop-quest-image" src="' + item['url'] + '">'
+	} else if (item['url'] !== null) {
+		stopImage = '<img class="pokestop-image" src="' + item['url'] + '">'
+	} else{
+		stopImage = '<img height="70px" style="padding: 5px;" src="static/forts/Pstop-large.png">'
+	}
     str =
-        '<center>' + '<div class="pokestop-label">' +
-        '<b>' + item['pokestop_name'] + '</b>' +
-        '</div>'
+		'<center><div class="pokestop-label">' +
+        stopName +
+		'</div></center>'
     if (!noQuests && item['quest_type'] !== 0) {
         str +=
             '<div><center>' +
-            '<img height="70px" style="padding: 5px;" src="static/forts/Pstop-quest-large.png">' +
-            stopImage +
-            getReward(item) +
+			stopImage
+			if (item['lure_expiration'] > Date.now()) {
+				str +=
+				//'<img style="padding:5px;position:absolute;left:15px;top:20px;height:50px;" src="static/forts/LureModule.png"/>'
+				'<img style="margin-bottom:55px;margin-left:-95px;height:50px;" src="static/forts/LureModule.png"/>' +
+				getReward(item)
+			}else{
+			str +=
+				'<div style="margin-top:-60px;margin-right:-60px">' +
+				getReward(item) +
+				'</div>'
+			}
+
+			if (item['lure_expiration'] > Date.now()) {
+				lureEndStr = getTimeStr(item['lure_expiration'])
+				//lureEndStr = getTimeStr(Math.floor(item['lure_expiration'] / 1000))
+				str +=
+				'<div style="font-weight:900;">' +
+				'Lockmodul bis' + ': ' + lureEndStr +
+				' <span class="label-countdown" disappears-at="' + item['lure_expiration'] + '">(00m00s)</span>' +
+				'</div>'
+			}
+			str += 
+				getQuest(item) +
+				//[selfmade]Option to delete Pokestop temporarily from map
+				'<a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a>'
             '</center></div>'
     } else {
         str =
@@ -1296,16 +1336,10 @@ function pokestopLabel(item) {
             '<b>' + item['pokestop_name'] + '</b>' +
             '</div>' +
             '<div>' +
-            '<img height="70px" style="padding: 5px;" src="static/forts/Pstop-large.png">' +
-            stopImage +
+			stopImage +
             '</div>' +
             '</center>' +
             '</div>'
-    }
-    if (!noQuests && item['quest_type'] !== 0) {
-        str += getQuest(item)
-		//[selfmade]Option to delete Pokestop temporarily from map
-		str += ' <a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a>'
     }
     if (!noDeletePokestops) {
         str += '<i class="fa fa-trash-o delete-pokestop" onclick="deletePokestop(event);" data-id="' + item['pokestop_id'] + '"></i>'
@@ -1319,19 +1353,9 @@ function pokestopLabel(item) {
     if (!noConvertPokestops) {
         str += '<center><div>' + i8ln('Convert to Gym') + '<i class="fa fa-refresh convert-pokestop" style="margin-top: 2px; vertical-align: middle; font-size: 1.5em;" onclick="openConvertPokestopModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'
     }
-	if (item['lure_expiration'] > Date.now()) {
-		lureEndStr = getTimeStr(item['lure_expiration'])
-		//lureEndStr = getTimeStr(Math.floor(item['lure_expiration'] / 1000))
-        str +=
-        '<img style="padding:5px;position:absolute;left:10px;top:15px;height:50px;" src="static/forts/LureModule.png"/>' +
-        '<div style="font-weight:900;">' +
-        'Lockmodul bis' + ': ' + lureEndStr +
-        ' <span class="label-countdown" disappears-at="' + item['lure_expiration'] + '">(00m00s)</span>' +
-        '</div>'
-	}
-    str += '<div>' +
+    str += '<div><center>' +
         i8ln('Ort:') + ' ' + '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item['latitude'] + ',' + item['longitude'] + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a> - <a href="./?lat=' + item['latitude'] + '&lon=' + item['longitude'] + '&zoom=16">Maplink</a>' +
-        '</div>'
+        '</center></div>'
     if ((!noWhatsappLink) && (item['quest_id'] && item['reward_id'] !== null)) {
         str += '<div>' +
             '<center>' +
