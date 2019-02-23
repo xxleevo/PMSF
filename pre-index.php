@@ -298,7 +298,7 @@ if ( $blockIframe ) {
                 <?php
                 if ( ! $noPokemon ) {
                     echo '<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-                    <h3>' . i8ln( 'Pokemon' ) . '</h3>
+                    <h3> Pokemon </h3>
                     <div class="onoffswitch">
                         <input id="pokemon-switch" type="checkbox" name="pokemon-switch" class="onoffswitch-checkbox"
                                checked>
@@ -312,7 +312,7 @@ if ( $blockIframe ) {
                 <?php
                 if ( ! $noNests ) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-                    <h3>' . i8ln( 'Nests' ) . '</h3>
+                    <h3> Nester </h3>
                     <div class="onoffswitch">
                         <input id="nests-switch" type="checkbox" name="nests-switch"
                                class="onoffswitch-checkbox" checked>

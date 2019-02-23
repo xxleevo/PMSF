@@ -2085,6 +2085,15 @@ function setupNestMarker(item) {
 }
 
 function nestLabel(item) {
+// Count pokemon/h in Nest
+	var pokemonCount = 0
+	var analyzeTime = 8
+	var avgPokemonPerHour = 0
+	if(item.pokemon_count > 0){
+		pokemonCount = item.pokemon_count
+		avgPokemonPerHour = Math.round(pokemonCount/analyzeTime)
+	}
+	
     var str = '<div>'
     if (item.pokemon_id > 0) {
         var types = item['pokemon_types']
@@ -2105,7 +2114,7 @@ function nestLabel(item) {
                 '<center>' +
                 '<div class="marker-nests">' +
                 '<img src="static/images/nest-' + item.english_pokemon_types[0].type.toLowerCase() + '.png" style="width:80px;height:auto;"/>' +
-                '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_00.png" style="position:absolute;width:65px;height:65px;top:44px;left:70px;"/>' +
+                '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_00.png" style="position:absolute;width:65px;height:65px;top:44px;left:80px;"/>' +
                 '<br>' +
                 '<div>' +
                 typesDisplay +
@@ -2127,8 +2136,15 @@ function nestLabel(item) {
     if (!noManualNests) {
         str += '<center><div>' + i8ln('Add Nest') + '<i class="fa fa-binoculars submit-nest" onclick="openNestModal(event);" data-id="' + item['nest_id'] + '"></i></div></center>'
     }
+	//Print the avg spawns
+	str += '<div>'+
+		'<center>' +
+		'<hr width="50%" style="margin: 1em 0;border-bottom: solid 1px rgba(141, 141, 141, 0.43);">' +
+		'<b>Spawndichte:</b> etwa ' + avgPokemonPerHour + ' pro Stunde' +
+		'</center>' +
+		'</div>'
     str += '<div>' +
-        '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">Maplink</a>' +
+        '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">Maplink</a></center>' +
         '</div>'
     if ((!noWhatsappLink) && (item.pokemon_id > 0)) {
         str += '<div>' +

@@ -689,7 +689,8 @@ class RDM extends Scanner
         lat,
         lon,
         pokemon_id,
-        type
+        type,
+		pokemon_count
         FROM nests
         WHERE :conditions";
 
