@@ -2090,8 +2090,10 @@ function nestLabel(item) {
 	var analyzeTime = 8
 	var avgPokemonPerHour = 0
 	if(item.pokemon_count > 0){
-		pokemonCount = item.pokemon_count
-		avgPokemonPerHour = Math.round(pokemonCount/analyzeTime)
+		// Old
+		//pokemonCount = item.pokemon_count
+		//avgPokemonPerHour = Math.round(pokemonCount/analyzeTime)
+		avgPokemonPerHour = item.pokemon_count
 	}
 	
     var str = '<div>'
