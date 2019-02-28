@@ -175,6 +175,8 @@ var scanAreaGroupQuest = new L.LayerGroup()
 //v3 xxleevo
 var scanAreaGroupPvp = new L.LayerGroup()
 // --end of edited/added code
+//v6 nestPolygons
+var nestPolygonGroup = new L.LayerGroup()
 var scanAreas = []
 /*
  text place holders:
@@ -294,7 +296,7 @@ function initMap() { // eslint-disable-line no-unused-vars
         maxZoom: maxZoom,
         zoomControl: false,
 		//v2 - v3 xxleevo
-        layers: [weatherLayerGroup, exLayerGroup, gymLayerGroup, stopLayerGroup, scanAreaGroup, scanAreaGroupQuest,scanAreaGroupPvp]
+        layers: [weatherLayerGroup, exLayerGroup, gymLayerGroup, stopLayerGroup, scanAreaGroup, scanAreaGroupQuest,scanAreaGroupPvp,nestPolygonGroup]
 		// --end of edited/added code
 	})
 
@@ -372,6 +374,9 @@ function initMap() { // eslint-disable-line no-unused-vars
 	//v3 xxleevo
     buildScanPolygonPvp()
 	// --end of edited/added code
+	//v6 nestpolygons
+	buildNestPolygons()
+	// --end of edited code
 
     map.on('moveend', function () {
         updateS2Overlay()
@@ -500,7 +505,7 @@ function showS2Cells(level, style) {
         steps++
     } while (steps < count)
 }
-
+// v6 xxleevo - Nest polygons added
 function buildScanPolygons() {
     if (!Store.get(['showScanPolygon'])) {
         return false
@@ -514,6 +519,22 @@ function buildScanPolygons() {
             }
         })
         scanAreaGroup.addLayer(geoPolys)
+    })
+}
+
+function buildNestPolygons() {
+    if (!Store.get(['showNests'])) {
+        return false
+    }
+
+    $.getJSON(nestJSONfile, function (data) {
+        var nestPolys = L.geoJson(data, {
+            onEachFeature: function (features, featureLayer) {
+                featureLayer.setStyle({color: features.properties.stroke, fillColor: features.properties.fill})
+                //featureLayer.bindPopup(features.properties.name)
+            }
+        })
+        nestPolygonGroup.addLayer(nestPolys)
     })
 }
 //v2 - xxleevo
@@ -2052,6 +2073,12 @@ function setupPokestopMarker(item) {
 }
 function setupNestMarker(item) {
     var getNestMarkerIcon = ''
+	var pokemonCount = item.pokemon_count
+	var bigNest = ''
+	var iconWidth = 48
+	var pokemonPosTop = 6
+	var pokemonPosLeft = 3
+	var iconAnchor = [24, 60]
     if (item.pokemon_id > 0) {
         var pokemonIdStr = ''
         if (item.pokemon_id <= 9) {
@@ -2061,9 +2088,16 @@ function setupNestMarker(item) {
         } else {
             pokemonIdStr = item.pokemon_id
         }
+		if(pokemonCount > 10){
+		bigNest += '_big'
+		iconWidth = 83
+		pokemonPosTop = 33
+		pokemonPosLeft = 20
+		iconAnchor = [42, 90]
+		}
         getNestMarkerIcon = '<div class="marker-nests">' +
-            '<img src="static/images/nest-' + item.english_pokemon_types[0].type.toLowerCase() + '.png" style="width:45px;height: auto;"/>' +
-            '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_00.png" style="position:absolute;width:40px;height:40px;top:6px;left:3px"/>' +
+            '<img src="static/images/nest-' + item.english_pokemon_types[0].type.toLowerCase() + bigNest + '.png" style="width:' + iconWidth + 'px;height: auto;"/>' +
+            '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_00.png" style="position:absolute;width:40px;height:40px;top:' + pokemonPosTop + 'px;left:' + pokemonPosLeft + 'px"/>' +
             '</div>'
     } else {
         getNestMarkerIcon = '<div class="marker-nests">' +
@@ -2072,8 +2106,8 @@ function setupNestMarker(item) {
     }
     var nestMarkerIcon = L.divIcon({
         iconSize: [36, 48],
-        iconAnchor: [20, 45],
-        popupAnchor: [0, -45],
+        iconAnchor: iconAnchor,
+        popupAnchor: [0, -60],
         className: 'marker-nests',
         html: getNestMarkerIcon
     })
@@ -6394,8 +6428,16 @@ $(function () {
         buildSwitchChangeListener(mapData, ['gyms'], 'showGyms').bind(this)()
     })
     $('#nests-switch').change(function () {
+		Store.set('showNests', this.checked)
+        if (this.checked) {
+            buildNestPolygons()
+        } else {
+            nestPolygonGroup.clearLayers()
+        }
+		buildNestPolygons()
         lastnests = false
         buildSwitchChangeListener(mapData, ['nests'], 'showNests').bind(this)()
+		
     })
     $('#communities-switch').change(function () {
         lastcommunities = false

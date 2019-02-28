@@ -1958,27 +1958,17 @@ if ( $blockIframe ) {
     var enableSpawnpoints = <?php echo $noSpawnPoints ? 'false' : $enableSpawnPoints ?>;
     var enableRanges = <?php echo $noRanges ? 'false' : $enableRanges ?>;
     var enableScanPolygon = <?php echo $noScanPolygon ? 'false' : $enableScanPolygon ?>;
-	//v2 xxleevo
     var enableScanPolygonQuest = <?php echo $noScanPolygonQuest ? 'false' : $enableScanPolygonQuest ?>;
-	// --end of edited/added code
-	//v3 xxleevo
     var enableScanPolygonPvp = <?php echo $noScanPolygonPvp ? 'false' : $enableScanPolygonPvp ?>;
-	// --end of edited/added code
     var geoJSONfile = '<?php echo $noScanPolygon ? '' : $geoJSONfile ?>';
-	//v2 xxleevo
+    var nestJSONfile = '<?php echo $noNests ? '' : $nestJSONfile ?>';
     var geoJSONfileQuest = '<?php echo $noScanPolygonQuest ? '' : $geoJSONfileQuest ?>';
-	// --end of edited/added code
-	//v3 xxleevo
     var geoJSONfilePvp = '<?php echo $noScanPolygonPvp ? '' : $geoJSONfilePvp ?>';
-	// --end of edited/added code
     var pvptext1 = '<?php echo $noScanPolygonPvp ? '' : $pvptext1 ?>';
     var pvptext2 = '<?php echo $noScanPolygonPvp ? '' : $pvptext2 ?>';
     var pvptext3 = '<?php echo $noScanPolygonPvp ? '' : $pvptext3 ?>';
     var pvptext4 = '<?php echo $noScanPolygonPvp ? '' : $pvptext4 ?>';
-	// --end of edited/added code
-	//v4 xxleevo
 	var verifiedDespawnTimer = '<?php echo $verifiedDespawnTimer ?>';
-	// --end of edited/added code
     var notifySound = <?php echo $noNotifySound ? 'false' : $notifySound ?>;
     var criesSound = <?php echo $noCriesSound ? 'false' : $criesSound ?>;
     var enableStartMe = <?php echo $noStartMe ? 'false' : $enableStartMe ?>;
