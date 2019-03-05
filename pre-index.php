@@ -738,7 +738,10 @@ if ( $blockIframe ) {
                             </div>';
                         } ?>
                     </div>
-						(Bereits getriggerte Arenen werden mit einem "EX" versehen)
+						<?php
+						if($onlyTriggerGyms){
+						echo '(Bereits getriggerte Arenen werden mit einem "EX" versehen)';
+						} ?>
                 </div>
                 <?php
             }
