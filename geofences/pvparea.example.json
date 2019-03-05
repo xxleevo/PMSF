@@ -1,0 +1,37 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          lon,
+          lat
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          lon,
+          lat
+        ]
+      }
+    }
+  ]
+}
