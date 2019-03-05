@@ -839,12 +839,12 @@ if ( $blockIframe ) {
             }
             ?>
             <?php
-            if ( ! $noSearchLocation || ! $noNests || ! $noStartMe || ! $noStartLast || ! $noFollowMe || ! $noPokestops || ! $noScannedLocations || ! $noSpawnPoints || ! $noRanges || ! $noWeatherOverlay || ! $noSpawnArea ) {
-                if ( ! $noSearchLocation ) {
+            if ( ! $noSearchLocation || ! $noNests || ! $noStartMe || ! $noStartLast || ! $noFollowMe || ! $noPokestops || ! $noScannedLocations || ! $noSpawnPoints || ! $noRanges || ! $noWeatherOverlay || ! $noSpawnArea || ! $noScanPolygon || ! $noScanPolygonQuest || ! $noScanPolygonPvp) {
+                if ( ! $noScanPolygon || ! $noScanPolygonQuest || ! $noScanPolygonPvp ) {
                 echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location &amp; Gebiete</h3>
                     <div>';
                 } else {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location &amp; Gebiete</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location</h3>
                     <div>';
 		} ?>
                 <?php
