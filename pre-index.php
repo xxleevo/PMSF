@@ -1280,7 +1280,7 @@ if ( $blockIframe ) {
 			</div>
 			
 			<?php
-			if (!$noQuests && !$noPokemon){
+			if (!$noQuests && !$noPokemon && $infopageUrl == "https://rocketmapdo.de/infopage/" ){
                 echo '<h3 style="font-weight: bold"><i class="fa fa-clock-o fa-fw"></i>&nbsp;Scanzeiten</h3>
 				<div>
 					<p style="height:30px"><img src="static/forts/Pstop-quest-small.png" alt ="" style="height:30px;width: auto;float:left"/><b style="font-size:17px">00:00-05:30 :</b>  Questscan</p> 
