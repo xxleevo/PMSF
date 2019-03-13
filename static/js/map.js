@@ -944,6 +944,14 @@ function gymLabel(item) {
     var raidStr = ''
     var raidIcon = ''
     var i = 0
+	
+	//Selfmade --Team Harmony if not scanned in the past 4 hours)
+	var outdated = ''
+	if( (lastScanned/1000) < ((Date.now()/1000)-14400) ){
+	teamName = 'Harmony'
+	outdated = '<b>Letzter Scan älter als 4 Std !</b>'
+	}
+	//End of Selfmade block
     if (raidSpawned && item.raid_end > Date.now()) {
         var levelStr = ''
         for (i = 0; i < item['raid_level']; i++) {
@@ -1049,7 +1057,6 @@ function gymLabel(item) {
             '<span class="cp team-' + teamId + '">' + members[i].pokemon_cp + '</span>' +
             '</span>'
     }
-
     var lastScannedStr = ''
     if (lastScanned != null) {
         lastScannedStr =
@@ -1068,7 +1075,7 @@ function gymLabel(item) {
     if (url !== null) {
         gymImage = '<img height="70px" style="padding: 5px;" src="' + url + '">'
     }
-    if (teamId === 0) {
+    if (teamId === 0 || ((lastScanned/1000) < ((Date.now()/1000)-14400) )) {
         str =
             '<div class="gym-label">' +
             '<center>' +
@@ -1076,12 +1083,19 @@ function gymLabel(item) {
             '<div>' +
             '<img height="70px" style="padding: 5px;" src="static/forts/' + teamName + '_large.png">' +
             raidIcon +
-            gymImage +
+			//No Gym Images for less Traffic
+            //gymImage +
+			// End of selfmade edit
             '</div>' +
             raidStr +
             '<div>' +
             park +
             '</div>' +
+			//Selfmade
+            '<div>' +
+            outdated +
+            '</div>' +
+			//end of selfmade edit
             '<div>' +
             i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a> - <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">Maplink</a>' +
             '</div>' +
@@ -1121,10 +1135,12 @@ function gymLabel(item) {
             nameStr +
             '</div>' +
             '<div>' +
-            '<b style="color:rgba(' + gymColor[teamId] + ')">' + i8ln('Team') + ' ' + i8ln(teamName) + '</b><br>' +
+			'<b style="color:rgba(' + gymColor[teamId] + ')">' + i8ln('Team') + ' ' + i8ln(teamName) + '</b><br>' +
             '<img height="70px" style="padding: 5px;" src="static/forts/' + teamName + '_large.png">' +
             raidIcon +
-            '<img height="70px" style="padding: 5px;" src="' + url + '">' +
+			//No Gym Images for less Traffic
+            //'<img height="70px" style="padding: 5px;" src="' + url + '">' +
+			//End of selfmade edit
             '</div>' +
             raidStr +
             '<div><b>' + freeSlots + ' ' + i8ln('Free Slots') + '</b></div>' +
@@ -1736,6 +1752,20 @@ function getGymMarkerIcon(item) {
             className: 'egg-marker',
             html: html
         })
+		//Selfmade -- 4h old Gyms = harmony
+	} else if( (lastScanned/1000) < ((Date.now()/1000)-14400) ){
+        html = '<div>' +
+            '<img src="static/forts/Harmony.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
+            exIcon +
+            '</div>'
+        fortMarker = L.divIcon({
+            iconSize: [relativeIconSize,relativeIconSize],
+            iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
+            popupAnchor: [0, -40],
+            className: 'egg-marker',
+            html: html
+        })
+	// Selfmade block ends
     } else {
         html = '<div>' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
