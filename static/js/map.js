@@ -4433,7 +4433,7 @@ function processPokestops(i, item) {
     if (!Store.get('showPokestops')) {
         return false
     }
-
+	
     if (Store.get('showLures') && !item['lure_expiration']) {
         return true
     }
@@ -4445,6 +4445,7 @@ function processPokestops(i, item) {
         if (item.marker) {
             markers.removeLayer(item.marker)
         }
+
         var latlng = turf.point([item['longitude'], item['latitude']])
         $.each(scanAreas, function (index, poly) {
             var insideScan = turf.booleanPointInPolygon(latlng, poly)
@@ -4455,8 +4456,15 @@ function processPokestops(i, item) {
                 item.scanArea = insideScan
             }
         })
+		//Temp Remove stops dont make the Stop again -- xxleevo
+		if (!item.hidden) {
+		//
         item.marker = setupPokestopMarker(item)
         mapData.pokestops[item['pokestop_id']] = item
+		//xxleevo
+        }
+		//
+
     } else {
         // change existing pokestop marker to unlured/lured
         var item2 = mapData.pokestops[item['pokestop_id']]
@@ -4487,7 +4495,13 @@ function updatePokestops() {
             }
             markers.removeLayer(value.marker)
             markersnotify.removeLayer(value.marker)
+			//if hidden, dont show stop again -- xxleevo
+			if(!value.hidden){
+			//xxleevo
             value.marker = setupPokestopMarker(value)
+			//xxleevo
+			}
+			//xxleevo
         }
     })
     // remove unlured stops if show lured only is selected
