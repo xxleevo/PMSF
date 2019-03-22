@@ -4485,10 +4485,10 @@ function updatePokestops() {
     }
     var removeStops = []
     var currentTime = Math.round(new Date().getTime() / 1000)
-
+	
     // change lured pokestop marker to unlured when expired
     $.each(mapData.pokestops, function (key, value) {
-        if (value['lure_expiration'] !== '0' && value['lure_expiration'] < currentTime) {
+        if (value['lure_expiration'] && value['lure_expiration'] !== '0' && value['lure_expiration'] < currentTime) {
             if (value.marker && value.marker.rangeCircle) {
                 markers.removeLayer(value.marker.rangeCircle)
                 markersnotify.removeLayer(value.marker.rangeCircle)
