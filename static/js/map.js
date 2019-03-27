@@ -2055,7 +2055,7 @@ function getPokestopMarkerIcon(item) {
             })
         }
     } else {
-			if(lure > Date.now() / 1000){
+			if(lure > Date.now() ){
 				html = '<div>' +
             '<img src="static/forts/Pstop-Lured_new.png" style="width:32px;height:auto;" />' +
             '</div>'
@@ -4484,7 +4484,8 @@ function updatePokestops() {
         return false
     }
     var removeStops = []
-    var currentTime = Math.round(new Date().getTime() / 1000)
+	var currentTime = Date.now()
+    //var currentTime = Math.round(new Date().getTime() / 1000)
 	
     // change lured pokestop marker to unlured when expired
     $.each(mapData.pokestops, function (key, value) {
