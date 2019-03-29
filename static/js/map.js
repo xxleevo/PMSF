@@ -1976,7 +1976,7 @@ function getPokestopMarkerIcon(item) {
                 shinyStr = '_shiny'
             }
 			//v5 - xxleevo lures
-			if(lure > Date.now() / 1000){
+			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
 					'<img src="static/forts/Pstop-Lured_new.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
 					'<img src="' + iconpath + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
@@ -1996,7 +1996,7 @@ function getPokestopMarkerIcon(item) {
                 html: html
             })
         } else if (reward[0]['type'] === 3) {
-			if(lure > Date.now() / 1000){
+			if(lure > Date.now() ){
 				html = '<div style="position:relative;">' +
 					'<img src="static/forts/Pstop-Lured_new.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
 					'<img src="' + iconpath + 'rewards/reward_stardust.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
@@ -2016,7 +2016,7 @@ function getPokestopMarkerIcon(item) {
                 html: html
             })
         } else if (reward[0]['type'] === 2) {
-			if(lure > Date.now() / 1000){
+			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
 					'<img src="static/forts/Pstop-Lured_new.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
 					'<img src="' + iconpath + 'rewards/reward_' + rewardinfo['item_id'] + '_1.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
@@ -2036,7 +2036,7 @@ function getPokestopMarkerIcon(item) {
                 html: html
             })
         } else {
-			if(lure > Date.now() / 1000){
+			if(lure > Date.now()){
 				html = '<div>' +
                 '<img src="static/forts/Pstop-Lured_new.png"' +
                 '</div>'
