@@ -1416,7 +1416,7 @@ function getQuest(item) {
         } else if (item['quest_condition_type'] === 11 && questinfo !== null) {
             str = str.replace('Beeren', 'einer ' + i8ln(idToItem[questinfo['item_id']].name))
         } else if (item['quest_condition_type'] === 11) {
-            str = str.replace('Entwickle', 'Nutze einen Entwicklungsitem und entwickle')
+            str = str.replace('Entwickle', 'Nutze ein Entwicklungsitem und entwickle')
         } else if (item['quest_condition_type'] === 14 && typeof questinfo['throw_type_id'] === 'undefined') {
             str = str.replace('Würfe', 'Würfe hintereinander')
             if (item['quest_condition_type_1'] === 15) {
