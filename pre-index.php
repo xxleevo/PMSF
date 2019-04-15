@@ -293,7 +293,12 @@ if ( $blockIframe ) {
                 ?>
                 <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Nester</h3>
                 <?php
-                } ?>
+                } else if (!$noPokemon){ 
+				?>
+                <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Pokemon</h3>
+                <?php
+				}
+				?>
                 <div>
                 <?php
                 if ( ! $noPokemon ) {
