@@ -1,0 +1,58 @@
+.raid-container{
+  .submit-raid{
+    cursor:pointer;
+    font-size:22px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+.raid-modal{
+  text-align:center;
+  input[type="number"]{
+    display:inline;
+    width:50px;
+    text-align:center;
+    margin:0 10px;
+  }
+  button.submitting-raid {
+    width: 73%;
+    float: left;
+  }
+  button.close-modal {
+    width: 25%;
+    float: left;
+    text-align: center;
+    margin-left: 2%;
+    padding:0;
+    .fa-times{
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+.pokemon-list.raid-submission{
+  .active{
+    border: 1px solid rgb(0, 255, 19);
+    background: rgba(0, 255, 19,.7);
+  }
+}
+
+.timer-cont{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  h5{
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  select{
+    width:75px;
+  }
+}
+.raid-report{
+  .mon-name{
+    font-size:14px;
+  }
+}
