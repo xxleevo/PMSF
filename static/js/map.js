@@ -1888,14 +1888,14 @@ function getGymMarkerIcon(item) {
 	
 	var teamStr = ''
 	var team = ''
-	if(!noGymTeamInfos){
+	if(!noGymTeamInfos && !noOutdatedGyms && ((lastScanned/1000) > ((Date.now()/1000)-14400)) ){
 		team = item.team_id
 		if (team === 0 || level === null) {
 			teamStr = gymTypes[item['team_id']]
 		} else {
 			teamStr = gymTypes[item['team_id']] + '_' + level
 		}
-	} else{
+	}else {
 		team = ''
 		teamStr = 'Harmony'
 	}
