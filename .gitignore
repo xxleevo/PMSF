@@ -33,6 +33,10 @@ fabric.properties
 /node_modules/
 config/*
 geofences/*
+!geofences/nest.example.json
+!geofences/pvparea.example.json
+!geofences/questarea.example.json
+!geofences/scanarea.example.json
 !config/example.config.php
 !config/example.access-config.php
 !config/default.php
