@@ -32,6 +32,7 @@ fabric.properties
 /.sass-cache/
 /node_modules/
 config/*
+geofences/*
 !config/example.config.php
 !config/example.access-config.php
 !config/default.php
@@ -43,6 +44,7 @@ cron/*
 !cron/raid_cron.php
 !cron/silph.php
 /static/dist/
+/static/icons/*
 /static/icons-im-1.png
 /static/icons-im-1-bigger.png
 /static/icons-pokemon/
