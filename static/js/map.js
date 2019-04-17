@@ -1563,10 +1563,12 @@ function pokestopLabel(item) {
 		'<center><div class="pokestop-label">' +
         stopName +
 		'</div></center>'
+		
     if (!noQuests && item['quest_type'] !== 0) {
+		
+		var excludeStr = '';
 		var reward = JSON.parse(item['quest_reward_info'])
 		var RewardId = ''
-		var excludeStr = '';
 		if (item['quest_reward_type'] === 7) {
 			RewardId = reward['pokemon_id']
 			excludeStr = '<a href="javascript:excludePokemonQuest(' + RewardId + ')" title="Alle dieser Spezies ausblenden">Exclude</a>'
@@ -1622,7 +1624,7 @@ function pokestopLabel(item) {
     if (!noDeletePokestops) {
         str += '<i class="fa fa-trash-o delete-pokestop" onclick="deletePokestop(event);" data-id="' + item['pokestop_id'] + '"></i>'
     }
-	if (!noQuests && item['quest_type'] !== 0){
+	if (!noQuests && item['quest_type'] !== 0 ){
 		str += '<div><center>' +
 		excludeStr +
 		'</div></center>'
@@ -4753,9 +4755,7 @@ function updatePokestops() {
     }
     var removeStops = []
 	var currentTime = Date.now()
-    //var currentTime = Math.round(new Date().getTime() / 1000)
 	
-    // change lured pokestop marker to unlured when expired
     $.each(mapData.pokestops, function (key, value) {
         if (value['lure_expiration'] && value['lure_expiration'] !== '0' && value['lure_expiration'] < currentTime) {
             if (value.marker && value.marker.rangeCircle) {
@@ -4764,16 +4764,11 @@ function updatePokestops() {
             }
             markers.removeLayer(value.marker)
             markersnotify.removeLayer(value.marker)
-			//if hidden, dont show stop again -- xxleevo
 			if(!value.hidden){
-			//xxleevo
             value.marker = setupPokestopMarker(value)
-			//xxleevo
 			}
-			//xxleevo
         }
     })
-    // remove unlured stops if show lured only is selected
     if (Store.get('showLures')) {
         $.each(mapData.pokestops, function (key, value) {
             if (value['lure_expiration'] < currentTime) {
@@ -6934,6 +6929,7 @@ $(function () {
             updateMap()
         }
         return buildSwitchChangeListener(mapData, ['pokestops'], 'showQuests').bind(this)()
+		updateMap()
     })
 
     $('#dustrange').on('input', function () {
