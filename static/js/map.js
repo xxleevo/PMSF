@@ -6929,7 +6929,6 @@ $(function () {
             updateMap()
         }
         return buildSwitchChangeListener(mapData, ['pokestops'], 'showQuests').bind(this)()
-		updateMap()
     })
 
     $('#dustrange').on('input', function () {
