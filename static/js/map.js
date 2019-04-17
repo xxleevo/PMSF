@@ -250,6 +250,30 @@ function excludePokemon(id) { // eslint-disable-line no-unused-vars
     clearStaleMarkers()
 }
 
+function excludePokemonQuest(id) { // eslint-disable-line no-unused-vars
+    $questsExcludePokemon.val(
+        $questsExcludePokemon.val().split(',').concat(id).join(',')
+    ).trigger('change')
+    $('label[for="exclude-quests-pokemon"] .pokemon-list .pokemon-icon-sprite[data-value="' + id + '"]').addClass('active')
+    updatePokestops();
+}
+
+function excludeItemQuest(id) { // eslint-disable-line no-unused-vars
+    $questsExcludeItem.val(
+        $questsExcludeItem.val().split(',').concat(id).join(',')
+    ).trigger('change')
+    $('label[for="exclude-quests-item"] .item-list .item-icon-sprite[data-value="' + id + '"]').addClass('active')
+    updatePokestops();
+}
+function excludeDustQuest() { // eslint-disable-line no-unused-vars
+	dustamount = 0
+	Store.set('showDustAmount', dustamount)
+	$('#dustvalue').text('Deaktiviert')
+	setTimeout(function () { updateMap() }, 2000)
+    updatePokestops();
+}
+
+
 function notifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
     $selectPokemonNotify.val(
         $selectPokemonNotify.val().split(',').concat(id).join(',')
@@ -1540,12 +1564,25 @@ function pokestopLabel(item) {
         stopName +
 		'</div></center>'
     if (!noQuests && item['quest_type'] !== 0) {
+		var reward = JSON.parse(item['quest_reward_info'])
+		var RewardId = ''
+		var excludeStr = '';
+		if (item['quest_reward_type'] === 7) {
+			RewardId = reward['pokemon_id']
+			excludeStr = '<a href="javascript:excludePokemonQuest(' + RewardId + ')" title="Alle dieser Spezies ausblenden">Exclude</a>'
+		}
+		if (item['quest_reward_type'] === 2){
+			RewardId = reward['item_id']
+			excludeStr = '<a href="javascript:excludeItemQuest(' + RewardId + ')" title="Alle dieser Spezies ausblenden">Exclude</a>'
+		}
+		if (item['quest_reward_type'] === 3){
+			excludeStr = '<a href="javascript:excludeDustQuest()" title="Sternenstaub-Quests ausblenden">Exclude Staub-Quests</a>'
+		}
         str +=
             '<div><center>' +
 			stopImage
 			if (item['lure_expiration'] > Date.now()) {
 				str +=
-				//'<img style="padding:5px;position:absolute;left:15px;top:20px;height:50px;" src="static/forts/LureModule.png"/>'
 				'<img style="margin-bottom:55px;margin-left:-95px;height:50px;" src="static/forts/LureModule.png"/>' +
 				getReward(item)
 			}else{
@@ -1557,7 +1594,6 @@ function pokestopLabel(item) {
 
 			if (item['lure_expiration'] > Date.now()) {
 				lureEndStr = getTimeStr(item['lure_expiration'])
-				//lureEndStr = getTimeStr(Math.floor(item['lure_expiration'] / 1000))
 				str +=
 				'<div style="font-weight:900;">' +
 				'Lockmodul bis' + ': ' + lureEndStr +
@@ -1567,7 +1603,6 @@ function pokestopLabel(item) {
 			str += 
 				getQuest(item) +
 				'<center>' +
-				//[selfmade]Option to delete Pokestop temporarily from map
 				'<a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a>'
             '</center></div>'
     } else {
@@ -1587,6 +1622,11 @@ function pokestopLabel(item) {
     if (!noDeletePokestops) {
         str += '<i class="fa fa-trash-o delete-pokestop" onclick="deletePokestop(event);" data-id="' + item['pokestop_id'] + '"></i>'
     }
+	if (!noQuests && item['quest_type'] !== 0){
+		str += '<div><center>' +
+		excludeStr +
+		'</div></center>'
+	}
     if (!noManualQuests && item['scanArea'] === false) {
         str += '<center><div>' + i8ln('Add Quest') + '<i class="fa fa-binoculars submit-quest" onclick="openQuestModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'
     }
