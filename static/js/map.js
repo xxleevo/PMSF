@@ -18,6 +18,7 @@ var $selectStyle
 var $selectIconSize
 var $selectIconNotifySizeModifier
 var $switchOpenGymsOnly
+var $switchBattleGymsOnly
 var $selectTeamGymsOnly
 var $selectLastUpdateGymsOnly
 var $switchActiveRaids
@@ -658,6 +659,8 @@ function initSidebar() {
     $('#gyms-filter-wrapper').toggle(Store.get('showGyms'))
     $('#team-gyms-only-switch').val(Store.get('showTeamGymsOnly'))
     $('#open-gyms-only-switch').prop('checked', Store.get('showOpenGymsOnly'))
+	//Battle-Gym
+    $('#battle-gyms-only-switch').prop('checked', Store.get('showBattleGymsOnly'))
     $('#raids-switch').prop('checked', Store.get('showRaids'))
     $('#raids-filter-wrapper').toggle(Store.get('showRaids'))
     $('#active-raids-switch').prop('checked', Store.get('activeRaids'))
@@ -1879,6 +1882,7 @@ function getGymMarkerIcon(item) {
     var raidForm = item['form']
     var formStr = ''
     var lastScanned = item['last_scanned']
+	var battleStatus = item['battle_status']
 	//Dynamic Sizes
 		//Raid,Gym,Eggsizes
 		// If you want to change base sizes or positions, do it HERE.
@@ -1913,6 +1917,14 @@ function getGymMarkerIcon(item) {
 		var exPosBot = 1;
 		var dynamicExPosBot = (exPosBot/6) + ((exPosBot/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 		
+		//Battle icon sizes
+		var swordSize = 24;
+		var dynamicSwordSize = (swordSize/6) + ((swordSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var swordPos = 1
+		var dynamicSwordPos = (swordPos/6) + ((swordPos/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var swordPosBot = 30;
+		var dynamicSwordPosBot = (swordPosBot/6) + ((swordPosBot/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		
     if (raidForm <= 10 || raidForm == null || raidForm === '0') {
         formStr = '00'
     } else {
@@ -1942,6 +1954,11 @@ function getGymMarkerIcon(item) {
 		teamStr = 'Harmony'
 	}
 	
+	var battleIcon = ''
+	if( !noBattleStatus && battleStatus == 1 && (!(lastScanned/1000) < ((Date.now()/1000)-900)) ){
+		battleIcon = '<img src="static/images/swords.png" style="width:' + dynamicSwordSize + 'px;height:auto;position:absolute;right:'+dynamicSwordPos+'px;bottom:' + dynamicSwordPosBot + 'px;"/>'
+	}
+	
     var exIcon = ''
     var fortMarker = ''
     if ((((park !== '0' && park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
@@ -1958,6 +1975,7 @@ function getGymMarkerIcon(item) {
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
             '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png" style="width:'+dynamicRaidBossSize+'px;height:auto;position:absolute;top:-6px;right:'+dynamicRaidBossPosRight+'px;"/>' +
+			battleIcon +
             '</div>'
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
@@ -1980,6 +1998,7 @@ function getGymMarkerIcon(item) {
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
             '<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:'+dynamicEggUnknownSize+'px;height:auto;position:absolute;top:'+dynamicEggUnknownPosTop+'px;right:'+dynamicEggUnknownPosRight+'px;"/>' +
+			battleIcon +
             '</div>'
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
@@ -2001,6 +2020,7 @@ function getGymMarkerIcon(item) {
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
             '<img src="static/raids/egg_' + raidEgg + '.png" style="width:'+dynamicEggSize+'px;height:auto;position:absolute;top:'+dynamicEggPosTop+'px;right:'+dynamicEggPosRight+'px;"/>' +
+			battleIcon +
             '</div>'
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
@@ -2027,6 +2047,7 @@ function getGymMarkerIcon(item) {
         html = '<div>' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
+			battleIcon +
             '</div>'
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
@@ -4887,6 +4908,14 @@ function processGyms(i, item) {
         removeGymFromMap(item['gym_id'])
         return true
     }
+	
+    if (Store.get('showBattleGymsOnly')) {
+        var now = new Date()
+        if ( item.battle_status == 0 || (item.last_scanned + (3600*1000)+900) < now.getTime() ) {
+            removeGymFromMap(item['gym_id'])
+            return true
+        }
+    }
 
     if (Store.get('showLastUpdatedGymsOnly')) {
         var now = new Date()
@@ -6110,7 +6139,7 @@ $(function () {
         redrawPokemon(mapData.pokemons)
         redrawPokemon(mapData.lurePokemons)
     })
-
+	
     $switchOpenGymsOnly = $('#open-gyms-only-switch')
 
     $switchOpenGymsOnly.on('change', function () {
@@ -6119,6 +6148,14 @@ $(function () {
         updateMap()
     })
 
+    $switchBattleGymsOnly = $('#battle-gyms-only-switch')
+
+    $switchBattleGymsOnly.on('change', function () {
+        Store.set('showBattleGymsOnly', this.checked)
+        lastgyms = false
+        updateMap()
+    })
+	
     $selectTeamGymsOnly = $('#team-gyms-only-switch')
 
     $selectTeamGymsOnly.select2({
