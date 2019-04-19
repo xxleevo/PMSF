@@ -1241,21 +1241,17 @@ if ( $blockIframe ) {
                 echo '<div class="form-control switch-container">
                 <h3>Arenen Style</h3>
                 <select name="gym-marker-style" id="gym-marker-style">
-				
                     <option value="classic">Classic</option>
-                    <option value="shield">Schilder</option>';
-				//if(!$noGymTeamInfos){
-				echo'
+                    <option value="shield">Schilder</option>
                     <option value="beasts">Biester</option>
                     <option value="idol">Idol</option>
                     <option value="elements">Elemente</option>
-                    <option value="ingame">Standard</option>';
-				}
-				echo'
+                    <option value="ingame">Standard</option>
                 </select>
-            </div>';
-            //}
-            ?>
+            </div>
+			';
+			}
+			?>
             <?php
             if ( ! $noLocationStyle ) {
                 echo '<div class="form-control switch-container">
