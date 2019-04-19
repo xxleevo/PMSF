@@ -132,6 +132,8 @@ $noMaplink = false; // No "Maplink"
 $noGymTeamInfos = false; // Also negating Images from Stops, Moves from Raids and only allow level 5 raids
 $noOutdatedGyms = false;
 $noExportImport = false;
+$noBattleStatus = false; // Only shown if $noGymTeamInfos is also enabled
+$enableBattleStatus = 'false';
 
 /* Notification Settings */
 $noNotifyPokemon = false;                                       // true/false
