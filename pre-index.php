@@ -1244,17 +1244,17 @@ if ( $blockIframe ) {
 				
                     <option value="classic">Classic</option>
                     <option value="shield">Schilder</option>';
-				if(!$noGymTeamInfos){
+				//if(!$noGymTeamInfos){
 				echo'
                     <option value="beasts">Biester</option>
                     <option value="idol">Idol</option>
                     <option value="elements">Elemente</option>
-                    <option value="ingame">Ingame</option>';
+                    <option value="ingame">Standard</option>';
 				}
 				echo'
                 </select>
             </div>';
-            }
+            //}
             ?>
             <?php
             if ( ! $noLocationStyle ) {
