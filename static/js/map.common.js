@@ -990,9 +990,9 @@ var StoreOptions = {
             default: gymSidebar,
             type: StoreTypes.Boolean
         },
-    'showBattleGymsOnly':
+    'battleStatus':
         {
-            default: enableBattleStatus,
+            default: battleStatus,
             type: StoreTypes.Boolean
         },
     'showOpenGymsOnly':

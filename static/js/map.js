@@ -34,6 +34,7 @@ var $switchTinyRat
 var $switchBigKarp
 var $selectDirectionProvider
 var $switchExEligible
+var $switchBattleStatus
 var $questsExcludePokemon
 var $questsExcludeItem
 
@@ -655,12 +656,11 @@ function initSidebar() {
     $('#new-portals-only-wrapper').toggle(Store.get('showPortals'))
     $('#gym-sidebar-switch').prop('checked', Store.get('useGymSidebar'))
     $('#ex-eligible-switch').prop('checked', Store.get('exEligible'))
+    $('#battle-status-switch').prop('checked', Store.get('battleStatus'))
     $('#gym-sidebar-wrapper').toggle(Store.get('showGyms') || Store.get('showRaids'))
     $('#gyms-filter-wrapper').toggle(Store.get('showGyms'))
     $('#team-gyms-only-switch').val(Store.get('showTeamGymsOnly'))
     $('#open-gyms-only-switch').prop('checked', Store.get('showOpenGymsOnly'))
-	//Battle-Gym
-    $('#battle-gyms-only-switch').prop('checked', Store.get('showBattleGymsOnly'))
     $('#raids-switch').prop('checked', Store.get('showRaids'))
     $('#raids-filter-wrapper').toggle(Store.get('showRaids'))
     $('#active-raids-switch').prop('checked', Store.get('activeRaids'))
@@ -964,6 +964,7 @@ function gymLabel(item) {
     var url = item['url']
     var members = item['pokemon']
     var form = item['form']
+	var isInBattle = item['battle_status']
 
     var raidSpawned = item['raid_level'] != null
     var raidStarted = item['raid_pokemon_id'] != null
@@ -1122,6 +1123,11 @@ function gymLabel(item) {
 		}
 	}
 	
+	var battleStr = ''
+	if(!noBattleStatus && isInBattle == 1 && ((lastScanned/1000) > ((Date.now()/1000)-900))){
+		battleStr = 'Arena wird bekämpft!'
+	}
+	
     var nameStr = (name ? '<div><b>' + name + '</b></div>' : '')
 
     var str
@@ -1202,11 +1208,13 @@ function gymLabel(item) {
             gymCp +
             '<div>' +
             memberStr +
+			battleStr +
             '</div>' +
             '<div>' +
             i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
             '</div>' +
             '<div>' +
+			'<br>' +
             lastModifiedText +
             '</div>' +
             '<div>' +
@@ -1882,7 +1890,7 @@ function getGymMarkerIcon(item) {
     var raidForm = item['form']
     var formStr = ''
     var lastScanned = item['last_scanned']
-	var battleStatus = item['battle_status']
+	var isInBattle = item['battle_status']
 	//Dynamic Sizes
 		//Raid,Gym,Eggsizes
 		// If you want to change base sizes or positions, do it HERE.
@@ -1955,7 +1963,7 @@ function getGymMarkerIcon(item) {
 	}
 	
 	var battleIcon = ''
-	if( !noBattleStatus && battleStatus == 1 && (!(lastScanned/1000) < ((Date.now()/1000)-900)) ){
+	if( !noBattleStatus && isInBattle == 1 && ((lastScanned/1000) > ((Date.now()/1000)-900)) ){
 		battleIcon = '<img src="static/images/swords.png" style="width:' + dynamicSwordSize + 'px;height:auto;position:absolute;right:'+dynamicSwordPos+'px;bottom:' + dynamicSwordPosBot + 'px;"/>'
 	}
 	
@@ -4897,6 +4905,13 @@ function processGyms(i, item) {
         return true
     }
 
+    if (Store.get('battleStatus')) {
+		if( item.battle_status == 0 || ((Date.now()/1000)-900) > (item.last_scanned/1000) ){
+            removeGymFromMap(item['gym_id'])
+            return true
+        }
+    }
+	
     if (Store.get('showOpenGymsOnly')) {
         if (item.slots_available === 0 && (item.raid_end === undefined || item.raid_end < Date.now())) {
             removeGymFromMap(item['gym_id'])
@@ -4908,14 +4923,7 @@ function processGyms(i, item) {
         removeGymFromMap(item['gym_id'])
         return true
     }
-	
-    if (Store.get('showBattleGymsOnly')) {
-        var now = new Date()
-        if ( item.battle_status == 0 || (item.last_scanned + (3600*1000)+900) < now.getTime() ) {
-            removeGymFromMap(item['gym_id'])
-            return true
-        }
-    }
+
 
     if (Store.get('showLastUpdatedGymsOnly')) {
         var now = new Date()
@@ -5575,11 +5583,16 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
                 '</center>'
         }
 
+		var battleStr = ''
+		if(!noBattleStatus && result.battle_status == 1 && ((result.last_scanned/1000) > ((Date.now()/1000)-900))){
+			battleStr = 'Arena wird bekämpft!'
+		}
+		
         var park = ''
         if (((result['park'] !== '0' && result['park'] !== 'None' && result['park'] !== undefined && result['park']) && (noParkInfo === false))) {
-            if (result['park'] === 1) {
+            if (result['park'] == 1) {
                 // RM only stores boolean, so just call it "Park Gym"
-                park = i8ln('Park Gym')
+                park = i8ln('Parkarena')
             } else {
                 park = i8ln('Park') + ': ' + result['park']
             }
@@ -5696,16 +5709,14 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
 
         var pokemonHtml = ''
         var gymImage = ''
-        if (result.url !== null) {
-            gymImage = '<img height="140px" style="padding: 5px;" src="' + result.url + '">'
-        }
+		//Dont show GymImage anymore
+        //if (result.url !== null) {
+        //    gymImage = '<img height="140px" style="padding: 5px;" src="' + result.url + '">'
+        //}
         var headerHtml =
             '<center class="team-' + result.team_id + '-text">' +
             '<div>' +
             '<b class="team-' + result.team_id + '-text">' + (result.name || '') + '</b>' +
-            '</div>' +
-            '<div>' +
-            gymImage +
             '</div>' +
             '<div>' +
             '<img height="70px" style="padding: 5px;" src="static/forts/' + gymTypes[result.team_id] + '_large.png">' +
@@ -5714,6 +5725,8 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             raidStr +
             gymLevelStr +
             '<div>' +
+			battleStr + 
+			'<br>' +
             park +
             '</div>' +
             '<div style="font-size: .7em">' +
@@ -5849,7 +5862,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             }
             pokemonHtml =
                 '<center class="team-' + result.team_id + '-text">' +
-                'Gym Leader:<br>' +
+                'Verteidiger:<br>' +
                 '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + guardFormStr + '.png"/><br>' +
                 '<b class="team-' + result.team_id + '-text">' + result.guard_pokemon_name + '</b>' +
                 '</center>'
@@ -6147,14 +6160,6 @@ $(function () {
         lastgyms = false
         updateMap()
     })
-
-    $switchBattleGymsOnly = $('#battle-gyms-only-switch')
-
-    $switchBattleGymsOnly.on('change', function () {
-        Store.set('showBattleGymsOnly', this.checked)
-        lastgyms = false
-        updateMap()
-    })
 	
     $selectTeamGymsOnly = $('#team-gyms-only-switch')
 
@@ -6277,6 +6282,25 @@ $(function () {
 
     $switchExEligible.on('change', function () {
         Store.set('exEligible', this.checked)
+        lastgyms = false
+        $.each(['gyms'], function (d, dType) {
+            $.each(mapData[dType], function (key, value) {
+                // for any marker you're turning off, you'll want to wipe off the range
+                if (mapData[dType][key].marker.rangeCircle) {
+                    markers.removeLayer(mapData[dType][key].marker.rangeCircle)
+                    delete mapData[dType][key].marker.rangeCircle
+                }
+                markers.removeLayer(mapData[dType][key].marker)
+            })
+            mapData[dType] = {}
+        })
+        updateMap()
+    })
+	
+    $switchBattleStatus = $('#battle-status-switch')
+
+    $switchBattleStatus.on('change', function () {
+        Store.set('battleStatus', this.checked)
         lastgyms = false
         $.each(['gyms'], function (d, dType) {
             $.each(mapData[dType], function (key, value) {

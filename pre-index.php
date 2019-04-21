@@ -728,24 +728,7 @@ if ( $blockIframe ) {
                                 <option value="5">5</option>
                                 <option value="6">6</option>
                             </select>
-                        </div>';
-					?>
-					<?php
-                    if ( ! $noBattleStatus && ( ! $noGyms || ! $noRaids ) ) {
-						echo '
-						<div class="form-control switch-container" id="battle-gyms-only-wrapper">
-							<h3>Arenen in Angriff</h3>
-							<div class="onoffswitch">
-								<input id="battle-gyms-only-switch" type="checkbox" name="battle-gyms-only-switch"
-									class="onoffswitch-checkbox" checked>
-								<label class="onoffswitch-label" for="battle-gyms-only-switch">
-									<span class="switch-label" data-on="On" data-off="Off"></span>
-									<span class="switch-handle"></span>
-								</label>
-							</div>
-						</div>';
-					}
-						echo '
+                        </div>
                         <div class="form-control switch-container" id="last-update-gyms-wrapper">
                             <h3>Letzter Scan</h3>
                             <select name="last-update-gyms-switch" id="last-update-gyms-switch">
@@ -774,7 +757,21 @@ if ( $blockIframe ) {
                                     </label>
                                 </div>
                             </div>';
-                        } ?>
+                        }
+                        if ( ! $noBattleStatus ) {
+                            echo '<div class="form-control switch-container" id="battle-status-wrapper">
+                                <h3>' . i8ln( 'Nur Arenen im Kampf' ) . '</h3>
+                                <div class="onoffswitch">
+                                    <input id="battle-status-switch" type="checkbox" name="battle-status-switch"
+                                           class="onoffswitch-checkbox" checked>
+                                    <label class="onoffswitch-label" for="battle-status-switch">
+                                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                                        <span class="switch-handle"></span>
+                                    </label>
+                                </div>
+                            </div>';
+                        }
+						?>
                     </div>
 						<?php
 						if($onlyTriggerGyms){
@@ -2079,8 +2076,8 @@ if ( $blockIframe ) {
     var noGymTeamInfos = <?php echo $noGymTeamInfos === true ? 'true' : 'false' ?>;
     var noOutdatedGyms = <?php echo $noOutdatedGyms === true ? 'true' : 'false' ?>;
     var $noExportImport = <?php echo $noOutdatedGyms === true ? 'true' : 'false' ?>;
-    var enableBattleStatus = <?php echo $noBattleStatus ? 'false' : $enableBattleStatus ?>;
-	var noBattleStatus = <?php echo $noBattleStatus === true ? 'true' : 'false' ?>;
+    var noBattleStatus = <?php echo $noBattleStatus === true ? 'true' : 'false' ?>;
+    var battleStatus = <?php echo $noBattleStatus === true ? 'false' : $battleStatus  ?>;
 	
 	
 </script>
