@@ -133,7 +133,7 @@ $noGymTeamInfos = false; // Also negating Images from Stops, Moves from Raids an
 $noOutdatedGyms = false;
 $noExportImport = false;
 $noBattleStatus = false; // Only shown if $noGymTeamInfos is also enabled
-$enableBattleStatus = 'false';
+$battleStatus = 'false';
 
 /* Notification Settings */
 $noNotifyPokemon = false;                                       // true/false
