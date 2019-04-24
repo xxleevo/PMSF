@@ -2402,7 +2402,7 @@ function setupPokestopMarker(item) {
 }
 function setupNestMarker(item) {
     var getNestMarkerIcon = ''
-	var pokemonCount = item.pokemon_count
+	var pokemonCount = item.pokemon_avg
 	var bigNest = ''
 	var iconWidth = 48
 	var pokemonPosTop = 6
@@ -2448,15 +2448,16 @@ function setupNestMarker(item) {
 }
 
 function nestLabel(item) {
-// Count pokemon/h in Nest
-	var pokemonCount = 0
-	var analyzeTime = 8
-	var avgPokemonPerHour = 0
-	if(item.pokemon_count > 0){
-		// Old
-		//pokemonCount = item.pokemon_count
-		//avgPokemonPerHour = Math.round(pokemonCount/analyzeTime)
-		avgPokemonPerHour = item.pokemon_count
+	var nameStr = ''
+	if (item.name !== 'Unknown Areaname' && item.name !== null){ //Set the Nest's name if the db has a proper value for it
+		nameStr = '<center><b>' + item.name + '</b></center>'
+	}
+	var countAvgStr = ''
+	if( item.pokemon_avg > 0 && item.pokemon_avg != null){ // Set the pokemon average spawn if the db has a proper value for it
+		countAvgStr = '<div>'+
+		'<hr width="50%" style="margin: 1em 0;border-bottom: solid 1px rgba(141, 141, 141, 0.43);">' +
+		'<b>Spawndichte:</b> etwa ' + item.pokemon_avg + ' pro Stunde' +
+		'</div>'
 	}
 	
     var str = '<div>'
@@ -2474,16 +2475,22 @@ function nestLabel(item) {
         } else {
             pokemonIdStr = item.pokemon_id
         }
-        str += '<center><b>' + item.pokemon_name + '</b></center>' +
+		var imageTopOffset = 44
+		if (nameStr !== ''){
+			imageTopOffset = 58
+		}
+        str +=  nameStr +
+				'<center><b>' + item.pokemon_name + '</b></center>' +
                 '</div>' +
                 '<center>' +
                 '<div class="marker-nests">' +
                 '<img src="static/images/nest-' + item.english_pokemon_types[0].type.toLowerCase() + '.png" style="width:80px;height:auto;"/>' +
-                '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_00.png" style="position:absolute;width:65px;height:65px;top:44px;left:80px;"/>' +
+                '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_00.png" style="position:absolute;width:65px;height:65px;top:'+ imageTopOffset +'px;left:80px;"/>' +
                 '<br>' +
                 '<div>' +
                 typesDisplay +
                 '</div>' +
+				countAvgStr +
                 '</center>' +
                 '</div>'
     } else {
@@ -2501,13 +2508,6 @@ function nestLabel(item) {
     if (!noManualNests) {
         str += '<center><div>' + i8ln('Add Nest') + '<i class="fa fa-binoculars submit-nest" onclick="openNestModal(event);" data-id="' + item['nest_id'] + '"></i></div></center>'
     }
-	//Print the avg spawns
-	str += '<div>'+
-		'<center>' +
-		'<hr width="50%" style="margin: 1em 0;border-bottom: solid 1px rgba(141, 141, 141, 0.43);">' +
-		'<b>Spawndichte:</b> etwa ' + avgPokemonPerHour + ' pro Stunde' +
-		'</center>' +
-		'</div>'
     str += '<div>' +
         '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">Maplink</a></center>' +
         '</div>'
