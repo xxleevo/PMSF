@@ -2449,8 +2449,12 @@ function setupNestMarker(item) {
 
 function nestLabel(item) {
 	var nameStr = ''
+	var whatsappStr = ''
 	if (item.name !== 'Unknown Areaname' && item.name !== null){ //Set the Nest's name if the db has a proper value for it
 		nameStr = '<center><b>' + item.name + '</b></center>'
+		whatsappStr = '<a href="whatsapp://send?text=%2ANest:%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2AOrt:%2A%20' + item.name + '%0A%2ASpawndichte:%2A%20~' + item.pokemon_avg + '/Stunde%0A%0A%2ANavi:%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
+	} else{
+		whatsappStr = '<a href="whatsapp://send?text=%2ANest:%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2ASpawndichte:%2A%20~' + item.pokemon_avg + '/Stunde%0A%0A%2ANavi:%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
 	}
 	var countAvgStr = ''
 	if( item.pokemon_avg > 0 && item.pokemon_avg != null){ // Set the pokemon average spawn if the db has a proper value for it
@@ -2511,10 +2515,11 @@ function nestLabel(item) {
     str += '<div>' +
         '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">Maplink</a></center>' +
         '</div>'
+
     if ((!noWhatsappLink) && (item.pokemon_id > 0)) {
         str += '<div>' +
             '<center>' +
-            '<a href="whatsapp://send?text=%2A' + encodeURIComponent(item.pokemon_name) + '%2A%20nest has been found.%0A%0ALocation:%20https://www.google.com/maps/search/?api=1%26query=' + item.lat + ',' + item.lon + '" data-action="share/whatsapp/share">Whatsapp Link</a>' +
+			whatsappStr +
             '</center>' +
             '</div>'
     }
