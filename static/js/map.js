@@ -986,6 +986,11 @@ function gymLabel(item) {
             levelStr += '★'
         }
         raidStr = '<h3 style="margin-bottom: 0">Raid ' + levelStr
+		if (item.is_exclusive !== null && item.is_exclusive == 1){
+			raidStr += '<span style="background-color:gold;border-radius:10px"><br>' + 'Exklusiver Raid</span>'
+		
+		}
+		
         if (raidStarted) {
             var cpStr = ''
             if (item.raid_pokemon_cp > 0) {
@@ -1925,6 +1930,14 @@ function getGymMarkerIcon(item) {
 		var exPosBot = 1;
 		var dynamicExPosBot = (exPosBot/6) + ((exPosBot/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 		
+		//Exclusive Raid icon sizes
+		var exclusiveSize = 50
+		var dynamicExclusiveSize = (exclusiveSize/6) + ((exclusiveSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var exclusivePos = -20;
+		var dynamicExclusivePos = (exclusivePos/6) + ((exclusivePos/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var exclusivePosBot = 20;
+		var dynamicExclusivePosBot = (exclusivePosBot/6) + ((exclusivePosBot/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		
 		//Battle icon sizes
 		var swordSize = 24;
 		var dynamicSwordSize = (swordSize/6) + ((swordSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
@@ -1972,6 +1985,12 @@ function getGymMarkerIcon(item) {
     if ((((park !== '0' && park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
         exIcon = '<img src="static/images/ex.png" style="width:' + dynamicExSize + 'px;height:auto;position:absolute;right:'+dynamicExPos+'px;bottom:' + dynamicExPosBot + 'px;"/>'
     }
+	
+	var exclusiveIcon = ''
+	if (noExGyms == false && item['is_exclusive'] == 1){
+		exclusiveIcon = '<img src="static/images/exclusive.png" style="width:' + dynamicExclusiveSize + 'px;height:auto;position:absolute;right:'+dynamicExclusivePos+'px;bottom:' + dynamicExclusivePosBot + 'px;"/>'
+	}
+	
     var smallExIcon = ''
     if ((((park !== '0' && park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
         smallExIcon = '<img src="static/images/ex.png" style="width:26px;position:absolute;right:35px;bottom:13px;"/>'
@@ -1983,6 +2002,7 @@ function getGymMarkerIcon(item) {
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
             '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png" style="width:'+dynamicRaidBossSize+'px;height:auto;position:absolute;top:-6px;right:'+dynamicRaidBossPosRight+'px;"/>' +
+			exclusiveIcon +
 			battleIcon +
             '</div>'
         fortMarker = L.divIcon({
@@ -2006,6 +2026,7 @@ function getGymMarkerIcon(item) {
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
             '<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:'+dynamicEggUnknownSize+'px;height:auto;position:absolute;top:'+dynamicEggUnknownPosTop+'px;right:'+dynamicEggUnknownPosRight+'px;"/>' +
+			exclusiveIcon +
 			battleIcon +
             '</div>'
         fortMarker = L.divIcon({
@@ -2028,6 +2049,7 @@ function getGymMarkerIcon(item) {
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
             '<img src="static/raids/egg_' + raidEgg + '.png" style="width:'+dynamicEggSize+'px;height:auto;position:absolute;top:'+dynamicEggPosTop+'px;right:'+dynamicEggPosRight+'px;"/>' +
+			exclusiveIcon +
 			battleIcon +
             '</div>'
         fortMarker = L.divIcon({
@@ -2042,7 +2064,7 @@ function getGymMarkerIcon(item) {
         html = '<div>' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
-            '</div>'
+			'</div>'
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
             iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],

@@ -484,7 +484,8 @@ class RDM extends Scanner
         raid_pokemon_form AS form,
         raid_pokemon_cp,
         ex_raid_eligible AS park,
-		in_battle as battle_status
+		in_battle as battle_status,
+		raid_is_exclusive as is_exclusive
         FROM gym
         WHERE :conditions";
 
