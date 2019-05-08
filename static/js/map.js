@@ -1670,18 +1670,62 @@ function pokestopLabel(item) {
 function formatSpawnTime(seconds) {
     // the addition and modulo are required here because the db stores when a spawn disappears
     // the subtraction to get the appearance time will knock seconds under 0 if the spawn happens in the previous hour
-    return ('0' + Math.floor((seconds + 3600) % 3600 / 60)).substr(-2) + ':' + ('0' + seconds % 60).substr(-2)
+	if (seconds < 0) {
+        seconds += 3600;
+	}
+
+    //return ('0' + Math.floor((seconds + 3600) % 3600 / 60)).substr(-2) + ':' + ('0' + seconds % 60).substr(-2)
+    return ('0' + Math.floor(seconds / 60)).substr(-2) + ':' + ('0' + seconds % 60).substr(-2)
 }
 
 function spawnpointLabel(item) {
+	var debugStr = ''
+
+		var value = item.despawn_sec
+		var now = new Date()
+		var seconds = now.getMinutes() * 60 + now.getSeconds()
+	
+		value = parseInt(value)
+		//Make the Value not the despawntime but the spawntime
+		if(value < 1800){
+			value += 3600
+		}
+		value -= 1800
+		
+		debugStr += 'Spawnsec: ' + value + '###<br>'
+		debugStr += 'sec: ' + seconds + '###<br>'
+		
+		//New Roll-over
+		if(seconds < value){
+			seconds += 3600
+		}
+		debugStr += 'Spawnsec for comp: ' + value + '###<br>'
+		debugStr += 'sec for comp: ' + seconds + '###<br>'
+		var diff = seconds - value
+		debugStr += 'sec for comp: ' + diff + '###<br>'
+	
+
+    var timeStr = '';
+    if (item["despawn_sec"]) {
+        timeStr = '<b>' + i8ln('Spawn') + '</b>(mm:ss): ' + formatSpawnTime(item["despawn_sec"] - 1800) + ' ' + i8ln('or') + ' ' + formatSpawnTime(item["despawn_sec"]) + 
+		'<br>' + 
+		'<b>' + i8ln('Despawn') + '</b>(mm:ss): ' + formatSpawnTime(item["despawn_sec"]);
+    } else {
+        timeStr = i8ln('Unknown spawnpoint data');
+    }
+	
     var str =
         '<div>' +
-        '<b>' + i8ln('Spawn Point') + '</b>' +
+        '<b><u>' + i8ln('Spawn Point') + '</u></b>' +
         '</div>' +
+		debugStr +
+		'<br>' + 
         '<div>' +
-        i8ln('Every hour from') + ' ' + formatSpawnTime(item.time + 1800) + ' ' + i8ln('to') + ' ' + formatSpawnTime(item.time) +
+		timeStr +
         '</div>'
-    if (item.duration === 60 || item.kind === 'ssss') {
+		
+    /** Old Monocle storage of spawnpoint kind
+	if (item.duration === 60 || item.kind === 'ssss') {
         str =
             '<div>' +
             '<b>Spawn Point</b>' +
@@ -1690,6 +1734,8 @@ function spawnpointLabel(item) {
             i8ln('Every hour from') + ' ' + formatSpawnTime(item.time) +
             '</div>'
     }
+	**/
+	
     return str
 }
 
@@ -2818,28 +2864,70 @@ function setupScannedMarker(item) {
 }
 
 function getColorBySpawnTime(value) {
-    var now = new Date()
-    var seconds = now.getMinutes() * 60 + now.getSeconds()
-    // account for hour roll-over
-    if (seconds < 900 && value > 2700) {
-        seconds += 3600
-    } else if (seconds > 2700 && value < 900) {
-        value += 3600
-    }
 
-    var diff = seconds - value
-    var hue = 275 // light purple when spawn is neither about to spawn nor active
-    if (diff >= 0 && diff <= 900) {
-        // green to red over 15 minutes of active spawn
-        hue = (1 - diff / 60 / 15) * 120
-    } else if (diff < 0 && diff > -300) {
-        // light blue to dark blue over 5 minutes til spawn
-        hue = (1 - -diff / 60 / 5) * 50 + 200
-    }
-
-    hue = Math.round(hue / 5) * 5
-
-    return colourConversion.hsvToHex(hue, 1.0, 1.0)
+	if(value){
+		var now = new Date()
+		var seconds = now.getMinutes() * 60 + now.getSeconds()
+	
+		value = parseInt(value)
+		//Make the Value not the despawntime but the spawntime
+		if(value < 1800){
+			value += 3600
+		}
+		value -= 1800
+		
+		// account for hour roll-over
+		//if (seconds < 1800 && value > 1800) {
+		//	seconds += 3600
+		//} else if (seconds > 1800 && value < 1800) {
+		//	value += 3600
+		//}
+		
+		//New Roll-over
+		if(seconds < value){
+			seconds += 3600
+		}
+		
+		var diff = seconds - value
+		//New Colorgrading
+		var color = '#a0a0a0' // Standard - grey if not relevant
+		
+		if (diff >= 0 && diff <=  600) {
+			color = 'green'
+		} else if (diff >= 600 && diff <= 1200 ) {
+			color = 'greenyellow'
+		} else if (diff >= 1200 && diff <= 1500 ) {
+			color = 'yellow'
+		} else if (diff >= 1500 && diff <= 1680 ) {
+			color = 'orange'
+		} else if (diff >= 1680 && diff <= 1800) {
+			color = 'red'
+		}
+		
+		if(diff <=3600 && diff >= 3540){
+			color = 'blue'
+		}else if(diff < 3540 && diff >= 3300){
+			color = 'royalblue'
+		}
+		/* Old Colorgrading
+		var hue = 275 // light purple when spawn is neither about to spawn nor active
+		if (diff >= 0 && diff <= 1800) {
+			// green to red over 15 minutes of active spawn
+			hue = (1 - diff / 60 / 30) * 120
+		} else if (diff < 0 && diff > -300) {
+			// light blue to dark blue over 5 minutes til spawn
+			hue = (1 - -diff / 60 / 5) * 50 + 200
+		}
+	
+		hue = Math.round(hue / 5) * 5
+		//return colourConversion.hsvToHex(hue, 1.0, 1.0)
+		*/
+		
+		return color
+	}
+	else{
+		return '000000'
+	}
 }
 var colourConversion = (function () {
     var self = {}
@@ -2898,7 +2986,7 @@ var colourConversion = (function () {
 })()
 
 function setupSpawnpointMarker(item) {
-    var hue = getColorBySpawnTime(item.time)
+    var hue = getColorBySpawnTime(item['despawn_sec'])
 
     var rangeCircleOpts = {
         radius: 4,
@@ -2907,7 +2995,7 @@ function setupSpawnpointMarker(item) {
         opacity: 1,
         center: [item['latitude'], item['longitude']],
         fillColor: hue,
-        fillOpacity: 0.4
+        fillOpacity: 0.8
     }
     var circle = L.circle([item['latitude'], item['longitude']], rangeCircleOpts).bindPopup(spawnpointLabel(item), {autoPan: false, closeOnclick: false, autoClose: false})
     markersnotify.addLayer(circle)
@@ -5060,7 +5148,7 @@ function updateSpawnPoints() {
 
     $.each(mapData.spawnpoints, function (key, value) {
         if (map.getBounds().contains(value.marker.getLatLng())) {
-            var hue = getColorBySpawnTime(value['time'])
+            var hue = getColorBySpawnTime(value['despawn_sec'])
             value.marker.setStyle({color: hue, fillColor: hue})
         }
     })

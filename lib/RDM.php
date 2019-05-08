@@ -939,7 +939,8 @@ class RDM extends Scanner
         global $db;
         $query = "SELECT lat AS latitude,
         lon AS longitude,
-        id AS spawnpoint_id
+        id AS spawnpoint_id,
+		despawn_sec AS despawn_sec
         FROM spawnpoint
         WHERE :conditions";
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
