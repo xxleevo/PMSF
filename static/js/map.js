@@ -1679,6 +1679,8 @@ function formatSpawnTime(seconds) {
 }
 
 function spawnpointLabel(item) {
+	
+	/* Debug Mode fgor spawnpoints
 	var debugStr = ''
 
 		var value = item.despawn_sec
@@ -1703,7 +1705,7 @@ function spawnpointLabel(item) {
 		debugStr += 'sec for comp: ' + seconds + '###<br>'
 		var diff = seconds - value
 		debugStr += 'sec for comp: ' + diff + '###<br>'
-	
+		*/
 
     var timeStr = '';
     if (item["despawn_sec"]) {
@@ -1718,7 +1720,7 @@ function spawnpointLabel(item) {
         '<div>' +
         '<b><u>' + i8ln('Spawn Point') + '</u></b>' +
         '</div>' +
-		debugStr +
+		//debugStr +
 		'<br>' + 
         '<div>' +
 		timeStr +
