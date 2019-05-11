@@ -167,7 +167,9 @@ $minIV = '0';                                                       // "0" for e
 $minLevel = '0';                                                    // "0" for empty or a number
 
 $noBigKarp = true;                                                 // true/false
+$enableBigKarps = 'false';
 $noTinyRat = true;                                                 // true/false
+$enableTinyRats = 'false';
 
 $noGyms = false;                                                    // true/false
 $enableGyms = 'false';                                              // true/false
