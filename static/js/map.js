@@ -7250,6 +7250,11 @@ function upload(fileText) {
 function openFile(event) { // eslint-disable-line no-unused-vars
     var input = event.target
     var reader = new FileReader()
+	
+	//Reset Settings first to prevent settings are still turned on
+	localStorage.clear()
+	window.location.reload()
+	
     reader.onload = function () {
         console.log(reader.result)
         upload(reader.result)

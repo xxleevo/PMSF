@@ -1298,7 +1298,8 @@ if ( $blockIframe ) {
 					<span style="color: #3b3b3b"><b style="font-size:17px">Importieren:</b><br>Lade eine Datei hoch, um zuvor gespeicherte Einstellungen wieder herzustellen.</span>
 					<div>
 						<center>
-							<button class="settings" onclick="download( addslashes($title) , JSON.stringify(JSON.stringify(localStorage)))">
+							<button class="settings"
+								onclick="download(\''. addslashes( $title ) .'\', JSON.stringify(JSON.stringify(localStorage)))">
 								<i class="fa fa-upload" aria-hidden="true"></i> Exportieren
 							</button>
 						</center>
@@ -2031,7 +2032,9 @@ if ( $blockIframe ) {
     var noParkInfo = <?php echo $noParkInfo === true ? 'true' : 'false' ?>;
     var onlyTriggerGyms = <?php echo $onlyTriggerGyms === true ? 'true' : 'false' ?>;
     var showBigKarp = <?php echo $noBigKarp === true ? 'true' : 'false' ?>;
+	var enableBigKarps = <?php echo $noBigKarp ? 'false' : $enableBigKarps ?>;
     var showTinyRat = <?php echo $noTinyRat === true ? 'true' : 'false' ?>;
+	var enableTinyRats = <?php echo $noTinyRat ? 'false' : $enableTinyRats ?>;
     var hidePokemonCoords = <?php echo $hidePokemonCoords === true ? 'true' : 'false' ?>;
     var directionProvider = '<?php echo $noDirectionProvider === true ? $directionProvider : 'google' ?>';
     var exEligible = <?php echo $noExEligible === true ? 'false' : $exEligible  ?>;

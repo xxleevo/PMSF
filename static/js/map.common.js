@@ -1027,12 +1027,12 @@ var StoreOptions = {
         },
     'showBigKarp':
         {
-            default: showBigKarp,
+            default: enableBigKarps,
             type: StoreTypes.Boolean
         },
     'showTinyRat':
         {
-            default: showTinyRat,
+            default: enableTinyRats,
             type: StoreTypes.Boolean
         },
     'showPokestops':
