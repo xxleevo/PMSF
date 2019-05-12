@@ -7303,8 +7303,6 @@ function removeNotifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
 }
 
 function shareNestsWhatsapp(size){
-	
-	console.log(size)
 	if(size == 'all'){
 	var link = 'whatsapp://send?text=%2ANester in Dortmund%2A:'
 		console.log('ALL PRESSED')
@@ -7317,7 +7315,6 @@ function shareNestsWhatsapp(size){
 	}
 	if(size == 'big'){
 	var link = 'whatsapp://send?text=%2AGroße Nester in Dortmund%2A:'
-		console.log('BIG PRESSED')
 		$.each(mapData.nests, function (key, value) {
 			if (mapData.nests[key]['name'] !== null && mapData.nests[key]['name'] !== 'Unknown Areaname' && (mapData.nests[key]['pokemon_avg'] != null && mapData.nests[key]['pokemon_avg'] >= 10 ) ){
 				link += '%0A%2A' + mapData.nests[key]['name'] + '%2A:%20' + encodeURIComponent(mapData.nests[key]['pokemon_name'])
@@ -7325,5 +7322,6 @@ function shareNestsWhatsapp(size){
 		})
 	document.getElementById("shareWhatsappNestsBig").href = link;
 	}
+	
 }
 
