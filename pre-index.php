@@ -301,20 +301,6 @@ if ( $blockIframe ) {
 				?>
                 <div>
                 <?php
-                if ( ! $noPokemon ) {
-                    echo '<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-                    <h3> Pokemon </h3>
-                    <div class="onoffswitch">
-                        <input id="pokemon-switch" type="checkbox" name="pokemon-switch" class="onoffswitch-checkbox"
-                               checked>
-                        <label class="onoffswitch-label" for="pokemon-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-		</div>';
-                } ?>
-                <?php
                 if ( ! $noNests ) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
                     <h3> Nester </h3>
@@ -328,12 +314,26 @@ if ( $blockIframe ) {
                     </div>
                 </div>';
                 } ?>
+                <?php
+                if ( ! $noPokemon ) {
+                    echo '<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
+                    <h3> Pokemon </h3>
+                    <div class="onoffswitch">
+                        <input id="pokemon-switch" type="checkbox" name="pokemon-switch" class="onoffswitch-checkbox"
+                               checked>
+                        <label class="onoffswitch-label" for="pokemon-switch">
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+				</div>';
+                } ?>
                     <div id="pokemon-filter-wrapper" style="display:none">
                         <?php
                         if ( ! $noTinyRat ) {
                             ?>
                             <div class="form-control switch-container">
-                                <h3><?php echo i8ln( 'Tiny Rats' ) ?></h3>
+                                <font size="3"><?php echo i8ln( 'Tiny Rats' ) ?></font>
                                 <div class="onoffswitch">
                                     <input id="tiny-rat-switch" type="checkbox" name="tiny-rat-switch"
                                            class="onoffswitch-checkbox" checked>
@@ -349,7 +349,7 @@ if ( $blockIframe ) {
                         if ( ! $noBigKarp ) {
                             ?>
                             <div class="form-control switch-container">
-                                <h3><?php echo i8ln( 'Big Karp' ) ?></h3>
+                                <font size="3"><?php echo i8ln( 'Big Karp' ) ?></font>
                                 <div class="onoffswitch">
                                     <input id="big-karp-switch" type="checkbox" name="big-karp-switch"
                                            class="onoffswitch-checkbox" checked>
@@ -478,7 +478,7 @@ if ( $blockIframe ) {
                 <?php
                 if ( ! $noLures ) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-                    <h3>Nur Lockmodule</h3>
+                    <font size="3">Nur Lockmodule</font>
                     <div class="onoffswitch">
                         <input id="lures-switch" type="checkbox" name="lures-switch"
                                class="onoffswitch-checkbox" checked>
@@ -492,7 +492,7 @@ if ( $blockIframe ) {
                 <?php
                 if ( ! $noQuests ) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-                    <h3>Nur Quests</h3>
+                    <font size="3">Nur Quests</font>
                     <div class="onoffswitch">
                         <input id="quests-switch" type="checkbox" name="quests-switch"
                                class="onoffswitch-checkbox" checked>
@@ -621,7 +621,7 @@ if ( $blockIframe ) {
 						echo '
 						<div id="raids-filter-wrapper" style="display:none">
 							<div class="form-control switch-container" id="active-raids-wrapper">
-								<h3>Nur aktive Raids</h3>
+								<font size="3">Nur aktive Raids</font>
 								<div class="onoffswitch">
 									<input id="active-raids-switch" type="checkbox" name="active-raids-switch"
 										class="onoffswitch-checkbox" checked>
@@ -632,7 +632,7 @@ if ( $blockIframe ) {
 								</div>
 							</div>
 							<div class="form-control switch-container" id="min-level-raids-filter-wrapper">
-								<h3>Min. Raid Level</h3>
+								<font size="3">Min. Raid Level</font>
 								<select name="min-level-raids-filter-switch" id="min-level-raids-filter-switch">
 									<option value ="">Einstellung angeben...</option>
 									<option value="1">1</option>
@@ -643,7 +643,7 @@ if ( $blockIframe ) {
 								</select>
 							</div>
 							<div class="form-control switch-container" id="max-level-raids-filter-wrapper">
-								<h3>Max. Raid Level</h3>
+								<font size="3">Max. Raid Level</font>
 								<select name="max-level-raids-filter-switch" id="max-level-raids-filter-switch">
 									<option value ="">Einstellung angeben...</option>
 									<option value="1">1</option>
@@ -660,7 +660,7 @@ if ( $blockIframe ) {
                     <?php
                     if ( ! $noGymSidebar && ( ! $noGyms || ! $noRaids ) ) {
                         echo '<div id="gym-sidebar-wrapper" class="form-control switch-container">
-                    <h3>' . i8ln( 'Use Gym Sidebar' ) . '</h3>
+                    <font size="3">' . i8ln( 'Use Gym Sidebar' ) . '</font>
                     <div class="onoffswitch">
                         <input id="gym-sidebar-switch" type="checkbox" name="gym-sidebar-switch"
                                class="onoffswitch-checkbox" checked>
@@ -688,7 +688,7 @@ if ( $blockIframe ) {
                     if ( ! $hideIfManual && !$noGymTeamInfos) {
                         echo '<div id="gyms-filter-wrapper" style="display:none">
                         <div class="form-control switch-container" id="team-gyms-only-wrapper">
-                            <h3>Team</h3>
+                            <font size="3">Team</font>
                             <select name="team-gyms-filter-switch" id="team-gyms-only-switch">
                                 <option value="0"> Alle</option>
                                 <option value="1"> Mystic / Weisheit</option>
@@ -697,7 +697,7 @@ if ( $blockIframe ) {
                             </select>
 						</div>
                         <div class="form-control switch-container" id="open-gyms-only-wrapper">
-                            <h3>Freie Plätze</h3>
+                            <font size="3">Freie Plätze</font>
                             <div class="onoffswitch">
                                 <input id="open-gyms-only-switch" type="checkbox" name="open-gyms-only-switch"
                                        class="onoffswitch-checkbox" checked>
@@ -708,7 +708,7 @@ if ( $blockIframe ) {
                             </div>
                         </div>
                         <div class="form-control switch-container" id="min-level-gyms-filter-wrapper">
-                            <h3>Min. freie Plätze</h3>
+                            <font size="3">Min. freie Plätze</font>
                             <select name="min-level-gyms-filter-switch" id="min-level-gyms-filter-switch">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -719,7 +719,7 @@ if ( $blockIframe ) {
                             </select>
                         </div>
                         <div class="form-control switch-container" id="max-level-gyms-filter-wrapper">
-                            <h3>Max. freie Plätze</h3>
+                            <font size="3">Max. freie Plätze</font>
                             <select name="max-level-gyms-filter-switch" id="max-level-gyms-filter-switch">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -730,7 +730,7 @@ if ( $blockIframe ) {
                             </select>
                         </div>
                         <div class="form-control switch-container" id="last-update-gyms-wrapper">
-                            <h3>Letzter Scan</h3>
+                            <font size="3">Letzter Scan</font>
                             <select name="last-update-gyms-switch" id="last-update-gyms-switch">
                                 <option value="0">Alle</option>
                                 <option value="1">Letzte Stunde</option>
@@ -747,7 +747,7 @@ if ( $blockIframe ) {
                         <?php
                         if ( ( $fork === "alternate" || $map === "rdm" || ( $map === "rm" && $fork !== "sloppy" ) ) && ! $noExEligible ) {
                             echo '<div class="form-control switch-container" id="ex-eligible-wrapper">
-                                <h3>' . i8ln( 'EX Eligible Only' ) . '</h3>
+                                <font size="3">' . i8ln( 'EX Eligible Only' ) . '</font>
                                 <div class="onoffswitch">
                                     <input id="ex-eligible-switch" type="checkbox" name="ex-eligible-switch"
                                            class="onoffswitch-checkbox" checked>
@@ -760,7 +760,7 @@ if ( $blockIframe ) {
                         }
                         if ( ! $noBattleStatus ) {
                             echo '<div class="form-control switch-container" id="battle-status-wrapper">
-                                <h3>' . i8ln( 'Nur Arenen im Kampf' ) . '</h3>
+                                <font size="3">' . i8ln( 'Nur Arenen im Kampf' ) . '</font>
                                 <div class="onoffswitch">
                                     <input id="battle-status-switch" type="checkbox" name="battle-status-switch"
                                            class="onoffswitch-checkbox" checked>
@@ -989,10 +989,26 @@ if ( $blockIframe ) {
                         </label>
                     </div>
                 </div>';
-                } ?>
+                } 
+                if ( ! $noSpawnArea ) {
+                    echo '<div id="spawn-area-wrapper" class="form-control switch-container">
+                <font size="3"> ' . i8ln( 'Spawn area' ) . ' </font>
+                <div class="onoffswitch">
+                    <input id = "spawn-area-switch" type = "checkbox" name = "spawn-area-switch"
+                           class="onoffswitch-checkbox"/>
+                    <label class="onoffswitch-label" for="spawn-area-switch">
+                        <span class="switch-label" data - on = "On" data - off = "Off"></span>
+                        <span class="switch-handle"></span>
+                    </label>
+                </div>
+				</div>';
+                }
+				?>
 				<?php
 				if ( ! $noScanPolygonQuest || ! $noScanPolygonPvp || ! $noScanPolygon){
-					echo '<h3><center><u> Gebiete </u></center></h3>';
+					echo '<div>
+						<h3><center><u> Gebiete </u></center></h3>
+					</div>';
 				} ?>
                 <?php
 				
@@ -1042,19 +1058,6 @@ if ( $blockIframe ) {
 					';
                 } ?>
                 <?php
-                if ( ! $noSpawnArea ) {
-                    echo '<div id="spawn-area-wrapper" class="form-control switch-container">
-                <h3> ' . i8ln( 'Spawn area' ) . ' </h3>
-                <div class="onoffswitch">
-                    <input id = "spawn-area-switch" type = "checkbox" name = "spawn-area-switch"
-                           class="onoffswitch-checkbox"/>
-                    <label class="onoffswitch-label" for="spawn-area-switch">
-                        <span class="switch-label" data - on = "On" data - off = "Off"></span>
-                        <span class="switch-handle"></span>
-                    </label>
-                </div>
-            </div>';
-                }
                 echo '</div>';
             }
             ?>
