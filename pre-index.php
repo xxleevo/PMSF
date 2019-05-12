@@ -312,7 +312,29 @@ if ( $blockIframe ) {
                             <span class="switch-handle"></span>
                         </label>
                     </div>
-                </div>';
+                </div>
+					<div id="nests-content-wrapper" style="display:none">
+						<div>
+							<center>
+								<u><h3> Nester teilen (Whatsapp)<h3></u>
+								<a class="settings" id="shareWhatsappNestsAll" href="#" data-action="share/whatsapp/share" style="background-color: #555555;border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;"
+									onclick="shareNestsWhatsapp(\'all\')">
+									<i class="fa fa-upload" aria-hidden="true"></i> Alle teilen
+								</a><br><br>
+								<a class="settings" id="shareWhatsappNestsBig" href="#" data-action="share/whatsapp/share" style="background-color: #555555;border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;"
+									onclick="shareNestsWhatsapp(\'big\')">
+									<i class="fa fa-upload" aria-hidden="true"></i> Nur Große teilen
+								</a>
+							</center>
+						</div>
+						<div>
+						Beachte: Es werden nur die Nester geteilt, die auf deiner Map zu sehen sind.
+						</div>
+						
+					</div>
+					<br>
+				
+				';
                 } ?>
                 <?php
                 if ( ! $noPokemon ) {

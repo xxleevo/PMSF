@@ -707,6 +707,9 @@ function initSidebar() {
     if (Store.get('showGyms') === true || Store.get('showRaids') === true) {
         $('#gyms-raid-filter-wrapper').toggle(true)
     }
+	if (Store.get('showNests') === true) {
+		$('#nests-content-wrapper').toggle(true)
+	}
     if (document.getElementById('next-location')) {
         const searchform = document.getElementById('search-places')
         const input = searchform.querySelector('input')
@@ -5196,6 +5199,7 @@ function updateMap() {
         showInBoundsMarkers(mapData.pokestops, 'pokestop')
         showInBoundsMarkers(mapData.scanned, 'scanned')
         showInBoundsMarkers(mapData.spawnpoints, 'inbound')
+		
         // drawScanPath(result.scanned)
 
         clearStaleMarkers()
@@ -6914,12 +6918,22 @@ $(function () {
         buildSwitchChangeListener(mapData, ['gyms'], 'showGyms').bind(this)()
     })
     $('#nests-switch').change(function () {
+        var options = {
+            'duration': 500
+        }
 		Store.set('showNests', this.checked)
+
         if (this.checked) {
             buildNestPolygons()
+			$('#nests-content-wrapper').show(options)
         } else {
             nestPolygonGroup.clearLayers()
+			$('#nests-content-wrapper').hide(options)
         }
+		
+		if (Store.get('showNests') === true) {
+			$('#nests-content-wrapper').toggle(true)
+		}
 		buildNestPolygons()
         lastnests = false
         buildSwitchChangeListener(mapData, ['nests'], 'showNests').bind(this)()
@@ -7287,3 +7301,29 @@ function removeNotifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
     //neues Ding auch entfernen
     $('label[for="notify-pokemon"] .pokemon-list .pokemon-icon-sprite[data-value="' + id + '"]').removeClass('active')
 }
+
+function shareNestsWhatsapp(size){
+	
+	console.log(size)
+	if(size == 'all'){
+	var link = 'whatsapp://send?text=%2ANester in Dortmund%2A:'
+		console.log('ALL PRESSED')
+		$.each(mapData.nests, function (key, value) {
+			if (mapData.nests[key]['name'] !== null && mapData.nests[key]['name'] !== 'Unknown Areaname'){
+				link += '%0A%2A' + mapData.nests[key]['name'] + '%2A:%20' + encodeURIComponent(mapData.nests[key]['pokemon_name'])
+			}
+		})
+	document.getElementById("shareWhatsappNestsAll").href = link;
+	}
+	if(size == 'big'){
+	var link = 'whatsapp://send?text=%2AGroße Nester in Dortmund%2A:'
+		console.log('BIG PRESSED')
+		$.each(mapData.nests, function (key, value) {
+			if (mapData.nests[key]['name'] !== null && mapData.nests[key]['name'] !== 'Unknown Areaname' && (mapData.nests[key]['pokemon_avg'] != null && mapData.nests[key]['pokemon_avg'] >= 10 ) ){
+				link += '%0A%2A' + mapData.nests[key]['name'] + '%2A:%20' + encodeURIComponent(mapData.nests[key]['pokemon_name'])
+			}
+		})
+	document.getElementById("shareWhatsappNestsBig").href = link;
+	}
+}
+
