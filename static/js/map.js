@@ -1540,14 +1540,17 @@ function getQuest(item) {
 function pokestopLabel(item) {
     var str
 	var pokestopId = item['pokestop_id']
+	var lureType = item['lure_id']
     if (item['pokestop_name'] === null) {
         item['pokestop_name'] = 'Pokéstop'
     }
 	var stopName = ''
 	if (item['lure_expiration'] > Date.now()){
-        stopName = '<b class="pokestop-lure-name">' +
-        item['pokestop_name'] +
-		'</b>'
+		if (lureType > 501){ // Lure name based on lure type
+			stopName = '<b class="pokestop-lure-'+ lureType +'-name">' + item['pokestop_name'] + '</b>'
+		} else{ // normal lure
+        stopName = '<b class="pokestop-lure-name">' + item['pokestop_name'] + '</b>'
+		}
 	}else if(!noQuests && item['quest_type'] !== 0){
         stopName = '<b class="pokestop-quest-name">' +
         item['pokestop_name'] +
@@ -1562,7 +1565,11 @@ function pokestopLabel(item) {
 	var stopLabel = ''
 	if (!noGymTeamInfos){
 		if (item['lure_expiration'] > Date.now() && item['url'] !== null) {
+			if (lureType > 501) { //If the lure is special type
+			stopImage = '<img class="pokestop-lure-'+ lureType + '-image" src="' + item['url'] + '">'
+			} else{
 			stopImage = '<img class="pokestop-lure-image" src="' + item['url'] + '">'
+			}
 		} else if(!noQuests && item['quest_type'] !== 0 && item['url'] !== null){
 			stopImage = '<img class="pokestop-quest-image" src="' + item['url'] + '">'
 		} else if (item['url'] !== null) {
@@ -1604,7 +1611,7 @@ function pokestopLabel(item) {
 			stopImage
 			if (item['lure_expiration'] > Date.now()) {
 				str +=
-				'<img style="margin-bottom:55px;margin-left:-95px;height:50px;" src="static/forts/LureModule.png"/>' +
+				'<img style="margin-bottom:55px;margin-left:-95px;height:50px;" src="static/forts/LureModule_' + lureType + '.png"/>' +
 				getReward(item)
 			}else{
 			str +=
@@ -2310,6 +2317,7 @@ function getPokestopMarkerIcon(item) {
     var reward = JSON.parse(item['quest_rewards'])
 	//v5 - xxleevo lures
 	var lure = item['lure_expiration']
+	var lureType = item['lure_id']
 	//v5 - end of code block
     var stopMarker = ''
     var html = ''
@@ -2337,7 +2345,7 @@ function getPokestopMarkerIcon(item) {
 			//v5 - xxleevo lures
 			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
-					'<img src="static/forts/Pstop-Lured_new.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
+					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
 					'<img src="' + iconpath + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
 					'</div>'
 			}
@@ -2357,7 +2365,7 @@ function getPokestopMarkerIcon(item) {
         } else if (reward[0]['type'] === 3) {
 			if(lure > Date.now() ){
 				html = '<div style="position:relative;">' +
-					'<img src="static/forts/Pstop-Lured_new.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
 					'<img src="' + iconpath + 'rewards/reward_stardust.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
 					'</div>'
 			}
@@ -2377,7 +2385,7 @@ function getPokestopMarkerIcon(item) {
         } else if (reward[0]['type'] === 2) {
 			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
-					'<img src="static/forts/Pstop-Lured_new.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
 					'<img src="' + iconpath + 'rewards/reward_' + rewardinfo['item_id'] + '_1.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
 					'</div>'
 			}
@@ -2397,7 +2405,7 @@ function getPokestopMarkerIcon(item) {
         } else {
 			if(lure > Date.now()){
 				html = '<div>' +
-                '<img src="static/forts/Pstop-Lured_new.png"' +
+                '<img src="static/forts/Pstop-Lured_'+ lureType + '.png"' +
                 '</div>'
 			}
 			else{
@@ -2416,7 +2424,7 @@ function getPokestopMarkerIcon(item) {
     } else {
 			if(lure > Date.now() ){
 				html = '<div>' +
-            '<img src="static/forts/Pstop-Lured_new.png" style="width:32px;height:auto;" />' +
+            '<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:32px;height:auto;" />' +
             '</div>'
 			}
 			else{

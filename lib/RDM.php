@@ -355,6 +355,7 @@ class RDM extends Scanner
         name AS pokestop_name,
         url,
         lure_expire_timestamp AS lure_expiration,
+		lure_id AS lure_id,
         quest_type,
         quest_timestamp,
         quest_target,
@@ -389,6 +390,7 @@ class RDM extends Scanner
             $pokestop["quest_reward_amount"] = intval($pokestop["quest_reward_amount"]);
 			$pokestop["url"] = ! empty($pokestop["url"]) ? str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]) : null;
             //$pokestop["url"] = str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]);
+            $pokestop["lure_id"] = intval($pokestop["lure_id"]);
 			$pokestop["lure_expiration"] = $pokestop["lure_expiration"] * 1000;
             if ($noTrainerName === true) {
                 // trainer names hidden, so don't show trainer who lured
