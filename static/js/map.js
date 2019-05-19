@@ -1544,6 +1544,17 @@ function pokestopLabel(item) {
     if (item['pokestop_name'] === null) {
         item['pokestop_name'] = 'Pokéstop'
     }
+
+	
+	var specialLure = ''
+	if(lureType == 502){ // Special lure: Icy
+		specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Gletscher-Lockmodul </b>'
+	} else if(lureType == 503){//Special lure: Mossy
+		specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Moos-Lockmodul </b>'
+	} else if(lureType == 504){//Special lure: Electric
+		specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Magnet-Lockmodul </b>'
+	}
+	
 	var stopName = ''
 	if (item['lure_expiration'] > Date.now()){
 		if (lureType > 501){ // Lure name based on lure type
@@ -1587,7 +1598,8 @@ function pokestopLabel(item) {
 	}
     str =
 		'<center><div class="pokestop-label">' +
-        stopName +
+        stopName + '<br>' +
+		specialLure +
 		'</div></center>'
 		
     if (!noQuests && item['quest_type'] !== 0) {
