@@ -1547,20 +1547,21 @@ function pokestopLabel(item) {
 
 	
 	var specialLure = ''
-	if(lureType == 502){ // Special lure: Icy
+	if(lureType == 502 && item['lure_expiration'] > Date.now()){ // Special lure: Icy
 		specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Gletscher-Lockmodul </b>'
-	} else if(lureType == 503){//Special lure: Mossy
+	} else if(lureType == 503 && item['lure_expiration'] > Date.now()){//Special lure: Mossy
 		specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Moos-Lockmodul </b>'
-	} else if(lureType == 504){//Special lure: Electric
+	} else if(lureType == 504 && item['lure_expiration'] > Date.now()){//Special lure: Electric
 		specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Magnet-Lockmodul </b>'
 	}
 	
 	var stopName = ''
-	if (item['lure_expiration'] > Date.now()){
+	// Pick the Stops name with color based of lure,quest,normal
+	if (item['lure_expiration'] > Date.now()){ 
 		if (lureType > 501){ // Lure name based on lure type
 			stopName = '<b class="pokestop-lure-'+ lureType +'-name">' + item['pokestop_name'] + '</b>'
 		} else{ // normal lure
-        stopName = '<b class="pokestop-lure-name">' + item['pokestop_name'] + '</b>'
+			stopName = '<b class="pokestop-lure-name">' + item['pokestop_name'] + '</b>'
 		}
 	}else if(!noQuests && item['quest_type'] !== 0){
         stopName = '<b class="pokestop-quest-name">' +
@@ -1572,7 +1573,6 @@ function pokestopLabel(item) {
 		'</b>'
 	}
 	var stopImage = ''
-	var lureEndStr = ''
 	var stopLabel = ''
 	if (!noGymTeamInfos){
 		if (item['lure_expiration'] > Date.now() && item['url'] !== null) {
@@ -1602,6 +1602,19 @@ function pokestopLabel(item) {
 		specialLure +
 		'</div></center>'
 		
+	var lureImage = ''
+	var lureStr = ''
+	var lureEndStr = ''
+	if (item['lure_expiration'] > Date.now()) { // Building the lure module image and the lure expiration text
+		lureImage = '<img style="margin-top:-15px;margin-bottom:55px;margin-left:-105px;height:65px;position:absolute" src="static/forts/LureModule_' + lureType + '.png"/>'
+		lureEndStr = getTimeStr(item['lure_expiration'])
+		lureStr =
+		'<div style="font-weight:900;">' +
+		'Lockmodul bis' + ': ' + lureEndStr +
+		' <span class="label-countdown" disappears-at="' + item['lure_expiration'] + '">(00m00s)</span>' +
+		'</div>'
+	}
+		
     if (!noQuests && item['quest_type'] !== 0) {
 		
 		var excludeStr = '';
@@ -1618,29 +1631,26 @@ function pokestopLabel(item) {
 		if (item['quest_reward_type'] === 3){
 			excludeStr = '<a href="javascript:excludeDustQuest()" title="Sternenstaub-Quests ausblenden">Exclude Staub-Quests</a>'
 		}
+		
+		var rewardStr = '<div style="margin-top:-60px;margin-right:-60px">' +
+						getReward(item) +
+						'</div>'
+
         str +=
             '<div><center>' +
 			stopImage
 			if (item['lure_expiration'] > Date.now()) {
 				str +=
-				'<img style="margin-bottom:55px;margin-left:-95px;height:50px;" src="static/forts/LureModule_' + lureType + '.png"/>' +
-				getReward(item)
+				//'<img style="margin-bottom:55px;margin-left:-95px;height:50px;" src="static/forts/LureModule_' + lureType + '.png"/>' +
+				lureImage +
+				rewardStr
 			}else{
 			str +=
-				'<div style="margin-top:-60px;margin-right:-60px">' +
-				getReward(item) +
-				'</div>'
+				rewardStr
 			}
 
-			if (item['lure_expiration'] > Date.now()) {
-				lureEndStr = getTimeStr(item['lure_expiration'])
-				str +=
-				'<div style="font-weight:900;">' +
-				'Lockmodul bis' + ': ' + lureEndStr +
-				' <span class="label-countdown" disappears-at="' + item['lure_expiration'] + '">(00m00s)</span>' +
-				'</div>'
-			}
 			str += 
+				lureStr +
 				getQuest(item) +
 				'<center>' +
 				'<a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a>'
@@ -1650,15 +1660,26 @@ function pokestopLabel(item) {
             '<div class="pokestop-label">' +
             '<center>' +
             '<div>' +
-            '<b>' + item['pokestop_name'] + '</b>' +
+			stopName + '<br>' +
+            '</div>' +
+            '<div>' +
+			specialLure +
             '</div>' +
             '<div>' +
 			stopLabel +
+            '</div>' +
+            '<div>' +
 			stopImage +
+			lureImage +
+            '</div>' +
+            '<div>' +
+			lureStr +
             '</div>' +
             '</center>' +
             '</div>'
     }
+	
+	
     if (!noDeletePokestops) {
         str += '<i class="fa fa-trash-o delete-pokestop" onclick="deletePokestop(event);" data-id="' + item['pokestop_id'] + '"></i>'
     }
