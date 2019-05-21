@@ -1,19 +1,14 @@
 <?php
-
 namespace Search;
-
 class RDM extends Search
 {
     public function search_reward($lat, $lon, $term)
     {
-        global $db, $defaultUnit, $maxSearchResults;
-
+        global $db, $defaultUnit, $maxSearchResults, $maxSearchNameLength;
 	$conds = array();
 	$params = array();
-
 	$params[':lat'] = $lat;
 	$params[':lon'] = $lon;
-
         $pjson = file_get_contents( 'static/dist/data/pokemon.min.json' );
         $prewardsjson = json_decode( $pjson, true );
         $presids = array();
@@ -21,7 +16,7 @@ class RDM extends Search
             if( $p > 493){
                 break;
             }
-            if(strpos(strtolower($preward['name']), strtolower($term)) !== false){
+            if(strpos(strtolower(i8ln($preward['name'])), strtolower($term)) !== false){
                 $presids[] = $p;
             }
         }
@@ -29,7 +24,7 @@ class RDM extends Search
         $irewardsjson = json_decode( $ijson, true );
         $iresids = [];
         foreach($irewardsjson as $i => $ireward){
-            if(strpos(strtolower($ireward['name']), strtolower($term)) !== false){
+            if(strpos(strtolower(i8ln($ireward['name'])), strtolower($term)) !== false){
                 $iresids[] = $i;
             }
         }
@@ -40,7 +35,7 @@ class RDM extends Search
 		$conds[] = "quest_item_id IN (" . implode(',',$iresids) . ")";
 	}
 	$query = "SELECT id,
-        name,
+    name,
 	lat,
 	lon,
 	url,
@@ -51,18 +46,16 @@ class RDM extends Search
 	FROM pokestop
 	WHERE :conditions
 	ORDER BY distance LIMIT " . $maxSearchResults . "";
-
 	$query = str_replace(":conditions", join(" OR ", $conds), $query);
-
 	$rewards = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
-
 	$data = array();
-
 	foreach($rewards as $reward){
-            $reward['pokemon_name'] = !empty($reward['pokemon_name']) ? $prewardsjson[$reward['quest_pokemon_id']]['name'] : null;
+        $reward['pokemon_name'] = !empty($reward['pokemon_name']) ? $prewardsjson[$reward['quest_pokemon_id']]['name'] : null;
 	    $reward['quest_pokemon_id'] = intval($reward['quest_pokemon_id']);
-            $reward['item_name'] = !empty($reward['item_name']) ? $irewardsjson[$reward['quest_item_id']]['name'] : null;
+        $reward['item_name'] = !empty($reward['item_name']) ? $irewardsjson[$reward['quest_item_id']]['name'] : null;
 	    $reward['quest_item_id'] = intval($reward['quest_item_id']);
+	    $reward['url'] = str_replace("http://", "https://images.weserv.nl/?url=", $reward['url']);
+	    $reward['name'] = ($maxSearchNameLength > 0) ? htmlspecialchars(substr($reward['name'], 0, $maxSearchNameLength)) : htmlspecialchars($reward['name']);
             if($defaultUnit === "km"){
                 $reward['distance'] = round($reward['distance'] * 1.60934,2);
 	    }
@@ -70,11 +63,9 @@ class RDM extends Search
 	}
         return $data;
     }
-
     public function search_nests($lat, $lon, $term)
     {
         global $manualdb, $defaultUnit, $maxSearchResults;
-
         $json = file_get_contents( 'static/dist/data/pokemon.min.json' );
         $mons = json_decode( $json, true );
         $resids = [];
@@ -82,11 +73,11 @@ class RDM extends Search
             if( $k > 386){
                 break;
             }
-            if(strpos(strtolower($mon['name']), strtolower($term)) !== false){
+            if(strpos(strtolower(i8ln($mon['name'])), strtolower($term)) !== false){
                 $resids[] = $k;
             } else{
                 foreach($mon['types'] as $t){
-                    if(strpos(strtolower($t['type']), strtolower($term)) !== false){
+                    if(strpos(strtolower(i8ln($t['type'])), strtolower($term)) !== false){
                         $resids[] = $k;
                         break;
                     }
@@ -107,21 +98,17 @@ class RDM extends Search
 	}
         return $data;
     }
-
     public function search_portals($lat, $lon, $term)
     {
         global $manualdb, $defaultUnit, $maxSearchResults;
-
         if ( $manualdb->info()['driver'] === 'pgsql' ) {
             $query = "SELECT id,external_id,name,lat,lon,url, ROUND(cast( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) as numeric),2) AS distance FROM ingress_portals WHERE LOWER(name) LIKE :name ORDER BY distance LIMIT " . $maxSearchResults . "";
         } else {
             $query = "SELECT id,name,lat,lon,url, ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ),2) AS distance FROM ingress_portals WHERE LOWER(name) LIKE :name ORDER BY distance LIMIT " . $maxSearchResults . "";
         }
         $searches = $manualdb->query( $query, [ ':name' => "%" . strtolower( $term ) . "%",  ':lat' => $lat, ':lon' => $lon ] )->fetchAll();
-
 	$data = array();
 	$i = 0;
-
         foreach($searches as $search){
             $search['url'] = str_replace("http://", "https://images.weserv.nl/?url=", $search['url']);
             if($defaultUnit === "km"){
@@ -133,22 +120,17 @@ class RDM extends Search
         }
         return $data;
     }
-
-
     public function search($dbname, $lat, $lon, $term)
     {
         global $db, $defaultUnit, $maxSearchResults;
-
         if ( $db->info()['driver'] === 'pgsql' ) {
             $query = "SELECT id,external_id,name,lat,lon,url, ROUND(cast( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) as numeric),2) AS distance FROM " . $dbname . " WHERE LOWER(name) LIKE :name ORDER BY distance LIMIT " . $maxSearchResults . "";
         } else {
             $query = "SELECT id,name,lat,lon,url, ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ),2) AS distance FROM " . $dbname . " WHERE LOWER(name) LIKE :name ORDER BY distance LIMIT " . $maxSearchResults . "";
         }
         $searches = $db->query( $query, [ ':name' => "%" . strtolower( $term ) . "%",  ':lat' => $lat, ':lon' => $lon ] )->fetchAll();
-
 	$data = array();
 	$i = 0;
-
         foreach($searches as $search){
             $search['url'] = str_replace("http://", "https://images.weserv.nl/?url=", $search['url']);
             if($defaultUnit === "km"){
