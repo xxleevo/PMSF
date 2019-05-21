@@ -1779,14 +1779,14 @@ if ( $blockIframe ) {
                         <?php if ( ! $noQuests && ! $noSearchManualQuests ) { ?>
                             <li><a href="#tab-rewards"><img src="static/images/reward.png"/></a></li>
                         <?php }
-                        if ( ! $noSearchNests ) { ?>
-                            <li><a href="#tab-nests"><img src="static/images/nest.png"/></a></li>
-                        <?php }
-                        if ( ! $noSearchGyms ) { ?>
-                            <li><a href="#tab-gym"><img src="static/forts/ingame/Uncontested.png"/></a></li>
-                        <?php }
                         if ( ! $noSearchPokestops ) { ?>
                             <li><a href="#tab-pokestop"><img src="static/forts/Pstop-large.png"/></a></li>
+                        <?php }
+                        if ( ! $noSearchGyms ) { ?>
+                            <li><a href="#tab-gym"><img src="static/forts/classic/Uncontested.png"/></a></li>
+                        <?php }
+                        if ( ! $noSearchNests ) { ?>
+                            <li><a href="#tab-nests"><img src="static/images/nest.png"/></a></li>
                         <?php }
                         if ( ! $noSearchPortals ) { ?>
                             <li><a href="#tab-portals"><img src="static/images/portal.png"/></a></li>
