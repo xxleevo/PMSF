@@ -6854,7 +6854,7 @@ $(function () {
 
     // run interval timers to regularly update map and timediffs
     window.setInterval(updateLabelDiffTime, 1000)
-    window.setInterval(updateMap, 5000)
+    window.setInterval(updateMap, 2000)
     window.setInterval(updateWeatherOverlay, 60000)
     window.setInterval(updateGeoLocation, 1000)
 
