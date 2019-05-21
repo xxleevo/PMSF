@@ -15,7 +15,7 @@ class RDM extends Scanner
 
         global $noHighLevelData;
         if (!$noHighLevelData) {
-            $select .= ", weight,^size AS height, atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level";
+            $select .= ", weight,size AS height, atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level";
         }
 		//v4 -- edited by xxleevo
 		global $verifiedDespawnTimer;
