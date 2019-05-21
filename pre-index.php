@@ -1971,7 +1971,7 @@ if ( $blockIframe ) {
 <script src="static/js/vendor/s2geometry.js"></script>
 <script src="static/dist/js/app.min.js"></script>
 <script src="static/js/vendor/classie.js"></script>
-<script src="node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+<script src="node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 <script src='static/js/vendor/Leaflet.fullscreen.min.js'></script>
 <script src="static/js/vendor/smoothmarkerbouncing.js"></script>
 <script src='https://maps.googleapis.com/maps/api/js?key=<?php $gmapsKey ?> ' async defer></script>
