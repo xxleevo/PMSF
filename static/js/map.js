@@ -28,6 +28,7 @@ var $selectMinRaidLevel
 var $selectMaxRaidLevel
 var $selectNewPortalsOnly
 var $selectGymMarkerStyle
+var $selectIconStyle
 var $selectLocationIconMarker
 var $switchGymSidebar
 var $switchTinyRat
@@ -1270,11 +1271,11 @@ function getReward(item) {
         if (reward['shiny'] === true) {
             shinyStr = '_shiny'
         }
-        rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
+        rewardImage = '<img height="70px" style="padding: 5px;" src="static/icons/rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
     } else if (item['quest_reward_type'] === 3) {
-        rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + 'rewards/reward_stardust.png"/>'
+        rewardImage = '<img height="70px" style="padding: 5px;" src="static/icons/rewards/reward_stardust.png"/>'
     } else if (item['quest_reward_type'] === 2) {
-        rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + 'rewards/reward_' + reward['item_id'] + '_1.png"/>'
+        rewardImage = '<img height="70px" style="padding: 5px;" src="static/icons/rewards/reward_' + reward['item_id'] + '_1.png"/>'
     }
     return rewardImage
 }
@@ -2379,13 +2380,13 @@ function getPokestopMarkerIcon(item) {
 			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
 					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
-					'<img src="' + iconpath + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+					'<img src="static/icons/rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
 					'</div>'
 			}
 			else{
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/Pstop-quest-small.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
-                '<img src="' + iconpath + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+                '<img src="static/icons/rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
 			}
             stopMarker = L.divIcon({
@@ -2399,13 +2400,13 @@ function getPokestopMarkerIcon(item) {
 			if(lure > Date.now() ){
 				html = '<div style="position:relative;">' +
 					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
-					'<img src="' + iconpath + 'rewards/reward_stardust.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+					'<img src="static/icons/rewards/reward_stardust.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
 					'</div>'
 			}
 			else{
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/Pstop-quest-small.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
-                '<img src="' + iconpath + 'rewards/reward_stardust.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+                '<img src="static/icons/rewards/reward_stardust.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
 			}
             stopMarker = L.divIcon({
@@ -2419,13 +2420,13 @@ function getPokestopMarkerIcon(item) {
 			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
 					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
-					'<img src="' + iconpath + 'rewards/reward_' + rewardinfo['item_id'] + '_1.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+					'<img src="static/icons/rewards/reward_' + rewardinfo['item_id'] + '_1.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
 					'</div>'
 			}
 			else{
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/Pstop-quest-small.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
-                '<img src="' + iconpath + 'rewards/reward_' + rewardinfo['item_id'] + '_1.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+                '<img src="static/icons/rewards/reward_' + rewardinfo['item_id'] + '_1.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
                 '</div>'
 			}
             stopMarker = L.divIcon({
@@ -6536,6 +6537,28 @@ $(function () {
     $selectGymMarkerStyle.val(Store.get('gymMarkerStyle')).trigger('change')
     pokemonSpritesFilter()
     itemSpritesFilter()
+	
+	//Icon Styling
+    $selectIconStyle = $('#icon-style')
+	
+    $selectIconStyle.select2({
+        placeholder: 'Select Style',
+        minimumResultsForSearch: Infinity
+    })
+    $selectIconStyle.on('change', function (e) {
+        Store.set('icons', this.value)
+		var port = ''
+		if (window.location.port.length > 0) {
+			port = ':' + window.location.port
+		}
+		var path = window.location.protocol + '//' + window.location.hostname + port + window.location.pathname
+		var r = new RegExp('^(?:[a-z]+:)?//', 'i')
+		iconpath = r.test(Store.get('icons')) ? Store.get('icons') : path + Store.get('icons')
+		
+        redrawPokemon(mapData.pokemons)
+        redrawPokemon(mapData.lurePokemons)
+    })
+    $selectIconStyle.val(Store.get('icons')).trigger('change')
 })
 
 $(function () {

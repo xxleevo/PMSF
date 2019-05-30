@@ -1329,6 +1329,18 @@ if ( $blockIframe ) {
 			}
 			?>
             <?php
+            if ( ! $noMultipleRepos ) {
+                echo '<div class="form-control switch-container">
+                <h3>Icon Style</h3>
+                <select name="icon-style" id="icon-style">
+                    <option value="static/icons/classic/">Classic(Stable)</option>
+                    <option value="static/icons/retro/">Retro(Beta)</option>
+                </select>
+            </div>
+			';
+			}
+			?>
+            <?php
             if ( ! $noLocationStyle ) {
                 echo '<div class="form-control switch-container">
                 <h3>Standort Style</h3>
