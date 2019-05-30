@@ -3351,7 +3351,7 @@ function searchForItem(lat, lon, term, type, field) {
                             html += '<span style="background:url(' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_00.png) no-repeat;" class="i-icon" ></span>'
                         }
                         if (element.quest_item_id !== 0) {
-                            html += '<span style="background:url(' + iconpath + 'rewards/reward_' + element.quest_item_id + '_1.png) no-repeat;" class="i-icon" ></span>'
+                            html += '<span style="background:url(static/icons/rewards/reward_' + element.quest_item_id + '_1.png) no-repeat;" class="i-icon" ></span>'
                         }
                     }
                     html += '<div class="cont">'
