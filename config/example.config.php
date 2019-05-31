@@ -272,6 +272,7 @@ $notifyNotification = 'true';                                       // true/fals
 
 $copyrightSafe = true;
 $iconRepository = '';						    // URLs or folder paths are allowed
+$noMultipleRepos = true;
 
 $noMapStyle = false;                                                // true/false
 $mapStyle = 'openstreetmap';                                        // openstreetmap, darkmatter, styleblackandwhite, styletopo, stylesatellite, stylewikipedia
