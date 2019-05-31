@@ -1334,7 +1334,10 @@ if ( $blockIframe ) {
                 <h3>Icon Style</h3>
                 <select name="icon-style" id="icon-style">
                     <option value="static/icons/classic/">Classic(Stable)</option>
-                    <option value="static/icons/retro/">Retro(Beta)</option>
+                    <option value="static/icons/retro/">Retro(Stable)</option>
+                    <option value="https://raw.githubusercontent.com/geekygreek7/pkmn_shuffle_icons/master/optimized_for_PMSF_frontend/">Shuffle-ShinyEdition(Stable)</option>
+                    <option value="https://raw.githubusercontent.com/whitewillem/pogoassets/resized/no_border/">Ingame(Beta)</option>
+                    <option value="https://raw.githubusercontent.com/ZeChrales/PogoAssets/master/pixels/">Pixel-Edition(Beta)</option>
                 </select>
             </div>
 			';
