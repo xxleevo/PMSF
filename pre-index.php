@@ -352,6 +352,21 @@ if ( $blockIframe ) {
 				
 				';
                 } ?>
+				<?php
+				if ( ! $noMultipleRepos ) {
+					echo '<div class="form-control switch-container">
+					<h3>Icon Style</h3>
+					<select name="icon-style" id="icon-style">
+						<option value="static/icons/classic/">Classic(Stable)</option>
+						<option value="static/icons/retro/">Retro(Stable)</option>
+						<option value="https://raw.githubusercontent.com/geekygreek7/pkmn_shuffle_icons/master/optimized_for_PMSF_frontend/">Shuffle-ShinyEdition(Stable)</option>
+						<option value="https://raw.githubusercontent.com/whitewillem/pogoassets/resized/no_border/">Ingame(Beta)</option>
+						<option value="https://raw.githubusercontent.com/ZeChrales/PogoAssets/master/pixels/">Pixel-Edition(Beta)</option>
+					</select>
+				</div>
+				';
+				}
+				?>
                 <?php
                 if ( ! $noPokemon ) {
                     echo '<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
@@ -730,6 +745,22 @@ if ( $blockIframe ) {
                     </div>
                 </div>';
                     } ?>
+					<?php
+					if ( ! $noGymStyle && ( ! $noGyms || ! $noRaids )) {
+						echo '<div class="form-control switch-container">
+						<h3>Arenen Style</h3>
+						<select name="gym-marker-style" id="gym-marker-style">
+							<option value="classic">Classic</option>
+							<option value="shield">Schilder</option>
+							<option value="beasts">Biester</option>
+							<option value="idol">Idol</option>
+							<option value="elements">Elemente</option>
+							<option value="ingame">Standard</option>
+						</select>
+					</div>
+					';
+					}
+					?>
                     <?php
                     if ( ! $noGyms ) {
                         echo '<div class="form-control switch-container">
@@ -1312,37 +1343,6 @@ if ( $blockIframe ) {
             </div>';
             }
             ?>
-            <?php
-            if ( ! $noGymStyle ) {
-                echo '<div class="form-control switch-container">
-                <h3>Arenen Style</h3>
-                <select name="gym-marker-style" id="gym-marker-style">
-                    <option value="classic">Classic</option>
-                    <option value="shield">Schilder</option>
-                    <option value="beasts">Biester</option>
-                    <option value="idol">Idol</option>
-                    <option value="elements">Elemente</option>
-                    <option value="ingame">Standard</option>
-                </select>
-            </div>
-			';
-			}
-			?>
-            <?php
-            if ( ! $noMultipleRepos ) {
-                echo '<div class="form-control switch-container">
-                <h3>Icon Style</h3>
-                <select name="icon-style" id="icon-style">
-                    <option value="static/icons/classic/">Classic(Stable)</option>
-                    <option value="static/icons/retro/">Retro(Stable)</option>
-                    <option value="https://raw.githubusercontent.com/geekygreek7/pkmn_shuffle_icons/master/optimized_for_PMSF_frontend/">Shuffle-ShinyEdition(Stable)</option>
-                    <option value="https://raw.githubusercontent.com/whitewillem/pogoassets/resized/no_border/">Ingame(Beta)</option>
-                    <option value="https://raw.githubusercontent.com/ZeChrales/PogoAssets/master/pixels/">Pixel-Edition(Beta)</option>
-                </select>
-            </div>
-			';
-			}
-			?>
             <?php
             if ( ! $noLocationStyle ) {
                 echo '<div class="form-control switch-container">
