@@ -1060,7 +1060,7 @@ if ( $blockIframe ) {
                 <?php
                 if ( ! $noStartLast ) {
                     echo '<div class="form-control switch-container">
-                    <h3> Starte an letzter Position </h3>
+                    <h3> Mapposition speichern </h3>
                     <div class="onoffswitch">
                         <input id = "start-at-last-location-switch" type = "checkbox" name = "start-at-last-location-switch"
                                class="onoffswitch-checkbox"/>
