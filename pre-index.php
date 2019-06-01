@@ -349,21 +349,23 @@ if ( $blockIframe ) {
 						
 					</div>
 					<br>
-				
 				';
                 } ?>
 				<?php
 				if ( ! $noMultipleRepos ) {
-					echo '<div class="form-control switch-container">
+					echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
 					<h3>Icon Style</h3>
-					<select name="icon-style" id="icon-style">
-						<option value="static/icons/classic/">Classic(Stable)</option>
-						<option value="static/icons/retro/">Retro(Stable)</option>
-						<option value="https://raw.githubusercontent.com/geekygreek7/pkmn_shuffle_icons/master/optimized_for_PMSF_frontend/">Shuffle-ShinyEdition(Stable)</option>
-						<option value="https://raw.githubusercontent.com/whitewillem/pogoassets/resized/no_border/">Ingame(Beta)</option>
-						<option value="https://raw.githubusercontent.com/ZeChrales/PogoAssets/master/pixels/">Pixel-Edition(Beta)</option>
-					</select>
+					<div>
+						<select name="icon-style" id="icon-style">
+							<option value="static/icons/classic/">Classic (Stable)</option>
+							<option value="static/icons/retro/">Retro (Stable)</option>
+							<option value="https://raw.githubusercontent.com/geekygreek7/pkmn_shuffle_icons/master/optimized_for_PMSF_frontend/">Shuffle-ShinyEdition (Stable)</option>
+							<option value="https://raw.githubusercontent.com/whitewillem/pogoassets/resized/no_border/">Ingame (Beta)</option>
+						</select>
+					</div>
 				</div>
+				<br>
+				<br>
 				';
 				}
 				?>
@@ -491,12 +493,15 @@ if ( $blockIframe ) {
                     </div>
 					<?php
 					if(!$noPokemon){
+					echo '<p style="font-size:13px">';
+					echo '<br>';
 					echo 'Blende mehr Pokemon aus, um die Performance der Ladezeit zu erhöhen.<br><br>';
+						if( !$noHighLevelData){
+						echo 'Unter \'Immer anzeigen\' kannst du Pokemon auswählen, die trotz IV/Lvl Filter dennoch angezeigt werden sollen.';
+						}
+					echo '</p>';
 					} ?>
-					<?php
-					if( !$noHighLevelData){
-					echo 'Unter \'Immer anzeigen\' kannst du Pokemon auswählen, die trotz IV/Lvl Filter dennoch angezeigt werden sollen.';
-					} ?>
+
                 </div>
                 <?php
             }
