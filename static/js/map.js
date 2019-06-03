@@ -845,10 +845,15 @@ function pokemonLabel(item) {
     if (atk != null && def != null && sta != null) {
         var iv = getIv(atk, def, sta)
         details =
-            '<div>' +
-            '<b><font size="4"> IV: ' + iv.toFixed(1) + '%</font></b>(' + atk + '/' + def + '/' + sta + ')' +
-            '</div>'
+			//IV
+                '<div style="clear:both;margin-bottom:0px;">' +
+					'<span style="padding-left: 5px;font-size: 15px;font-weight: bold;">IV</span><img src="static/images/label/iv.png" style="height:23px;float:left;" />' +
+					'<span style="font-size: 11px;border-radius:10px;float:right;" >(' + atk + '/' + def + '/' + sta + ')</span>' +
+					'<span style="margin-right: 1px;font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + iv.toFixed(1) + '%</span><br>' +
 
+				'</div>'
+			
+			
         if (cp != null && (cpMultiplier != null || level != null)) {
             var pokemonLevel
             if (level != null) {
@@ -857,53 +862,64 @@ function pokemonLabel(item) {
                 pokemonLevel = getPokemonLevel(cpMultiplier)
             }
             details +=
-                '<div>' +
-                '<b>' + i8ln('WP') + ' : ' + cp + ' | Level: ' + pokemonLevel + '</b>' +
-                '</div>'
+				//WP + LVL
+                '<div style="clear:both;margin-bottom:10px;">' +
+					'<span style="font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + cp + ' WP</span>' +
+					'<span style="margin-right: 3px;font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >Lvl ' + level + ' - </span><br>' +
+
+				'</div>'
         }
         details +=
-            '<div>' +
-            i8ln('Moves') + ' : ' + pMove1 + ' / ' + pMove2 +
+				//Moveset
+                '<div style="clear:both;">' +
+				'<span style="padding-left: 5px;font-size: 14px;font-weight: bold;">Set</span><img src="static/images/swords.png" style="height:23px;float:left;" />' +
+				'<span style="font-size: 12px;font-weight: bold;border-radius:10px;float:right;padding: 1px 6px 1px 6px;" >' + pMove1 + ' / ' + pMove2 + '</span>' +
             '</div>'
     }
     if (weatherBoostedCondition !== 0) {
         details +=
-            '<div>' +
+                '<div style="clear:both;margin-top:">' +
             i8ln('Wetter') + ': ' + i8ln(weather[weatherBoostedCondition]) +
             '</div>'
     }
     if (gender != null) {
         details +=
             '<div>'
-        if (weight != null) {
-            details += '' + i8ln('Gewicht') + ': ' + weight.toFixed(2) + 'kg'
-        }
-        if (height != null) {
-            details += ' | ' + i8ln('Größe') + ': ' + height.toFixed(2) + 'm'
+        if (weight != null && height != null) {
+			details += 
+				//kg & m
+                '<div style="clear:both;">' +
+					'<span style="padding-left: 25px;font-size: 14px;font-weight: bold;">kg & m</span> ' +
+					'<span style="font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' +  height.toFixed(2) + 'm</span>' +
+					'<span style="margin-right: 3px;font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + weight.toFixed(2) + 'kg - </span>' +
+
+				'</div>'
         }
         details +=
             '</div>'
     }
-    var contentstring =
-        '<div>' +
-        '<b><font size="4">' + name + '</font></b>'
-    if (form !== null && form > 0 && forms.length > form) {
-        // todo: check how rocket map handles this (if at all):
-        if (id === 132) {
-            contentstring += ' (' + idToPokemon[item['form']].name + ')'
-        } else {
-            contentstring += ' (' + forms[item['form']] + ')'
-        }
+	
+
+	var contentstring =
+		'<center><div style="background-color:rgba(0,0,0,0.4);margin: 0px -10px -5px -10px;border-radius:6px;font-family: recursive;box-shadow: inset 0 0 2px #fff;">' +
+		'<b><font size="3" color="white">' + name + '</font></b>'
+	if (form !== null && form > 0 && forms.length > form) {
+    // todo: check how rocket map handles this (if at all):
+		if (id === 132) {
+			contentstring += ' (' + idToPokemon[item['form']].name + ')'
+		} else {
+			contentstring += ' (' + forms[item['form']] + ')'
+		}
     }
-    var coordText = latitude.toFixed(6) + ', ' + longitude.toFixed(7)
-    if (hidePokemonCoords === true) {
-        coordText = i8ln('Directions')
-    }
-    contentstring += '<span> - </span>' +
-        '<small>' +
-        '<a href="https://pokemon.gameinfo.io/' + languageSite + '/pokemon/' + id + '" target="_blank" title="' + i8ln('View in Pokedex') + ' " style="font-size:20px"><i class="fa fa-slack" aria-hidden="true"></i>' + id + '</a>' +
-        '</small>' +
-        '<span><font size="4" style="font-weight: bold"><b> ' 
+	var coordText = latitude.toFixed(6) + ', ' + longitude.toFixed(7)
+	if (hidePokemonCoords === true) {
+		coordText = i8ln('Directions')
+	}
+	contentstring += '<span style="color:white;"> - </span>' +
+		'<small>' +
+		'<a href="https://pokemon.gameinfo.io/' + languageSite + '/pokemon/' + id + '" target="_blank" title="' + i8ln('View in Pokedex') + ' " style="font-size:15px;color:white;"><i class="fa fa-slack" aria-hidden="true"></i>' + id + '</a>' +
+		'</small>' +
+		'<span><font style="color:white;font-weight:bold"> ' 
 		if (genderType[gender-1] == '♂') {
 		contentstring += '<i class="fa fa-mars fa-fw">'
 		}
@@ -913,48 +929,55 @@ function pokemonLabel(item) {
 		else{
 		contentstring += '<i class="fa fa-genderless fa-fw">'
 		}
-		contentstring += '</i></b></font></span>'+
-        '<span> - </span>' +
-        '<small>' + typesDisplay + '</small>' +
-        '</div>' 
-    if (noRarityDisplay === false) {
-        contentstring += '<span> ' + rarityDisplay + '</span>'
-    }
-    if (pokemonReportTime === true) {
-        contentstring += '<div><center><b>' +
-            i8ln('Reported at') + ' ' + getTimeStr(reportTime) +
-            '</b></center></div>'
-    } else {
-		//changes for v4 -- by xxleevo
+		contentstring += '</i></font></span>'+
+		'<span> - </span>' +
+		'</div></center>' 
+
+	contentstring +=
+	'<center><img style="width: 80px; -webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/></center>'
+	
+	if (noRarityDisplay === false) {
+		contentstring += '<span> ' + rarityDisplay + '</span>'
+	}
+	if (pokemonReportTime === true) {
+		contentstring += '<div style="background:rgba(255,255,255,0.8);border-radius:12px;box-shadow: inset 0 0 4px #000;padding: 5px;margin: 0px -10px -5px -10px;">'
+		contentstring += '<div><center><b>' +
+			i8ln('Reported at') + ' ' + getTimeStr(reportTime) +
+			'</b></center></div>'
+	} else {
+		//Type
+		contentstring += '<div style="background:rgba(255,255,255,0.8);border-radius:12px;box-shadow: inset 0 0 4px #000;padding: 5px;margin: 0px -10px -5px -10px;">' +
+		'<center><small>' + typesDisplay + '</small></center>'
 		if (verifiedDespawn == 1){
-        contentstring += '<div>' +
-		'<br>Verifizierte Restzeit:' +
-        '<br> <span class="label-countdown" style="background-color: #fffaaa;font-size: 15px;font-weight: bold" disappears-at="' + disappearTime + '">(00m00s)</span> verbleibend <br>' +
-        '<font size="1" style="font-weight: normal;">(Despawn um ' + getTimeStr(disappearTime) + ')' + '</font><br><br>' +
-            '</div>'
+		//Verified Timer
+		contentstring += '<div style="padding-top:5px;padding-bottom: 7px;">' +
+		'<span style="padding-left: 5px;font-size: 14px;font-weight: bold;">Restzeit</span><img src="static/images/label/clock.png" style="height:23px;float:left;" />' +
+		'<span class="label-countdown" style="background-color: #fffaaa;font-size: 14px;font-weight: bold;border-radius:10px;float:right" disappears-at="' + disappearTime + '">(00m00s)</span><br>' +
+		'<div style="clear:both;"><font size="1" style="font-weight: normal;">(Despawn um ' + getTimeStr(disappearTime) + ')' + '</font>' +
+		'<span style="float:right"><span style="padding-bottom: 8px;">Verifiziert</span><img src="static/images/label/check.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
+		+ '</div>'
 		} else {
-        contentstring += '<div>' +
-		'<br>Vorraussichtliche Restzeit:' +
-        '<br> <span class="label-countdown" style="background-color: #fffaaa;font-size: 15px;font-weight: bold" disappears-at="' + disappearTime + '">(00m00s)</span> verbleibend <br>' +
-        '<font size="1" style="font-weight: normal;">(Vorraussichtlicher Despawn um ' + getTimeStr(disappearTime) + ')' + '</font><br><br>' +
-        //    i8ln('Aprox Despawn Time:') + ' ' + getTimeStr(disappearTime) +
-        //    ' <span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
-            '</div>'
+		//Unverified Timer
+		contentstring += '<div style="padding-top:5px;padding-bottom: 7px;">' +
+		'<span style="padding-left: 5px;font-size: 14px;font-weight: bold;">Restzeit</span><img src="static/images/label/clock.png" style="height:23px;float:left;" />' +
+		'<span class="label-countdown" style="background-color: #fffaaa;font-size: 14px;font-weight: bold;border-radius:10px;float:right" disappears-at="' + disappearTime + '">(00m00s)</span><br>' +
+		'<div style="clear:both;"><font size="1" style="font-weight: normal;">(Bis ca.' + getTimeStr(disappearTime) + ')' + '</font>' +
+		'<span style="float:right"><span style="padding-bottom: 8px;">Nicht Verifiziert</span><img src="static/images/label/cross.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
+		+ '</div>'
 		}
-		//v4 -- end of code block editing
-    }
-    contentstring += 
-	details +
-        '<br><div>' +
-		'<span style="font-weight: bold">Optionen für ' + name + ':</span><br>' +
-			'<a href="javascript:excludePokemon(' + id + ')" title="Alle dieser Spezies ausblenden"><i class="fa fa-ban" aria-hidden="true" style="font-size:32px"></i></a>&nbsp&nbsp' +
-			'<a href="javascript:notifyAboutPokemon(' + id + ')" title="Favorisieren"><i class="fa fa-star" aria-hidden="true" style="font-size:32px"></i></a>&nbsp&nbsp' +
-			'<a href="javascript:removeNotifyAboutPokemon(' + id + ')" title="Favorisierung aufheben"><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></a>&nbsp&nbsp' +
-			'<a href="javascript:removePokemonMarker(\'' + encounterId + '\')" title="Dieses entfernen"><i class="fa fa-trash" aria-hidden="true" style="font-size:32px"></i></a>&nbsp&nbsp' +
-			'<a href="javascript:void(0);" onclick="javascript:toggleOtherPokemon(' + id + ');" title="Andere Arten aus/einblenden"><i class="fa fa-retweet" aria-hidden="true" style="font-size:32px"></i></a>&nbsp&nbsp' +
-			'<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ', ' + longitude + ')" title="Route zum Ort aufrufen"><i class="fa fa-map" aria-hidden="true" style="font-size:32px"></i></a><br>' +
-		'</div>'
-    return contentstring
+		}
+		contentstring += 
+		details +
+		'<div style="margin-top:10px;">' +
+		'<a href="javascript:excludePokemon(' + id + ')" title="Alle dieser Spezies ausblenden"><img src="static/images/label/exclude.png" height="32" width="auto" /></a>&nbsp' +
+		'<a href="javascript:notifyAboutPokemon(' + id + ')" title="Favorisieren"><img src="static/images/label/fav.png" height="32" width="auto" /></a>&nbsp' +
+		'<a href="javascript:removeNotifyAboutPokemon(' + id + ')" title="Favorisierung aufheben"><img src="static/images/label/removefav.png" height="32" width="auto" /></a>&nbsp' +
+		'<a href="javascript:removePokemonMarker(\'' + encounterId + '\')" title="Dieses entfernen"><img src="static/images/label/trash.png" height="32" width="auto" /></a>&nbsp' +
+		'<a href="javascript:void(0);" onclick="javascript:toggleOtherPokemon(' + id + ');" title="Andere Arten aus/einblenden"><img src="static/images/label/flip.png" height="32" width="auto" /></a>&nbsp' +
+		'<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ', ' + longitude + ')" title="Route zum Ort aufrufen"><img src="static/images/label/map.png" height="32" width="auto" /></a>' +
+	'</div>' +
+	'</div>'
+	return contentstring
 }
 
 function gymLabel(item) {
@@ -1939,8 +1962,8 @@ function customizePokemonMarker(marker, item, skipNotification) {
     if (!marker.rangeCircle && isRangeActive(map)) {
         marker.rangeCircle = addRangeCircle(marker, map, 'pokemon')
     }
-
-    marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 300})
+	//Label customization #01
+		marker.bindPopup(pokemonLabel(item), {className: 'pokeLabel', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 300, minWidth: 210})
 
     if (notifiedPokemon.indexOf(item['pokemon_id']) > -1 || notifiedRarity.indexOf(item['pokemon_rarity']) > -1) {
         if (!skipNotification) {
