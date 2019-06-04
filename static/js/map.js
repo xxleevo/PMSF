@@ -803,10 +803,7 @@ function pokemonLabel(item) {
     var latitude = item['latitude']
     var longitude = item['longitude']
     var disappearTime = item['disappear_time']
-	//v4 -- edited by xxleevo
-	// if not verified, getting 0 - if rdm hasnt the field for verified despawn timers, getting NULL
 	var verifiedDespawn = item['is_verified_despawn']
-	//v4 -- end of code block 
     var reportTime = disappearTime - 1800000
     var atk = item['individual_attack']
     var def = item['individual_defense']
@@ -822,12 +819,13 @@ function pokemonLabel(item) {
     var weatherBoostedCondition = item['weather_boosted_condition']
     var level = item['level']
     var formStr = ''
+	
     if (form === 0 || form === '0' || form == null) {
         formStr = '00'
     } else {
         formStr = form
     }
-
+	
     var pokemonidStr = ''
     if (id <= 9) {
         pokemonidStr = '00' + id
@@ -853,7 +851,6 @@ function pokemonLabel(item) {
 
 				'</div>'
 			
-			
         if (cp != null && (cpMultiplier != null || level != null)) {
             var pokemonLevel
             if (level != null) {
@@ -866,7 +863,6 @@ function pokemonLabel(item) {
                 '<div style="clear:both;margin-bottom:10px;">' +
 					'<span style="font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + cp + ' WP</span>' +
 					'<span style="margin-right: 3px;font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >Lvl ' + level + ' - </span><br>' +
-
 				'</div>'
         }
         details +=
@@ -878,30 +874,25 @@ function pokemonLabel(item) {
     }
     if (weatherBoostedCondition !== 0) {
         details +=
+				//wetter
                 '<div style="clear:both;margin-top:">' +
-            i8ln('Wetter') + ': ' + i8ln(weather[weatherBoostedCondition]) +
+            '<b>' + i8ln('Wetter') + ':</b> ' + i8ln(weather[weatherBoostedCondition]) +
             '</div>'
     }
     if (gender != null) {
         details +=
-            '<div>'
+                '<div style="clear:both;margin-top:">'
         if (weight != null && height != null) {
 			details += 
-				//kg & m
-                '<div style="clear:both;">' +
-					'<span style="padding-left: 25px;font-size: 14px;font-weight: bold;">kg & m</span> ' +
-					'<span style="font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' +  height.toFixed(2) + 'm</span>' +
-					'<span style="margin-right: 3px;font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + weight.toFixed(2) + 'kg - </span>' +
-
-				'</div>'
+				//Maße
+				'<b>' + i8ln('Maße') + ':</b> ' + height.toFixed(2) + 'm - ' + weight.toFixed(2) + 'kg</span>'
         }
         details +=
             '</div>'
     }
-	
 
 	var contentstring =
-		'<center><div style="background-color:rgba(0,0,0,0.4);margin: 0px -10px -5px -10px;border-radius:6px;font-family: recursive;box-shadow: inset 0 0 2px #fff;">' +
+		'<center><div style="background-color:rgba(0,0,0,0.4);margin: 0px -10px -5px -10px;border-radius:6px;box-shadow: inset 0 0 2px #fff;">' +
 		'<b><font size="3" color="white">' + name 
 	if (form !== null && form > 0 && forms.length > form) {
     // todo: check how rocket map handles this (if at all):
@@ -935,7 +926,7 @@ function pokemonLabel(item) {
 		'</div></center>' 
 
 	contentstring +=
-	'<center><img style="width: 80px; -webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/></center>'
+	'<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/></center>'
 	
 	if (noRarityDisplay === false) {
 		contentstring += '<span> ' + rarityDisplay + '</span>'
@@ -949,24 +940,25 @@ function pokemonLabel(item) {
 		//Type
 		contentstring += '<div style="background:rgba(255,255,255,0.8);border-radius:12px;box-shadow: inset 0 0 4px #000;padding: 5px;margin: 0px -10px -5px -10px;">' +
 		'<center><small>' + typesDisplay + '</small></center>'
+		
+		contentstring += '<div style="padding-top:5px;padding-bottom: 7px;">' +
+			'<span style="padding-left: 5px;font-size: 14px;font-weight: bold;">Restzeit</span><img src="static/images/label/clock.png" style="height:23px;float:left;" />'
 		if (verifiedDespawn == 1){
 		//Verified Timer
-		contentstring += '<div style="padding-top:5px;padding-bottom: 7px;">' +
-		'<span style="padding-left: 5px;font-size: 14px;font-weight: bold;">Restzeit</span><img src="static/images/label/clock.png" style="height:23px;float:left;" />' +
-		'<span class="label-countdown" style="background-color: #fffaaa;font-size: 14px;font-weight: bold;border-radius:10px;float:right" disappears-at="' + disappearTime + '">(00m00s)</span><br>' +
-		'<div style="clear:both;"><font size="1" style="font-weight: normal;">(Despawn um ' + getTimeStr(disappearTime) + ')' + '</font>' +
-		'<span style="float:right"><span style="padding-bottom: 8px;">Verifiziert</span><img src="static/images/label/check.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
-		+ '</div>'
+			contentstring +=
+			'<span class="label-countdown" style="background-color: #fffaaa;font-size: 14px;font-weight: bold;border-radius:10px;float:right" disappears-at="' + disappearTime + '">(00m00s)</span><br>' +
+			'<div style="clear:both;"><font size="1" style="font-weight: normal;">(Despawn um ' + getTimeStr(disappearTime) + ')' + '</font>' +
+			'<span style="float:right"><span style="padding-bottom: 8px;">Verifiziert</span><img src="static/images/label/check.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
 		} else {
 		//Unverified Timer
-		contentstring += '<div style="padding-top:5px;padding-bottom: 7px;">' +
-		'<span style="padding-left: 5px;font-size: 14px;font-weight: bold;">Restzeit</span><img src="static/images/label/clock.png" style="height:23px;float:left;" />' +
-		'<span class="label-countdown" style="background-color: #fffaaa;font-size: 14px;font-weight: bold;border-radius:10px;float:right" disappears-at="' + disappearTime + '">(00m00s)</span><br>' +
-		'<div style="clear:both;"><font size="1" style="font-weight: normal;">(Bis ca.' + getTimeStr(disappearTime) + ')' + '</font>' +
-		'<span style="float:right"><span style="padding-bottom: 8px;">Nicht Verifiziert</span><img src="static/images/label/cross.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
-		+ '</div>'
+			contentstring +=
+			'<span class="label-countdown" style="background-color: #fffaaa;font-size: 14px;font-weight: bold;border-radius:10px;float:right" disappears-at="' + disappearTime + '">(00m00s)</span><br>' +
+			'<div style="clear:both;"><font size="1" style="font-weight: normal;">(Bis ca.' + getTimeStr(disappearTime) + ')' + '</font>' +
+			'<span style="float:right"><span style="padding-bottom: 8px;">Nicht Verifiziert</span><img src="static/images/label/cross.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
+
 		}
-		}
+		contentstring += '</div>'
+	}
 		contentstring += 
 		details +
 		'<div style="margin-top:10px;">' +
@@ -1551,7 +1543,6 @@ function getQuest(item) {
 			str = str.replace('Arenenkämpfe', 'Arenenkämpfen')
 		}
 		
-        str += '</div>'
     } else if (item['quest_type'] !== null) {
         questStr = i8ln(questtypeList[item['quest_type']])
         str += '<div>' +
@@ -1570,7 +1561,6 @@ function pokestopLabel(item) {
         item['pokestop_name'] = 'Pokéstop'
     }
 
-	
 	var specialLure = ''
 	if(lureType == 502 && item['lure_expiration'] > Date.now()){ // Special lure: Icy
 		specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Gletscher-Lockmodul </b>'
@@ -1621,12 +1611,7 @@ function pokestopLabel(item) {
 	if (!noMaplink){
 		maplinkText = '- <a href="./?lat=' + item['latitude'] + '&lon=' + item['longitude'] + '&zoom=16">Maplink</a>'
 	}
-    str =
-		'<center><div class="pokestop-label">' +
-        stopName + '<br>' +
-		specialLure +
-		'</div></center>'
-		
+	
 	var lureImage = ''
 	var lureStr = ''
 	var lureEndStr = ''
@@ -1639,9 +1624,14 @@ function pokestopLabel(item) {
 		' <span class="label-countdown" disappears-at="' + item['lure_expiration'] + '">(00m00s)</span>' +
 		'</div>'
 	}
+	// Starting the Pokestop Label
+    str = 
+		'<center><div class="pokestop-label">' +
+        stopName + '<br>' +
+		specialLure +
+		'</div></center>'
 		
     if (!noQuests && item['quest_type'] !== 0) {
-		
 		var excludeStr = '';
 		var reward = JSON.parse(item['quest_reward_info'])
 		var RewardId = ''
@@ -1651,33 +1641,29 @@ function pokestopLabel(item) {
 		}
 		if (item['quest_reward_type'] === 2){
 			RewardId = reward['item_id']
-			excludeStr = '<a href="javascript:excludeItemQuest(' + RewardId + ')" title="Alle dieser Spezies ausblenden">Exclude</a>'
+			excludeStr = '<a href="javascript:excludeItemQuest(' + RewardId + ')" title="Alle dieser Sorte ausblenden">Exclude</a>'
 		}
 		if (item['quest_reward_type'] === 3){
 			excludeStr = '<a href="javascript:excludeDustQuest()" title="Sternenstaub-Quests ausblenden">Exclude Staub-Quests</a>'
 		}
-		
-		var rewardStr = '<div style="margin-top:-60px;margin-right:-60px">' +
+		var rewardImg = '<div style="margin-top:-60px;margin-right:-60px">' +
 						getReward(item) +
 						'</div>'
-
         str +=
             '<div><center>' +
-			stopImage
+			stopImage 
 			if (item['lure_expiration'] > Date.now()) {
 				str +=
-				//'<img style="margin-bottom:55px;margin-left:-95px;height:50px;" src="static/forts/LureModule_' + lureType + '.png"/>' +
 				lureImage +
-				rewardStr
+				rewardImg
 			}else{
 			str +=
-				rewardStr
+				rewardImg
 			}
-
 			str += 
+				'<div>' +
 				lureStr +
 				getQuest(item) +
-				'<center>' +
 				'<a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a>'
             '</center></div>'
     } else {
@@ -1703,7 +1689,6 @@ function pokestopLabel(item) {
             '</center>' +
             '</div>'
     }
-	
 	
     if (!noDeletePokestops) {
         str += '<i class="fa fa-trash-o delete-pokestop" onclick="deletePokestop(event);" data-id="' + item['pokestop_id'] + '"></i>'
@@ -1732,48 +1717,18 @@ function pokestopLabel(item) {
             '</center>' +
             '</div>'
     }
+	str += '</div>'
     return str
 }
 
 function formatSpawnTime(seconds) {
-    // the addition and modulo are required here because the db stores when a spawn disappears
-    // the subtraction to get the appearance time will knock seconds under 0 if the spawn happens in the previous hour
 	if (seconds < 0) {
         seconds += 3600;
 	}
-
-    //return ('0' + Math.floor((seconds + 3600) % 3600 / 60)).substr(-2) + ':' + ('0' + seconds % 60).substr(-2)
     return ('0' + Math.floor(seconds / 60)).substr(-2) + ':' + ('0' + seconds % 60).substr(-2)
 }
 
 function spawnpointLabel(item) {
-	
-	/* Debug Mode fgor spawnpoints
-	var debugStr = ''
-
-		var value = item.despawn_sec
-		var now = new Date()
-		var seconds = now.getMinutes() * 60 + now.getSeconds()
-	
-		value = parseInt(value)
-		//Make the Value not the despawntime but the spawntime
-		if(value < 1800){
-			value += 3600
-		}
-		value -= 1800
-		
-		debugStr += 'Spawnsec: ' + value + '###<br>'
-		debugStr += 'sec: ' + seconds + '###<br>'
-		
-		//New Roll-over
-		if(seconds < value){
-			seconds += 3600
-		}
-		debugStr += 'Spawnsec for comp: ' + value + '###<br>'
-		debugStr += 'sec for comp: ' + seconds + '###<br>'
-		var diff = seconds - value
-		debugStr += 'sec for comp: ' + diff + '###<br>'
-		*/
 
     var timeStr = '';
     if (item["despawn_sec"]) {
@@ -1788,7 +1743,6 @@ function spawnpointLabel(item) {
         '<div>' +
         '<b><u>' + i8ln('Spawn Point') + '</u></b>' +
         '</div>' +
-		//debugStr +
 		'<br>' + 
         '<div>' +
 		timeStr +
