@@ -902,7 +902,7 @@ function pokemonLabel(item) {
 
 	var contentstring =
 		'<center><div style="background-color:rgba(0,0,0,0.4);margin: 0px -10px -5px -10px;border-radius:6px;font-family: recursive;box-shadow: inset 0 0 2px #fff;">' +
-		'<b><font size="3" color="white">' + name + '</font></b>'
+		'<b><font size="3" color="white">' + name 
 	if (form !== null && form > 0 && forms.length > form) {
     // todo: check how rocket map handles this (if at all):
 		if (id === 132) {
@@ -911,6 +911,7 @@ function pokemonLabel(item) {
 			contentstring += ' (' + forms[item['form']] + ')'
 		}
     }
+		contentstring += '</font></b>'
 	var coordText = latitude.toFixed(6) + ', ' + longitude.toFixed(7)
 	if (hidePokemonCoords === true) {
 		coordText = i8ln('Directions')
