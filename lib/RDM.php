@@ -244,7 +244,7 @@ class RDM extends Scanner
         $params[':neLng'] = $neLng;
         if (!empty($quests) && $quests === 'true') {
             $pokemonSQL = '';
-	    if (count($qpeids)) {
+			if (count($qpeids)) {
                 $pkmn_in = '';
                 $p = 1;
                 foreach ($qpeids as $qpeid) {
@@ -270,8 +270,8 @@ class RDM extends Scanner
                 $itemSQL .= "quest_item_id NOT IN ( $item_in )";
             } else {
                 $itemSQL .= "quest_item_id IS NOT NULL";
-	    }
-	    $dustSQL = '';
+			}
+			$dustSQL = '';
             if (!empty($dustamount) && !is_nan((float)$dustamount) && $dustamount > 0) {
                 $dustSQL .= "OR (json_extract(json_extract(`quest_rewards`,'$[*].type'),'$[0]') = 3 AND json_extract(json_extract(`quest_rewards`,'$[*].info.amount'),'$[0]') > :amount)";
                 $params[':amount'] = intval($dustamount);
@@ -284,7 +284,7 @@ class RDM extends Scanner
             $params[':oswLng'] = $oSwLng;
             $params[':oneLat'] = $oNeLat;
             $params[':oneLng'] = $oNeLng;
-	}
+		}
         if (!empty($lures) && $lures === 'true') {
             $conds[] = "lure_expire_timestamp > :time";
             $params[':time'] = time();
@@ -308,7 +308,7 @@ class RDM extends Scanner
         $params[':neLng'] = $neLng;
         if (!empty($quests) && $quests === 'true') {
             $tmpSQL = '';
-	    if (count($qpreids)) {
+			if (count($qpreids)) {
                 $pkmn_in = '';
                 $p = 1;
                 foreach ($qpreids as $qpreid) {
@@ -337,7 +337,7 @@ class RDM extends Scanner
             if ($reloaddustamount == "true") {
                 $tmpSQL .= "(json_extract(json_extract(`quest_rewards`,'$[*].type'),'$[0]') = 3 AND json_extract(json_extract(`quest_rewards`,'$[*].info.amount'),'$[0]') > :amount)";
                 $params[':amount'] = intval($dustamount);
-	    } else {
+			} else {
                 $tmpSQL .= "";
             }
             $conds[] = $tmpSQL;
