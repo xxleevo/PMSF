@@ -301,12 +301,6 @@ $noParkInfo = false;                                                // Do not di
 /* Share links */
 $noWhatsappLink = true;
 $noWhatsappLinkQuests = true;
-//-----------------------------------------------
-// Raid API
-//-----------------------------------------------------
-
-$raidApiKey = '';                                                   // Raid API Key, '' to deny access
-$sendRaidData = false;                                              // Send Raid data, false to only send gym data
 
 //-----------------------------------------------------
 // Manual Submissions
