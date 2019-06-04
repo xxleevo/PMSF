@@ -5821,10 +5821,6 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
 
         var pokemonHtml = ''
         var gymImage = ''
-		//Dont show GymImage anymore
-        //if (result.url !== null) {
-        //    gymImage = '<img height="140px" style="padding: 5px;" src="' + result.url + '">'
-        //}
         var headerHtml =
             '<center class="team-' + result.team_id + '-text">' +
             '<div>' +
@@ -5850,114 +5846,6 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             '</div>' +
             '</center>'
 
-        //if (pokemon.length) {
-        //    $.each(pokemon, function (i, pokemon) {
-        //        var perfectPercent = getIv(pokemon.iv_attack, pokemon.iv_defense, pokemon.iv_stamina)
-        //        var moveEnergy = Math.round(100 / pokemon.move_2_energy)
-		//
-        //       var pokemonIdStr = ''
-        //       if (pokemon.pokemon_id <= 9) {
-        //           pokemonIdStr = '00' + pokemon.pokemon_id
-        //       } else if (pokemon.pokemon_id <= 99) {
-        //           pokemonIdStr = '0' + pokemon.pokemon_id
-        //       } else {
-        //           pokemonIdStr = pokemon.pokemon_id
-        //       }
-        //       var formStr = ''
-        //       if (pokemon.form === '0' || pokemon.form === null || pokemon.form === 0 || pokemon.form === undefined) {
-        //           formStr = '00'
-        //       } else {
-        //           formStr = pokemon.form
-        //       }
-        //       pokemonHtml +=
-        //           '<tr onclick=toggleGymPokemonDetails(this)>' +
-        //           '<td width="30px">' +
-        //           '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + '.png"/>' +
-        //           '</td>' +
-        //           '<td class="team-' + result.team_id + '-text">' +
-        //           '<div style="line-height:1em">' + pokemon.pokemon_name + '</div>' +
-        //           '<div class="cp">CP ' + pokemon.pokemon_cp + '</div>' +
-        //           '</td>' +
-        //           '<td width="190" class="team-' + result.team_id + '-text" align="center">'
-        //       if (pokemon.trainer_level) {
-        //           pokemonHtml +=
-        //               '<div class="trainer-level">' + pokemon.trainer_level + '</div>'
-        //       }
-        //       if (pokemon.trainer_name) {
-        //           pokemonHtml +=
-        //               '<div style="line-height: 1em">' + pokemon.trainer_name + '</div>'
-        //       }
-        //       pokemonHtml +=
-        //           '</td>' +
-        //           '<td width="10">' +
-        //           '<!--<a href="#" onclick="toggleGymPokemonDetails(this)">-->' +
-        //           '<i class="team-' + result.team_id + '-text fa fa-angle-double-down"></i>' +
-        //           '<!--</a>-->' +
-        //           '</td>' +
-        //           '</tr>' +
-        //           '<tr class="details">' +
-        //           '<td colspan="2">' +
-        //           '<div class="ivs">' +
-        //           '<div class="iv">' +
-        //           '<div class="type">ATK</div>' +
-        //           '<div class="value">' +
-        //           pokemon.iv_attack +
-        //           '</div>' +
-        //           '</div>' +
-        //           '<div class="iv">' +
-        //           '<div class="type">DEF</div>' +
-        //           '<div class="value">' +
-        //           pokemon.iv_defense +
-        //           '</div>' +
-        //            '</div>' +
-        //            '<div class="iv">' +
-        //            '<div class="type">STA</div>' +
-        //            '<div class="value">' +
-        //            pokemon.iv_stamina +
-        //            '</div>' +
-        //            '</div>' +
-        //            '<div class="iv" style="width: 36px">' +
-        //            '<div class="type">PERFECT</div>' +
-        //            '<div class="value">' +
-        //            perfectPercent.toFixed(0) + '' +
-        //            '<span style="font-size: .6em">%</span>' +
-        //            '</div>' +
-        //            '</div>' +
-        //            '</div>' +
-        //            '</td>' +
-        //            '<td colspan="2">' +
-        //            '<div class="moves">' +
-        //            '<div class="move">' +
-        //            '<div class="name">' +
-        //            pokemon.move_1_name +
-        //            ' <div class="type ' + pokemon.move_1_type.type_en.toLowerCase() + '">' + pokemon.move_1_type.type + '</div>' +
-        //            '</div>' +
-        //            '<div class="damage">' +
-        //            pokemon.move_1_damage +
-        //            '</div>' +
-        //            '</div>' +
-        //            '<br>' +
-        //            '<div class="move">' +
-        //            '<div class="name">' +
-        //            pokemon.move_2_name +
-        //            ' <div class="type ' + pokemon.move_2_type.type_en.toLowerCase() + '">' + pokemon.move_2_type.type + '</div>' +
-        //            '<div>' +
-        //            '<i class="move-bar-sprite move-bar-sprite-' + moveEnergy + '"></i>' +
-        //            '</div>' +
-        //            '</div>' +
-        //            '<div class="damage">' +
-        //            pokemon.move_2_damage +
-        //            '</div>' +
-        //            '</div>' +
-        //            '</div>' +
-        //            '</td>' +
-        //            '</tr>'
-        //    })
-        //
-        //    pokemonHtml = '<table><tbody>' + pokemonHtml + '</tbody></table>'
-        //} else if (result.team_id === 0) {
-        //    pokemonHtml = ''
-        //} else {
             var pokemonIdStr = ''
             if (result.guard_pokemon_id <= 9) {
                 pokemonIdStr = '00' + result.guard_pokemon_id
@@ -5978,10 +5866,8 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
                 '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + guardFormStr + '.png"/><br>' +
                 '<b class="team-' + result.team_id + '-text">' + result.guard_pokemon_name + '</b>' +
                 '</center>'
-        //}
 
         sidebar.innerHTML = headerHtml + pokemonHtml
-
         sidebarClose = document.createElement('a')
         sidebarClose.href = '#'
         sidebarClose.className = 'close'
