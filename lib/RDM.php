@@ -459,7 +459,6 @@ class RDM extends Scanner
         updated AS last_scanned,
         raid_pokemon_id,
         guarding_pokemon_id AS guard_pokemon_id,
-		total_cp as total_gym_cp,
         availble_slots AS slots_available,
         team_id,
         raid_level,

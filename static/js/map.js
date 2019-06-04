@@ -1092,9 +1092,9 @@ function gymLabel(item) {
     if ((item['park'] !== '0' && item['park'] !== 'None' && item['park'] !== undefined && item['park']) && (noParkInfo === false)) {
         if (item['park'] == 1) {
             // RM only stores boolean, so just call it "Park Gym"
-            park = i8ln('Parkarena')
+            park = '<div>' + i8ln('Parkarena') + '</div>'
         } else {
-            park = i8ln('Park') + ': ' + item['park']
+            park = '<div>' + i8ln('Park') + ': ' + item['park'] + '</div>'
         }
     }
 
@@ -1138,7 +1138,7 @@ function gymLabel(item) {
 	
 	var battleStr = ''
 	if(!noBattleStatus && isInBattle == 1 && ((lastScanned/1000) > ((Date.now()/1000)-900))){
-		battleStr = 'Arena wird bekämpft!'
+	   battleStr = '<div>Arena wird bekämpft!</div>'
 	}
 	
     var nameStr = (name ? '<div><b>' + name + '</b></div>' : '')
@@ -1149,7 +1149,8 @@ function gymLabel(item) {
         gymImage = '<img height="70px" style="padding: 5px;" src="' + url + '">'
     }
     if (teamId === 0 || ((lastScanned/1000) < ((Date.now()/1000)-14400) && !noOutdatedGyms)) {
-        var gymCp = ''
+		//Todo: integration of total cp
+        //var gymCp = ''
         //if (item['total_gym_cp'] != null) {
         //    gymCp = '<div>' + i8ln('Total Gym CP') + ' : <b>' + item.total_gym_cp + '</b></div>'
         //}
@@ -1160,9 +1161,8 @@ function gymLabel(item) {
             '<div>' +
             '<img height="70px" style="padding: 5px;" src="static/forts/' + teamName + '_large.png">' +
             raidIcon +
-            '</div>' + raidStr + '<div>' +
+            '</div>' + raidStr +
             park +
-            '</div>' +
             '<div>' + outdated + '</div>' +
             '<div>' +
             i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
@@ -1199,13 +1199,8 @@ function gymLabel(item) {
             '</div>' +
             raidStr +
             freeSlotsText +
-            '<div>' +
             park +
-            '</div>' +
-            gymCp +
-            '<div>' +
 			battleStr +
-            '</div>' +
             '<div>' +
             i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
             '</div>' +
