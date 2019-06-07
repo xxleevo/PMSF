@@ -1,5 +1,7 @@
 /* Nav */
-
+:root{
+  --overview-style: linear-gradient(to top, rgb(104, 104, 104) 0%, rgb(18, 18, 18) 100%);
+  }
 #nav {
   @include vendor('transform', 'translateX(-20.50em)');
   @include vendor('transition', ('transform #{_duration(nav)} ease', 'box-shadow #{_duration(nav)} ease', 'visibility #{_duration(nav)}'));
@@ -280,7 +282,7 @@
   .ui-state-active,
   .onoffswitch-checkbox:checked + .onoffswitch-label {
     border-color: #3b3b3b;
-    background-color: #3b3b3b;
+    background-image: var(--overview-style);
   }
   .onoffswitch-checkbox:checked + .onoffswitch-label:before {
     border-color: #c0c0c0;
@@ -538,7 +540,7 @@
   .ui-state-active,
   .onoffswitch-checkbox:checked + .onoffswitch-label {
     border-color: #3b3b3b;
-    background-color: #3b3b3b;
+    background-image: var(--overview-style);
   }
   .onoffswitch-checkbox:checked + .onoffswitch-label:before {
     border-color: #c0c0c0;
@@ -661,3 +663,4 @@ li.place-result {
 form#search-places {
   margin-bottom: 0px;
 }
+

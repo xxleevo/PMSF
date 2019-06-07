@@ -1397,7 +1397,7 @@ if ( $blockIframe ) {
 					<span style="color: #3b3b3b"><b style="font-size:17px">Zurücksetzen:</b><br>Alle Einstellungen des Menüs werden auf Standard zurückgesetzt.</span>
 					<div>
 						<center>
-							<button class="settings"
+							<button id="reset-button" class="settings"
 									onclick="confirm(\'Möchtest du die Einstellungen auf Standard zurücksetzen?\') ? (localStorage.clear(), window.location.reload()) : false">
 								<i class="fa fa-refresh" aria-hidden="true"></i> Zurücksetzen
 							</button>
@@ -1408,7 +1408,7 @@ if ( $blockIframe ) {
 					<span style="color: #3b3b3b"><b style="font-size:17px">Importieren:</b><br>Lade eine Datei hoch, um zuvor gespeicherte Einstellungen wieder herzustellen.</span>
 					<div>
 						<center>
-							<button class="settings"
+							<button id="export-button" class="settings"
 								onclick="download(\''. addslashes( $title ) .'\', JSON.stringify(JSON.stringify(localStorage)))">
 								<i class="fa fa-upload" aria-hidden="true"></i> Exportieren
 							</button>
@@ -1417,7 +1417,7 @@ if ( $blockIframe ) {
 					<div>
 						<center>
 							<input id="fileInput" type="file" style="display:none;" onchange="openFile(event)"/>
-							<button class="settings"
+							<button id="import-button" class="settings"
 									onclick="document.getElementById(\'fileInput\').click()">
 								<i class="fa fa-download" aria-hidden="true"></i> Importieren
 							</button>
@@ -1840,13 +1840,13 @@ if ( $blockIframe ) {
     </div>
     <?php if ( ( ! $noGyms || ! $noPokestops ) && ! $noSearch ) { ?>
         <div class="search-container">
-            <button class="search-modal-button" onClick="openSearchModal(event);"><i class="fa fa-search"
+            <button class="search-modal-button" id="search-button"onClick="openSearchModal(event);"><i class="fa fa-search"
                                                                                      aria-hidden="true"></i></button>
             <div class="search-modal" style="display:none;">
                 <div id="search-tabs">
                     <ul>
                         <?php if ( ! $noQuests && ! $noSearchManualQuests ) { ?>
-                            <li><a href="#tab-rewards"><img src="static/images/reward.png"/></a></li>
+                            <li ><a href="#tab-rewards"><img src="static/images/reward.png"/></a></li>
                         <?php }
                         if ( ! $noSearchPokestops ) { ?>
                             <li><a href="#tab-pokestop"><img src="static/forts/Pstop-large.png"/></a></li>

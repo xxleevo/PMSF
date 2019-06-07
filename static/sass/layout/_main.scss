@@ -200,7 +200,7 @@ i.fa.fa-expand {
           border-radius: 0;
           &.ui-state-active{
             border-color: #3b3b3b;
-            background-color: #3b3b3b;
+			background-image: var(--overview-style);
           }
           a{
             text-align:center;
