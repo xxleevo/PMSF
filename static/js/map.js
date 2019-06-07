@@ -28,6 +28,7 @@ var $selectMinRaidLevel
 var $selectMaxRaidLevel
 var $selectNewPortalsOnly
 var $selectGymMarkerStyle
+var $selectOverlayStyle
 var $selectIconStyle
 var $selectLocationIconMarker
 var $switchGymSidebar
@@ -6368,6 +6369,19 @@ $(function () {
     pokemonSpritesFilter()
     itemSpritesFilter()
 	
+	//Overlay Styling
+    $selectOverlayStyle = $('#design-style')
+
+    $selectOverlayStyle.select2({
+        placeholder: 'Select Style',
+        minimumResultsForSearch: Infinity
+    })
+    $selectOverlayStyle.on('change', function (e) {
+        Store.set('designStyle', this.value)
+		document.getElementById("header").style.backgroundImage = Store.get('designStyle')
+    })
+    $selectOverlayStyle.val(Store.get('designStyle')).trigger('change')
+	
 	//Icon Styling
     $selectIconStyle = $('#icon-style')
 	
@@ -7196,6 +7210,7 @@ function removeNotifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
     $('label[for="notify-pokemon"] .pokemon-list .pokemon-icon-sprite[data-value="' + id + '"]').removeClass('active')
 }
 
+
 function shareNestsWhatsapp(size){
 	if(size == 'all'){
 	var link = 'whatsapp://send?text=%2ANester in Dortmund%2A:'
@@ -7218,4 +7233,5 @@ function shareNestsWhatsapp(size){
 	}
 	
 }
+
 
