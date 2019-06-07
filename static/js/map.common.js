@@ -1194,6 +1194,11 @@ var StoreOptions = {
             default: icons,
             type: StoreTypes.String
         },
+    'designStyle':
+        {
+            default: overlayDesign,
+            type: StoreTypes.String
+        },
     'triggerGyms':
         {
             default: triggerGyms,

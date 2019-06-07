@@ -205,7 +205,7 @@ if ( $blockIframe ) {
 <body id="top">
 <div class="wrapper">
     <!-- Header -->
-    <header id="header" style = "background-image: linear-gradient(to top, #686868 0%, #121212 100%)">
+    <header id="header" style = "background-image: <?php echo $overlayDesign ?>">
         <a href="#nav"><b><span class="label" style="color:white"><?php echo i8ln('Menü') ?></span></b></a>
 
         <h1><a href="#"><?= $title ?><img src="<?= $raidmapLogo ?>" height="35" width="auto" border="0" style="float: right; margin-left: 5px; margin-top: 10px;"></a></h1>
@@ -1357,6 +1357,33 @@ if ( $blockIframe ) {
             </div>';
             }
             ?>
+			
+            <?php
+            if ( ! $noOverlayDesign ) {
+				echo '<div class="form-control switch-container">
+				<h3>Overlay Design</h3>
+					<div>
+						<select name="design-style" id="design-style">
+							<option value="'. $overlayDesign .'">Classic</option>
+							<option value="linear-gradient(to top, black 1%,white 2%,white 25%, black 50%, #cc0000 85%)">Pokeball</option>
+							<option value="linear-gradient(to top, yellow 0%,black 80%)">BVB</option>
+							<option value="linear-gradient(to top, yellow 20%,red 50%,black 80%)">Germany</option>
+							<option value="linear-gradient(319deg,skyblue 0%, yellow 57%, red 80%, white 110%)">Rainbow</option>
+							<option value="linear-gradient(to top, red 0%, black 110%)">Deep Red</option>
+							<option value="linear-gradient(to top, orange 0%, black 110%)">Orange</option>
+							<option value="linear-gradient(to top, #ffd633 5%, black 140%)">Gold</option>
+							<option value="linear-gradient(to top, #80ff80 0%, green 100%)">Light Green</option>
+							<option value="linear-gradient(to top, green 0%, black 110%)">Deep Green</option>
+							<option value="linear-gradient(to top, #00ffff -25%, black 125%)">Light Blue</option>
+							<option value="linear-gradient(to top, blue 0%, black 100%)">Deep Blue</option>
+							<option value="linear-gradient(to top, #7a0099 0%, black 110%)">Deep Purple</option>
+							<option value="linear-gradient(to top, hotpink 0%, black 120%)">Deep Pink</option>
+							<option value="linear-gradient(to top, pink 0%, deeppink 120%)">Light Pink</option>
+						</select>
+					</div>
+				</div>';
+				}
+				?>
             <?php
             if ( ! $noMapStyle || ! $noDirectionProvider || ! $noIconSize || ! $noIconNotifySizeModifier || ! $noGymStyle || ! $noLocationStyle ) {
                 echo '</div>';
@@ -2164,6 +2191,8 @@ if ( $blockIframe ) {
     var $noExportImport = <?php echo $noOutdatedGyms === true ? 'true' : 'false' ?>;
     var noBattleStatus = <?php echo $noBattleStatus === true ? 'true' : 'false' ?>;
     var battleStatus = <?php echo $noBattleStatus === true ? 'false' : $battleStatus  ?>;
+    var $noOverlayDesign = <?php echo $noOverlayDesign === true ? 'true' : 'false' ?>;
+    var overlayDesign = '<?php echo $overlayDesign ?>';
 	
 	
 </script>
