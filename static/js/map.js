@@ -1367,6 +1367,8 @@ function getRawQuest(item) {
             if (item['quest_condition_type_1'] === 15) {
                 str = str.replace('throw(s)', 'curve throw(s)')
             }
+        } else if (item['quest_condition_type'] == 12) {
+            str = str.replace('Pokéstops', i8ln('new Pokéstops'))
         } else if (item['quest_condition_type'] !== 0) {
             console.log('Undefined condition type ' + item['quest_condition_type'])
             str += 'Undefined condition'
@@ -1455,6 +1457,8 @@ function getQuest(item) {
             if (item['quest_condition_type_1'] === 15) {
                 str = str.replace('Würfe', 'Curveball Würfe')
             }
+        } else if (item['quest_condition_type'] == 12) {
+            str = str.replace('Pokéstops', 'neue Pokéstops')
         } else if (item['quest_condition_type'] !== 0) {
             console.log('Undefined condition type ' + item['quest_condition_type'])
             str += '<div>Undefined condition</div>'
@@ -1498,12 +1502,13 @@ function getQuest(item) {
 			str = str.replace('gute', 'guten')
 			str = str.replace('großartige', 'großartigen')
 			str = str.replace('fabelhafte', 'fabelhaften')
+			str = str.replace('neue Pokéstops', 'neuen Pokéstop')
 			
 			// Condition 1: Pokemon,3:Pokemon,11:entwickle Pokemon
 			if(str.includes('1 Pokémon') || str.includes('1 Ei')){
 			str = str.replace(item['quest_target'],'ein')
 			}
-			if(str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level')){
+			if(str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop')){
 			str = str.replace(item['quest_target'],'einen')
 			}
 		}
