@@ -880,7 +880,7 @@ if ( $blockIframe ) {
             <?php
             if ( ! $noPortals || ! $noS2Cells ) {
                 ?>
-                <h3><?php echo i8ln( 'Ingress / S2Cell' ); ?></h3>
+                <h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;S2 Zellen</h3>
 		<div>
                 <?php
                 if ( ! $noPortals ) {
@@ -931,7 +931,7 @@ if ( $blockIframe ) {
 		</div>
                 <div class="form-control switch-container" id = "s2-switch-wrapper" style = "display:none">
                     <div class="form-control switch-container">
-                        <h3>' . i8ln( 'EX trigger Cells' ) . '</h3>
+                        <font size="3">' . i8ln( 'EX trigger Cells' ) . '</font>
                         <div class="onoffswitch">
                             <input id="s2-level13-switch" type="checkbox" name="s2-level13-switch"
                                    class="onoffswitch-checkbox" checked>
@@ -942,7 +942,7 @@ if ( $blockIframe ) {
 			</div>
                     </div>
                     <div class="form-control switch-container">
-                        <h3>' . i8ln( 'Gym placement Cells' ) . '</h3>
+                        <font size="3">' . i8ln( 'Gym placement Cells' ) . '</font>
                         <div class="onoffswitch">
                             <input id="s2-level14-switch" type="checkbox" name="s2-level14-switch"
                                    class="onoffswitch-checkbox" checked>
@@ -953,7 +953,7 @@ if ( $blockIframe ) {
                         </div>
                     </div>
                     <div class="form-control switch-container">
-                        <h3>' . i8ln( 'Pokestop placement Cells' ) . '</h3>
+                        <font size="3">' . i8ln( 'Pokestop placement Cells' ) . '</font>
                         <div class="onoffswitch">
                             <input id="s2-level17-switch" type="checkbox" name="s2-level17-switch"
                                    class="onoffswitch-checkbox" checked>

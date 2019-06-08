@@ -509,6 +509,7 @@ function showS2Cells(level, style) {
         const vertices = cell.getCornerLatLngs()
         const poly = L.polygon(vertices,
             Object.assign({color: 'blue', opacity: 0.5, weight: 2, fillOpacity: 0.0, dashArray: '2 6', dashOffset: '0'}, style))
+			
         if (cell.level === 13) {
             exLayerGroup.addLayer(poly)
         } else if (cell.level === 14) {
