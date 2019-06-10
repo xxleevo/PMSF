@@ -1020,7 +1020,7 @@ function gymLabel(item) {
 	
     if (raidSpawned && item.raid_end > Date.now()) {
 		if(!noGymTeamInfos){
-        teamImage = '<img width="200px" style="padding: 5px;margin-left:-50px" src="static/forts/label/' + teamName + '_raw.png">'
+        teamImage = '<img width="140px" style="padding: 5px;margin-left:-50px" src="static/forts/label/' + teamName + '_raw.png">'
 		}
 	
         var levelStr = ''
@@ -1079,7 +1079,7 @@ function gymLabel(item) {
         }
 
         if (raidStarted) {
-            raidIcon = '<img style="width: 80px;margin-left:-140px;margin-bottom: 65px; --webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/>'
+            raidIcon = '<img style="width: 68px;margin-left:-105px;margin-bottom: 50px; --webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/>'
         } else if (item.raid_start <= Date.now()) {
             var hatchedEgg = ''
             if (item['raid_level'] <= 2) {
@@ -1089,7 +1089,7 @@ function gymLabel(item) {
             } else {
                 hatchedEgg = 'hatched_legendary'
             }
-            raidIcon = '<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:80px;margin-left:-140px;margin-bottom: 70px;">'
+            raidIcon = '<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:60px;margin-left:-100px;margin-bottom: 50px;">'
         } else {
             var raidEgg = ''
             if (item['raid_level'] <= 2) {
@@ -1099,7 +1099,7 @@ function gymLabel(item) {
             } else {
                 raidEgg = 'legendary'
             }
-            raidIcon = '<img src="static/raids/egg_' + raidEgg + '.png" style="margin-left:-140px;margin-bottom: 50px;width:80px;">'
+            raidIcon = '<img src="static/raids/egg_' + raidEgg + '.png" style="margin-left:-102px;margin-bottom: 35px;width:60px;">'
         }
     }
     if (manualRaids && item['scanArea'] === false) {
