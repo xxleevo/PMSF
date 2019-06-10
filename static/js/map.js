@@ -1142,6 +1142,10 @@ function gymLabel(item) {
 	if(!noBattleStatus && isInBattle == 1 && ((lastScanned/1000) > ((Date.now()/1000)-900))){
 	   battleStr = '<div>Arena wird bekämpft!</div>'
 	}
+	var gymCp = ''
+    if (item['total_cp'] != null) {
+        gymCp = '<div>' + i8ln('Gym CP') + ' : <b>' + item['total_cp'] + '</b></div>'
+    }
 	
     var nameStr = (name ? '<div><b>' + name + '</b></div>' : '')
 
@@ -1150,20 +1154,18 @@ function gymLabel(item) {
     if (url !== null) {
         gymImage = '<img height="70px" style="padding: 5px;" src="' + url + '">'
     }
-    if (teamId === 0 || ((lastScanned/1000) < ((Date.now()/1000)-14400) && !noOutdatedGyms)) {
-		//Todo: integration of total cp
-        //var gymCp = ''
-        //if (item['total_gym_cp'] != null) {
-        //    gymCp = '<div>' + i8ln('Total Gym CP') + ' : <b>' + item.total_gym_cp + '</b></div>'
-        //}
+		
+    if (teamId === 0 || (((lastScanned/1000) > ((Date.now()/1000)-14400)) && !noOutdatedGyms)) {
         str =
             '<div class="gym-label">' +
             '<center>' +
             nameStr +
             '<div>' +
-            '<img height="70px" style="padding: 5px;" src="static/forts/' + teamName + '_large.png">' +
+			teamLabel +
+            teamImage +
             raidIcon +
             '</div>' + raidStr +
+			gymCp +
             park +
             '<div>' + outdated + '</div>' +
             '<div>' +
