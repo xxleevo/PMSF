@@ -1004,7 +1004,7 @@ function gymLabel(item) {
 	var teamLabel = ''
 	var teamImage = ''
 	var freeSlotsText = ''
-	if(!noGymTeamInfos){
+	if(!noGymTeamInfos && ((lastScanned/1000) > ((Date.now()/1000)-14400))){
         var freeSlots = item['slots_available']
 		teamLabel = '<b style="color:rgba(' + gymColor[teamId] + ')">' + i8ln('Team') + ' ' + i8ln(teamName) + '</b><br>'
         teamImage = '<img width="200px" style="padding: 5px;" src="static/forts/label/' + teamName + '_normal.png">'
@@ -1171,7 +1171,7 @@ function gymLabel(item) {
             '</div>' + raidStr +
 			gymCp +
             park +
-            '<div>' + outdated + '</div>' +
+			battleStr +
             '<div>' +
             i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
             '</div>' +
@@ -1208,7 +1208,7 @@ function gymLabel(item) {
             raidStr +
             freeSlotsText +
             park +
-			battleStr +
+            '<div>' + outdated + '</div>' +
             '<div>' +
             i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
             '</div>' +
