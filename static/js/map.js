@@ -986,6 +986,7 @@ function gymLabel(item) {
     var url = item['url']
     var form = item['form']
 	var isInBattle = item['battle_status']
+	var gymColor = ['0, 0, 0, .4', '74, 138, 202, .6', '240, 68, 58, .6', '254, 217, 40, .6']
 
     var raidSpawned = item['raid_level'] != null
     var raidStarted = item['raid_pokemon_id'] != null
@@ -999,7 +1000,29 @@ function gymLabel(item) {
 		teamName = 'Harmony'
 		outdated = '<b>Letzter Scan älter als 4 Std !</b>'
 	}
+	
+	var teamLabel = ''
+	var teamImage = ''
+	var freeSlotsText = ''
+	if(!noGymTeamInfos){
+        var freeSlots = item['slots_available']
+		teamLabel = '<b style="color:rgba(' + gymColor[teamId] + ')">' + i8ln('Team') + ' ' + i8ln(teamName) + '</b><br>'
+        teamImage = '<img width="200px" style="padding: 5px;" src="static/forts/label/' + teamName + '_normal.png">'
+		freeSlotsText = '<div><b>' + freeSlots + ' ' + i8ln('Free Slots') + '</b></div>'
+	} else{
+		teamLabel = 'Arena<br>'
+        teamImage = '<img height="70px" style="padding: 5px;" src="static/forts/Harmony_large.png">'
+		if(item['raid_level'] < 5){
+			raidIcon = ''
+			raidStr = ''
+		}
+	}
+	
     if (raidSpawned && item.raid_end > Date.now()) {
+		if(!noGymTeamInfos){
+        teamImage = '<img width="200px" style="padding: 5px;margin-left:-50px" src="static/forts/label/' + teamName + '_raw.png">'
+		}
+	
         var levelStr = ''
         for (i = 0; i < item['raid_level']; i++) {
             levelStr += '★'
@@ -1056,7 +1079,7 @@ function gymLabel(item) {
         }
 
         if (raidStarted) {
-            raidIcon = '<img style="width: 80px; -webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/>'
+            raidIcon = '<img style="width: 80px;margin-left:-140px;margin-bottom: 65px; --webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/>'
         } else if (item.raid_start <= Date.now()) {
             var hatchedEgg = ''
             if (item['raid_level'] <= 2) {
@@ -1066,7 +1089,7 @@ function gymLabel(item) {
             } else {
                 hatchedEgg = 'hatched_legendary'
             }
-            raidIcon = '<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:60px;height:70">'
+            raidIcon = '<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:80px;margin-left:-140px;margin-bottom: 70px;">'
         } else {
             var raidEgg = ''
             if (item['raid_level'] <= 2) {
@@ -1076,7 +1099,7 @@ function gymLabel(item) {
             } else {
                 raidEgg = 'legendary'
             }
-            raidIcon = '<img src="static/raids/egg_' + raidEgg + '.png">'
+            raidIcon = '<img src="static/raids/egg_' + raidEgg + '.png" style="margin-left:-140px;margin-bottom: 50px;width:80px;">'
         }
     }
     if (manualRaids && item['scanArea'] === false) {
@@ -1108,8 +1131,6 @@ function gymLabel(item) {
             '</div>'
     }
 	
-	var gymColor = ['0, 0, 0, .4', '74, 138, 202, .6', '240, 68, 58, .6', '254, 217, 40, .6']
-	
 	var lastModifiedText = ''
 	if (!noGymScannedText){
 	var lastModifiedStr = getDateStr(lastModified) + ' ' + getTimeStr(lastModified)
@@ -1119,23 +1140,6 @@ function gymLabel(item) {
 	var maplinkText = ''
 	if (!noMaplink){
 		maplinkText = '- <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">Maplink</a>'
-	}
-	
-	var teamLabel = ''
-	var teamImage = ''
-	var freeSlotsText = ''
-	if(!noGymTeamInfos){
-        var freeSlots = item['slots_available']
-		teamLabel = '<b style="color:rgba(' + gymColor[teamId] + ')">' + i8ln('Team') + ' ' + i8ln(teamName) + '</b><br>'
-        teamImage = '<img height="70px" style="padding: 5px;" src="static/forts/' + teamName + '_large.png">'
-		freeSlotsText = '<div><b>' + freeSlots + ' ' + i8ln('Free Slots') + '</b></div>'
-	} else{
-		teamLabel = 'Arena<br>'
-        teamImage = '<img height="70px" style="padding: 5px;" src="static/forts/Harmony_large.png">'
-		if(item['raid_level'] < 5){
-			raidIcon = ''
-			raidStr = ''
-		}
 	}
 	
 	var battleStr = ''
