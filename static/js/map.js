@@ -6394,14 +6394,14 @@ $(function () {
     })
     $selectOverlayStyle.on('change', function (e) {
         Store.set('designStyle', this.value)
-		document.getElementById("header").style.backgroundImage = Store.get('designStyle')
-		document.getElementById("search-button").style.backgroundImage = Store.get('designStyle')
 		document.documentElement.style.setProperty('--overview-style', Store.get('designStyle'));
-		document.getElementById("shareWhatsappNestsAll").style.backgroundImage = Store.get('designStyle')
-		document.getElementById("shareWhatsappNestsBig").style.backgroundImage = Store.get('designStyle')
-		document.getElementById("import-button").style.backgroundImage = Store.get('designStyle')
-		document.getElementById("export-button").style.backgroundImage = Store.get('designStyle')
-		document.getElementById("reset-button").style.backgroundImage = Store.get('designStyle')
+		if(document.getElementById("header") != null) document.getElementById("header").style.backgroundImage = Store.get('designStyle')
+		if(document.getElementById("search-button") != null) document.getElementById("search-button").style.backgroundImage = Store.get('designStyle')
+		if(document.getElementById("shareWhatsappNestsAll") != null) document.getElementById("shareWhatsappNestsAll").style.backgroundImage = Store.get('designStyle')
+		if(document.getElementById("shareWhatsappNestsBig") != null) document.getElementById("shareWhatsappNestsBig").style.backgroundImage = Store.get('designStyle')
+		if(document.getElementById("import-button") != null) document.getElementById("import-button").style.backgroundImage = Store.get('designStyle')
+		if(document.getElementById("export-button") != null) document.getElementById("export-button").style.backgroundImage = Store.get('designStyle')
+		if(document.getElementById("reset-button") != null) document.getElementById("reset-button").style.backgroundImage = Store.get('designStyle')
 
     })
     $selectOverlayStyle.val(Store.get('designStyle')).trigger('change')
