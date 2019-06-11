@@ -688,6 +688,8 @@ function initSidebar() {
     $('#follow-my-location-switch').prop('checked', Store.get('followMyLocation'))
     $('#spawn-area-switch').prop('checked', Store.get('spawnArea'))
     $('#spawn-area-wrapper').toggle(Store.get('followMyLocation'))
+    $('#follow-me-map-wrapper').toggle(Store.get('followMyLocation'))
+    $('#follow-me-map-switch').prop('checked', Store.get('spawnArea'))
     $('#scanned-switch').prop('checked', Store.get('showScanned'))
     $('#weather-switch').prop('checked', Store.get('showWeather'))
     $('#spawnpoints-switch').prop('checked', Store.get('showSpawnpoints'))
@@ -5608,7 +5610,9 @@ function updateGeoLocation() {
 
             if (Store.get('followMyLocation')) {
                 if (typeof locationMarker !== 'undefined') {
+					if (Store.get('followMap')){
                     map.setView(center)
+					}
                     locationMarker.setLatLng(center)
                     if (Store.get('spawnArea')) {
                         if (locationMarker.rangeCircle) {
@@ -6341,13 +6345,13 @@ $(function () {
             centerMapOnLocation()
         }
 
-        if (Store.get('startAtLastLocation') && !locationSet) {
+        if (Store.get('startAtLastLocation') !locationSet) { 
             var position = Store.get('startAtLastLocationPosition')
             var lat = 'lat' in position ? position.lat : centerLat
             var lng = 'lng' in position ? position.lng : centerLng
 
             var latlng = new L.LatLng(lat, lng)
-            locationMarker.setLatLng(latlng)
+            //locationMarker.setLatLng(latlng) dont set the location marker to the last location
             map.setView(latlng)
         }
 
@@ -7127,10 +7131,18 @@ $(function () {
                 'duration': 500
             }
             var wrapper = $('#spawn-area-wrapper')
+            var wrapper2 = $('#follow-me-map-wrapper')
             if (this.checked) {
                 wrapper.show(options)
-            } else {
+                wrapper2.show(options)
+            } else { //remove spawnarea if "follow me" is beein turned off
+				if (locationMarker.rangeCircle) {
+					markers.removeLayer(locationMarker.rangeCircle)
+					markersnotify.removeLayer(locationMarker.rangeCircle)
+					delete locationMarker.rangeCircle
+                }
                 wrapper.hide(options)
+                wrapper2.hide(options)
             }
         }
     })
@@ -7142,6 +7154,9 @@ $(function () {
             markersnotify.removeLayer(locationMarker.rangeCircle)
             delete locationMarker.rangeCircle
         }
+    })
+    $('#follow-me-map-switch').change(function () {
+        Store.set('followMap', this.checked)
     })
 
     if ($('#nav-accordion').length) {

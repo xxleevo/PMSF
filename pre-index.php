@@ -1087,17 +1087,29 @@ if ( $blockIframe ) {
                 </div>';
                 } 
                 if ( ! $noSpawnArea ) {
-                    echo '<div id="spawn-area-wrapper" class="form-control switch-container">
-                <font size="3"> ' . i8ln( 'Spawn area' ) . ' </font>
-                <div class="onoffswitch">
-                    <input id = "spawn-area-switch" type = "checkbox" name = "spawn-area-switch"
-                           class="onoffswitch-checkbox"/>
-                    <label class="onoffswitch-label" for="spawn-area-switch">
-                        <span class="switch-label" data - on = "On" data - off = "Off"></span>
-                        <span class="switch-handle"></span>
-                    </label>
-                </div>
-				</div>';
+                    echo '
+					<div id="spawn-area-wrapper" class="form-control switch-container">
+						<font size="3"> ' . i8ln( 'Spawn area' ) . ' </font>
+						<div class="onoffswitch">
+							<input id = "spawn-area-switch" type = "checkbox" name = "spawn-area-switch"
+									class="onoffswitch-checkbox"/>
+							<label class="onoffswitch-label" for="spawn-area-switch">
+								<span class="switch-label" data - on = "On" data - off = "Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>
+					<div id="follow-me-map-wrapper" class="form-control switch-container">
+						<font size="3"> ' . i8ln( 'Keep map centered' ) . ' </font>
+						<div class="onoffswitch">
+							<input id = "follow-me-map-switch" type = "checkbox" name = "follow-me-map-switch"
+								class="onoffswitch-checkbox"/>
+							<label class="onoffswitch-label" for="follow-me-map-switch">
+								<span class="switch-label" data - on = "On" data - off = "Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>';
                 }
 				?>
 				<?php

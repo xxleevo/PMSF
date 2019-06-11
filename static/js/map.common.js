@@ -1144,6 +1144,11 @@ var StoreOptions = {
             default: enableSpawnArea,
             type: StoreTypes.Boolean
         },
+    'followMap':
+        {
+            default: false,
+            type: StoreTypes.Boolean
+        },
     'scanHere':
         {
             default: false,
