@@ -758,6 +758,7 @@ if ( $blockIframe ) {
 						<select name="gym-marker-style" id="gym-marker-style">
 							<option value="classic">Classic</option>
 							<option value="shield">Schilder</option>
+							<option value="tower">Tower</option>
 							<option value="beasts">Biester</option>
 							<option value="idol">Idol</option>
 							<option value="elements">Elemente</option>
