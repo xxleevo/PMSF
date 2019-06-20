@@ -56,6 +56,10 @@ $gAnalyticsId = "";                                                 // "" for em
 $piwikUrl = "";
 $piwikSiteId = "";
 
+/* Map Url */
+
+$mapUrl = "";   //For the link from the nest sharing tool - not needed if nests are off
+
 /* PayPal */
 
 $paypalUrl = "";                                                    // PayPal donation URL, leave "" for empty
@@ -268,6 +272,10 @@ $criesSound = 'false';                                              // true/fals
 $notifyBounce = 'true';                                             // true/false
 
 $notifyNotification = 'true';                                       // true/false
+
+/* Questscan Menu Settings */
+$noQuestscanInfotext = true; // true/false - enables the questscan-info menupoint in the menu
+$questscanInfotext = "some text for quest information supporting<br>html";
 
 /* Style Settings */
 
