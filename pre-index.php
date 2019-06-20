@@ -332,21 +332,26 @@ if ( $blockIframe ) {
 					<div id="nests-content-wrapper" style="display:none">
 						<div>
 							<center>
-								<u><h3> Nester teilen (Whatsapp)<h3></u>
-								<a class="settings" id="shareWhatsappNestsAll" href="#" data-action="share/whatsapp/share" style="background-color: #555555;border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;"
-									onclick="shareNestsWhatsapp(\'all\')">
-									<i class="fa fa-upload" aria-hidden="true"></i> Alle teilen
-								</a><br><br>
-								<a class="settings" id="shareWhatsappNestsBig" href="#" data-action="share/whatsapp/share" style="background-color: #555555;border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;"
-									onclick="shareNestsWhatsapp(\'big\')">
-									<i class="fa fa-upload" aria-hidden="true"></i> Nur Große teilen
+							
+								<u><h3 style="margin:0 0 0.5em 0;"> Nester teilen (Whatsapp)</h3></u>
+								<a class="settings btn-share-whatsapp" id="shareNests0" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(0)">
+									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies
+								</a>
+								<a class="settings btn-share-whatsapp" id="shareNests1" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(1)">
+									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies, Location
+								</a>
+								<a class="settings btn-share-whatsapp" id="shareNests2" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(2)">
+									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies, Menge
+								</a>
+								<a class="settings btn-share-whatsapp" id="shareNests3" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(3)">
+									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies ,Loc. ,Menge
 								</a>
 							</center>
 						</div>
 						<div>
 						Beachte: Es werden nur die Nester geteilt, die auf deiner Map zu sehen sind.
 						</div>
-						
+						<hr style="margin:0px;" />
 					</div>
 					<br>
 				';
@@ -1440,16 +1445,10 @@ if ( $blockIframe ) {
 			}?>
 			
 			<?php
-			if (!$noQuests && !$noPokemon && $infopageUrl == "https://rocketmapdo.de/infopage/" ){
+			if (!$noQuestscanInfotext){
                 echo '<h3 style="font-weight: bold"><i class="fa fa-clock-o fa-fw"></i>&nbsp;Scanzeiten</h3>
 				<div>
-					<p style="height:30px"><img src="static/forts/Pstop-quest-small.png" alt ="" style="height:30px;width: auto;float:left"/><b style="font-size:17px">00:00-05:30 :</b>  Questscan</p> 
-					<p style="height:30px"><img src="static/icons/pokemon_icon_025_00.png" alt ="" style="height:30px;width: auto;float:left"/><b style="font-size:17px">05:30-23:59 :</b>  Pokemon & IV </p> 
-					<br>
-					Während <b>Quests</b> gescannt werden, werden Pokemon nicht auf IV gescannt. Pokemon werden nur dort gescannt, wo der Scanner auch gerade Quests scannt.
-					<br>
-					<br>
-					Während der <b>Pokemon & IV-Scan</b> aktiv ist wird der Dortmunder Scanradius wie gewöhnlich auf Pokemon sowie ausgewählte Pokemon auf IV gescannt.
+				' . $questscanInfotext .'
 				</div>';
 			}
 			?>

@@ -6397,11 +6397,7 @@ $(function () {
 		document.documentElement.style.setProperty('--overview-style', Store.get('designStyle'));
 		if(document.getElementById("header") != null) document.getElementById("header").style.backgroundImage = Store.get('designStyle')
 		if(document.getElementById("search-button") != null) document.getElementById("search-button").style.backgroundImage = Store.get('designStyle')
-		if(document.getElementById("shareWhatsappNestsAll") != null) document.getElementById("shareWhatsappNestsAll").style.backgroundImage = Store.get('designStyle')
-		if(document.getElementById("shareWhatsappNestsBig") != null) document.getElementById("shareWhatsappNestsBig").style.backgroundImage = Store.get('designStyle')
-		if(document.getElementById("import-button") != null) document.getElementById("import-button").style.backgroundImage = Store.get('designStyle')
-		if(document.getElementById("export-button") != null) document.getElementById("export-button").style.backgroundImage = Store.get('designStyle')
-		if(document.getElementById("reset-button") != null) document.getElementById("reset-button").style.backgroundImage = Store.get('designStyle')
+		if(document.getElementsByClassName("settings") != null) [].forEach.call(document.getElementsByClassName("settings"), function (button) {button.style.backgroundImage = Store.get('designStyle')});
 
     })
     $selectOverlayStyle.val(Store.get('designStyle')).trigger('change')
@@ -7246,27 +7242,27 @@ function removeNotifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
 }
 
 
-function shareNestsWhatsapp(size){
-	if(size == 'all'){
-	var link = 'whatsapp://send?text=%2ANester in Dortmund%2A:'
-		console.log('ALL PRESSED')
+function shareNestsWhatsapp(mode){
+	var link = 'whatsapp://send?text=%2ANester%20in%20Dortmund%2A:%0A(By%20https://map.rocketmapdo.de)%0A'
+		console.log('ALL PRESSED'+ mode)
 		$.each(mapData.nests, function (key, value) {
-			if (mapData.nests[key]['name'] !== null && mapData.nests[key]['name'] !== 'Unknown Areaname'){
-				link += '%0A%2A' + mapData.nests[key]['name'] + '%2A:%20' + encodeURIComponent(mapData.nests[key]['pokemon_name'])
+			//In All Modes, Show Nestname+Pokemon
+			link += '%0A%2A' + mapData.nests[key]['name'] + '%2A:%20' + encodeURIComponent(mapData.nests[key]['pokemon_name'])
+			//Adding Loc
+			if (mode == 1 || mode == 3){
+				link += '%0Ahttps://maps.google.com/?q=' + mapData.nests[key]['lat'].toFixed(4) + ',' + mapData.nests[key]['lon'].toFixed(4)
+			}
+			//Adding Density
+			if (mode == 2 || mode == 3){
+				link += '%0ASpawns: ~' + mapData.nests[key]['pokemon_avg'] + '%20pro%20Stunde'
+			}
+			//Adding an extra Space if its not mode 0
+			if(mode != 0){
+			link += '%0A'
 			}
 		})
-	document.getElementById("shareWhatsappNestsAll").href = link;
-	}
-	if(size == 'big'){
-	var link = 'whatsapp://send?text=%2AGroße Nester in Dortmund%2A:'
-		$.each(mapData.nests, function (key, value) {
-			if (mapData.nests[key]['name'] !== null && mapData.nests[key]['name'] !== 'Unknown Areaname' && (mapData.nests[key]['pokemon_avg'] != null && mapData.nests[key]['pokemon_avg'] >= 10 ) ){
-				link += '%0A%2A' + mapData.nests[key]['name'] + '%2A:%20' + encodeURIComponent(mapData.nests[key]['pokemon_name'])
-			}
-		})
-	document.getElementById("shareWhatsappNestsBig").href = link;
-	}
-	
+		link += '%0AFür%20mehr%20Infos%20lass%20dir%20die%20Nester%20%2Akostenlos%2A%20auf%20der%20Map%20anzeigen%0A(Erfordert Discord:%20https://discord.gg/V2MZCxY)'
+		document.getElementById("shareNests" + mode).href = link;
 }
 
 
