@@ -362,7 +362,7 @@ if ( $blockIframe ) {
 					<h3>Icon Style</h3>
 					<div>
 						<select name="icon-style" id="icon-style">
-							<option value="static/icons/classic/">Classic (Stable)</option>
+							<option value="'. $iconRepository .'">Classic (Stable)</option>
 							<option value="static/icons/retro/">Retro (Stable)</option>
 							<option value="https://raw.githubusercontent.com/geekygreek7/pkmn_shuffle_icons/master/optimized_for_PMSF_frontend/">Shuffle-ShinyEdition (Stable)</option>
 							<option value="https://raw.githubusercontent.com/nileplumb/PkmnShuffleMap/master/PMSF_icons_large/">Shuffle-Normal (Stable)</option>
