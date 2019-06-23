@@ -334,16 +334,16 @@ if ( $blockIframe ) {
 							<center>
 							
 								<u><h3 style="margin:0 0 0.5em 0;"> Nester teilen (Whatsapp)</h3></u>
-								<a class="settings btn-share-whatsapp" id="shareNests0" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(0,\''. $discordUrl .'\',\''. $mapUrl .'\')">
+								<a class="settings btn-share-whatsapp" id="shareNests0" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(0,\''. $nestShareHeader .'\',\''. $nestShareDescription .'\',\''. $nestShareFooter .'\')">
 									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies
 								</a>
-								<a class="settings btn-share-whatsapp" id="shareNests1" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(1,\''. $discordUrl .'\',\''. $mapUrl .'\')">
+								<a class="settings btn-share-whatsapp" id="shareNests1" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(1,\''. $nestShareHeader .'\',\''. $nestShareDescription .'\',\''. $nestShareFooter .'\')">
 									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies, Location
 								</a>
-								<a class="settings btn-share-whatsapp" id="shareNests2" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(2,\''. $discordUrl .'\',\''. $mapUrl .'\')">
+								<a class="settings btn-share-whatsapp" id="shareNests2" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(2,\''. $nestShareHeader .'\',\''. $nestShareDescription .'\',\''. $nestShareFooter .'\')">
 									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies, Menge
 								</a>
-								<a class="settings btn-share-whatsapp" id="shareNests3" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(3,\''. $discordUrl .'\',\''. $mapUrl .'\')">
+								<a class="settings btn-share-whatsapp" id="shareNests3" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(3,\''. $nestShareHeader .'\',\''. $nestShareDescription .'\',\''. $nestShareFooter .'\')">
 									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies ,Loc. ,Menge
 								</a>
 							</center>

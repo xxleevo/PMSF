@@ -7242,8 +7242,8 @@ function removeNotifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
 }
 
 
-function shareNestsWhatsapp(mode,discordUrl,mapUrl){
-	var link = 'whatsapp://send?text=%2ANester%20in%20Dortmund%2A:%0A(By%20'+ mapUrl + ')%0A'
+function shareNestsWhatsapp(mode,header,secondLine,footer){
+	var link = 'whatsapp://send?text=%2A'+ header +'%2A:%0A'+ secondLine +'%0A'
 		console.log('ALL PRESSED'+ mode)
 		$.each(mapData.nests, function (key, value) {
 			//In All Modes, Show Nestname+Pokemon
@@ -7261,7 +7261,7 @@ function shareNestsWhatsapp(mode,discordUrl,mapUrl){
 			link += '%0A'
 			}
 		})
-		link += '%0AFür%20mehr%20Infos%20lass%20dir%20die%20Nester%20%2Akostenlos%2A%20auf%20der%20Map%20anzeigen%0A(Erfordert Discord:%20'+ discordUrl +')'
+		link += '%0A%0A' + footer
 		document.getElementById("shareNests" + mode).href = link;
 }
 
