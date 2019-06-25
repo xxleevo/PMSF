@@ -554,7 +554,7 @@ if ( $blockIframe ) {
                 </div>';
 		} ?>
                 <?php
-                if ( ! $noQuests && ! $noQuestsItems ) {
+                if ( ! $noQuests && ! $noQuestsItems && ! $noQuestsItemsAmounts) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
                     <font size="3">Belohnungsanzahl</font>
                     <div class="onoffswitch">
