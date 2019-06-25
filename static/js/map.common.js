@@ -1050,6 +1050,11 @@ var StoreOptions = {
             default: enableQuests,
             type: StoreTypes.Boolean
         },
+    'showItemAmounts':
+        {
+            default: enableQuestsItemsAmounts,
+            type: StoreTypes.Boolean
+        },
     'showDustAmount':
         {
             default: 500,

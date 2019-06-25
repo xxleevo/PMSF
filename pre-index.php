@@ -554,6 +554,20 @@ if ( $blockIframe ) {
                 </div>';
 		} ?>
                 <?php
+                if ( ! $noQuests && ! $noQuestsItems ) {
+                    echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
+                    <font size="3">Belohnungsanzahl</font>
+                    <div class="onoffswitch">
+                        <input id="quests-amount-icon-switch" type="checkbox" name="quests-amount-icon-switch"
+                               class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="quests-amount-icon-switch">
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>';
+		}?>
+                <?php
                 if ( ! $noQuests ) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
                     <font size="3">Nur Quests</font>
@@ -567,6 +581,7 @@ if ( $blockIframe ) {
                     </div>
                 </div>';
 		?>
+
                     <div id="quests-filter-wrapper" style="display:none">
                         <div id="quests-tabs">
                             <ul>
@@ -2115,6 +2130,7 @@ if ( $blockIframe ) {
     var enableLured = <?php echo $noLures ? 'false' : $enableLured ?>;
     var noQuests = <?php echo $noQuests === true ? 'true' : 'false' ?>;
     var enableQuests = <?php echo $noQuests ? 'false' : $enableQuests ?>;
+	var enableQuestsItemsAmounts = <?php echo $noQuestsItemsAmounts ? 'false' : $enableQuestsItemsAmounts ?>;
     var hideQuestsPokemon = <?php echo $noQuestsPokemon ? '[]' : $hideQuestsPokemon ?>;
     var hideQuestsItem = <?php echo $noQuestsItems ? '[]' : $hideQuestsItem ?>;
     var enableNewPortals = <?php echo ( ( $map != "monocle" ) || ( $fork == "alternate" ) ) ? $enableNewPortals : 0 ?>;

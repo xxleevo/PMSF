@@ -680,6 +680,7 @@ function initSidebar() {
     $('#pokestops-filter-wrapper').toggle(Store.get('showPokestops'))
     $('#lures-switch').prop('checked', Store.get('showLures'))
     $('#quests-switch').prop('checked', Store.get('showQuests'))
+    $('#quests-amount-icon-switch').prop('checked', Store.get('showItemAmounts'))
     $('#quests-filter-wrapper').toggle(Store.get('showQuests'))
     $('#dustvalue').text(Store.get('showDustAmount'))
     $('#dustrange').val(Store.get('showDustAmount'))
@@ -2314,6 +2315,10 @@ function getPokestopMarkerIcon(item) {
 	//v5 - end of code block
     var stopMarker = ''
     var html = ''
+	
+
+	
+	
     if (!noQuests && reward !== null) {
         var rewardinfo = reward[0]['info']
         if (reward[0]['type'] === 7) {
@@ -2336,16 +2341,20 @@ function getPokestopMarkerIcon(item) {
                 shinyStr = '_shiny'
             }
 			//v5 - xxleevo lures
+			
+			
+			
+			var rewardImg = '<img src="static/icons/rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
 			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
 					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
-					'<img src="static/icons/rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+					rewardImg +
 					'</div>'
 			}
 			else{
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/Pstop-quest-small.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
-                '<img src="static/icons/rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+                rewardImg +
                 '</div>'
 			}
             stopMarker = L.divIcon({
@@ -2356,16 +2365,21 @@ function getPokestopMarkerIcon(item) {
                 html: html
             })
         } else if (reward[0]['type'] === 3) {
+			var rewardImg = '<img src="static/icons/rewards/reward_stardust.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+			if(Store.get('showItemAmounts')){
+			rewardImg = '<img src="static/icons/rewards/reward_stardust_' + item['quest_reward_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+			}
+			
 			if(lure > Date.now() ){
 				html = '<div style="position:relative;">' +
 					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
-					'<img src="static/icons/rewards/reward_stardust.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+					rewardImg +
 					'</div>'
 			}
 			else{
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/Pstop-quest-small.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
-                '<img src="static/icons/rewards/reward_stardust.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+                rewardImg +
                 '</div>'
 			}
             stopMarker = L.divIcon({
@@ -2375,17 +2389,21 @@ function getPokestopMarkerIcon(item) {
                 className: 'stop-quest-marker',
                 html: html
             })
-        } else if (reward[0]['type'] === 2) {
+        } else if (reward[0]['type'] === 2) { //On Item Reward
+			var rewardImg = '<img src="static/icons/rewards/reward_' + rewardinfo['item_id'] + '_1.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+			if(Store.get('showItemAmounts')){
+			rewardImg = '<img src="static/icons/rewards/reward_' + rewardinfo['item_id'] + '_' + item['quest_reward_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+			}
 			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
 					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
-					'<img src="static/icons/rewards/reward_' + rewardinfo['item_id'] + '_1.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+					rewardImg +
 					'</div>'
 			}
 			else{
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/Pstop-quest-small.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
-                '<img src="static/icons/rewards/reward_' + rewardinfo['item_id'] + '_1.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>' +
+                rewardImg +
                 '</div>'
 			}
             stopMarker = L.divIcon({
@@ -7049,6 +7067,15 @@ $(function () {
             updateMap()
         }
         return buildSwitchChangeListener(mapData, ['pokestops'], 'showQuests').bind(this)()
+    })
+	
+    $('#quests-amount-icon-switch').change(function () {
+        Store.set('showItemAmounts', this.checked)
+		$.each(mapData.pokestops, function (key, value) {
+			markers.removeLayer(value.marker)
+			value.marker = setupPokestopMarker(value)
+		})
+		
     })
 
     $('#dustrange').on('input', function () {
