@@ -716,6 +716,9 @@ function initSidebar() {
 	if (Store.get('showNests') === true) {
 		$('#nests-content-wrapper').toggle(true)
 	}
+	if (Store.get('showCommunities') === true) {
+		$('#community-content-wrapper').toggle(true)
+	}
     if (document.getElementById('next-location')) {
         const searchform = document.getElementById('search-places')
         const input = searchform.querySelector('input')
@@ -2620,14 +2623,14 @@ function nestLabel(item) {
 
 function setupCommunityMarker(item) {
     var icon = L.divIcon({
-        iconSize: [36, 48],
-        iconAnchor: [18, 24],
-        popupAnchor: [0, -35],
+        iconSize: [36, 36],
+        iconAnchor: [18, 36],
+        popupAnchor: [0, -47],
         className: 'marker-community',
-        html: '<img src="static/images/marker-' + item.type + '.png" style="width:36px;height: auto;"/>'
+        html: '<img src="static/images/marker-' + item.type + '.png" style="width:36px;height: 36px;"/>'
     })
 
-    var marker = L.marker([item['lat'], item['lon']], {icon: icon, zIndexOffset: 1030}).bindPopup(communityLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    var marker = L.marker([item['lat'], item['lon']], {icon: icon, zIndexOffset: 1030}).bindPopup(communityLabel(item), {autoPan: false, closeOnClick: false, autoClose: false,minWidth: 200})
     markers.addLayer(marker)
 
     addListeners(marker)
@@ -2636,32 +2639,54 @@ function setupCommunityMarker(item) {
 }
 
 function communityLabel(item) {
-    var str = '<div align="center" class="marker-community">' +
-        '<img src="static/images/marker-' + item.type + '.png" align"middle" style="width:30px;height: auto;"/>'
-    if (item.image_url != null) {
-        str +=
-        '<img src="' + item.image_url + '" align"middle" style="width:36px;height: auto;"/>'
-    } else {
-        str +=
-        '<img src="static/images/community_ball.png" align"middle" style="width:36px;height: auto;"/>'
-    }
-    str +=
-        '</div>' +
-        '<center><h4><div>' + item.title + '</div></h4></center>' +
-        '<center><div>' + item.description.slice(0, 40) + '</div></center>'
+	var labelTitle = ''
+	var titleImage = 'com-'
+	if(item.type == 3){ //Discord
+		titleImage += 'discord'
+		labelTitle = 'Discord Community'
+	}else if(item.type == 4){//Telegram
+		titleImage += 'telegram'
+		labelTitle = 'Telegram Community'
+	}else if(item.type == 5){//Whatsapp
+		titleImage += 'whatsapp'
+		labelTitle = 'Whatsapp Community'
+	}else if(item.type == 6){//FB Msg Group
+		titleImage += 'fbmessenger'
+		labelTitle = 'FB Messenger Community'
+	}else if(item.type == 7){// FB Group
+		titleImage += 'facebook'
+		labelTitle = 'Facebook Community'
+	}else if(item.type == 8){//GroupMe
+		titleImage += 'groupme'
+		labelTitle = 'GroupMe Community'
+	}else{
+		labelTitle = 'Group'
+	}
+	
+    var str = '<div align="center" style="padding-left:10px;padding-right:10px;">' +
+				'<b>' + labelTitle + '</b>' +
+				'</div>'
+		if(item.type == 3 || item.type == 4 || item.type == 5){
+				str += '<center><img src="static/images/communities/' + titleImage + '.png" align"middle" style="width:200px;height: auto;border-radius:30px;"/></center>'
+		}
+   str +=
+        '<center><h3><div><u>' + item.title + '</u></div></h3></center>' +
+        '<center><div>' + 
+		'<u>Beschreibung:</u><br>'+
+		item.description.slice(0, 70) + '</div></center><hr style="margin:1em 0"/>'
     if (item.team_instinct === 1 || item.team_mystic === 1 || item.team_valor === 1) {
-        str += '<center><div>Welcome to Teams:<br>'
+        str += '<center><div>Teams:<br>'
         if (item.team_instinct === 1) {
             str +=
-            '<img src="static/images/communities/instinct.png" align"middle" style="width:18px;height: auto;"/>'
+            '<img src="static/images/communities/instinct.png" align"middle" style="width:32px;height: auto;"/>'
         }
         if (item.team_mystic === 1) {
             str +=
-            '<img src="static/images/communities/mystic.png" align"middle" style="width:18px;height: auto;"/>'
+            '<img src="static/images/communities/mystic.png" align"middle" style="width:32px;height: auto;"/>'
         }
         if (item.team_valor === 1) {
             str +=
-            '<img src="static/images/communities/valor.png" align"middle" style="width:18px;height: auto;"/>'
+            '<img src="static/images/communities/valor.png" align"middle" style="width:32px;height: auto;"/>'
         }
         str += '</center></div>'
     }
@@ -6887,6 +6912,13 @@ $(function () {
     })
     $('#communities-switch').change(function () {
         lastcommunities = false
+		Store.set('showCommunities', this.checked)
+        if (this.checked) {
+			$('#community-content-wrapper').show(options)
+        } else {
+			$('#community-content-wrapper').hide(options)
+        }
+		
         buildSwitchChangeListener(mapData, ['communities'], 'showCommunities').bind(this)()
     })
     $('#poi-switch').change(function () {
@@ -7290,6 +7322,32 @@ function shareNestsWhatsapp(mode,header,secondLine,footer){
 		})
 		link += '%0A%0A' + footer
 		document.getElementById("shareNests" + mode).href = link;
+}
+function shareCommunitiesWhatsapp(header,secondLine,footer){
+	var link = 'whatsapp://send?text=%2A'+ header +'%2A:%0A'+ secondLine +'%0A'
+		console.log('ALL PRESSED')
+		$.each(mapData.communities, function (key, value) {
+			//In only mode, show: type, name, link
+			if(mapData.communities[key]['type'] == 3){ //Discord
+				link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(Discord):%20'
+			} else if(mapData.communities[key]['type'] == 4){ //Telegram
+				link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(Telegram):%20'
+			} else if(mapData.communities[key]['type'] == 5){ //Whatsapp
+				link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(Whatsapp):%20'
+			} else if(mapData.communities[key]['type'] == 6){ //Msg
+				link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(Fb Messenger):%20'
+			} else if(mapData.communities[key]['type'] == 7){ //Fb
+				link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(Fb Gruppe):%20'
+			} else if(mapData.communities[key]['type'] == 8){ //groupme
+				link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(GroupMe):%20'
+			}
+			if(mapData.communities[key]['has_invite_url'] === 1 && (mapData.communities[key]['invite_url'] !== '#' || mapData.communities[key]['invite_url'] !== undefined)){
+			link += '%0ALink:%20' + mapData.communities[key]['invite_url'] + '%0A'
+			}
+			
+		})
+		link += '%0A%0A' + footer
+		document.getElementById("shareCommunities").href = link;
 }
 
 

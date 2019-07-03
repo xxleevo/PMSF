@@ -1,4 +1,12 @@
 {
+  "Save Changes": "Speichern",
+  "Enter Community Name": "Namen eingeben..",
+  "Join Now": "Beitreten",
+  "Edit Community": "Bearbeiten ",
+  "Enter description": "Beschreibung eingeben..",
+  "Link must be valid and start with https://": "Link muss gültig sein und mit https:// beginnen",
+  "Submit Community": "Community einreichen",
+  "Submit Data to Map":" Daten hinzufügen",
   "EX cells are currently hidden":"Ex-Zellen deaktiviert",
   "Gym cells are currently hidden":"Arena-Zellen deaktiviert",
   "Pokestop cells are currently hidden":"Pokestop-Zellen deaktiviert",

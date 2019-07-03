@@ -368,9 +368,16 @@ $maxSearchNameLength = 0;	// 0 = Unlimited. Shorten pokestop names in reward sea
 //-----------------------------------------------------
 $noCommunity = true;
 $enableCommunities = 'false';
+$communityDescription = 'Display a text in your Community Container';
 $noAddNewCommunity = true;
 $noDeleteCommunity = true;
 $noEditCommunity = true;
+
+//Custom Nestshare configs
+$communityShareHeader = "Communities in YOURCITY"; // Displays the first line (bold) of the shared text
+$communityShareDescription = "(By ". $mapUrl .")"; // Displays the second line of the shared text
+$communityShareFooter = "For more infos visit our Map %0A(Discord needed: ". $discordUrl .")"; // Disyplays the footer under the shared nests
+
 //-----------------------------------------------
 // Nests
 //-----------------------------------------------------

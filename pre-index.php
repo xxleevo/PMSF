@@ -272,7 +272,10 @@ if ( $blockIframe ) {
                     header('Location: ./logout.php');
                 }
 				$userAccessLevel = $manualdb->get( "users", [ 'access_level' ], [ 'expire_timestamp' => $_SESSION['user']->expire_timestamp ] );
-				if ($userAccessLevel['access_level'] == 1) {
+				if ($userAccessLevel['access_level'] == 2) {
+				echo "<span style='color: ". $color .";'><i class='fa fa-check fa-fw'></i><i class='fa fa-pencil fa-fw' style='font-weight:normal;'></i></span>";
+				} 
+				elseif ($userAccessLevel['access_level'] == 1) {
 				echo "<span style='color: ". $color .";'><i class='fa fa-check fa-fw'></i></span>";
 				} 
 				elseif ($userAccessLevel['access_level'] == 0) {
@@ -673,7 +676,7 @@ if ( $blockIframe ) {
             <?php
             if ( ! $noCommunity ) {
                 ?>
-                <h3><?php echo i8ln( 'Communities' ); ?></h3>
+                <h3 style="font-weight: bold;"><i class="fa fa-users fa-fw"></i>&nbsp;Communities</h3>
 		<div>
                 <?php
                 if ( ! $noCommunity ) {
@@ -687,7 +690,26 @@ if ( $blockIframe ) {
                             <span class="switch-handle"></span>
                         </label>
                     </div>
-                </div>';
+                </div>
+				
+					<div id="community-content-wrapper" style="display:none">
+						<div>'
+						. $communityDescription .
+						'
+							<center>
+							
+								<u><h3 style="margin:0 0 0.5em 0;"> Gruppen teilen</h3></u>
+								<a class="settings btn-share-whatsapp" id="shareCommunities" href="#" data-action="share/whatsapp/share" onclick="shareCommunitiesWhatsapp(\''. $communityShareHeader .'\',\''. $communityShareDescription .'\',\''. $communityShareFooter .'\')">
+									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Whatsapp
+								</a>
+							</center>
+						</div>
+						<div>
+						Beachte: Es werden nur die Gruppen geteilt, die auf deiner Map zu sehen sind.
+						</div>
+						<hr style="margin:0px;" />
+					</div>';
+				
 		} ?>
                 </div>
                 <?php
