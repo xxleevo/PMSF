@@ -369,7 +369,8 @@ if ( $blockIframe ) {
 							<option value="static/icons/retro/">Retro (Stable)</option>
 							<option value="https://raw.githubusercontent.com/geekygreek7/pkmn_shuffle_icons/master/optimized_for_PMSF_frontend/">Shuffle-ShinyEdition (Stable)</option>
 							<option value="https://raw.githubusercontent.com/nileplumb/PkmnShuffleMap/master/PMSF_icons_large/">Shuffle-Normal (Stable)</option>
-							<option value="https://raw.githubusercontent.com/whitewillem/pogoassets/resized/no_border/">Ingame (Beta)</option>
+							<option value="https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/">Ingame (Beta)</option>
+							<option value="https://raw.githubusercontent.com/whitewillem/pogoassets/resized/no_border/">Ingame-Borderless(Beta)</option>
 						</select>
 					</div>
 				</div>
