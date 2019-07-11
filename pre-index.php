@@ -371,6 +371,7 @@ if ( $blockIframe ) {
 							<option value="https://raw.githubusercontent.com/nileplumb/PkmnShuffleMap/master/PMSF_icons_large/">Shuffle-Normal (Stable)</option>
 							<option value="https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/">Ingame (Beta)</option>
 							<option value="https://raw.githubusercontent.com/whitewillem/pogoassets/resized/no_border/">Ingame-Borderless(Beta)</option>
+							<option value="static/icons/flork-gamepress/">flork-gamepress (Beta)</option>
 						</select>
 					</div>
 				</div>
