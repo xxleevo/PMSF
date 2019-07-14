@@ -1,6 +1,6 @@
 <?php
 include( 'config/config.php' );
-global $map, $fork, $noSubmit;
+global $noSubmit;
 
 if ( $noSubmit === true ) {
     http_response_code( 401 );
@@ -55,15 +55,9 @@ $d           = array();
 $d['status'] = "ok";
 $d["timestamp"] = $now->getTimestamp();
 
-if (strtolower($map) === "rdm") {
-    if (strtolower($fork) === "default") {
-        $submit = new \Submit\RDM();
-    }
-} else if (strtolower($map) === "monocle") {
-    if (strtolower($fork) === "alternate") {
-        $submit = new \Submit\Monocle();
-    }
-}
+//create Submit
+$submit = new \Submit\RDM();
+
 
 if ( $action === "raid" ) {
     $submit->submit_raid($pokemonId, $gymId, $eggTime, $monTime, $loggedUser);

@@ -12,18 +12,11 @@ session_start();
 require_once(__DIR__ . '/../utils.php');
 
 $libs[] = "Scanner.php";
-$libs[] = "Monocle.php";
-$libs[] = "Monocle_Asner.php";
-$libs[] = "Monocle_Alternate.php";
-$libs[] = "RocketMap.php";
-$libs[] = "RocketMap_Sloppy.php";
 $libs[] = "RDM.php";
 $libs[] = "search/Search.php";
 $libs[] = "search/Search.rdm.php";
-$libs[] = "search/Search.monocle_alternate.php";
 $libs[] = "submit/Submit.php";
 $libs[] = "submit/Submit.rdm.php";
-$libs[] = "submit/Submit.monocle_alternate.php";
 
 // Include libraries
 foreach ($libs as $file) {
@@ -446,5 +439,3 @@ $enableDebug = false;
 //-----------------------------------------------------
 // DATABASE CONFIG
 //-----------------------------------------------------
-$map = "rdm";
-$fork = "default";                                                  // default/asner/sloppy

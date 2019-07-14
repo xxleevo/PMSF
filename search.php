@@ -1,6 +1,5 @@
 <?php
 include('config/config.php');
-global $map, $fork;
 
 if ( $noSearch === true ) {
     http_response_code( 401 );
@@ -17,26 +16,15 @@ $action = ! empty( $_POST['action'] ) ? $_POST['action'] : '';
 $lat = ! empty( $_POST['lat'] ) ? $_POST['lat'] : '';
 $lon = ! empty( $_POST['lon'] ) ? $_POST['lon'] : '';
 
+//set db name
 $dbname = '';
-if (strtolower($map) === "rdm") {
-    if (strtolower($fork) === "default") {
-	if ( $action === "pokestops" ) {
-	    $dbname = "pokestop";
-	} elseif ( $action === "forts" ) {
-            $dbname = "gym";
-        }
-        $search = new \Search\RDM();
-    }
-} else if (strtolower($map) === "monocle") {
-    if (strtolower($fork) === "alternate") {
-	if ( $action === "pokestops" ) {
-	    $dbname = "pokestops";
-	} elseif ( $action === "forts" ) {
-	    $dbname = "forts";
-        }
-        $search = new \Search\Monocle();
-    }
+if ( $action === "pokestops" ) {
+    $dbname = "pokestop";
+} elseif ( $action === "forts" ) {
+	$dbname = "gym";
 }
+$search = new \Search\RDM();
+
 if ($action === "reward") {
     $data["reward"] = $search->search_reward($lat, $lon, $term);
 }

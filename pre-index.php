@@ -615,14 +615,9 @@ if ( $blockIframe ) {
                                                 //pokemonFilterImages( $noPokemonNumbers, '', $excludeQuestsPokemon, 8 ); ? >
 												
                                                     if ($generateExcludeQuestsPokemon === true) {
-                                                        if (strtolower($fork) === "mad") {
-                                                            $questTable = 'trs_quest';
-                                                        } else {
-                                                            $questTable = 'pokestop';
-                                                        }
         
                                                         $pokestops = $db->query(
-                                                            "SELECT distinct quest_pokemon_id FROM " . $questTable . " WHERE quest_pokemon_id >= '1' AND DATE(FROM_UNIXTIME(quest_timestamp)) = CURDATE() order by quest_pokemon_id;"
+                                                            "SELECT distinct quest_pokemon_id FROM pokestop WHERE quest_pokemon_id >= '1' AND DATE(FROM_UNIXTIME(quest_timestamp)) = CURDATE() order by quest_pokemon_id;"
                                                         )->fetchAll(\PDO::FETCH_ASSOC);
         
                                                         foreach ($pokestops as $pokestop) {
@@ -886,7 +881,7 @@ if ( $blockIframe ) {
                     ?>
                     <div id="gyms-raid-filter-wrapper" style="display:none">
                         <?php
-                        if ( ( $fork === "alternate" || $map === "rdm" || ( $map === "rm" && $fork !== "sloppy" ) ) && ! $noExEligible ) {
+                        if (! $noExEligible ) {
                             echo '<div class="form-control switch-container" id="ex-eligible-wrapper">
                                 <font size="3">' . i8ln( 'EX Eligible Only' ) . '</font>
                                 <div class="onoffswitch">
@@ -1024,7 +1019,7 @@ if ( $blockIframe ) {
                     <div>';
 		} ?>
                 <?php
-                if ( $map != "monocle" && ! $noScannedLocations ) {
+                if ( ! $noScannedLocations ) {
                     echo '<div class="form-control switch-container">
                     <h3> ' . i8ln( 'Scanned Locations' ) . ' </h3>
                     <div class="onoffswitch">
@@ -2157,9 +2152,9 @@ if ( $blockIframe ) {
 	var enableQuestsItemsAmounts = <?php echo $noQuestsItemsAmounts ? 'false' : $enableQuestsItemsAmounts ?>;
     var hideQuestsPokemon = <?php echo $noQuestsPokemon ? '[]' : $hideQuestsPokemon ?>;
     var hideQuestsItem = <?php echo $noQuestsItems ? '[]' : $hideQuestsItem ?>;
-    var enableNewPortals = <?php echo ( ( $map != "monocle" ) || ( $fork == "alternate" ) ) ? $enableNewPortals : 0 ?>;
+    var enableNewPortals = <?php echo $enableNewPortals ?>;
     var enableWeatherOverlay = <?php echo ! $noWeatherOverlay ? $enableWeatherOverlay : 'false' ?>;
-    var enableScannedLocations = <?php echo $map != "monocle" && ! $noScannedLocations ? $enableScannedLocations : 'false' ?>;
+    var enableScannedLocations = <?php echo ! $noScannedLocations ? $enableScannedLocations : 'false' ?>;
     var enableSpawnpoints = <?php echo $noSpawnPoints ? 'false' : $enableSpawnPoints ?>;
     var enableRanges = <?php echo $noRanges ? 'false' : $enableRanges ?>;
     var enableScanPolygon = <?php echo $noScanPolygon ? 'false' : $enableScanPolygon ?>;
@@ -2188,7 +2183,7 @@ if ( $blockIframe ) {
     var weatherSpritesSrc = '<?php echo $copyrightSafe ? 'static/sprites-safe/' : 'static/sprites-pokemon/' ?>';
     var icons = '<?php echo $copyrightSafe ? 'static/icons-safe/' : $iconRepository ?>';
     var weatherColors = <?php echo json_encode( $weatherColors ); ?>;
-    var mapType = '<?php echo $map; ?>';
+    var mapType = '<?php echo 'rdm'; ?>';
     var triggerGyms = <?php echo $triggerGyms ?>;
     var noExGyms = <?php echo $noExGyms === true ? 'true' : 'false' ?>;
     var noParkInfo = <?php echo $noParkInfo === true ? 'true' : 'false' ?>;

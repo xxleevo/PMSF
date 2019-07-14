@@ -1,6 +1,6 @@
 <?php
 include(dirname(__FILE__).'/../config/config.php');
-global $map, $fork, $db, $raidBosses, $webhookUrl, $sendWebhook, $manualFiveStar, $noManualRaids, $noRaids;
+global $db, $raidBosses, $webhookUrl, $sendWebhook, $manualFiveStar, $noManualRaids, $noRaids;
 
 if($noManualRaids === true || $noRaids === true){
     http_response_code(401);

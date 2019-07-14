@@ -1,7 +1,6 @@
 <?php
 $timing['start'] = microtime(true);
 include('config/config.php');
-global $map, $fork;
 
 // set content type
 header('Content-Type: application/json');
@@ -75,25 +74,7 @@ if (!validateToken($_POST['token'])) {
 }
 
 // init map
-if (strtolower($map) === "monocle") {
-    if (strtolower($fork) === "asner") {
-        $scanner = new \Scanner\Monocle_Asner();
-    } elseif (strtolower($fork) === "default") {
-        $scanner = new \Scanner\Monocle();
-    } else {
-        $scanner = new \Scanner\Monocle_Alternate();
-    }
-} elseif (strtolower($map) === "rm") {
-    if (strtolower($fork) === "sloppy") {
-        $scanner = new \Scanner\RocketMap_Sloppy();
-    } else {
-        $scanner = new \Scanner\RocketMap();
-    }
-} elseif (strtolower($map) === "rdm") {
-    if (strtolower($fork) === "default") {
-        $scanner = new \Scanner\RDM();
-    }
-}
+$scanner = new \Scanner\RDM();
 
 $newarea = false;
 if (($oSwLng < $swLng) && ($oSwLat < $swLat) && ($oNeLat > $neLat) && ($oNeLng > $neLng)) {

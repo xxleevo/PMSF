@@ -1,6 +1,6 @@
 <?php
 include(dirname(__FILE__).'/../config/config.php');
-global $map, $fork, $db, $noManualQuests;
+global $db, $noManualQuests;
 
 if($noManualQuests === true){
     http_response_code(401);
