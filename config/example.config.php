@@ -486,7 +486,7 @@ $enableDebug = false;
 //-----------------------------------------------------
 $db = new Medoo([// required
     'database_type' => 'mysql',                                    
-    'database_name' => 'Monocle',
+    'database_name' => 'rdmdb',
     'server' => '127.0.0.1',
     'username' => 'database_user',
     'password' => 'database_password',
@@ -499,7 +499,7 @@ $db = new Medoo([// required
 
 //$manualdb = new Medoo([// required
 //    'database_type' => 'mysql',
-//    'database_name' => 'Monocle',
+//    'database_name' => 'rdmdb',
 //    'server' => '127.0.0.1',
 //    'username' => 'database_user',
 //    'password' => 'database_password',
