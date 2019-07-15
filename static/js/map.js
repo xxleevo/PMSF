@@ -203,6 +203,52 @@ var notifyText = 'Despawn vorraussichtlich um <dist> (<udist>)'
 var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider
 var searchProvider = new OpenStreetMapProvider()
 //
+// Extras
+//
+L.Marker.addInitHook(function () {
+    if (this.options.virtual) {
+        this.on('add', function () {
+            this._updateIconVisibility = function () {
+                if (!this._map) {
+                    return
+                }
+                var map = this._map
+                var isVisible = map.getBounds().contains(this.getLatLng())
+                var wasVisible = this._wasVisible
+                var icon = this._icon
+                var iconParent = this._iconParent
+                var shadow = this._shadow
+                var shadowParent = this._shadowParent
+
+                if (!iconParent) {
+                    iconParent = this._iconParent = icon.parentNode
+                }
+                if (shadow && !shadowParent) {
+                    shadowParent = this._shadowParent = shadow.parentNode
+                }
+
+                if (isVisible !== wasVisible) {
+                    if (isVisible) {
+                        iconParent.appendChild(icon)
+                        if (shadow) {
+                            shadowParent.appendChild(shadow)
+                        }
+                    } else {
+                        iconParent.removeChild(icon)
+                        if (shadow) {
+                            shadowParent.removeChild(shadow)
+                        }
+                    }
+                    this._wasVisible = isVisible
+                }
+            }
+
+            this._map.on('resize moveend zoomend', this._updateIconVisibility, this)
+            this._updateIconVisibility()
+        }, this)
+    }
+})
+//
 // Functions
 //
 if (location.search.indexOf('login=true') > 0) {
@@ -323,6 +369,7 @@ function initMap() { // eslint-disable-line no-unused-vars
         minZoom: minZoom,
         maxZoom: maxZoom,
         zoomControl: false,
+		preferCanvas: true,
 		//v2 - v3 xxleevo
         layers: [weatherLayerGroup, exLayerGroup, gymLayerGroup, stopLayerGroup, scanAreaGroup, scanAreaGroupQuest,scanAreaGroupPvp,nestPolygonGroup]
 		// --end of edited/added code
@@ -2146,7 +2193,7 @@ function getGymMarkerIcon(item) {
 }
 
 function setupGymMarker(item) {
-    var marker = L.marker([item['latitude'], item['longitude']], {icon: getGymMarkerIcon(item), zIndexOffset: 1060})
+    var marker = L.marker([item['latitude'], item['longitude']], {icon: getGymMarkerIcon(item), zIndexOffset: 1060, virtual: true})
     markers.addLayer(marker)
     updateGymMarker(item, marker)
 
@@ -2478,12 +2525,12 @@ function setupPokestopMarker(item) {
     if (!noQuests && reward !== null) {
         var rewardInfo = JSON.parse(item['quest_reward_info'])
         if (rewardInfo['shiny'] === true) {
-            marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper shiny', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 250})
+            marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper shiny', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 250})
         } else {
-            marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 250})
+            marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 250})
         }
     } else {
-        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 250})
+        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 250})
     }
     markers.addLayer(marker)
 
@@ -2535,7 +2582,7 @@ function setupNestMarker(item) {
         className: 'marker-nests',
         html: getNestMarkerIcon
     })
-    var marker = L.marker([item['lat'], item['lon']], {icon: nestMarkerIcon, zIndexOffset: 1020}).bindPopup(nestLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+    var marker = L.marker([item['lat'], item['lon']], {icon: nestMarkerIcon, zIndexOffset: 1020, virtal: true}).bindPopup(nestLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
     markers.addLayer(marker)
     addListeners(marker)
 
@@ -2630,7 +2677,7 @@ function setupCommunityMarker(item) {
         html: '<img src="static/images/marker-' + item.type + '.png" style="width:36px;height: 36px;"/>'
     })
 
-    var marker = L.marker([item['lat'], item['lon']], {icon: icon, zIndexOffset: 1030}).bindPopup(communityLabel(item), {autoPan: false, closeOnClick: false, autoClose: false,minWidth: 200})
+    var marker = L.marker([item['lat'], item['lon']], {icon: icon, zIndexOffset: 1030, virtual: true}).bindPopup(communityLabel(item), {autoPan: false, closeOnClick: false, autoClose: false,minWidth: 200})
     markers.addLayer(marker)
 
     addListeners(marker)
