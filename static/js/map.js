@@ -37,6 +37,7 @@ var $switchBigKarp
 var $selectDirectionProvider
 var $switchExEligible
 var $switchBattleStatus
+var $switchWeatherIcons
 var $questsExcludePokemon
 var $questsExcludeItem
 
@@ -707,6 +708,7 @@ function initSidebar() {
     $('#gym-sidebar-switch').prop('checked', Store.get('useGymSidebar'))
     $('#ex-eligible-switch').prop('checked', Store.get('exEligible'))
     $('#battle-status-switch').prop('checked', Store.get('battleStatus'))
+    $('#weather-icon-switch').prop('checked', Store.get('showWeatherIcons'))
     $('#gym-sidebar-wrapper').toggle(Store.get('showGyms') || Store.get('showRaids'))
     $('#gyms-filter-wrapper').toggle(Store.get('showGyms'))
     $('#team-gyms-only-switch').val(Store.get('showTeamGymsOnly'))
@@ -980,9 +982,17 @@ function pokemonLabel(item) {
 		'<span> - </span>' +
 		'</div></center>' 
 
-	contentstring +=
-	'<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/></center>'
-	
+	//handle the icon, add weather icon if enabled
+	if(Store.get('showWeatherIcons') && weatherBoostedCondition !== 0 && !noWeatherIcons && noWeatherShadow){ // show weather icon if enabled
+		contentstring +=
+		'<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/> '+
+		'<img src="static/weather/i-' + weatherBoostedCondition + '.png" style="width:45px;height:auto;position:absolute;top:38px;left:140px;"/>'+
+		'</center>'
+	}else{
+		contentstring +=
+		'<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/></center>'
+	}
+
 	if (noRarityDisplay === false) {
 		contentstring += '<span> ' + rarityDisplay + '</span>'
 	}
@@ -6395,6 +6405,15 @@ $(function () {
             mapData[dType] = {}
         })
         updateMap()
+    })
+	
+    $switchWeatherIcons = $('#weather-icon-switch')
+
+    $switchWeatherIcons.on('change', function () {
+        Store.set('showWeatherIcons', this.checked)
+        redrawPokemon(mapData.pokemons)
+        redrawPokemon(mapData.lurePokemons)
+		console.log(Store.get('showWeatherIcons'))
     })
 	
     $switchBattleStatus = $('#battle-status-switch')

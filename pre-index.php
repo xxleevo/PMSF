@@ -427,6 +427,22 @@ if ( $blockIframe ) {
                             </div>
                             <?php
                         } ?>
+                        <?php
+                        if ( ! $noWeatherIcons ) {
+                            ?>
+                            <div class="form-control switch-container">
+                                <font size="3"><?php echo i8ln( 'Weather Icons' ) ?></font>
+                                <div class="onoffswitch">
+                                    <input id="weather-icon-switch" type="checkbox" name="weather-icon-switch"
+                                           class="onoffswitch-checkbox" checked>
+                                    <label class="onoffswitch-label" for="weather-icon-switch">
+                                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                                        <span class="switch-handle"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <?php
+                        } ?>
                         <div class="form-row min-stats-row">
                             <?php
                             if ( ! $noMinIV ) {
@@ -2230,6 +2246,7 @@ if ( $blockIframe ) {
     var copyrightSafe = <?php echo $copyrightSafe === true ? 'true' : 'false' ?>;
     var noRarityDisplay = <?php echo $noRarityDisplay === true ? 'true' : 'false' ?>;
     var noWeatherIcons = <?php echo $noWeatherIcons === true ? 'true' : 'false' ?>;
+	var enableWeatherIcons = <?php echo $noWeatherIcons ? 'false' : $enableWeatherIcons ?>;
     var noWeatherShadow = <?php echo $noWeatherShadow === true ? 'true' : 'false' ?>;
     var noGymScannedText = <?php echo $noGymScannedText === true ? 'true' : 'false' ?>;
     var noMaplink = <?php echo $noMaplink === true ? 'true' : 'false' ?>;

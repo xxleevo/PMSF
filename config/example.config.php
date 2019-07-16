@@ -126,8 +126,10 @@ $noMinIV = false;                                               // true/false
 $noMinLevel = false;                                            // true/false
 $noHighLevelData = false;                                       // true/false
 $noRarityDisplay = false;                                       // true/false
-$noWeatherIcons = true;
-$noWeatherShadow = false;
+//Weather Markers - only Icons or Shadow can be enabled at a time, without function if both set to 'false'
+$noWeatherIcons = false;										// If set to false, this option let users allow to enable/disable weather icons for pokemon
+$enableWeatherIcons = 'false';                                 // default value for users for weather-icons
+$noWeatherShadow = true;										//enabled shadow for pokemon when weatherboosted.
 
 /* Hide Specific content */
 $noGymScannedText = false;
