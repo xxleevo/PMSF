@@ -272,16 +272,16 @@ if ( $blockIframe ) {
                     header('Location: ./logout.php');
                 }
 				$userAccessLevel = $manualdb->get( "users", [ 'access_level' ], [ 'expire_timestamp' => $_SESSION['user']->expire_timestamp ] );
-				if ($userAccessLevel['access_level'] == 2) {
+				
+				if ($userAccessLevel['access_level'] >= 3) {
+				echo "<span style='color: ". $color .";'><i class='fa fa-check fa-fw'></i><i class='fa fa-unlock-alt fa-fw' style='font-weight:normal;'></i></span>";
+				} elseif ($userAccessLevel['access_level'] == 2) {
 				echo "<span style='color: ". $color .";'><i class='fa fa-check fa-fw'></i><i class='fa fa-pencil fa-fw' style='font-weight:normal;'></i></span>";
-				} 
-				elseif ($userAccessLevel['access_level'] == 1) {
+				} elseif ($userAccessLevel['access_level'] == 1) {
 				echo "<span style='color: ". $color .";'><i class='fa fa-check fa-fw'></i></span>";
-				} 
-				elseif ($userAccessLevel['access_level'] == 0) {
+				} elseif ($userAccessLevel['access_level'] == 0) {
 				echo "<span style='color: yellow;'><i class='fa fa-check fa-fw'></i></span>";
-				}
-				else{
+				} else{
 				echo "<span style='color: red;'><i class='fa fa-times fa-fw'></i></span>";
 				}
 				
