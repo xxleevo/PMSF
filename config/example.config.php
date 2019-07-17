@@ -135,7 +135,7 @@ $noWeatherShadow = true;										//enabled shadow for pokemon when weatherboost
 /* Hide Specific content */
 $noGymScannedText = false;										// "Last Scanned" and "Last modified" beeing displayed or not
 $noRaidMoves = false;											// Raid Moveset beeing displayed or not
-$noMaplink = false; 											// No "Maplink" and also no Stop images from PGO
+$noMaplink = false; 											// No "Maplink" at gyms,pokemon,stops
 $noGymTeamInfos = false; 										// Disables every info concerning the gym team
 $noPokestopImages = false;										// Original Images used for Pokestops in the Label
 $denyRaidLevelsBelow = 0;										// Deny raid levels beeing shown under this value (0-6)(5 = only show level 5 raids) - 0 to disable
