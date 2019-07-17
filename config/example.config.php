@@ -133,14 +133,18 @@ $enableWeatherIcons = 'false';                                 // default value 
 $noWeatherShadow = true;										//enabled shadow for pokemon when weatherboosted.
 
 /* Hide Specific content */
-$noGymScannedText = false;
-$noRaidMoves = false;
-$noMaplink = false; // No "Maplink"
-$noGymTeamInfos = false; // Also negating Images from Stops, Moves from Raids and only allow level 5 raids
-$noOutdatedGyms = false;
-$noExportImport = false;
-$noBattleStatus = false; // Only shown if $noGymTeamInfos is also enabled
-$battleStatus = 'false';
+$noGymScannedText = false;										// "Last Scanned" and "Last modified" beeing displayed or not
+$noRaidMoves = false;											// Raid Moveset beeing displayed or not
+$noMaplink = false; 												// No "Maplink" and also no Stop images from PGO
+$noGymTeamInfos = false; 										// Disables every info concerning the gym team
+$noPokestopImages = false;										// Original Images used for Pokestops in the Label
+$denyRaidLevelsBelow = 0;										// Deny raid levels beeing shown under this value (0-6)(5 = only show level 5 raids) - 0 to disable
+																// In addition you may want to adjust $minRaidLevel and $maxRaidLevel;
+																// To prevent displaying gyms with denied raids on it.
+$noOutdatedGyms = false;											// If active, set GymTeams to Harmony when older than 4h(only frontend-side, no db-changes)
+$noExportImport = false;											// Enable/Disable the ability for users to Export/Import Settings
+$noBattleStatus = false; 										// Enable/Disable the ability for users to filter battle gyms
+$battleStatus = 'false';										// Default value for battle gym filter
 
 /* Notification Settings */
 $noNotifyPokemon = false;                                       // true/false

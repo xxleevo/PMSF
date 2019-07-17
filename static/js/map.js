@@ -1059,7 +1059,7 @@ function gymLabel(item) {
     var i = 0
 	
 	var outdated = ''
-	if( (lastScanned/1000) < ((Date.now()/1000)-14400) ){
+	if( ((lastScanned/1000) < ((Date.now()/1000)-14400)) && !noOutdatedGyms ){
 		teamName = 'Harmony'
 		outdated = '<b>Letzter Scan älter als 4 Std !</b>'
 	}
@@ -1067,7 +1067,7 @@ function gymLabel(item) {
 	var teamLabel = ''
 	var teamImage = ''
 	var freeSlotsText = ''
-	if(!noGymTeamInfos && ((lastScanned/1000) > ((Date.now()/1000)-14400))){
+	if(!noGymTeamInfos && (((lastScanned/1000) > ((Date.now()/1000)-14400)) || noOutdatedGyms) ){
         var freeSlots = item['slots_available']
 		teamLabel = '<b style="color:rgba(' + gymColor[teamId] + ')">' + i8ln('Team') + ' ' + i8ln(teamName) + '</b><br>'
         teamImage = '<img width="200px" style="padding: 5px;" src="static/forts/label/' + teamName + '_normal.png">'
@@ -1075,15 +1075,17 @@ function gymLabel(item) {
 	} else{
 		teamLabel = 'Arena<br>'
         teamImage = '<img height="70px" style="padding: 5px;" src="static/forts/Harmony_large.png">'
-		if(item['raid_level'] < 5){
+		if(item['raid_level'] < denyRaidLevelsBelow){
 			raidIcon = ''
 			raidStr = ''
 		}
 	}
 	
-    if (raidSpawned && item.raid_end > Date.now()) {
+    if (raidSpawned && item.raid_end > Date.now() && item['raid_level'] >= denyRaidLevelsBelow) {
 		if(!noGymTeamInfos){
         teamImage = '<img width="140px" style="padding: 5px;margin-left:-50px" src="static/forts/label/' + teamName + '_raw.png">'
+		} else{
+        teamImage = '<img width="140px" style="padding: 5px;margin-left:-50px" src="static/forts/label/Harmony_raw.png">'
 		}
 	
         var levelStr = ''
@@ -1112,7 +1114,7 @@ function gymLabel(item) {
             raidStr += cpStr
         }
         raidStr += '</h3>'
-        if (raidStarted && item.raid_pokemon_move_1 > 0 && item.raid_pokemon_move_1 !== '133' && item.raid_pokemon_move_2 > 0 && item.raid_pokemon_move_2 !== '133' && !noGymTeamInfos) {
+        if (raidStarted && item.raid_pokemon_move_1 > 0 && item.raid_pokemon_move_1 !== '133' && item.raid_pokemon_move_2 > 0 && item.raid_pokemon_move_2 !== '133' && !noRaidMoves) {
             var pMove1 = (moves[item['raid_pokemon_move_1']] !== undefined) ? i8ln(moves[item['raid_pokemon_move_1']]['name']) : 'gen/unknown'
             var pMove2 = (moves[item['raid_pokemon_move_2']] !== undefined) ? i8ln(moves[item['raid_pokemon_move_2']]['name']) : 'gen/unknown'
             raidStr += '<div><b>' + pMove1 + ' / ' + pMove2 + '</b></div>'
@@ -1210,7 +1212,7 @@ function gymLabel(item) {
 	   battleStr = '<div>Arena wird bekämpft!</div>'
 	}
 	var gymCp = ''
-    if (item['total_cp'] != null) {
+    if (item['total_cp'] != null && !noGymTeamInfos) {
         gymCp = '<div>' + i8ln('Gym CP') + ' : <b>' + item['total_cp'] + '</b></div>'
     }
 	
@@ -1222,7 +1224,7 @@ function gymLabel(item) {
         gymImage = '<img height="70px" style="padding: 5px;" src="' + url + '">'
     }
 		
-    if (teamId === 0 || (((lastScanned/1000) > ((Date.now()/1000)-14400)) && !noOutdatedGyms)) {
+    if (teamId === 0 || (((lastScanned/1000) > ((Date.now()/1000)-14400)) || noOutdatedGyms)) {
         str =
             '<div class="gym-label">' +
             '<center>' +
@@ -1631,7 +1633,7 @@ function pokestopLabel(item) {
 	}
 	var stopImage = ''
 	var stopLabel = ''
-	if (!noGymTeamInfos){
+	if (!noPokestopImages){
 		if (item['lure_expiration'] > Date.now() && item['url'] !== null) {
 			if (lureType > 501) { //If the lure is special type
 			stopImage = '<img class="pokestop-lure-'+ lureType + '-image" src="' + item['url'] + '">'
@@ -2075,7 +2077,7 @@ function getGymMarkerIcon(item) {
 	
 	var teamStr = ''
 	var team = ''
-	if(!noGymTeamInfos && !noOutdatedGyms && ((lastScanned/1000) > ((Date.now()/1000)-14400)) ){
+	if(!noGymTeamInfos && ( noOutdatedGyms || ((lastScanned/1000) > ((Date.now()/1000)-14400))) ){
 		team = item.team_id
 		if (team === 0 || level === null) {
 			teamStr = gymTypes[item['team_id']]
@@ -2109,7 +2111,7 @@ function getGymMarkerIcon(item) {
     }
     var html = ''
 	var relativeIconSize = (50/6)+((50/6)*(map.getZoom()-10))
-    if (item['raid_pokemon_id'] != null && item.raid_end > Date.now() && (noGymTeamInfos && item['raid_level'] == 5 || (!noGymTeamInfos)) ) {
+    if (item['raid_pokemon_id'] != null && item.raid_end > Date.now() && ( item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow == 0))) {
         html = '<div style="position:relative;">' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
@@ -2124,7 +2126,7 @@ function getGymMarkerIcon(item) {
             className: 'raid-marker',
             html: html
         })
-    } else if (item['raid_level'] !== null && item.raid_start <= Date.now() && item.raid_end > Date.now() && (noGymTeamInfos && item['raid_level'] == 5 || (!noGymTeamInfos))) {
+    } else if (item['raid_level'] !== null && item.raid_start <= Date.now() && item.raid_end > Date.now() && ( item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow == 0))) {
         var hatchedEgg = ''
         if (item['raid_level'] <= 2) {
             hatchedEgg = 'hatched_normal'
@@ -2148,7 +2150,7 @@ function getGymMarkerIcon(item) {
             className: 'active-egg-marker',
             html: html
         })
-    } else if (item['raid_level'] !== null && item.raid_end > Date.now() && (noGymTeamInfos && item['raid_level'] == 5 || (!noGymTeamInfos)) ) {
+    } else if (item['raid_level'] !== null && item.raid_end > Date.now() && ( item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow == 0))) {
         var raidEgg = ''
         if (item['raid_level'] <= 2) {
             raidEgg = 'normal'
@@ -2512,7 +2514,7 @@ function getPokestopMarkerIcon(item) {
             html: html
         })
     }
-	if(noGymTeamInfos){
+	if(noPokestopImages){
 			html = '<div>' +
             '<img src="static/forts/stop.png" style="width:16px;height:auto;" />' +
             '</div>'

@@ -752,7 +752,7 @@ if ( $blockIframe ) {
                     } ?>
 					
 					<?php
-					if (!$noGymTeamInfos){
+					if (!$denyRaidLevelsBelow > 0){
 						echo '
 						<div id="raids-filter-wrapper" style="display:none">
 							<div class="form-control switch-container" id="active-raids-wrapper">
@@ -836,65 +836,70 @@ if ( $blockIframe ) {
                     </div>
                 </div>';
 		    } ?>
+			
                     <?php
-                    if ( ! $hideIfManual && !$noGymTeamInfos) {
-                        echo '<div id="gyms-filter-wrapper" style="display:none">
-                        <div class="form-control switch-container" id="team-gyms-only-wrapper">
-                            <font size="3">Team</font>
-                            <select name="team-gyms-filter-switch" id="team-gyms-only-switch">
-                                <option value="0"> Alle</option>
-                                <option value="1"> Mystic / Weisheit</option>
-                                <option value="2"> Valor / Wagemut</option>
-                                <option value="3"> Instinct / Intuition</option>
-                            </select>
-						</div>
-                        <div class="form-control switch-container" id="open-gyms-only-wrapper">
-                            <font size="3">Freie Plätze</font>
-                            <div class="onoffswitch">
-                                <input id="open-gyms-only-switch" type="checkbox" name="open-gyms-only-switch"
-                                       class="onoffswitch-checkbox" checked>
-                                <label class="onoffswitch-label" for="open-gyms-only-switch">
-                                    <span class="switch-label" data-on="On" data-off="Off"></span>
-                                    <span class="switch-handle"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-control switch-container" id="min-level-gyms-filter-wrapper">
-                            <font size="3">Min. freie Plätze</font>
-                            <select name="min-level-gyms-filter-switch" id="min-level-gyms-filter-switch">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                            </select>
-                        </div>
-                        <div class="form-control switch-container" id="max-level-gyms-filter-wrapper">
-                            <font size="3">Max. freie Plätze</font>
-                            <select name="max-level-gyms-filter-switch" id="max-level-gyms-filter-switch">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                            </select>
-                        </div>
-                        <div class="form-control switch-container" id="last-update-gyms-wrapper">
-                            <font size="3">Letzter Scan</font>
-                            <select name="last-update-gyms-switch" id="last-update-gyms-switch">
-                                <option value="0">Alle</option>
-                                <option value="1">Letzte Stunde</option>
-                                <option value="6">Letzten 6 Stunden</option>
-                                <option value="12">Letzten 12 Stunden</option>
-                                <option value="24">Letzten 24 Stunden</option>
-                                <option value="168">Letzte Woche</option>
-                            </select>
-                        </div>
-		    </div>';
-                    }
-                    ?>
+                    if ( (!$hideIfManual && !$noGymTeamInfos) || !$noGymScannedText) {
+						echo '<div id="gyms-filter-wrapper" style="display:none">';
+						
+						if ( ! $hideIfManual && !$noGymTeamInfos) {
+							echo '<div class="form-control switch-container" id="team-gyms-only-wrapper">
+								<font size="3">Team</font>
+								<select name="team-gyms-filter-switch" id="team-gyms-only-switch">
+									<option value="0"> Alle</option>
+									<option value="1"> Mystic / Weisheit</option>
+									<option value="2"> Valor / Wagemut</option>
+									<option value="3"> Instinct / Intuition</option>
+								</select>
+							</div>
+							<div class="form-control switch-container" id="open-gyms-only-wrapper">
+								<font size="3">Freie Plätze</font>
+								<div class="onoffswitch">
+									<input id="open-gyms-only-switch" type="checkbox" name="open-gyms-only-switch"
+										class="onoffswitch-checkbox" checked>
+									<label class="onoffswitch-label" for="open-gyms-only-switch">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+							</div>
+							<div class="form-control switch-container" id="min-level-gyms-filter-wrapper">
+								<font size="3">Min. freie Plätze</font>
+								<select name="min-level-gyms-filter-switch" id="min-level-gyms-filter-switch">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+								</select>
+							</div>
+							<div class="form-control switch-container" id="max-level-gyms-filter-wrapper">
+								<font size="3">Max. freie Plätze</font>
+								<select name="max-level-gyms-filter-switch" id="max-level-gyms-filter-switch">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+								</select>
+							</div>';
+						}
+						if ( !$noGymScannedText) {
+							echo '<div class="form-control switch-container" id="last-update-gyms-wrapper">
+								<font size="3">Letzter Scan</font>
+								<select name="last-update-gyms-switch" id="last-update-gyms-switch">
+									<option value="0">Alle</option>
+									<option value="1">Letzte Stunde</option>
+									<option value="6">Letzten 6 Stunden</option>
+									<option value="12">Letzten 12 Stunden</option>
+									<option value="24">Letzten 24 Stunden</option>
+									<option value="168">Letzte Woche</option>
+								</select>
+							</div>';
+						}
+						echo '</div>';
+					}?>
                     <div id="gyms-raid-filter-wrapper" style="display:none">
                         <?php
                         if (! $noExEligible ) {
@@ -2258,7 +2263,9 @@ if ( $blockIframe ) {
     var battleStatus = <?php echo $noBattleStatus === true ? 'false' : $battleStatus  ?>;
     var $noOverlayDesign = <?php echo $noOverlayDesign === true ? 'true' : 'false' ?>;
     var overlayDesign = '<?php echo $overlayDesign ?>';
-	
+	var noPokestopImages = <?php echo $noPokestopImages === true ? 'true' : 'false' ?>;
+    var denyRaidLevelsBelow = <?php echo ($denyRaidLevelsBelow >= 1 && $denyRaidLevelsBelow <= 6) ? $denyRaidLevelsBelow : 0 ?>;
+	var noRaidMoves  = <?php echo $noRaidMoves === true ? 'true' : 'false' ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

@@ -137,6 +137,18 @@ $noWeatherIcons = false;
 $enableWeatherIcons = 'false';                                 // true/false
 $noWeatherShadow = true;
 
+/* Hide Specific content */
+$noGymScannedText = false;
+$noRaidMoves = false;
+$noMaplink = false; 
+$noGymTeamInfos = false;
+$noPokestopImages = false;
+$denyRaidLevelsBelow = 0;
+$noOutdatedGyms = false;;
+$noExportImport = false;
+$noBattleStatus = false;
+$battleStatus = 'false';
+
 /* Notification Settings */
 $noNotifyPokemon = false;                                       // true/false
 $noNotifyRarity = false;                                        // true/false
