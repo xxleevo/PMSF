@@ -32,6 +32,7 @@ setSessionCsrfToken();
 
 $startingLat = 52.084992;                                          // Starting latitude
 $startingLng = 5.302366;                                        // Starting longitude
+$startingZoom = 15;												//Starting Zoom
 
 /* Zoom and Cluster Settings */
 

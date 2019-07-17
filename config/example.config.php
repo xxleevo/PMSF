@@ -21,6 +21,7 @@ use Medoo\Medoo;
 
 $startingLat = 52.084992;                                          // Starting latitude
 $startingLng = 5.302366;                                           // Starting longitude
+$startingZoom = 15;								//Starting Zoom - should be between $maxZoomIn & $maxZoomOut
 
 /* Zoom and Cluster Settings */
 

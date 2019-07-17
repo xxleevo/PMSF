@@ -410,7 +410,7 @@ var StoreOptions = {
         },
     'zoomLevel':
         {
-            default: 16,
+            default: initialZoom,
             type: StoreTypes.Number
         },
     'icons':
