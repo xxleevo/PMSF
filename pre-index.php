@@ -628,14 +628,14 @@ if ( $blockIframe ) {
                                             <div class="quest-pokemon-container">
                                                 <input id="exclude-quests-pokemon" type="text" readonly="true">
                                                 <?php
-                                                //pokemonFilterImages( $noPokemonNumbers, '', $excludeQuestsPokemon, 8 ); ? >
 												
                                                     if ($generateExcludeQuestsPokemon === true) {
         
                                                         $pokestops = $db->query(
                                                             "SELECT distinct quest_pokemon_id FROM pokestop WHERE quest_pokemon_id >= '1' AND DATE(FROM_UNIXTIME(quest_timestamp)) = CURDATE() order by quest_pokemon_id;"
                                                         )->fetchAll(\PDO::FETCH_ASSOC);
-        
+														
+														$data = array();
                                                         foreach ($pokestops as $pokestop) {
                                                             $data[] = $pokestop['quest_pokemon_id'];
                                                         }
