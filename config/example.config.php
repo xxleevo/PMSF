@@ -171,9 +171,6 @@ $noHidePokemon = false;                                             // true/fals
 $hidePokemon = '[10, 13, 16, 19, 21, 29, 32, 41, 46, 48, 50, 52, 56, 74, 77, 96, 111, 133,
                   161, 163, 167, 177, 183, 191, 194, 168]';         // [] for empty
 $hidePokemonCoords = false;                                         // true/false
-$verifiedDespawnTimer = false;									//This option needs rdm to support verified despawn timers. if your database isnt updated for verified despawn timers properly, pokemon wont show up at all. so use it correct.
-																//Dont change this if you dont know what this is.
-
 $excludeMinIV = '[131, 143, 147, 148, 149, 248]';                   // [] for empty
 
 $minIV = '0';                                                       // "0" for empty or a number
