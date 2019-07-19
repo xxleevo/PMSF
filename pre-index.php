@@ -2191,7 +2191,6 @@ if ( $blockIframe ) {
     var pvptext2 = '<?php echo $noScanPolygonPvp ? '' : $pvptext2 ?>';
     var pvptext3 = '<?php echo $noScanPolygonPvp ? '' : $pvptext3 ?>';
     var pvptext4 = '<?php echo $noScanPolygonPvp ? '' : $pvptext4 ?>';
-	var verifiedDespawnTimer = '<?php echo $verifiedDespawnTimer ?>';
     var notifySound = <?php echo $noNotifySound ? 'false' : $notifySound ?>;
     var criesSound = <?php echo $noCriesSound ? 'false' : $criesSound ?>;
     var enableStartMe = <?php echo $noStartMe ? 'false' : $enableStartMe ?>;
