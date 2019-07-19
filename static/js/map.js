@@ -174,13 +174,8 @@ var exLayerGroup = new L.LayerGroup()
 var gymLayerGroup = new L.LayerGroup()
 var stopLayerGroup = new L.LayerGroup()
 var scanAreaGroup = new L.LayerGroup()
-//v2 xxleevo
 var scanAreaGroupQuest = new L.LayerGroup()
-// --end of edited/added code
-//v3 xxleevo
 var scanAreaGroupPvp = new L.LayerGroup()
-// --end of edited/added code
-//v6 nestPolygons
 var nestPolygonGroup = new L.LayerGroup()
 var scanAreas = []
 /*
@@ -371,9 +366,7 @@ function initMap() { // eslint-disable-line no-unused-vars
         maxZoom: maxZoom,
         zoomControl: false,
 		preferCanvas: true,
-		//v2 - v3 xxleevo
         layers: [weatherLayerGroup, exLayerGroup, gymLayerGroup, stopLayerGroup, scanAreaGroup, scanAreaGroupQuest,scanAreaGroupPvp,nestPolygonGroup]
-		// --end of edited/added code
 	})
 
     setTileLayer(Store.get('map_style'))
@@ -444,15 +437,9 @@ function initMap() { // eslint-disable-line no-unused-vars
     updateWeatherOverlay()
     updateS2Overlay()
     buildScanPolygons()
-	//v2 xxleevo
     buildScanPolygonQuest()
-	// --end of edited/added code
-	//v3 xxleevo
     buildScanPolygonPvp()
-	// --end of edited/added code
-	//v6 nestpolygons
 	buildNestPolygons()
-	// --end of edited code
 
     map.on('moveend', function () {
         updateS2Overlay()
@@ -582,7 +569,6 @@ function showS2Cells(level, style) {
         steps++
     } while (steps < count)
 }
-// v6 xxleevo - Nest polygons added
 function buildScanPolygons() {
     if (!Store.get(['showScanPolygon'])) {
         return false
@@ -592,7 +578,6 @@ function buildScanPolygons() {
         var geoPolys = L.geoJson(data, {
             onEachFeature: function (features, featureLayer) {
                 featureLayer.setStyle({color: features.properties.stroke, fillColor: features.properties.fill})
-                //featureLayer.bindPopup(features.properties.name)
             }
         })
         scanAreaGroup.addLayer(geoPolys)
@@ -608,13 +593,11 @@ function buildNestPolygons() {
         var nestPolys = L.geoJson(data, {
             onEachFeature: function (features, featureLayer) {
                 featureLayer.setStyle({color: features.properties.stroke, fillColor: features.properties.fill})
-                //featureLayer.bindPopup(features.properties.name)
             }
         })
         nestPolygonGroup.addLayer(nestPolys)
     })
 }
-//v2 - xxleevo
 function buildScanPolygonQuest() {
     if (!Store.get(['showScanPolygonQuest'])) {
         return false
@@ -624,14 +607,11 @@ function buildScanPolygonQuest() {
         var geoPolyQuest = L.geoJson(data, {
             onEachFeature: function (features, featureLayer) {
                 featureLayer.setStyle({color: features.properties.stroke, fillColor: features.properties.fill})
-                //featureLayer.bindPopup(features.properties.name)
             }
         })
         scanAreaGroupQuest.addLayer(geoPolyQuest)
     })
 }
-// --end of edited/added code
-//v3 - xxleevo
 function buildScanPolygonPvp() {
     if (!Store.get(['showScanPolygonPvp'])) {
         return false
@@ -672,25 +652,11 @@ function buildScanPolygonPvp() {
 					featureLayer.bindPopup('no additional information found.')
 					}
 				}
-				
-				else{
-                //featureLayer.bindPopup(features.properties.name)
-				}
-				//if(features.properties.name){
-				//	if((features.properties.name).match(/polygon.*/)){
-
-				//		featureLayer.setStyle({
-				//			color: '#e23d4b'
-				//			}
-				//		);
-				//	}
-				//}
             }
         })
         scanAreaGroupPvp.addLayer(geoPolyPvp)
     })
 }
-// --end of edited/added code
 
 function initSidebar() {
     $('#gyms-switch').prop('checked', Store.get('showGyms'))
@@ -746,12 +712,8 @@ function initSidebar() {
     $('#direction-provider').val(Store.get('directionProvider'))
     $('#ranges-switch').prop('checked', Store.get('showRanges'))
     $('#scan-area-switch').prop('checked', Store.get('showScanPolygon'))
-	//v2 xxleevo
     $('#scan-area-quest-switch').prop('checked', Store.get('showScanPolygonQuest'))
-	// --end of edited/added code
-	//v3 xxleevo
     $('#scan-area-pvp-switch').prop('checked', Store.get('showScanPolygonPvp'))
-	// --end of edited/added code
     $('#sound-switch').prop('checked', Store.get('playSound'))
     $('#cries-switch').prop('checked', Store.get('playCries'))
     $('#cries-switch-wrapper').toggle(Store.get('playSound'))
@@ -1556,10 +1518,8 @@ function getQuest(item) {
             '<b><u>Belohnung:</u></b> ' + i8ln(idToPokemon[rewardinfo['pokemon_id']]).name + '<br>' +
             '</center></div>'
         }
-
 		
 		//If condition is only 1 item/pokemon/etc
-		
 		if(item['quest_target'] === 1 ){//hardcode singulary in german
 			str = str.replace('Würfe', 'Wurf')
 			str = str.replace('Raids', 'Raid')
@@ -2371,10 +2331,8 @@ function updateGymIcons() {
 }
 function getPokestopMarkerIcon(item) {
     var reward = JSON.parse(item['quest_rewards'])
-	//v5 - xxleevo lures
 	var lure = item['lure_expiration']
 	var lureType = item['lure_id']
-	//v5 - end of code block
     var stopMarker = ''
     var html = ''
 	
@@ -2402,10 +2360,7 @@ function getPokestopMarkerIcon(item) {
             if (rewardinfo['shiny'] === true) {
                 shinyStr = '_shiny'
             }
-			//v5 - xxleevo lures
-			
-			
-			
+
 			var rewardImg = '<img src="static/icons/rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
 			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
@@ -2505,7 +2460,6 @@ function getPokestopMarkerIcon(item) {
             '<img src="static/forts/Pstop.png" style="width:32px;height:auto;" />' +
             '</div>'
 			}
-			//v5 - end of codeblock
         stopMarker = L.divIcon({
             iconSize: [31, 31],
             iconAnchor: [15, 28],
@@ -4978,14 +4932,11 @@ function processPokestops(i, item) {
                 item.scanArea = insideScan
             }
         })
-		//Temp Remove stops dont make the Stop again -- xxleevo
+		//If Stop isnt hidden, set it up again
 		if (!item.hidden) {
-		//
         item.marker = setupPokestopMarker(item)
         mapData.pokestops[item['pokestop_id']] = item
-		//xxleevo
         }
-		//
 
     } else {
         // change existing pokestop marker to unlured/lured
@@ -7098,7 +7049,6 @@ $(function () {
             scanAreaGroup.clearLayers()
         }
     })
-	//v2 - xxleevo
     $('#scan-area-quest-switch').change(function () {
         Store.set('showScanPolygonQuest', this.checked)
         if (this.checked) {
@@ -7107,8 +7057,6 @@ $(function () {
             scanAreaGroupQuest.clearLayers()
         }
     })
-	// --end of edited/added code
-	//v3 - xxleevo
     $('#scan-area-pvp-switch').change(function () {
         Store.set('showScanPolygonPvp', this.checked)
         if (this.checked) {
@@ -7117,7 +7065,6 @@ $(function () {
             scanAreaGroupPvp.clearLayers()
         }
     })
-	// --end of edited/added code
     $('#pokestops-switch').change(function () {
         var options = {
             'duration': 500
