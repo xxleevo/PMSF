@@ -5220,7 +5220,7 @@ function updateMap() {
         lng: position.lng
     })
     // lets try and get the s2 cell id in the middle
-    if (mapType !== 'rdm') {
+    if (mapType !== 'rdm' && enableWeatherOverlay) {
         var s2CellCenter = S2.keyToId(S2.latLngToKey(position.lat, position.lng, 10))
         if ((s2CellCenter) && (String(s2CellCenter) !== $('#currentWeather').data('current-cell')) && (map.getZoom() > 13)) {
             loadWeatherCellData(s2CellCenter).done(function (cellWeather) {
