@@ -2266,6 +2266,7 @@ if ( $blockIframe ) {
 	var noPokestopImages = <?php echo $noPokestopImages === true ? 'true' : 'false' ?>;
     var denyRaidLevelsBelow = <?php echo ($denyRaidLevelsBelow >= 1 && $denyRaidLevelsBelow <= 6) ? $denyRaidLevelsBelow : 0 ?>;
 	var noRaidMoves  = <?php echo $noRaidMoves === true ? 'true' : 'false' ?>;
+	var noCostumeIcons = <?php echo $noCostumeIcons === true ? 'true' : 'false' ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

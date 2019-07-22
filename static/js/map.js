@@ -909,6 +909,10 @@ function pokemonLabel(item) {
         details +=
             '</div>'
     }
+	var costumeString = ''
+	if (item['costume'] > 0 && noCostumeIcons === false) {
+        costumeString = '_' + item['costume']
+	}
 
 	var contentstring =
 		'<center><div style="background-color:rgba(0,0,0,0.4);margin: 0px -10px -5px -10px;border-radius:6px;box-shadow: inset 0 0 2px #fff;">' +
@@ -947,12 +951,12 @@ function pokemonLabel(item) {
 	//handle the icon, add weather icon if enabled
 	if(Store.get('showWeatherIcons') && weatherBoostedCondition !== 0 && !noWeatherIcons && noWeatherShadow){ // show weather icon if enabled
 		contentstring +=
-		'<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/> '+
+		'<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + costumeString +'.png"/> '+
 		'<img src="static/weather/i-' + weatherBoostedCondition + '.png" style="width:45px;height:auto;position:absolute;top:38px;left:140px;"/>'+
 		'</center>'
 	}else{
 		contentstring +=
-		'<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/></center>'
+		'<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + costumeString +'.png"/></center>'
 	}
 
 	if (noRarityDisplay === false) {

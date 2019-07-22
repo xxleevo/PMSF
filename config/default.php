@@ -269,6 +269,7 @@ $questscanInfotext = "some text for quest information supporting<br>html";
 
 $copyrightSafe = true;
 $iconRepository = 'https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/';
+$noCostumeIcons = true;											// enable/disable costume forms (label only) (Note: use icon-sets with costumes if using this)
 
 $noMapStyle = false;                                                // true/false
 $mapStyle = 'openstreetmap';                                        // openstreetmap, darkmatter, styleblackandwhite, styletopo, stylesatellite, stylewikipedia
