@@ -576,6 +576,20 @@ if ( $blockIframe ) {
                 </div>';
 		} ?>
                 <?php
+                if ( ! $noRocketInvasions ) {
+                    echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
+                    <font size="3">Nur Team Rocket</font>
+                    <div class="onoffswitch">
+                        <input id="invasions-switch" type="checkbox" name="invasions-switch"
+                               class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="invasions-switch">
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>';
+		} ?>
+                <?php
                 if ( ! $noQuests && ! $noQuestsItems && ! $noQuestsItemsAmounts) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
                     <font size="3">Belohnungsanzahl</font>
@@ -2169,7 +2183,10 @@ if ( $blockIframe ) {
     var gymSidebar = <?php echo $noGymSidebar ? 'false' : $gymSidebar ?>;
     var enablePokemon = <?php echo $noPokemon ? 'false' : $enablePokemon ?>;
     var enablePokestops = <?php echo $noPokestops ? 'false' : $enablePokestops ?>;
+    var noLures = <?php echo $noLures === true ? 'true' : 'false' ?>;
     var enableLured = <?php echo $noLures ? 'false' : $enableLured ?>;
+	var noInvasions = <?php echo $noRocketInvasions === true ? 'true' : 'false' ?>;
+	var enableInvasions = <?php echo $noRocketInvasions ? 'false' : $enableInvasions ?>;
     var noQuests = <?php echo $noQuests === true ? 'true' : 'false' ?>;
     var enableQuests = <?php echo $noQuests ? 'false' : $enableQuests ?>;
 	var enableQuestsItemsAmounts = <?php echo $noQuestsItemsAmounts ? 'false' : $enableQuestsItemsAmounts ?>;

@@ -145,9 +145,9 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         for (i = 0; i < pokestopCount.length; i++) {
             if (pokestopCount[i] > 0) {
                 if (i === 0) {
-                    pokestopListString += '<tr><td><img src="static/forts/Pstop.png" /></td><td>' + i8ln('Not Lured') + '</td><td>' + pokestopCount[i] + '</td><td>' + Math.round(pokestopCount[i] * 100 / pokestopTotal * 10) / 10 + '%</td></tr>'
+                    pokestopListString += '<tr><td><img src="static/forts/Pstop.png" style="width:50px;height:auto;" /></td><td>' + i8ln('Not Lured') + '</td><td>' + pokestopCount[i] + '</td><td>' + Math.round(pokestopCount[i] * 100 / pokestopTotal * 10) / 10 + '%</td></tr>'
                 } else if (i === 1) {
-                    pokestopListString += '<tr><td><img src="static/forts/PstopLured.png" /></td><td>' + i8ln('Lured') + '</td><td>' + pokestopCount[i] + '</td><td>' + Math.round(pokestopCount[i] * 100 / pokestopTotal * 10) / 10 + '%</td></tr>'
+                    pokestopListString += '<tr><td><img src="static/forts/Pstop-Lured_501.png" style="width:50px;height:auto;" /></td><td>' + i8ln('Lured') + '</td><td>' + pokestopCount[i] + '</td><td>' + Math.round(pokestopCount[i] * 100 / pokestopTotal * 10) / 10 + '%</td></tr>'
                 }
             }
         }

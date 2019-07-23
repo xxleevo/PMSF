@@ -254,6 +254,11 @@ var StoreOptions = {
             default: enableLured,
             type: StoreTypes.Boolean
         },
+    'showInvasions':
+        {
+            default: enableInvasions,
+            type: StoreTypes.Boolean
+        },
     'showQuests':
         {
             default: enableQuests,

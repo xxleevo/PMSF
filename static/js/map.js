@@ -695,6 +695,7 @@ function initSidebar() {
     $('#pokestops-filter-wrapper').toggle(Store.get('showPokestops'))
     $('#lures-switch').prop('checked', Store.get('showLures'))
     $('#quests-switch').prop('checked', Store.get('showQuests'))
+    $('#invasions-switch').prop('checked', Store.get('showInvasions'))
     $('#quests-amount-icon-switch').prop('checked', Store.get('showItemAmounts'))
     $('#quests-filter-wrapper').toggle(Store.get('showQuests'))
     $('#dustvalue').text(Store.get('showDustAmount'))
@@ -1569,18 +1570,26 @@ function pokestopLabel(item) {
         item['pokestop_name'] = 'Pokéstop'
     }
 
+	var invasion = item['invasion']
+	var invasionExpire = item['invasion_expiration']
+	
+	
 	var specialLure = ''
-	if(lureType == 502 && item['lure_expiration'] > Date.now()){ // Special lure: Icy
-		specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Gletscher-Lockmodul </b>'
-	} else if(lureType == 503 && item['lure_expiration'] > Date.now()){//Special lure: Mossy
-		specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Moos-Lockmodul </b>'
-	} else if(lureType == 504 && item['lure_expiration'] > Date.now()){//Special lure: Electric
-		specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Magnet-Lockmodul </b>'
+	if(!noLures){
+		if(lureType == 502 && item['lure_expiration'] > Date.now()){ // Special lure: Icy
+			specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Gletscher-Lockmodul </b>'
+		} else if(lureType == 503 && item['lure_expiration'] > Date.now()){//Special lure: Mossy
+			specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Moos-Lockmodul </b>'
+		} else if(lureType == 504 && item['lure_expiration'] > Date.now()){//Special lure: Electric
+			specialLure = '<b class="pokestop-lure-'+ lureType +'-name"> Magnet-Lockmodul </b>'
+		}
 	}
 	
 	var stopName = ''
 	// Pick the Stops name with color based of lure,quest,normal
-	if (item['lure_expiration'] > Date.now()){ 
+	if(invasion == '1' && invasionExpire > Date.now() && !noInvasions){
+		stopName = '<b class="pokestop-tr-name">' + item['pokestop_name'] + '</b>'
+	}else if (item['lure_expiration'] > Date.now()){ 
 		if (lureType > 501){ // Lure name based on lure type
 			stopName = '<b class="pokestop-lure-'+ lureType +'-name">' + item['pokestop_name'] + '</b>'
 		} else{ // normal lure
@@ -1598,7 +1607,10 @@ function pokestopLabel(item) {
 	var stopImage = ''
 	var stopLabel = ''
 	if (!noPokestopImages){
-		if (item['lure_expiration'] > Date.now() && item['url'] !== null) {
+		
+		if(item['invasion_expiration'] > Date.now() && item['url'] !== null && !noInvasions){
+			stopImage = '<img class="pokestop-tr-image" src="' + item['url'] + '">'
+		}else if (item['lure_expiration'] > Date.now() && item['url'] !== null && !noLures) {
 			if (lureType > 501) { //If the lure is special type
 			stopImage = '<img class="pokestop-lure-'+ lureType + '-image" src="' + item['url'] + '">'
 			} else{
@@ -1620,10 +1632,25 @@ function pokestopLabel(item) {
 		maplinkText = '- <a href="./?lat=' + item['latitude'] + '&lon=' + item['longitude'] + '&zoom=16">Maplink</a>'
 	}
 	
+	var invasionImage = ''
+	var invasionStr = ''
+	var invasionEndStr = ''
+
+	if (item['invasion_expiration'] > Date.now() && !noInvasions) { // Building the invasion image and the invasion expiration text
+		invasionImage = '<img style="margin-top:0px;margin-bottom:55px;margin-left:-33px;height:40px;position:absolute" src="static/forts/rocket-invasion.png"/>'
+		invasionEndStr = getTimeStr(item['invasion_expiration'])
+		invasionStr =
+		'<div style="font-weight:900;">' +
+		'Team Rocket bis' + ': ' + invasionEndStr +
+		' <span class="label-countdown" disappears-at="' + item['invasion_expiration'] + '">(00m00s)</span>' +
+		'</div>'
+	}
+	
 	var lureImage = ''
 	var lureStr = ''
 	var lureEndStr = ''
-	if (item['lure_expiration'] > Date.now()) { // Building the lure module image and the lure expiration text
+
+	if (item['lure_expiration'] > Date.now() && !noLures) { // Building the lure module image and the lure expiration text
 		lureImage = '<img style="margin-top:-15px;margin-bottom:55px;margin-left:-105px;height:65px;position:absolute" src="static/forts/LureModule_' + lureType + '.png"/>'
 		lureEndStr = getTimeStr(item['lure_expiration'])
 		lureStr =
@@ -1660,6 +1687,10 @@ function pokestopLabel(item) {
         str +=
             '<div><center>' +
 			stopImage 
+			if (item['invasion_expiration'] > Date.now()) {
+				str +=
+				invasionImage
+			}
 			if (item['lure_expiration'] > Date.now()) {
 				str +=
 				lureImage +
@@ -1670,6 +1701,7 @@ function pokestopLabel(item) {
 			}
 			str += 
 				'<div>' +
+				invasionStr +
 				lureStr +
 				getQuest(item) +
 				'<a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a>'
@@ -1689,9 +1721,11 @@ function pokestopLabel(item) {
             '</div>' +
             '<div>' +
 			stopImage +
+			invasionImage +
 			lureImage +
             '</div>' +
             '<div>' +
+			invasionStr +
 			lureStr +
             '</div>' +
             '</center>' +
@@ -2337,10 +2371,19 @@ function getPokestopMarkerIcon(item) {
     var reward = JSON.parse(item['quest_rewards'])
 	var lure = item['lure_expiration']
 	var lureType = item['lure_id']
+	var invasion = item['invasion']
+	var invasion_expiration = item['invasion_expiration']
     var stopMarker = ''
     var html = ''
 	
-
+	var width = 32
+	var invasionString = ''
+	var anchor = [15, 28]
+	if(invasion == '1' && invasion_expiration > Date.now()){
+		invasionString = '-tr'
+		width = 50
+		anchor = [24, 38]
+	}
 	
 	
     if (!noQuests && reward !== null) {
@@ -2366,15 +2409,16 @@ function getPokestopMarkerIcon(item) {
             }
 
 			var rewardImg = '<img src="static/icons/rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+
 			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
-					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
+					'<img src="static/forts/Pstop-Lured_'+ lureType + invasionString + '.png" style="width:50px;height:auto;top:-35px;right:10px;"/>'+
 					rewardImg +
 					'</div>'
 			}
 			else{
             html = '<div style="position:relative;">' +
-                '<img src="static/forts/Pstop-quest-small.png" style="width:50px;height:72;top:-35px;right:10px;"/>'+
+                '<img src="static/forts/Pstop-quest-small' + invasionString +'.png" style="width:50px;height:auto;top:-35px;right:10px;"/>'+
                 rewardImg +
                 '</div>'
 			}
@@ -2393,13 +2437,13 @@ function getPokestopMarkerIcon(item) {
 			
 			if(lure > Date.now() ){
 				html = '<div style="position:relative;">' +
-					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+					'<img src="static/forts/Pstop-Lured_'+ lureType + invasionString + '.png" style="width:50px;height:auto;top:-35px;right:10px;"/>' +
 					rewardImg +
 					'</div>'
 			}
 			else{
             html = '<div style="position:relative;">' +
-                '<img src="static/forts/Pstop-quest-small.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+                '<img src="static/forts/Pstop-quest-small' + invasionString + '.png" style="width:50px;height:auto;top:-35px;right:10px;"/>' +
                 rewardImg +
                 '</div>'
 			}
@@ -2417,13 +2461,13 @@ function getPokestopMarkerIcon(item) {
 			}
 			if(lure > Date.now()){
 				html = '<div style="position:relative;">' +
-					'<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+					'<img src="static/forts/Pstop-Lured_'+ lureType + invasionString + '.png" style="width:50px;height:auto;top:-35px;right:10px;"/>' +
 					rewardImg +
 					'</div>'
 			}
 			else{
             html = '<div style="position:relative;">' +
-                '<img src="static/forts/Pstop-quest-small.png" style="width:50px;height:72;top:-35px;right:10px;"/>' +
+                '<img src="static/forts/Pstop-quest-small' + invasionString + '.png" style="width:50px;height:auto;top:-35px;right:10px;"/>' +
                 rewardImg +
                 '</div>'
 			}
@@ -2437,17 +2481,17 @@ function getPokestopMarkerIcon(item) {
         } else {
 			if(lure > Date.now()){
 				html = '<div>' +
-                '<img src="static/forts/Pstop-Lured_'+ lureType + '.png"' +
+                '<img src="static/forts/Pstop-Lured_'+ lureType + invasionString + '.png" style="width:50px;height:auto;"' +
                 '</div>'
 			}
 			else{
 			html = '<div>' +
-                '<img src="static/forts/Pstop.png"' +
+                '<img src="static/forts/Pstop' + invasionString + '.png" style="width:' + width + 'px;height:auto;"' +
                 '</div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
-                iconAnchor: [15, 28],
+                iconAnchor: anchor,
                 popupAnchor: [0, -35],
                 className: 'stop-marker',
                 html: html
@@ -2456,17 +2500,17 @@ function getPokestopMarkerIcon(item) {
     } else {
 			if(lure > Date.now() ){
 				html = '<div>' +
-            '<img src="static/forts/Pstop-Lured_'+ lureType + '.png" style="width:32px;height:auto;" />' +
+            '<img src="static/forts/Pstop-Lured_'+ lureType + invasionString + '.png" style="width:' + width + 'px;height:auto;" />' +
             '</div>'
 			}
 			else{
 				html = '<div>' +
-            '<img src="static/forts/Pstop.png" style="width:32px;height:auto;" />' +
+            '<img src="static/forts/Pstop' + invasionString + '.png" style="width:' + width + 'px;height:auto;" />' +
             '</div>'
 			}
         stopMarker = L.divIcon({
             iconSize: [31, 31],
-            iconAnchor: [15, 28],
+            iconAnchor: anchor,
             popupAnchor: [0, -35],
             className: 'stop-marker',
             html: html
@@ -3183,6 +3227,7 @@ function loadRawData() {
     var loadPokestops = Store.get('showPokestops')
     var loadLures = Store.get('showLures')
     var loadQuests = Store.get('showQuests')
+    var loadInvasions = Store.get('showInvasions')
     var loadDustamount = Store.get('showDustAmount')
     var loadNests = Store.get('showNests')
     var loadCommunities = Store.get('showCommunities')
@@ -4917,6 +4962,9 @@ function processPokestops(i, item) {
     if (Store.get('showLures') && !item['lure_expiration']) {
         return true
     }
+    if (Store.get('showInvasions') && !item['invasion_expiration']) {
+        return true
+    }
     if (!mapData.pokestops[item['pokestop_id']]) {
         // new pokestop, add marker to map and item to dict
         if (item.marker && item.marker.rangeCircle) {
@@ -4937,15 +4985,23 @@ function processPokestops(i, item) {
             }
         })
 		//If Stop isnt hidden, set it up again
-		if (!item.hidden) {
+		//if (!item.hidden) {
         item.marker = setupPokestopMarker(item)
         mapData.pokestops[item['pokestop_id']] = item
-        }
+        //}
 
     } else {
         // change existing pokestop marker to unlured/lured
         var item2 = mapData.pokestops[item['pokestop_id']]
         if (!!item['lure_expiration'] !== !!item2['lure_expiration']) {
+            if (item2.marker && item2.marker.rangeCircle) {
+                markers.removeLayer(item2.marker.rangeCircle)
+            }
+            markers.removeLayer(item2.marker)
+            item.marker = setupPokestopMarker(item)
+            mapData.pokestops[item['pokestop_id']] = item
+        }
+        if (!!item['invasion_expiration'] !== !!item2['invasion_expiration']) {
             if (item2.marker && item2.marker.rangeCircle) {
                 markers.removeLayer(item2.marker.rangeCircle)
             }
@@ -4975,10 +5031,39 @@ function updatePokestops() {
             value.marker = setupPokestopMarker(value)
 			}
         }
+        if (value['invasion_expiration'] && value['invasion_expiration'] !== '0' && value['invasion_expiration'] < currentTime) {
+            if (value.marker && value.marker.rangeCircle) {
+                markers.removeLayer(value.marker.rangeCircle)
+                markersnotify.removeLayer(value.marker.rangeCircle)
+            }
+            markers.removeLayer(value.marker)
+            markersnotify.removeLayer(value.marker)
+			if(!value.hidden){
+            value.marker = setupPokestopMarker(value)
+			}
+        }
     })
     if (Store.get('showLures')) {
         $.each(mapData.pokestops, function (key, value) {
             if (value['lure_expiration'] < currentTime) {
+                removeStops.push(key)
+            }
+        })
+        $.each(removeStops, function (key, value) {
+            if (mapData.pokestops[value] && mapData.pokestops[value].marker) {
+                if (mapData.pokestops[value].marker.rangeCircle) {
+                    markers.removeLayer(mapData.pokestops[value].marker.rangeCircle)
+                    markersnotify.removeLayer(mapData.pokestops[value].marker.rangeCircle)
+                }
+                markers.removeLayer(mapData.pokestops[value].marker)
+                markersnotify.removeLayer(mapData.pokestops[value].marker)
+                delete mapData.pokestops[value]
+            }
+        })
+    }
+    if (Store.get('showInvasions')) {
+        $.each(mapData.pokestops, function (key, value) {
+            if (value['invasion_expiration'] < currentTime) {
                 removeStops.push(key)
             }
         })
@@ -6830,6 +6915,8 @@ $(function () {
                     lastpokestops = false
                 } else if (storageKey === 'showLures') {
                     lastpokestops = false
+                } else if (storageKey === 'showInvasions') {
+                    lastpokestops = false
                 } else if (storageKey === 'showQuests') {
                     lastpokestops = false
                 } else if (storageKey === 'showPortals') {
@@ -7084,8 +7171,10 @@ $(function () {
 
     $('#lures-switch').change(function () {
         Store.set('showLures', this.checked)
-        if (this.checked === true && Store.get('showQuests') === true) {
-            Store.set('showQuests', false)
+        if ((this.checked === true )&& (Store.get('showInvasions') === true || Store.get('showQuests') === true)) {
+            Store.set('showInvasions', false)
+			Store.set('showQuests', false)
+            $('#invasions-switch').prop('checked', false)
             $('#quests-switch').prop('checked', false)
         }
         if (this.checked) {
@@ -7097,11 +7186,31 @@ $(function () {
         }
         return buildSwitchChangeListener(mapData, ['pokestops'], 'showLures').bind(this)()
     })
+	
+    $('#invasions-switch').change(function () {
+        Store.set('showInvasions', this.checked)
+        if ((this.checked === true )&& (Store.get('showQuests') === true || Store.get('showLures') === true)) {
+            Store.set('showQuests', false)
+			Store.set('showLures', false)
+            $('#quests-switch').prop('checked', false)
+            $('#lures-switch').prop('checked', false)
+        }
+        if (this.checked) {
+            lastpokestops = false
+            updateMap()
+        } else {
+            lastpokestops = false
+            updateMap()
+        }
+        return buildSwitchChangeListener(mapData, ['pokestops'], 'showInvasions').bind(this)()
+    })
 
     $('#quests-switch').change(function () {
         Store.set('showQuests', this.checked)
-        if (this.checked === true && Store.get('showLures') === true) {
-            Store.set('showLures', false)
+        if ((this.checked === true )&& (Store.get('showInvasions') === true || Store.get('showLures') === true)) {
+            Store.set('showInvasions', false)
+			Store.set('showLures', false)
+            $('#invasions-switch').prop('checked', false)
             $('#lures-switch').prop('checked', false)
         }
         var options = {
