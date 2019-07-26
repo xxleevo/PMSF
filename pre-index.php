@@ -573,7 +573,8 @@ if ( $blockIframe ) {
                             <span class="switch-handle"></span>
                         </label>
                     </div>
-                </div>';
+                </div>
+				<hr style="padding:0px;margin:10px;" />';
 				} ?>
                 <?php
                 if ( ! $noRocketInvasions ) {
@@ -599,22 +600,10 @@ if ( $blockIframe ) {
 							<span class="switch-handle"></span>
 						</label>
 					</div>
-                </div>';
+                </div>
+				<hr style="padding:0px;margin:10px;" />';
 				} ?>
-                <?php
-                if ( ! $noQuests && ! $noQuestsItems && ! $noQuestsItemsAmounts) {
-                    echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-                    <font size="3">Belohnungsanzahl</font>
-                    <div class="onoffswitch">
-                        <input id="quests-amount-icon-switch" type="checkbox" name="quests-amount-icon-switch"
-                               class="onoffswitch-checkbox" checked>
-                        <label class="onoffswitch-label" for="quests-amount-icon-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
-				}?>
+				
                 <?php
                 if ( ! $noQuests ) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
@@ -629,6 +618,20 @@ if ( $blockIframe ) {
                     </div>
                 </div>';
 				?>
+                <?php
+					if ( ! $noQuestsItems && ! $noQuestsItemsAmounts) {
+						echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
+						<font size="3">Belohnungsanzahl</font>
+						<div class="onoffswitch">
+							<input id="quests-amount-icon-switch" type="checkbox" name="quests-amount-icon-switch"
+								class="onoffswitch-checkbox" checked>
+							<label class="onoffswitch-label" for="quests-amount-icon-switch">
+								<span class="switch-label" data-on="On" data-off="Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>';
+					} ?>
 
                     <div id="quests-filter-wrapper" style="display:none">
                         <div id="quests-tabs">
@@ -707,7 +710,7 @@ if ( $blockIframe ) {
                         </div>
                     </div>
                 <?php
-		} ?>
+				} ?>
                     </div>
                 </div>
                 <?php
