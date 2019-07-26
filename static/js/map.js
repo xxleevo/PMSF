@@ -1569,7 +1569,7 @@ function pokestopLabel(item) {
     if (item['pokestop_name'] === null) {
         item['pokestop_name'] = 'Pokéstop'
     }
-
+	
 	var invasion = item['invasion']
 	var invasionExpire = item['invasion_expiration']
 	
@@ -1588,7 +1588,7 @@ function pokestopLabel(item) {
 	var stopName = ''
 	// Pick the Stops name with color based of lure,quest,normal
 	if(invasion == '1' && invasionExpire > Date.now() && !noInvasions){
-		stopName = '<b class="pokestop-tr-name">' + item['pokestop_name'] + '</b>'
+		stopName = '<b class="pokestop-rocket-name">' + item['pokestop_name'] + '</b>'
 	}else if (item['lure_expiration'] > Date.now()){ 
 		if (lureType > 501){ // Lure name based on lure type
 			stopName = '<b class="pokestop-lure-'+ lureType +'-name">' + item['pokestop_name'] + '</b>'
@@ -1609,7 +1609,7 @@ function pokestopLabel(item) {
 	if (!noPokestopImages){
 		
 		if(item['invasion_expiration'] > Date.now() && item['url'] !== null && !noInvasions){
-			stopImage = '<img class="pokestop-tr-image" src="' + item['url'] + '">'
+			stopImage = '<img class="pokestop-rocket-image" src="' + item['url'] + '">'
 		}else if (item['lure_expiration'] > Date.now() && item['url'] !== null && !noLures) {
 			if (lureType > 501) { //If the lure is special type
 			stopImage = '<img class="pokestop-lure-'+ lureType + '-image" src="' + item['url'] + '">'
