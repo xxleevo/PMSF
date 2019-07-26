@@ -437,7 +437,12 @@ var StoreOptions = {
         {
             default: exEligible,
             type: StoreTypes.Boolean
-        }
+        },
+    'showInvasionTimer':
+        {
+            default: enableInvasionTimer,
+            type: StoreTypes.Boolean
+		}
 }
 
 var Store = {

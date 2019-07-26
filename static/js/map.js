@@ -696,6 +696,7 @@ function initSidebar() {
     $('#lures-switch').prop('checked', Store.get('showLures'))
     $('#quests-switch').prop('checked', Store.get('showQuests'))
     $('#invasions-switch').prop('checked', Store.get('showInvasions'))
+	$('#invasion-timer-switch').prop('checked', Store.get('showInvasionTimer'))
     $('#quests-amount-icon-switch').prop('checked', Store.get('showItemAmounts'))
     $('#quests-filter-wrapper').toggle(Store.get('showQuests'))
     $('#dustvalue').text(Store.get('showDustAmount'))
@@ -2171,7 +2172,7 @@ function getGymMarkerIcon(item) {
             className: 'egg-marker',
             html: html
         })
-		//Selfmade -- 4h old Gyms = harmony
+		//If gyms are older than 4h - unscanned
 	} else if( (lastScanned/1000) < ((Date.now()/1000)-14400) ){
         html = '<div>' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
@@ -2184,7 +2185,6 @@ function getGymMarkerIcon(item) {
             className: 'egg-marker',
             html: html
         })
-	// Selfmade block ends
     } else {
         html = '<div>' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
@@ -2422,6 +2422,9 @@ function getPokestopMarkerIcon(item) {
                 rewardImg +
                 '</div>'
 			}
+			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
+				html += '<div><span class="label-countdown invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
                 iconAnchor: [24, 38],
@@ -2447,6 +2450,9 @@ function getPokestopMarkerIcon(item) {
                 rewardImg +
                 '</div>'
 			}
+			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
+				html += '<div><span class="label-countdown invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
                 iconAnchor: [24, 38],
@@ -2471,6 +2477,9 @@ function getPokestopMarkerIcon(item) {
                 rewardImg +
                 '</div>'
 			}
+			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
+				html += '<div><span class="label-countdown invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
                 iconAnchor: [24, 38],
@@ -2488,6 +2497,9 @@ function getPokestopMarkerIcon(item) {
 			html = '<div>' +
                 '<img src="static/forts/Pstop' + invasionString + '.png" style="width:' + width + 'px;height:auto;"' +
                 '</div>'
+			}
+			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
+				html += '<div><span class="label-countdown invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2507,6 +2519,9 @@ function getPokestopMarkerIcon(item) {
 				html = '<div>' +
             '<img src="static/forts/Pstop' + invasionString + '.png" style="width:' + width + 'px;height:auto;" />' +
             '</div>'
+			}
+			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
+				html += '<div><span class="label-countdown invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
 			}
         stopMarker = L.divIcon({
             iconSize: [31, 31],
@@ -5019,6 +5034,7 @@ function updatePokestops() {
     var removeStops = []
 	var currentTime = Date.now()
 	
+	// change lured pokestop marker to unlured when expired
     $.each(mapData.pokestops, function (key, value) {
         if (value['lure_expiration'] && value['lure_expiration'] !== '0' && value['lure_expiration'] < currentTime) {
             if (value.marker && value.marker.rangeCircle) {
@@ -7203,6 +7219,25 @@ $(function () {
             updateMap()
         }
         return buildSwitchChangeListener(mapData, ['pokestops'], 'showInvasions').bind(this)()
+    })
+	
+    $('#invasion-timer-switch').change(function () {
+        Store.set('showInvasionTimer', this.checked)
+        if (this.checked) {
+			$.each(mapData.pokestops, function (key, value) {
+				if(value['invasion_expiration'] > 0){
+					markers.removeLayer(value.marker)
+					value.marker = setupPokestopMarker(value)
+				}
+			})
+        } else{
+			$.each(mapData.pokestops, function (key, value) {
+				if(value['invasion_expiration'] > 0){
+					markers.removeLayer(value.marker)
+					value.marker = setupPokestopMarker(value)
+				}
+			})
+		}
     })
 
     $('#quests-switch').change(function () {

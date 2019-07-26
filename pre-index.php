@@ -574,21 +574,33 @@ if ( $blockIframe ) {
                         </label>
                     </div>
                 </div>';
-		} ?>
+				} ?>
                 <?php
                 if ( ! $noRocketInvasions ) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
                     <font size="3">Nur Team Rocket</font>
                     <div class="onoffswitch">
-                        <input id="invasions-switch" type="checkbox" name="invasions-switch"
-                               class="onoffswitch-checkbox" checked>
+                        <input id="invasions-switch" type="checkbox" name="invasions-switch" class="onoffswitch-checkbox" checked>
                         <label class="onoffswitch-label" for="invasions-switch">
                             <span class="switch-label" data-on="On" data-off="Off"></span>
                             <span class="switch-handle"></span>
                         </label>
                     </div>
                 </div>';
-		} ?>
+				} ?>
+                <?php
+                if ( ! $noInvasionTimer && ! $noRocketInvasions ) {
+                    echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
+                    <font size="3">Team Rocket Timer</font>
+                    <div class="onoffswitch">
+						<input id="invasion-timer-switch" type="checkbox" name="invasion-timer-switch" class="onoffswitch-checkbox" checked>
+						<label class="onoffswitch-label" for="invasion-timer-switch">
+							<span class="switch-label" data-on="On" data-off="Off"></span>
+							<span class="switch-handle"></span>
+						</label>
+					</div>
+                </div>';
+				} ?>
                 <?php
                 if ( ! $noQuests && ! $noQuestsItems && ! $noQuestsItemsAmounts) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
@@ -602,7 +614,7 @@ if ( $blockIframe ) {
                         </label>
                     </div>
                 </div>';
-		}?>
+				}?>
                 <?php
                 if ( ! $noQuests ) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
@@ -616,7 +628,7 @@ if ( $blockIframe ) {
                         </label>
                     </div>
                 </div>';
-		?>
+				?>
 
                     <div id="quests-filter-wrapper" style="display:none">
                         <div id="quests-tabs">
@@ -2187,6 +2199,8 @@ if ( $blockIframe ) {
     var enableLured = <?php echo $noLures ? 'false' : $enableLured ?>;
 	var noInvasions = <?php echo $noRocketInvasions === true ? 'true' : 'false' ?>;
 	var enableInvasions = <?php echo $noRocketInvasions ? 'false' : $enableInvasions ?>;
+    var noInvasionTimer = <?php echo $noInvasionTimer === true ? 'true' : 'false' ?>;
+    var enableInvasionTimer = <?php echo $noInvasionTimer ? 'false' : $enableInvasionTimer ?>;
     var noQuests = <?php echo $noQuests === true ? 'true' : 'false' ?>;
     var enableQuests = <?php echo $noQuests ? 'false' : $enableQuests ?>;
 	var enableQuestsItemsAmounts = <?php echo $noQuestsItemsAmounts ? 'false' : $enableQuestsItemsAmounts ?>;
