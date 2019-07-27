@@ -2379,7 +2379,7 @@ function getPokestopMarkerIcon(item) {
 	var width = 32
 	var invasionString = ''
 	var anchor = [15, 28]
-	if(invasion == '1' && invasion_expiration > Date.now()){
+	if(invasion == '1' && invasion_expiration > Date.now() && !noInvasions){
 		invasionString = '-tr'
 		width = 50
 		anchor = [24, 38]
