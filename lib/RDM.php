@@ -340,7 +340,8 @@ class RDM extends Scanner
         name AS pokestop_name,
         url,
         lure_expire_timestamp AS lure_expiration,
-		lure_id AS lure_id,
+		lure_id,
+		grunt_type,
         quest_type,
         quest_timestamp,
         quest_target,
@@ -375,12 +376,20 @@ class RDM extends Scanner
             $pokestop["quest_pokemon_id"] = intval($pokestop["quest_pokemon_id"]);
             $pokestop["quest_item_id"] = intval($pokestop["quest_item_id"]);
             $pokestop["quest_reward_amount"] = intval($pokestop["quest_reward_amount"]);
+            $grunttype_pid = $pokestop["grunt_type"];
+            if ($grunttype_pid == "0") {
+                $grunttype_pid = null;
+                $pokestop["grunt_type"] = null;
+            }
 			$pokestop["url"] = ! empty($pokestop["url"]) ? str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]) : null;
             //$pokestop["url"] = str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]);
             $pokestop["lure_id"] = intval($pokestop["lure_id"]);
 			$pokestop["lure_expiration"] = $pokestop["lure_expiration"] * 1000;
             $pokestop["invasion"] = intval($pokestop["invasion"]);
 			$pokestop["invasion_expiration"] = $pokestop["invasion_expiration"] * 1000;
+            $pokestop["grunt_type_name"] = empty($grunttype_pid) ? null : i8ln($this->grunttype[$grunttype_pid]["type"]);
+            $pokestop["grunt_type_gender"] = empty($grunttype_pid) ? null : i8ln($this->grunttype[$grunttype_pid]["grunt"]);
+			
             $data[] = $pokestop;
 
             unset($pokestops[$i]);
