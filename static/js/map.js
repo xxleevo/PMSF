@@ -708,7 +708,6 @@ function initSidebar() {
     $('#spawn-area-wrapper').toggle(Store.get('followMyLocation'))
     $('#follow-me-map-wrapper').toggle(Store.get('followMyLocation'))
     $('#follow-me-map-switch').prop('checked', Store.get('spawnArea'))
-    $('#scanned-switch').prop('checked', Store.get('showScanned'))
     $('#weather-switch').prop('checked', Store.get('showWeather'))
     $('#spawnpoints-switch').prop('checked', Store.get('showSpawnpoints'))
     $('#direction-provider').val(Store.get('directionProvider'))
@@ -3236,14 +3235,6 @@ function clearStaleMarkers() {
         }
     })
 
-    $.each(mapData.scanned, function (key, value) {
-        // If older than 15mins remove
-        if (mapData.scanned[key]['last_modified'] < new Date().getTime() - 15 * 60 * 1000) {
-            markers.removeLayer(mapData.scanned[key].marker)
-            markersnotify.removeLayer(mapData.scanned[key].marker)
-            delete mapData.scanned[key]
-        }
-    })
 }
 
 function showInBoundsMarkers(markersInput, type) {
@@ -3293,7 +3284,6 @@ function loadRawData() {
     var loadPortals = Store.get('showPortals')
     var loadPois = Store.get('showPoi')
     var loadNewPortalsOnly = Store.get('showNewPortalsOnly')
-    var loadScanned = Store.get('showScanned')
     var loadSpawnpoints = Store.get('showSpawnpoints')
     var loadMinIV = Store.get('remember_text_min_iv')
     var loadMinLevel = Store.get('remember_text_min_level')
@@ -3335,7 +3325,6 @@ function loadRawData() {
             'gyms': loadGyms,
             'lastgyms': lastgyms,
             'exEligible': exEligible,
-            'scanned': loadScanned,
             'lastslocs': lastslocs,
             'spawnpoints': loadSpawnpoints,
             'lastspawns': lastspawns,
@@ -5299,39 +5288,6 @@ function setTimeOut(id, item, time) {
     }, time + 1000)
 }
 
-function processScanned(i, item) {
-    if (!Store.get('showScanned')) {
-        return false
-    }
-
-    var scanId = item['latitude'] + '|' + item['longitude']
-
-    if (!(scanId in mapData.scanned)) {
-        // add marker to map and item to dict
-        if (item.marker) {
-            item.marker.setMap(null)
-        }
-        item.marker = setupScannedMarker(item)
-        mapData.scanned[scanId] = item
-    } else {
-        mapData.scanned[scanId].last_modified = item['last_modified']
-    }
-}
-
-function updateScanned() {
-    if (!Store.get('showScanned')) {
-        return false
-    }
-
-    $.each(mapData.scanned, function (key, value) {
-        if (map.getBounds().intersects(value.marker.getBounds())) {
-            value.marker.setOptions({
-                fillColor: getColorByDate(value['last_modified'])
-            })
-        }
-    })
-}
-
 function processSpawnpoints(i, item) {
     if (!Store.get('showSpawnpoints')) {
         return false
@@ -5390,7 +5346,6 @@ function updateMap() {
         $.each(result.pokemons, processPokemons)
         $.each(result.pokestops, processPokestops)
         $.each(result.gyms, processGyms)
-        $.each(result.scanned, processScanned)
         $.each(result.spawnpoints, processSpawnpoints)
         $.each(result.nests, processNests)
         $.each(result.communities, processCommunities)
@@ -5400,14 +5355,12 @@ function updateMap() {
         showInBoundsMarkers(mapData.lurePokemons, 'pokemon')
         showInBoundsMarkers(mapData.gyms, 'gym')
         showInBoundsMarkers(mapData.pokestops, 'pokestop')
-        showInBoundsMarkers(mapData.scanned, 'scanned')
         showInBoundsMarkers(mapData.spawnpoints, 'inbound')
 		
         // drawScanPath(result.scanned)
 
         clearStaleMarkers()
 
-        updateScanned()
         updateSpawnPoints()
         updatePokestops()
         updatePortals()
@@ -6981,8 +6934,6 @@ $(function () {
                     lastpokestops = false
                 } else if (storageKey === 'showPortals') {
                     lastportals = false
-                } else if (storageKey === 'showScanned') {
-                    lastslocs = false
                 } else if (storageKey === 'showSpawnpoints') {
                     lastspawns = false
                 }
@@ -7173,9 +7124,6 @@ $(function () {
             wrapper.hide(options)
         }
         buildSwitchChangeListener(mapData, ['pokemons'], 'showPokemon').bind(this)()
-    })
-    $('#scanned-switch').change(function () {
-        buildSwitchChangeListener(mapData, ['scanned'], 'showScanned').bind(this)()
     })
 
     $('#weather-switch').change(function () {
