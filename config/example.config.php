@@ -235,7 +235,7 @@ $enableSpawnArea = 'false';											// default value for users
 
 $noScanPolygon = true;												// Enables/Disables Scan Area/Polygon
 $enableScanPolygon = 'false';										// default value for users
-$geoJSONfile = 'custom/scannerarea.json';							// path to geoJSON file create your own on http://geojson.io/ adjust filename
+$geoJSONfile = 'geofences/scannerarea.json';							// path to geoJSON file create your own on http://geojson.io/ adjust filename
 
 $noScanPolygonQuest = true;											// Enables/Disables Quest Area/Polygon
 $enableScanPolygonQuest = 'false';									// default value for users
@@ -431,7 +431,11 @@ $noStatsToggle = false;                                             // Enables o
 /* OSM */
 $osmTileServer = 'tile.openstreetmap.org';                          // osm tile server (no trailing slash)
 
-/* Debuggung */
+/* Access-config Settings */
+$accessLevelsInherit = false;										// Choose if the levels in the access-level config inherit access configurations from lower levels
+																	// If true, the access level will inherit from the last updated configuration
+																	//example: standard config: $noPokemon = false; -- accesslevel 0: $noPokemon = true; -- accesslevel 1: $noPokemon is unset: will inherit from accesslevel 0 instead of standard config.
+/* Debugging */
 $enableDebug = false;
 
 //-----------------------------------------------------

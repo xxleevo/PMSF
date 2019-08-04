@@ -28,6 +28,9 @@ setSessionCsrfToken();
 // MAP SETTINGS
 //-----------------------------------------------------
 
+/* Access-config Settings */
+$accessLevelsInherit = false;
+
 /* Location Settings */
 
 $startingLat = 52.084992;                                          // Starting latitude
@@ -233,7 +236,7 @@ $enableRanges = 'false';                                            // true/fals
 
 $noScanPolygon = true;
 $enableScanPolygon = 'false';
-$geoJSONfile = 'custom/scannerarea.json';			    // path to geoJSON file create your own on http://geojson.io/ adjust filename
+$geoJSONfile = 'geofences/scannerarea.json';			    // path to geoJSON file create your own on http://geojson.io/ adjust filename
 /* Location & Search Settings */
 
 $noSearchLocation = false;                                          // true/false
