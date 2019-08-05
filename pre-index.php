@@ -357,28 +357,27 @@ if ( $blockIframe ) {
 						</div>
 						<hr style="margin:0px;" />
 					</div>
-					<br>
 				';
                 } ?>
 				<?php
 				if ( ! $noMultipleRepos ) {
-					echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-					<h3>Icon Style</h3>
-					<div>
-						<select name="icon-style" id="icon-style">
-							<option value="'. $iconRepository .'">Classic (Stable)</option>
-							<option value="static/icons/retro/">Retro (Stable)</option>
-							<option value="https://raw.githubusercontent.com/geekygreek7/pkmn_shuffle_icons/master/optimized_for_PMSF_frontend/">Shuffle-ShinyEdition (Stable)</option>
-							<option value="https://raw.githubusercontent.com/nileplumb/PkmnShuffleMap/master/PMSF_icons_large/">Shuffle-Normal (Stable)</option>
-							<option value="https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/">Ingame (Beta)</option>
-							<option value="https://raw.githubusercontent.com/whitewillem/pogoassets/resized/no_border/">Ingame-Borderless(Beta)</option>
-							<option value="static/icons/flork-gamepress/">flork-gamepress (Beta)</option>
-						</select>
-					</div>
-				</div>
-				<br>
-				<br>
-				';
+				echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:35px;">
+					<h3>Icon Style</h3>';
+					$count = sizeof( $iconRepos );
+					if ( $count > 0 ) {
+						echo '
+						<div>
+							<select name="icon-style" id="icon-style">';
+						for ( $i = 0; $i <= $count - 1; $i ++ ) {
+							echo '<option value="'. $iconRepos[$i][1] .'">'. $iconRepos[$i][0] .'</option>';
+						}
+						echo '</select>
+						</div>
+						</div>';
+					} else{
+						echo '</div>';
+						echo '<div><p>404 No Icon Packs found</p></div>';
+					}
 				}
 				?>
                 <?php

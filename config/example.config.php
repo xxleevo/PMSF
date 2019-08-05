@@ -67,14 +67,16 @@ $sellyWebhookSecret = '';											// Add a secret key at https://selly.gg/sett
 //-----------------------------------------------------
 /*---------General Frontend Settings---------*/
 $copyrightSafe = true;												// If you want to use icons, set to false (you will need your own icons)
+$iconRepository = 'https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/';												// URLs or folder paths are allowed - if noMultipleRepos=false, this is also the default icon pack
 $noMultipleRepos = true;											// To enable Multiple icon packs:
 																	// Each iconpack needs to be in a seperate folder
-																	// So you have the icons/rewards, icons/PACK1, icon_PACK2 folder
-																	// You also need to adjust the pre-index.html to enter the packs there (Rework will set that also to config)
-
-$iconRepository = '';												// URLs or folder paths are allowed - if noMultipleRepos=false, this is also the default icon pack
-																	// Icons are directly in that folder if $noMultipleRepos = true. rewards are in $iconRepository/rewards/
-
+$iconRepos = [["Standard","$iconRepository"],						// Multiple Repos in here with the format ["Name","Link_To_Icons"] - Link can be a relative path for an iconfolder or a Link to a Repo.
+			["Retro","static/icons/retro/"],						// Example for a Pack located on your server at static/icons/retro/, named "Retro" in the Frontend
+			["Shuffle-ShinyEdition","https://raw.githubusercontent.com/geekygreek7/pkmn_shuffle_icons/master/optimized_for_PMSF_frontend/"],
+			["Shuffle-Normal","https://raw.githubusercontent.com/nileplumb/PkmnShuffleMap/master/PMSF_icons_large/"],
+			["Ingame","https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/"],
+			["Ingame-Borderless","https://raw.githubusercontent.com/whitewillem/pogoassets/resized/no_border/"]
+			]; // You May add different iconPacks here so mapusers can switch between them
 $noMaplink = false; 												// Dont display the maplink option at gyms,pokemon,stops
 $noExportImport = false;											// Enable/Disable the ability for users to Export/Import Settings
 $noWhatsappLink = false;											// Enable/Disable the display of the Whatsapp share button to Raids
