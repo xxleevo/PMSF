@@ -179,8 +179,8 @@ $enableQuestsItemsAmounts = 'false';								// default value for users: Show Ite
 
 $noQuestsItems = false;												// Enables/Disables Quest Items
 $noItemNumbers = true;												// Enables/Disables numbers at the item filter
-$hideQuestsItem = '[4, 5, 301, 401, 402, 403, 404, 501, 602, 603, 604, 702, 704, 707, 801, 901, 902, 903, 1001, 1002, 1401, 1402, 1402, 1403, 1404, 1405]';    // Item ids "See protos https://github.com/Furtif/POGOProtos/blob/master/src/POGOProtos/Inventory/Item/ItemId.proto"
-$excludeQuestsItem = [4, 5, 301, 401, 402, 403, 404, 501, 602, 603, 604, 702, 704, 707, 801, 901, 902, 903, 1001, 1002, 1401, 1402, 1402, 1403, 1404, 1405];   // All excluded item wil not be shown in the filter.
+$hideQuestsItem = '[4, 5, 301, 401, 402, 403, 404, 501, 502, 503, 504, 602, 603, 604, 702, 704, 707, 801, 901, 902, 903, 1001, 1002, 1401, 1402, 1402, 1403, 1404, 1405]';    // Item ids "See protos https://github.com/Furtif/POGOProtos/blob/master/src/POGOProtos/Inventory/Item/ItemId.proto"
+$excludeQuestsItem = [4, 5, 301, 401, 402, 403, 404, 501, 502, 503, 504, 602, 603, 604, 702, 704, 707, 801, 901, 902, 903, 1001, 1002, 1401, 1402, 1402, 1403, 1404, 1405];   // All excluded item wil not be shown in the filter.
 
 $noQuestsPokemon = false;											// Enables/Disables Quest Pokemon
 $generateExcludeQuestsPokemon = true;                               // Generate $excludeQuestsPokemon based on active quests in database
