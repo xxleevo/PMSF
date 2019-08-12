@@ -42,7 +42,7 @@ $startingZoom = 15;												//Starting Zoom
 $maxLatLng = 1;                                                     // Max latitude and longitude size (1 = ~110km, 0 to disable)
 $maxZoomOut = 0;                                                    // Max zoom out level (11 ~= $maxLatLng = 1, 0 to disable, lower = the further you can zoom out)
 $maxZoomIn = 18;                                                    // Max zoom in level 18 
-$disableClusteringAtZoom = 15;					    // Disable clustering above this value. 0 to disable
+$disableClusteringAtZoom = 0;					    // Disable clustering above this value. 0 to disable
 $zoomToBoundsOnClick = 15;					    // Zoomlevel on clusterClick
 $maxClusterRadius = 30;						    // The maximum radius that a cluster will cover from the central marker (in pixels).
 $spiderfyOnMaxZoom = 'true';					    // Spiderfy cluster markers on click
