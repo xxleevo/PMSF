@@ -70,6 +70,7 @@ $copyrightSafe = true;												// If you want to use icons, set to false (you
 $iconRepository = 'https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/';												// URLs or folder paths are allowed - if noMultipleRepos=false, this is also the default icon pack
 $noMultipleRepos = true;											// To enable Multiple icon packs:
 																	// Each iconpack needs to be in a seperate folder
+																	// for the menu icons, $iconRepository will be used always.
 $iconRepos = [["Standard","$iconRepository"],						// Multiple Repos in here with the format ["Name","Link_To_Icons"] - Link can be a relative path for an iconfolder or a Link to a Repo.
 			["Retro","static/icons/retro/"],						// Example for a Pack located on your server at static/icons/retro/, named "Retro" in the Frontend
 			["Shuffle-ShinyEdition","https://raw.githubusercontent.com/geekygreek7/pkmn_shuffle_icons/master/optimized_for_PMSF_frontend/"],
