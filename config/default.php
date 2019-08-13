@@ -206,6 +206,7 @@ $noLures = false;                                                   // true/fals
 $enableLured = 'false';                                             // true/false
 $noRocketInvasions = false;
 $enableInvasions = 'false';                                             // true/false
+$noInvasionEncounterData = true;
 $noInvasionTimer = false;
 $enableInvasionTimer = 'false';
 $noQuests = false;                                                  // true/false

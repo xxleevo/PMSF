@@ -389,8 +389,9 @@ class RDM extends Scanner
 			$pokestop["invasion_expiration"] = $pokestop["invasion_expiration"] * 1000;
             $pokestop["grunt_type_name"] = empty($grunttype_pid) ? null : i8ln($this->grunttype[$grunttype_pid]["type"]);
             $pokestop["grunt_type_gender"] = empty($grunttype_pid) ? null : i8ln($this->grunttype[$grunttype_pid]["grunt"]);
-			
-            $data[] = $pokestop;
+			$pokestop["encounters"] = empty($this->grunttype[$grunttype_pid]["encounters"]) ? null : $this->grunttype[$grunttype_pid]["encounters"];
+            $pokestop["second_reward"] = empty($this->grunttype[$grunttype_pid]["second_reward"]) ? null : $this->grunttype[$grunttype_pid]["second_reward"];
+			$data[] = $pokestop;
 
             unset($pokestops[$i]);
             $i++;

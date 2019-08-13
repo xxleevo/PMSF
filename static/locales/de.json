@@ -1,4 +1,11 @@
 {
+  "grunt data may change anytime": "Rüpeldaten können sich jederzeit ändern",
+  "chance for one of the following": "Chance auf Folgende",
+  "Grunt Pokemon": "Rüpel Pokemon",
+  "Show Grunt Data": "Rüpel Daten anzeigen",
+  "Hide Grunt Data": "Rüpel Daten ausblenden",
+  "Show Grunt Rewards": "Rüpel Belohnungen anzeigen",
+  "Hide Grunt Rewards": "Rüpel Belohnungen ausblenden",
   "Male Grunt": "Männlich",
   "Female Grunt": "Weiblich",
   "Grunt-Gender": "Rüpel-Geschlecht",

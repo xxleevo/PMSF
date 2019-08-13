@@ -1575,6 +1575,65 @@ function pokestopLabel(item) {
 	var invasionExpire = item['invasion_expiration']
 	var hr = '<hr style="margin:10px;" />'
 	
+	var encounters = ""
+	var gruntReward = ""
+	if(item["encounters"] !== null && !noInvasionEncounterData && !noInvasions){
+		//Encounter data in a spoiler
+		encounters += '<input name="button" type="button" onClick="if (this.parentNode.getElementsByTagName(\'div\')[3].style.display != \'none\') { this.parentNode.getElementsByTagName(\'div\')[3].style.display = \'none\'; this.value = \''+ i8ln('Show Grunt Data') +'\'; } else { this.parentNode.getElementsByTagName(\'div\')[3].style.display = \'block\'; this.value = \'' + i8ln('Hide Grunt Data') + '\';}" value="' + i8ln('Show Grunt Data') + '" style="font-weight:normal;font-size:9pt">' +
+		'<div id="encounterSpoiler" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
+		//data for mon#1
+			'<div>' + i8ln('Grunt Pokemon') + ' #1:<br>'
+				item["encounters"]["first"].forEach(function(data){
+				encounters += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+				})
+			encounters += '</div>' +
+			//data for mon#2
+			'<div>' + i8ln('Grunt Pokemon') + ' #2:<br>'
+				item["encounters"]["second"].forEach(function(data){
+					encounters += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+				})
+			encounters += '</div>' +
+			//data for mon#3
+			'<div>' + i8ln('Grunt Pokemon') + ' #3:<br>'
+				item["encounters"]["third"].forEach(function(data){
+					encounters += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+				})
+			encounters += '</div>' +
+			'<span style="border-radius:5px;padding:1px;font-size:7pt;background-color:white;">(' + i8ln('grunt data may change anytime') + ')</span>' +
+		'</center></div>'
+		//In addition make reward data if we know what can be a second reward.
+		if(item["second_reward"] !== null){
+			//calculations for the rewards
+			if(item["second_reward"] == "false"){ // if there is a possibility for 
+			//Reward data in a spoiler
+			gruntReward += '<input name="button" type="button" onClick="if (this.parentNode.getElementsByTagName(\'div\')[7].style.display != \'none\') { this.parentNode.getElementsByTagName(\'div\')[7].style.display = \'none\'; this.value = \'' + i8ln('Show Grunt Rewards') + '\'; } else { this.parentNode.getElementsByTagName(\'div\')[7].style.display = \'block\'; this.value = \'' + i8ln('Hide Grunt Rewards') + '\';}" value="'+ i8ln('Show Grunt Rewards') +'" style="font-weight:normal;font-size:9pt">' +
+			'<div id="gruntRewardSpoiler" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
+				'<div>100% ' + i8ln('chance for one of the following') + ':<br>'
+					item["encounters"]["first"].forEach(function(data){
+						gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+					})
+				gruntReward += '</div>' +
+				'<span style="border-radius:5px;padding:1px;font-size:7pt;background-color:white;">(' + i8ln('grunt data may change anytime') + ')</span>' +
+			'</div></center>'
+			} else if(item["second_reward"] == "true"){
+				gruntReward += '<input name="button" type="button" onClick="if (this.parentNode.getElementsByTagName(\'div\')[7].style.display != \'none\') { this.parentNode.getElementsByTagName(\'div\')[7].style.display = \'none\'; this.value = \'Rüpel Belohnungen anzeigen\'; } else { this.parentNode.getElementsByTagName(\'div\')[7].style.display = \'block\'; this.value = \'Rüpel Belohnungen verstecken\';}" value="Rüpel Belohnungen anzeigen" style="font-weight:normal;font-size:9pt">' +
+				'<div id="gruntRewardSpoiler" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
+					'<div>85% ' + i8ln('chance for one of the following') + ':<br>'
+						item["encounters"]["first"].forEach(function(data){
+							gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+						})
+					gruntReward += '</div>' +
+					'<div>15% ' + i8ln('chance for one of the following') + ':<br>'
+						item["encounters"]["second"].forEach(function(data){
+							gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+						})
+					gruntReward += '</div>' +
+					'<span style="border-radius:5px;padding:1px;font-size:7pt;background-color:white;">(' + i8ln('grunt data may change anytime') + ')</span>' +
+				'</div></center>'
+			}
+		}
+	}
+	
 	var specialLure = ''
 	if(!noLures){
 		if(lureType == 502 && item['lure_expiration'] > Date.now()){ // Special lure: Icy
@@ -1641,7 +1700,7 @@ function pokestopLabel(item) {
 		invasionImage = '<img style="margin-top:0px;margin-bottom:55px;margin-left:-33px;height:40px;position:absolute" src="static/forts/rocket-invasion.png"/>'
 		invasionEndStr = getTimeStr(item['invasion_expiration'])
 		invasionStr +=
-		'<div style="font-weight:900;">' +
+		'<div>' +
 		'Team Rocket bis' + ': ' + invasionEndStr +
 		' <span class="label-countdown" disappears-at="' + item['invasion_expiration'] + '">(00m00s)</span>' +
 		'</div>'
@@ -1718,10 +1777,13 @@ function pokestopLabel(item) {
 			str += 
 				'<div>' +
 				invasionStr +
+				//Test for encounters
+				encounters +
+				gruntReward +
 				hr +
 				lureStr +
 				getQuest(item) +
-				'<a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a>' +
+				'<center><a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a></center>' +
 				'</center>' +
 				hr +
 				'</div>'
@@ -1745,6 +1807,9 @@ function pokestopLabel(item) {
             '</div>' +
             '<div>' +
 			invasionStr +
+			//Test for encounters
+			encounters +
+			gruntReward +
 			lureStr +
             '</div>' +
 			hr +

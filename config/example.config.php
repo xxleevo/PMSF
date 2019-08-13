@@ -68,6 +68,9 @@ $sellyWebhookSecret = '';											// Add a secret key at https://selly.gg/sett
 /*---------General Frontend Settings---------*/
 $copyrightSafe = true;												// If you want to use icons, set to false (you will need your own icons)
 $iconRepository = 'https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/';												// URLs or folder paths are allowed - if noMultipleRepos=false, this is also the default icon pack
+																	//You can also use a relative path here for your icons!
+																	//example: $iconRepository = 'static/icons/';
+																									
 $noMultipleRepos = true;											// To enable Multiple icon packs:
 																	// Each iconpack needs to be in a seperate folder
 																	// for the menu icons, $iconRepository will be used always.
@@ -167,6 +170,8 @@ $enableLured = 'false';                                             // default v
 
 $noRocketInvasions = false;											// Enables/Disables Rocket Invasions
 $enableInvasions = 'false';											// default value for users: Show Invasions only
+
+$noInvasionEncounterData = true;									//Enable/Disable grunttype encounter data stored in static/data/grunttype.json (beta feature, grunttypes, encounters and rewards may change over time!)
 
 $noInvasionTimer = false;											// Enables/Disables the ability to enable/disable the Invasion Timer
 $enableInvasionTimer = 'false';										// default value for users: Invasion Timer
@@ -412,7 +417,7 @@ $blockIframe = true;                                                // Block you
 $maxLatLng = 1;                                                     // Max latitude and longitude size (1 = ~110km, 0 to disable)
 $maxZoomOut = 11;                                                   // Max zoom out level (11 ~= $maxLatLng = 1, 0 to disable, lower = the further you can zoom out)
 $maxZoomIn = 18;                                                    // Max zoom in level 18
-$disableClusteringAtZoom = 15;										// Disable clustering above this value. 0 to disable
+$disableClusteringAtZoom = 0;										// Disable clustering above this value. 0 to disable
 $zoomToBoundsOnClick = 15;											// Zoomlevel on clusterClick
 $maxClusterRadius = 30;												// The maximum radius that a cluster will cover from the central marker (in pixels).
 $spiderfyOnMaxZoom = 'true';										// Spiderfy cluster markers on click
