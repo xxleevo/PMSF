@@ -211,14 +211,13 @@ if ( $blockIframe ) {
         <h1><a href="#"><?= $title ?><img src="<?= $raidmapLogo ?>" height="35" width="auto" border="0" style="float: right; margin-left: 5px; margin-top: 10px;"></a></h1>
         <?php
         if ( $discordUrl != "" ) {
-            echo '<a href="' . $discordUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle;padding:0 5px;">
-            <img src="static/images/discord_big.png" border="0" style="float: right; width: 36px; height: auto;">
+            echo '<a href="' . $discordUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle;padding:0 2px;">
+            <img src="static/images/discord.png" border="0" style="float: right; width: 42px; height: auto;">
         </a>';
         }
         if ( $paypalUrl != "" ) {
-            echo '<a href="' . $paypalUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle; padding:0 5px;">
-            <img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_donate_74x21.png" border="0" name="submit"
-                 title="PayPal - The safer, easier way to pay online!" alt="Donate" style="float: right;">
+            echo '<a href="' . $paypalUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle; padding:0 2px;">
+            <img src="static/images/paypal.png" border="0" alt="Donate" style="float: right;width: 42px; height: auto;">
         </a>';
         }
         ?>
@@ -289,7 +288,7 @@ if ( $blockIframe ) {
 
                 //echo "<span style='color: {$color};'>" . substr($_SESSION['user']->user, 0, 3) . "...</span>";
             } else {
-                echo "<a href='./user'> Login </a>";
+                echo "<a href='./user' style='display:inline;border: 1px solid white;border-radius:6px;padding:2px 6px 2px 6px;font-weight:bold;'> Login </a>";
             }
         }
         ?>
