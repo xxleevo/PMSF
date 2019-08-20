@@ -2189,7 +2189,7 @@ function getGymMarkerIcon(item) {
 			battleIcon +
             '</div>'
 			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Hatched-Known
-				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>00m00s</span></div>'
+				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>' + generateRemainingTimer(item.raid_end, 'end') + '</span></div>'
 			}
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
@@ -2216,7 +2216,7 @@ function getGymMarkerIcon(item) {
 			battleIcon +
             '</div>'
 			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Hatched-unknown
-				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>00m00s</span></div>'
+				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>' + generateRemainingTimer(item.raid_end, 'end') + '</span></div>'
 			}
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
@@ -2242,7 +2242,7 @@ function getGymMarkerIcon(item) {
 			battleIcon +
             '</div>'
 			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Egg
-				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-egg" disappears-at="' + item.raid_start + '" start>00m00s</span></div>'
+				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-egg" disappears-at="' + item.raid_start + '" start>' + generateRemainingTimer(item.raid_start, 'start') + '</span></div>'
 			}
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
@@ -2506,7 +2506,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>00m00s</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>' + generateRemainingTimer(item['invasion_expiration'], 'end') + '</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2537,7 +2537,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>00m00s</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>' + generateRemainingTimer(item['invasion_expiration'], 'end') + '</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2567,7 +2567,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>00m00s</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>' + generateRemainingTimer(item['invasion_expiration'], 'end') + '</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2594,7 +2594,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>00m00s</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>' + generateRemainingTimer(item['invasion_expiration'], 'end') + '</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2621,7 +2621,7 @@ function getPokestopMarkerIcon(item) {
             '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>00m00s</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>' + generateRemainingTimer(item['invasion_expiration'], 'end') + '</span></div>'
 			}
         stopMarker = L.divIcon({
             iconSize: [31, 31],
@@ -5648,6 +5648,30 @@ var updateLabelDiffTime = function updateLabelDiffTime() {
 
         $(element).text(timestring)
     })
+}
+
+function generateRemainingTimer(timestamp, type) {
+    var disappearsAt = getTimeUntil(parseInt(timestamp))
+    var hours = disappearsAt.hour
+    var minutes = disappearsAt.min
+    var seconds = disappearsAt.sec
+    var timestring = ''
+    if (disappearsAt.time < disappearsAt.now) {
+        if (type === 'start') {
+            timestring = i8ln('started')
+        } else if (type === 'end') {
+            timestring = i8ln('ended')
+        } else {
+            timestring = i8ln('expired')
+        }
+    } else {
+        if (hours > 0) {
+            timestring += hours + 'h'
+        }
+        timestring += lpad(minutes, 2, 0) + 'm'
+        timestring += lpad(seconds, 2, 0) + 's'
+    }
+    return timestring
 }
 
 function sendNotification(title, text, icon, lat, lon) {
