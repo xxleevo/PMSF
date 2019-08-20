@@ -2511,7 +2511,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span class="label-countdown invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2542,7 +2542,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span class="label-countdown invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2572,7 +2572,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span class="label-countdown invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2599,7 +2599,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span class="label-countdown invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2626,7 +2626,7 @@ function getPokestopMarkerIcon(item) {
             '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span class="label-countdown invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
 			}
         stopMarker = L.divIcon({
             iconSize: [31, 31],
@@ -5621,6 +5621,34 @@ var updateLabelDiffTime = function updateLabelDiffTime() {
             timestring += lpad(minutes, 2, 0) + 'm'
             timestring += lpad(seconds, 2, 0) + 's'
             timestring += ')'
+        }
+
+        $(element).text(timestring)
+    })
+    $('.label-countdown-bracketless').each(function (index, element) {
+        var disappearsAt = getTimeUntil(parseInt(element.getAttribute('disappears-at')))
+
+        var hours = disappearsAt.hour
+        var minutes = disappearsAt.min
+        var seconds = disappearsAt.sec
+        var timestring = ''
+
+        if (disappearsAt.time < disappearsAt.now) {
+            if (element.hasAttribute('start')) {
+                timestring = i8ln('started')
+            } else if (element.hasAttribute('end')) {
+                timestring = i8ln('ended')
+            } else {
+                timestring = i8ln('expired')
+            }
+        } else {
+            timestring = ''
+            if (hours > 0) {
+                timestring += hours + 'h'
+            }
+
+            timestring += lpad(minutes, 2, 0) + 'm'
+            timestring += lpad(seconds, 2, 0) + 's'
         }
 
         $(element).text(timestring)
