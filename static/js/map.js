@@ -680,6 +680,7 @@ function initSidebar() {
     $('#team-gyms-only-switch').val(Store.get('showTeamGymsOnly'))
     $('#open-gyms-only-switch').prop('checked', Store.get('showOpenGymsOnly'))
     $('#raids-switch').prop('checked', Store.get('showRaids'))
+	$('#raid-timer-switch').prop('checked', Store.get('showRaidTimer'))
     $('#raids-filter-wrapper').toggle(Store.get('showRaids'))
     $('#active-raids-switch').prop('checked', Store.get('activeRaids'))
     $('#min-level-gyms-filter-switch').val(Store.get('minGymLevel'))
@@ -2095,53 +2096,38 @@ function getGymMarkerIcon(item) {
 	var isInBattle = item['battle_status']
 	//Dynamic Sizes
 		//Raid,Gym,Eggsizes
-		// If you want to change base sizes or positions, do it HERE.
-		var gymSize = 48;
-		var raidBossSize = 40;
-		var raidBossPosRight = 12; // the distance from the right corner
-		var eggUnknownSize = 35;
-		var eggUnknownPosRight = 18;// the distance from the right corner
-		var eggUnknownPosTop = -11;// the distance from the top corner <- in this case the icon is a little bit above the gym
-
 		// If you want to keep the scaling on mapzoom, dont touch these settings
-		var dynamicRaidBossSize = (raidBossSize/6) + ((raidBossSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var dynamicRaidBossPosRight = (raidBossPosRight/6) + ((raidBossPosRight/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var dynamicEggUnknownSize = (eggUnknownSize/6) + ((eggUnknownSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var dynamicEggUnknownPosRight = (eggUnknownPosRight/6) + ((eggUnknownPosRight/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var dynamicEggUnknownPosTop = (eggUnknownPosTop/6) + ((eggUnknownPosTop/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var dynamicGymSize = (gymSize/6) + ((gymSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicRaidBossSize = (40/6) + ((40/6) * (map.getZoom() - 10)) // RaidbossSize - Depends on Zoom - 40=Initial
+		var dynamicRaidBossPosRight = (12/6) + ((12/6) * (map.getZoom() - 10)) // Position from the raidboss from Right - Depends on Zoom - 12 = Initial
+		var dynamicEggUnknownSize = (35/6) + ((35/6) * (map.getZoom() - 10)) // Unknown Egg Size - Depends on Zoom - 35=Initial
+		var dynamicEggUnknownPosRight = (18/6) + ((18/6) * (map.getZoom() - 10)) // Unknown Egg right position - Depends on Zoom - 18=Initial
+		var dynamicEggUnknownPosTop = (-11/6) + ((-11/6) * (map.getZoom() - 10)) // Unknown Egg Top position - Depends on Zoom - (-11)=Initial
+		var dynamicGymSize = (48/6) + ((48/6) * (map.getZoom() - 10)) // Gym Size - Depends on Zoomlevel - 48=Initial
 		
 		// Egg icon Sizes
-		var eggSize = 30;
-		var dynamicEggSize = (eggSize/6) + ((eggSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var eggPosTop = 2;
-		var dynamicEggPosTop = (eggPosTop/6) + ((eggPosTop/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var eggPosRight = 14;
-		var dynamicEggPosRight = (eggPosRight/6) + ((eggPosRight/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicEggSize = (30/6) + ((30/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicEggPosTop = (2/6) + ((2/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicEggPosRight = (14/6) + ((14/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 		
 		//Ex icon sizes
-		var exSize = 38;
-		var dynamicExSize = (exSize/6) + ((exSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var exPos = 25;
-		var dynamicExPos = (exPos/6) + ((exPos/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var exPosBot = 1;
-		var dynamicExPosBot = (exPosBot/6) + ((exPosBot/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicExSize = (38/6) + ((38/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicExPos = (25/6) + ((25/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicExPosBot = (1/6) + ((1/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 		
 		//Exclusive Raid icon sizes
-		var exclusiveSize = 50
-		var dynamicExclusiveSize = (exclusiveSize/6) + ((exclusiveSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var exclusivePos = -20;
-		var dynamicExclusivePos = (exclusivePos/6) + ((exclusivePos/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var exclusivePosBot = 20;
-		var dynamicExclusivePosBot = (exclusivePosBot/6) + ((exclusivePosBot/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicExclusiveSize = (50/6) + ((50/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicExclusivePos = (-20/6) + ((-20/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicExclusivePosBot = (20/6) + ((20/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 		
 		//Battle icon sizes
-		var swordSize = 24;
-		var dynamicSwordSize = (swordSize/6) + ((swordSize/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var swordPos = 1
-		var dynamicSwordPos = (swordPos/6) + ((swordPos/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var swordPosBot = 30;
-		var dynamicSwordPosBot = (swordPosBot/6) + ((swordPosBot/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicSwordSize = (24/6) + ((24/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicSwordPos = (1/6) + ((1/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicSwordPosBot = (30/6) + ((30/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		
+		//RaidTimer
+		var dynamicLeft = (-4/6) + ((-4/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicTop = (46/6) + ((46/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicFontSize = (12/6) + ((12/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 		
     if (raidForm <= 10 || raidForm == null || raidForm === '0') {
         formStr = '00'
@@ -2202,6 +2188,9 @@ function getGymMarkerIcon(item) {
 			exclusiveIcon +
 			battleIcon +
             '</div>'
+			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Hatched-Known
+				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>00m00s</span></div>'
+			}
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
             iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
@@ -2226,6 +2215,9 @@ function getGymMarkerIcon(item) {
 			exclusiveIcon +
 			battleIcon +
             '</div>'
+			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Hatched-unknown
+				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>00m00s</span></div>'
+			}
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
             iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
@@ -2249,6 +2241,9 @@ function getGymMarkerIcon(item) {
 			exclusiveIcon +
 			battleIcon +
             '</div>'
+			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Egg
+				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-egg" disappears-at="' + item.raid_start + '" start>00m00s</span></div>'
+			}
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
             iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
@@ -2511,7 +2506,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>00m00s</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2542,7 +2537,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>00m00s</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2572,7 +2567,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>00m00s</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2599,7 +2594,7 @@ function getPokestopMarkerIcon(item) {
                 '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>00m00s</span></div>'
 			}
             stopMarker = L.divIcon({
                 iconSize: [31, 31],
@@ -2626,7 +2621,7 @@ function getPokestopMarkerIcon(item) {
             '</div>'
 			}
 			if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion == '1' && invasion_expiration > Date.now()) {
-				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>(00m00s)</span></div>'
+				html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>00m00s</span></div>'
 			}
         stopMarker = L.divIcon({
             iconSize: [31, 31],
@@ -7336,6 +7331,15 @@ $(function () {
 					value.marker = setupPokestopMarker(value)
 				}
 			})
+		}
+    })
+	
+    $('#raid-timer-switch').change(function () {
+        Store.set('showRaidTimer', this.checked)
+        if (this.checked) {
+			updateGymIcons()
+        } else{
+			updateGymIcons()
 		}
     })
 

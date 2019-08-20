@@ -778,11 +778,25 @@ if ( $blockIframe ) {
                     </div>
                 </div>';
                     } ?>
-					
+
 					<?php
+					echo '
+					<div id="raids-filter-wrapper" style="display:none">';
+					if ( ! $noRaidTimer && ! $noRaids ) {
+						echo '
+						<div class="form-control switch-container">
+							<font size="3">Raid Timer</font>
+							<div class="onoffswitch">
+								<input id="raid-timer-switch" type="checkbox" name="raid-timer-switch" class="onoffswitch-checkbox" checked>
+								<label class="onoffswitch-label" for="raid-timer-switch">
+									<span class="switch-label" data-on="On" data-off="Off"></span>
+									<span class="switch-handle"></span>
+								</label>
+							</div>
+						</div>';
+					}
 					if (!$denyRaidLevelsBelow > 0){
 						echo '
-						<div id="raids-filter-wrapper" style="display:none">
 							<div class="form-control switch-container" id="active-raids-wrapper">
 								<font size="3">Nur aktive Raids</font>
 								<div class="onoffswitch">
@@ -815,11 +829,10 @@ if ( $blockIframe ) {
 									<option value="4">4</option>
 									<option value="5">5</option>
 								</select>
-							</div>
-						</div>
-						
-						';
-					} ?>
+							</div>';
+					}
+					echo '</div>';
+					?>
                     <?php
                     if ( ! $noGymSidebar && ( ! $noGyms || ! $noRaids ) ) {
                         echo '<div id="gym-sidebar-wrapper" class="form-control switch-container">
@@ -2150,7 +2163,7 @@ if ( $blockIframe ) {
     var locationSet = <?= $locationSet; ?>;
     var motd = <?php echo $noMotd ? 'false' : 'true' ?>;
     var zoom<?php echo $zoom ? " = " . $zoom : null; ?>;
-	var initialZoom = <?php echo $startingZoom; ?>;
+    var initialZoom = <?php echo $startingZoom; ?>;
     var encounterId<?php echo $encounterId ? " = '" . $encounterId . "'" : null; ?>;
     var maxZoom = <?= $maxZoomIn; ?>;
     var minZoom = <?= $maxZoomOut; ?>;
@@ -2185,13 +2198,13 @@ if ( $blockIframe ) {
     var enablePokestops = <?php echo $noPokestops ? 'false' : $enablePokestops ?>;
     var noLures = <?php echo $noLures === true ? 'true' : 'false' ?>;
     var enableLured = <?php echo $noLures ? 'false' : $enableLured ?>;
-	var noInvasions = <?php echo $noRocketInvasions === true ? 'true' : 'false' ?>;
-	var enableInvasions = <?php echo $noRocketInvasions ? 'false' : $enableInvasions ?>;
+    var noInvasions = <?php echo $noRocketInvasions === true ? 'true' : 'false' ?>;
+    var enableInvasions = <?php echo $noRocketInvasions ? 'false' : $enableInvasions ?>;
     var noInvasionTimer = <?php echo $noInvasionTimer === true ? 'true' : 'false' ?>;
     var enableInvasionTimer = <?php echo $noInvasionTimer ? 'false' : $enableInvasionTimer ?>;
     var noQuests = <?php echo $noQuests === true ? 'true' : 'false' ?>;
     var enableQuests = <?php echo $noQuests ? 'false' : $enableQuests ?>;
-	var enableQuestsItemsAmounts = <?php echo $noQuestsItemsAmounts ? 'false' : $enableQuestsItemsAmounts ?>;
+    var enableQuestsItemsAmounts = <?php echo $noQuestsItemsAmounts ? 'false' : $enableQuestsItemsAmounts ?>;
     var hideQuestsPokemon = <?php echo $noQuestsPokemon ? '[]' : $hideQuestsPokemon ?>;
     var hideQuestsItem = <?php echo $noQuestsItems ? '[]' : $hideQuestsItem ?>;
     var enableNewPortals = <?php echo $enableNewPortals ?>;
@@ -2229,7 +2242,7 @@ if ( $blockIframe ) {
     var noParkInfo = <?php echo $noParkInfo === true ? 'true' : 'false' ?>;
     var onlyTriggerGyms = <?php echo $onlyTriggerGyms === true ? 'true' : 'false' ?>;
     var showBigKarp = <?php echo $noBigKarp === true ? 'true' : 'false' ?>;
-	var enableBigKarps = <?php echo $noBigKarp ? 'false' : $enableBigKarps ?>;
+    var enableBigKarps = <?php echo $noBigKarp ? 'false' : $enableBigKarps ?>;
     var showTinyRat = <?php echo $noTinyRat === true ? 'true' : 'false' ?>;
 	var enableTinyRats = <?php echo $noTinyRat ? 'false' : $enableTinyRats ?>;
     var hidePokemonCoords = <?php echo $hidePokemonCoords === true ? 'true' : 'false' ?>;
@@ -2270,7 +2283,7 @@ if ( $blockIframe ) {
     var copyrightSafe = <?php echo $copyrightSafe === true ? 'true' : 'false' ?>;
     var noRarityDisplay = <?php echo $noRarityDisplay === true ? 'true' : 'false' ?>;
     var noWeatherIcons = <?php echo $noWeatherIcons === true ? 'true' : 'false' ?>;
-	var enableWeatherIcons = <?php echo $noWeatherIcons ? 'false' : $enableWeatherIcons ?>;
+    var enableWeatherIcons = <?php echo $noWeatherIcons ? 'false' : $enableWeatherIcons ?>;
     var noWeatherShadow = <?php echo $noWeatherShadow === true ? 'true' : 'false' ?>;
     var noGymScannedText = <?php echo $noGymScannedText === true ? 'true' : 'false' ?>;
     var noMaplink = <?php echo $noMaplink === true ? 'true' : 'false' ?>;
@@ -2281,11 +2294,13 @@ if ( $blockIframe ) {
     var battleStatus = <?php echo $noBattleStatus === true ? 'false' : $battleStatus  ?>;
     var $noOverlayDesign = <?php echo $noOverlayDesign === true ? 'true' : 'false' ?>;
     var overlayDesign = '<?php echo $overlayDesign ?>';
-	var noPokestopImages = <?php echo $noPokestopImages === true ? 'true' : 'false' ?>;
+    var noPokestopImages = <?php echo $noPokestopImages === true ? 'true' : 'false' ?>;
     var denyRaidLevelsBelow = <?php echo ($denyRaidLevelsBelow >= 1 && $denyRaidLevelsBelow <= 6) ? $denyRaidLevelsBelow : 0 ?>;
-	var noRaidMoves  = <?php echo $noRaidMoves === true ? 'true' : 'false' ?>;
-	var noCostumeIcons = <?php echo $noCostumeIcons === true ? 'true' : 'false' ?>;
-	var noInvasionEncounterData = <?php echo $noInvasionEncounterData === true ? 'true' : 'false' ?>;
+    var noRaidMoves  = <?php echo $noRaidMoves === true ? 'true' : 'false' ?>;
+    var noCostumeIcons = <?php echo $noCostumeIcons === true ? 'true' : 'false' ?>;
+    var noInvasionEncounterData = <?php echo $noInvasionEncounterData === true ? 'true' : 'false' ?>;
+    var noRaidTimer = <?php echo $noRaidTimer === true ? 'true' : 'false' ?>;
+    var enableRaidTimer = <?php echo $noRaidTimer ? 'false' : $enableRaidTimer ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

@@ -196,6 +196,8 @@ $exEligible = 'false';                                              // true/fals
 
 $noRaids = false;                                                   // true/false
 $enableRaids = 'false';                                             // true/false
+$noRaidTimer = false;
+$enableRaidTimer = 'false';
 $activeRaids = 'false';                                             // true/false
 $minRaidLevel = 1;
 $maxRaidLevel = 5;

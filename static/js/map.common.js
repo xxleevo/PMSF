@@ -437,6 +437,11 @@ var StoreOptions = {
         {
             default: enableInvasionTimer,
             type: StoreTypes.Boolean
+		},
+    'showRaidTimer':
+        {
+            default: enableRaidTimer,
+            type: StoreTypes.Boolean
 		}
 }
 
