@@ -1453,11 +1453,16 @@ function getQuest(item) {
                 tstr = pokemonTypes[questinfo['pokemon_type_ids']]
             }
             str = str.replace('Pokémon','Pokémon vom Typ '+ tstr)
+			str = str.replace('Schnappschüsse','Schnappschüsse von ' + tstr + ' Pokémon')
         } else if (item['quest_condition_type'] === 2) {
             var pstr = ''
             if (questinfo['pokemon_ids'].length > 1) {
                 $.each(questinfo['pokemon_ids'], function (index, id) {
-                    pstr += idToPokemon[id].name + ' '
+					if (index === (questinfo['pokemon_ids'].length - 1)) {
+						pstr += idToPokemon[id].name
+					} else{
+						pstr += idToPokemon[id].name + '/'
+					}
                 })
             } else {
                 pstr = idToPokemon[questinfo['pokemon_ids']].name
@@ -1500,7 +1505,9 @@ function getQuest(item) {
             }
         } else if (item['quest_condition_type'] == 12) {
             str = str.replace('Pokéstops', 'neue Pokéstops')
-        } else if (item['quest_condition_type'] !== 0) {
+        } else if (item['quest_condition_type'] == 27) {
+			
+		} else if (item['quest_condition_type'] !== 0) {
             console.log('Undefined condition type ' + item['quest_condition_type'])
             str += '<div>Undefined condition</div>'
         }
@@ -1542,12 +1549,14 @@ function getQuest(item) {
 			str = str.replace('großartige', 'großartigen')
 			str = str.replace('fabelhafte', 'fabelhaften')
 			str = str.replace('neue Pokéstops', 'neuen Pokéstop')
+			str = str.replace('Schnappschüsse', 'Schnappschuss')
+			str = str.replace('PVP-Kämpfe', 'PVP-Kampf')
 			
 			// Condition 1: Pokemon,3:Pokemon,11:entwickle Pokemon
 			if(str.includes('1 Pokémon') || str.includes('1 Ei')){
 			str = str.replace(item['quest_target'],'ein')
 			}
-			if(str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop')){
+			if(str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss')|| str.includes('PVP-Kampf')|| str.includes('Rüpel')){
 			str = str.replace(item['quest_target'],'einen')
 			}
 		}
