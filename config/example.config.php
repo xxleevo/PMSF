@@ -348,9 +348,9 @@ $manualFiveStar = [
 // Search
 //-----------------------------------------------------
 $noSearch = false;
-$noSearchPokestops = true;											//Wont work if noSearch = false
-$noSearchGyms = true;												//Wont work if noSearch = false
-$noSearchManualQuests = false;										//Wont work if noSearch = false
+$noSearchPokestops = true;											//Wont work if $noSearch = true
+$noSearchGyms = true;												//Wont work if $noSearch = true
+$noSearchManualQuests = false;										//Wont work if $noSearch = true
 $noSearchNests = true;
 $noSearchPortals = true;
 $defaultUnit = "km"; 												// mi/km
