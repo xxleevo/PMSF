@@ -2743,9 +2743,10 @@ function nestLabel(item) {
 	}
 	var countAvgStr = ''
 	if( item.pokemon_avg > 0 && item.pokemon_avg != null){ // Set the pokemon average spawn if the db has a proper value for it
+		
 		countAvgStr = '<div>'+
 		'<hr width="50%" style="margin: 1em 0;border-bottom: solid 1px rgba(141, 141, 141, 0.43);">' +
-		'<b>Spawndichte:</b> etwa ' + item.pokemon_avg + ' pro Stunde' +
+		'<b>Spawndichte:</b> etwa ' + Math.round(item.pokemon_avg) + ' pro Stunde' +
 		'</div>'
 	}
 	
