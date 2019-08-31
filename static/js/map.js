@@ -391,9 +391,6 @@ function initMap() { // eslint-disable-line no-unused-vars
             storeZoom = true
         }
 
-        redrawPokemon(mapData.pokemons)
-        redrawPokemon(mapData.lurePokemons)
-		//For Gyms on zoom
 		updateGymIcons()
         if (this.getZoom() > 13) {
             // hide weather markers
@@ -3298,15 +3295,6 @@ function clearStaleMarkers() {
             delete mapData.pokemons[key]
         }
     })
-
-    $.each(mapData.lurePokemons, function (key, value) {
-        if (mapData.lurePokemons[key]['lure_expiration'] < new Date().getTime() || (excludedPokemon.indexOf(mapData.lurePokemons[key]['pokemon_id']) >= 0 && ((encounterId && encounterId !== mapData.pokemons[key]['encounter_id']) || !encounterId))) {
-            markers.removeLayer(mapData.lurePokemons[key].marker)
-            markersnotify.removeLayer(mapData.lurePokemons[key].marker)
-            delete mapData.lurePokemons[key]
-        }
-    })
-
 }
 
 function showInBoundsMarkers(markersInput, type) {
@@ -5424,7 +5412,6 @@ function updateMap() {
         $.each(result.portals, processPortals)
         $.each(result.pois, processPois)
         showInBoundsMarkers(mapData.pokemons, 'pokemon')
-        showInBoundsMarkers(mapData.lurePokemons, 'pokemon')
         showInBoundsMarkers(mapData.gyms, 'gym')
         showInBoundsMarkers(mapData.pokestops, 'pokestop')
         showInBoundsMarkers(mapData.spawnpoints, 'inbound')
@@ -6426,7 +6413,6 @@ $(function () {
     $selectIconSize.on('change', function () {
         Store.set('iconSizeModifier', this.value)
         redrawPokemon(mapData.pokemons)
-        redrawPokemon(mapData.lurePokemons)
     })
 
     $selectIconNotifySizeModifier = $('#pokemon-icon-notify-size')
@@ -6439,7 +6425,6 @@ $(function () {
     $selectIconNotifySizeModifier.on('change', function () {
         Store.set('iconNotifySizeModifier', this.value)
         redrawPokemon(mapData.pokemons)
-        redrawPokemon(mapData.lurePokemons)
     })
 	
     $switchOpenGymsOnly = $('#open-gyms-only-switch')
@@ -6591,7 +6576,6 @@ $(function () {
     $switchWeatherIcons.on('change', function () {
         Store.set('showWeatherIcons', this.checked)
         redrawPokemon(mapData.pokemons)
-        redrawPokemon(mapData.lurePokemons)
 		console.log(Store.get('showWeatherIcons'))
     })
 	
@@ -6708,7 +6692,6 @@ $(function () {
 		iconpath = r.test(Store.get('icons')) ? Store.get('icons') : path + Store.get('icons')
 		
         redrawPokemon(mapData.pokemons)
-        redrawPokemon(mapData.lurePokemons)
     })
     $selectIconStyle.val(Store.get('icons')).trigger('change')
 })
