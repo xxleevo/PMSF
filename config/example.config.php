@@ -117,6 +117,8 @@ $noWeatherShadow = true;											//Only this or noWeatherIcons
 $noHighLevelData = false;											// This will activate/deactivate all iv/cp/move data for monsters
 $noMinIV = false;													// This will enable/disable the option for a global minIV
 $minIV = '0';														// "0" for empty or a number
+$noIv100Glow = false;												// Puts a glow on the 100% and put their z-index to highest, also restyles the IV-label part
+$Iv100GlowColor = 'rgba(255, 200, 44, 1)';							// Glow Color - supports rgba, hex, colorname
 
 $noMinLevel = false;												// This will enable/disable the option for a global minLvl
 $minLevel = '0';													// "0" for empty or a number

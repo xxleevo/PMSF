@@ -862,10 +862,14 @@ function pokemonLabel(item) {
         var iv = getIv(atk, def, sta)
         details =
 			//IV
-                '<div style="clear:both;margin-bottom:0px;">' +
+                '<div style="clear:both;margin-bottom:0px;'
+				if(!noIvGlow && iv === 100){
+				details += 'background-color: ' + glowColor + ';border-radius: 6px;box-shadow: 0px 0px 10px 2px ' + glowColor + ';'
+				}
+				details += '">' +
 					'<span style="padding-left: 5px;font-size: 15px;font-weight: bold;">IV</span><img src="static/images/label/iv.png" style="height:23px;float:left;" />' +
-					'<span style="font-size: 11px;border-radius:10px;float:right;" >(' + atk + '/' + def + '/' + sta + ')</span>' +
-					'<span style="margin-right: 1px;font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + iv.toFixed(1) + '%</span><br>' +
+					'<span style="font-size: 11px;border-radius:10px;float:right;padding-top:2px;padding-right:3px;" >(' + atk + '/' + def + '/' + sta + ')</span>' +
+					'<span style="margin-right: 3px;font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + iv.toFixed(1) + '%</span><br>' +
 
 				'</div>'
 			
@@ -950,7 +954,7 @@ function pokemonLabel(item) {
 		'</div></center>' 
 
 	//handle the icon, add weather icon if enabled
-	if(Store.get('showWeatherIcons') && weatherBoostedCondition !== 0 && !noWeatherIcons && noWeatherShadow){ // show weather icon if enabled
+	if(Store.get('showWeatherIcons') && weatherBoostedCondition !== 0 && !noWeatherIcons){ // show weather icon if enabled
 		contentstring +=
 		'<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + costumeString +'.png"/> '+
 		'<img src="static/weather/i-' + weatherBoostedCondition + '.png" style="width:45px;height:auto;position:absolute;top:38px;left:140px;"/>'+
@@ -6576,7 +6580,6 @@ $(function () {
     $switchWeatherIcons.on('change', function () {
         Store.set('showWeatherIcons', this.checked)
         redrawPokemon(mapData.pokemons)
-		console.log(Store.get('showWeatherIcons'))
     })
 	
     $switchBattleStatus = $('#battle-status-switch')
@@ -7594,7 +7597,6 @@ function removeNotifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
 
 function shareNestsWhatsapp(mode,header,secondLine,footer){
 	var link = 'whatsapp://send?text=%2A'+ header +'%2A:%0A'+ secondLine +'%0A'
-		console.log('ALL PRESSED'+ mode)
 		$.each(mapData.nests, function (key, value) {
 			//In All Modes, Show Nestname+Pokemon
 			link += '%0A%2A' + mapData.nests[key]['name'] + '%2A:%20' + encodeURIComponent(mapData.nests[key]['pokemon_name'])
@@ -7616,7 +7618,6 @@ function shareNestsWhatsapp(mode,header,secondLine,footer){
 }
 function shareCommunitiesWhatsapp(header,secondLine,footer){
 	var link = 'whatsapp://send?text=%2A'+ header +'%2A:%0A'+ secondLine +'%0A'
-		console.log('ALL PRESSED')
 		$.each(mapData.communities, function (key, value) {
 			//In only mode, show: type, name, link
 			if(mapData.communities[key]['type'] == 3){ //Discord

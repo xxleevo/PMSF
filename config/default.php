@@ -138,7 +138,6 @@ $noHighLevelData = true;                                       // true/false
 $noRarityDisplay = false;                                      // true/false
 $noWeatherIcons = false;
 $enableWeatherIcons = 'false';                                 // true/false
-$noWeatherShadow = true;
 
 /* Hide Specific content */
 $noGymScannedText = false;
@@ -183,6 +182,8 @@ $excludeMinIV = '[131, 143, 147, 148, 149, 248]';                   // [] for em
 
 $minIV = '0';                                                       // "0" for empty or a number
 $minLevel = '0';                                                    // "0" for empty or a number
+$noIv100Glow = false;
+$Iv100GlowColor = 'rgba(255, 200, 44, 1)';							// Glow Color
 
 $noBigKarp = true;                                                 // true/false
 $noTinyRat = true;                                                 // true/false

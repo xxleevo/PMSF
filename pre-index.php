@@ -2284,7 +2284,6 @@ if ( $blockIframe ) {
     var noRarityDisplay = <?php echo $noRarityDisplay === true ? 'true' : 'false' ?>;
     var noWeatherIcons = <?php echo $noWeatherIcons === true ? 'true' : 'false' ?>;
     var enableWeatherIcons = <?php echo $noWeatherIcons ? 'false' : $enableWeatherIcons ?>;
-    var noWeatherShadow = <?php echo $noWeatherShadow === true ? 'true' : 'false' ?>;
     var noGymScannedText = <?php echo $noGymScannedText === true ? 'true' : 'false' ?>;
     var noMaplink = <?php echo $noMaplink === true ? 'true' : 'false' ?>;
     var noGymTeamInfos = <?php echo $noGymTeamInfos === true ? 'true' : 'false' ?>;
@@ -2301,6 +2300,8 @@ if ( $blockIframe ) {
     var noInvasionEncounterData = <?php echo $noInvasionEncounterData === true ? 'true' : 'false' ?>;
     var noRaidTimer = <?php echo $noRaidTimer === true ? 'true' : 'false' ?>;
     var enableRaidTimer = <?php echo $noRaidTimer ? 'false' : $enableRaidTimer ?>;
+    var noIvGlow = <?php echo $noIv100Glow === true ? 'true' : 'false' ?>;
+    var glowColor = '<?php echo $Iv100GlowColor ?>';
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
