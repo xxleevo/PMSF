@@ -110,7 +110,6 @@ $noPokemonNumbers = false;                                          // For the F
 
 $noWeatherIcons = false;											// If set to false, this option let users allow to enable/disable weather icons for pokemon
 $enableWeatherIcons = 'false';										// default value for users for weather-icons
-$noWeatherShadow = true;											//Only this or noWeatherIcons
 
 
 /*---------IV & CP Settings---------*/
