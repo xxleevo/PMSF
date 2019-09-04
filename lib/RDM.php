@@ -349,6 +349,7 @@ class RDM extends Scanner
         quest_pokemon_id,
         quest_item_id,
 		pokestop_display AS invasion,
+		first_seen_timestamp as first_seen,
 		incident_expire_timestamp AS invasion_expiration,
         json_extract(json_extract(`quest_conditions`,'$[*].type'),'$[0]') AS quest_condition_type,
         json_extract(json_extract(`quest_conditions`,'$[*].type'),'$[1]') AS quest_condition_type_1,
@@ -385,6 +386,7 @@ class RDM extends Scanner
             //$pokestop["url"] = str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]);
             $pokestop["lure_id"] = intval($pokestop["lure_id"]);
 			$pokestop["lure_expiration"] = $pokestop["lure_expiration"] * 1000;
+            $pokestop["first_seen"] = $pokestop["first_seen"] * 1000;
             $pokestop["invasion"] = intval($pokestop["invasion"]);
 			$pokestop["invasion_expiration"] = $pokestop["invasion_expiration"] * 1000;
             $pokestop["grunt_type_name"] = empty($grunttype_pid) ? null : i8ln($this->grunttype[$grunttype_pid]["type"]);

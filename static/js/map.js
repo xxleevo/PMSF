@@ -785,6 +785,14 @@ function getDateStr(t) { // eslint-disable-line no-unused-vars
     }
     return dateStr
 }
+// Converts timestamp to readable String (
+function getDateStrFull(t) { // eslint-disable-line no-unused-vars
+    var dateStr = 'Unknown'
+    if (t) {
+        dateStr = moment(t).format('LL')
+    }
+    return dateStr
+}
 
 // Converts timestamp to readable String
 function getTimeStr(t) {
@@ -1744,6 +1752,12 @@ function pokestopLabel(item) {
 		hr
 	}
 	
+	var firstSeen = ""
+	if(item["first_seen"] !== null){
+		firstSeen = '<div><center>' +
+					'Entdeckt: ' + getDateStrFull(item["first_seen"]) +
+					'</center></div>'
+	}
 
 	// Starting the Pokestop Label
     str = 
@@ -1758,14 +1772,14 @@ function pokestopLabel(item) {
 		var RewardId = ''
 		if (item['quest_reward_type'] === 7) {
 			RewardId = reward['pokemon_id']
-			excludeStr = '<a href="javascript:excludePokemonQuest(' + RewardId + ')" title="Alle dieser Spezies ausblenden">Exclude</a>'
+			excludeStr = '<a href="javascript:excludePokemonQuest(' + RewardId + ')" title="Alle dieser Spezies ausblenden">'+ i8ln('Exclude Questtype') + '</a>'
 		}
 		if (item['quest_reward_type'] === 2){
 			RewardId = reward['item_id']
-			excludeStr = '<a href="javascript:excludeItemQuest(' + RewardId + ')" title="Alle dieser Sorte ausblenden">Exclude</a>'
+			excludeStr = '<a href="javascript:excludeItemQuest(' + RewardId + ')" title="Alle dieser Sorte ausblenden">'+ i8ln('Exclude Questtype') + '</a>'
 		}
 		if (item['quest_reward_type'] === 3){
-			excludeStr = '<a href="javascript:excludeDustQuest()" title="Sternenstaub-Quests ausblenden">Exclude Staub-Quests</a>'
+			excludeStr = '<a href="javascript:excludeDustQuest()" title="Sternenstaub-Quests ausblenden">'+ i8ln('Exclude Questtype') + '</a>'
 		}
 		var rewardImg = '<div style="margin-top:-60px;margin-right:-60px">' +
 						getReward(item) +
@@ -1788,7 +1802,6 @@ function pokestopLabel(item) {
 			str += 
 				'<div>' +
 				invasionStr +
-				//Test for encounters
 				encounters +
 				gruntReward +
 				hr +
@@ -1797,6 +1810,7 @@ function pokestopLabel(item) {
 				'<center><a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a></center>' +
 				'</center>' +
 				hr +
+				firstSeen +
 				'</div>'
     } else {
         str =
@@ -1824,6 +1838,7 @@ function pokestopLabel(item) {
 			lureStr +
             '</div>' +
 			hr +
+			firstSeen +
             '</center>' +
             '</div>'
     }
