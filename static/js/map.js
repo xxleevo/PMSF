@@ -1753,7 +1753,7 @@ function pokestopLabel(item) {
 	}
 	
 	var firstSeen = ""
-	if(item["first_seen"] !== null){
+	if(!noPokestopFirstseen && item["first_seen"] !== null && item["first_seen"] !== 0){
 		firstSeen = '<div><center>' +
 					'Entdeckt: ' + getDateStrFull(item["first_seen"]) +
 					'</center></div>'

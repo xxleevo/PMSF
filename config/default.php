@@ -205,6 +205,7 @@ $maxRaidLevel = 5;
 
 $noPokestops = false;                                               // true/false
 $enablePokestops = 'false';                                         // true/false
+$noPokestopFirstseen = true;
 $noLures = false;                                                   // true/false
 $enableLured = 'false';                                             // true/false
 $noRocketInvasions = false;

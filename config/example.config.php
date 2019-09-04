@@ -167,6 +167,7 @@ $noPokestops = false;                                               // Enables/D
 $enablePokestops = 'false';                                         // default value for users
 
 $noPokestopImages = false;											// Enables/Disables original pokestop images(swap with standard icons if disabled)
+$noPokestopFirstseen = true;										// Enables/Disables the display for the first seen time in the stop label
 
 $noLures = false;													// Enables/Disables Lures
 $enableLured = 'false';                                             // default value for users: Show Lures only
