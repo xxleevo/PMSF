@@ -2769,9 +2769,9 @@ function nestLabel(item) {
 	var whatsappStr = ''
 	if (item.name !== 'Unknown Areaname' && item.name !== null){ //Set the Nest's name if the db has a proper value for it
 		nameStr = '<center><b>' + item.name + '</b></center>'
-		whatsappStr = '<a href="whatsapp://send?text=%2ANest:%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2AOrt:%2A%20' + item.name + '%0A%2ASpawndichte:%2A%20~' + item.pokemon_avg + '/Stunde%0A%0A%2ANavi:%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
+		whatsappStr = '<a href="whatsapp://send?text=%2ANest:%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2AOrt:%2A%20' + item.name + '%0A%2ASpawndichte:%2A%20~' + Math.round(item.pokemon_avg) + '/Stunde%0A%0A%2ANavi:%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
 	} else{
-		whatsappStr = '<a href="whatsapp://send?text=%2ANest:%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2ASpawndichte:%2A%20~' + item.pokemon_avg + '/Stunde%0A%0A%2ANavi:%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
+		whatsappStr = '<a href="whatsapp://send?text=%2ANest:%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2ASpawndichte:%2A%20~' + Math.round(item.pokemon_avg) + '/Stunde%0A%0A%2ANavi:%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
 	}
 	var countAvgStr = ''
 	if( item.pokemon_avg > 0 && item.pokemon_avg != null){ // Set the pokemon average spawn if the db has a proper value for it
@@ -7637,7 +7637,7 @@ function shareNestsWhatsapp(mode,header,secondLine,footer){
 			}
 			//Adding Density
 			if (mode == 2 || mode == 3){
-				link += '%0ASpawns: ~' + mapData.nests[key]['pokemon_avg'] + '%20pro%20Stunde'
+				link += '%0ASpawns: ~' + Math.round(mapData.nests[key]['pokemon_avg']) + '%20pro%20Stunde'
 			}
 			//Adding an extra Space if its not mode 0
 			if(mode != 0){
