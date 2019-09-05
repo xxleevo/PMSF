@@ -105,7 +105,7 @@
   },
   "27": {
     "prototext": "QUEST_COMPLETE_COMBAT",
-    "text": "Gewinne {0} PVP-Kämpfe"
+    "text": "Bestreite {0} Kämpfe"
   },
   "28": {
     "prototext": "QUEST_TAKE_SNAPSHOT",

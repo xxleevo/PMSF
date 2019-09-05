@@ -2301,6 +2301,7 @@ if ( $blockIframe ) {
     var noRaidTimer = <?php echo $noRaidTimer === true ? 'true' : 'false' ?>;
     var enableRaidTimer = <?php echo $noRaidTimer ? 'false' : $enableRaidTimer ?>;
     var noPokestopFirstseen = <?php echo $noPokestopFirstseen === true ? 'true' : 'false' ?>;
+    var noGymFirstseen = <?php echo $noGymFirstseen === true ? 'true' : 'false' ?>;
     var noIvGlow = <?php echo $noIv100Glow === true ? 'true' : 'false' ?>;
     var glowColor = '<?php echo $Iv100GlowColor ?>';
 	

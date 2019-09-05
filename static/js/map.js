@@ -1029,13 +1029,14 @@ function gymLabel(item) {
     var form = item['form']
 	var isInBattle = item['battle_status']
 	var gymColor = ['0, 0, 0, .4', '74, 138, 202, .6', '240, 68, 58, .6', '254, 217, 40, .6']
-
+	var hr = '<hr style="margin:10px;" />'
     var raidSpawned = item['raid_level'] != null
     var raidStarted = item['raid_pokemon_id'] != null
 
     var raidStr = ''
     var raidIcon = ''
     var i = 0
+	
 	
 	var outdated = ''
 	if( ((lastScanned/1000) < ((Date.now()/1000)-14400)) && !noOutdatedGyms ){
@@ -1202,6 +1203,13 @@ function gymLabel(item) {
     if (url !== null) {
         gymImage = '<img height="70px" style="padding: 5px;" src="' + url + '">'
     }
+	
+	var firstSeen = ""
+	if(!noGymFirstseen && item["first_seen"] !== null && item["first_seen"] !== 0){
+		firstSeen = '<div><center>' +
+					i8ln('gym first seen') +': ' + getDateStrFull(item["first_seen"]) +
+					'</center></div>'
+	}
 		
     if (teamId === 0 || (((lastScanned/1000) > ((Date.now()/1000)-14400)) || noOutdatedGyms)) {
         str =
@@ -1216,21 +1224,25 @@ function gymLabel(item) {
 			gymCp +
             park +
 			battleStr +
+			hr +
             '<div>' +
             i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
             '</div>' +
             '<div>' + lastModifiedText + '</div>' +
             '<div>' + lastScannedStr + '</div>' +
+			firstSeen +
             '</center>' +
             '</div>'
         if (((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
-			str += '<center>' +
+			str += hr +
+				'<center>' +
                 '<div>' +
                 '<a href="whatsapp://send?text=' + '%2AArena:%2A' + encodeURIComponent(item.name) + '%0A%2ARaid:%2ALevel%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>' +
                 '</div>' +
                 '</center>'
         } else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
-            str += '<center>' +
+            str += hr +
+				'<center>' +
                 '<div>' +
                 '<a href="whatsapp://send?text=' + '%2AArena:%2A%20' + encodeURIComponent(item.name) + '%0A%2ARaid:%2A%20Level%20' + item.raid_level + '%20Ei%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>' +
                 '</div>' +
@@ -1241,7 +1253,6 @@ function gymLabel(item) {
             '<div class="gym-label">' +
             '<center>' +
             '<div style="padding-bottom: 2px">' +
-
             nameStr +
             '</div>' +
             '<div>' +
@@ -1253,17 +1264,18 @@ function gymLabel(item) {
             freeSlotsText +
             park +
             '<div>' + outdated + '</div>' +
+			hr +
             '<div>' +
             i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
             '</div>' +
             '<div>' +
-			'<br>' +
             lastModifiedText +
             '</div>' +
             '<div>' +
             lastScannedStr +
             '</div>' +
             '</center>' +
+			firstSeen +
             '</div>'
         if (((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
 			str += '<center>' +
@@ -1514,6 +1526,10 @@ function getQuest(item) {
             }
         } else if (item['quest_condition_type'] == 12) {
             str = str.replace('Pokéstops', 'neue Pokéstops')
+        } else if (item['quest_condition_type'] == 22) {
+            str = str.replace('Kämpfe', 'NPC-Kämpfe')
+        } else if (item['quest_condition_type'] == 23) {
+            str = str.replace('Kämpfe', 'PVP-Kämpfe')
         } else if (item['quest_condition_type'] == 27) {
 			
 		} else if (item['quest_condition_type'] !== 0) {
@@ -1559,13 +1575,13 @@ function getQuest(item) {
 			str = str.replace('fabelhafte', 'fabelhaften')
 			str = str.replace('neue Pokéstops', 'neuen Pokéstop')
 			str = str.replace('Schnappschüsse', 'Schnappschuss')
-			str = str.replace('PVP-Kämpfe', 'PVP-Kampf')
+			str = str.replace('Kämpfe', 'Kampf')
 			
 			// Condition 1: Pokemon,3:Pokemon,11:entwickle Pokemon
 			if(str.includes('1 Pokémon') || str.includes('1 Ei')){
 			str = str.replace(item['quest_target'],'ein')
 			}
-			if(str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss')|| str.includes('PVP-Kampf')|| str.includes('Rüpel')){
+			if(str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss')|| str.includes('Kampf')|| str.includes('Rüpel')){
 			str = str.replace(item['quest_target'],'einen')
 			}
 		}
@@ -1755,7 +1771,7 @@ function pokestopLabel(item) {
 	var firstSeen = ""
 	if(!noPokestopFirstseen && item["first_seen"] !== null && item["first_seen"] !== 0){
 		firstSeen = '<div><center>' +
-					'Entdeckt: ' + getDateStrFull(item["first_seen"]) +
+					i8ln('stop first seen') +': ' + getDateStrFull(item["first_seen"]) +
 					'</center></div>'
 	}
 

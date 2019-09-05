@@ -194,6 +194,7 @@ $noGymSidebar = false;                                              // true/fals
 $gymSidebar = 'true';                                               // true/false
 $noExEligible = false;                                              // true/false
 $exEligible = 'false';                                              // true/false
+$noGymFirstseen = true;                                             // true/false
 
 $noRaids = false;                                                   // true/false
 $enableRaids = 'false';                                             // true/false

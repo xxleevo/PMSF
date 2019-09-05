@@ -454,6 +454,7 @@ class RDM extends Scanner
         name,
         url,
         last_modified_timestamp AS last_modified,
+		first_seen_timestamp as first_seen,
         raid_end_timestamp AS raid_end,
         raid_battle_timestamp AS raid_start,
         updated AS last_scanned,
@@ -499,6 +500,7 @@ class RDM extends Scanner
             $gym["slots_available"] = intval($gym["slots_available"]);
             $gym["last_modified"] = $gym["last_modified"] * 1000;
             $gym["last_scanned"] = $gym["last_scanned"] * 1000;
+            $gym["first_seen"] = $gym["first_seen"] * 1000;
             $gym["raid_start"] = $gym["raid_start"] * 1000;
             $gym["raid_end"] = $gym["raid_end"] * 1000;
             $gym["sponsor"] = !empty($gym["sponsor"]) ? $gym["sponsor"] : null;

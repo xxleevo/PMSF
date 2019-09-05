@@ -142,6 +142,7 @@ $noBattleStatus = false;											// Enable/Disable the ability for users to fi
 $battleStatus = 'false';											// default value for users
 
 $noGymScannedText = false;											// Enables/Disables "Last seen" and "Last modified" at gyms
+$noGymFirstseen = true;                                             // Enables/Disables the display for first seen in gym label
 $noGymTeamInfos = false;											// Enables/Disables every information about gym team
 $noOutdatedGyms = false;											// If active, set GymTeams to Harmony when older than 4h(only frontend-side, no db-changes)
 
