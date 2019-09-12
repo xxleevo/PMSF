@@ -1619,19 +1619,19 @@ function pokestopLabel(item) {
 		//data for mon#1
 			'<div>' + i8ln('Grunt Pokemon') + ' #1:<br>'
 				item["encounters"]["first"].forEach(function(data){
-				encounters += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+				encounters += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:38px;height:auto;"/>'
 				})
 			encounters += '</div>' +
 			//data for mon#2
 			'<div>' + i8ln('Grunt Pokemon') + ' #2:<br>'
 				item["encounters"]["second"].forEach(function(data){
-					encounters += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+					encounters += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:38px;height:auto;"/>'
 				})
 			encounters += '</div>' +
 			//data for mon#3
 			'<div>' + i8ln('Grunt Pokemon') + ' #3:<br>'
 				item["encounters"]["third"].forEach(function(data){
-					encounters += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+					encounters += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:38px;height:auto;"/>'
 				})
 			encounters += '</div>' +
 			'<span style="border-radius:5px;padding:1px;font-size:7pt;background-color:white;">(' + i8ln('grunt data may change anytime') + ')</span>' +
@@ -1645,7 +1645,8 @@ function pokestopLabel(item) {
 			'<div id="gruntRewardSpoiler" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
 				'<div>100% ' + i8ln('chance for one of the following') + ':<br>'
 					item["encounters"]["first"].forEach(function(data){
-						gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+						gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:38px;height:auto;position:absolute;margin-top:4px;margin-left:4px;"/>' +
+						'<img src="static/images/shadow.png" style="width:44px;height:44px;"/>'
 					})
 				gruntReward += '</div>' +
 				'<span style="border-radius:5px;padding:1px;font-size:7pt;background-color:white;">(' + i8ln('grunt data may change anytime') + ')</span>' +
@@ -1655,12 +1656,14 @@ function pokestopLabel(item) {
 				'<div id="gruntRewardSpoiler" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
 					'<div>85% ' + i8ln('chance for one of the following') + ':<br>'
 						item["encounters"]["first"].forEach(function(data){
-							gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+							gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:38px;height:auto;position:absolute;margin-top:4px;margin-left:4px;"/>' +
+							'<img src="static/images/shadow.png" style="width:44px;height:44px;"/>'
 						})
 					gruntReward += '</div>' +
 					'<div>15% ' + i8ln('chance for one of the following') + ':<br>'
 						item["encounters"]["second"].forEach(function(data){
-							gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:30px;height:auto;"/>'
+							gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:38px;height:auto;position:absolute;margin-top:4px;margin-left:4px;"/>' +
+							'<img src="static/images/shadow.png" style="width:44px;height:44px;"/>'
 						})
 					gruntReward += '</div>' +
 					'<span style="border-radius:5px;padding:1px;font-size:7pt;background-color:white;">(' + i8ln('grunt data may change anytime') + ')</span>' +
