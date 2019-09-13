@@ -125,6 +125,9 @@ $minLevel = '0';													// "0" for empty or a number
 $noExcludeMinIV = false;											// This will activate/deactivate the possibility to keep specific pokemon on the map if global minIV is set for a user
 $excludeMinIV = '[131, 143, 147, 148, 149, 248]';					// [] for empty
 
+$noDittoDetection = false;											// Turn on/off detection of dittos: weather & level circumstances give information about if this should be a ditto, if so, it is treated as a ditto on the map
+$possibleDittos = ['46', '48', '163', '165', '193', '223', '293', '316']; // Possible Ditto Mon IDs
+
 /*---------Gym Settings---------*/
 $noGyms = false;                                                    // Enables/Disables Gyms (& the whole Gym Menu if raids are also disabled)
 $enableGyms = 'false';                                              // default value for users
