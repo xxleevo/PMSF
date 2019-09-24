@@ -56,7 +56,7 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         })
 
         var pokeCounts = []
-
+		//TODO: Ditto display
         for (i = 0; i < pkmnCount.length; i++) {
             if (pkmnCount[i] && pkmnCount[i].Count > 0) {
                 var pokemonIdStr = ''
