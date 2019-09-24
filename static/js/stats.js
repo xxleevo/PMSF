@@ -186,14 +186,14 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
             thisPokestopIsVisible = currentVisibleMap.contains(thisPokestopLocation)
 
             if (thisPokestopIsVisible) {
-                if (mapData.pokestops[key]['invasion_expiration'] && mapData.pokestops[key]['invasion_expiration'] > 0) {
+                if (mapData.pokestops[key]['invasion_expiration'] && mapData.pokestops[key]['invasion_expiration'] >  Date.now()) {
                     if (pokestopCount[3] === 0 || !pokestopCount[3]) {
                         pokestopCount[3] = 1
                     } else {
                         pokestopCount[3] += 1
                     }
 				console.log(mapData.pokestops[key]['lure_expiration'])
-                } if (mapData.pokestops[key]['lure_expiration'] && mapData.pokestops[key]['lure_expiration'] > 0) {
+                } if (mapData.pokestops[key]['lure_expiration'] && mapData.pokestops[key]['lure_expiration'] >  Date.now()) {
                     if (pokestopCount[2] === 0 || !pokestopCount[2]) {
                         pokestopCount[2] = 1
                     } else {
