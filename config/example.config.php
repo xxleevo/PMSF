@@ -126,7 +126,7 @@ $noExcludeMinIV = false;											// This will activate/deactivate the possibil
 $excludeMinIV = '[131, 143, 147, 148, 149, 248]';					// [] for empty
 
 $noDittoDetection = false;											// Turn on/off detection of dittos: weather & level circumstances give information about if this should be a ditto, if so, it is treated as a ditto on the map
-$possibleDittos = ['46', '48', '163', '165', '193', '223', '293', '316']; // Possible Ditto Mon IDs
+$possibleDittos = [13, 46, 48, 163, 165, 167, 187, 223, 273, 293, 300, 316, 322, 399]; // Possible Ditto Mon IDs
 
 /*---------Gym Settings---------*/
 $noGyms = false;                                                    // Enables/Disables Gyms (& the whole Gym Menu if raids are also disabled)
