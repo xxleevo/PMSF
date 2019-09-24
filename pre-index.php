@@ -284,9 +284,8 @@ if ( $blockIframe ) {
 				} else{
 				echo "<span style='color: red;'><i class='fa fa-times fa-fw'></i></span>";
 				}
-				
-
-                //echo "<span style='color: {$color};'>" . substr($_SESSION['user']->user, 0, 3) . "...</span>";
+            } elseif ($forcedDiscordLogin === true) {
+                header("Location: ./discord-login");
             } else {
                 echo "<a href='./user' style='display:inline;border: 1px solid white;border-radius:6px;padding:2px 6px 2px 6px;font-weight:bold;'> Login </a>";
             }
