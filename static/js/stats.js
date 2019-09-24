@@ -231,6 +231,6 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         pokestopListString += '</table>'
         document.getElementById('pokestopList').innerHTML = pokestopListString
     } else {
-        document.getElementById('pokestopList').innerHTML = '</center>' + i8ln('PokéStops markers are disabled')+ '</center>'
+        document.getElementById('pokestopList').innerHTML = '<center>' + i8ln('PokéStops markers are disabled')+ '</center>'
     }
 }
