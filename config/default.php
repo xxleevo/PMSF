@@ -186,7 +186,7 @@ $noIv100Glow = false;
 $Iv100GlowColor = 'rgba(255, 200, 44, 1)';							// Glow Color
 
 $noDittoDetection = false;
-$$possibleDittos = [13, 46, 48, 163, 165, 167, 187, 223, 273, 293, 300, 316, 322, 399];
+$possibleDittos = [13, 46, 48, 163, 165, 167, 187, 223, 273, 293, 300, 316, 322, 399];
 
 $noBigKarp = true;                                                 // true/false
 $noTinyRat = true;                                                 // true/false
