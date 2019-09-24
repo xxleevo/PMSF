@@ -895,12 +895,14 @@ function pokemonLabel(item) {
 					'<span style="margin-right: 3px;font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >Lvl ' + level + ' - </span><br>' +
 				'</div>'
         }
-        details +=
+		if(moves[item['move_1']] !== undefined || moves[item['move_2']] !== undefined){
+			details +=
 				//Moveset
                 '<div style="clear:both;">' +
 				'<span style="padding-left: 5px;font-size: 14px;font-weight: bold;">Set</span><img src="static/images/swords.png" style="height:23px;float:left;" />' +
 				'<span style="font-size: 12px;font-weight: bold;border-radius:10px;float:right;padding: 1px 6px 1px 6px;" >' + pMove1 + ' / ' + pMove2 + '</span>' +
             '</div>'
+		}
     }
     if (weatherBoostedCondition !== 0) {
         details +=
