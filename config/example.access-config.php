@@ -1,4 +1,9 @@
 <?php
+
+//Access-config file
+//Make sure that you have a second, manualdb (besides your scanning db) and applied the sql's from sql/manualdb/ to that manual db 
+//(first file for the table creations and then apply the update sqls afterwards=
+
 /* User levels */
 // The part below requires the bot Chuckleslove wrote https://github.com/jepke/PMSF-Discord-AuthBot
 // This bot is included when you pull PMSF so no need to pull it separately

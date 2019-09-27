@@ -37,6 +37,7 @@ $infopageUrl = ""; 													// A page which is shown at the bottom of the me
 //-----------------------------------------------------
 
 /* Discord Login */
+//Have a look in the example.access-config.php for instructions to use discord login, use the howto here to install discord login afterwards.
 $forcedDiscordLogin = false;                                         // If Users are forced to login with discord instantly 
 $noDiscordLogin = true;                                             // true/false - This will enable login through discord.
                                                                     // 1. Create a discord bot here -> https://discordapp.com/developers/applications/me
