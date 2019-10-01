@@ -1534,6 +1534,10 @@ function getQuest(item) {
             str = str.replace('Kämpfe', 'PVP-Kämpfe')
         } else if (item['quest_condition_type'] == 27) {
 			
+        } else if (item['quest_condition_type'] == 19) { //"new friend", but no string because its a default
+			
+		} else if (item['quest_condition_type'] == 25) {
+			str = str.replace('Pokémon', 'Pokémon mit ' +  questinfo['distance'].toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' km Entfernung')
 		} else if (item['quest_condition_type'] !== 0) {
             console.log('Undefined condition type ' + item['quest_condition_type'])
             str += '<div>Undefined condition</div>'
@@ -1583,7 +1587,7 @@ function getQuest(item) {
 			if(str.includes('1 Pokémon') || str.includes('1 Ei')){
 			str = str.replace(item['quest_target'],'ein')
 			}
-			if(str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss')|| str.includes('Kampf')|| str.includes('Rüpel')){
+			if(str.includes('1 neuen') ||str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss')|| str.includes('Kampf')|| str.includes('Rüpel')){
 			str = str.replace(item['quest_target'],'einen')
 			}
 		}
