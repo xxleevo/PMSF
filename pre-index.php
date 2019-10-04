@@ -2310,6 +2310,7 @@ if ( $blockIframe ) {
     var noGymFirstseen = <?php echo $noGymFirstseen === true ? 'true' : 'false' ?>;
     var noIvGlow = <?php echo $noIv100Glow === true ? 'true' : 'false' ?>;
     var glowColor = '<?php echo $Iv100GlowColor ?>';
+	var noRaidCounterGuide = <?php echo $noRaidCounterGuide === true ? 'true' : 'false' ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

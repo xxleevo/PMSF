@@ -165,6 +165,7 @@ $maxRaidLevel = 5;													// default value for users: max raid lvl
 $noRaidTimer = false;												// Enables/Disables Raidtimers on the Map
 $enableRaidTimer = 'false';											//default value for users: raidtimer
 $noRaidMoves = false;												// Raid Moveset beeing displayed or not
+$noRaidCounterGuide = false;                                        // For hatched raidbosses, link a counterguide(pokebattler) on the bottom in the label.
 $denyRaidLevelsBelow = 0;											// Deny raid levels beeing shown under this value (0-6)(5 = only show level 5 raids) - 0 to disable
 																	// In addition you may want to adjust $minRaidLevel and $maxRaidLevel;
 																	// To prevent displaying gyms with denied raids on it.													
