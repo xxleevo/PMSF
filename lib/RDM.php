@@ -563,6 +563,24 @@ class RDM extends Scanner
             $gym["raid_end"] = $gym["raid_end"] * 1000;
             $gym["sponsor"] = !empty($gym["sponsor"]) ? $gym["sponsor"] : null;
             $gym["url"] = ! empty($gym["url"]) ? preg_replace("/^http:/i", "https:", $gym["url"]) : null;
+			
+			if(!empty($raid_pid)){
+                if($gym["form"] == 0){
+                        $gym["raidboss_base_atk"] = $this->data[$gym["raid_pokemon_id"]]["baseAttack"];
+                        $gym["raidboss_base_def"] = $this->data[$gym["raid_pokemon_id"]]["baseDefense"];
+                        $gym["raidboss_base_sta"] = $this->data[$gym["raid_pokemon_id"]]["baseStamina"];
+                }else{
+                    $forms = $this->data[$gym["raid_pokemon_id"]]["forms"];
+                    foreach ($forms as $f => $v) {
+                        if($gym["form"] === $v['protoform']) {
+                            $gym["raidboss_base_atk"] = $v["baseAttack"];
+                            $gym["raidboss_base_def"] = $v["baseDefense"];
+                            $gym["raidboss_base_sta"] = $v["baseStamina"];
+                        }
+                    }
+			    }
+            }
+			
             $data[] = $gym;
 
             unset($gyms[$i]);

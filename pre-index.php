@@ -2312,6 +2312,7 @@ if ( $blockIframe ) {
     var glowColor = '<?php echo $Iv100GlowColor ?>';
 	var noRaidCounterGuide = <?php echo $noRaidCounterGuide === true ? 'true' : 'false' ?>;
 	var noQuestPokemonCP = <?php echo $noQuestPokemonCP === true ? 'true' : 'false' ?>;
+	var noRaidPokemonCP = <?php echo $noRaidPokemonCP === true ? 'true' : 'false' ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

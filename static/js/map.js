@@ -1108,6 +1108,13 @@ function gymLabel(item) {
         raidStr += '<div>' + i8ln('Start') + ': <b>' + raidStartStr + '</b> <span class="label-countdown" disappears-at="' + item['raid_start'] + '" start>(00m00s)</span></div>'
         raidStr += '<div>' + i8ln('End') + ': <b>' + raidEndStr + '</b> <span class="label-countdown" disappears-at="' + item['raid_end'] + '" end>(00m00s)</span></div>'
 
+		if(!noRaidPokemonCP && raidStarted){
+			var cpMin = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],20,10,10,10)
+			var cpMax = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],20,15,15,15)
+			var cpMinBoosted = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],25,10,10,10)
+			var cpMaxBoosted = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],25,15,15,15)
+			raidStr += 'Fang-WP: <b>' + cpMin + '-' + cpMax + '</b> ( <font size="4">↑</font>' + cpMinBoosted + '-' + cpMaxBoosted + ')'
+		}
         var raidForm = item['form']
         var formStr = ''
         if (raidForm <= 10 || raidForm == null || raidForm === '0') {
@@ -1130,9 +1137,9 @@ function gymLabel(item) {
         if (raidStarted) {
 			raidIcon = '<img style="width: 68px;margin-left:-105px;margin-bottom: 50px; --webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/>'
 			if(form !== null && form > 0 && forms.length > form){
-			raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '_' + (forms_en[item['form']]).toUpperCase() + '_FORM/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
+			    raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '_' + (forms_en[item['form']]).toUpperCase() + '_FORM/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
 			}else{
-			raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
+			    raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
             }
 		} else if (item.raid_start <= Date.now()) {
             var hatchedEgg = ''
