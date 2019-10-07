@@ -190,6 +190,8 @@ $enableInvasionTimer = 'false';										// default value for users: Invasion Ti
 $noQuests = false;													// Enables/Disables Quests
 $enableQuests = 'false';                                            // default value for users: Show Quests only
 
+$noQuestPokemonCP = false;                                          // Enable/Disable min/max cp display for pokemon rewards
+
 $noQuestsItemsAmounts = false;										// Enables/Disables the switch between Reward number Icons and standard
 $enableQuestsItemsAmounts = 'false';								// default value for users: Show Item Amount in Icon
 

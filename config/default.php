@@ -219,6 +219,7 @@ $noInvasionEncounterData = true;
 $noInvasionTimer = false;
 $enableInvasionTimer = 'false';
 $noQuests = false;                                                  // true/false
+$noQuestPokemonCP = false;                                          // true/false
 $enableQuests = 'false';                                            // true/false
 $noQuestsItemsAmounts = false;										// true/false
 $enableQuestsItemsAmounts = 'false';
