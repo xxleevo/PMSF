@@ -1095,6 +1095,13 @@ function gymLabel(item) {
                 }
             }
             raidStr += cpStr
+			if(!noRaidPokemonCP){
+				var cpMin = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],20,10,10,10)
+				var cpMax = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],20,15,15,15)
+				var cpMinBoosted = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],25,10,10,10)
+				var cpMaxBoosted = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],25,15,15,15)
+			raidStr += '<h4 style="margin-bottom: 1px;">Fang-WP: ' + cpMin + '-' + cpMax + ' (' + cpMinBoosted + '-' + cpMaxBoosted + ')</h4>'
+			}
         }
         raidStr += '</h3>'
         if (raidStarted && item.raid_pokemon_move_1 > 0 && item.raid_pokemon_move_1 !== '133' && item.raid_pokemon_move_2 > 0 && item.raid_pokemon_move_2 !== '133' && !noRaidMoves) {
@@ -1108,13 +1115,6 @@ function gymLabel(item) {
         raidStr += '<div>' + i8ln('Start') + ': <b>' + raidStartStr + '</b> <span class="label-countdown" disappears-at="' + item['raid_start'] + '" start>(00m00s)</span></div>'
         raidStr += '<div>' + i8ln('End') + ': <b>' + raidEndStr + '</b> <span class="label-countdown" disappears-at="' + item['raid_end'] + '" end>(00m00s)</span></div>'
 
-		if(!noRaidPokemonCP && raidStarted){
-			var cpMin = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],20,10,10,10)
-			var cpMax = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],20,15,15,15)
-			var cpMinBoosted = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],25,10,10,10)
-			var cpMaxBoosted = getPokemonCP(pokemonid,raidForm,item['raidboss_base_atk'],item['raidboss_base_def'],item['raidboss_base_sta'],25,15,15,15)
-			raidStr += 'Fang-WP: <b>' + cpMin + '-' + cpMax + '</b> ( <font size="4">↑</font>' + cpMinBoosted + '-' + cpMaxBoosted + ')'
-		}
         var raidForm = item['form']
         var formStr = ''
         if (raidForm <= 10 || raidForm == null || raidForm === '0') {
