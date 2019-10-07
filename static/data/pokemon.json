@@ -4,6 +4,9 @@
     "rarity": "Uncommon",
     "level": 1,
     "cp": 3757,
+	"baseStamina": 128,
+	"baseAttack": 118,
+	"baseDefense": 111,
     "types": [
       {
         "type": "Grass",
@@ -19,6 +22,9 @@
         "nameform": "Normal",
         "protoform": "163",
         "assetsform": "00",
+		"baseStamina": 128,
+		"baseAttack": 118,
+		"baseDefense": 111,
         "formtypes": [
           {
             "type": "Grass",
@@ -4951,6 +4957,9 @@
         "nameform": "Normal",
         "protoform": "247",
         "assetsform": "00",
+		"baseAttack": 218,
+		"baseStamina": 172,
+		"baseDefense": 170,
         "formtypes": [
           {
             "type": "Bug",

@@ -1571,9 +1571,25 @@ function getQuest(item) {
         if (item['quest_reward_type'] === 7) {
 			var reward = JSON.parse(item['quest_rewards'])
 			var rewardinfo = reward[0]['info']
+			//Min / Max cp Calculations for monster reward
+			var pokemonCPStr = ''
+			if(!noQuestPokemonCP){
+				var cpMin = ''
+				var cpMax = ''
+				if(item['reward_pokemon_base_atk'] !== null && item['reward_pokemon_base_def'] !== null && item['reward_pokemon_base_sta'] !== null){
+					var cpMin = Math.floor(((item['reward_pokemon_base_atk'] + 10) * Math.pow((item['reward_pokemon_base_def'] + 10),0.5) * Math.pow((item['reward_pokemon_base_sta'] + 10),0.5) * Math.pow(cpMultiplier[14],2))/10)
+					var cpMax = Math.floor(((item['reward_pokemon_base_atk'] + 15) * Math.pow((item['reward_pokemon_base_def'] + 15),0.5) * Math.pow((item['reward_pokemon_base_sta'] + 15),0.5) * Math.pow(cpMultiplier[14],2))/10)
+				}else{
+					var cpMin = '?'
+					var cpMax = '?'
+					console.log('Unknown basestats for Pokemon #' + rewardinfo['pokemon_id'] +  ':' + item["quest_pokemon_form"] + ' (' + i8ln(idToPokemon[rewardinfo['pokemon_id']]).name + ')')
+				}
+			    pokemonCPStr = '<b>WP: </b>' + cpMin + '-' + cpMax
+			}
             str += '<div><center>' +
             '<b><u>Belohnung:</u></b> ' + i8ln(idToPokemon[rewardinfo['pokemon_id']]).name + '<br>' +
-            '</center></div>'
+			pokemonCPStr +
+			'</center></div>'
         }
 		
 		//If condition is only 1 item/pokemon/etc

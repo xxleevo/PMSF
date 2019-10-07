@@ -391,8 +391,9 @@ class RDM extends Scanner
         json_extract(json_extract(`quest_conditions`,'$[*].info'),'$[0]') AS quest_condition_info,
         json_extract(json_extract(`quest_rewards`,'$[*].type'),'$[0]') AS quest_reward_type,
         json_extract(json_extract(`quest_rewards`,'$[*].info'),'$[0]') AS quest_reward_info,
-        json_extract(json_extract(`quest_rewards`,'$[*].info.amount'),'$[0]') AS quest_reward_amount
-        FROM pokestop
+        json_extract(json_extract(`quest_rewards`,'$[*].info.amount'),'$[0]') AS quest_reward_amount,
+        json_extract(json_extract(`quest_rewards`,'$[*].info.form_id'),'$[0]') AS quest_pokemon_form
+		FROM pokestop
         WHERE :conditions";
 
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
@@ -429,6 +430,26 @@ class RDM extends Scanner
             $pokestop["grunt_type_gender"] = empty($grunttype_pid) ? null : i8ln($this->grunttype[$grunttype_pid]["grunt"]);
 			$pokestop["encounters"] = empty($this->grunttype[$grunttype_pid]["encounters"]) ? null : $this->grunttype[$grunttype_pid]["encounters"];
             $pokestop["second_reward"] = empty($this->grunttype[$grunttype_pid]["second_reward"]) ? null : $this->grunttype[$grunttype_pid]["second_reward"];
+
+			//Get Stats of Reward Pokemon
+			if(!empty($pokestop["quest_pokemon_id"])){
+                if($pokestop["quest_pokemon_form"] == 0){
+				        $pokestop["reward_pokemon_base_atk"] = 3;
+                        $pokestop["reward_pokemon_base_atk"] = $this->data[$pokestop["quest_pokemon_id"]]["baseAttack"];
+                        $pokestop["reward_pokemon_base_def"] = $this->data[$pokestop["quest_pokemon_id"]]["baseDefense"];
+                        $pokestop["reward_pokemon_base_sta"] = $this->data[$pokestop["quest_pokemon_id"]]["baseStamina"];
+                }else{
+                    $forms = $this->data[$pokestop["quest_pokemon_id"]]["forms"];
+                    foreach ($forms as $f => $v) {
+                        if($pokestop["quest_pokemon_form"] === $v['protoform']) {
+                            $pokestop["reward_pokemon_base_atk"] = 4;
+                            $pokestop["reward_pokemon_base_atk"] = $v["baseAttack"];
+                            $pokestop["reward_pokemon_base_def"] = $v["baseDefense"];
+                            $pokestop["reward_pokemon_base_sta"] = $v["baseStamina"];
+                        }
+                    }
+			    }
+            }
 			$data[] = $pokestop;
 
             unset($pokestops[$i]);
