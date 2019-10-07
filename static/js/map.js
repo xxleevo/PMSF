@@ -1574,16 +1574,8 @@ function getQuest(item) {
 			//Min / Max cp Calculations for monster reward
 			var pokemonCPStr = ''
 			if(!noQuestPokemonCP){
-				var cpMin = ''
-				var cpMax = ''
-				if(item['reward_pokemon_base_atk'] !== null && item['reward_pokemon_base_def'] !== null && item['reward_pokemon_base_sta'] !== null){
-					var cpMin = Math.floor(((item['reward_pokemon_base_atk'] + 10) * Math.pow((item['reward_pokemon_base_def'] + 10),0.5) * Math.pow((item['reward_pokemon_base_sta'] + 10),0.5) * Math.pow(cpMultiplier[14],2))/10)
-					var cpMax = Math.floor(((item['reward_pokemon_base_atk'] + 15) * Math.pow((item['reward_pokemon_base_def'] + 15),0.5) * Math.pow((item['reward_pokemon_base_sta'] + 15),0.5) * Math.pow(cpMultiplier[14],2))/10)
-				}else{
-					var cpMin = '?'
-					var cpMax = '?'
-					console.log('Unknown basestats for Pokemon #' + rewardinfo['pokemon_id'] +  ':' + item["quest_pokemon_form"] + ' (' + i8ln(idToPokemon[rewardinfo['pokemon_id']]).name + ')')
-				}
+				var cpMin = getPokemonCP(rewardinfo['pokemon_id'],item["quest_pokemon_form"],item['reward_pokemon_base_atk'],item['reward_pokemon_base_def'],item['reward_pokemon_base_sta'],15,10,10,10)
+				var cpMax = getPokemonCP(rewardinfo['pokemon_id'],item["quest_pokemon_form"],item['reward_pokemon_base_atk'],item['reward_pokemon_base_def'],item['reward_pokemon_base_sta'],15,15,15,15)
 			    pokemonCPStr = '<b>WP: </b>' + cpMin + '-' + cpMax
 			}
             str += '<div><center>' +
@@ -2022,6 +2014,16 @@ function getIv(atk, def, stm) {
     }
 
     return false
+}
+
+function getPokemonCP(pokemon_id,form,atk_base,def_base,sta_base,level,atk,def,sta){
+    if(atk_base !== null && def_base !== null && sta_base !== null){
+        var pokemonLevel = level - 1 // pulled from array, so decrease 1 to match for the multiplier-array
+        return Math.floor(((atk_base + atk) * Math.pow(def_base + def,0.5) * Math.pow(sta_base + sta,0.5) * Math.pow(cpMultiplier[pokemonLevel],2))/10)
+	}else{
+        console.log('Unknown basestats for Pokemon #' + pokemon_id +  ':' + form + ' (' + i8ln(idToPokemon[pokemon_id]).name + ')')
+        return '?'
+    }
 }
 
 function getPokemonLevel(cpMultiplier) {
