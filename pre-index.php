@@ -971,8 +971,8 @@ if ( $blockIframe ) {
 						?>
                     </div>
 						<?php
-						if($onlyTriggerGyms){
-						echo '(Bereits getriggerte Arenen werden mit einem "EX" versehen)';
+						if(!empty($triggerGyms)){
+						echo '(Bereits getriggerte Arenen werden mit einem <b>goldenen</b> "EX" versehen)';
 						} ?>
                 </div>
                 <?php
