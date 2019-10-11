@@ -1064,6 +1064,7 @@ function gymLabel(item) {
 		}
 	}
 	
+    var raidCounterGuideStr = ''
     if (raidSpawned && item.raid_end > Date.now() && item['raid_level'] >= denyRaidLevelsBelow) {
 		if(!noGymTeamInfos){
         teamImage = '<img width="140px" style="padding: 5px;margin-left:-50px" src="static/forts/label/' + teamName + '_raw.png">'
@@ -1133,7 +1134,6 @@ function gymLabel(item) {
             pokemonidStr = pokemonid
         }
 
-        var raidCounterGuideStr = ''
         if (raidStarted) {
 			raidIcon = '<img style="width: 68px;margin-left:-105px;margin-bottom: 50px; --webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/>'
 			if(form !== null && form > 0 && forms.length > form){
@@ -1178,7 +1178,7 @@ function gymLabel(item) {
     if ((item['park'] !== '0' && item['park'] !== 'None' && item['park'] !== undefined && item['park']) && (noParkInfo === false)) {
         if (item['park'] == 1) {
             // RM only stores boolean, so just call it "Park Gym"
-            park = '<div>' + i8ln('Parkarena') + '</div>'
+            park = '<div>' + i8ln('park gym(ex eligible)') + '</div>'
         } else {
             park = '<div>' + i8ln('Park') + ': ' + item['park'] + '</div>'
         }
@@ -1250,18 +1250,23 @@ function gymLabel(item) {
             '</center>' +
             '</div>'
 		if(!noWhatsappLink || !noRaidCounterGuide){
-			str += hr +
+		        var hyphen = ''
+                if((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)){
+			        str += hr
+					hyphen = ' - '
+                }
+                str +=
 				'<center>' +
                 '<div>'
-                if (((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
+                if ((!noWhatsappLink && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
                     str += '<a href="whatsapp://send?text=' + '%2AArena:%2A' + encodeURIComponent(item.name) + '%0A%2ARaid:%2ALevel%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
                 } else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
                     str += '<a href="whatsapp://send?text=' + '%2AArena:%2A' + encodeURIComponent(item.name) + '%0A%2ARaid:%2ALevel%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
                 }
-				if (!noWhatsappLink && !noRaidCounterGuide){
-                    str += ' - '
+				if (!noWhatsappLink || !noRaidCounterGuide && ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon))){
+                    str += hyphen
 				}
-				if (!noRaidCounterGuide){
+				if ((!noRaidCounterGuide && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)){
                     str += raidCounterGuideStr
 				}
 				str +=
@@ -2202,8 +2207,8 @@ function getGymMarkerIcon(item) {
 		
 		//Exclusive Raid icon sizes
 		var dynamicExclusiveSize = (50/6) + ((50/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var dynamicExclusivePos = (-20/6) + ((-20/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-		var dynamicExclusivePosBot = (20/6) + ((20/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicExclusivePos = (-25/6) + ((-20/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicExclusivePosBot = (25/6) + ((20/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 		
 		//Battle icon sizes
 		var dynamicSwordSize = (24/6) + ((24/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
@@ -2251,13 +2256,16 @@ function getGymMarkerIcon(item) {
 	
     var exIcon = ''
     var fortMarker = ''
-    if ((((park !== '0' && park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
-        exIcon = '<img src="static/images/ex.png" style="width:' + dynamicExSize + 'px;height:auto;position:absolute;right:'+dynamicExPos+'px;bottom:' + dynamicExPosBot + 'px;"/>'
+    if ((((park !== '0' && park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0)) && noExGyms === false)) {
+        exIcon = '<img src="static/images/ex_gym.png" style="width:' + dynamicExSize + 'px;height:auto;position:absolute;right:'+dynamicExPos+'px;bottom:' + dynamicExPosBot + 'px;"/>'
+    }
+    if ((triggerGyms.includes(item['gym_id'])) && (noExGyms === false)) {
+        exIcon = '<img src="static/images/ex_gym_triggered.png" style="width:' + dynamicExSize + 'px;height:auto;position:absolute;right:'+dynamicExPos+'px;bottom:' + dynamicExPosBot + 'px;"/>'
     }
 	
 	var exclusiveIcon = ''
 	if (noExGyms == false && item['is_exclusive'] == 1){
-		exclusiveIcon = '<img src="static/images/exclusive.png" style="width:' + dynamicExclusiveSize + 'px;height:auto;position:absolute;right:'+dynamicExclusivePos+'px;bottom:' + dynamicExclusivePosBot + 'px;"/>'
+		exclusiveIcon = '<img src="static/images/ex_gym_raid.png" style="width:' + dynamicExclusiveSize + 'px;height:auto;position:absolute;right:'+dynamicExclusivePos+'px;bottom:' + dynamicExclusivePosBot + 'px;"/>'
 	}
 	
     var smallExIcon = ''
