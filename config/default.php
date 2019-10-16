@@ -84,7 +84,7 @@ $discordUrl = "";                                                   // Discord U
 
 /* Worldopole */
 
-$worldopoleUrl = "";                                                // Link to Worldopole, leave "" for empty
+$worldopoleUrl = "";                                                // Link to Worldopole/RDM-o-Pole, leave "" for empty
 
 /* StatsToggle */
 $noStatsToggle = false;                                             // Enables or disables the stats button in the header.

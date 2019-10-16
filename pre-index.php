@@ -1574,9 +1574,9 @@ if ( $blockIframe ) {
         ?>
         </div>
         <?php
-        if ( $infopageUrl != "" ) {
-            echo '<p><center><a href="' . $infopageUrl . '" target="_blank" style="background-color: #555555;border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;">
-            <i class="fa fa-info-circle fa-fw"></i>Unsere Infopage
+        if ( $worldopoleUrl != "" ) {
+            echo '<p><center><a href="' . $worldopoleUrl . '" target="_blank" style="background-color: #555555;border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;">
+            <i class="fa fa-info-circle fa-fw"></i>Statistiken
         </a></center></p>';
         }
         ?>
@@ -1621,7 +1621,7 @@ if ( $blockIframe ) {
                 ?>
                 <div class="switch-container">
                     <div>
-                        <center><a href="<?= $worldopoleUrl ?>">Full Stats</a></center>
+                        <center><a href="<?= $worldopoleUrl ?>"><?php echo i8ln('Full Stats')?></a></center>
                     </div>
                 </div>
                 <?php
