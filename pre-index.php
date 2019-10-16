@@ -1575,7 +1575,7 @@ if ( $blockIframe ) {
         </div>
         <?php
         if ( $worldopoleUrl != "" ) {
-            echo '<p><center><a href="' . $worldopoleUrl . '" target="_blank" style="background-color: #555555;border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;">
+            echo '<p><center><a href="' . $worldopoleUrl . '" target="_blank" style="border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;" class="settings">
             <i class="fa fa-info-circle fa-fw"></i>Statistiken
         </a></center></p>';
         }
