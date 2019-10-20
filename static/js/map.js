@@ -1259,8 +1259,12 @@ function gymLabel(item) {
 				'<center>' +
                 '<div>'
                 if ((!noWhatsappLink && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
-                    str += '<a href="whatsapp://send?text=' + '📌%20%2AArena:%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2ARaid:%2A%20%0ALevel%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A🔛%20%2ARaidzeit:%2A%20%0AStart:%20' + raidStartStr + '%0AEnde:%20' + raidEndStr + '%0A%0A🗺%20%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
-                } else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
+					if(!noWhatsappRaidMoves){
+						str += '<a href="whatsapp://send?text=' + '📌%20%2AArena:%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2ARaid:%2A%20%0ALevel%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A👊%20%2AMoveset:%2A%20%0A' + pMove1 + '/' + pMove2 +'%0A%0A🔛%20%2ARaidzeit:%2A%20%0AStart:%20' + raidStartStr + '%0AEnde:%20' + raidEndStr + '%0A%0A🗺%20%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
+					}else{
+						str += '<a href="whatsapp://send?text=' + '📌%20%2AArena:%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2ARaid:%2A%20%0ALevel%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A🔛%20%2ARaidzeit:%2A%20%0AStart:%20' + raidStartStr + '%0AEnde:%20' + raidEndStr + '%0A%0A🗺%20%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
+					}
+				} else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
                     str += '<a href="whatsapp://send?text=' + '📌%20%2AArena:%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2ARaid:%2A%20%0ALevel%20' + item.raid_level + '%20Ei%20🥚%0A%0A🔛%20%2ARaidzeit:%2A%20%0AStart:%20' + raidStartStr + '%0AEnde:%20' + raidEndStr + '%0A%0A🗺%20%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
                 }
 				if (!noWhatsappLink || !noRaidCounterGuide && ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon))){

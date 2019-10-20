@@ -208,6 +208,7 @@ $minRaidLevel = 1;
 $maxRaidLevel = 5;
 $noRaidCounterGuide = false;
 $noRaidPokemonCP = false;                                           // true/false
+$noWhatsappRaidMoves = false;
 
 $noPokestops = false;                                               // true/false
 $enablePokestops = 'false';                                         // true/false

@@ -2313,6 +2313,7 @@ if ( $blockIframe ) {
 	var noRaidCounterGuide = <?php echo $noRaidCounterGuide === true ? 'true' : 'false' ?>;
 	var noQuestPokemonCP = <?php echo $noQuestPokemonCP === true ? 'true' : 'false' ?>;
 	var noRaidPokemonCP = <?php echo $noRaidPokemonCP === true ? 'true' : 'false' ?>;
+	var noWhatsappRaidMoves = <?php echo $nnoWhatsappRaidMoves === true ? 'true' : 'false' ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
