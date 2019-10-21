@@ -85,6 +85,8 @@ $discordUrl = "";                                                   // Discord U
 /* Worldopole */
 
 $worldopoleUrl = "";                                                // Link to Worldopole/RDM-o-Pole, leave "" for empty
+$noLinkFullStats = false;                                              // Enable a link to worldopole in the stats sidebar
+$worldopoleButtonTitle = "Statistiken";                             // Display text for the button-link to worlopole in the Menu
 
 /* StatsToggle */
 $noStatsToggle = false;                                             // Enables or disables the stats button in the header.

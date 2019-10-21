@@ -1576,7 +1576,7 @@ if ( $blockIframe ) {
         <?php
         if ( $worldopoleUrl != "" ) {
             echo '<p><center><a href="' . $worldopoleUrl . '" target="_blank" style="background-image:'. $overlayDesign . ';border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;" class="settings">
-            <i class="fa fa-info-circle fa-fw"></i>Statistiken
+            <i class="fa fa-info-circle fa-fw"></i>'. $worldopoleButtonTitle .'
         </a></center></p>';
         }
         ?>
@@ -1617,7 +1617,7 @@ if ( $blockIframe ) {
     <nav id="stats">
         <div class="switch-container">
             <?php
-            if ( $worldopoleUrl !== "" ) {
+            if ( $worldopoleUrl !== "" && !$noLinkFullStats) {
                 ?>
                 <div class="switch-container">
                     <div>
