@@ -117,7 +117,7 @@ if ( $blockIframe ) {
     }
 
     function itemFilterImages( $noItemNumbers, $onClick = '', $itemsToExclude = array(), $num = 0 ) {
-        global $items, $copyrightSafe, $iconRepository;
+        global $items, $copyrightSafe, $iconRepository, $rewardsIconsRepository;
         if ( empty( $items ) ) {
             $json = file_get_contents( 'static/dist/data/items.min.json' );
             $items = json_decode( $json, true );
@@ -130,7 +130,7 @@ if ( $blockIframe ) {
 
             if ( ! in_array( $k, $itemsToExclude ) ) {
 		if ( ! $copyrightSafe ) {
-                    echo '<span class="item-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="static/icons/rewards/reward_' . $k . '_1.png" style="width:48px;height:48px;"/>';
+                    echo '<span class="item-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="' . $rewardsIconsRepository . 'rewards/reward_' . $k . '_1.png" style="width:48px;height:48px;"/>';
 		} else {
                     echo '<span class="item-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="static/icons-safe/rewards/reward_' . $k . '_1.png" style="width:48px;height:48px;"/>';
                 }
@@ -2241,6 +2241,7 @@ if ( $blockIframe ) {
     var spriteFileLarge = '<?php echo $copyrightSafe ? 'static/icons-safe-1-bigger.png' : 'static/icons-im-1-bigger.png' ?>';
     var weatherSpritesSrc = '<?php echo $copyrightSafe ? 'static/sprites-safe/' : 'static/sprites-pokemon/' ?>';
     var icons = '<?php echo $copyrightSafe ? 'static/icons-safe/' : $iconRepository ?>';
+    var rewardIcons = '<?php echo $copyrightSafe ? 'static/icons-safe/' : $rewardsIconsRepository ?>';
     var weatherColors = <?php echo json_encode( $weatherColors ); ?>;
     var mapType = '<?php echo 'rdm'; ?>';
     var triggerGyms = <?php echo $triggerGyms ?>;

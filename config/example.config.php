@@ -68,9 +68,11 @@ $sellyWebhookSecret = '';											// Add a secret key at https://selly.gg/sett
 /*---------General Frontend Settings---------*/
 $copyrightSafe = true;												// If you want to use icons, set to false (you will need your own icons)
 $iconRepository = 'https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/';												// URLs or folder paths are allowed - if noMultipleRepos=false, this is also the default icon pack
-																	//You can also use a relative path here for your icons!
-																	//example: $iconRepository = 'static/icons/';
-																									
+																	// You can also use a relative path here for your icons!
+																	// example: $iconRepository = 'static/icons/';
+$rewardsIconsRepository = 'static/icons/';						    // URL or folder paths to the "reward"-folder, containing the reward images and a "pokemon" folder containing the pokemon reward images.
+																	// You can also use a an url here for your icons!
+																	// example: $rewardsIconsRepository = 'https://raw.githubusercontent.com/user/repo/branch/.../';
 $noMultipleRepos = true;											// To enable Multiple icon packs:
 																	// Each iconpack needs to be in a seperate folder
 																	// for the menu icons, $iconRepository will be used always.
