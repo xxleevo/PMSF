@@ -21,6 +21,8 @@ var $switchOpenGymsOnly
 var $switchBattleGymsOnly
 var $selectTeamGymsOnly
 var $selectLastUpdateGymsOnly
+var $selectNewGymsOnly
+var $selectNewPokestopsOnly
 var $switchActiveRaids
 var $selectMinGymLevel
 var $selectMaxGymLevel
@@ -686,6 +688,8 @@ function initSidebar() {
     $('#min-level-raids-filter-switch').val(Store.get('minRaidLevel'))
     $('#max-level-raids-filter-switch').val(Store.get('maxRaidLevel'))
     $('#last-update-gyms-switch').val(Store.get('showLastUpdatedGymsOnly'))
+    $('#new-gyms-switch').val(Store.get('showNewGymsOnly'))
+    $('#new-pokestops-switch').val(Store.get('showNewPokestopsOnly'))
     $('#pokemon-switch').prop('checked', Store.get('showPokemon'))
     $('#pokemon-filter-wrapper').toggle(Store.get('showPokemon'))
     $('#big-karp-switch').prop('checked', Store.get('showBigKarp'))
@@ -2189,6 +2193,8 @@ function getGymMarkerIcon(item) {
     var formStr = ''
     var lastScanned = item['last_scanned']
 	var isInBattle = item['battle_status']
+	var dateFirstSeen = new Date(item['first_seen'])
+	var dateFirstSeenStr = dateFirstSeen.getDate() + "." + (dateFirstSeen.getMonth()+1) + "." + dateFirstSeen.getFullYear()
 	//Dynamic Sizes
 		//Raid,Gym,Eggsizes
 		// If you want to keep the scaling on mapzoom, dont touch these settings
@@ -2223,6 +2229,11 @@ function getGymMarkerIcon(item) {
 		var dynamicLeft = (-4/6) + ((-4/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 		var dynamicTop = (46/6) + ((46/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 		var dynamicFontSize = (12/6) + ((12/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		
+		//FirstSeenDate
+		var dynamicFirstseenLeft = (-6/6) + ((-6/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicFirstseenTop = (-16/6) + ((-16/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+		var dynamicFirstseenFontSize = (12/6) + ((12/6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 		
     if (raidForm <= 10 || raidForm == null || raidForm === '0') {
         formStr = '00'
@@ -2289,6 +2300,9 @@ function getGymMarkerIcon(item) {
 			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Hatched-Known
 				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>' + generateRemainingTimer(item.raid_end, 'end') + '</span></div>'
 			}
+			if (Store.get('showNewGymsOnly') !== "0" && map.getZoom() > 11){
+				html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
+			}
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
             iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
@@ -2316,6 +2330,9 @@ function getGymMarkerIcon(item) {
 			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Hatched-unknown
 				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>' + generateRemainingTimer(item.raid_end, 'end') + '</span></div>'
 			}
+			if (Store.get('showNewGymsOnly') !== "0" && map.getZoom() > 11){
+				html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
+			}
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
             iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
@@ -2342,6 +2359,9 @@ function getGymMarkerIcon(item) {
 			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Egg
 				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-egg" disappears-at="' + item.raid_start + '" start>' + generateRemainingTimer(item.raid_start, 'start') + '</span></div>'
 			}
+			if (Store.get('showNewGymsOnly') !== "0" && map.getZoom() > 11){
+				html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
+			}
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
             iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
@@ -2353,7 +2373,11 @@ function getGymMarkerIcon(item) {
 	} else if( (lastScanned/1000) < ((Date.now()/1000)-14400) ){
         html = '<div>' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
-            exIcon +
+            exIcon
+			if (Store.get('showNewGymsOnly') !== "0" && map.getZoom() > 11){
+				html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
+			}
+			html +=
 			'</div>'
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
@@ -2366,8 +2390,12 @@ function getGymMarkerIcon(item) {
         html = '<div>' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:'+dynamicGymSize+'px;height:auto;"/>' +
             exIcon +
-			battleIcon +
-            '</div>'
+			battleIcon
+			if (Store.get('showNewGymsOnly') !== "0" && map.getZoom() > 11){
+				html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
+			}
+			html +=
+			'</div>'
         fortMarker = L.divIcon({
             iconSize: [relativeIconSize,relativeIconSize],
             iconAnchor: [dynamicGymSize/2, dynamicGymSize/2],
@@ -2552,7 +2580,6 @@ function getPokestopMarkerIcon(item) {
 	var invasion_expiration = item['invasion_expiration']
     var stopMarker = ''
     var html = ''
-	
 	var width = 32
 	var invasionString = ''
 	var anchor = [15, 28]
@@ -5165,6 +5192,36 @@ function processPokestops(i, item) {
     if (Store.get('showInvasions') && !item['invasion_expiration']) {
         return true
     }
+	
+    var removePokestopFromMap = function removePokestopFromMap(pokestopid) {
+        if (mapData.pokestops[pokestopid] && mapData.pokestops[pokestopid].marker) {
+            if (mapData.pokestops[pokestopid].marker.rangeCircle) {
+                markers.removeLayer(mapData.pokestops[pokestopid].marker.rangeCircle)
+                markersnotify.removeLayer(mapData.pokestops[pokestopid].marker.rangeCircle)
+            }
+            markers.removeLayer(mapData.pokestops[pokestopid].marker)
+            markersnotify.removeLayer(mapData.pokestops[pokestopid].marker)
+            delete mapData.pokestops[pokestopid]
+        }
+    }
+    if (Store.get('showNewPokestopsOnly')) {
+		if(Store.get('showNewPokestopsOnly') !== "0"){
+			var filterMonthDate = new Date(Store.get('showNewPokestopsOnly'))
+		}else{
+			var filterMonthDate = new Date("1970-01-01")
+		}
+        if (item.first_seen == null) {
+			if (item.first_seen < filterMonthDate.valueOf()){
+                removePokestopFromMap(item['pokestop_id'])
+                return true
+            }
+        } else {
+			if (item.first_seen < filterMonthDate.valueOf()){
+                removePokestopFromMap(item['pokestop_id'])
+                return true
+            }
+        }
+    }
     if (!mapData.pokestops[item['pokestop_id']]) {
         // new pokestop, add marker to map and item to dict
         if (item.marker && item.marker.rangeCircle) {
@@ -5403,7 +5460,25 @@ function processGyms(i, item) {
             }
         }
     }
-
+    if (Store.get('showNewGymsOnly')) {
+		if(Store.get('showNewGymsOnly') !== "0"){
+			var filterMonthDate = new Date(Store.get('showNewGymsOnly'))
+		}else{
+			var filterMonthDate = new Date("1970-01-01")
+		}
+        if (item.first_seen == null) {
+			if (item.first_seen < filterMonthDate.valueOf()){
+                removeGymFromMap(item['gym_id'])
+                return true
+            }
+        } else {
+			if (item.first_seen < filterMonthDate.valueOf()){
+                removeGymFromMap(item['gym_id'])
+                return true
+            }
+        }
+    }
+	
     if (gymLevel < Store.get('minGymLevel') && (item.raid_end === undefined || item.raid_end < Date.now())) {
         removeGymFromMap(item['gym_id'])
         return true
@@ -6551,6 +6626,37 @@ $(function () {
         Store.set('showLastUpdatedGymsOnly', this.value)
         lastgyms = false
         updateMap()
+    })
+	
+    $selectNewGymsOnly = $('#new-gyms-switch')
+
+    $selectNewGymsOnly.select2({
+        placeholder: Store.get('showNewGymsOnly'),
+        minimumResultsForSearch: Infinity
+    })
+
+    $selectNewGymsOnly.on('change', function () {
+        Store.set('showNewGymsOnly', this.value)
+        lastgyms = false
+        updateMap()
+		updateGymIcons()
+    })
+	
+    $selectNewPokestopsOnly = $('#new-pokestops-switch')
+
+    $selectNewPokestopsOnly.select2({
+        placeholder: Store.get('showNewPokestopsOnly'),
+        minimumResultsForSearch: Infinity
+    })
+
+    $selectNewPokestopsOnly.on('change', function () {
+        Store.set('showNewPokestopsOnly', this.value)
+        lastpokestops = false
+        updateMap()
+		$.each(mapData.pokestops, function (key, value) {
+			markers.removeLayer(value.marker)
+			value.marker = setupPokestopMarker(value)
+		})
     })
 
     $selectMinGymLevel = $('#min-level-gyms-filter-switch')

@@ -219,6 +219,16 @@ var StoreOptions = {
             default: 0,
             type: StoreTypes.Number
         },
+    'showNewGymsOnly':
+        {
+            default: 0,
+            type: StoreTypes.String
+        },
+    'showNewPokestopsOnly':
+        {
+            default: 0,
+            type: StoreTypes.String
+        },
     'minGymLevel':
         {
             default: 0,

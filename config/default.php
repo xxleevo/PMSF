@@ -200,6 +200,7 @@ $gymSidebar = 'true';                                               // true/fals
 $noExEligible = false;                                              // true/false
 $exEligible = 'false';                                              // true/false
 $noGymFirstseen = true;                                             // true/false
+$noNewGymsFilter = true;
 
 $noRaids = false;                                                   // true/false
 $enableRaids = 'false';                                             // true/false
@@ -215,6 +216,7 @@ $noWhatsappRaidMoves = false;
 $noPokestops = false;                                               // true/false
 $enablePokestops = 'false';                                         // true/false
 $noPokestopFirstseen = true;
+$noNewPokestopsFilter = true;
 $noLures = false;                                                   // true/false
 $enableLured = 'false';                                             // true/false
 $noRocketInvasions = false;

@@ -698,7 +698,23 @@ if ( $blockIframe ) {
 								</div>
 							</div>
 						<?php
-						} ?>
+						}
+					if ( !$noNewPokestopsFilter) {
+						echo '
+						<hr style="padding:0px;margin:10px;" />
+						<div class="form-control switch-container" id="new-pokestops-wrapper">
+							<font size="3">Neue Pokestops ab:</font>
+							<select name="new-pokestops-switch" id="new-pokestops-switch">
+								<option value="" disabled selected></option>
+								<option value="0">Inaktiv</option>
+								<option value="2019-08-01">August 2019</option>
+								<option value="2019-09-01">September 2019</option>
+								<option value="2019-10-01">Oktober 2019</option>
+								<option value="2019-11-01">November 2019</option>
+								<option value="2019-12-01">Dezember 2019</option>
+							</select>
+						</div>';
+					}?>
 					</div>
 				</div>
                 <?php
@@ -925,6 +941,20 @@ if ( $blockIframe ) {
 									<option value="12">Letzten 12 Stunden</option>
 									<option value="24">Letzten 24 Stunden</option>
 									<option value="168">Letzte Woche</option>
+								</select>
+							</div>';
+						}
+						if ( !$noNewGymsFilter) {
+							echo '<div class="form-control switch-container" id="new-gyms-wrapper">
+								<font size="3">Neue Arenen ab:</font>
+								<select name="new-gyms-switch" id="new-gyms-switch">
+									<option value="" disabled selected></option>
+									<option value="0">Inaktiv</option>
+									<option value="2019-08-01">August 2019</option>
+									<option value="2019-09-01">September 2019</option>
+									<option value="2019-10-01">Oktober 2019</option>
+									<option value="2019-11-01">November 2019</option>
+									<option value="2019-12-01">Dezember 2019</option>
 								</select>
 							</div>';
 						}
