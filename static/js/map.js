@@ -5705,7 +5705,6 @@ function drawWeatherOverlay(weather) {
             weatherArray = []
         })
         if (map.getZoom() <= 13) {
-			console.log('triggered')
             $.each(weatherMarkers, function (index, marker) {
                 markers.addLayer(marker)
             })
