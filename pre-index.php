@@ -999,9 +999,11 @@ if ( $blockIframe ) {
             }
             ?>
             <?php
-            if ( ! $noPortals || ! $noS2Cells || $noWeatherOverlay) {
-				if(!$noWeatherOverlay){
+            if ( ! $noPortals || ! $noS2Cells || ! $noWeatherOverlay) {
+				if(!$noWeatherOverlay && (! $noPortals || ! $noS2Cells)){
 					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;S2 Zellen &amp; Wetter</h3>';
+				} else if(!$noWeatherOverlay){
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;Wetter</h3>';
 				} else{
 					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;S2 Zellen</h3>';
 				} ?>
