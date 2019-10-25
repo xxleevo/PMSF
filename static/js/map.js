@@ -5552,21 +5552,19 @@ function updateMap() {
         lng: position.lng
     })
     // lets try and get the s2 cell id in the middle
-    if (mapType !== 'rdm' && enableWeatherOverlay) {
-        var s2CellCenter = S2.keyToId(S2.latLngToKey(position.lat, position.lng, 10))
-        if ((s2CellCenter) && (String(s2CellCenter) !== $('#currentWeather').data('current-cell')) && (map.getZoom() > 13)) {
-            loadWeatherCellData(s2CellCenter).done(function (cellWeather) {
-                var currentWeather = cellWeather.weather
-                var currentCell = $('#currentWeather').data('current-cell')
-                if ((currentWeather) && (currentCell !== currentWeather.s2_cell_id)) {
-                    $('#currentWeather').data('current-cell', currentWeather.s2_cell_id)
-                    $('#currentWeather').html('<img src="static/weather/' + currentWeather.condition + '.png" alt="" height="55px"">')
-                } else if (!currentWeather) {
-                    $('#currentWeather').data('current-cell', '')
-                    $('#currentWeather').html('')
-                }
-            })
-        }
+    var s2CellCenter = S2.keyToId(S2.latLngToKey(position.lat, position.lng, 10))
+    if ((s2CellCenter) && (String(s2CellCenter) !== $('#currentWeather').data('current-cell')) && (map.getZoom() > 13)) {
+        loadWeatherCellData(s2CellCenter).done(function (cellWeather) {
+            var currentWeather = cellWeather.weather
+            var currentCell = $('#currentWeather').data('current-cell')
+            if ((currentWeather) && (currentCell !== currentWeather.s2_cell_id)) {
+                $('#currentWeather').data('current-cell', currentWeather.s2_cell_id)
+                $('#currentWeather').html('<img src="static/weather/' + currentWeather.condition + '.png" alt="" height="55px"">')
+            } else if (!currentWeather) {
+                $('#currentWeather').data('current-cell', '')
+                $('#currentWeather').html('')
+            }
+        })
     }
 
     loadRawData().done(function (result) {
@@ -5686,7 +5684,7 @@ function drawWeatherOverlay(weather) {
                 color: weatherColors[item.condition],
                 opacity: 1,
                 weight: 1,
-                fillOpacity: 0
+                fillOpacity: weatherCellsFillOpacity
             })
             var bounds = new L.LatLngBounds()
             var i, center
@@ -5706,6 +5704,11 @@ function drawWeatherOverlay(weather) {
             weatherLayerGroup.addLayer(poly)
             weatherArray = []
         })
+        if (map.getZoom() < 13) {
+            $.each(weatherMarkers, function (index, marker) {
+                markers.addLayer(marker)
+            })
+		}
     }
 }
 

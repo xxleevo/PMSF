@@ -890,4 +890,32 @@ class RDM extends Scanner
         }
         return $data;
     }
+    public function get_weather_by_cell_id($cell_id)
+    {
+        global $db;
+        $query = "SELECT id AS s2_cell_id, gameplay_condition AS gameplay_weather FROM weather WHERE id = :cell_id";
+        $params = [':cell_id' => intval((float)$cell_id)]; // use float to intval because RDM is signed int
+        $weather_info = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
+        if ($weather_info) {
+            // force re-bind of gameplay_weather to condition
+            $weather_info[0]['condition'] = $weather_info[0]['gameplay_weather'];
+            unset($weather_info[0]['gameplay_weather']);
+            return $weather_info[0];
+        } else {
+            return null;
+        }
+    }
+    public function get_weather($updated = null)
+    {
+        global $db;
+        $query = "SELECT id AS s2_cell_id, gameplay_condition AS gameplay_weather FROM weather";
+        $weathers = $db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+        $data = array();
+        foreach ($weathers as $weather) {
+            $data["weather_" . $weather['s2_cell_id']] = $weather;
+            $data["weather_" . $weather['s2_cell_id']]['condition'] = $data["weather_" . $weather['s2_cell_id']]['gameplay_weather'];
+            unset($data["weather_" . $weather['s2_cell_id']]['gameplay_weather']);
+        }
+        return $data;
+    }
 }

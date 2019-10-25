@@ -424,6 +424,22 @@ $noAreas = true;
 $areas = [];                                                        // [[latitude,longitude,zoom,"name"],[latitude,longitude,zoom,"name"]]
 
 //-----------------------------------------------------
+// Weather Config
+//-----------------------------------------------------
+$noWeatherOverlay = false;
+$enableWeatherOverlay = 'false';
+$weatherColors = [
+    'grey',         // no weather
+    '#fdfd96',      // clear
+    'darkblue',     // rain
+    'grey',         // partly cloudy
+    'darkgrey',     // cloudy
+    'purple',       // windy
+    'white',        // snow
+    'black'         // fog
+];
+$weatherCellsFillOpacity = 0.2;   // FillOpacity of the weather cells. 10% = 0.1, 20% = 0.2 etc
+//-----------------------------------------------------
 // MISC
 // Only change settings from this block if you know what they exactly do. Use some of them carefully!
 //-----------------------------------------------------

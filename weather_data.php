@@ -2,8 +2,7 @@
 include('config/config.php');
 header('Content-Type: application/json');
 // init map
-// - missing
-
+$scanner = new \Scanner\RDM();
 if (isset($_POST['cell_id'])) {
     $return_weather = $scanner->get_weather_by_cell_id($_POST['cell_id']);
 } else {

@@ -999,93 +999,107 @@ if ( $blockIframe ) {
             }
             ?>
             <?php
-            if ( ! $noPortals || ! $noS2Cells ) {
-                ?>
-                <h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;S2 Zellen</h3>
-		<div>
+            if ( ! $noPortals || ! $noS2Cells || $noWeatherOverlay) {
+				if(!$noWeatherOverlay){
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;S2 Zellen &amp; Wetter</h3>';
+				} else{
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;S2 Zellen</h3>';
+				} ?>
+				<div>
                 <?php
-                if ( ! $noPortals ) {
-                    echo '<div class="form-control switch-container">
-                    <h3>' . i8ln( 'Portals' ) . '</h3>
-                    <div class="onoffswitch">
-                        <input id="portals-switch" type="checkbox" name="portals-switch"
-                               class="onoffswitch-checkbox" checked>
-                        <label class="onoffswitch-label" for="portals-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-		</div>
-                <div class="form-control switch-container" id = "new-portals-only-wrapper" style = "display:none">
-                    <select name = "new-portals-only-switch" id = "new-portals-only-switch">
-                        <option value = "0"> ' . i8ln( 'All' ) . '</option>
-                        <option value = "1"> ' . i8ln( 'Only new' ) . ' </option>
-                    </select>
-                </div>';
-		} ?>
-                <?php
-                if ( ! $noPoi ) {
-                    echo '<div class="form-control switch-container">
-                    <h3>' . i8ln( 'POI' ) . '</h3>
-                    <div class="onoffswitch">
-                        <input id="poi-switch" type="checkbox" name="poi-switch"
-                               class="onoffswitch-checkbox" checked>
-                        <label class="onoffswitch-label" for="poi-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
-		} ?>
-                <?php
-                if ( ! $noS2Cells ) {
-                    echo '<div class="form-control switch-container">
-                    <h3>' . i8ln( 'Show S2 Cells' ) . '</h3>
-                    <div class="onoffswitch">
-                        <input id="s2-switch" type="checkbox" name="s2-switch"
-                               class="onoffswitch-checkbox" checked>
-                        <label class="onoffswitch-label" for="s2-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-		</div>
-                <div class="form-control switch-container" id = "s2-switch-wrapper" style = "display:none">
-                    <div class="form-control switch-container">
-                        <font size="3">' . i8ln( 'EX trigger Cells' ) . '</font>
-                        <div class="onoffswitch">
-                            <input id="s2-level13-switch" type="checkbox" name="s2-level13-switch"
-                                   class="onoffswitch-checkbox" checked>
-                            <label class="onoffswitch-label" for="s2-level13-switch">
-                                <span class="switch-label" data-on="On" data-off="Off"></span>
-                                <span class="switch-handle"></span>
-                            </label>
-			</div>
-                    </div>
-                    <div class="form-control switch-container">
-                        <font size="3">' . i8ln( 'Gym placement Cells' ) . '</font>
-                        <div class="onoffswitch">
-                            <input id="s2-level14-switch" type="checkbox" name="s2-level14-switch"
-                                   class="onoffswitch-checkbox" checked>
-                            <label class="onoffswitch-label" for="s2-level14-switch">
-                                <span class="switch-label" data-on="On" data-off="Off"></span>
-                                <span class="switch-handle"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-control switch-container">
-                        <font size="3">' . i8ln( 'Pokestop placement Cells' ) . '</font>
-                        <div class="onoffswitch">
-                            <input id="s2-level17-switch" type="checkbox" name="s2-level17-switch"
-                                   class="onoffswitch-checkbox" checked>
-                            <label class="onoffswitch-label" for="s2-level17-switch">
-                                <span class="switch-label" data-on="On" data-off="Off"></span>
-                                <span class="switch-handle"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>';
-		} ?>
+					if ( ! $noPortals ) {
+						echo '
+						<div class="form-control switch-container">
+							<h3>' . i8ln( 'Portals' ) . '</h3>
+							<div class="onoffswitch">
+								<input id="portals-switch" type="checkbox" name="portals-switch" class="onoffswitch-checkbox" checked>
+								<label class="onoffswitch-label" for="portals-switch">
+									<span class="switch-label" data-on="On" data-off="Off"></span>
+									<span class="switch-handle"></span>
+								</label>
+							</div>
+						</div>
+						<div class="form-control switch-container" id = "new-portals-only-wrapper" style = "display:none">
+						<select name = "new-portals-only-switch" id = "new-portals-only-switch">
+							<option value = "0"> ' . i8ln( 'All' ) . '</option>
+							<option value = "1"> ' . i8ln( 'Only new' ) . ' </option>
+						</select>
+						</div>';
+					} ?>
+					<?php
+					if ( ! $noPoi ) {
+						echo '
+						<div class="form-control switch-container">
+							<h3>' . i8ln( 'POI' ) . '</h3>
+							<div class="onoffswitch">
+								<input id="poi-switch" type="checkbox" name="poi-switch" class="onoffswitch-checkbox" checked>
+								<label class="onoffswitch-label" for="poi-switch">
+									<span class="switch-label" data-on="On" data-off="Off"></span>
+									<span class="switch-handle"></span>
+								</label>
+							</div>
+						</div>';
+					} ?>
+					<?php
+					if ( ! $noS2Cells ) {
+						echo '
+						<div class="form-control switch-container">
+							<h3>' . i8ln( 'Show S2 Cells' ) . '</h3>
+							<div class="onoffswitch">
+								<input id="s2-switch" type="checkbox" name="s2-switch" class="onoffswitch-checkbox" checked>
+								<label class="onoffswitch-label" for="s2-switch">
+									<span class="switch-label" data-on="On" data-off="Off"></span>
+									<span class="switch-handle"></span>
+								</label>
+							</div>
+						</div>
+						<div class="form-control switch-container" id = "s2-switch-wrapper" style = "display:none">
+							<div class="form-control switch-container">
+								<font size="3">' . i8ln( 'EX trigger Cells' ) . '</font>
+								<div class="onoffswitch">
+									<input id="s2-level13-switch" type="checkbox" name="s2-level13-switch" class="onoffswitch-checkbox" checked>
+									<label class="onoffswitch-label" for="s2-level13-switch">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+							</div>
+							<div class="form-control switch-container">
+								<font size="3">' . i8ln( 'Gym placement Cells' ) . '</font>
+								<div class="onoffswitch">
+									<input id="s2-level14-switch" type="checkbox" name="s2-level14-switch" class="onoffswitch-checkbox" checked>
+									<label class="onoffswitch-label" for="s2-level14-switch">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+							</div>
+							<div class="form-control switch-container">
+								<font size="3">' . i8ln( 'Pokestop placement Cells' ) . '</font>
+								<div class="onoffswitch">
+									<input id="s2-level17-switch" type="checkbox" name="s2-level17-switch" class="onoffswitch-checkbox" checked>
+									<label class="onoffswitch-label" for="s2-level17-switch">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+							</div>
+						</div>';
+					} ?>
+					<?php
+					if ( ! $noWeatherOverlay ) {
+						echo '
+						<div class="form-control switch-container">
+							<h3> ' . i8ln( 'Weather Conditions' ) . ' </h3>
+							<div class="onoffswitch">
+								<input id="weather-switch" type="checkbox" name="weather-switch" class="onoffswitch-checkbox">
+								<label class="onoffswitch-label" for="weather-switch">
+									<span class="switch-label" data-on="On" data-off="Off"></span>
+									<span class="switch-handle"></span>
+								</label>
+							</div>
+						</div>';
+					} ?>
                 </div>
                 <?php
             }
@@ -1099,20 +1113,6 @@ if ( $blockIframe ) {
                 echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location</h3>
                     <div>';
 		} ?>
-                <?php
-                if ( ! $noWeatherOverlay ) {
-                    echo '<div class="form-control switch-container">
-                    <h3> ' . i8ln( 'Weather Conditions' ) . ' </h3>
-                    <div class="onoffswitch">
-                        <input id="weather-switch" type="checkbox" name="weather-switch"
-                               class="onoffswitch-checkbox">
-                        <label class="onoffswitch-label" for="weather-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
-                } ?>
                 <?php
                 if ( ! $noSpawnPoints ) {
                     echo '<div class="form-control switch-container">
@@ -2263,6 +2263,7 @@ if ( $blockIframe ) {
     var icons = '<?php echo $copyrightSafe ? 'static/icons-safe/' : $iconRepository ?>';
     var rewardIcons = '<?php echo $copyrightSafe ? 'static/icons-safe/' : $rewardsIconsRepository ?>';
     var weatherColors = <?php echo json_encode( $weatherColors ); ?>;
+    var weatherCellsFillOpacity = <?php echo $noWeatherOverlay === true ? 0 : $weatherCellsFillOpacity ?>;
     var mapType = '<?php echo 'rdm'; ?>';
     var triggerGyms = <?php echo $triggerGyms ?>;
     var noExGyms = <?php echo $noExGyms === true ? 'true' : 'false' ?>;

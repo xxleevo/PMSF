@@ -441,32 +441,19 @@ $areas = [];                                                        // [[latitud
 //-----------------------------------------------------
 // Weather Config
 //-----------------------------------------------------
-
-$noWeatherOverlay = true;                                          // true/false
-$enableWeatherOverlay = 'false';                                    // true/false
-
-$weather = [
-    0 => null,
-    1 => 'clear',
-    2 => 'rain',
-    3 => 'partly_cloudy',
-    4 => 'cloudy',
-    5 => 'windy',
-    6 => 'snow',
-    7 => 'fog'
-];
-
+$noWeatherOverlay = false;
+$enableWeatherOverlay = 'false';
 $weatherColors = [
-    'grey',
-    '#fdfd96',
-    'darkblue',
-    'grey',
-    'darkgrey',
-    'purple',
-    'white',
-    'black'
+    'grey',         // no weather
+    '#fdfd96',      // clear
+    'darkblue',     // rain
+    'grey',         // partly cloudy
+    'darkgrey',     // cloudy
+    'purple',       // windy
+    'white',        // snow
+    'black'         // fog
 ];
-
+$weatherCellsFillOpacity = 0.2;
 //-----------------------------------------------------
 // DEBUGGING
 //-----------------------------------------------------
