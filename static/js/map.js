@@ -534,6 +534,22 @@ function createLocationMarker() {
 
     return locationMarker
 }
+function pointInPolygon (x, y, cornersX, cornersY) {
+    var i, j=cornersX.length-1 ;
+    var odd = 0;
+    var pX = cornersX;
+    var pY = cornersY;
+
+    for (i=0; i<cornersX.length; i++) {
+        if ((pY[i]< y && pY[j]>=y ||  pY[j]< y && pY[i]>=y)
+            && (pX[i]<=x || pX[j]<=x)) {
+              odd ^= (pX[i] + (y-pY[i])*(pX[j]-pX[i])/(pY[j]-pY[i])) < x; 
+        }
+
+        j=i; 
+    }
+return odd == 1;
+}
 
 function showS2Cells(level, style) {
     const bounds = map.getBounds()
@@ -542,8 +558,30 @@ function showS2Cells(level, style) {
 
     function addPoly(cell) {
         const vertices = cell.getCornerLatLngs()
+		var s2Lats = []
+		var s2Lons = []
+		// group vertices lat and lons to check 
+		for(let j=0; j < vertices.length; j++){
+			s2Lats[j] = vertices[j]['lat']
+			s2Lons[j] = vertices[j]['lng']
+		}
+		var filledStyle = {color: 'blue', fillOpacity: 0.0}
+		if(Store.get('showCoveredPokestopCells') == true){
+			if(cell.level === 17){
+				$.each(mapData.pokestops, function (key, value) {
+					if(pointInPolygon(value['latitude'], value['longitude'],s2Lats,s2Lons)){
+						filledStyle = {fillColor: 'red', fillOpacity: 0.3}
+					}
+				})
+				$.each(mapData.gyms, function (key, value) {
+					if(pointInPolygon(value['latitude'], value['longitude'],s2Lats,s2Lons)){
+						filledStyle = {fillColor: 'red', fillOpacity: 0.3}
+					}
+				})
+			}
+		}
         const poly = L.polygon(vertices,
-            Object.assign({color: 'blue', opacity: 0.5, weight: 2, fillOpacity: 0.0, dashArray: '2 6', dashOffset: '0'}, style))
+            Object.assign({color: 'blue', opacity: 0.5, weight: 2, fillOpacity: 0.0, dashArray: '2 6', dashOffset: '0'}, style,filledStyle))
 			
         if (cell.level === 13) {
             exLayerGroup.addLayer(poly)
@@ -669,6 +707,8 @@ function initSidebar() {
     $('#s2-level13-switch').prop('checked', Store.get('showExCells'))
     $('#s2-level14-switch').prop('checked', Store.get('showGymCells'))
     $('#s2-level17-switch').prop('checked', Store.get('showStopCells'))
+    $('#fill-busy-pokestop-cell-wrapper').toggle(Store.get('showStopCells'))
+    $('#fill-busy-pokestop-cell-switch').prop('checked', Store.get('showCoveredPokestopCells'))
     $('#new-portals-only-switch').val(Store.get('showNewPortalsOnly'))
     $('#new-portals-only-wrapper').toggle(Store.get('showPortals'))
     $('#gym-sidebar-switch').prop('checked', Store.get('useGymSidebar'))
@@ -5585,6 +5625,9 @@ function updateMap() {
 
         clearStaleMarkers()
 
+		if(Store.get('showCoveredPokestopCells') == true){
+		updateS2Overlay()
+		}
         updateSpawnPoints()
         updatePokestops()
         updatePortals()
@@ -7301,6 +7344,9 @@ $(function () {
         var wrapper = $('#gyms-filter-wrapper')
         var gymSidebarWrapper = $('#gym-sidebar-wrapper')
         var gymRaidsFilterWrapper = $('#gyms-raid-filter-wrapper')
+		if(Store.get('showCoveredPokestopCells') == true){
+			updateS2Overlay()
+		}
         if (this.checked) {
             lastgyms = false
             wrapper.show(options)
@@ -7412,10 +7458,16 @@ $(function () {
     })
 
     $('#s2-level17-switch').change(function () {
+        var options = {
+            'duration': 500
+        }
+		var wrapper = $('#fill-busy-pokestop-cell-wrapper')
         Store.set('showStopCells', this.checked)
         if (this.checked) {
+			wrapper.show(options)
             showS2Cells(17, {color: 'blue'})
         } else {
+            wrapper.hide(options)
             stopLayerGroup.clearLayers()
         }
     })
@@ -7475,6 +7527,9 @@ $(function () {
         var options = {
             'duration': 500
         }
+		if(Store.get('showCoveredPokestopCells') == true){
+			updateS2Overlay()
+		}
         var wrapper = $('#pokestops-filter-wrapper')
         if (this.checked) {
             wrapper.show(options)
@@ -7599,6 +7654,11 @@ $(function () {
 			value.marker = setupPokestopMarker(value)
 		})
 		
+    })
+	
+    $('#fill-busy-pokestop-cell-switch').change(function () {
+        Store.set('showCoveredPokestopCells', this.checked)
+		updateS2Overlay()
     })
 
     $('#dustrange').on('input', function () {

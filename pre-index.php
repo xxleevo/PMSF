@@ -1085,7 +1085,27 @@ if ( $blockIframe ) {
 										<span class="switch-handle"></span>
 									</label>
 								</div>
-							</div>
+							</div>';
+							if ( ! $noFillCoveredPokestopCells) {
+								echo '
+								<div id="fill-busy-pokestop-cell-wrapper" class="form-control switch-container" style="float:none;height:35px;margin-bottom:1px;">
+									<font size="3">' . i8ln('Mark occupied stopcells') . '</font>
+									<div class="onoffswitch">
+										<input id="fill-busy-pokestop-cell-switch" type="checkbox" name="fill-busy-pokestop-cell-switch" class="onoffswitch-checkbox" checked>
+										<label class="onoffswitch-label" for="fill-busy-pokestop-cell-switch">
+											<span class="switch-label" data-on="On" data-off="Off"></span>
+											<span class="switch-handle"></span>
+										</label>
+									</div><br>';
+									
+									echo '
+									<div class="form-control" style="font-size:13px;margin-top: 6px;">' .
+										i8ln('Cells are only marked for enabled gyms/stops on the map') .
+									'</div>';
+								echo 
+								'</div>';
+							}
+						echo'
 						</div>';
 					} ?>
 					<?php
@@ -2307,6 +2327,7 @@ if ( $blockIframe ) {
     var enableLevel13Cells = <?php echo $noS2Cells ? 'false' : $enableLevel13Cells ?>;
     var enableLevel14Cells = <?php echo $noS2Cells ? 'false' : $enableLevel14Cells ?>;
     var enableLevel17Cells = <?php echo $noS2Cells ? 'false' : $enableLevel17Cells ?>;
+    var enableFillCoveredPokestopCells = <?php echo $enableFillCoveredPokestopCells ? 'false' : $enableFillCoveredPokestopCells ?>;
     var noDeletePortal = <?php echo $noDeletePortal === true ? 'true' : 'false' ?>;
     var noConvertPortal = <?php echo $noConvertPortal === true ? 'true' : 'false' ?>;
     var markPortalsAsNew = <?php echo $markPortalsAsNew ?>;

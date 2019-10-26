@@ -241,6 +241,9 @@ $enableLevel13Cells = 'false';										// default value for users
 $enableLevel14Cells = 'false';										// default value for users
 $enableLevel17Cells = 'false';										// default value for users
 
+$noFillCoveredPokestopCells = false;								//true/false - Enables the option to fill covered pokestop placement cells
+$enableFillCoveredPokestopCells = 'false';
+
 /*---------Location & Polygons---------*/
 $noSpawnPoints = false;												// Enables/Disables Spawnpoints
 $enableSpawnPoints = 'false';                                       // default value for users

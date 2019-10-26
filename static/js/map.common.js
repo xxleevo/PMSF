@@ -279,6 +279,11 @@ var StoreOptions = {
             default: enableQuestsItemsAmounts,
             type: StoreTypes.Boolean
         },
+    'showCoveredPokestopCells':
+        {
+            default: enableFillCoveredPokestopCells,
+            type: StoreTypes.Boolean
+        },
     'showDustAmount':
         {
             default: 500,
