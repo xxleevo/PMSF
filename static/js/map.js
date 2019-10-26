@@ -534,21 +534,20 @@ function createLocationMarker() {
 
     return locationMarker
 }
-function pointInPolygon (x, y, cornersX, cornersY) {
-    var i, j=cornersX.length-1 ;
-    var odd = 0;
-    var pX = cornersX;
-    var pY = cornersY;
+function pointInPolygon(x, y, cornersX, cornersY) {
+    var i
+    var j = cornersX.length - 1
+    var odd = 0
+    var pX = cornersX
+    var pY = cornersY
 
-    for (i=0; i<cornersX.length; i++) {
-        if ((pY[i]< y && pY[j]>=y ||  pY[j]< y && pY[i]>=y)
-            && (pX[i]<=x || pX[j]<=x)) {
-              odd ^= (pX[i] + (y-pY[i])*(pX[j]-pX[i])/(pY[j]-pY[i])) < x; 
+    for (i = 0; i < cornersX.length; i++) {
+        if (((pY[i] < y && pY[j] >= y) || (pY[j] < y && pY[i] >= y)) && (pX[i] <= x || pX[j] <= x)) {
+            odd ^= (pX[i] + (y - pY[i]) * (pX[j] - pX[i]) / (pY[j] - pY[i])) < x
         }
-
-        j=i; 
+        j = i
     }
-return odd == 1;
+    return odd === 1
 }
 
 function showS2Cells(level, style) {
