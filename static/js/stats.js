@@ -8,7 +8,7 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
     var i = 0
     var arenaCount = []
     var arenaTotal = 0
-	var raidCount = []
+    var raidCount = []
     var raidTotal = 0
     var pkmnCount = []
     var pkmnTotal = 0
@@ -32,10 +32,9 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
             if (thisPokeIsVisible) {
                 pkmnTotal++
                 if ((mapData.pokemons[key]['form'] === '0') && (pkmnCount[mapData.pokemons[key]['pokemon_id']] === 0 || !pkmnCount[mapData.pokemons[key]['pokemon_id']])) {
-                    
-					pkmnCount[mapData.pokemons[key]['pokemon_id']] = {
+                    pkmnCount[mapData.pokemons[key]['pokemon_id']] = {
                         'ID': mapData.pokemons[key]['pokemon_id'],
-						'Form': mapData.pokemons[key]['form'],
+                        'Form': mapData.pokemons[key]['form'],
                         'Count': 1,
                         'Name': i8ln(mapData.pokemons[key]['pokemon_name'])
                     }
@@ -56,7 +55,7 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         })
 
         var pokeCounts = []
-		//TODO: Ditto display
+        // TODO: Ditto display
         for (i = 0; i < pkmnCount.length; i++) {
             if (pkmnCount[i] && pkmnCount[i].Count > 0) {
                 var pokemonIdStr = ''
@@ -84,7 +83,7 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         }
         // Clear stale data, add fresh data, redraw
         $('#pokemonList_table').dataTable().show()
-		pokeStatTable.clear().rows.add(pokeCounts).draw()
+        pokeStatTable.clear().rows.add(pokeCounts).draw()
     } else {
         pokeStatTable.clear().draw()
         document.getElementById('pokeStatStatus').innerHTML = '<center>' + i8ln('Pokémon markers are disabled') + '<center>'
@@ -125,7 +124,6 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
     } else {
         document.getElementById('arenaList').innerHTML = '<center>' + i8ln('Gym markers are disabled') + '</center>'
     }
-	
     if (Store.get('showRaids')) {
         $.each(mapData.gyms, function (key, value) {
             var thisRaidLocation = {lat: mapData.gyms[key]['latitude'], lng: mapData.gyms[key]['longitude']}
@@ -167,7 +165,7 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
                             raidCount[1] += 1
                         }
                     }
-					raidTotal++
+                    raidTotal++
                 }
             }
         })
@@ -196,18 +194,17 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
 
     if (Store.get('showPokestops')) {
         $.each(mapData.pokestops, function (key, value) {
-			var thisPokestopLocation = {lat: mapData.pokestops[key]['latitude'], lng: mapData.pokestops[key]['longitude']}
+            var thisPokestopLocation = {lat: mapData.pokestops[key]['latitude'], lng: mapData.pokestops[key]['longitude']}
             thisPokestopIsVisible = currentVisibleMap.contains(thisPokestopLocation)
 
             if (thisPokestopIsVisible) {
-                if (mapData.pokestops[key]['invasion_expiration'] && mapData.pokestops[key]['invasion_expiration'] >  Date.now()) {
+                if (mapData.pokestops[key]['invasion_expiration'] && mapData.pokestops[key]['invasion_expiration'] > Date.now()) {
                     if (pokestopCount[3] === 0 || !pokestopCount[3]) {
                         pokestopCount[3] = 1
                     } else {
                         pokestopCount[3] += 1
                     }
-				console.log(mapData.pokestops[key]['lure_expiration'])
-                } if (mapData.pokestops[key]['lure_expiration'] && mapData.pokestops[key]['lure_expiration'] >  Date.now()) {
+                } if (mapData.pokestops[key]['lure_expiration'] && mapData.pokestops[key]['lure_expiration'] > Date.now()) {
                     if (pokestopCount[2] === 0 || !pokestopCount[2]) {
                         pokestopCount[2] = 1
                     } else {
@@ -228,7 +225,7 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
                 pokestopTotal++
             }
         })
-        var pokestopListString = '<table><th>' + i8ln('Icon') + '</th><th>' + i8ln('Status') + '</th><th>' + i8ln('Count') + '</th><th>%</th>' //<tr><td></td><td>' + i8ln('Total') + '</td><td>' + pokestopTotal + '</td></tr>'
+        var pokestopListString = '<table><th>' + i8ln('Icon') + '</th><th>' + i8ln('Status') + '</th><th>' + i8ln('Count') + '</th><th>%</th>'
         for (i = 0; i < pokestopCount.length; i++) {
             if (pokestopCount[i] > 0) {
                 if (i === 0) {
@@ -245,6 +242,6 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         pokestopListString += '</table>'
         document.getElementById('pokestopList').innerHTML = pokestopListString
     } else {
-        document.getElementById('pokestopList').innerHTML = '<center>' + i8ln('Pokéstops markers are disabled')+ '</center>'
+        document.getElementById('pokestopList').innerHTML = '<center>' + i8ln('Pokéstops markers are disabled') + '</center>'
     }
 }

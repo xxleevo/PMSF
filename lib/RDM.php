@@ -556,6 +556,9 @@ class RDM extends Scanner
             $gym["latitude"] = floatval($gym["latitude"]);
             $gym["longitude"] = floatval($gym["longitude"]);
             $gym["slots_available"] = intval($gym["slots_available"]);
+            $gym["park"] = intval($gym["park"]);
+            $gym["battle_status"] = intval($gym["battle_status"]);
+            $gym["is_exclusive"] = intval($gym["is_exclusive"]);
             $gym["last_modified"] = $gym["last_modified"] * 1000;
             $gym["last_scanned"] = $gym["last_scanned"] * 1000;
             $gym["first_seen"] = $gym["first_seen"] * 1000;
