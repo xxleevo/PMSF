@@ -561,23 +561,63 @@ function showS2Cells(level, style) {
             s2Lats[j] = vertices[j]['lat']
             s2Lons[j] = vertices[j]['lng']
         }
-        var filledStyle = {color: 'blue', fillOpacity: 0.0}
+        var stopCount = 0
+        var gymCount = 0
+        var totalCount = 0
+        if (cell.level === 14 || cell.level === 17) {
+            $.each(mapData.pokestops, function (key, value) {
+                if (pointInPolygon(value['latitude'], value['longitude'], s2Lats, s2Lons)) {
+                    stopCount++
+                    totalCount++
+                }
+            })
+            $.each(mapData.gyms, function (key, value) {
+                if (pointInPolygon(value['latitude'], value['longitude'], s2Lats, s2Lons)) {
+                    gymCount++
+                    totalCount++
+                }
+            })
+        }
+
+        var html = ''
+        var filledStyle = {color: 'black', fillOpacity: 0.0}
+        if (cell.level === 14) {
+            html += '<div><center><b><u>' + i8ln('Gym cell') + '</u></b></center></div>'
+            if (totalCount === 1 || totalCount === 5 || totalCount === 19) {
+                filledStyle = {fillColor: 'green', fillOpacity: 0.3}
+                html += '<div><center><b>' + i8ln('1 more Pokéstop until new gym') + '</b></center></div>'
+            } else if (totalCount === 4 || totalCount === 18) {
+                filledStyle = {fillColor: 'orange', fillOpacity: 0.3}
+                html += '<div><center><b>' + i8ln('2 more Pokéstops until new gym') + '</b></center></div>'
+            } else if (totalCount >= 20) {
+                filledStyle = {fillColor: 'black', fillOpacity: 0.3}
+                html += '<div><center><b>' + i8ln('Max amount of Gyms reached') + '</b></center></div>'
+            }
+        }
+
         if (Store.get('showCoveredPokestopCells') === true) {
             if (cell.level === 17) {
                 $.each(mapData.pokestops, function (key, value) {
                     if (pointInPolygon(value['latitude'], value['longitude'], s2Lats, s2Lons)) {
                         filledStyle = {fillColor: 'red', fillOpacity: 0.3}
+                        html += '<div><center><b>' + i8ln('Max amount reached') + '</b></center></div>'
                     }
                 })
                 $.each(mapData.gyms, function (key, value) {
                     if (pointInPolygon(value['latitude'], value['longitude'], s2Lats, s2Lons)) {
                         filledStyle = {fillColor: 'red', fillOpacity: 0.3}
+                        html += '<div><center><b>' + i8ln('Max amount reached') + '</b></center></div>'
                     }
                 })
             }
         }
-        const poly = L.polygon(vertices,
-            Object.assign({color: 'blue', opacity: 0.5, weight: 2, fillOpacity: 0.0, dashArray: '2 6', dashOffset: '0'}, style, filledStyle))
+        const poly = L.polygon(vertices, Object.assign({color: 'black', opacity: 0.5, weight: 2, fillOpacity: 0.0, dashArray: '2 6', dashOffset: '0'}, style, filledStyle))
+        if (cell.level === 14 || cell.level === 17) {
+            html += '<div>' + i8ln('Gyms in cell') + ': <b>' + gymCount + '</b></div>' +
+                '<div>' + i8ln('Pokéstops in cell') + ': <b>' + stopCount + '</b></div>' +
+                '<div>' + i8ln('Total') + ': <b>' + totalCount + '</b></div>'
+            poly.bindPopup(html, {autoPan: false, closeOnClick: false, autoClose: false})
+        }
         if (cell.level === 13) {
             exLayerGroup.addLayer(poly)
         } else if (cell.level === 14) {
@@ -5470,9 +5510,9 @@ function updateMap() {
 
         clearStaleMarkers()
 
-        if (Store.get('showCoveredPokestopCells') === true) {
+        /* if (Store.get('showCoveredPokestopCells') === true) {
             updateS2Overlay()
-        }
+        } */
 
         updateSpawnPoints()
         updatePokestops()
@@ -5541,26 +5581,23 @@ function updateWeatherOverlay() {
 
 function updateS2Overlay() {
     if ((Store.get('showCells'))) {
-        if (Store.get('showExCells') && (map.getZoom() > 12)) {
+        if (Store.get('showExCells') && (map.getZoom() > 13)) {
             exLayerGroup.clearLayers()
-            showS2Cells(13, {color: 'red', weight: 6, dashOffset: '8'})
+            showS2Cells(13, {color: 'black', weight: 5, dashOffset: '8', dashArray: '2 6'})
         } else if (Store.get('showExCells') && (map.getZoom() <= 12)) {
             exLayerGroup.clearLayers()
-            toastr['error'](i8ln('This is to much zoom.'), i8ln('EX cells are currently hidden'))
         }
         if (Store.get('showGymCells') && (map.getZoom() > 13)) {
             gymLayerGroup.clearLayers()
-            showS2Cells(14, {color: 'green', weight: 4, dashOffset: '4'})
+            showS2Cells(14, {color: 'black', weight: 3, dashOffset: '4', dashArray: '2 6'})
         } else if (Store.get('showGymCells') && (map.getZoom() <= 13)) {
             gymLayerGroup.clearLayers()
-            toastr['error'](i8ln('This is to much zoom.'), i8ln('Gym cells are currently hidden'))
         }
-        if (Store.get('showStopCells') && (map.getZoom() > 16)) {
+        if (Store.get('showStopCells') && (map.getZoom() > 14)) {
             stopLayerGroup.clearLayers()
-            showS2Cells(17, {color: 'blue'})
-        } else if (Store.get('showStopCells') && (map.getZoom() <= 16)) {
+            showS2Cells(17, {color: 'black'})
+        } else if (Store.get('showStopCells') && (map.getZoom() <= 14)) {
             stopLayerGroup.clearLayers()
-            toastr['error'](i8ln('This is to much zoom.'), i8ln('Pokestop cells are currently hidden'))
         }
     }
 }
@@ -7263,13 +7300,13 @@ $(function () {
         if (this.checked) {
             wrapper.show(options)
             if (Store.get('showExCells')) {
-                showS2Cells(13, {color: 'red', weight: 6, dashOffset: '8'})
+                showS2Cells(13, {color: 'black', weight: 5, dashOffset: '8', dashArray: '2 6'})
             }
             if (Store.get('showGymCells')) {
-                showS2Cells(14, {color: 'green', weight: 4, dashOffset: '4'})
+                showS2Cells(14, {color: 'black', weight: 3, dashOffset: '4', dashArray: '2 6'})
             }
             if (Store.get('showStopCells')) {
-                showS2Cells(17, {color: 'blue'})
+                showS2Cells(17, {color: 'black'})
             }
         } else {
             wrapper.hide(options)
@@ -7283,7 +7320,7 @@ $(function () {
     $('#s2-level13-switch').change(function () {
         Store.set('showExCells', this.checked)
         if (this.checked) {
-            showS2Cells(13, {color: 'red', weight: 6, dashOffset: '8'})
+            showS2Cells(13, {color: 'black', weight: 5, dashOffset: '8', dashArray: '2 6'})
         } else {
             exLayerGroup.clearLayers()
         }
@@ -7292,7 +7329,7 @@ $(function () {
     $('#s2-level14-switch').change(function () {
         Store.set('showGymCells', this.checked)
         if (this.checked) {
-            showS2Cells(14, {color: 'green', weight: 4, dashOffset: '4'})
+            showS2Cells(14, {color: 'black', weight: 3, dashOffset: '4', dashArray: '2 6'})
         } else {
             gymLayerGroup.clearLayers()
         }
@@ -7306,7 +7343,7 @@ $(function () {
         Store.set('showStopCells', this.checked)
         if (this.checked) {
             wrapper.show(options)
-            showS2Cells(17, {color: 'blue'})
+            showS2Cells(17, {color: 'black'})
         } else {
             wrapper.hide(options)
             stopLayerGroup.clearLayers()
