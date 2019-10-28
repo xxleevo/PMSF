@@ -118,5 +118,13 @@
   "30": {
     "prototext": "QUEST_PURIFY_POKEMON",
     "text": "Erlöse {0} Pokémon"
+  },
+  "31": {
+    "prototext": "QUEST_FIND_TEAM_ROCKET",
+    "text": "Finde {0} Rocket Rüpel"
+  },
+  "32": {
+    "prototext": "QUEST_FIRST_GRUNT_OF_THE_DAY",
+    "text": "{0} mal erster Rüpel des Tages"
   }
 }
