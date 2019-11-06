@@ -884,7 +884,7 @@ if ( $blockIframe ) {
 		    } ?>
 			
                     <?php
-                    if ( (!$hideIfManual && !$noGymTeamInfos) || !$noGymScannedText) {
+                    if ( (!$hideIfManual && !$noGymTeamInfos) || !$noGymScannedText || $noNewGymsFilter) {
 						echo '<div id="gyms-filter-wrapper" style="display:none">';
 						
 						if ( ! $hideIfManual && !$noGymTeamInfos) {
