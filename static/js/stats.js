@@ -105,19 +105,24 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
             }
         })
 
-        var arenaListString = '<table><th>' + i8ln('Icon') + '</th><th>' + i8ln('Team') + '</th><th>' + i8ln('Count') + '</th><th>%</th><tr><td></td><td>' + i8ln('Total') + '</td><td>' + arenaTotal + '</td></tr>'
-        for (i = 0; i < arenaCount.length; i++) {
-            if (arenaCount[i] > 0) {
-                if (i === 1) {
-                    arenaListString += '<tr><td><img src="static/forts/Mystic.png" style="height:48px;" /></td><td style="vertical-align:middle;">' + i8ln('Mystic') + '</td><td style="vertical-align:middle;">' + arenaCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
-                } else if (i === 2) {
-                    arenaListString += '<tr><td><img src="static/forts/Valor.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i8ln('Valor') + '</td><td style="vertical-align:middle;">' + arenaCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
-                } else if (i === 3) {
-                    arenaListString += '<tr><td><img src="static/forts/Instinct.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i8ln('Instinct') + '</td><td style="vertical-align:middle;">' + arenaCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
-                } else {
-                    arenaListString += '<tr><td><img src="static/forts/Uncontested.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i8ln('Uncontested') + '</td><td style="vertical-align:middle;">' + arenaCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
+        var arenaListString = '<table><th>' + i8ln('Icon') + '</th><th>' + i8ln('Team') + '</th><th>' + i8ln('Count') + '</th><th>%</th>'
+        if (!noGymTeamInfos) {
+            arenaListString += '<tr><td></td><td>' + i8ln('Total') + '</td><td>' + arenaTotal + '</td></tr>'
+            for (i = 0; i < arenaCount.length; i++) {
+                if (arenaCount[i] > 0) {
+                    if (i === 1) {
+                        arenaListString += '<tr><td><img src="static/forts/Mystic.png" style="height:48px;" /></td><td style="vertical-align:middle;">' + i8ln('Mystic') + '</td><td style="vertical-align:middle;">' + arenaCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
+                    } else if (i === 2) {
+                        arenaListString += '<tr><td><img src="static/forts/Valor.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i8ln('Valor') + '</td><td style="vertical-align:middle;">' + arenaCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
+                    } else if (i === 3) {
+                        arenaListString += '<tr><td><img src="static/forts/Instinct.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i8ln('Instinct') + '</td><td style="vertical-align:middle;">' + arenaCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
+                    } else {
+                        arenaListString += '<tr><td><img src="static/forts/Uncontested.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i8ln('Uncontested') + '</td><td style="vertical-align:middle;">' + arenaCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
+                    }
                 }
             }
+        } else {
+            arenaListString += '<tr><td><img src="static/forts/Harmony.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i8ln('Gyms') + '</td><td style="vertical-align:middle;">' + arenaTotal + '</td><td style="vertical-align:middle;">' + Math.round(arenaTotal * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
         }
         arenaListString += '</table>'
         document.getElementById('arenaList').innerHTML = arenaListString
@@ -230,11 +235,11 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
             if (pokestopCount[i] > 0) {
                 if (i === 0) {
                     pokestopListString += '<tr><td><img src="static/forts/Pstop.png" style="width:50px;height:auto;style="height:48px;" /></td><td style="vertical-align:middle;">' + i8ln('Stops total') + '</td><td style="vertical-align:middle;">' + pokestopCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(pokestopCount[i] * 100 / pokestopTotal * 10) / 10 + '%</td></tr>'
-                } else if (i === 1) {
+                } else if (i === 1 && !noQuests) {
                     pokestopListString += '<tr><td><img src="static/forts/Pstop-quest-small.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i8ln('Quest') + '</td><td style="vertical-align:middle;">' + pokestopCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(pokestopCount[i] * 100 / pokestopTotal * 10) / 10 + '%</td></tr>'
-                } else if (i === 2) {
+                } else if (i === 2 && !noLures) {
                     pokestopListString += '<tr><td><img src="static/forts/Pstop-Lured_501.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i8ln('Modules') + '</td><td style="vertical-align:middle;">' + pokestopCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(pokestopCount[i] * 100 / pokestopTotal * 10) / 10 + '%</td></tr>'
-                } else if (i === 3) {
+                } else if (i === 3 && !noInvasions) {
                     pokestopListString += '<tr><td><img src="static/forts/Pstop-quest-small-tr.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i8ln('Team Rocket') + '</td><td style="vertical-align:middle;">' + pokestopCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(pokestopCount[i] * 100 / pokestopTotal * 10) / 10 + '%</td></tr>'
                 }
             }

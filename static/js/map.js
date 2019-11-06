@@ -614,13 +614,11 @@ function showS2Cells(level, style) {
                 $.each(mapData.pokestops, function (key, value) {
                     if (pointInPolygon(value['latitude'], value['longitude'], s2Lats, s2Lons) && value['pokestop_id'].includes('.')) {
                         filledStyle = {fillColor: 'red', fillOpacity: 0.3}
-                        html += '<div><center><b>' + i8ln('Max amount reached') + '</b></center></div>'
                     }
                 })
                 $.each(mapData.gyms, function (key, value) {
                     if (pointInPolygon(value['latitude'], value['longitude'], s2Lats, s2Lons) && value['gym_id'].includes('.')) {
                         filledStyle = {fillColor: 'red', fillOpacity: 0.3}
-                        html += '<div><center><b>' + i8ln('Max amount reached') + '</b></center></div>'
                     }
                 })
             }
@@ -1782,7 +1780,7 @@ function pokestopLabel(item) {
     // Pick the Stops name with color based of lure,quest,normal
     if (invasion === 1 && invasionExpire > Date.now() && !noInvasions) {
         stopName = '<b class="pokestop-rocket-name">' + item['pokestop_name'] + '</b>'
-    } else if (item['lure_expiration'] > Date.now()) {
+    } else if (item['lure_expiration'] > Date.now() && !noLures) {
         if (lureType > 501) { // Lure name based on lure type
             stopName = '<b class="pokestop-lure-' + lureType + '-name">' + item['pokestop_name'] + '</b>'
         } else { // normal lure
