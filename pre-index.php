@@ -1056,8 +1056,11 @@ if ( $blockIframe ) {
 							</div>
 						</div>
 						<div class="form-control switch-container" id = "s2-switch-wrapper" style = "display:none">
+							<div class="form-control" style="font-size:13px;margin-top: 6px;">
+								(' . i8ln('Some Cell show options need a specific zoom') . ')
+							</div>
 							<div class="form-control switch-container">
-								<font size="3">' . i8ln( 'EX trigger Cells' ) . '</font>
+								<font size="3"><b>' . i8ln( 'EX trigger Cells' ) . '</b></font>
 								<div class="onoffswitch">
 									<input id="s2-level13-switch" type="checkbox" name="s2-level13-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="s2-level13-switch">
@@ -1067,7 +1070,7 @@ if ( $blockIframe ) {
 								</div>
 							</div>
 							<div class="form-control switch-container">
-								<font size="3">' . i8ln( 'Gym placement Cells' ) . '</font>
+								<font size="3"><b>' . i8ln( 'Gym placement Cells' ) . '</b></font>
 								<div class="onoffswitch">
 									<input id="s2-level14-switch" type="checkbox" name="s2-level14-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="s2-level14-switch">
@@ -1075,9 +1078,26 @@ if ( $blockIframe ) {
 										<span class="switch-handle"></span>
 									</label>
 								</div>
-							</div>
+							</div>';
+							if ( ! $noGymCellCalculations) {
+								echo '
+								<div id="fill-busy-gym-cell-wrapper" class="form-control switch-container" >
+									<font size="3">' . i8ln('Calculate gymcell objects') . '</font>
+									<div class="onoffswitch">
+										<input id="fill-busy-gym-cell-switch" type="checkbox" name="fill-busy-gym-cell-switch" class="onoffswitch-checkbox" checked>
+										<label class="onoffswitch-label" for="fill-busy-gym-cell-switch">
+											<span class="switch-label" data-on="On" data-off="Off"></span>
+											<span class="switch-handle"></span>
+										</label>
+									</div><br>
+									<div class="form-control" style="font-size:13px;margin-top: 6px;">' .
+										i8ln('Only visible objects are calculated') .
+									'</div>
+								</div>';
+							}
+							echo '
 							<div class="form-control switch-container">
-								<font size="3">' . i8ln( 'Pokestop placement Cells' ) . '</font>
+								<font size="3"><b>' . i8ln( 'Pokestop placement Cells' ) . '</b></font>
 								<div class="onoffswitch">
 									<input id="s2-level17-switch" type="checkbox" name="s2-level17-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="s2-level17-switch">
@@ -1096,14 +1116,11 @@ if ( $blockIframe ) {
 											<span class="switch-label" data-on="On" data-off="Off"></span>
 											<span class="switch-handle"></span>
 										</label>
-									</div><br>';
-									
-									echo '
+									</div><br>
 									<div class="form-control" style="font-size:13px;margin-top: 6px;">' .
 										i8ln('Cells are only marked for enabled gyms/stops on the map') .
-									'</div>';
-								echo 
-								'</div>';
+									'</div>
+								</div>';
 							}
 						echo'
 						</div>';
@@ -2328,6 +2345,7 @@ if ( $blockIframe ) {
     var enableLevel14Cells = <?php echo $noS2Cells ? 'false' : $enableLevel14Cells ?>;
     var enableLevel17Cells = <?php echo $noS2Cells ? 'false' : $enableLevel17Cells ?>;
     var enableFillCoveredPokestopCells = <?php echo $enableFillCoveredPokestopCells ? 'false' : $enableFillCoveredPokestopCells ?>;
+    var enableGymCellCalculations = <?php echo $enableGymCellCalculations ? 'false' : $enableGymCellCalculations ?>;
     var noDeletePortal = <?php echo $noDeletePortal === true ? 'true' : 'false' ?>;
     var noConvertPortal = <?php echo $noConvertPortal === true ? 'true' : 'false' ?>;
     var markPortalsAsNew = <?php echo $markPortalsAsNew ?>;

@@ -284,6 +284,11 @@ var StoreOptions = {
             default: enableFillCoveredPokestopCells,
             type: StoreTypes.Boolean
         },
+    'showGymCellCalculations':
+        {
+            default: enableGymCellCalculations,
+            type: StoreTypes.Boolean
+        },
     'showDustAmount':
         {
             default: 500,

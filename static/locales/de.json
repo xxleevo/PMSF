@@ -1,4 +1,10 @@
 {
+  "Total (excluding sponsored)" : "Gesamt (ohne gesponserte)",
+  "Sponsored Pokéstops in cell" : "Gesponserte Pokéstops",
+  "Sponsored Gyms in cell" : "Gesponserte Arenen",
+  "Only visible objects are calculated" : "Nur sichtbare Objekte werden berechnet",
+  "Calculate gymcell objects" : "Berechne Gym-Zell-Objekte",
+  "Some Cell show options need a specific zoom" : "Einige Optionen benötigen ein bestimmtes Zoomlevel",
   "Flying Press" : "Aurasphäre",
   "Aura Sphere" : "Aurasphäre",
   "Gym cell" : "Arena Zelle",
