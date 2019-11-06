@@ -244,6 +244,8 @@ $enableLevel17Cells = 'false';										// default value for users
 $noFillCoveredPokestopCells = false;								//true/false - Enables the option to fill covered pokestop placement cells
 $enableFillCoveredPokestopCells = 'false';
 
+$noGymCellCalculations = true;										//true/false - Enables the gym cell calculations(not needed to display gym cells)
+$enableGymCellCalculations = 'false';
 /*---------Location & Polygons---------*/
 $noSpawnPoints = false;												// Enables/Disables Spawnpoints
 $enableSpawnPoints = 'false';                                       // default value for users
