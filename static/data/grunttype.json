@@ -252,7 +252,47 @@
     }
   },
   "40": {
-    "type": "",
-    "grunt": "Player Team Leader"
+    "type": "Player Team Leader",
+    "grunt": "TeamLeader"
+  },
+  "41": {
+    "type": "Executive Cliff",
+    "grunt": "Cliff"
+  },
+  "42": {
+    "type": "Executive Arlo",
+    "grunt": "Arlo"
+  },
+  "43": {
+    "type": "Executive Sierra",
+    "grunt": "Sierra"
+  },
+  "44": {
+    "type": "Giovanni",
+    "grunt": "Giovanni"
+  },
+  "45": {
+    "type": "Decoy",
+    "grunt": "Male Grunt"
+  },
+  "46": {
+    "type": "Decoy",
+    "grunt": "Female Grunt"
+  },
+  "47": {
+    "type": "Ghost",
+    "grunt": "Female Grunt"
+  },
+  "48": {
+    "type": "Ghost",
+    "grunt": "Male Grunt"
+  },
+  "49": {
+    "type": "Electric",
+    "grunt": "Female Grunt"
+  },
+  "50": {
+    "type": "Electric",
+    "grunt": "Male Grunt"
   }
 }
