@@ -1709,8 +1709,8 @@ function pokestopLabel(item) {
     var gruntReward = ''
     if (item['encounters'] !== null && !noInvasionEncounterData && !noInvasions) {
         //  Encounter data in a spoiler
-        encounters += '<input name="button" type="button" onClick="if (this.parentNode.getElementsByTagName(\'div\')[3].style.display != \'none\') { this.parentNode.getElementsByTagName(\'div\')[3].style.display = \'none\'; this.value = \'' + i8ln('Show Grunt Data') + '\'; } else { this.parentNode.getElementsByTagName(\'div\')[3].style.display = \'block\'; this.value = \'' + i8ln('Hide Grunt Data') + '\';}" value="' + i8ln('Show Grunt Data') + '" style="font-weight:normal;font-size:9pt">' +
-            '<div id="encounterSpoiler" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
+        encounters += '<input name="button" type="button" onClick="showHideGruntEncounter(0)" value="' + i8ln('Grunt Data') + '" style="font-weight:normal;font-size:9pt;margin-right: 3px;">' +
+            '<div class="grunt-encounters-wrapper" id="encounterSpoiler" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
             // data for mon#1
             '<div>' + i8ln('Grunt Pokemon') + ' #1:<br>'
         item['encounters']['first'].forEach(function (data) {
@@ -1736,8 +1736,8 @@ function pokestopLabel(item) {
             // calculations for the rewards
             if (item['second_reward'] === 'false') { // if there is a possibility for
             // Reward data in a spoiler
-                gruntReward += '<input name="button" type="button" onClick="if (this.parentNode.getElementsByTagName(\'div\')[7].style.display != \'none\') { this.parentNode.getElementsByTagName(\'div\')[7].style.display = \'none\'; this.value = \'' + i8ln('Show Grunt Rewards') + '\'; } else { this.parentNode.getElementsByTagName(\'div\')[7].style.display = \'block\'; this.value = \'' + i8ln('Hide Grunt Rewards') + '\';}" value="' + i8ln('Show Grunt Rewards') + '" style="font-weight:normal;font-size:9pt">' +
-                    '<div id="gruntRewardSpoiler" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
+                gruntReward += '<input name="button" type="button" onClick="showHideGruntEncounter(1)" value="' + i8ln('Grunt Rewards') + '" style="font-weight:normal;font-size:9pt;margin-left: 3px;">' +
+                    '<div id="gruntRewardSpoiler" class="grunt-rewards-wrapper" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
                     '<div>100% ' + i8ln('chance for one of the following') + ':<br>'
                 item['encounters']['first'].forEach(function (data) {
                     gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:38px;height:auto;position:absolute;margin-top:4px;margin-left:4px;"/>' +
@@ -1976,6 +1976,25 @@ function pokestopLabel(item) {
     str += '</div>'
     return str
 }
+
+function showHideGruntEncounter(type) { // eslint-disable-line no-unused-vars
+    var x
+    if(type === 0) { // Grunt encounter Data
+        x = document.getElementsByClassName('grunt-encounters-wrapper')
+    } else if (type === 1) {
+        x = document.getElementsByClassName('grunt-rewards-wrapper')
+    }
+    var i
+    for (i = 0; i < x.length; i++) {
+        if (x[i].style.display === 'none') {
+            x[i].style.display = 'block'
+        } else {
+            x[i].style.display = 'none'
+        }
+    }
+}
+
+
 function formatSpawnTime(seconds) {
     if (seconds < 0) {
         seconds += 3600
