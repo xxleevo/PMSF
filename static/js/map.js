@@ -1842,7 +1842,9 @@ function pokestopLabel(item) {
         } else if (item['grunt_type_gender'] !== '') {
             invasionStr += '<div><b>Rüpel-Typ: Zufall</b></div>'
         }
-        invasionStr += '<div><b>Rüpel-Geschlecht: ' + item['grunt_type_gender'] + '</b></div>'
+        if (item['grunt_type_gender'] !== ''){
+            invasionStr += '<div><b>Rüpel-Geschlecht: ' + item['grunt_type_gender'] + '</b></div>'
+        }
     }
     var lureImage = ''
     var lureStr = ''
