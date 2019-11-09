@@ -290,7 +290,9 @@
     "grunt": "",
     "second_reward": "false",
     "encounters":{
-        "first": ["144_00"]
+        "first": ["144_00"],
+        "second": [],
+        "third": []
     }
   },
   "45": {
