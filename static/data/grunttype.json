@@ -95,7 +95,7 @@
     "second_reward": "false",
     "encounters":{
         "first": ["107_00"],
-        "second":[""106_00","107_00"],
+        "second":["106_00","107_00"],
         "third":["107_00"]
 	}
   },
