@@ -5798,6 +5798,9 @@
         "nameform": "Galarian",
         "protoform": "944",
         "assetsform": "00",
+        "baseStamina": 163,
+        "baseAttack": 174,
+        "baseDefense": 197,
         "formtypes": [
           {
             "type": "Poison",
@@ -10932,6 +10935,9 @@
         "protoform": "",
         "protoform": "945",
         "assetsform": "00",
+        "baseStamina": 116,
+        "baseAttack": 58,
+        "baseDefense": 80,
         "formtypes": [
           {
             "type": "Normal",
@@ -10944,6 +10950,9 @@
         "protoform": "",
         "protoform": "946",
         "assetsform": "00",
+        "baseStamina": 254,
+        "baseAttack": 58,
+        "baseDefense": 80,
         "formtypes": [
           {
             "type": "Dark",
@@ -10975,6 +10984,9 @@
         "protoform": "",
         "protoform": "947",
         "assetsform": "00",
+        "baseStamina": 186,
+        "baseAttack": 142,
+        "baseDefense": 128,
         "formtypes": [
           {
             "type": "Normal",
@@ -10987,6 +10999,9 @@
         "protoform": "",
         "protoform": "948",
         "assetsform": "00",
+        "baseStamina": 186,
+        "baseAttack": 142,
+        "baseDefense": 128,
         "formtypes": [
           {
             "type": "Dark",
