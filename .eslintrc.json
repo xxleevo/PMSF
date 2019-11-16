@@ -211,6 +211,10 @@
     "enableTinyRats": true,
     "enableBigKarps": true,
     "battleStatus": true,
-    "enableGymCellCalculations": true
+    "enableGymCellCalculations": true,
+    "hideGrunts": true,
+    "numberOfPokemon": true,
+    "numberOfItem": true,
+    "numberOfGrunt": true
   }
 }

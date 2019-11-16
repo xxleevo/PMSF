@@ -254,7 +254,7 @@ class RDM extends Scanner
         return $data;
     }
 
-    public function get_stops($qpeids, $qieids, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $lures, $quests, $dustamount)
+    public function get_stops($geids, $qpeids, $qieids, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $lures, $quests, $dustamount)
     {
         $conds = array();
         $params = array();
@@ -299,6 +299,23 @@ class RDM extends Scanner
             }
             $conds[] = "(" . $pokemonSQL . " OR " . $itemSQL . ")" . $dustSQL . "";
         }
+        if (!empty($rocket) && $rocket === 'true') {
+            $rocketSQL = '';
+            if (count($geids)) {
+                $rocket_in = '';
+                $r = 1;
+                foreach ($geids as $geid) {
+                    $params[':rqry_' . $r . "_"] = $geid;
+                    $rocket_in .= ':rqry_' . $r . "_,";
+                    $r++;
+                }
+                $rocket_in = substr($rocket_in, 0, -1);
+                $rocketSQL .= "grunt_type NOT IN ( $rocket_in )";
+            } else {
+                $rocketSQL .= "grunt_type IS NOT NULL";
+            }
+            $conds[] = "" . $rocketSQL . "";
+        }
         if ($oSwLat != 0) {
             $conds[] = "NOT (lat > :oswLat AND lon > :oswLng AND lat < :oneLat AND lon < :oneLng)";
             $params[':oswLat'] = $oSwLat;
@@ -318,7 +335,7 @@ class RDM extends Scanner
     }
 
 
-    public function get_stops_quest($qpreids, $qireids, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $lures, $quests, $dustamount, $reloaddustamount)
+    public function get_stops_quest($greids, $qpreids, $qireids, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $lures, $quests, $dustamount, $reloaddustamount)
     {
         $conds = array();
         $params = array();
@@ -360,6 +377,21 @@ class RDM extends Scanner
                 $params[':amount'] = intval($dustamount);
 			} else {
                 $tmpSQL .= "";
+            }
+            $conds[] = $tmpSQL;
+        }
+        if (!empty($rocket) && $rocket === 'true') {
+            $tmpSQL = '';
+            if (count($greids)) {
+                $rocket_in = '';
+                $r = 1;
+                foreach ($greids as $greid) {
+                    $params[':rqry_' . $r . "_"] = $greid;
+                    $rocket_in .= ':rqry_' . $r . "_,";
+                    $r++;
+                }
+                $rocket_in = substr($rocket_in, 0, -1);
+                $tmpSQL .= "grunt_type IN ( $rocket_in )";
             }
             $conds[] = $tmpSQL;
         }
@@ -921,5 +953,29 @@ class RDM extends Scanner
             unset($data["weather_" . $weather['s2_cell_id']]['gameplay_weather']);
         }
         return $data;
+    }
+    public function generated_exclude_list($type)
+    {
+        global $db;
+	if ($type === 'pokemonlist') {
+            $pokestops = $db->query( "SELECT distinct quest_pokemon_id FROM pokestop WHERE quest_pokemon_id > 0 AND DATE(FROM_UNIXTIME(quest_timestamp)) = CURDATE() order by quest_pokemon_id;")->fetchAll(\PDO::FETCH_ASSOC);
+            $data = array();
+	    foreach ($pokestops as $pokestop) {
+                $data[] = $pokestop['quest_pokemon_id'];
+            }
+	} else if ($type === 'itemlist') {
+            $pokestops = $db->query( "SELECT distinct quest_item_id FROM pokestop WHERE quest_item_id > 0 AND DATE(FROM_UNIXTIME(quest_timestamp)) = CURDATE() order by quest_item_id;")->fetchAll(\PDO::FETCH_ASSOC);
+            $data = array();
+	    foreach ($pokestops as $pokestop) {
+                $data[] = $pokestop['quest_item_id'];
+            }
+        } else if ($type === 'gruntlist') {
+            $pokestops = $db->query( "SELECT distinct grunt_type FROM pokestop WHERE grunt_type > 0 AND incident_expire_timestamp > UNIX_TIMESTAMP() order by grunt_type;")->fetchAll(\PDO::FETCH_ASSOC);
+            $data = array();
+	    foreach ($pokestops as $pokestop) {
+                $data[] = $pokestop['grunt_type'];
+            }
+        }
+	return $data;
     }
 }

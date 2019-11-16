@@ -41,11 +41,13 @@ var $switchBattleStatus
 var $switchWeatherIcons
 var $questsExcludePokemon
 var $questsExcludeItem
+var $excludeGrunts
 
 var language = document.documentElement.lang === '' ? 'en' : document.documentElement.lang
 var languageSite = 'en'
 var idToPokemon = {}
 var idToItem = {}
+var idToGrunt = {}
 var i8lnDictionary = {}
 var languageLookups = 0
 var languageLookupThreshold = 3
@@ -59,6 +61,7 @@ var notifiedPokemon = []
 var notifiedRarity = []
 var questsExcludedPokemon = []
 var questsExcludedItem = []
+var excludedGrunts = []
 var notifiedMinPerfection = null
 var notifiedMinLevel = null
 var minIV = null
@@ -71,14 +74,14 @@ var buffer = []
 var reincludedPokemon = []
 var reincludedQuestsPokemon = []
 var reincludedQuestsItem = []
+var reincludedGrunts = []
 var reids = []
 var qpreids = []
 var qireids = []
+var greids = []
 var dustamount
 var reloaddustamount
 
-var numberOfPokemon = 649
-var numberOfItem = 1405
 var L
 var map
 var markers
@@ -123,6 +126,7 @@ var cries
 var pokeList = []
 var raidBoss = {} // eslint-disable-line no-unused-vars
 var itemList = []
+var gruntList = []
 var questtypeList = []
 var rewardtypeList = []
 var conditiontypeList = []
@@ -774,6 +778,7 @@ function initSidebar() {
     $('#raids-switch').prop('checked', Store.get('showRaids'))
     $('#raid-timer-switch').prop('checked', Store.get('showRaidTimer'))
     $('#raids-filter-wrapper').toggle(Store.get('showRaids'))
+    $('#rocket-wrapper').toggle(Store.get('showInvasions'))
     $('#active-raids-switch').prop('checked', Store.get('activeRaids'))
     $('#min-level-gyms-filter-switch').val(Store.get('minGymLevel'))
     $('#max-level-gyms-filter-switch').val(Store.get('maxGymLevel'))
@@ -1747,8 +1752,8 @@ function pokestopLabel(item) {
                     '<span style="border-radius:5px;padding:1px;font-size:7pt;background-color:white;">(' + i8ln('grunt data may change anytime') + ')</span>' +
                     '</div></center>'
             } else if (item['second_reward'] === 'true') {
-                gruntReward += '<input name="button" type="button" onClick="if (this.parentNode.getElementsByTagName(\'div\')[7].style.display != \'none\') { this.parentNode.getElementsByTagName(\'div\')[7].style.display = \'none\'; this.value = \'Rüpel Belohnungen anzeigen\'; } else { this.parentNode.getElementsByTagName(\'div\')[7].style.display = \'block\'; this.value = \'Rüpel Belohnungen verstecken\';}" value="Rüpel Belohnungen anzeigen" style="font-weight:normal;font-size:9pt">' +
-                    '<div id="gruntRewardSpoiler" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
+                gruntReward += '<input name="button" type="button" onClick="showHideGruntEncounter(1)" value="' + i8ln('Grunt Rewards') + '" style="font-weight:normal;font-size:9pt;margin-left: 3px;">' +
+                    '<div id="gruntRewardSpoiler" class="grunt-rewards-wrapper" style="display: none;background-color: #ccc;border-radius: 10px;border: 1px solid black;"><center>' +
                     '<div>85% ' + i8ln('chance for one of the following') + ':<br>'
                 item['encounters']['first'].forEach(function (data) {
                     gruntReward += '<img src="' + iconpath + 'pokemon_icon_' + data + '.png" style="width:38px;height:auto;position:absolute;margin-top:4px;margin-left:4px;"/>' +
@@ -1842,7 +1847,7 @@ function pokestopLabel(item) {
         } else if (item['grunt_type_gender'] !== '') {
             invasionStr += '<div><b>Rüpel-Typ: Zufall</b></div>'
         }
-        if (item['grunt_type_gender'] !== ''){
+        if (item['grunt_type_gender'] !== '') {
             invasionStr += '<div><b>Rüpel-Geschlecht: ' + item['grunt_type_gender'] + '</b></div>'
         }
     }
@@ -1875,16 +1880,18 @@ function pokestopLabel(item) {
         var excludeStr = ''
         var reward = JSON.parse(item['quest_reward_info'])
         var RewardId = ''
-        if (item['quest_reward_type'] === 7) {
-            RewardId = reward['pokemon_id']
-            excludeStr = '<a href="javascript:excludePokemonQuest(' + RewardId + ')" title="Alle dieser Spezies ausblenden">' + i8ln('Exclude Questtype') + '</a>'
-        }
-        if (item['quest_reward_type'] === 2) {
-            RewardId = reward['item_id']
-            excludeStr = '<a href="javascript:excludeItemQuest(' + RewardId + ')" title="Alle dieser Sorte ausblenden">' + i8ln('Exclude Questtype') + '</a>'
-        }
-        if (item['quest_reward_type'] === 3) {
-            excludeStr = '<a href="javascript:excludeDustQuest()" title="Sternenstaub-Quests ausblenden">' + i8ln('Exclude Questtype') + '</a>'
+        if (Store.get('showQuests') === true) {
+            if (item['quest_reward_type'] === 7) {
+                RewardId = reward['pokemon_id']
+                excludeStr = '<a href="javascript:excludePokemonQuest(' + RewardId + ')" title="Alle dieser Spezies ausblenden">' + i8ln('Exclude Questtype') + '</a>'
+            }
+            if (item['quest_reward_type'] === 2) {
+                RewardId = reward['item_id']
+                excludeStr = '<a href="javascript:excludeItemQuest(' + RewardId + ')" title="Alle dieser Sorte ausblenden">' + i8ln('Exclude Questtype') + '</a>'
+            }
+            if (item['quest_reward_type'] === 3) {
+                excludeStr = '<a href="javascript:excludeDustQuest()" title="Sternenstaub-Quests ausblenden">' + i8ln('Exclude Questtype') + '</a>'
+            }
         }
         var rewardImg = '<div style="margin-top:-60px;margin-right:-60px">' +
                         getReward(item) +
@@ -1979,7 +1986,7 @@ function pokestopLabel(item) {
 
 function showHideGruntEncounter(type) { // eslint-disable-line no-unused-vars
     var x
-    if(type === 0) { // Grunt encounter Data
+    if (type === 0) { // Grunt encounter Data
         x = document.getElementsByClassName('grunt-encounters-wrapper')
     } else if (type === 1) {
         x = document.getElementsByClassName('grunt-rewards-wrapper')
@@ -3507,6 +3514,8 @@ function loadRawData() {
             'qpeids': String(questsExcludedPokemon),
             'qireids': String(reincludedQuestsItem),
             'qieids': String(questsExcludedItem),
+            'geids': String(excludedGrunts),
+            'greids': String(reincludedGrunts),
             'token': token,
             'encId': encounterId
         },
@@ -5294,7 +5303,7 @@ function updatePokestops() {
     }
     if (Store.get('showInvasions')) {
         $.each(mapData.pokestops, function (key, value) {
-            if (value['invasion_expiration'] < currentTime) {
+            if (value['invasion_expiration'] < currentTime || excludedGrunts.indexOf(Number(value['grunt_type'])) > -1) {
                 removeStops.push(key)
             }
         })
@@ -5589,6 +5598,7 @@ function updateMap() {
         reids = result.reids
         qpreids = result.qpreids
         qireids = result.qireids
+        greids = result.greids
         if (reids instanceof Array) {
             reincludedPokemon = reids.filter(function (e) {
                 return this.indexOf(e) < 0
@@ -5603,6 +5613,11 @@ function updateMap() {
             reincludedQuestsItem = qireids.filter(function (e) {
                 return this.indexOf(e) < 0
             }, reincludedQuestsItem)
+        }
+        if (greids instanceof Array) {
+            reincludedGrunts = greids.filter(function (e) {
+                return this.indexOf(e) < 0
+            }, reincludedGrunts)
         }
         reloaddustamount = false
         timestamp = result.timestamp
@@ -6420,12 +6435,33 @@ function itemSpritesFilter() {
     })
 }
 
+function gruntSpritesFilter() {
+    jQuery('.grunt-list').parent().find('.select2').hide()
+    loadDefaultImages()
+    jQuery('#nav .grunt-list .grunt-icon-sprite').on('click', function () {
+        var img = jQuery(this)
+        var select = jQuery(this).parent().parent().parent().find('.select2-hidden-accessible')
+        var value = select.val().split(',')
+        var id = img.data('value').toString()
+        if (img.hasClass('active')) {
+            select.val(value.filter(function (elem) {
+                return elem !== id
+            }).join(',')).trigger('change')
+            img.removeClass('active')
+        } else {
+            select.val((value.concat(id).join(','))).trigger('change')
+            img.addClass('active')
+        }
+    })
+}
+
 function loadDefaultImages() {
     var ep = Store.get('remember_select_exclude')
     var eminiv = Store.get('remember_select_exclude_min_iv')
     var en = Store.get('remember_select_notify')
     var eqp = Store.get('remember_quests_exclude_pokemon')
     var eqi = Store.get('remember_quests_exclude_item')
+    var eg = Store.get('remember_exclude_grunts')
     $('label[for="exclude-pokemon"] .pokemon-icon-sprite').each(function () {
         if (ep.indexOf($(this).data('value')) !== -1) {
             $(this).addClass('active')
@@ -6448,6 +6484,11 @@ function loadDefaultImages() {
     })
     $('label[for="exclude-quests-item"] .item-icon-sprite').each(function () {
         if (eqi.indexOf($(this).data('value')) !== -1) {
+            $(this).addClass('active')
+        }
+    })
+    $('label[for="exclude-grunts"] .grunt-icon-sprite').each(function () {
+        if (eg.indexOf($(this).data('value')) !== -1) {
             $(this).addClass('active')
         }
     })
@@ -6862,6 +6903,7 @@ $(function () {
         redrawPokemon(mapData.pokemons)
     })
     $selectIconStyle.val(Store.get('icons')).trigger('change')
+    gruntSpritesFilter()
 })
 
 $(function () {
@@ -6918,7 +6960,40 @@ $(function () {
     $switchBigKarp = $('#big-karp-switch')
     $questsExcludePokemon = $('#exclude-quests-pokemon')
     $questsExcludeItem = $('#exclude-quests-item')
+    $excludeGrunts = $('#exclude-grunts')
 
+    $.getJSON('static/dist/data/grunttype.min.json').done(function (data) {
+        $.each(data, function (key, value) {
+            gruntList.push({
+                id: key,
+                name: i8ln(value['type']),
+                gender: i8ln(value['grunt'])
+            })
+            value['type'] = i8ln(value['type'])
+            value['grunt'] = i8ln(value['grunt'])
+            idToGrunt[key] = value
+        })
+        $excludeGrunts.select2({
+            placeholder: i8ln('Select Grunt'),
+            data: gruntList,
+            templateResult: formatState,
+            multiple: true,
+            maximumSelectionSize: 1
+        })
+        $excludeGrunts.on('change', function (e) {
+            buffer = excludedGrunts
+            excludedGrunts = $excludeGrunts.val().split(',').map(Number).sort(function (a, b) {
+                return parseInt(a) - parseInt(b)
+            })
+            buffer = buffer.filter(function (e) {
+                return this.indexOf(e) < 0
+            }, excludedGrunts)
+            reincludedGrunts = reincludedGrunts.concat(buffer).map(String)
+            updateMap()
+            Store.set('remember_exclude_grunts', excludedGrunts)
+        })
+        $excludeGrunts.val(Store.get('remember_exclude_grunts')).trigger('change')
+    })
     $.getJSON('static/dist/data/items.min.json').done(function (data) {
         $.each(data, function (key, value) {
             itemList.push({
@@ -6947,6 +7022,7 @@ $(function () {
             updateMap()
             Store.set('remember_quests_exclude_item', questsExcludedItem)
         })
+        $questsExcludeItem.val(Store.get('remember_quests_exclude_item')).trigger('change')
     })
 
     $.getJSON('static/dist/data/pokemon.min.json').done(function (data) {
@@ -6973,7 +7049,6 @@ $(function () {
             value['types'] = _types
             idToPokemon[key] = value
         })
-        $questsExcludeItem.val(Store.get('remember_quests_exclude_item')).trigger('change')
 
         // setup the filter lists
         $selectExclude.select2({
@@ -7126,6 +7201,7 @@ $(function () {
         }
         $('#tabs').tabs()
         $('#quests-tabs').tabs()
+        $('#grunt-tabs').tabs()
         if (manualRaids) {
             $('.global-raid-modal').html(generateRaidModal())
         }
@@ -7157,6 +7233,21 @@ $(function () {
         parent.find('.item-list .item-icon-sprite').removeClass('active')
         parent.find('input').val('').trigger('change')
     })
+
+    $('.select-all-grunt').on('click', function (e) {
+        e.preventDefault()
+        var parent = $(this).parent()
+        parent.find('.grunt-list .grunt-icon-sprite').addClass('active')
+        parent.find('input').val(Array.from(Array(numberOfGrunt + 1).keys()).slice(1).join(',')).trigger('change')
+    })
+
+    $('.hide-all-grunt').on('click', function (e) {
+        e.preventDefault()
+        var parent = $(this).parent()
+        parent.find('.grunt-list .grunt-icon-sprite').removeClass('active')
+        parent.find('input').val('').trigger('change')
+    })
+
     $('.area-go-to').on('click', function (e) {
         e.preventDefault()
         var lat = $(this).data('lat')
@@ -7478,9 +7569,16 @@ $(function () {
 
     $('#lures-switch').change(function () {
         Store.set('showLures', this.checked)
+        var options = {
+            'duration': 500
+        }
+        var questWrapper = $('#quests-filter-wrapper')
+        var rocketWrapper = $('#rocket-wrapper')
         if ((this.checked === true) && (Store.get('showInvasions') === true || Store.get('showQuests') === true)) {
             Store.set('showInvasions', false)
             Store.set('showQuests', false)
+            questWrapper.hide(options)
+            rocketWrapper.hide(options)
             $('#invasions-switch').prop('checked', false)
             $('#quests-switch').prop('checked', false)
         }
@@ -7496,14 +7594,21 @@ $(function () {
 
     $('#invasions-switch').change(function () {
         Store.set('showInvasions', this.checked)
+        var questWrapper = $('#quests-filter-wrapper')
+        var options = {
+            'duration': 500
+        }
         if ((this.checked === true) && (Store.get('showQuests') === true || Store.get('showLures') === true)) {
             Store.set('showQuests', false)
             Store.set('showLures', false)
+            questWrapper.hide(options)
             $('#quests-switch').prop('checked', false)
             $('#lures-switch').prop('checked', false)
         }
+        var rocketWrapper = $('#rocket-wrapper')
         if (this.checked) {
             lastpokestops = false
+            rocketWrapper.show(options)
             updateMap()
             // Redraw Rocket Stops, we are switching Markers
             $.each(mapData.pokestops, function (key, value) {
@@ -7514,6 +7619,7 @@ $(function () {
             })
         } else {
             lastpokestops = false
+            rocketWrapper.hide(options)
             updateMap()
             // Redraw Stops, we are switching Markers
             $.each(mapData.pokestops, function (key, value) {
@@ -7554,16 +7660,17 @@ $(function () {
 
     $('#quests-switch').change(function () {
         Store.set('showQuests', this.checked)
-        if ((this.checked === true) && (Store.get('showInvasions') === true || Store.get('showLures') === true)) {
-            Store.set('showInvasions', false)
-            Store.set('showLures', false)
-            $('#invasions-switch').prop('checked', false)
-            $('#lures-switch').prop('checked', false)
-        }
+        var rocketWrapper = $('#rocket-wrapper')
         var options = {
             'duration': 500
         }
-
+        if ((this.checked === true) && (Store.get('showInvasions') === true || Store.get('showLures') === true)) {
+            Store.set('showInvasions', false)
+            Store.set('showLures', false)
+            rocketWrapper.hide(options)
+            $('#invasions-switch').prop('checked', false)
+            $('#lures-switch').prop('checked', false)
+        }
         var wrapper = $('#quests-filter-wrapper')
         if (this.checked) {
             lastpokestops = false

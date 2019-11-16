@@ -192,6 +192,12 @@ $noInvasionEncounterData = true;									//Enable/Disable grunttype encounter da
 $noInvasionTimer = false;											// Enables/Disables the ability to enable/disable the Invasion Timer
 $enableInvasionTimer = 'false';										// default value for users: Invasion Timer
 
+$noGrunts = false;
+$noGruntNumbers = false;
+$hideGrunts = '[1,2,3,42,45,46]';
+$excludeGrunts = [1,2,3,42,45,46];
+$generateExcludeGrunts = true;
+
 $noQuests = false;													// Enables/Disables Quests
 $enableQuests = 'false';                                            // default value for users: Show Quests only
 
@@ -206,6 +212,7 @@ $noQuestsItems = false;												// Enables/Disables Quest Items
 $noItemNumbers = true;												// Enables/Disables numbers at the item filter
 $hideQuestsItem = '[4, 5, 301, 401, 402, 403, 404, 501, 502, 503, 504, 602, 603, 604, 702, 704, 707, 801, 901, 902, 903, 1001, 1002, 1401, 1402, 1402, 1403, 1404, 1405]';    // Item ids "See protos https://github.com/Furtif/POGOProtos/blob/master/src/POGOProtos/Inventory/Item/ItemId.proto"
 $excludeQuestsItem = [4, 5, 301, 401, 402, 403, 404, 501, 502, 503, 504, 602, 603, 604, 702, 704, 707, 801, 901, 902, 903, 1001, 1002, 1401, 1402, 1402, 1403, 1404, 1405];   // All excluded item wil not be shown in the filter.
+$generateExcludeItems = true;
 
 $noQuestsPokemon = false;											// Enables/Disables Quest Pokemon
 $generateExcludeQuestsPokemon = true;                               // Generate $excludeQuestsPokemon based on active quests in database
@@ -448,6 +455,10 @@ $weatherCellsFillOpacity = 0.2;   // FillOpacity of the weather cells. 10% = 0.1
 // MISC
 // Only change settings from this block if you know what they exactly do. Use some of them carefully!
 //-----------------------------------------------------
+/* Counts */
+$numberOfPokemon = 649;
+$numberOfItem = 1405;
+$numberOfGrunt = 50;
 
 /* Anti scrape Settings */
 $enableCsrf = true;                                                 // Don't disable this unless you know why you need to :)
