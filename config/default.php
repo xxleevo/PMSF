@@ -78,9 +78,10 @@ $mapUrl = "";   //For the link from the nest sharing tool - not needed if nests 
 
 $paypalUrl = "";                                                    // PayPal donation URL, leave "" for empty
 
-/* Discord */
+/* Discord/Telegram */
 
 $discordUrl = "";                                                   // Discord URL, leave "" for empty
+$telegramUrl = "";												// Telegram URL, leave "" for empty
 
 /* Worldopole */
 

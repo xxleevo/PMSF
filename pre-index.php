@@ -245,6 +245,11 @@ $getList = new \Scanner\RDM();
             <img src="static/images/header/discord126x.png" border="0" style="float: right; width: 42px; height: auto;">
         </a>';
         }
+        if ( $telegramUrl != "" ) {
+            echo '<a href="' . $telegramUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle;padding:0 2px;">
+            <img src="static/images/header/telegram126x.png" border="0" style="float: right; width: 42px; height: auto;">
+        </a>';
+        }
         if ( $paypalUrl != "" ) {
             echo '<a href="' . $paypalUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle; padding:0 2px;">
             <img src="static/images/header/paypal126x.png" border="0" alt="Donate" style="float: right;width: 42px; height: auto;">

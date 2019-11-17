@@ -29,6 +29,7 @@ $motdContent = "This is an example MOTD<br>Do whatever you like with it.";
 $mapUrl = "";														// For the link from the nest sharing tool - not needed if nests are off
 $paypalUrl = "";                                                    // PayPal donation URL, leave "" for empty
 $discordUrl = "https://discord.gg/INVITE_LINK";                     // Discord URL, leave "" for empty
+$telegramUrl = "";													// Telegram URL, leave "" for empty
 $worldopoleUrl = "";                                                // Link to Worldopole/RDM-o-Pole, leave "" for empty
 $noLinkFullStats = false;                                              // Enable a link to worldopole in the stats sidebar
 $worldopoleButtonTitle = "Statistiken";                             // Display text for the button-link to worlopole in the Menu
