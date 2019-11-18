@@ -968,6 +968,7 @@ $getList = new \Scanner\RDM();
 							<div class="form-control switch-container" id="min-level-gyms-filter-wrapper">
 								<font size="3">Min. freie Plätze</font>
 								<select name="min-level-gyms-filter-switch" id="min-level-gyms-filter-switch">
+									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -979,6 +980,7 @@ $getList = new \Scanner\RDM();
 							<div class="form-control switch-container" id="max-level-gyms-filter-wrapper">
 								<font size="3">Max. freie Plätze</font>
 								<select name="max-level-gyms-filter-switch" id="max-level-gyms-filter-switch">
+									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
