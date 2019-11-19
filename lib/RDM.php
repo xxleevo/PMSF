@@ -507,7 +507,6 @@ class RDM extends Scanner
 
     public function get_gyms($rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible = false, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
-		file_put_contents('log.txt', print_r($raids, true), FILE_APPEND);
         $conds = array();
         $params = array();
 
