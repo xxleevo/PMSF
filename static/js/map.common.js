@@ -134,9 +134,24 @@ var StoreOptions = {
             default: enableRaids,
             type: StoreTypes.Boolean
         },
+    'filterRaidboss':
+        {
+            default: raidbossFilterlist,
+            type: StoreTypes.JSON
+        },
+    'remember_exclude_raidbosses':
+        {
+            default: hideRaidPokemon,
+            type: StoreTypes.JSON
+        },
     'activeRaids':
         {
             default: activeRaids,
+            type: StoreTypes.Boolean
+        },
+    'filterRaidlevel':
+        {
+            default: filterByRaidlevel,
             type: StoreTypes.Boolean
         },
     'minRaidLevel':

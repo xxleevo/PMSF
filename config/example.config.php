@@ -164,6 +164,8 @@ $noParkInfo = false;                                                // Do not di
 $noRaids = false;                                                   // Enables/Disables Raids (& the whole raid Menu if gyms are also disabled)
 $enableRaids = 'false';                                             // default value for users enable raids
 $activeRaids = 'false';                                             // default value for users: only hatched eggs
+$noFilterByRaidlevel = false;                                       //Allows to filter by raidlevel
+$filterByRaidlevel = 'false';                                       // default value for users: Raidfilter-switch
 $minRaidLevel = 1;													// default value for users: min raid lvl
 $maxRaidLevel = 5;													// default value for users: max raid lvl
 $noRaidTimer = false;												// Enables/Disables Raidtimers on the Map
@@ -174,7 +176,13 @@ $noRaidPokemonCP = false;                                           // Display m
 $noWhatsappRaidMoves = false;                                        // Allow Moves from hatched boss to share via whatsapp
 $denyRaidLevelsBelow = 0;											// Deny raid levels beeing shown under this value (0-6)(5 = only show level 5 raids) - 0 to disable
 																	// In addition you may want to adjust $minRaidLevel and $maxRaidLevel;
-																	// To prevent displaying gyms with denied raids on it.													
+																	// To prevent displaying gyms with denied raids on it.		
+
+$noRaidfilterList = false;                                          // Allows to filter by raidboss id
+$raidbossFilterlist = 'false';                                      // default value for users
+$noRaidfilterListNumbers = false;                                   // Enable/Disable Numbers on the filter tab
+$hideRaidPokemon = '[]';                                            // hidden bosses by default
+$excludeRaidPokemon = [];                                           // exclude bosses from the list (for users not changeable)																	
 /*---------Pokestop Settings---------*/
 $noPokestops = false;                                               // Enables/Disables Pokestops & the whole Pokestop menu
 $enablePokestops = 'false';                                         // default value for users

@@ -208,11 +208,19 @@ $enableRaids = 'false';                                             // true/fals
 $noRaidTimer = false;
 $enableRaidTimer = 'false';
 $activeRaids = 'false';                                             // true/false
+$noFilterByRaidlevel = false;                                       //Allows to filter by raidlevel
+$filterByRaidlevel = 'false';
 $minRaidLevel = 1;
 $maxRaidLevel = 5;
 $noRaidCounterGuide = false;
 $noRaidPokemonCP = false;                                           // true/false
 $noWhatsappRaidMoves = false;
+
+$noRaidfilterList = false;                                          // Allows to filter by raidboss id
+$raidbossFilterlist = 'false';
+$noRaidfilterListNumbers = false;
+$hideRaidPokemon = '[]';
+$excludeRaidPokemon = [];
 
 $noPokestops = false;                                               // true/false
 $enablePokestops = 'false';                                         // true/false

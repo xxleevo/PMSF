@@ -86,17 +86,17 @@ $getList = new \Scanner\RDM();
             if ( ! in_array( $k, $pokemonToExclude ) ) {
                 if ( $k > 649 ) {
                     break;
-		}
-		if ( $k <= 9 ) {
+				}
+				if ( $k <= 9 ) {
                     $id = "00$k";
                 } else if ( $k <= 99 ) {
                     $id = "0$k";
                 } else {
                     $id = $k;
-		}
-		if ( ! $copyrightSafe ) {
+				}
+				if ( ! $copyrightSafe ) {
                     echo '<span class="pokemon-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . i8ln( $type ) . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="' . $iconRepository . 'pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
-		} else {
+				} else {
                     echo '<span class="pokemon-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . i8ln( $type ) . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="static/icons-safe/pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
                 }
                 if ( ! $noPokemonNumbers ) {
@@ -179,6 +179,53 @@ $getList = new \Scanner\RDM();
                 valueNames: ['type', 'gender', 'id']
             };
             var gruntList = new List('grunt-list-cont-<?php echo $num; ?>', options);
+        </script>
+        <?php
+    }
+	function raidbossFilterImages($noRaidfilterListNumbers, $onClick = '', $raidbossesToExclude = array(), $num = 0)
+    {
+        global $raids, $copyrightSafe, $iconRepository;
+        if (empty($raids)) {
+            $json = file_get_contents('static/dist/data/pokemon.min.json');
+            $raidbosses = json_decode($json, true);
+        }
+        echo '<div class="raidboss-list-cont" id="raidboss-list-cont-' . $num . '"><input type="hidden" class="search-number" value="' . $num . '" /><input class="search search-input" placeholder="' . i8ln("Search Name & ID") . '" /><div class="raidboss-list list">';
+        $i = 0;
+        $z = 0;
+        foreach ($raidbosses as $rb => $raidboss) {
+            $type = '';
+            $name = $raidboss['name'];
+            foreach ( $raidboss['types'] as $t ) {
+                $type .= $t['type'];
+            }
+            if (! in_array($rb, $raidbossesToExclude)) {
+                if ( $rb > 649 ) {
+                    break;
+				}
+				if ( $rb <= 9 ) {
+                    $id = "00$rb";
+                } else if ( $rb <= 99 ) {
+                    $id = "0$rb";
+                } else {
+                    $id = $rb;
+				}
+				if ( ! $copyrightSafe ) {
+                    echo '<span class="raidboss-icon-sprite" data-value="' . $rb . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . i8ln( $type ) . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">' . $id . '</span><img src="' . $iconRepository . 'pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
+				} else {
+                    echo '<span class="raidboss-icon-sprite" data-value="' . $rb . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . i8ln( $type ) . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">' . $id . '</span><img src="static/icons-safe/pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
+                }
+                if (! $noRaidfilterListNumbers) {
+                    echo '<span class="raidboss-number">' . $rb . '</span>';
+                }
+                echo "</span>";
+            }
+        }
+        echo '</div></div>'; ?>
+        <script>
+            var options = {
+                valueNames: ['name', 'types', 'id']
+            };
+            var raidbossList = new List('raidboss-list-cont-<?php echo $num; ?>', options);
         </script>
         <?php
     }
@@ -828,38 +875,35 @@ $getList = new \Scanner\RDM();
                 <div>
                     <?php
                     if ( ! $noRaids ) {
-                        echo '<div class="form-control switch-container" id="raids-wrapper">
-                    <h3>' . i8ln( 'Raids' ) . '</h3>
-                    <div class="onoffswitch">
-                        <input id="raids-switch" type="checkbox" name="raids-switch"
-                               class="onoffswitch-checkbox" checked>
-                        <label class="onoffswitch-label" for="raids-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
-                    } ?>
-
-					<?php
-					echo '
-					<div id="raids-filter-wrapper" style="display:none">';
-					if ( ! $noRaidTimer && ! $noRaids ) {
-						echo '
-						<div class="form-control switch-container">
-							<font size="3">Raid Timer</font>
+                        echo '
+						<div class="form-control switch-container" id="raids-wrapper" style="float:none;height:35px;margin-bottom:0px;">
+							<h3>' . i8ln( 'Raids' ) . '</h3>
 							<div class="onoffswitch">
-								<input id="raid-timer-switch" type="checkbox" name="raid-timer-switch" class="onoffswitch-checkbox" checked>
-								<label class="onoffswitch-label" for="raid-timer-switch">
+								<input id="raids-switch" type="checkbox" name="raids-switch" class="onoffswitch-checkbox" checked>
+								<label class="onoffswitch-label" for="raids-switch">
 									<span class="switch-label" data-on="On" data-off="Off"></span>
 									<span class="switch-handle"></span>
 								</label>
 							</div>
 						</div>';
-					}
-					if (!$denyRaidLevelsBelow > 0){
+                    
 						echo '
-							<div class="form-control switch-container" id="active-raids-wrapper">
+						<div id="raids-filter-wrapper" style="display:none">';
+						if ( ! $noRaidTimer ) {
+							echo '
+							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
+								<font size="3">Raid Timer</font>
+								<div class="onoffswitch">
+									<input id="raid-timer-switch" type="checkbox" name="raid-timer-switch" class="onoffswitch-checkbox" checked>
+									<label class="onoffswitch-label" for="raid-timer-switch">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+							</div>';
+						}
+						echo '
+							<div class="form-control switch-container" id="active-raids-wrapper" style="float:none;height:35px;margin-bottom:0px;">
 								<font size="3">Nur aktive Raids</font>
 								<div class="onoffswitch">
 									<input id="active-raids-switch" type="checkbox" name="active-raids-switch"
@@ -869,45 +913,102 @@ $getList = new \Scanner\RDM();
 										<span class="switch-handle"></span>
 									</label>
 								</div>
-							</div>
-							<div class="form-control switch-container" id="min-level-raids-filter-wrapper">
-								<font size="3">Min. Raid Level</font>
-								<select name="min-level-raids-filter-switch" id="min-level-raids-filter-switch">
-									<option value ="">Einstellung angeben...</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-							</div>
-							<div class="form-control switch-container" id="max-level-raids-filter-wrapper">
-								<font size="3">Max. Raid Level</font>
-								<select name="max-level-raids-filter-switch" id="max-level-raids-filter-switch">
-									<option value ="">Einstellung angeben...</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
 							</div>';
+						if (!$noFilterByRaidlevel) {
+							echo '
+							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
+								<font size="3">' . i8ln('Filter by level') . '</font>
+								<div class="onoffswitch">
+									<input id="raid-level-filter-switch" type="checkbox" name="raid-level-filter-switch" class="onoffswitch-checkbox" >
+									<label class="onoffswitch-label" for="raid-level-filter-switch">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+							</div>';
+						}
+						if (!$noRaidfilterList) {
+							echo '
+							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
+								<font size="3">' . i8ln('Filter by raidboss') . '</font>
+								<div class="onoffswitch">
+									<input id="raidboss-filter-switch" type="checkbox" name="raidboss-filter-switch" class="onoffswitch-checkbox" >
+									<label class="onoffswitch-label" for="raidboss-filter-switch">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+							</div>';
+						}
+						if (!$denyRaidLevelsBelow > 0 && !$noFilterByRaidlevel){
+							echo '
+							<div id="raid-level-filter-wrapper" style="display:none">
+								<div class="form-control switch-container" id="min-level-raids-filter-wrapper" style="float:none;height:35px;margin-bottom:0px;">
+									<font size="3">Min. Raid Level</font>
+									<select name="min-level-raids-filter-switch" id="min-level-raids-filter-switch">
+										<option value="" disabled selected></option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+								</div>
+								<div class="form-control switch-container" id="max-level-raids-filter-wrapper" style="float:none;height:75px;margin-bottom:0px;">
+									<font size="3">Max. Raid Level</font>
+									<select name="max-level-raids-filter-switch" id="max-level-raids-filter-switch">
+										<option value="" disabled selected></option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+								</div>
+							</div>';
+						}
+						if (!$noRaidfilterList) { ?>
+							<div id="raidboss-filter-wrapper" style="display:none;">
+								<div id="raidboss-tabs">
+									<ul>
+										<li><a href="#tabs-1"><?php echo i8ln('Raidfilter') ?></a></li>
+									</ul>
+									<div id="tabs-1">
+										<div class="form-control hide-select-2">
+											<label for="exclude-raidbosses">
+												<div class="raidbosses-container">
+													<input id="exclude-raidbosses" type="text" readonly="true">
+													<?php
+													raidbossFilterImages($noRaidfilterListNumbers, '', $excludeRaidPokemon, 11); ?>
+												</div>
+												<a href="#" class="select-all-raidboss"><?php echo i8ln('All') ?>
+												</a><a href="#" class="hide-all-raidboss"><?php echo i8ln('None') ?> </a>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						<?php
+						} ?>
+						
+						<?php
+						echo '
+						</div>';
 					}
-					echo '</div>';
-					?>
-                    <?php
                     if ( ! $noGymSidebar && ( ! $noGyms || ! $noRaids ) ) {
-                        echo '<div id="gym-sidebar-wrapper" class="form-control switch-container">
-                    <font size="3">' . i8ln( 'Use Gym Sidebar' ) . '</font>
-                    <div class="onoffswitch">
-                        <input id="gym-sidebar-switch" type="checkbox" name="gym-sidebar-switch"
-                               class="onoffswitch-checkbox" checked>
-                        <label class="onoffswitch-label" for="gym-sidebar-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
+                        echo '
+						<hr style="margin:15px;" />
+						<div id="gym-sidebar-wrapper" class="form-control switch-container">
+							<font size="3">' . i8ln( 'Use Gym Sidebar' ) . '</font>
+							<div class="onoffswitch">
+								<input id="gym-sidebar-switch" type="checkbox" name="gym-sidebar-switch"class="onoffswitch-checkbox" checked>
+								<label class="onoffswitch-label" for="gym-sidebar-switch">
+									<span class="switch-label" data-on="On" data-off="Off"></span>
+									<span class="switch-handle"></span>
+								</label>
+							</div>
+						</div>
+						<br><hr style="margin:15px;" />';
                     } ?>
 					<?php
 					if ( ! $noGymStyle && ( ! $noGyms || ! $noRaids )) {
@@ -2440,6 +2541,9 @@ $getList = new \Scanner\RDM();
     var numberOfPokemon = <?php echo $numberOfPokemon; ?>;
     var numberOfItem = <?php echo $numberOfItem; ?>;
     var numberOfGrunt = <?php echo $numberOfGrunt; ?>;
+	var hideRaidPokemon = <?php echo $noRaids ? '[]' : $hideRaidPokemon ?>;
+	var raidbossFilterlist = <?php echo $noRaidfilterList === true ? 'true' : $raidbossFilterlist ?>;
+	var filterByRaidlevel = <?php echo $noFilterByRaidlevel === true ? 'true' : $filterByRaidlevel ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
