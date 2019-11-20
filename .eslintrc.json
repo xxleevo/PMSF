@@ -217,6 +217,7 @@
     "numberOfItem": true,
     "numberOfGrunt": true,
 	"hideRaidPokemon": true,
+	"hideRaidEggs": true,
 	"raidbossFilterlist": true,
 	"filterByRaidlevel": true
   }

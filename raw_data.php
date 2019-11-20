@@ -111,6 +111,8 @@ $geids = array();
 $greids = array();
 $rbeids = array();
 $rbreids = array();
+$reeids = array();
+$rereids = array();
 
 $debug['1_before_functions'] = microtime(true) - $timing['start'];
 
@@ -197,13 +199,14 @@ global $noGyms, $noRaids;
 if (!$noGyms || !$noRaids) {
     if ($d["lastgyms"] == "true") {
 		$rbeids = !empty($_POST['rbeids']) ? explode(",", $_POST['rbeids']) : array();
+		$reeids = !empty($_POST['reeids']) ? explode(",", $_POST['reeids']) : array();
         if ($lastgyms != "true") {
-            $d["gyms"] = $scanner->get_gyms($rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible);
+            $d["gyms"] = $scanner->get_gyms($reeids, $rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible);
         } else {
             if ($newarea) {
-                $d["gyms"] = $scanner->get_gyms($rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng);
+                $d["gyms"] = $scanner->get_gyms($reeids, $rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng);
             } else {
-                $d["gyms"] = $scanner->get_gyms($rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, $timestamp);
+                $d["gyms"] = $scanner->get_gyms($reeids, $rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, $timestamp);
             }
         }
             if (!empty($_POST['rbreids'])) {
@@ -213,6 +216,14 @@ if (!$noGyms || !$noRaids) {
                     $d["gyms"] = array_merge($d["gyms"], $scanner->get_gyms($rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng));
                 }
                 $d["rbreids"] = $rbreids;
+            }
+            if (!empty($_POST['rereids'])) {
+                $rereids = !empty($_POST['rereids']) ? array_unique(explode(",", $_POST['rereids'])) : array();
+                $rereidsDiff = array_diff($rereids, $reeids);
+                if (count($rereidsDiff)) {
+                    $d["gyms"] = array_merge($d["gyms"], $scanner->get_gyms($reeids, $rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng));
+                }
+                $d["rereids"] = $rereids;
             }
     }
 }

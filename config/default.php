@@ -221,6 +221,8 @@ $raidbossFilterlist = 'false';
 $noRaidfilterListNumbers = false;
 $hideRaidPokemon = '[]';
 $excludeRaidPokemon = [];
+$hideRaidEggs = '[]';
+$excludeRaidEggs = [];
 
 $noPokestops = false;                                               // true/false
 $enablePokestops = 'false';                                         // true/false

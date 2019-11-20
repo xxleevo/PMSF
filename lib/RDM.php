@@ -505,7 +505,7 @@ class RDM extends Scanner
         return $gym;
     }
 
-    public function get_gyms($rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible = false, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    public function get_gyms($reeids, $rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible = false, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
         $conds = array();
         $params = array();
@@ -542,7 +542,22 @@ class RDM extends Scanner
             } else {
                 $raidsSQL .= "raid_pokemon_id IS NOT NULL";
             }
+            $eggsSQL = '';
+            if (count($reeids)) {
+                $egg_in = '';
+                $r = 1;
+                foreach ($reeids as $reeid) {
+                    $params[':rqry_' . $r . "_"] = $reeids;
+                    $egg_in .= ':rqry_' . $r . "_,";
+                    $r++;
+                }
+                $egg_in = substr($egg_in, 0, -1);
+                $eggsSQL .= "raid_level NOT IN ( $egg_in )";
+            } else {
+                $eggsSQL .= "raid_level IS NOT NULL";
+            }
             $conds[] = "" . $raidsSQL . "";
+            $conds[] = "" . $eggsSQL . "";
         }
         if ($exEligible === "true") {
             $conds[] = "(ex_raid_eligible IS NOT NULL AND ex_raid_eligible != '0')";

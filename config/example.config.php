@@ -182,7 +182,9 @@ $noRaidfilterList = false;                                          // Allows to
 $raidbossFilterlist = 'false';                                      // default value for users
 $noRaidfilterListNumbers = false;                                   // Enable/Disable Numbers on the filter tab
 $hideRaidPokemon = '[]';                                            // hidden bosses by default
-$excludeRaidPokemon = [];                                           // exclude bosses from the list (for users not changeable)																	
+$excludeRaidPokemon = [];                                           // exclude bosses from the list (for users not changeable)
+$hideRaidEggs = '[]'; 												// hidden eggs by default
+$excludeRaidEggs = [];												// exclude eggs from the list (for users not changeable)
 /*---------Pokestop Settings---------*/
 $noPokestops = false;                                               // Enables/Disables Pokestops & the whole Pokestop menu
 $enablePokestops = 'false';                                         // default value for users

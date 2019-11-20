@@ -229,6 +229,38 @@ $getList = new \Scanner\RDM();
         </script>
         <?php
     }
+	function raidEggsFilterImages($noRaidfilterListNumbers, $onClick = '', $raidEggsToExclude = array(), $num = 0)
+    {
+        global $raids, $copyrightSafe, $iconRepository;
+        echo '<div class="raidbeggs-list-cont" id="raideggs-list-cont-' . $num . '"><input type="hidden" class="search-number" value="' . $num . '" /><input class="search search-input" placeholder="' . i8ln("Search Level") . '" /><div class="raideggs-list list">';
+        $i = 0;
+        $z = 0;
+		for ($e = 1; $e <= 5; $e++) {
+			$level = $e;
+			if($e === 1 || $e === 2){
+				$egg = 'normal';
+			} else if($e === 3 || $e === 4){
+				$egg = 'rare';
+			} else if($e === 5){
+				$egg = 'legendary';
+			}
+            if (! in_array($e, $raidEggsToExclude)) {
+                echo '<span class="raideggs-icon-sprite" data-value="' . $e . '" onclick="' . $onClick . '"><span style="display:none" class="level">' . $level . '</span><img src="static/raids/egg_' . $egg . '.png" style="width:48px;height:56px;"/>';
+                if (! $noRaidfilterListNumbers) {
+                    echo '<span class="raidboss-number">' . $e . '</span>';
+                }
+                echo "</span>";
+            }
+		}
+        echo '</div></div>'; ?>
+        <script>
+            var options = {
+                valueNames: ['level']
+            };
+            var raideggsList = new List('raideggs-list-cont-<?php echo $num; ?>', options);
+        </script>
+        <?php
+    }
     ?>
 
     <?php
@@ -914,7 +946,7 @@ $getList = new \Scanner\RDM();
 									</label>
 								</div>
 							</div>';
-						if (!$noFilterByRaidlevel) {
+						if ($denyRaidLevelsBelow == 0 && !$noFilterByRaidlevel) {
 							echo '
 							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
 								<font size="3">' . i8ln('Filter by level') . '</font>
@@ -940,7 +972,7 @@ $getList = new \Scanner\RDM();
 								</div>
 							</div>';
 						}
-						if (!$denyRaidLevelsBelow > 0 && !$noFilterByRaidlevel){
+						if ($denyRaidLevelsBelow == 0 && !$noFilterByRaidlevel){
 							echo '
 							<div id="raid-level-filter-wrapper" style="display:none">
 								<div class="form-control switch-container" id="min-level-raids-filter-wrapper" style="float:none;height:35px;margin-bottom:0px;">
@@ -972,6 +1004,7 @@ $getList = new \Scanner\RDM();
 								<div id="raidboss-tabs">
 									<ul>
 										<li><a href="#tabs-1"><?php echo i8ln('Raidfilter') ?></a></li>
+										<li><a href="#tabs-2"><?php echo i8ln('Eggs') ?></a></li>
 									</ul>
 									<div id="tabs-1">
 										<div class="form-control hide-select-2">
@@ -979,14 +1012,30 @@ $getList = new \Scanner\RDM();
 												<div class="raidbosses-container">
 													<input id="exclude-raidbosses" type="text" readonly="true">
 													<?php
-													raidbossFilterImages($noRaidfilterListNumbers, '', $excludeRaidPokemon, 11); ?>
+													raidbossFilterImages($noRaidfilterListNumbers, '', $excludeRaidPokemon, 11); 
+													?>
 												</div>
 												<a href="#" class="select-all-raidboss"><?php echo i8ln('All') ?>
 												</a><a href="#" class="hide-all-raidboss"><?php echo i8ln('None') ?> </a>
 											</label>
 										</div>
 									</div>
+									<div id="tabs-2">
+										<div class="form-control hide-select-2">
+											<label for="exclude-raideggs">
+												<div class="raideggs-container">
+													<input id="exclude-raideggs" type="text" readonly="true">
+													<?php
+													raidEggsFilterImages($noRaidfilterListNumbers, '', $excludeRaidEggs, 12); 
+													?>
+												</div>
+												<a href="#" class="select-all-raideggs"><?php echo i8ln('All') ?>
+												</a><a href="#" class="hide-all-raideggs"><?php echo i8ln('None') ?> </a>
+											</label>
+										</div>
+									</div>
 								</div>
+
 							</div>
 						<?php
 						} ?>
@@ -2544,6 +2593,7 @@ $getList = new \Scanner\RDM();
 	var hideRaidPokemon = <?php echo $noRaids ? '[]' : $hideRaidPokemon ?>;
 	var raidbossFilterlist = <?php echo $noRaidfilterList === true ? 'true' : $raidbossFilterlist ?>;
 	var filterByRaidlevel = <?php echo $noFilterByRaidlevel === true ? 'true' : $filterByRaidlevel ?>;
+	var hideRaidEggs = <?php echo $noRaids ? '[]' : $hideRaidEggs ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

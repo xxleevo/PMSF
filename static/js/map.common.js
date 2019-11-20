@@ -144,6 +144,11 @@ var StoreOptions = {
             default: hideRaidPokemon,
             type: StoreTypes.JSON
         },
+    'remember_exclude_raideggs':
+        {
+            default: hideRaidEggs,
+            type: StoreTypes.JSON
+        },
     'activeRaids':
         {
             default: activeRaids,
