@@ -7429,7 +7429,7 @@ $(function () {
         e.preventDefault()
         var parent = $(this).parent()
         parent.find('.raidboss-list .raidboss-icon-sprite').addClass('active')
-        parent.find('input').val(Array.from(Array(numberOfGrunt + 1).keys()).slice(1).join(',')).trigger('change')
+        parent.find('input').val(Array.from(Array(numberOfPokemon + 1).keys()).slice(1).join(',')).trigger('change')
     })
 
     $('.hide-all-raidboss').on('click', function (e) {
@@ -7443,7 +7443,7 @@ $(function () {
         e.preventDefault()
         var parent = $(this).parent()
         parent.find('.raideggs-list .raideggs-icon-sprite').addClass('active')
-        parent.find('input').val(Array.from(Array(numberOfGrunt + 1).keys()).slice(1).join(',')).trigger('change')
+        parent.find('input').val(Array.from(Array(5 + 1).keys()).slice(1).join(',')).trigger('change')
     })
 
     $('.hide-all-raideggs').on('click', function (e) {
