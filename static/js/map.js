@@ -3540,7 +3540,7 @@ function loadRawData() {
             'greids': String(reincludedGrunts),
             'rbeids': String(excludedRaidbosses),
             'rbreids': String(reincludedRaidbosses),
-            'reeids': String(excludedRaideggs),
+			'reeids': String(excludedRaideggs),
             'rereids': String(reincludedRaideggs),
             'token': token,
             'encId': encounterId
@@ -5634,7 +5634,7 @@ function updateMap() {
         qireids = result.qireids
         greids = result.greids
         rbreids = result.rbreids
-        rereids = result.rereids
+		rereids = result.rereids
         if (reids instanceof Array) {
             reincludedPokemon = reids.filter(function (e) {
                 return this.indexOf(e) < 0
@@ -6500,7 +6500,6 @@ function gruntSpritesFilter() {
         }
     })
 }
-
 function raidbossSpritesFilter() {
     jQuery('.raidboss-list').parent().find('.select2').hide()
     loadDefaultImages()
@@ -6520,7 +6519,6 @@ function raidbossSpritesFilter() {
         }
     })
 }
-
 function raideggsSpritesFilter() {
     jQuery('.raideggs-list').parent().find('.select2').hide()
     loadDefaultImages()
@@ -6540,7 +6538,6 @@ function raideggsSpritesFilter() {
         }
     })
 }
-
 function loadDefaultImages() {
     var ep = Store.get('remember_select_exclude')
     var eminiv = Store.get('remember_select_exclude_min_iv')
@@ -6549,7 +6546,7 @@ function loadDefaultImages() {
     var eqi = Store.get('remember_quests_exclude_item')
     var eg = Store.get('remember_exclude_grunts')
     var erb = Store.get('remember_exclude_raidbosses')
-    var ere = Store.get('remember_exclude_raideggs')
+	var ere = Store.get('remember_exclude_raideggs')
     $('label[for="exclude-pokemon"] .pokemon-icon-sprite').each(function () {
         if (ep.indexOf($(this).data('value')) !== -1) {
             $(this).addClass('active')
@@ -7002,8 +6999,8 @@ $(function () {
     })
     $selectIconStyle.val(Store.get('icons')).trigger('change')
     gruntSpritesFilter()
-    raidbossSpritesFilter()
-    raideggsSpritesFilter()
+	raidbossSpritesFilter()
+	raideggsSpritesFilter()
 })
 
 $(function () {
@@ -7061,8 +7058,8 @@ $(function () {
     $questsExcludePokemon = $('#exclude-quests-pokemon')
     $questsExcludeItem = $('#exclude-quests-item')
     $excludeGrunts = $('#exclude-grunts')
-    $excludeRaidbosses = $('#exclude-raidbosses')
-    $excludeRaideggs = $('#exclude-raideggs')
+	$excludeRaidbosses = $('#exclude-raidbosses')
+	$excludeRaideggs = $('#exclude-raideggs')
 
     $.getJSON('static/dist/data/grunttype.min.json').done(function (data) {
         $.each(data, function (key, value) {
@@ -7128,85 +7125,23 @@ $(function () {
     })
 
     $.getJSON('static/dist/data/pokemon.min.json').done(function (data) {
-        // Raidbosses
-        var _types = []
-        $.each(data, function (key, value) {
-            if (key > numberOfPokemon) {
-                return false
-            }
-            raidbossList.push({
-                id: key,
-                name: i8ln(value['name'])
-            })
-            value['name'] = i8ln(value['name'])
-            $.each(value['types'], function (key, pokemonType) {
-                _types.push({
-                    'type': i8ln(pokemonType['type']),
-                    'color': pokemonType['color']
-                })
-            })
-            value['types'] = _types
-            idToPokemon[key] = value
-        })
-        $excludeRaidbosses.select2({
-            placeholder: i8ln('Select Raidboss'),
-            data: raidbossList,
-            templateResult: formatState,
-            multiple: true,
-            maximumSelectionSize: 1
-        })
-        $excludeRaidbosses.on('change', function (e) {
-            buffer = excludedRaidbosses
-            excludedRaidbosses = $excludeRaidbosses.val().split(',').map(Number).sort(function (a, b) {
-                return parseInt(a) - parseInt(b)
-            })
-            buffer = buffer.filter(function (e) {
-                return this.indexOf(e) < 0
-            }, excludedRaidbosses)
-            reincludedRaidbosses = reincludedRaidbosses.concat(buffer).map(String)
-            lastgyms = false
-            updateMap()
-            Store.set('remember_exclude_raidbosses', excludedRaidbosses)
-        })
-        $excludeRaidbosses.val(Store.get('remember_exclude_raidbosses')).trigger('change')
-
         // Raideggs
-        $.each(data, function (key, value) {
-            if (key > 5) {
-                return false
-            }
+		var eggLevel = 1;
+		while(eggLevel <= 5){
             raideggsList.push({
-                level: key
+                level: eggLevel
             })
-        })
-        $excludeRaideggs.select2({
-            placeholder: i8ln('Select Raidegg'),
-            data: raideggsList,
-            templateResult: formatState,
-            multiple: true,
-            maximumSelectionSize: 1
-        })
-        $excludeRaideggs.on('change', function (e) {
-            buffer = excludedRaideggs
-            excludedRaideggs = $excludeRaideggs.val().split(',').map(Number).sort(function (a, b) {
-                return parseInt(a) - parseInt(b)
-            })
-            buffer = buffer.filter(function (e) {
-                return this.indexOf(e) < 0
-            }, excludedRaideggs)
-            reincludedRaideggs = reincludedRaideggs.concat(buffer).map(String)
-            lastgyms = false
-            updateMap()
-            Store.set('remember_exclude_raideggs', excludedRaideggs)
-        })
-        $excludeRaideggs.val(Store.get('remember_exclude_raideggs')).trigger('change')
-
-        // pokemon
+			eggLevel ++
+		}
         $.each(data, function (key, value) {
             if (key > numberOfPokemon) {
                 return false
             }
             var _types = []
+			raidbossList.push({
+				id: key,
+				name: i8ln(value['name'])
+			})
             pokeList.push({
                 id: key,
                 text: i8ln(value['name']) + ' - #' + key,
@@ -7260,6 +7195,47 @@ $(function () {
             maximumSelectionSize: 1
         })
         // setup list change behavior now that we have the list to work from
+		
+        $excludeRaidbosses.select2({
+            placeholder: i8ln('Select Raidboss'),
+            data: raidbossList,
+            templateResult: formatState,
+            multiple: true,
+            maximumSelectionSize: 1
+        })
+        $excludeRaidbosses.on('change', function (e) {
+            buffer = excludedRaidbosses
+            excludedRaidbosses = $excludeRaidbosses.val().split(',').map(Number).sort(function (a, b) {
+                return parseInt(a) - parseInt(b)
+            })
+            buffer = buffer.filter(function (e) {
+                return this.indexOf(e) < 0
+            }, excludedRaidbosses)
+            reincludedRaidbosses = reincludedRaidbosses.concat(buffer).map(String)
+            lastgyms = false
+            updateMap()
+            Store.set('remember_exclude_raidbosses', excludedRaidbosses)
+        })
+        $excludeRaideggs.select2({
+            placeholder: i8ln('Select Raidegg'),
+            data: raideggsList,
+            templateResult: formatState,
+            multiple: true,
+            maximumSelectionSize: 1
+        })
+        $excludeRaideggs.on('change', function (e) {
+            buffer = excludedRaideggs
+            excludedRaideggs = $excludeRaideggs.val().split(',').map(Number).sort(function (a, b) {
+                return parseInt(a) - parseInt(b)
+            })
+            buffer = buffer.filter(function (e) {
+                return this.indexOf(e) < 0
+            }, excludedRaideggs)
+            reincludedRaideggs = reincludedRaideggs.concat(buffer).map(String)
+            lastgyms = false
+            updateMap()
+            Store.set('remember_exclude_raideggs', excludedRaideggs)
+        })
         $selectExclude.on('change', function (e) {
             buffer = excludedPokemon
             excludedPokemon = $selectExclude.val().split(',').map(Number).sort(function (a, b) {
@@ -7371,6 +7347,8 @@ $(function () {
         $textMinLevel.val(Store.get('remember_text_min_level')).trigger('change')
         $raidNotify.val(Store.get('remember_raid_notify')).trigger('change')
         $questsExcludePokemon.val(Store.get('remember_quests_exclude_pokemon')).trigger('change')
+        $excludeRaidbosses.val(Store.get('remember_exclude_raidbosses')).trigger('change')
+		$excludeRaideggs.val(Store.get('remember_exclude_raideggs')).trigger('change')
 
         if (isTouchDevice() && isMobileDevice()) {
             $('.select2-search input').prop('readonly', true)
@@ -7378,7 +7356,7 @@ $(function () {
         $('#tabs').tabs()
         $('#quests-tabs').tabs()
         $('#grunt-tabs').tabs()
-        $('#raidboss-tabs').tabs()
+		$('#raidboss-tabs').tabs()
         if (manualRaids) {
             $('.global-raid-modal').html(generateRaidModal())
         }
@@ -7438,12 +7416,12 @@ $(function () {
         parent.find('.raidboss-list .raidboss-icon-sprite').removeClass('active')
         parent.find('input').val('').trigger('change')
     })
-
+	
     $('.select-all-raideggs').on('click', function (e) {
         e.preventDefault()
         var parent = $(this).parent()
         parent.find('.raideggs-list .raideggs-icon-sprite').addClass('active')
-        parent.find('input').val(Array.from(Array(5 + 1).keys()).slice(1).join(',')).trigger('change')
+        parent.find('input').val(Array.from(Array(numberOfPokemon + 1).keys()).slice(1).join(',')).trigger('change')
     })
 
     $('.hide-all-raideggs').on('click', function (e) {
@@ -7452,7 +7430,7 @@ $(function () {
         parent.find('.raideggs-list .raideggs-icon-sprite').removeClass('active')
         parent.find('input').val('').trigger('change')
     })
-
+	
     $('.area-go-to').on('click', function (e) {
         e.preventDefault()
         var lat = $(this).data('lat')
@@ -7540,17 +7518,14 @@ $(function () {
         var wrapper = $('#raids-filter-wrapper')
         var gymSidebarWrapper = $('#gym-sidebar-wrapper')
         var gymRaidsFilterWrapper = $('#gyms-raid-filter-wrapper')
-        var raidsWrapper = $('#raidsfilter-wrapper')
         if (this.checked) {
             lastgyms = false
             wrapper.show(options)
-            raidsWrapper.show(options)
             gymSidebarWrapper.show(options)
             gymRaidsFilterWrapper.show(options)
         } else {
             lastgyms = false
             wrapper.hide(options)
-            raidsWrapper.hide(options)
             if (!Store.get('showGyms')) {
                 gymSidebarWrapper.hide(options)
                 gymRaidsFilterWrapper.hide(options)
@@ -7558,6 +7533,38 @@ $(function () {
         }
         buildSwitchChangeListener(mapData, ['gyms'], 'showRaids').bind(this)()
     })
+    if (Store.get('showGyms') === true || Store.get('showRaids') === true) {
+        $('#gyms-raid-filter-wrapper').toggle(true)
+    }
+    $('#gyms-switch').change(function () {
+        var options = {
+            'duration': 500
+        }
+        var wrapper = $('#gyms-filter-wrapper')
+        var gymSidebarWrapper = $('#gym-sidebar-wrapper')
+        var gymRaidsFilterWrapper = $('#gyms-raid-filter-wrapper')
+		var raidsWrapper = $('#raidsfilter-wrapper')
+        if (Store.get('showCoveredPokestopCells') || Store.get('showGymCellCalculations')) {
+            updateS2Overlay()
+        }
+        if (this.checked) {
+            lastgyms = false
+            wrapper.show(options)
+			raidsWrapper.show(options)
+            gymSidebarWrapper.show(options)
+            gymRaidsFilterWrapper.show(options)
+        } else {
+            lastgyms = false
+            wrapper.hide(options)
+			raidsWrapper.hide(options)
+            if (!Store.get('showRaids')) {
+                gymSidebarWrapper.hide(options)
+                gymRaidsFilterWrapper.hide(options)
+            }
+        }
+        buildSwitchChangeListener(mapData, ['gyms'], 'showGyms').bind(this)()
+    })
+	
     $('#raid-level-filter-switch').change(function () {
         var options = {
             'duration': 500
@@ -7588,35 +7595,7 @@ $(function () {
             wrapperRaidboss.hide(options)
         }
     })
-
-    if (Store.get('showGyms') === true || Store.get('showRaids') === true) {
-        $('#gyms-raid-filter-wrapper').toggle(true)
-    }
-    $('#gyms-switch').change(function () {
-        var options = {
-            'duration': 500
-        }
-        var wrapper = $('#gyms-filter-wrapper')
-        var gymSidebarWrapper = $('#gym-sidebar-wrapper')
-        var gymRaidsFilterWrapper = $('#gyms-raid-filter-wrapper')
-        if (Store.get('showCoveredPokestopCells') || Store.get('showGymCellCalculations')) {
-            updateS2Overlay()
-        }
-        if (this.checked) {
-            lastgyms = false
-            wrapper.show(options)
-            gymSidebarWrapper.show(options)
-            gymRaidsFilterWrapper.show(options)
-        } else {
-            lastgyms = false
-            wrapper.hide(options)
-            if (!Store.get('showRaids')) {
-                gymSidebarWrapper.hide(options)
-                gymRaidsFilterWrapper.hide(options)
-            }
-        }
-        buildSwitchChangeListener(mapData, ['gyms'], 'showGyms').bind(this)()
-    })
+	
     $('#nests-switch').change(function () {
         var options = {
             'duration': 500

@@ -209,22 +209,22 @@ if (!$noGyms || !$noRaids) {
                 $d["gyms"] = $scanner->get_gyms($reeids, $rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, $timestamp);
             }
         }
-            if (!empty($_POST['rbreids'])) {
-                $rbreids = !empty($_POST['rbreids']) ? array_unique(explode(",", $_POST['rbreids'])) : array();
-                $rbreidsDiff = array_diff($rbreids, $rbeids);
-                if (count($rbreidsDiff)) {
-                    $d["gyms"] = array_merge($d["gyms"], $scanner->get_gyms($rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng));
-                }
-                $d["rbreids"] = $rbreids;
+        if (!empty($_POST['rbreids'])) {
+            $rbreids = !empty($_POST['rbreids']) ? array_unique(explode(",", $_POST['rbreids'])) : array();
+            $rbreidsDiff = array_diff($rbreids, $rbeids);
+            if (count($rbreidsDiff)) {
+                $d["gyms"] = array_merge($d["gyms"], $scanner->get_gyms($rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng));
             }
-            if (!empty($_POST['rereids'])) {
-                $rereids = !empty($_POST['rereids']) ? array_unique(explode(",", $_POST['rereids'])) : array();
-                $rereidsDiff = array_diff($rereids, $reeids);
-                if (count($rereidsDiff)) {
-                    $d["gyms"] = array_merge($d["gyms"], $scanner->get_gyms($reeids, $rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng));
-                }
-                $d["rereids"] = $rereids;
+            $d["rbreids"] = $rbreids;
+        }
+        if (!empty($_POST['rereids'])) {
+            $rereids = !empty($_POST['rereids']) ? array_unique(explode(",", $_POST['rereids'])) : array();
+            $rereidsDiff = array_diff($rereids, $reeids);
+            if (count($rereidsDiff)) {
+                $d["gyms"] = array_merge($d["gyms"], $scanner->get_gyms($reeids, $rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng));
             }
+            $d["rereids"] = $rereids;
+        }
     }
 }
 $debug['4_after_gyms'] = microtime(true) - $timing['start'];

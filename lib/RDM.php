@@ -557,7 +557,7 @@ class RDM extends Scanner
                 $eggsSQL .= "raid_level IS NOT NULL";
             }
             $conds[] = "" . $raidsSQL . "";
-            $conds[] = "" . $eggsSQL . "";
+			$conds[] = "" . $eggsSQL . "";
         }
         if ($exEligible === "true") {
             $conds[] = "(ex_raid_eligible IS NOT NULL AND ex_raid_eligible != '0')";

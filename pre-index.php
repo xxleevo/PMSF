@@ -1035,7 +1035,6 @@ $getList = new \Scanner\RDM();
 										</div>
 									</div>
 								</div>
-
 							</div>
 						<?php
 						} ?>
@@ -1047,7 +1046,7 @@ $getList = new \Scanner\RDM();
                     if ( ! $noGymSidebar && ( ! $noGyms || ! $noRaids ) ) {
                         echo '
 						<div id="gym-sidebar-wrapper" class="form-control switch-container">
-							<hr style="margin:15px;" />
+						<hr style="margin:15px;" />
 							<font size="3">' . i8ln( 'Use Gym Sidebar' ) . '</font>
 							<div class="onoffswitch">
 								<input id="gym-sidebar-switch" type="checkbox" name="gym-sidebar-switch"class="onoffswitch-checkbox" checked>

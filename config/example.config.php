@@ -177,14 +177,13 @@ $noWhatsappRaidMoves = false;                                        // Allow Mo
 $denyRaidLevelsBelow = 0;											// Deny raid levels beeing shown under this value (0-6)(5 = only show level 5 raids) - 0 to disable
 																	// In addition you may want to adjust $minRaidLevel and $maxRaidLevel;
 																	// To prevent displaying gyms with denied raids on it.		
-
 $noRaidfilterList = false;                                          // Allows to filter by raidboss id
 $raidbossFilterlist = 'false';                                      // default value for users
 $noRaidfilterListNumbers = false;                                   // Enable/Disable Numbers on the filter tab
 $hideRaidPokemon = '[]';                                            // hidden bosses by default
 $excludeRaidPokemon = [];                                           // exclude bosses from the list (for users not changeable)
 $hideRaidEggs = '[]'; 												// hidden eggs by default
-$excludeRaidEggs = [];												// exclude eggs from the list (for users not changeable)
+$excludeRaidEggs = [];												// exclude eggs from the list (for users not changeable)												
 /*---------Pokestop Settings---------*/
 $noPokestops = false;                                               // Enables/Disables Pokestops & the whole Pokestop menu
 $enablePokestops = 'false';                                         // default value for users
