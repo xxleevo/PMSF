@@ -3540,7 +3540,7 @@ function loadRawData() {
             'greids': String(reincludedGrunts),
             'rbeids': String(excludedRaidbosses),
             'rbreids': String(reincludedRaidbosses),
-			'reeids': String(excludedRaideggs),
+            'reeids': String(excludedRaideggs),
             'rereids': String(reincludedRaideggs),
             'token': token,
             'encId': encounterId
@@ -5634,7 +5634,7 @@ function updateMap() {
         qireids = result.qireids
         greids = result.greids
         rbreids = result.rbreids
-		rereids = result.rereids
+        rereids = result.rereids
         if (reids instanceof Array) {
             reincludedPokemon = reids.filter(function (e) {
                 return this.indexOf(e) < 0
@@ -6546,7 +6546,7 @@ function loadDefaultImages() {
     var eqi = Store.get('remember_quests_exclude_item')
     var eg = Store.get('remember_exclude_grunts')
     var erb = Store.get('remember_exclude_raidbosses')
-	var ere = Store.get('remember_exclude_raideggs')
+    var ere = Store.get('remember_exclude_raideggs')
     $('label[for="exclude-pokemon"] .pokemon-icon-sprite').each(function () {
         if (ep.indexOf($(this).data('value')) !== -1) {
             $(this).addClass('active')
@@ -6999,8 +6999,8 @@ $(function () {
     })
     $selectIconStyle.val(Store.get('icons')).trigger('change')
     gruntSpritesFilter()
-	raidbossSpritesFilter()
-	raideggsSpritesFilter()
+    raidbossSpritesFilter()
+    raideggsSpritesFilter()
 })
 
 $(function () {
@@ -7058,8 +7058,8 @@ $(function () {
     $questsExcludePokemon = $('#exclude-quests-pokemon')
     $questsExcludeItem = $('#exclude-quests-item')
     $excludeGrunts = $('#exclude-grunts')
-	$excludeRaidbosses = $('#exclude-raidbosses')
-	$excludeRaideggs = $('#exclude-raideggs')
+    $excludeRaidbosses = $('#exclude-raidbosses')
+    $excludeRaideggs = $('#exclude-raideggs')
 
     $.getJSON('static/dist/data/grunttype.min.json').done(function (data) {
         $.each(data, function (key, value) {
@@ -7126,22 +7126,22 @@ $(function () {
 
     $.getJSON('static/dist/data/pokemon.min.json').done(function (data) {
         // Raideggs
-		var eggLevel = 1;
-		while(eggLevel <= 5){
+        var eggLevel = 1
+        while (eggLevel <= 5) {
             raideggsList.push({
                 level: eggLevel
             })
-			eggLevel ++
-		}
+            eggLevel++
+        }
         $.each(data, function (key, value) {
             if (key > numberOfPokemon) {
                 return false
             }
             var _types = []
-			raidbossList.push({
-				id: key,
-				name: i8ln(value['name'])
-			})
+            raidbossList.push({
+                id: key,
+                name: i8ln(value['name'])
+            })
             pokeList.push({
                 id: key,
                 text: i8ln(value['name']) + ' - #' + key,
@@ -7195,7 +7195,6 @@ $(function () {
             maximumSelectionSize: 1
         })
         // setup list change behavior now that we have the list to work from
-		
         $excludeRaidbosses.select2({
             placeholder: i8ln('Select Raidboss'),
             data: raidbossList,
@@ -7348,7 +7347,7 @@ $(function () {
         $raidNotify.val(Store.get('remember_raid_notify')).trigger('change')
         $questsExcludePokemon.val(Store.get('remember_quests_exclude_pokemon')).trigger('change')
         $excludeRaidbosses.val(Store.get('remember_exclude_raidbosses')).trigger('change')
-		$excludeRaideggs.val(Store.get('remember_exclude_raideggs')).trigger('change')
+        $excludeRaideggs.val(Store.get('remember_exclude_raideggs')).trigger('change')
 
         if (isTouchDevice() && isMobileDevice()) {
             $('.select2-search input').prop('readonly', true)
@@ -7356,7 +7355,7 @@ $(function () {
         $('#tabs').tabs()
         $('#quests-tabs').tabs()
         $('#grunt-tabs').tabs()
-		$('#raidboss-tabs').tabs()
+        $('#raidboss-tabs').tabs()
         if (manualRaids) {
             $('.global-raid-modal').html(generateRaidModal())
         }
@@ -7416,7 +7415,7 @@ $(function () {
         parent.find('.raidboss-list .raidboss-icon-sprite').removeClass('active')
         parent.find('input').val('').trigger('change')
     })
-	
+
     $('.select-all-raideggs').on('click', function (e) {
         e.preventDefault()
         var parent = $(this).parent()
@@ -7430,7 +7429,7 @@ $(function () {
         parent.find('.raideggs-list .raideggs-icon-sprite').removeClass('active')
         parent.find('input').val('').trigger('change')
     })
-	
+
     $('.area-go-to').on('click', function (e) {
         e.preventDefault()
         var lat = $(this).data('lat')
@@ -7543,20 +7542,20 @@ $(function () {
         var wrapper = $('#gyms-filter-wrapper')
         var gymSidebarWrapper = $('#gym-sidebar-wrapper')
         var gymRaidsFilterWrapper = $('#gyms-raid-filter-wrapper')
-		var raidsWrapper = $('#raidsfilter-wrapper')
+        var raidsWrapper = $('#raidsfilter-wrapper')
         if (Store.get('showCoveredPokestopCells') || Store.get('showGymCellCalculations')) {
             updateS2Overlay()
         }
         if (this.checked) {
             lastgyms = false
             wrapper.show(options)
-			raidsWrapper.show(options)
+            raidsWrapper.show(options)
             gymSidebarWrapper.show(options)
             gymRaidsFilterWrapper.show(options)
         } else {
             lastgyms = false
             wrapper.hide(options)
-			raidsWrapper.hide(options)
+            raidsWrapper.hide(options)
             if (!Store.get('showRaids')) {
                 gymSidebarWrapper.hide(options)
                 gymRaidsFilterWrapper.hide(options)
@@ -7564,7 +7563,7 @@ $(function () {
         }
         buildSwitchChangeListener(mapData, ['gyms'], 'showGyms').bind(this)()
     })
-	
+
     $('#raid-level-filter-switch').change(function () {
         var options = {
             'duration': 500
@@ -7595,7 +7594,7 @@ $(function () {
             wrapperRaidboss.hide(options)
         }
     })
-	
+
     $('#nests-switch').change(function () {
         var options = {
             'duration': 500
