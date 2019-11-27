@@ -45,12 +45,6 @@ class RDM extends Scanner
             $tmpSQL .= ' OR (pokemon_id = 129 AND weight' . $float . ' > 13.13)';
             $eids[] = "129";
         }
-        global $noDittoDetection, $possibleDittos;
-        if (!$noDittoDetection && ($key = array_search("132", $eids)) === false) {
-            $pDitto = implode(",", $possibleDittos);
-            $tmpSQL .= " OR (weather > 0 AND (level < 6 OR atk_iv < 4 OR def_iv < 4 OR sta_iv < 4) and pokemon_id in (" . $pDitto . "))";
-            $eids[] = "132";
-        }
         if (count($eids)) {
             $pkmn_in = '';
             $i = 1;
@@ -114,12 +108,6 @@ class RDM extends Scanner
             }
             if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $ids)) !== false) {
                 $tmpSQL .= ' OR (pokemon_id = 129 AND weight' . $float . ' > 13.13)';
-                unset($ids[$key]);
-            }
-            global $noDittoDetection, $possibleDittos;
-            if (!$noDittoDetection && ($key = array_search("132", $ids)) !== false) {
-                $pDitto = implode(",", $possibleDittos);
-                $tmpSQL .= " OR (weather > 0 AND (level < 6 OR atk_iv < 4 OR def_iv < 4 OR sta_iv < 4) and pokemon_id in (" . $pDitto . "))";
                 unset($ids[$key]);
             }
             $pkmn_in = '';
@@ -224,26 +212,6 @@ class RDM extends Scanner
                     $types[$k]['type'] = i8ln($v['type']);
                 }
                 $pokemon["pokemon_types"] = $types;
-            }
-			
-            // Ditto detection
-            global $noDittoDetection, $possibleDittos;
-            if (!$noDittoDetection) {
-                if (in_array($pokemon["pokemon_id"], $possibleDittos) && $pokemon["weather_boosted_condition"] > 0 && $pokemon["level"] !== null) {
-                    if ($pokemon["level"] < 6 || $pokemon["individual_attack"] < 4 || $pokemon["individual_defense"] < 4 || $pokemon["individual_stamina"] < 4) {
-                        if ($pokemon["weather_boosted_condition"] != 3) {
-                            $pokemon["weather_boosted_condition"] = 0;
-                        }
-                        $pokemon["pokemon_id"] = 132;
-                        $pokemon["form"] = 0;
-                        $pokemon["pokemon_name"] = $pokemon["pokemon_name"] . ' (' . i8ln('Ditto') . ')';
-                        $pokemon["move_1"] = null;
-                        $pokemon["move_2"] = null;
-                        $pokemon["height"] = null;
-                        $pokemon["weight"] = null;
-                        $pokemon["gender"] = 3;
-                    }
-                }
             }
 
             $data[] = $pokemon;
