@@ -171,6 +171,10 @@
     "protoname": "ITEM_GEN4_EVOLUTION_STONE",
     "name": "Sinnohstein"
   },
+  "1107": {
+    "protoname": "ITEM_GEN5_EVOLUTION_STONE",
+    "name": "Unova Stein"
+  },
   "1201": {
     "protoname": "ITEM_MOVE_REROLL_FAST_ATTACK",
     "name": "Sofort TM"
