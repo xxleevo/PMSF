@@ -11,7 +11,7 @@ class RDM extends Scanner
         $params = array();
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
 		
-	    $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weather AS weather_boosted_condition, costume, expire_timestamp_verified AS is_verified_despawn";
+	    $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weather AS weather_boosted_condition, costume, expire_timestamp_verified AS is_verified_despawn, display_pokemon_id";
 
         global $noHighLevelData;
         if (!$noHighLevelData) {
@@ -87,7 +87,7 @@ class RDM extends Scanner
         $params = array();
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
 
-        $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weather AS weather_boosted_condition, costume, expire_timestamp_verified AS is_verified_despawn";
+        $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weather AS weather_boosted_condition, costume, expire_timestamp_verified AS is_verified_despawn, display_pokemon_id";
 
         global $noHighLevelData;
         if (!$noHighLevelData) {
@@ -188,6 +188,9 @@ class RDM extends Scanner
             $pokemon["pokemon_id"] = intval($pokemon["pokemon_id"]);
             $pokemon["is_verified_despawn"] = intval($pokemon["is_verified_despawn"]);
             $pokemon["pokemon_name"] = i8ln($this->data[$pokemon["pokemon_id"]]['name']);
+			if (isset($pokemon["display_pokemon_id"]) && $pokemon["display_pokemon_id"] > 0) {
+				$pokemon["display_pokemon_name"] = i8ln($this->data[$pokemon["display_pokemon_id"]]['name']);
+			}
             if (isset($pokemon["form"]) && $pokemon["form"] > 0) {
                 $forms = $this->data[$pokemon["pokemon_id"]]["forms"];
                 foreach ($forms as $f => $v) {
