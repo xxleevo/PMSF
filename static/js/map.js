@@ -8,7 +8,6 @@ var expireTimestamp
 var $selectExclude
 var $selectExcludeMinIV
 var $selectPokemonNotify
-var $selectRarityNotify
 var $textPerfectionNotify
 var $textLevelNotify
 var $textMinIV
@@ -60,7 +59,6 @@ var timestamp
 var excludedPokemon = []
 var excludedMinIV = []
 var notifiedPokemon = []
-var notifiedRarity = []
 var questsExcludedPokemon = []
 var questsExcludedItem = []
 var excludedGrunts = []
@@ -946,7 +944,6 @@ function isTemporaryHidden(pokemonId) {
 
 function pokemonLabel(item) {
     var name = item['pokemon_name']
-    var rarityDisplay = item['pokemon_rarity'] ? '(' + item['pokemon_rarity'] + ')' : ''
     var types = item['pokemon_types']
     var typesDisplay = ''
     var encounterId = item['encounter_id']
@@ -1083,9 +1080,6 @@ function pokemonLabel(item) {
     } else {
         contentstring +=
             '<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + costumeString + '.png"/></center>'
-    }
-    if (noRarityDisplay === false) {
-        contentstring += '<span> ' + rarityDisplay + '</span>'
     }
     if (pokemonReportTime === true) {
         contentstring += '<div style="background:rgba(255,255,255,0.8);border-radius:12px;box-shadow: inset 0 0 4px #000;padding: 5px;margin: 0px -10px -5px -10px;">'
@@ -2232,7 +2226,7 @@ function customizePokemonMarker(marker, item, skipNotification) {
     }
     // Label customization #01
     marker.bindPopup(pokemonLabel(item), {className: 'pokeLabel', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 300, minWidth: 210})
-    if (notifiedPokemon.indexOf(item['pokemon_id']) > -1 || notifiedRarity.indexOf(item['pokemon_rarity']) > -1) {
+    if (notifiedPokemon.indexOf(item['pokemon_id']) > -1) {
         if (!skipNotification) {
             checkAndCreateSound(item['pokemon_id'])
             sendNotification(getNotifyText(item).fav_title, getNotifyText(item).fav_text, iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + '.png', item['latitude'], item['longitude'])
@@ -7066,7 +7060,6 @@ $(function () {
     $selectExclude = $('#exclude-pokemon')
     $selectExcludeMinIV = $('#exclude-min-iv')
     $selectPokemonNotify = $('#notify-pokemon')
-    $selectRarityNotify = $('#notify-rarity')
     $textPerfectionNotify = $('#notify-perfection')
     $textMinIV = $('#min-iv')
     $textMinLevel = $('#min-level')
@@ -7169,7 +7162,6 @@ $(function () {
                 cp: value['cp'] !== undefined ? value['cp'] : 1
             })
             value['name'] = i8ln(value['name'])
-            value['rarity'] = i8ln(value['rarity'])
             $.each(value['types'], function (key, pokemonType) {
                 _types.push({
                     'type': i8ln(pokemonType['type']),
@@ -7194,12 +7186,6 @@ $(function () {
             templateResult: formatState,
             multiple: true,
             maximumSelectionSize: 1
-        })
-
-        $selectRarityNotify.select2({
-            placeholder: i8ln('Select Rarity'),
-            data: [i8ln('Common'), i8ln('Uncommon'), i8ln('Rare'), i8ln('Very Rare'), i8ln('Ultra Rare')],
-            templateResult: formatState
         })
         $selectExcludeMinIV.select2({
             placeholder: i8ln('Select Pokémon'),
@@ -7316,10 +7302,6 @@ $(function () {
             })
             Store.set('remember_select_notify', notifiedPokemon)
         })
-        $selectRarityNotify.on('change', function (e) {
-            notifiedRarity = $selectRarityNotify.val().map(String)
-            Store.set('remember_select_rarity_notify', notifiedRarity)
-        })
         $textPerfectionNotify.on('change', function (e) {
             notifiedMinPerfection = parseInt($textPerfectionNotify.val(), 10)
             if (isNaN(notifiedMinPerfection) || notifiedMinPerfection <= 0) {
@@ -7358,7 +7340,6 @@ $(function () {
         $selectExclude.val(Store.get('remember_select_exclude')).trigger('change')
         $selectExcludeMinIV.val(Store.get('remember_select_exclude_min_iv')).trigger('change')
         $selectPokemonNotify.val(Store.get('remember_select_notify')).trigger('change')
-        $selectRarityNotify.val(Store.get('remember_select_rarity_notify')).trigger('change')
         $textPerfectionNotify.val(Store.get('remember_text_perfection_notify')).trigger('change')
         $textLevelNotify.val(Store.get('remember_text_level_notify')).trigger('change')
         $textMinIV.val(Store.get('remember_text_min_iv')).trigger('change')

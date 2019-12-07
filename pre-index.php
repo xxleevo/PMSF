@@ -1478,7 +1478,7 @@ $getList = new \Scanner\RDM();
                 }
                 echo '</div>';
             }
-            if ( ! $noNotifyPokemon || ! $noNotifyRarity || ! $noNotifyIv || ! $noNotifyLevel || ! $noNotifySound || ! $noNotifyRaid || ! $noNotifyBounce || ! $noNotifyNotification ) {
+            if ( ! $noNotifyPokemon || ! $noNotifyIv || ! $noNotifyLevel || ! $noNotifySound || ! $noNotifyRaid || ! $noNotifyBounce || ! $noNotifyNotification ) {
                 echo '<h3 style="font-weight: bold"><i class="fa fa-star fa-fw"></i>&nbsp;' . i8ln("Favorites") . '</h3>
 				<div>';
             }
@@ -1492,16 +1492,6 @@ $getList = new \Scanner\RDM();
 						echo '</div>
                     </label>
                 </div>';
-            }
-            if ( ! $noNotifyRarity ) {
-                echo '<div class="form-control">
-					<label for="notify-rarity">
-						<h3>' . i8ln( "Notify of Rarity" ) . '</h3>
-						<div style="max-height:165px;overflow-y:auto">
-							<select id="notify-rarity" multiple="multiple"></select>
-						</div>
-					</label>
-				</div>';
             }
             if ( ! $noNotifyIv ) {
                 echo '<div class="form-control">
@@ -1580,7 +1570,7 @@ $getList = new \Scanner\RDM();
 					</div>
 				</div>';
             }
-            if ( ! $noNotifyPokemon || ! $noNotifyRarity || ! $noNotifyIv || ! $noNotifyLevel || ! $noNotifySound || ! $noNotifyRaid || ! $noNotifyBounce || ! $noNotifyNotification ) {
+            if ( ! $noNotifyPokemon || ! $noNotifyIv || ! $noNotifyLevel || ! $noNotifySound || ! $noNotifyRaid || ! $noNotifyBounce || ! $noNotifyNotification ) {
                 echo '</div>';
             }
 
@@ -2356,7 +2346,6 @@ $getList = new \Scanner\RDM();
     var minIV = <?php echo $noMinIV ? '""' : $minIV ?>;
     var minLevel = <?php echo $noMinLevel ? '""' : $minLevel ?>;
     var notifyPokemon = <?php echo $noNotifyPokemon ? '[]' : $notifyPokemon ?>;
-    var notifyRarity = <?php echo $noNotifyRarity ? '[]' : $notifyRarity ?>;
     var notifyIv = <?php echo $noNotifyIv ? '""' : $notifyIv ?>;
     var notifyLevel = <?php echo $noNotifyLevel ? '""' : $notifyLevel ?>;
     var notifyRaid = <?php echo $noNotifyRaid ? 0 : $notifyRaid ?>;
@@ -2462,7 +2451,6 @@ $getList = new \Scanner\RDM();
     var noConvertPortal = <?php echo $noConvertPortal === true ? 'true' : 'false' ?>;
     var markPortalsAsNew = <?php echo $markPortalsAsNew ?>;
     var copyrightSafe = <?php echo $copyrightSafe === true ? 'true' : 'false' ?>;
-    var noRarityDisplay = <?php echo $noRarityDisplay === true ? 'true' : 'false' ?>;
     var noWeatherIcons = <?php echo $noWeatherIcons === true ? 'true' : 'false' ?>;
     var enableWeatherIcons = <?php echo $noWeatherIcons ? 'false' : $enableWeatherIcons ?>;
     var noGymScannedText = <?php echo $noGymScannedText === true ? 'true' : 'false' ?>;

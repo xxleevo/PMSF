@@ -110,7 +110,6 @@ $hidePokemon = '[10, 13, 16, 19, 21, 29, 32, 41, 46, 48, 50, 52, 56, 74, 77, 96,
                   161, 163, 167, 177, 183, 191, 194, 168]';         // [] for empty
 
 $hidePokemonCoords = true;											// Against Spoofer: Hide the coordinates, put "Navigation" instead of coords
-$noRarityDisplay = true;											// Enables/Disables the rarity Display (not stable)
 $noPokemonNumbers = false;                                          // For the Filters, hide or show Pokemon numbers 
 
 $noWeatherIcons = false;											// If set to false, this option let users allow to enable/disable weather icons for pokemon
@@ -231,8 +230,6 @@ $hideQuestsPokemon = '[]';											// Pokemon ids will default be hidden in th
 /*---------Notification Settings---------*/
 $noNotifyPokemon = false;											// Enables/Disables notifications by Pokemon ID
 $notifyPokemon = '[201]';                                           // default value for users - "" = empty
-$noNotifyRarity = true;												// Enables/Disables notifications by Pokemon rarity
-$notifyRarity = '[]';												// default value for users; Possible: "Common", "Uncommon", "Rare", "Very Rare", "Ultra Rare"
 $noNotifyIv = false;												// Enables/Disables notifications by Pokemon IV
 $notifyIv = '""';                                                   // default value for users - "" = empty
 $noNotifyLevel = false;												// Enables/Disables notifications by Pokemon LVL

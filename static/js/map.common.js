@@ -74,11 +74,6 @@ var StoreOptions = {
             default: notifyPokemon,
             type: StoreTypes.JSON
         },
-    'remember_select_rarity_notify':
-        {
-            default: notifyRarity, // Common, Uncommon, Rare, Very Rare, Ultra Rare
-            type: StoreTypes.JSON
-        },
     'remember_text_perfection_notify':
         {
             default: notifyIv,
@@ -604,10 +599,8 @@ function isNotifiedPokemon(item) {
     var notifiedMinPerfection = Store.get('remember_text_perfection_notify')
     var notifiedMinLevel = Store.get('remember_text_level_notify')
     var notifiedPokemon = Store.get('remember_select_notify')
-    var notifiedRarity = Store.get('remember_select_rarity_notify')
 
-    if ((iv >= notifiedMinPerfection && notifiedMinPerfection > 0) || notifiedPokemon.indexOf(item['pokemon_id']) > -1 ||
-        notifiedRarity.indexOf(item['pokemon_rarity']) > -1 || (notifiedMinLevel > 0 && level >= notifiedMinLevel)) {
+    if ((iv >= notifiedMinPerfection && notifiedMinPerfection > 0) || notifiedPokemon.indexOf(item['pokemon_id']) > -1 || (notifiedMinLevel > 0 && level >= notifiedMinLevel)) {
         return true
     }
 

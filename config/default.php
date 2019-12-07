@@ -138,7 +138,6 @@ $noExcludeMinIV = true;                                        // true/false
 $noMinIV = true;                                               // true/false
 $noMinLevel = true;                                            // true/false
 $noHighLevelData = true;                                       // true/false
-$noRarityDisplay = false;                                      // true/false
 $noWeatherIcons = false;
 $enableWeatherIcons = 'false';                                 // true/false
 
@@ -156,7 +155,6 @@ $battleStatus = 'false';
 
 /* Notification Settings */
 $noNotifyPokemon = false;                                       // true/false
-$noNotifyRarity = false;                                        // true/false
 $noNotifyIv = false;                                            // true/false
 $noNotifyLevel = false;                                         // true/false
 $noNotifyRaid = false;                                          // true/false
@@ -291,7 +289,6 @@ $enableSpawnArea = 'false';                                         // true/fals
 /* Notification Settings */
 
 $notifyPokemon = '[]';                                           // [] for empty
-$notifyRarity = '[]';                                               // "Common", "Uncommon", "Rare", "Very Rare", "Ultra Rare"
 $notifyIv = '""';                                                   // "" for empty or a number
 $notifyLevel = '""';                                                // "" for empty or a number
 $notifyRaid = 5;                                                    // O to disable
