@@ -1131,7 +1131,7 @@ function gymLabel(item) {
     var outdated = ''
     if (((lastScanned / 1000) < ((Date.now() / 1000) - 14400)) && !noOutdatedGyms) {
         teamName = 'Harmony'
-        outdated = '<b>Letzter Scan älter als 4 Std !</b>'
+        outdated = '<b>' + i8ln("Last scan older than 4 hours !") + '</b>'
     }
     var teamLabel = ''
     var teamImage = ''
@@ -1142,7 +1142,7 @@ function gymLabel(item) {
         teamImage = '<img width="200px" style="padding: 5px;" src="static/forts/label/' + teamName + '_normal.png">'
         freeSlotsText = '<div><b>' + freeSlots + ' ' + i8ln('Free Slots') + '</b></div>'
     } else {
-        teamLabel = 'Arena<br>'
+        teamLabel = i8ln("Gym") + '<br>'
         teamImage = '<img height="70px" style="padding: 5px;" src="static/forts/Harmony_large.png">'
         if (item['raid_level'] < denyRaidLevelsBelow) {
             raidIcon = ''
@@ -1259,7 +1259,7 @@ function gymLabel(item) {
     if ((item['park'] !== '0' && item['park'] !== 'None' && item['park'] !== undefined && item['park']) && (noParkInfo === false)) {
         if (item['park'] === 1) {
             // RM only stores boolean, so just call it "Park Gym"
-            park = '<div>' + i8ln('park gym(ex eligible)') + '</div>'
+            park = '<div>' + i8ln('Park Gym (Ex Eligible)') + '</div>'
         } else {
             park = '<div>' + i8ln('Park') + ': ' + item['park'] + '</div>'
         }
@@ -1279,15 +1279,15 @@ function gymLabel(item) {
     }
     var maplinkText = ''
     if (!noMaplink) {
-        maplinkText = '- <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">Maplink</a>'
+        maplinkText = '- <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">' + i8ln("Maplink") + '</a>'
     }
     var battleStr = ''
     if (!noBattleStatus && isInBattle === 1 && ((lastScanned / 1000) > ((Date.now() / 1000) - 900))) {
-        battleStr = '<div>Arena wird bekämpft!</div>'
+        battleStr = '<div>' + i8ln("Gym currently under attack!") + '</div>'
     }
     var gymCp = ''
     if (item['total_cp'] != null && !noGymTeamInfos) {
-        gymCp = '<div>' + i8ln('Gym CP') + ' : <b>' + item['total_cp'] + '</b></div>'
+        gymCp = '<div>' + i8ln('Total Gym CP') + ' : <b>' + item['total_cp'] + '</b></div>'
     }
     var nameStr = (name ? '<div><b>' + name + '</b></div>' : '')
     var str
@@ -1299,7 +1299,7 @@ function gymLabel(item) {
     var firstSeen = ''
     if (!noGymFirstseen && item['first_seen'] !== null && item['first_seen'] !== 0) {
         firstSeen = '<div><center>' +
-            i8ln('gym first seen') + ': ' + getDateStrFull(item['first_seen']) +
+            i8ln('Gym First Seen') + ': ' + getDateStrFull(item['first_seen']) +
             '</center></div>'
     }
     if (teamId === 0 || (((lastScanned / 1000) > ((Date.now() / 1000) - 14400)) || noOutdatedGyms)) {
@@ -1317,7 +1317,7 @@ function gymLabel(item) {
             battleStr +
             hr +
             '<div>' +
-            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
+            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + i8ln("Open Route") + '</a>' + maplinkText +
             '</div>' +
             '<div>' + lastModifiedText + '</div>' +
             '<div>' + lastScannedStr + '</div>' +
@@ -1847,7 +1847,7 @@ function pokestopLabel(item) {
     }
     var maplinkText = ''
     if (!noMaplink) {
-        maplinkText = '- <a href="./?lat=' + item['latitude'] + '&lon=' + item['longitude'] + '&zoom=16">Maplink</a>'
+        maplinkText = '- <a href="./?lat=' + item['latitude'] + '&lon=' + item['longitude'] + '&zoom=16">' + i8ln("Maplink") + '</a>'
     }
     var invasionImage = ''
     var invasionStr = ''
@@ -1890,7 +1890,7 @@ function pokestopLabel(item) {
     var firstSeen = ''
     if (!noPokestopFirstseen && item['first_seen'] !== null && item['first_seen'] !== 0) {
         firstSeen = '<div><center>' +
-            i8ln('stop first seen') + ': ' + getDateStrFull(item['first_seen']) +
+            i8ln('Stop First Seen') + ': ' + getDateStrFull(item['first_seen']) +
             '</center></div>'
     }
     // Starting the Pokestop Label
@@ -2962,7 +2962,7 @@ function nestLabel(item) {
         str += '<center><div>' + i8ln('Add Nest') + '<i class="fa fa-binoculars submit-nest" onclick="openNestModal(event);" data-id="' + item['nest_id'] + '"></i></div></center>'
     }
     str += '<div>' +
-        '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">Maplink</a></center>' +
+        '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">' + i8ln("Maplink") + '</a></center>' +
         '</div>'
 
     if ((!noWhatsappLink) && (item.pokemon_id > 0)) {
@@ -6180,14 +6180,14 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
 
         var battleStr = ''
         if (!noBattleStatus && result.battle_status === 1 && ((result.last_scanned / 1000) > ((Date.now() / 1000) - 900))) {
-            battleStr = 'Arena wird bekämpft!'
+            battleStr = i8ln("Gym currently under attack!")
         }
 
         var park = ''
         if (((result['park'] !== '0' && result['park'] !== 'None' && result['park'] !== undefined && result['park']) && (noParkInfo === false))) {
             if (result['park'] === 1) {
                 // RDM only stores boolean, so just call it "Park Gym"
-                park = i8ln('Parkarena')
+                park = i8ln('Park Gym (Ex Eligible)')
             } else {
                 park = i8ln('Park') + ': ' + result['park']
             }
@@ -6324,7 +6324,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             '</div>' +
             lastScannedStr +
             '<div>' +
-            '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Get directions') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">Maplink</a>' +
+            '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Open Route') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">' + i8ln("Maplink") + '</a>' +
             '</div>' +
             '</center>'
 
@@ -6344,7 +6344,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         }
         pokemonHtml =
                 '<center class="team-' + result.team_id + '-text">' +
-                'Verteidiger:<br>' +
+                i8ln("Defender") + ':<br>' +
                 '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + guardFormStr + '.png"/><br>' +
                 '<b class="team-' + result.team_id + '-text">' + result.guard_pokemon_name + '</b>' +
                 '</center>'
