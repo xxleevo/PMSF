@@ -1002,8 +1002,8 @@ function pokemonLabel(item) {
             details +=
                 // WP + LVL
                 '<div style="clear:both;margin-bottom:10px;">' +
-                '<span style="font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + cp + ' ' + i8ln("CP") + '</span>' +
-                '<span style="margin-right: 3px;font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + i8ln("Lv") + ' ' + level + ' - </span><br>' +
+                '<span style="font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + cp + ' ' + i8ln('CP') + '</span>' +
+                '<span style="margin-right: 3px;font-size: 14px;font-weight: bold;border-radius:10px;float:right;" >' + i8ln('Lv') + ' ' + level + ' - </span><br>' +
                 '</div>'
         }
         if (moves[item['move_1']] !== undefined || moves[item['move_2']] !== undefined) {
@@ -1041,9 +1041,9 @@ function pokemonLabel(item) {
         '<center><div style="background-color:rgba(0,0,0,0.4);margin: 0px -10px -5px -10px;border-radius:6px;box-shadow: inset 0 0 2px #fff;">' +
         '<b><font size="3" color="white">' + name
         // If its a Ditto, show the real Pokemons name too.
-        if (id === 132) {
-            contentstring += ' (' + dittoDisguise + ')'
-        }
+    if (id === 132) {
+        contentstring += ' (' + dittoDisguise + ')'
+    }
     contentstring += '</font></b>'
     contentstring += '<span style="color:white;"> - </span>' +
         '<small>' +
@@ -1080,19 +1080,19 @@ function pokemonLabel(item) {
         contentstring += '<div style="background:rgba(255,255,255,0.8);border-radius:12px;box-shadow: inset 0 0 4px #000;padding: 5px;margin: 0px -10px -5px -10px;">' +
             '<center><small>' + typesDisplay + '</small></center>' +
             '<div style="padding-top:5px;padding-bottom: 7px;">' +
-            '<span style="padding-left: 5px;font-size: 14px;font-weight: bold;">' + i8ln("Despawn") + '</span><img src="static/images/label/clock.png" style="height:23px;float:left;" />'
+            '<span style="padding-left: 5px;font-size: 14px;font-weight: bold;">' + i8ln('Despawn') + '</span><img src="static/images/label/clock.png" style="height:23px;float:left;" />'
         if (verifiedDespawn === 1) {
             // Verified Timer
             contentstring +=
                 '<span class="label-countdown" style="background-color: #fffaaa;font-size: 14px;font-weight: bold;border-radius:10px;float:right" disappears-at="' + disappearTime + '">(00m00s)</span><br>' +
-                '<div style="clear:both;"><font size="1" style="font-weight: normal;">(' + i8ln("Despawn at") + ' ' + getTimeStr(disappearTime) + ')' + '</font>' +
-                '<span style="float:right"><span style="padding-bottom: 8px;">' + i8ln("Verified") + '</span><img src="static/images/label/check.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
+                '<div style="clear:both;"><font size="1" style="font-weight: normal;">(' + i8ln('Despawn at') + ' ' + getTimeStr(disappearTime) + ')' + '</font>' +
+                '<span style="float:right"><span style="padding-bottom: 8px;">' + i8ln('Verified') + '</span><img src="static/images/label/check.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
         } else {
             // Unverified Timer
             contentstring +=
                 '<span class="label-countdown" style="background-color: #fffaaa;font-size: 14px;font-weight: bold;border-radius:10px;float:right" disappears-at="' + disappearTime + '">(00m00s)</span><br>' +
-                '<div style="clear:both;"><font size="1" style="font-weight: normal;">(' + i8ln("Until Approx.") + ' ' +  getTimeStr(disappearTime) + ')' + '</font>' +
-                '<span style="float:right"><span style="padding-bottom: 8px;">' + i8ln("Not Verified") + '</span><img src="static/images/label/cross.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
+                '<div style="clear:both;"><font size="1" style="font-weight: normal;">(' + i8ln('Until Approx.') + ' ' + getTimeStr(disappearTime) + ')' + '</font>' +
+                '<span style="float:right"><span style="padding-bottom: 8px;">' + i8ln('Not Verified') + '</span><img src="static/images/label/cross.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
         }
         contentstring += '</div>'
     }
@@ -1131,7 +1131,7 @@ function gymLabel(item) {
     var outdated = ''
     if (((lastScanned / 1000) < ((Date.now() / 1000) - 14400)) && !noOutdatedGyms) {
         teamName = 'Harmony'
-        outdated = '<b>' + i8ln("Last scan older than 4 hours !") + '</b>'
+        outdated = '<b>' + i8ln('Last scan older than 4 hours !') + '</b>'
     }
     var teamLabel = ''
     var teamImage = ''
@@ -1142,7 +1142,7 @@ function gymLabel(item) {
         teamImage = '<img width="200px" style="padding: 5px;" src="static/forts/label/' + teamName + '_normal.png">'
         freeSlotsText = '<div><b>' + freeSlots + ' ' + i8ln('Free Slots') + '</b></div>'
     } else {
-        teamLabel = i8ln("Gym") + '<br>'
+        teamLabel = i8ln('Gym') + '<br>'
         teamImage = '<img height="70px" style="padding: 5px;" src="static/forts/Harmony_large.png">'
         if (item['raid_level'] < denyRaidLevelsBelow) {
             raidIcon = ''
@@ -1279,11 +1279,11 @@ function gymLabel(item) {
     }
     var maplinkText = ''
     if (!noMaplink) {
-        maplinkText = '- <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">' + i8ln("Maplink") + '</a>'
+        maplinkText = '- <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">' + i8ln('Maplink') + '</a>'
     }
     var battleStr = ''
     if (!noBattleStatus && isInBattle === 1 && ((lastScanned / 1000) > ((Date.now() / 1000) - 900))) {
-        battleStr = '<div>' + i8ln("Gym currently under attack!") + '</div>'
+        battleStr = '<div>' + i8ln('Gym currently under attack!') + '</div>'
     }
     var gymCp = ''
     if (item['total_cp'] != null && !noGymTeamInfos) {
@@ -1317,7 +1317,7 @@ function gymLabel(item) {
             battleStr +
             hr +
             '<div>' +
-            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + i8ln("Route") + '</a>' + maplinkText +
+            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + i8ln('Route') + '</a>' + maplinkText +
             '</div>' +
             '<div>' + lastModifiedText + '</div>' +
             '<div>' + lastScannedStr + '</div>' +
@@ -1797,11 +1797,11 @@ function pokestopLabel(item) {
     var specialLure = ''
     if (!noLures) {
         if (lureType === 502 && item['lure_expiration'] > Date.now()) { // Special lure: Icy
-            specialLure = '<b class="pokestop-lure-' + lureType + '-name">' + i8ln("Glacial Lure") + '</b>'
+            specialLure = '<b class="pokestop-lure-' + lureType + '-name">' + i8ln('Glacial Lure') + '</b>'
         } else if (lureType === 503 && item['lure_expiration'] > Date.now()) { // Special lure: Mossy
-            specialLure = '<b class="pokestop-lure-' + lureType + '-name">' + i8ln("Mossy Lure") + '</b>'
+            specialLure = '<b class="pokestop-lure-' + lureType + '-name">' + i8ln('Mossy Lure') + '</b>'
         } else if (lureType === 504 && item['lure_expiration'] > Date.now()) { // Special lure: Electric
-            specialLure = '<b class="pokestop-lure-' + lureType + '-name">' + i8ln("Magnetic Lure") + '</b>'
+            specialLure = '<b class="pokestop-lure-' + lureType + '-name">' + i8ln('Magnetic Lure') + '</b>'
         }
     }
     var stopName = ''
@@ -1847,7 +1847,7 @@ function pokestopLabel(item) {
     }
     var maplinkText = ''
     if (!noMaplink) {
-        maplinkText = '- <a href="./?lat=' + item['latitude'] + '&lon=' + item['longitude'] + '&zoom=16">' + i8ln("Maplink") + '</a>'
+        maplinkText = '- <a href="./?lat=' + item['latitude'] + '&lon=' + item['longitude'] + '&zoom=16">' + i8ln('Maplink') + '</a>'
     }
     var invasionImage = ''
     var invasionStr = ''
@@ -1866,12 +1866,12 @@ function pokestopLabel(item) {
             invasionImage += '<img style="margin-top:20px;margin-bottom:55px;margin-left:-90px;height:50px;position:absolute" src="static/forts/gruntType/' + item['grunt_type'] + '.png"/>'
         }
         if (item['grunt_type_name'] !== '') {
-            invasionStr += '<div><b>' + i8ln("Grunt Type") + ':</b> ' + item['grunt_type_name'] + '</div>'
+            invasionStr += '<div><b>' + i8ln('Grunt Type') + ':</b> ' + item['grunt_type_name'] + '</div>'
         } else if (item['grunt_type_gender'] !== '') {
-            invasionStr += '<div><b>' + i8ln("Grunt Type") + ':</b> ' + i8ln("Extra") + '</div>'
+            invasionStr += '<div><b>' + i8ln('Grunt Type') + ':</b> ' + i8ln('Extra') + '</div>'
         }
         if (item['grunt_type_gender'] !== '') {
-            invasionStr += '<div><b>' + i8ln("Gender") + ':</b> ' + item['grunt_type_gender'] + '</div>'
+            invasionStr += '<div><b>' + i8ln('Gender') + ':</b> ' + item['grunt_type_gender'] + '</div>'
         }
     }
     var lureImage = ''
@@ -1882,7 +1882,7 @@ function pokestopLabel(item) {
         lureEndStr = getTimeStr(item['lure_expiration'])
         lureStr =
         '<div style="font-weight:900;">' +
-        i8ln("Lure until") + ': ' + lureEndStr +
+        i8ln('Lure until') + ': ' + lureEndStr +
         ' <span class="label-countdown" disappears-at="' + item['lure_expiration'] + '">(00m00s)</span>' +
         '</div>' +
         hr
@@ -1994,7 +1994,7 @@ function pokestopLabel(item) {
         str += '<center><div>' + i8ln('Convert to Gym') + '<i class="fa fa-refresh convert-pokestop" style="margin-top: 2px; vertical-align: middle; font-size: 1.5em;" onclick="openConvertPokestopModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'
     }
     str += '<div><center>' +
-        '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item['latitude'] + ',' + item['longitude'] + ')" title="' + i8ln('View in Maps') + '">' + i8ln("Route") + '</a>' + maplinkText +
+        '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item['latitude'] + ',' + item['longitude'] + ')" title="' + i8ln('View in Maps') + '">' + i8ln('Route') + '</a>' + maplinkText +
         '</center></div>'
     if ((!noWhatsappLinkQuests) && (item['quest_condition_type'] !== null && item['quest_type'] !== null)) {
         str += '<div>' +
@@ -2962,7 +2962,7 @@ function nestLabel(item) {
         str += '<center><div>' + i8ln('Add Nest') + '<i class="fa fa-binoculars submit-nest" onclick="openNestModal(event);" data-id="' + item['nest_id'] + '"></i></div></center>'
     }
     str += '<div>' +
-        '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">' + i8ln("Route") + '</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">' + i8ln("Maplink") + '</a></center>' +
+        '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">' + i8ln('Route') + '</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">' + i8ln('Maplink') + '</a></center>' +
         '</div>'
 
     if ((!noWhatsappLink) && (item.pokemon_id > 0)) {
@@ -6180,7 +6180,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
 
         var battleStr = ''
         if (!noBattleStatus && result.battle_status === 1 && ((result.last_scanned / 1000) > ((Date.now() / 1000) - 900))) {
-            battleStr = i8ln("Gym currently under attack!")
+            battleStr = i8ln('Gym currently under attack!')
         }
 
         var park = ''
@@ -6324,7 +6324,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             '</div>' +
             lastScannedStr +
             '<div>' +
-            '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Route') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">' + i8ln("Maplink") + '</a>' +
+            '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Route') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">' + i8ln('Maplink') + '</a>' +
             '</div>' +
             '</center>'
 
@@ -6344,7 +6344,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         }
         pokemonHtml =
                 '<center class="team-' + result.team_id + '-text">' +
-                i8ln("Defender") + ':<br>' +
+                i8ln('Defender') + ':<br>' +
                 '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + guardFormStr + '.png"/><br>' +
                 '<b class="team-' + result.team_id + '-text">' + result.guard_pokemon_name + '</b>' +
                 '</center>'
