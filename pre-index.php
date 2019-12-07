@@ -1442,7 +1442,7 @@ $getList = new \Scanner\RDM();
 				}
                 if ( ! $noScanPolygon ) {
                     echo '<div class="form-control switch-container">
-						<h3>' . i8ln("Scan Area") . '</h3> (' . i8ln("Pkmn, Gyms, Stops, Raid") . ')
+						<h3>' . i8ln("Scan Area") . ' </h3><font size="2">(' . i8ln("Pkmn, Gyms, Stops, Raid") . ')</font>
 						<div class="onoffswitch">
 							<input id="scan-area-switch" type="checkbox" name="scan-area-switch" class="onoffswitch-checkbox">
 							<label class="onoffswitch-label" for="scan-area-switch">
@@ -1454,7 +1454,7 @@ $getList = new \Scanner\RDM();
                 }
                 if ( ! $noScanPolygonQuest ) {
                     echo '<div class="form-control switch-container">
-						<h3>' . i8ln("Scan Area") . '</h3> (' . i8ln("Quests") . ')
+						<h3>' . i8ln("Scan Area") . ' </h3><font size="2">(' . i8ln("Quests") . ')</font>
 						<div class="onoffswitch">
 							<input id="scan-area-quest-switch" type="checkbox" name="scan-area-quest-switch" class="onoffswitch-checkbox">
 							<label class="onoffswitch-label" for="scan-area-quest-switch">
@@ -1485,7 +1485,13 @@ $getList = new \Scanner\RDM();
             if ( ! $noNotifyPokemon ) {
                 echo '<div class="form-control hide-select-2">
                     <label for="notify-pokemon">
-                        <h3>' . i8ln("Favorite Selection") . '</h3><a href="#" class="select-all" style="background-color:#3b3b3b;border-radius:3px;padding: 5px 10px;border-color: white;color:white">Alle</a>&nbsp;&nbsp;<a href="#" class="hide-all" style="background:#3b3b3b;border-radius:3px;padding: 5px 10px;border-color: white;color:white">Keine</a><br><br>
+                        <h3>' . i8ln("Favorite Selection") . '</h3><br>
+						<a href="#" class="select-all" style="background-color:#3b3b3b;border-radius:3px;padding: 5px 10px;border-color: white;color:white">
+							' . i8ln("All") . '
+						</a>&nbsp;&nbsp;
+						<a href="#" class="hide-all" style="background:#3b3b3b;border-radius:3px;padding: 5px 10px;border-color: white;color:white">
+							' . i8ln("None") . '
+						</a><br><br>
                         <div style="max-height:165px;overflow-y:auto;">
                             <input id="notify-pokemon" type="text" readonly="true"/>';
 							pokemonFilterImages( $noPokemonNumbers, '', [], 4 );
@@ -1665,7 +1671,7 @@ $getList = new \Scanner\RDM();
 						</center>
 					</div>
 					<br>
-					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Export") . ':</b><br>' . i8ln("Save your current settings with downloading them as a file") . '<br></span>
+					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Export") . ':</b><br>' . i8ln("Save your current settings with downloading them as a file") . '<br><br></span>
 					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Import") . ':</b><br>' . i8ln("Upload a setting file to restore your settings") . '</span>
 					<div>
 						<center>
@@ -1688,7 +1694,7 @@ $getList = new \Scanner\RDM();
 			}
 			# Scanning Times
 			if (!$noQuestscanInfotext){
-                echo '<h3 style="font-weight: bold"><i class="fa fa-clock-o fa-fw"></i>&nbsp;' . ("Scanning Times") . '</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-clock-o fa-fw"></i>&nbsp;' . i8ln("Scanning Times") . '</h3>
 				<div>
 					' . $questscanInfotext .'
 				</div>';

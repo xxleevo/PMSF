@@ -1,7 +1,7 @@
 {
   "Auth" : "Authentifizierung",
   "Map Locations" : "Orte",
-  "You are logged in" : "Du bist derzeit eingeloggt",
+  "You are currently logged in" : "Du bist derzeit eingeloggt",
   "Scanning Times" : "Scanzeiten",
   "Upload a setting file to restore your settings" : "Lade eine Datei hoch, um zuvor gespeicherte Einstellungen wieder herzustellen.",
   "Save your current settings with downloading them as a file" : "Speichere deine Einstellungen des Menüs indem du sie als Datei downloadest.",
@@ -14,7 +14,7 @@
   "Location Style" : "Standort Style",
   "Fav Iconsize Modifier" : "Fav. Vergrößerung",
   "Navigation via" : "Navigation über",
-  "Push Notifications" : "Push Nachrichten(Desktop)",
+  "Push Notifications" : "Push Nachrichten",
   "Jumping Favs" : "Fav. Springen",
   "Use Pokemon Cries" : "Pokemon Laute",
   "Disabled" : "Deaktiviert",
