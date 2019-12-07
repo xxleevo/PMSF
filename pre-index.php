@@ -315,7 +315,7 @@ $getList = new \Scanner\RDM();
 <div class="wrapper">
     <!-- Header -->
     <header id="header" style = "background-image: <?php echo $overlayDesign ?>">
-        <a href="#nav"><b><span class="label" style="color:white"><?php echo i8ln('Menü') ?></span></b></a>
+        <a href="#nav"><b><span class="label" style="color:white"><?php echo i8ln('Menu') ?></span></b></a>
 
         <h1><a href="#"><?= $title ?><img src="<?= $raidmapLogo ?>" height="35" width="auto" border="0" style="float: right; margin-left: 5px; margin-top: 10px;"></a></h1>
         <?php
@@ -418,24 +418,18 @@ $getList = new \Scanner\RDM();
             <?php
             if ( ! $noPokemon || ! $noNests ) {
                 if ( ! $noNests && ! $noPokemon) {
-                ?>
-                <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Pokemon & Nester</h3>
-                <?php
+					echo '<h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i>&nbsp;' . i8ln("Pokemon") . ' &amp; ' . i8ln("Nests") . '</h3>';
                 } else if (!$noNests){ 
-                ?>
-                <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Nester</h3>
-                <?php
+					echo '<h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i>&nbsp;' . i8ln("Nests") . '</h3>';
                 } else if (!$noPokemon){ 
-				?>
-                <h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Pokemon</h3>
-                <?php
+					echo '<h3 style="font-weight: bold;"><i class="fa fa-map-marker fa-fw"></i>&nbsp;' . i8ln("Pokemon") . '</h3>';
 				}
 				?>
                 <div>
                 <?php
                 if ( ! $noNests ) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-                    <h3> Nester </h3>
+                    <h3>' . i8ln("Nests") . '</h3>
                     <div class="onoffswitch">
                         <input id="nests-switch" type="checkbox" name="nests-switch"
                                class="onoffswitch-checkbox" checked>
@@ -449,32 +443,32 @@ $getList = new \Scanner\RDM();
 						<div>
 							<center>
 							
-								<u><h3 style="margin:0 0 0.5em 0;"> Nester teilen (Whatsapp)</h3></u>
+								<u><h3 style="margin:0 0 0.5em 0;"> ' . i8ln("Share Nests(Whatsapp)") . '</h3></u>
 								<a class="settings btn-share-whatsapp" id="shareNests0" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(0,\''. $nestShareHeader .'\',\''. $nestShareDescription .'\',\''. $nestShareFooter .'\')">
-									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies
+									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span>' . i8ln("Park") . ', ' . i8ln("Species") . '
 								</a>
 								<a class="settings btn-share-whatsapp" id="shareNests1" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(1,\''. $nestShareHeader .'\',\''. $nestShareDescription .'\',\''. $nestShareFooter .'\')">
-									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies, Location
+									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span>' . i8ln("Park") . ', ' . i8ln("Species") . ', ' . i8ln("Adress") . '
 								</a>
 								<a class="settings btn-share-whatsapp" id="shareNests2" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(2,\''. $nestShareHeader .'\',\''. $nestShareDescription .'\',\''. $nestShareFooter .'\')">
-									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies, Menge
+									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> ' . i8ln("Park") . ', ' . i8ln("Species") . ', ' . i8ln("Amount") . '
 								</a>
 								<a class="settings btn-share-whatsapp" id="shareNests3" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(3,\''. $nestShareHeader .'\',\''. $nestShareDescription .'\',\''. $nestShareFooter .'\')">
-									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Park, Spezies ,Loc. ,Menge
+									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> ' . i8ln("Park") . ', ' . i8ln("Spec.") . ', ' . i8ln("Adr.") . ', ' . i8ln("Amount") . '
 								</a>
 							</center>
 						</div>
 						<div>
-						Beachte: Es werden nur die Nester geteilt, die auf deiner Map zu sehen sind.
+						<b>' . i8ln("Info") . ':</b> ' . i8ln("Only current visible nests on the map will be shared.") . '
 						</div>
-						<hr style="margin:0px;" />
+						<hr style="margin:0px;margin-top:10px" />
 					</div>
 				';
                 } ?>
 				<?php
 				if ( ! $noMultipleRepos ) {
 				echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:35px;">
-					<h3>Icon Style</h3>';
+					<h3> ' . i8ln("Icon Style") . '</h3>';
 					$count = sizeof( $iconRepos );
 					if ( $count > 0 ) {
 						echo '
@@ -488,14 +482,14 @@ $getList = new \Scanner\RDM();
 						</div>';
 					} else{
 						echo '</div>';
-						echo '<div><p>404 No Icon Packs found</p></div>';
+						echo '<div><p>' . i8ln("404 No Icon Packs found") . '</p></div>';
 					}
 				}
 				?>
                 <?php
                 if ( ! $noPokemon ) {
                     echo '<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-                    <h3> Pokemon </h3>
+                    <h3>' . i8ln("Pokemon") . '</h3>
                     <div class="onoffswitch">
                         <input id="pokemon-switch" type="checkbox" name="pokemon-switch" class="onoffswitch-checkbox"
                                checked>
@@ -559,35 +553,30 @@ $getList = new \Scanner\RDM();
                             <?php
                             if ( ! $noMinIV ) {
                                 echo '<div class="form-control" >
-                            <label for="min-iv">
-                                <h3> Min. IV</h3>
-                                <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="' . i8ln( 'Min IV' ) . '"/>
-                            </label>
-                        </div>';
-                            } ?>
-                            <?php
+									<label for="min-iv">
+										<h3>' . i8ln("Min. IV") . '</h3>
+										<input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="' . i8ln( 'Min IV' ) . '"/>
+									</label>
+								</div>';
+                            }
                             if ( ! $noMinLevel ) {
                                 echo '<div class="form-control">
-                            <label for="min-level">
-                                <h3> Min. Lvl</h3>
-                                <input id="min-level" type="number" min="0" max="100" name="min-level" placeholder="' . i8ln( 'Min Lvl' ) . '"/>
-                            </label>
-                        </div></p>';
+									<label for="min-level">
+										<h3>' . i8ln("Min. Lvl") . '</h3>
+										<input id="min-level" type="number" min="0" max="100" name="min-level" placeholder="' . i8ln( 'Min Lvl' ) . '"/>
+									</label>
+								</div></p>';
                             } ?>
                         </div>
                         <div id="tabs">
                             <ul>
                                 <?php
                                 if ( ! $noHidePokemon ) {
-                                    ?>
-                                    <li><a href="#tabs-1">Ausblenden</a></li>
-                                    <?php
+                                    echo '<li><a href="#tabs-1">' . i8ln("Hide") . '</a></li>';
                                 } ?>
                                 <?php
                                 if ( ! $noExcludeMinIV ) {
-                                    ?>
-                                    <li><a href="#tabs-2">Immer anzeigen</a></li>
-                                    <?php
+                                    echo '<li><a href="#tabs-2">' . i8ln("Ign. Min IV/Lvl") . '</a></li>';
                                 } ?>
                             </ul>
                             <?php
@@ -601,8 +590,11 @@ $getList = new \Scanner\RDM();
                                                 <?php
                                                 pokemonFilterImages( $noPokemonNumbers, '', [], 2 ); ?>
                                             </div>
-                                            <a href="#" class="select-all">Alle</a>
-											<a href="#" class="hide-all">Keine</a>
+											<?php
+											echo '
+											<a href="#" class="select-all">' . i8ln("All") . '</a>
+											<a href="#" class="hide-all">' . i8ln('None') . '</a>';
+											?>
                                         </label>
                                     </div>
                                 </div>
@@ -619,8 +611,11 @@ $getList = new \Scanner\RDM();
                                                 <?php
                                                 pokemonFilterImages( $noPokemonNumbers, '', [], 3 ); ?>
                                             </div>
-                                            <a href="#" class="select-all">Alle</a>
-											<a href="#" class="hide-all">Keine</a>
+											<?php
+											echo '
+											<a href="#" class="select-all">' . i8ln("All") . '</a>
+											<a href="#" class="hide-all">' . i8ln('None') . '</a>';
+											?>
                                         </label>
                                     </div>
                                 </div>
@@ -630,13 +625,13 @@ $getList = new \Scanner\RDM();
                     </div>
 					<?php
 					if(!$noPokemon){
-					echo '<p style="font-size:13px">';
-					echo '<br>';
-					echo 'Blende mehr Pokemon aus, um die Performance der Ladezeit zu erhöhen.<br><br>';
+						echo '<p style="font-size:13px">
+						<br>'
+						 . i8ln("The more Pokemon you hide, the less traffic the map will use and loading time will be faster.") . '<br><br>';
 						if( !$noHighLevelData){
-						echo 'Unter \'Immer anzeigen\' kannst du Pokemon auswählen, die trotz IV/Lvl Filter dennoch angezeigt werden sollen.';
+							echo i8ln("At 'Ign. Min IV/Lvl' you can select Pokemon that will ignore the level & iv filter.'");
 						}
-					echo '</p>';
+						echo '</p>';
 					} ?>
 
                 </div>
@@ -646,9 +641,9 @@ $getList = new \Scanner\RDM();
             <?php
 			if ( ! $noPokestops ) {
 				if ( ! $noQuests ) {
-					echo '<h3 style="font-weight: bold"><i class="fa fa-map-pin fa-fw"></i>&nbsp;Pokestops &amp; Quests</h3>';
+					echo '<h3 style="font-weight: bold"><i class="fa fa-map-pin fa-fw"></i>&nbsp;' . i8ln("Pokestops") . ' &amp; ' . i8ln("Quests") . '</h3>';
 				} else {
-					echo '<h3 style="font-weight: bold"><i class="fa fa-map-pin fa-fw"></i>&nbsp;Stops</h3>';
+					echo '<h3 style="font-weight: bold"><i class="fa fa-map-pin fa-fw"></i>&nbsp;' . i8ln("Stops") . '</h3>';
 				}
 				?>
 				<div>
@@ -656,7 +651,7 @@ $getList = new \Scanner\RDM();
 					if ( ! $noPokestops ) {
 						echo '
 						<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-							<h3>Pokestops</h3>
+							<h3>' . i8ln("Pokestops") . '</h3>
 							<div class="onoffswitch">
 							<input id="pokestops-switch" type="checkbox" name="pokestops-switch" class="onoffswitch-checkbox" checked>
 								<label class="onoffswitch-label" for="pokestops-switch">
@@ -671,7 +666,7 @@ $getList = new \Scanner\RDM();
 						if ( ! $noLures ) {
 							echo '
 							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-								<font size="3">Nur Lockmodule</font>
+								<font size="3">' . i8ln("Only Lures") . '</font>
 								<div class="onoffswitch">
 								<input id="lures-switch" type="checkbox" name="lures-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="lures-switch">
@@ -686,7 +681,7 @@ $getList = new \Scanner\RDM();
 						if ( ! $noRocketInvasions ) {
 							echo '
 							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-								<font size="3">Nur Team Rocket</font>
+								<font size="3">' . i8ln("Only Team Rocket") . '</font>
 								<div class="onoffswitch">
 									<input id="invasions-switch" type="checkbox" name="invasions-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="invasions-switch">
@@ -700,7 +695,7 @@ $getList = new \Scanner\RDM();
 						if ( ! $noInvasionTimer && ! $noRocketInvasions ) {
 							echo '
 							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-								<font size="3">Team Rocket Timer</font>
+								<font size="3">' . i8ln("Team Rocket Timer") . '</font>
 								<div class="onoffswitch">
 									<input id="invasion-timer-switch" type="checkbox" name="invasion-timer-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="invasion-timer-switch">
@@ -728,9 +723,11 @@ $getList = new \Scanner\RDM();
                                                 gruntFilterImages($noGruntNumbers, '', $excludeGrunts, 10);
                                             } ?>
 										</div>
-										<a href="#" class="select-all-grunt"><?php echo i8ln('All') ?>
-	
-										</a><a href="#" class="hide-all-grunt"><?php echo i8ln('None') ?> </a>
+										<?php
+										echo '
+										<a href="#" class="select-all-grunt">' . i8ln("All") . '</a>
+										<a href="#" class="hide-all-grunt">' . i8ln('None') . '</a>';
+										?>
 									</label>
 								</div>
 								</div>
@@ -741,7 +738,7 @@ $getList = new \Scanner\RDM();
 						if ( ! $noQuests ) {
 							echo '
 							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-								<font size="3">Nur Quests</font>
+								<font size="3">' . i8ln("Only Quests") . '</font>
 								<div class="onoffswitch">
 									<input id="quests-switch" type="checkbox" name="quests-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="quests-switch">
@@ -754,7 +751,7 @@ $getList = new \Scanner\RDM();
 							<?php
 							if ( ! $noQuestsItems && ! $noQuestsItemsAmounts) {
 								echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-								<font size="3">Belohnungsanzahl</font>
+								<font size="3">' . i8ln("Reward amount") . '</font>
 								<div class="onoffswitch">
 									<input id="quests-amount-icon-switch" type="checkbox" name="quests-amount-icon-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="quests-amount-icon-switch">
@@ -769,15 +766,11 @@ $getList = new \Scanner\RDM();
 									<ul>
 										<?php
 										if ( ! $noQuestsPokemon ) {
-											?>
-											<li><a href="#tabs-1">Pokemon-Filter</a></li>
-											<?php
+											echo '<li><a href="#tabs-1">' . i8ln("Pokemon") . '</a></li>';
 										} ?>
 										<?php
 										if ( ! $noQuestsItems ) {
-											?>
-											<li><a href="#tabs-2">Item-Filter</a></li>
-											<?php
+											echo '<li><a href="#tabs-2">' . i8ln("Items") . '</a></li>';
 										} ?>
 									</ul>
 									<?php
@@ -797,8 +790,10 @@ $getList = new \Scanner\RDM();
 														?>
 														
 													</div>
-													<a href="#" class="select-all">Alle</a>
-													<a href="#" class="hide-all">Keine</a>
+													<?php
+														echo '<a href="#" class="select-all">' . i8ln("All") . '</a>
+														<a href="#" class="hide-all">' . i8ln("None") . '</a>';
+													?>
 												</label>
 											</div>
 										</div>
@@ -820,18 +815,23 @@ $getList = new \Scanner\RDM();
 															}
 															?>
 													</div>
-													<a href="#" class="select-all-item">Alle</a>
-													<a href="#" class="hide-all-item">Keine</a>
+													<?php
+														echo '<a href="#" class="select-all-item">' . i8ln("All") . '</a>
+														<a href="#" class="hide-all-item">' . i8ln("None") . '</a>';
+													?>
+													
 												</label>
 											</div>
 										</div>
 										<?php
 									} ?>
 								</div>
-								<div class="dustslider">
-									<input type="range" min="0" max="2000" value="500" class="slider" id="dustrange">
-									<p>Min. Sternenstaub: <span id="dustvalue"></span></p>
-								</div>
+								<?php
+									echo '<div class="dustslider">
+										<input type="range" min="0" max="2000" value="500" class="slider" id="dustrange">
+										<p>' . i8ln("Min. Stardust") . ': <span id="dustvalue"></span></p>
+									</div>';
+								?>
 							</div>
 						<?php
 						}
@@ -839,47 +839,40 @@ $getList = new \Scanner\RDM();
 						echo '
 						<hr style="padding:0px;margin:10px;" />
 						<div class="form-control switch-container" id="new-pokestops-wrapper">
-							<font size="3">Neue Pokestops ab:</font>
+							<font size="3">' . i8ln("New Pokestops Since") . ':</font>
 							<select name="new-pokestops-switch" id="new-pokestops-switch">
 								<option value="" disabled selected></option>
-								<option value="0">Inaktiv</option>
-								<option value="2019-08-01">August 2019</option>
-								<option value="2019-09-01">September 2019</option>
-								<option value="2019-10-01">Oktober 2019</option>
-								<option value="2019-11-01">November 2019</option>
-								<option value="2019-12-01">Dezember 2019</option>
+								<option value="0">' . i8ln("Inactive") . '</option>
+								<option value="2019-08-01">'. i8ln("August") . ' 2019</option>
+								<option value="2019-09-01">'. i8ln("September") . ' 2019</option>
+								<option value="2019-10-01">'. i8ln("October") . ' 2019</option>
+								<option value="2019-11-01">'. i8ln("November") . ' 2019</option>
+								<option value="2019-12-01">'. i8ln("December") . ' 2019</option>
 							</select>
 						</div>';
 					}?>
 					</div>
 				</div>
                 <?php
-            }?>
-            <?php
+            }
             if ( ! $noCommunity ) {
-                ?>
-                <h3 style="font-weight: bold;"><i class="fa fa-users fa-fw"></i>&nbsp;Communities</h3>
-		<div>
-                <?php
+                echo '<h3 style="font-weight: bold;"><i class="fa fa-users fa-fw"></i>&nbsp;' . i8ln("Communities") . '</h3>
+				<div>';
                 if ( ! $noCommunity ) {
                     echo '<div class="form-control switch-container">
-                    <h3>' . i8ln( 'Communities' ) . '</h3>
-                    <div class="onoffswitch">
-                        <input id="communities-switch" type="checkbox" name="communities-switch"
-                               class="onoffswitch-checkbox" checked>
-                        <label class="onoffswitch-label" for="communities-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>
-				
+						<h3>' . i8ln( 'Communities' ) . '</h3>
+						<div class="onoffswitch">
+							<input id="communities-switch" type="checkbox" name="communities-switch" class="onoffswitch-checkbox" checked>
+							<label class="onoffswitch-label" for="communities-switch">
+								<span class="switch-label" data-on="On" data-off="Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>
 					<div id="community-content-wrapper" style="display:none">
-						<div>'
-						. $communityDescription .
-						'
+						<div>
+						'. $communityDescription .'
 							<center>
-							
 								<u><h3 style="margin:0 0 0.5em 0;"> Gruppen teilen</h3></u>
 								<a class="settings btn-share-whatsapp" id="shareCommunities" href="#" data-action="share/whatsapp/share" onclick="shareCommunitiesWhatsapp(\''. $communityShareHeader .'\',\''. $communityShareDescription .'\',\''. $communityShareFooter .'\')">
 									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Whatsapp
@@ -887,23 +880,16 @@ $getList = new \Scanner\RDM();
 							</center>
 						</div>
 						<div>
-						Beachte: Es werden nur die Gruppen geteilt, die auf deiner Map zu sehen sind.
+							<b>' . i8ln("Info") . ':</b> ' . i8ln("Only current visible communities on the map will be shared.") . '
 						</div>
 						<hr style="margin:0px;" />
 					</div>';
-				
-		} ?>
-                </div>
-                <?php
+				}
+				echo '</div>';
             }
-            ?>
-            <?php
             if ( ! $noRaids || ! $noGyms ) {
-                ?>
-				
-				<h3 style="font-weight: bold"><i class="fa fa-shield fa-fw"></i>&nbsp;Arenen &amp; Raids</h3>
-				
-				
+				echo '<h3 style="font-weight: bold"><i class="fa fa-shield fa-fw"></i>&nbsp;' . i8ln("Gyms") . ' &amp; ' . i8ln("Raids") . '</h3>';
+				?>
                 <div>
                     <?php
                     if ( ! $noRaids ) {
@@ -918,13 +904,12 @@ $getList = new \Scanner\RDM();
 								</label>
 							</div>
 						</div>';
-                    
 						echo '
 						<div id="raids-filter-wrapper" style="display:none">';
 						if ( ! $noRaidTimer ) {
 							echo '
 							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-								<font size="3">Raid Timer</font>
+								<font size="3">' . i8ln("Raid Timer") . '</font>
 								<div class="onoffswitch">
 									<input id="raid-timer-switch" type="checkbox" name="raid-timer-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="raid-timer-switch">
@@ -936,7 +921,7 @@ $getList = new \Scanner\RDM();
 						}
 						echo '
 							<div class="form-control switch-container" id="active-raids-wrapper" style="float:none;height:35px;margin-bottom:0px;">
-								<font size="3">Nur aktive Raids</font>
+								<font size="3">' . i8ln("Only Active Raids") . '</font>
 								<div class="onoffswitch">
 									<input id="active-raids-switch" type="checkbox" name="active-raids-switch"
 										class="onoffswitch-checkbox" checked>
@@ -949,7 +934,7 @@ $getList = new \Scanner\RDM();
 						if ($denyRaidLevelsBelow == 0 && !$noFilterByRaidlevel) {
 							echo '
 							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-								<font size="3">' . i8ln('Filter by level') . '</font>
+								<font size="3">' . i8ln('Filter By Level') . '</font>
 								<div class="onoffswitch">
 									<input id="raid-level-filter-switch" type="checkbox" name="raid-level-filter-switch" class="onoffswitch-checkbox" >
 									<label class="onoffswitch-label" for="raid-level-filter-switch">
@@ -962,7 +947,7 @@ $getList = new \Scanner\RDM();
 						if (!$noRaidfilterList) {
 							echo '
 							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-								<font size="3">' . i8ln('Filter by raidboss') . '</font>
+								<font size="3">' . i8ln('Filter By Raidboss') . '</font>
 								<div class="onoffswitch">
 									<input id="raidboss-filter-switch" type="checkbox" name="raidboss-filter-switch" class="onoffswitch-checkbox" >
 									<label class="onoffswitch-label" for="raidboss-filter-switch">
@@ -976,7 +961,7 @@ $getList = new \Scanner\RDM();
 							echo '
 							<div id="raid-level-filter-wrapper" style="display:none">
 								<div class="form-control switch-container" id="min-level-raids-filter-wrapper" style="float:none;height:35px;margin-bottom:0px;">
-									<font size="3">Min. Raid Level</font>
+									<font size="3">' . i8ln("Min. Raid Level") . '</font>
 									<select name="min-level-raids-filter-switch" id="min-level-raids-filter-switch">
 										<option value="" disabled selected></option>
 										<option value="1">1</option>
@@ -987,7 +972,7 @@ $getList = new \Scanner\RDM();
 									</select>
 								</div>
 								<div class="form-control switch-container" id="max-level-raids-filter-wrapper" style="float:none;height:75px;margin-bottom:0px;">
-									<font size="3">Max. Raid Level</font>
+									<font size="3">' . i8ln("Max. Raid Level") . '</font>
 									<select name="max-level-raids-filter-switch" id="max-level-raids-filter-switch">
 										<option value="" disabled selected></option>
 										<option value="1">1</option>
@@ -1062,7 +1047,7 @@ $getList = new \Scanner\RDM();
 					<?php
 					if ( ! $noGymStyle && ( ! $noGyms || ! $noRaids )) {
 						echo '<div class="form-control switch-container">
-						<h3>Arenen Style</h3>
+						<h3>' . i8ln("Gym Style") . '</h3>
 						<select name="gym-marker-style" id="gym-marker-style">
 							<option value="classic">Classic</option>
 							<option value="shield">Schilder</option>
@@ -1098,14 +1083,14 @@ $getList = new \Scanner\RDM();
 							echo '<div class="form-control switch-container" id="team-gyms-only-wrapper">
 								<font size="3">Team</font>
 								<select name="team-gyms-filter-switch" id="team-gyms-only-switch">
-									<option value="0"> Alle</option>
-									<option value="1"> Mystic / Weisheit</option>
-									<option value="2"> Valor / Wagemut</option>
-									<option value="3"> Instinct / Intuition</option>
+									<option value="0">' . i8ln("All") . '</option>
+									<option value="1">' . i8ln("Mystic") . '</option>
+									<option value="2">' . i8ln("Valor") . '</option>
+									<option value="3">' . i8ln("Instinct") . '</option>
 								</select>
 							</div>
 							<div class="form-control switch-container" id="open-gyms-only-wrapper">
-								<font size="3">Freie Plätze</font>
+								<font size="3">' . i8ln("Free Slots") . '</font>
 								<div class="onoffswitch">
 									<input id="open-gyms-only-switch" type="checkbox" name="open-gyms-only-switch"
 										class="onoffswitch-checkbox" checked>
@@ -1116,7 +1101,7 @@ $getList = new \Scanner\RDM();
 								</div>
 							</div>
 							<div class="form-control switch-container" id="min-level-gyms-filter-wrapper">
-								<font size="3">Min. freie Plätze</font>
+								<font size="3">' . i8ln("Min. Free Slots") . '</font>
 								<select name="min-level-gyms-filter-switch" id="min-level-gyms-filter-switch">
 									<option value="0">0</option>
 									<option value="1">1</option>
@@ -1128,7 +1113,7 @@ $getList = new \Scanner\RDM();
 								</select>
 							</div>
 							<div class="form-control switch-container" id="max-level-gyms-filter-wrapper">
-								<font size="3">Max. freie Plätze</font>
+								<font size="3">' . i8ln("Max. Free Slots") . '</font>
 								<select name="max-level-gyms-filter-switch" id="max-level-gyms-filter-switch">
 									<option value="0">0</option>
 									<option value="1">1</option>
@@ -1142,7 +1127,7 @@ $getList = new \Scanner\RDM();
 						}
 						if ( !$noGymScannedText) {
 							echo '<div class="form-control switch-container" id="last-update-gyms-wrapper">
-								<font size="3">Letzter Scan</font>
+								<font size="3">' . i8ln("Last Scanned") . '</font>
 								<select name="last-update-gyms-switch" id="last-update-gyms-switch">
 									<option value="0">Alle</option>
 									<option value="1">Letzte Stunde</option>
@@ -1155,7 +1140,7 @@ $getList = new \Scanner\RDM();
 						}
 						if ( !$noNewGymsFilter) {
 							echo '<div class="form-control switch-container" id="new-gyms-wrapper">
-								<font size="3">Neue Arenen ab:</font>
+								<font size="3">' . i8ln("New Gyms Since") . '</font>
 								<select name="new-gyms-switch" id="new-gyms-switch">
 									<option value="" disabled selected></option>
 									<option value="0">Inaktiv</option>
@@ -1173,7 +1158,7 @@ $getList = new \Scanner\RDM();
                         <?php
                         if (! $noExEligible ) {
                             echo '<div class="form-control switch-container" id="ex-eligible-wrapper">
-                                <font size="3">' . i8ln( 'EX Eligible Only' ) . '</font>
+                                <font size="3">' . i8ln("EX Eligible Only") . '</font>
                                 <div class="onoffswitch">
                                     <input id="ex-eligible-switch" type="checkbox" name="ex-eligible-switch"
                                            class="onoffswitch-checkbox" checked>
@@ -1186,10 +1171,9 @@ $getList = new \Scanner\RDM();
                         }
                         if ( ! $noBattleStatus ) {
                             echo '<div class="form-control switch-container" id="battle-status-wrapper">
-                                <font size="3">' . i8ln( 'Nur Arenen im Kampf' ) . '</font>
+                                <font size="3">' . i8ln("Only Gyms under Attack") . '</font>
                                 <div class="onoffswitch">
-                                    <input id="battle-status-switch" type="checkbox" name="battle-status-switch"
-                                           class="onoffswitch-checkbox" checked>
+                                    <input id="battle-status-switch" type="checkbox" name="battle-status-switch" class="onoffswitch-checkbox" checked>
                                     <label class="onoffswitch-label" for="battle-status-switch">
                                         <span class="switch-label" data-on="On" data-off="Off"></span>
                                         <span class="switch-handle"></span>
@@ -1201,20 +1185,18 @@ $getList = new \Scanner\RDM();
                     </div>
 						<?php
 						if(!empty($triggerGyms)){
-						echo '(Bereits getriggerte Arenen werden mit einem <b>goldenen</b> "EX" versehen)';
+							echo i8ln("Already triggered gyms are marked with a <b>golden</b> 'EX'");
 						} ?>
                 </div>
                 <?php
             }
-            ?>
-            <?php
             if ( ! $noPortals || ! $noS2Cells || ! $noWeatherOverlay) {
 				if(!$noWeatherOverlay && (! $noPortals || ! $noS2Cells)){
-					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;S2 Zellen &amp; Wetter</h3>';
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("S2 Cells") . ' &amp; ' . i8ln("Weather") . '</h3>';
 				} else if(!$noWeatherOverlay){
-					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;Wetter</h3>';
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Weather") . '</h3>';
 				} else{
-					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;S2 Zellen</h3>';
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("S2 Cells") . '</h3>';
 				} ?>
 				<div>
                 <?php
@@ -1266,10 +1248,10 @@ $getList = new \Scanner\RDM();
 						</div>
 						<div class="form-control switch-container" id = "s2-switch-wrapper" style = "display:none">
 							<div class="form-control" style="font-size:13px;margin-top: 6px;">
-								(' . i8ln('Some Cell show options need a specific zoom') . ')
+								(' . i8ln('Some options need a specific zoom') . ')
 							</div>
 							<div class="form-control switch-container">
-								<font size="3"><b>' . i8ln( 'EX trigger Cells' ) . '</b></font>
+								<font size="3"><b>' . i8ln( 'EX Trigger Cells' ) . '</b></font>
 								<div class="onoffswitch">
 									<input id="s2-level13-switch" type="checkbox" name="s2-level13-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="s2-level13-switch">
@@ -1279,7 +1261,7 @@ $getList = new \Scanner\RDM();
 								</div>
 							</div>
 							<div class="form-control switch-container">
-								<font size="3"><b>' . i8ln( 'Gym placement Cells' ) . '</b></font>
+								<font size="3"><b>' . i8ln( 'Gym Placement Cells' ) . '</b></font>
 								<div class="onoffswitch">
 									<input id="s2-level14-switch" type="checkbox" name="s2-level14-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="s2-level14-switch">
@@ -1291,7 +1273,7 @@ $getList = new \Scanner\RDM();
 							if ( ! $noGymCellCalculations) {
 								echo '
 								<div id="fill-busy-gym-cell-wrapper" class="form-control switch-container" >
-									<font size="3">' . i8ln('Calculate gymcell objects') . '</font>
+									<font size="3">' . i8ln('Calculate Gym Cell Objects') . '</font>
 									<div class="onoffswitch">
 										<input id="fill-busy-gym-cell-switch" type="checkbox" name="fill-busy-gym-cell-switch" class="onoffswitch-checkbox" checked>
 										<label class="onoffswitch-label" for="fill-busy-gym-cell-switch">
@@ -1306,7 +1288,7 @@ $getList = new \Scanner\RDM();
 							}
 							echo '
 							<div class="form-control switch-container">
-								<font size="3"><b>' . i8ln( 'Pokestop placement Cells' ) . '</b></font>
+								<font size="3"><b>' . i8ln( 'Pokestop Placement Cells' ) . '</b></font>
 								<div class="onoffswitch">
 									<input id="s2-level17-switch" type="checkbox" name="s2-level17-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="s2-level17-switch">
@@ -1318,7 +1300,7 @@ $getList = new \Scanner\RDM();
 							if ( ! $noFillCoveredPokestopCells) {
 								echo '
 								<div id="fill-busy-pokestop-cell-wrapper" class="form-control switch-container" style="float:none;height:35px;margin-bottom:1px;">
-									<font size="3">' . i8ln('Mark occupied stopcells') . '</font>
+									<font size="3">' . i8ln('Mark Occupied Stopcells') . '</font>
 									<div class="onoffswitch">
 										<input id="fill-busy-pokestop-cell-switch" type="checkbox" name="fill-busy-pokestop-cell-switch" class="onoffswitch-checkbox" checked>
 										<label class="onoffswitch-label" for="fill-busy-pokestop-cell-switch">
@@ -1351,104 +1333,91 @@ $getList = new \Scanner\RDM();
                 </div>
                 <?php
             }
-            ?>
-            <?php
             if ( ! $noSearchLocation || ! $noNests || ! $noStartMe || ! $noStartLast || ! $noFollowMe || ! $noPokestops || ! $noSpawnPoints || ! $noRanges || ! $noWeatherOverlay || ! $noSpawnArea || ! $noScanPolygon || ! $noScanPolygonQuest || ! $noScanPolygonPvp) {
                 if ( ! $noScanPolygon || ! $noScanPolygonQuest || ! $noScanPolygonPvp ) {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location &amp; Gebiete</h3>
+					echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;' . i8ln("Location") . ' &amp; ' . i8ln("Areas") . '</h3>
                     <div>';
                 } else {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;Location</h3>
+					echo '<h3 style="font-weight: bold"><i class="fa fa-location-arrow fa-fw"></i>&nbsp;' . i8ln("Location") . '</h3>
                     <div>';
-		} ?>
-                <?php
+				}
                 if ( ! $noSpawnPoints ) {
                     echo '<div class="form-control switch-container">
-                    <h3> Spawnpunkte </h3>
-                    <div class="onoffswitch">
-                        <input id="spawnpoints-switch" type="checkbox" name="spawnpoints-switch"
-                               class="onoffswitch-checkbox">
-                        <label class="onoffswitch-label" for="spawnpoints-switch">
-                            <span class="switch-label" data - on="On" data - off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
-                } ?>
-                <?php
+						<h3>' . i8ln("Spawn Points") . '</h3>
+						<div class="onoffswitch">
+							<input id="spawnpoints-switch" type="checkbox" name="spawnpoints-switch" class="onoffswitch-checkbox">
+							<label class="onoffswitch-label" for="spawnpoints-switch">
+								<span class="switch-label" data - on="On" data - off="Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>';
+                }
                 if ( ! $noRanges ) {
                     echo '<div class="form-control switch-container">
-                    <h3> Reichweiten </h3>
-                    <div class="onoffswitch">
-                        <input id="ranges-switch" type="checkbox" name="ranges-switch" class="onoffswitch-checkbox">
-                        <label class="onoffswitch-label" for="ranges-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
-                } ?>
-                <?php
+						<h3>' . i8ln("Ranges") . '</h3>
+						<div class="onoffswitch">
+							<input id="ranges-switch" type="checkbox" name="ranges-switch" class="onoffswitch-checkbox">
+							<label class="onoffswitch-label" for="ranges-switch">
+								<span class="switch-label" data-on="On" data-off="Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>';
+                }
                 if ( ! $noSearchLocation ) {
                     echo '<div class="form-control switch-container" style="display:{{is_fixed}}">
-                <label for="next-location">
-		    <h3>Suchstandort ändern:</h3>
-                    <form id ="search-places">
-		    <input id="next-location" type="text" name="next-location" placeholder="Adresse suchen..">
-                    <ul id="search-places-results" class="search-results places-results"></ul>
-                    </form>
-                </label>
-            </div>';
-                } ?>
-                <?php
+						<label for="next-location">
+							<h3>' . i8ln("Change Map Location") . '</h3>
+							<form id ="search-places">
+								<input id="next-location" type="text" name="next-location" placeholder="' . i8ln("Search Adress") . '..">
+								<ul id="search-places-results" class="search-results places-results"></ul>
+							</form>
+						</label>
+					</div>';
+                }
                 if ( ! $noStartMe ) {
                     echo '<div class="form-control switch-container">
-                    <h3> Starte an meiner Position </h3>
-                    <div class="onoffswitch">
-                        <input id = "start-at-user-location-switch" type = "checkbox" name = "start-at-user-location-switch"
-                               class="onoffswitch-checkbox"/>
-                        <label class="onoffswitch-label" for="start-at-user-location-switch">
-                            <span class="switch-label" data - on = "On" data - off = "Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
-                } ?>
-                <?php
+						<h3>' . i8ln("Start at my Location") . '</h3>
+						<div class="onoffswitch">
+							<input id = "start-at-user-location-switch" type = "checkbox" name = "start-at-user-location-switch" class="onoffswitch-checkbox"/>
+							<label class="onoffswitch-label" for="start-at-user-location-switch">
+								<span class="switch-label" data - on = "On" data - off = "Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>';
+                }
                 if ( ! $noStartLast ) {
                     echo '<div class="form-control switch-container">
-                    <h3> Mapposition speichern </h3>
-                    <div class="onoffswitch">
-                        <input id = "start-at-last-location-switch" type = "checkbox" name = "start-at-last-location-switch"
-                               class="onoffswitch-checkbox"/>
-                        <label class="onoffswitch-label" for="start-at-last-location-switch">
-                            <span class="switch-label" data - on = "On" data - off = "Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
-                } ?>
-                <?php
+						<h3>' . i8ln("Save Last Loc.") . '</h3>
+						<div class="onoffswitch">
+							<input id = "start-at-last-location-switch" type = "checkbox" name = "start-at-last-location-switch" class="onoffswitch-checkbox"/>
+							<label class="onoffswitch-label" for="start-at-last-location-switch">
+								<span class="switch-label" data - on = "On" data - off = "Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>';
+                }
                 if ( ! $noFollowMe ) {
                     echo '<div class="form-control switch-container">
-                    <h3> Mir folgen </h3>
-                    <div class="onoffswitch">
-                        <input id = "follow-my-location-switch" type = "checkbox" name = "follow-my-location-switch"
-                               class="onoffswitch-checkbox"/>
-                        <label class="onoffswitch-label" for="follow-my-location-switch">
-                            <span class="switch-label" data - on = "On" data - off = "Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
+						<h3>' . i8ln("Follow my Loc.") . '</h3>
+						<div class="onoffswitch">
+							<input id = "follow-my-location-switch" type = "checkbox" name = "follow-my-location-switch" class="onoffswitch-checkbox"/>
+							<label class="onoffswitch-label" for="follow-my-location-switch">
+								<span class="switch-label" data - on = "On" data - off = "Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>';
                 } 
                 if ( ! $noSpawnArea ) {
                     echo '
 					<div id="spawn-area-wrapper" class="form-control switch-container">
-						<font size="3"> ' . i8ln( 'Spawn area' ) . ' </font>
+						<font size="3"> ' . i8ln("Spawn Area") . ' </font>
 						<div class="onoffswitch">
-							<input id = "spawn-area-switch" type = "checkbox" name = "spawn-area-switch"
-									class="onoffswitch-checkbox"/>
+							<input id = "spawn-area-switch" type = "checkbox" name = "spawn-area-switch" class="onoffswitch-checkbox"/>
 							<label class="onoffswitch-label" for="spawn-area-switch">
 								<span class="switch-label" data - on = "On" data - off = "Off"></span>
 								<span class="switch-handle"></span>
@@ -1456,10 +1425,9 @@ $getList = new \Scanner\RDM();
 						</div>
 					</div>
 					<div id="follow-me-map-wrapper" class="form-control switch-container">
-						<font size="3"> ' . i8ln( 'Keep map centered' ) . ' </font>
+						<font size="3"> ' . i8ln("Keep Map Centered") . ' </font>
 						<div class="onoffswitch">
-							<input id = "follow-me-map-switch" type = "checkbox" name = "follow-me-map-switch"
-								class="onoffswitch-checkbox"/>
+							<input id = "follow-me-map-switch" type = "checkbox" name = "follow-me-map-switch" class="onoffswitch-checkbox"/>
 							<label class="onoffswitch-label" for="follow-me-map-switch">
 								<span class="switch-label" data - on = "On" data - off = "Off"></span>
 								<span class="switch-handle"></span>
@@ -1467,19 +1435,14 @@ $getList = new \Scanner\RDM();
 						</div>
 					</div>';
                 }
-				?>
-				<?php
 				if ( ! $noScanPolygonQuest || ! $noScanPolygonPvp || ! $noScanPolygon){
 					echo '<div>
-						<h3><center><u> Gebiete </u></center></h3>
+						<h3><center><u>' . i8ln("Areas") . '</u></center></h3>
 					</div>';
-				} ?>
-                <?php
-				
+				}
                 if ( ! $noScanPolygon ) {
-                    echo '
-					<div class="form-control switch-container">
-                    <h3> Scangebiet (Pkmn,Arenen,Stops,Raids) </h3>
+                    echo '<div class="form-control switch-container">
+						<h3>' . i8ln("Scan Area") . '</h3> (' . i8ln("Pkmn, Gyms, Stops, Raid") . ')
 						<div class="onoffswitch">
 							<input id="scan-area-switch" type="checkbox" name="scan-area-switch" class="onoffswitch-checkbox">
 							<label class="onoffswitch-label" for="scan-area-switch">
@@ -1487,15 +1450,11 @@ $getList = new \Scanner\RDM();
 								<span class="switch-handle"></span>
 							</label>
 						</div>
-					</div>
-					';
-                } ?>
-                <?php
-
+					</div>';
+                }
                 if ( ! $noScanPolygonQuest ) {
-                    echo '
-					<div class="form-control switch-container">
-                    <h3> Scangebiet (Quests) </h3>
+                    echo '<div class="form-control switch-container">
+						<h3>' . i8ln("Scan Area") . '</h3> (' . i8ln("Quests") . ')
 						<div class="onoffswitch">
 							<input id="scan-area-quest-switch" type="checkbox" name="scan-area-quest-switch" class="onoffswitch-checkbox">
 							<label class="onoffswitch-label" for="scan-area-quest-switch">
@@ -1503,14 +1462,11 @@ $getList = new \Scanner\RDM();
 								<span class="switch-handle"></span>
 							</label>
 						</div>
-					</div>
-					';
-                } ?>
-                <?php
+					</div>';
+                }
                 if ( ! $noScanPolygonPvp ) {
-                    echo '
-					<div class="form-control switch-container">
-                    <h3> Pvp-Gebiete </h3>
+                    echo '<div class="form-control switch-container">
+						<h3>' . i8ln("PVP Areas") . '</h3>
 						<div class="onoffswitch">
 							<input id="scan-area-pvp-switch" type="checkbox" name="scan-area-pvp-switch" class="onoffswitch-checkbox">
 							<label class="onoffswitch-label" for="scan-area-pvp-switch">
@@ -1518,72 +1474,56 @@ $getList = new \Scanner\RDM();
 								<span class="switch-handle"></span>
 							</label>
 						</div>
-					</div>
-					';
-                } ?>
-                <?php
+					</div>';
+                }
                 echo '</div>';
             }
-            ?>
-            <?php
             if ( ! $noNotifyPokemon || ! $noNotifyRarity || ! $noNotifyIv || ! $noNotifyLevel || ! $noNotifySound || ! $noNotifyRaid || ! $noNotifyBounce || ! $noNotifyNotification ) {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-star fa-fw"></i>&nbsp;Favoriten</h3>
-            <div>';
+                echo '<h3 style="font-weight: bold"><i class="fa fa-star fa-fw"></i>&nbsp;' . i8ln("Favorites") . '</h3>
+				<div>';
             }
-            ?>
-            <?php
             if ( ! $noNotifyPokemon ) {
                 echo '<div class="form-control hide-select-2">
                     <label for="notify-pokemon">
-                        <h3>Meldungen für Pokemon</h3><a href="#" class="select-all" style="background-color:#3b3b3b;border-radius:3px;padding: 5px 10px;border-color: white;color:white">Alle</a>&nbsp;&nbsp;<a href="#" class="hide-all" style="background:#3b3b3b;border-radius:3px;padding: 5px 10px;border-color: white;color:white">Keine</a><br><br>
+                        <h3>' . i8ln("Favorite Selection") . '</h3><a href="#" class="select-all" style="background-color:#3b3b3b;border-radius:3px;padding: 5px 10px;border-color: white;color:white">Alle</a>&nbsp;&nbsp;<a href="#" class="hide-all" style="background:#3b3b3b;border-radius:3px;padding: 5px 10px;border-color: white;color:white">Keine</a><br><br>
                         <div style="max-height:165px;overflow-y:auto;">
                             <input id="notify-pokemon" type="text" readonly="true"/>';
-                pokemonFilterImages( $noPokemonNumbers, '', [], 4 );
-                echo '</div>
+							pokemonFilterImages( $noPokemonNumbers, '', [], 4 );
+						echo '</div>
                     </label>
                 </div>';
             }
-            ?>
-            <?php
             if ( ! $noNotifyRarity ) {
                 echo '<div class="form-control">
-                <label for="notify-rarity">
-                    <h3>' . i8ln( 'Notify of Rarity' ) . '</h3>
-                    <div style="max-height:165px;overflow-y:auto">
-                        <select id="notify-rarity" multiple="multiple"></select>
-                    </div>
-                </label>
-            </div>';
+					<label for="notify-rarity">
+						<h3>' . i8ln( "Notify of Rarity" ) . '</h3>
+						<div style="max-height:165px;overflow-y:auto">
+							<select id="notify-rarity" multiple="multiple"></select>
+						</div>
+					</label>
+				</div>';
             }
-            ?>
-            <?php
             if ( ! $noNotifyIv ) {
                 echo '<div class="form-control">
-                <label for="notify-perfection">
-                    <h3>Fav. nach IV</h3>
-                    <input id="notify-perfection" type="text" name="notify-perfection"
-                           placeholder="Min %" style="float: right;width: 75px;text-align:center"/>
-                </label>
-            </div>';
+					<label for="notify-perfection">
+						<h3>' . i8ln( "IV Favs" ) . '</h3>
+						<input id="notify-perfection" type="text" name="notify-perfection" placeholder="Min %" style="float: right;width: 75px;text-align:center"/>
+					</label>
+				</div>';
             }
-            ?>
-            <?php
             if ( ! $noNotifyLevel ) {
                 echo '<div class="form-control">
-                <label for="notify-level">
-                    <h3 style="float:left;">Fav. nach Level</h3>
-                    <input id="notify-level" min="1" max="35" type="number" name="notify-level"
-                           placeholder="Min Lvl" style="float: right;width: 75px;text-align:center"/>
-                </label>
-            </div>';
+					<label for="notify-level">
+						<h3 style="float:left;">' . i8ln( "Level Favs" ) . '</h3>
+						<input id="notify-level" min="1" max="35" type="number" name="notify-level" placeholder="Min Lvl" style="float: right;width: 75px;text-align:center"/>
+					</label>
+				</div>';
             }
-            ?>
-            <?php
             if ( ! $noNotifyRaid ) {
                 echo '<div class="form-control switch-container" id="notify-raid-wrapper">
-                        <h3>Fav. min. Raid Lvl:</h3>
+                        <h3>' . i8ln("Min Raid Level Favs") . '</h3>
                         <select name="notify-raid" id="notify-raid">
-                            <option value="0">Deaktiviert</option>
+                            <option value="0">' . i8ln("Disabled") . '</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -1592,144 +1532,112 @@ $getList = new \Scanner\RDM();
                         </select>
                     </div>';
             }
-            ?>
-            <?php
             if ( ! $noNotifySound ) {
                 echo '<div class="form-control switch-container">
-                <h3>Meldung mit Ton</h3>
-                <div class="onoffswitch">
-                    <input id="sound-switch" type="checkbox" name="sound-switch" class="onoffswitch-checkbox"
-                           checked>
-                    <label class="onoffswitch-label" for="sound-switch">
-                        <span class="switch-label" data-on="On" data-off="Off"></span>
-                        <span class="switch-handle"></span>
-                    </label>
-                </div>';
-            }
-            ?>
-            <?php
-            if ( ! $noCriesSound ) {
-                echo '<div class="form-control switch-container" id="cries-switch-wrapper">
-                <h3>' . i8ln( 'Use Pokemon cries' ) . '</h3>
-                <div class="onoffswitch">
-                    <input id="cries-switch" type="checkbox" name="cries-switch" class="onoffswitch-checkbox"
-                           checked>
-                    <label class="onoffswitch-label" for="cries-switch">
-                        <span class="switch-label" data-on="On" data-off="Off"></span>
-                        <span class="switch-handle"></span>
-                    </label>
-                </div>
-            </div>';
-            }
-            ?>
-            <?php
-            if ( ! $noNotifySound ) {
+					<h3>' . i8ln("Notify with Sound") . '</h3>
+					<div class="onoffswitch">
+						<input id="sound-switch" type="checkbox" name="sound-switch" class="onoffswitch-checkbox" checked>
+						<label class="onoffswitch-label" for="sound-switch">
+							<span class="switch-label" data-on="On" data-off="Off"></span>
+							<span class="switch-handle"></span>
+						</label>
+					</div>';
+					if ( ! $noCriesSound ) {
+						echo '<div class="form-control switch-container" id="cries-switch-wrapper">
+							<h3>' . i8ln( 'Use Pokemon Cries' ) . '</h3>
+							<div class="onoffswitch">
+								<input id="cries-switch" type="checkbox" name="cries-switch" class="onoffswitch-checkbox" checked>
+								<label class="onoffswitch-label" for="cries-switch">
+									<span class="switch-label" data-on="On" data-off="Off"></span>
+									<span class="switch-handle"></span>
+								</label>
+							</div>
+						</div>';
+					}
                 echo '</div>';
             }
-            ?>
-            <?php
             if ( ! $noNotifyBounce ) {
                 echo '<div class="form-control switch-container">
-                <h3>Fav. Springen</h3>
-                <div class="onoffswitch">
-                    <input id="bounce-switch" type="checkbox" name="bounce-switch" class="onoffswitch-checkbox"
-                           checked>
-                    <label class="onoffswitch-label" for="bounce-switch">
-                        <span class="switch-label" data-on="On" data-off="Off"></span>
-                        <span class="switch-handle"></span>
-                    </label>
-                </div>
-            </div>';
+					<h3>' . i8ln("Jumping Favs") . '</h3>
+					<div class="onoffswitch">
+						<input id="bounce-switch" type="checkbox" name="bounce-switch" class="onoffswitch-checkbox" checked>
+						<label class="onoffswitch-label" for="bounce-switch">
+							<span class="switch-label" data-on="On" data-off="Off"></span>
+							<span class="switch-handle"></span>
+						</label>
+					</div>
+				</div>';
             }
-            ?>
-            <?php
             if ( ! $noNotifyNotification ) {
                 echo '<div class="form-control switch-container">
-                <h3>Push Nachrichten</h3>
-                <div class="onoffswitch">
-                    <input id="notification-switch" type="checkbox" name="notification-switch" class="onoffswitch-checkbox"
-                           checked>
-                    <label class="onoffswitch-label" for="notification-switch">
-                        <span class="switch-label" data-on="On" data-off="Off"></span>
-                        <span class="switch-handle"></span>
-                    </label>
-                </div>
-            </div>';
+					<h3>' . i8ln("Push Notifications") . ' </h3>(' . i8ln("Desktop") . ')
+					<div class="onoffswitch">
+						<input id="notification-switch" type="checkbox" name="notification-switch" class="onoffswitch-checkbox" checked>
+						<label class="onoffswitch-label" for="notification-switch">
+							<span class="switch-label" data-on="On" data-off="Off"></span>
+							<span class="switch-handle"></span>
+						</label>
+					</div>
+				</div>';
             }
-            ?>
-            <?php
             if ( ! $noNotifyPokemon || ! $noNotifyRarity || ! $noNotifyIv || ! $noNotifyLevel || ! $noNotifySound || ! $noNotifyRaid || ! $noNotifyBounce || ! $noNotifyNotification ) {
                 echo '</div>';
             }
-            ?>
 
-            <?php
+			# Styling
             if ( ! $noMapStyle || ! $noDirectionProvider || ! $noIconSize || ! $noIconNotifySizeModifier || ! $noGymStyle || ! $noLocationStyle ) {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-map-o fa-fw"></i>&nbsp;Style</h3>
-            <div>';
+                echo '<h3 style="font-weight: bold"><i class="fa fa-map-o fa-fw"></i>&nbsp;' . i8ln("Style") . '</h3>
+				<div>';
             }
-            ?>
-            <?php
             if ( ! $noMapStyle ) {
                 echo '<div class="form-control switch-container">
-                <h3>Map Style</h3>
-                <select id="map-style"></select>
-            </div>';
+					<h3>' . i8ln("Map Style") . '</h3>
+					<select id="map-style"></select>
+				</div>';
             }
-            ?>
-            <?php
             if ( ! $noDirectionProvider ) {
                 echo '<div class="form-control switch-container">
-                <h3>Navigation über:</h3>
-                <select name="direction-provider" id="direction-provider">
-                    <option value="apple">' . i8ln( 'Apple' ) . '</option>
-                    <option value="google">' . i8ln( 'Google (Directions)' ) . '</option>
-                    <option value="google_pin">' . i8ln( 'Google (Pin)' ) . '</option>
-                    <option value="waze">' . i8ln( 'Waze' ) . '</option>
-                    <option value="bing">' . i8ln( 'Bing' ) . '</option>
-                </select>
-            </div>';
+					<h3>' . i8ln("Navigation via") . ':</h3>
+					<select name="direction-provider" id="direction-provider">
+						<option value="apple">' . i8ln( 'Apple' ) . '</option>
+						<option value="google">' . i8ln( 'Google (Directions)' ) . '</option>
+						<option value="google_pin">' . i8ln( 'Google (Pin)' ) . '</option>
+						<option value="waze">' . i8ln( 'Waze' ) . '</option>
+						<option value="bing">' . i8ln( 'Bing' ) . '</option>
+					</select>
+				</div>';
             }
-            ?>
-            <?php
             if ( ! $noIconSize ) {
                 echo '<div class="form-control switch-container">
-                <h3>Icon Größe</h3>
-                <select name="pokemon-icon-size" id="pokemon-icon-size">
-                    <option value="-8">' . i8ln( 'Small' ) . '</option>
-                    <option value="0">' . i8ln( 'Normal' ) . '</option>
-                    <option value="10">' . i8ln( 'Large' ) . '</option>
-                    <option value="20">' . i8ln( 'X-Large' ) . '</option>
-                </select>
-            </div>';
+					<h3>' . i8ln("Icon Size") . '</h3>
+					<select name="pokemon-icon-size" id="pokemon-icon-size">
+						<option value="-8">' . i8ln( 'Small' ) . '</option>
+						<option value="0">' . i8ln( 'Normal' ) . '</option>
+						<option value="10">' . i8ln( 'Large' ) . '</option>
+						<option value="20">' . i8ln( 'X-Large' ) . '</option>
+					</select>
+				</div>';
             }
-            ?>
-            <?php
             if ( ! $noIconNotifySizeModifier ) {
                 echo '<div class="form-control switch-container">
-                <h3>Fav. Vergrößerung</h3>
-                <select name="pokemon-icon-notify-size" id="pokemon-icon-notify-size">
-                    <option value="0">' . i8ln( 'Disable' ) . '</option>
-                    <option value="15">' . i8ln( 'Large' ) . '</option>
-                    <option value="30">' . i8ln( 'X-Large' ) . '</option>
-                    <option value="45">' . i8ln( 'XX-Large' ) . '</option>
-                </select>
-            </div>';
+					<h3>' . i8ln("Fav Iconsize Modifier") . '</h3>
+					<select name="pokemon-icon-notify-size" id="pokemon-icon-notify-size">
+						<option value="0">' . i8ln( 'Disable' ) . '</option>
+						<option value="15">' . i8ln( 'Large' ) . '</option>
+						<option value="30">' . i8ln( 'X-Large' ) . '</option>
+						<option value="45">' . i8ln( 'XX-Large' ) . '</option>
+					</select>
+				</div>';
             }
-            ?>
-            <?php
             if ( ! $noLocationStyle ) {
                 echo '<div class="form-control switch-container">
-                <h3>Standort Style</h3>
-                <select name="locationmarker-style" id="locationmarker-style"></select>
-            </div>';
+					<h3>' . i8ln("Location Style") . '</h3>
+					<select name="locationmarker-style" id="locationmarker-style"></select>
+				</div>';
             }
-            ?>
-			
-            <?php
             if ( ! $noOverlayDesign ) {
 				echo '<div class="form-control switch-container">
-				<h3>Overlay Design</h3>
+					<h3>' . i8ln("Overlay Design") . '</h3>
 					<div>
 						<select name="design-style" id="design-style">
 							<option value="'. $overlayDesign .'">Classic</option>
@@ -1750,35 +1658,30 @@ $getList = new \Scanner\RDM();
 						</select>
 					</div>
 				</div>';
-				}
-				?>
-            <?php
+			}
             if ( ! $noMapStyle || ! $noDirectionProvider || ! $noIconSize || ! $noIconNotifySizeModifier || ! $noGymStyle || ! $noLocationStyle ) {
                 echo '</div>';
             }
-            ?>
-			<?php
 			if (!$noExportImport){
 				echo '
-				<h3 style="font-weight: bold"><i class="fa fa-sliders fa-fw"></i>&nbsp;Einstellungen</h3>
+				<h3 style="font-weight: bold"><i class="fa fa-sliders fa-fw"></i>&nbsp;' . i8ln("Settings") . '</h3>
 				<div>
-					<span style="color: #3b3b3b"><b style="font-size:17px">Zurücksetzen:</b><br>Alle Einstellungen des Menüs werden auf Standard zurückgesetzt.</span>
+					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Reset") . ':</b><br>' . i8ln("All settings will be resettet to factory settings") . '</span>
 					<div>
 						<center>
-							<button id="reset-button" class="settings"
-									onclick="confirm(\'Möchtest du die Einstellungen auf Standard zurücksetzen?\') ? (localStorage.clear(), window.location.reload()) : false">
-								<i class="fa fa-refresh" aria-hidden="true"></i> Zurücksetzen
+							<button id="reset-button" class="settings" onclick="confirm(\'' . i8ln("Are you sure you want to reset all settings?") . '\') ? (localStorage.clear(), window.location.reload()) : false">
+								<i class="fa fa-refresh" aria-hidden="true"></i> ' . i8ln("Reset") . '
 							</button>
 						</center>
 					</div>
 					<br>
-					<span style="color: #3b3b3b"><b style="font-size:17px">Exportieren:</b><br>Speichere deine Einstellungen des Menüs indem du sie als Datei downloadest.<br></span>
-					<span style="color: #3b3b3b"><b style="font-size:17px">Importieren:</b><br>Lade eine Datei hoch, um zuvor gespeicherte Einstellungen wieder herzustellen.</span>
+					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Export") . ':</b><br>' . i8ln("Save your current settings with downloading them as a file") . '<br></span>
+					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Import") . ':</b><br>' . i8ln("Upload a setting file to restore your settings") . '</span>
 					<div>
 						<center>
 							<button id="export-button" class="settings"
 								onclick="download(\''. addslashes( $title ) .'\', JSON.stringify(JSON.stringify(localStorage)))">
-								<i class="fa fa-upload" aria-hidden="true"></i> Exportieren
+								<i class="fa fa-upload" aria-hidden="true"></i> ' . i8ln("Export") . '
 							</button>
 						</center>
 					</div>
@@ -1787,49 +1690,43 @@ $getList = new \Scanner\RDM();
 							<input id="fileInput" type="file" style="display:none;" onchange="openFile(event)"/>
 							<button id="import-button" class="settings"
 									onclick="document.getElementById(\'fileInput\').click()">
-								<i class="fa fa-download" aria-hidden="true"></i> Importieren
+								<i class="fa fa-download" aria-hidden="true"></i> ' . i8ln("Import") . '
 							</button>
 						</center>
 					</div>
 				</div>';
-			}?>
-			
-			<?php
+			}
+			# Scanning Times
 			if (!$noQuestscanInfotext){
-                echo '<h3 style="font-weight: bold"><i class="fa fa-clock-o fa-fw"></i>&nbsp;Scanzeiten</h3>
+                echo '<h3 style="font-weight: bold"><i class="fa fa-clock-o fa-fw"></i>&nbsp;' . ("Scanning Times") . '</h3>
 				<div>
-				' . $questscanInfotext .'
+					' . $questscanInfotext .'
 				</div>';
 			}
-			?>
-
-			
-            <?php
+			# Auth
 			if (($noDiscordLogin === false) && !empty($_SESSION['user']->id)) {
-                echo '<h3 style="font-weight: bold"><i class="fa fa-key fa-fw"></i>&nbsp;Authentifizierung</h3>
-            <div>';
-            ?>
-            <div><center><p>
-            <?php
-            echo '<b>Eingeloggt:</b> via Discord<br>
-			<b>User:</b> ' . $_SESSION['user']->user . "";
-            ?>
-			</p></center></div>
-			<div>
-                <center>
-                    <button class="settings"
-                            onclick="document.location.href='logout.php'">
-                        <i class="fa" aria-hidden="true"></i> Logout
-                    </button>
-                </center>
-            </div><br>
-        <?php
-		echo '</div>';
-        }
-        ?>
-        <?php
+                echo '<h3 style="font-weight: bold"><i class="fa fa-key fa-fw"></i>&nbsp;' . i8ln("Auth") . '</h3>
+				<div>
+					<div>
+						<center>
+							<p>
+								<b>' . i8ln("You are currently logged in") . '</b><br>
+								<b>' . i8ln("User") . ':</b> ' . $_SESSION['user']->user . "" . '
+							</p>
+						</center>
+					</div>
+					<div>
+						<center>
+							<button class="settings"onclick="document.location.href=\'logout.php\'">
+								<i class="fa" aria-hidden="true"></i>' . i8ln("Logout") . '
+							</button>
+						</center>
+					</div><br>
+				</div>';
+			}
+			# Map Locations / Areas
             if ( ! $noAreas ) {
-			echo '<h3 style="font-weight: bold"><i class="fa fa-globe fa-fw"></i>&nbsp;Orte</h3>';
+			echo '<h3 style="font-weight: bold"><i class="fa fa-globe fa-fw"></i>&nbsp;' . i8ln("Map Locations") . '</h3>';
                 $count = sizeof( $areas );
                 if ( $count > 0 ) {
                     echo '<div class="form-control switch-container area-container"><ul>';
@@ -1843,12 +1740,14 @@ $getList = new \Scanner\RDM();
         </div>
         <?php
         if ( $worldopoleUrl != "" ) {
-            echo '<p><center><a href="' . $worldopoleUrl . '" target="_blank" style="background-image:'. $overlayDesign . ';border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;" class="settings">
-            <i class="fa fa-info-circle fa-fw"></i>'. $worldopoleButtonTitle .'
-        </a></center></p>';
+            echo '<p>
+				<center>
+					<a href="' . $worldopoleUrl . '" target="_blank" style="background-image:'. $overlayDesign . ';border: 1px solid;border-color: black;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;padding: 6px 12px;border-radius: 16px;" class="settings">
+						<i class="fa fa-info-circle fa-fw"></i>'. $worldopoleButtonTitle .'
+					</a>
+				</center>
+			</p>';
         }
-        ?>
-        <?php
         if (($noNativeLogin === false) && !empty($_SESSION['user']->id)) {
             ?>
             <div>
@@ -1905,10 +1804,13 @@ $getList = new \Scanner\RDM();
                 <table id="pokemonList_table" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th>Icon</th>
-                        <th>Name</th>
-                        <th>Anzahl</th>
-                        <th>%</th>
+					<?php
+                        echo '
+						<th>' . i8ln("Icon") . '</th>
+                        <th>' . i8ln("Name") . '</th>
+                        <th>' . i8ln("Amount") . '</th>
+                        <th>%</th>'
+					?>
                     </tr>
                     </thead>
                     <tbody></tbody>
