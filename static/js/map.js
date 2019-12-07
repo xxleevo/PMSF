@@ -1317,7 +1317,7 @@ function gymLabel(item) {
             battleStr +
             hr +
             '<div>' +
-            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + i8ln("Open Route") + '</a>' + maplinkText +
+            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + i8ln("Route") + '</a>' + maplinkText +
             '</div>' +
             '<div>' + lastModifiedText + '</div>' +
             '<div>' + lastScannedStr + '</div>' +
@@ -1797,11 +1797,11 @@ function pokestopLabel(item) {
     var specialLure = ''
     if (!noLures) {
         if (lureType === 502 && item['lure_expiration'] > Date.now()) { // Special lure: Icy
-            specialLure = '<b class="pokestop-lure-' + lureType + '-name"> Gletscher-Lockmodul </b>'
+            specialLure = '<b class="pokestop-lure-' + lureType + '-name">' + i8ln("Glacial Lure") + '</b>'
         } else if (lureType === 503 && item['lure_expiration'] > Date.now()) { // Special lure: Mossy
-            specialLure = '<b class="pokestop-lure-' + lureType + '-name"> Moos-Lockmodul </b>'
+            specialLure = '<b class="pokestop-lure-' + lureType + '-name">' + i8ln("Mossy Lure") + '</b>'
         } else if (lureType === 504 && item['lure_expiration'] > Date.now()) { // Special lure: Electric
-            specialLure = '<b class="pokestop-lure-' + lureType + '-name"> Magnet-Lockmodul </b>'
+            specialLure = '<b class="pokestop-lure-' + lureType + '-name">' + i8ln("Magnetic Lure") + '</b>'
         }
     }
     var stopName = ''
@@ -1857,7 +1857,7 @@ function pokestopLabel(item) {
         invasionEndStr = getTimeStr(item['invasion_expiration'])
         invasionStr +=
         '<div>' +
-        'Team Rocket bis' + ': ' + invasionEndStr +
+        i8ln('Team Rocket until') + ': ' + invasionEndStr +
         ' <span class="label-countdown" disappears-at="' + item['invasion_expiration'] + '">(00m00s)</span>' +
         '</div>'
         if (item['grunt_type'] !== null && item['url'] !== null) {
@@ -1866,12 +1866,12 @@ function pokestopLabel(item) {
             invasionImage += '<img style="margin-top:20px;margin-bottom:55px;margin-left:-90px;height:50px;position:absolute" src="static/forts/gruntType/' + item['grunt_type'] + '.png"/>'
         }
         if (item['grunt_type_name'] !== '') {
-            invasionStr += '<div><b>Rüpel-Typ: ' + item['grunt_type_name'] + '</b></div>'
+            invasionStr += '<div><b>' + i8ln("Grunt Type") + ':</b> ' + item['grunt_type_name'] + '</div>'
         } else if (item['grunt_type_gender'] !== '') {
-            invasionStr += '<div><b>Rüpel-Typ: Zufall</b></div>'
+            invasionStr += '<div><b>' + i8ln("Grunt Type") + ':</b> ' + i8ln("Extra") + '</div>'
         }
         if (item['grunt_type_gender'] !== '') {
-            invasionStr += '<div><b>Rüpel-Geschlecht: ' + item['grunt_type_gender'] + '</b></div>'
+            invasionStr += '<div><b>' + i8ln("Gender") + ':</b> ' + item['grunt_type_gender'] + '</div>'
         }
     }
     var lureImage = ''
@@ -1882,7 +1882,7 @@ function pokestopLabel(item) {
         lureEndStr = getTimeStr(item['lure_expiration'])
         lureStr =
         '<div style="font-weight:900;">' +
-        'Lockmodul bis' + ': ' + lureEndStr +
+        i8ln("Lure until") + ': ' + lureEndStr +
         ' <span class="label-countdown" disappears-at="' + item['lure_expiration'] + '">(00m00s)</span>' +
         '</div>' +
         hr
@@ -1966,10 +1966,10 @@ function pokestopLabel(item) {
             lureImage +
             '</div>' +
             '<div>' +
+            lureStr +
             invasionStr +
             encounters +
             gruntReward +
-            lureStr +
             '</div>' +
             hr +
             firstSeen +
@@ -1994,7 +1994,7 @@ function pokestopLabel(item) {
         str += '<center><div>' + i8ln('Convert to Gym') + '<i class="fa fa-refresh convert-pokestop" style="margin-top: 2px; vertical-align: middle; font-size: 1.5em;" onclick="openConvertPokestopModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'
     }
     str += '<div><center>' +
-        '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item['latitude'] + ',' + item['longitude'] + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a>' + maplinkText +
+        '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item['latitude'] + ',' + item['longitude'] + ')" title="' + i8ln('View in Maps') + '">' + i8ln("Route") + '</a>' + maplinkText +
         '</center></div>'
     if ((!noWhatsappLinkQuests) && (item['quest_condition_type'] !== null && item['quest_type'] !== null)) {
         str += '<div>' +
@@ -2962,7 +2962,7 @@ function nestLabel(item) {
         str += '<center><div>' + i8ln('Add Nest') + '<i class="fa fa-binoculars submit-nest" onclick="openNestModal(event);" data-id="' + item['nest_id'] + '"></i></div></center>'
     }
     str += '<div>' +
-        '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">Wegbeschreibung</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">' + i8ln("Maplink") + '</a></center>' +
+        '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">' + i8ln("Route") + '</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">' + i8ln("Maplink") + '</a></center>' +
         '</div>'
 
     if ((!noWhatsappLink) && (item.pokemon_id > 0)) {
@@ -6324,7 +6324,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             '</div>' +
             lastScannedStr +
             '<div>' +
-            '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Open Route') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">' + i8ln("Maplink") + '</a>' +
+            '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Route') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">' + i8ln("Maplink") + '</a>' +
             '</div>' +
             '</center>'
 
