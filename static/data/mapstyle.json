@@ -1,11 +1,11 @@
 {
+  "tileserver": "Tileserver (Recommended)",
   "openstreetmap": "OpenStreetMap",
   "darkmatter": "Dark Matter",
   "styleblackandwhite": "Black and White",
   "styletopo": "ToPo Map",
   "stylesatellite": "Satellite",
-  "stylewikipedia": "Wikipedia",
+  "stylewikipedia": "Wikimedia",
   "googlemapssat": "Google Maps Satellite",
-  "googlemapsroad": "Google Maps Roadmap",
-  "tileserver": "Tileserver"
+  "googlemapsroad": "Google Maps Roadmap"
 }

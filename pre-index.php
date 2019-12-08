@@ -1576,16 +1576,16 @@ $getList = new \Scanner\RDM();
 					</div>
 				</div>';
             }
-            if ( ! $noNotifyPokemon || ! $noNotifyIv || ! $noNotifyLevel || ! $noNotifySound || ! $noNotifyRaid || ! $noNotifyBounce || ! $noNotifyNotification ) {
+            if ( !$noNotifyPokemon || !$noNotifyIv || !$noNotifyLevel || !$noNotifySound || !$noNotifyRaid || !$noNotifyBounce || !$noNotifyNotification ) {
                 echo '</div>';
             }
 
 			# Styling
-            if ( ! $noMapStyle || ! $noDirectionProvider || ! $noIconSize || ! $noIconNotifySizeModifier || ! $noGymStyle || ! $noLocationStyle ) {
+            if ( !$noMapStyle || !$noDirectionProvider || !$noIconSize || !$noIconNotifySizeModifier || !$noGymStyle || !$noLocationStyle ) {
                 echo '<h3 style="font-weight: bold"><i class="fa fa-map-o fa-fw"></i>&nbsp;' . i8ln("Style") . '</h3>
 				<div>';
             }
-            if ( ! $noMapStyle ) {
+            if ( !$noMapStyle && !$forcedTileServer) {
                 echo '<div class="form-control switch-container">
 					<h3>' . i8ln("Map Style") . '</h3>
 					<select id="map-style"></select>
@@ -2492,6 +2492,7 @@ $getList = new \Scanner\RDM();
 	var hideRaidEggs = <?php echo $noRaids ? '[]' : $hideRaidEggs ?>;
     var noCustomTileServer = <?php echo $noCustomTileServer === true ? 'true' : 'false' ?>;
     var customTileServerAddress = '<?php echo $customTileServerAddress ?>';
+    var forcedTileServer = <?php echo $forcedTileServer === true ? 'true' : 'false' ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

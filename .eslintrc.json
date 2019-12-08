@@ -219,6 +219,8 @@
 	"hideRaidPokemon": true,
 	"hideRaidEggs": true,
 	"raidbossFilterlist": true,
-	"filterByRaidlevel": true
+	"filterByRaidlevel": true,
+    "noCustomTileServer": true,
+    "forcedTileServer": true
   }
 }

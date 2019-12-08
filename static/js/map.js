@@ -267,6 +267,9 @@ if (location.search.indexOf('login=true') > 0) {
 if (location.search.indexOf('login=false') > 0) {
     openAccessDeniedModal()
 }
+if (forcedTileServer) {
+    Store.set('map_style', 'tileserver')
+}
 function openAccessDeniedModal(event) { // eslint-disable-line no-unused-vars
     $('.ui-dialog').remove()
     $('.accessdenied-modal').clone().dialog({
@@ -6650,18 +6653,18 @@ $(function () {
                 customTileServer = true
             }
             var customTileServerStyle = value.includes('Tileserver')
-
-            if (!googleMaps && !googleStyle && !customTileServerStyle) {
+            if (customTileServer && customTileServerStyle) {
+                styleList.push({
+                    id: key,
+                    text: i8ln(value)
+                })
+            }
+            else if (!googleMaps && !googleStyle && !customTileServerStyle) {
                 styleList.push({
                     id: key,
                     text: i8ln(value)
                 })
             } else if (googleMaps) {
-                styleList.push({
-                    id: key,
-                    text: i8ln(value)
-                })
-            } else if (customTileServer && customTileServerStyle) {
                 styleList.push({
                     id: key,
                     text: i8ln(value)
