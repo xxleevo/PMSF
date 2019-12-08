@@ -221,6 +221,7 @@
 	"raidbossFilterlist": true,
 	"filterByRaidlevel": true,
     "noCustomTileServer": true,
+	"customTileServerAddress": true,
     "forcedTileServer": true
   }
 }

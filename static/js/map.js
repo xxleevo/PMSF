@@ -6646,7 +6646,7 @@ $(function () {
                 googleMaps = true
             }
             var googleStyle = value.includes('Google')
-			var customTileServer
+            var customTileServer
             if (noCustomTileServer) {
                 customTileServer = false
             } else {
@@ -6658,8 +6658,7 @@ $(function () {
                     id: key,
                     text: i8ln(value)
                 })
-            }
-            else if (!googleMaps && !googleStyle && !customTileServerStyle) {
+            } else if (!googleMaps && !googleStyle && !customTileServerStyle) {
                 styleList.push({
                     id: key,
                     text: i8ln(value)
