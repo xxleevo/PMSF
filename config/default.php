@@ -301,6 +301,13 @@ $notifyNotification = 'true';                                       // true/fals
 $noQuestscanInfotext = true; // true/false - enables the questscan-info menupoint in the menu
 $questscanInfotext = "some text for quest information supporting<br>html";
 
+/* Custom Tileserver.  */
+// (Only tested with https://github.com/123FLO321/SwiftTileserverCache ) */
+
+$noCustomTileServer = true;                                         // Enable/Disable Custom TileServer
+$customTileServerAddress = '';                                      // TileServer URL: http://ipAddress:port/tile/klokantech-basic/{z}/{x}/{y}/1/png
+$forcedTileServer = false;
+
 /* Style Settings */
 
 $copyrightSafe = true;
@@ -311,7 +318,7 @@ $iconRepos = [["Standard","$iconRepository"]];
 $noCostumeIcons = true;											// enable/disable costume forms (label only) (Note: use icon-sets with costumes if using this)
 
 $noMapStyle = false;                                                // true/false
-$mapStyle = 'openstreetmap';                                        // openstreetmap, darkmatter, styleblackandwhite, styletopo, stylesatellite, stylewikipedia
+$mapStyle = 'openstreetmap';                                        // openstreetmap, darkmatter, styleblackandwhite, styletopo, stylesatellite, stylewikipedia, (tileserver)
 
 $noDirectionProvider = false;                                       // true/false
 $directionProvider = 'google';                                      // google, waze, apple, bing, google_pin

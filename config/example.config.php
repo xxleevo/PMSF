@@ -292,6 +292,13 @@ $pvptext2 = '';								// font size 4 good for header - name your marker "2" in 
 $pvptext3 = '';								// font size 4 good for header - name your marker "3" in the geojson, this text will be the popup text. if no text is given, it will be "no further information"
 $pvptext4 = '';								// font size 4 good for header - name your marker "4" in the geojson, this text will be the popup text. if no text is given, it will be "no further information"
 
+/* Custom Tileserver.  */
+// (Only tested with https://github.com/123FLO321/SwiftTileserverCache ) */
+
+$noCustomTileServer = true;                                        // Enable/Disable Custom TileServer
+$customTileServerAddress = '';                                      // TileServer URL: http://ipAddress:port/tile/klokantech-basic/{z}/{x}/{y}/1/png
+$forcedTileServer = false;
+
 /*---------Style Settings---------*/
 $noCostumeIcons = true;												// enable/disable costume forms (label only) (Note: only use icon-sets with costumes if using this)
 

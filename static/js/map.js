@@ -421,7 +421,6 @@ function initMap() { // eslint-disable-line no-unused-vars
             $('#currentWeather').fadeOut()
         }
     })
-
     map.createPane('portals')
     map.getPane('portals').style.zIndex = 450
     createMyLocationButton()
@@ -500,6 +499,8 @@ var stylewikipedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y
 
 var googlemapssat = L.gridLayer.googleMutant({type: 'satellite'}) // eslint-disable-line no-unused-vars
 var googlemapsroad = L.gridLayer.googleMutant({type: 'roadmap'}) // eslint-disable-line no-unused-vars
+
+var tileserver = L.tileLayer(customTileServerAddress, {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
 
 function setTileLayer(layername) {
     if (map.hasLayer(window[_oldlayer])) { map.removeLayer(window[_oldlayer]) }
@@ -6642,12 +6643,25 @@ $(function () {
                 googleMaps = true
             }
             var googleStyle = value.includes('Google')
-            if (!googleMaps && !googleStyle) {
+			var customTileServer
+            if (noCustomTileServer) {
+                customTileServer = false
+            } else {
+                customTileServer = true
+            }
+            var customTileServerStyle = value.includes('Tileserver')
+
+            if (!googleMaps && !googleStyle && !customTileServerStyle) {
                 styleList.push({
                     id: key,
                     text: i8ln(value)
                 })
             } else if (googleMaps) {
+                styleList.push({
+                    id: key,
+                    text: i8ln(value)
+                })
+            } else if (customTileServer && customTileServerStyle) {
                 styleList.push({
                     id: key,
                     text: i8ln(value)

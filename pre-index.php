@@ -2490,6 +2490,8 @@ $getList = new \Scanner\RDM();
 	var raidbossFilterlist = <?php echo $noRaidfilterList === true ? 'true' : $raidbossFilterlist ?>;
 	var filterByRaidlevel = <?php echo $noFilterByRaidlevel === true ? 'true' : $filterByRaidlevel ?>;
 	var hideRaidEggs = <?php echo $noRaids ? '[]' : $hideRaidEggs ?>;
+    var noCustomTileServer = <?php echo $noCustomTileServer === true ? 'true' : 'false' ?>;
+    var customTileServerAddress = '<?php echo $customTileServerAddress ?>';
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
