@@ -494,9 +494,8 @@ function initMap() { // eslint-disable-line no-unused-vars
     $selectPokemonLabelStyle.on('change', function (e) {
         Store.set('pokemonLabelStyle', this.value)
         // Redraw Pokemon when changing the label
-		redrawPokemon(mapData.pokemons)
+        redrawPokemon(mapData.pokemons)
     })
-
 }
 
 function toggleFullscreenMap() { // eslint-disable-line no-unused-vars
@@ -986,14 +985,14 @@ function pokemonLabel(item) {
     var weatherBoostedCondition = item['weather_boosted_condition']
     var level = item['level']
     var formStr = ''
-	var labelStyle = Store.get('pokemonLabelStyle')
-	
+    var labelStyle = Store.get('pokemonLabelStyle')
+
     if (form === 0 || form === '0' || form == null) {
         formStr = '00'
     } else {
         formStr = form
     }
-	var pokeForm = ''
+    var pokeForm = ''
     if (form !== null && form > 0 && item['form_name'] !== 'Normal') {
         pokeForm = ' (' + i8ln(item['form_name']) + ')'
     }
@@ -1008,11 +1007,13 @@ function pokemonLabel(item) {
     $.each(types, function (index, type) {
         typesDisplay += getTypeSpan(type)
     })
+    var details = ''
+    var iv
+    var contentstring = ''
     if (labelStyle !== 'classic') { // If LabelStyle is anything but classic
-	    //Start of the label 
-        var details = ''
+        // Start of the label
         if (atk != null && def != null && sta != null) {
-            var iv = getIv(atk, def, sta)
+            iv = getIv(atk, def, sta)
             details =
                 // IV
                 '<div style="clear:both;margin-bottom:0px;'
@@ -1063,14 +1064,14 @@ function pokemonLabel(item) {
         if (item['costume'] > 0 && noCostumeIcons === false) {
             costumeString = '_' + item['costume']
         }
-        var contentstring =
+        contentstring =
             '<center><div style="background-color:rgba(0,0,0,0.4);margin: 0px -10px -5px -10px;border-radius:6px;box-shadow: inset 0 0 2px #fff;">' +
             '<b><font size="3" color="white">' + name + pokeForm
             // If its a Ditto, show the real Pokemons name too.
         if (id === 132) {
             contentstring += ' (' + dittoDisguise + ')'
         }
-		
+
         contentstring += '</font></b>'
         contentstring += '<span style="color:white;"> - </span>' +
             '<small>' +
@@ -1134,12 +1135,11 @@ function pokemonLabel(item) {
             '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ', ' + longitude + ')" title="' + i8ln('Route') + '"><img src="static/images/label/' + labelStyle + '/map.png" height="32" width="auto" /></a>' +
             '</div>' +
             '</div>'
-	} else { // Classic labelStyle
+    } else { // Classic labelStyle
         var pMoveType1 = ''
         var pMoveType2 = ''
-        var details = ''
         if (atk != null && def != null && sta != null) {
-            var iv = getIv(atk, def, sta)
+            iv = getIv(atk, def, sta)
             var pokemonLevel
             if (level != null) {
                 pokemonLevel = level
@@ -1154,8 +1154,8 @@ function pokemonLabel(item) {
             }
             // IV, CP, Moves & Details
             details +=
-                '<div style="position:absolute;top:90px;left:100px;">'+
-				'<div style="font-size:14px;">' + i8ln('IV') + ': <b>' + iv.toFixed(1) + '%</b> (<b>' + atk + '</b>/<b>' + def + '</b>/<b>' + sta + '</b>)' +
+                '<div style="position:absolute;top:90px;left:100px;">' +
+                '<div style="font-size:14px;">' + i8ln('IV') + ': <b>' + iv.toFixed(1) + '%</b> (<b>' + atk + '</b>/<b>' + def + '</b>/<b>' + sta + '</b>)' +
                 '</div>' +
                 '<div style="font-size:14px;">' + i8ln('CP') + ': <b>' + cp + '</b> | ' + i8ln('Level') + ': <b>' + pokemonLevel + '</b></div>' +
                 '</div><br>' +
@@ -1173,7 +1173,7 @@ function pokemonLabel(item) {
         }
 
         // Name
-        var contentstring =
+        contentstring =
             '<div style="font-size:15px;"><center>' +
             '<b>' + name + '</b>'
         if (form !== null && form > 0 && item['form_name'] !== 'Normal') {
@@ -1184,7 +1184,7 @@ function pokemonLabel(item) {
         if (gender != null) {
             contentstring += ' ' + genderType[gender - 1]
         }
-        
+
         // Coords
         var coordText = latitude.toFixed(6) + ', ' + longitude.toFixed(7)
         if (hidePokemonCoords === true) {
@@ -1201,13 +1201,13 @@ function pokemonLabel(item) {
             '</center></div>' +
             '<div><center><small>' + typesDisplay + '</small></center></div>' +
             '<div><img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr
-        //Costume
+        // Costume
         if (item['costume'] > 0 && noCostumeIcons === false) {
             contentstring += '_' + item['costume']
         }
         contentstring += '.png" style="width:70px;margin-top:5px;"/>'
-        
-        //Despawn timer
+
+        // Despawn timer
         if (verifiedDespawn === 1) {
             contentstring += '<span style="top:63px;left:95px;position:absolute;font-size:13px;">' +
                 ' <img src="static/images/label/v2/clock.png" height="16" width="auto" style="vertical-align:middle;" />' + ' ' + getTimeStr(disappearTime) +
@@ -1251,7 +1251,7 @@ function pokemonLabel(item) {
         if (atk != null && def != null && sta != null) {
             contentstring += '<br><br><br>'
         }
-	}
+    }
     return contentstring
 }
 
@@ -2358,20 +2358,20 @@ function customizePokemonMarker(marker, item, skipNotification) {
         marker.rangeCircle = addRangeCircle(marker, map, 'pokemon')
     }
     // Label customization #01
-	switch (Store.get('pokemonLabelStyle')){
+    switch (Store.get('pokemonLabelStyle')) {
         case 'classic':
             marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 300, minWidth: 210})
-            break;
+            break
         case 'v1':
             marker.bindPopup(pokemonLabel(item), {className: 'pokeLabelv1', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 300, minWidth: 210})
-            break;
+            break
         case 'v2':
             marker.bindPopup(pokemonLabel(item), {className: 'pokeLabelv2', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 300, minWidth: 210})
-            break;
+            break
         default:
             marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 300, minWidth: 210})
-        break;
-	}
+            break
+    }
     if (notifiedPokemon.indexOf(item['pokemon_id']) > -1) {
         if (!skipNotification) {
             checkAndCreateSound(item['pokemon_id'])
@@ -7149,8 +7149,6 @@ $(function () {
     })
     $selectOverlayStyle.val(Store.get('designStyle')).trigger('change')
 
-    //PokemonLabelStyle HERE
-	
     // Icon Styling
     $selectIconStyle = $('#icon-style')
 

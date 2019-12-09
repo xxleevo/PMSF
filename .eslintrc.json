@@ -222,6 +222,7 @@
 	"filterByRaidlevel": true,
     "noCustomTileServer": true,
 	"customTileServerAddress": true,
+	"pokemonLabelStyle": true,
     "forcedTileServer": true
   }
 }
