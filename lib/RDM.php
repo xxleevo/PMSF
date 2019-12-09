@@ -196,6 +196,7 @@ class RDM extends Scanner
                 foreach ($forms as $f => $v) {
                     if ($pokemon["form"] === $v['protoform']) {
                         $types = $v['formtypes'];
+						$pokemon["form_name"] = $v['nameform'];
                         foreach ($v['formtypes'] as $ft => $v) {
                             $types[$ft]['type'] = i8ln($v['type']);
                         }

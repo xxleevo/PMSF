@@ -300,6 +300,9 @@ $customTileServerAddress = '';                                      // TileServe
 $forcedTileServer = false;
 
 /*---------Style Settings---------*/
+$noPokemonLabelStyles = true;                                   //enables/disables the choice for users to set their prefered pokemonLabel style
+$pokemonLabelStyle = 'classic';                                 // classic, v1, v2
+
 $noCostumeIcons = true;												// enable/disable costume forms (label only) (Note: only use icon-sets with costumes if using this)
 
 $noMapStyle = false;												// Enables/Disables Mapstyle changing

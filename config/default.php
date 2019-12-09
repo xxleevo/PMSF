@@ -164,6 +164,9 @@ $noNotifyBounce = false;                                        // true/false
 $noNotifyNotification = false;                                  // true/false
 
 /* Style Settings */
+$noPokemonLabelStyles = true;                                   //enables/disables the choice for users to set their prefered pokemonLabel style
+$pokemonLabelStyle = 'classic';                                 // classic, v1, v2
+
 $iconNotifySizeModifier = 15;                                   // 0, 15, 30, 45
 $noOverlayDesign = true;                                        // true/false
 $overlayDesign = 'linear-gradient(to top, #686868 0%, #121212 100%)'; //Color design - sets the background-image (linear-gradient for normal colors is also possible here)

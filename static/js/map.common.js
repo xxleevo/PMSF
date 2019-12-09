@@ -444,6 +444,11 @@ var StoreOptions = {
             default: gymStyle,
             type: StoreTypes.String
         },
+    'pokemonLabelStyle':
+        {
+            default: pokemonLabelStyle,
+            type: StoreTypes.String
+        },
     'zoomLevel':
         {
             default: initialZoom,

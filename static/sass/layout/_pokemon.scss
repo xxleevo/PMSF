@@ -1,6 +1,12 @@
-.pokeLabel .leaflet-popup-content-wrapper{
+.pokeLabelv1 .leaflet-popup-content-wrapper{
   background: black;
-  background: #000000 url('/static/images/label_back.png');
+  background: #000000 url('/static/images/label/v1/label_back.png');
+  background-size: cover;
+}
+
+.pokeLabelv2 .leaflet-popup-content-wrapper{
+  background: black;
+  background: #000000 url('/static/images/label/v2/label_back.png');
   background-size: cover;
 }
 

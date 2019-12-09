@@ -1,4 +1,8 @@
 {
+  "Weight" : "Gewicht",
+  "Height" : "Größe",
+  "Plant" : "Pflanze",
+  "Trash" : "Lumpen",
   "Tileserver (Recommended)" : "Tileserver (Empfohlen)",
   "Lure until" : "Lockmodul bis",
   "Magnetic Lure" : "Magnet-Lockmodul",
