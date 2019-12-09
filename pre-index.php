@@ -311,6 +311,14 @@ $getList = new \Scanner\RDM();
 	<!-- font awesome icons -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
+<?php
+if (!$noLoadingScreen) {
+    echo '<app-root><p class="spinner" VALIGN="CENTER">';
+    if ($loadingStyle == '') {
+        $loadingStyle = '<i class="fa fas fa-cog fa-spin fa-2x" aria-hidden="true"></i>';
+    }
+    echo $loadingStyle . '&nbsp;' . i8ln('Loading') . '...</p></app-root>';
+} ?>
 <body id="top">
 <div class="wrapper">
     <!-- Header -->
@@ -1655,6 +1663,18 @@ $getList = new \Scanner\RDM();
 					</div>
 				</div>';
 			}
+            if ( !$noPokemonLabelStyles ) {
+				echo '<div class="form-control switch-container">
+					<h3>' . i8ln("Pokemon Label Design") . '</h3>
+					<div>
+						<select name="pokemon-label-style" id="pokemon-label-style">
+							<option value="classic">Classic</option>
+							<option value="v1">Restyled(v1)</option>
+							<option value="v2">Restyled(v2)</option>
+						</select>
+					</div>
+				</div>';
+			}
             if ( ! $noMapStyle || ! $noDirectionProvider || ! $noIconSize || ! $noIconNotifySizeModifier || ! $noGymStyle || ! $noLocationStyle ) {
                 echo '</div>';
             }
@@ -2493,6 +2513,7 @@ $getList = new \Scanner\RDM();
     var noCustomTileServer = <?php echo $noCustomTileServer === true ? 'true' : 'false' ?>;
     var customTileServerAddress = '<?php echo $customTileServerAddress ?>';
     var forcedTileServer = <?php echo $forcedTileServer === true ? 'true' : 'false' ?>;
+    var pokemonLabelStyle = '<?php echo $pokemonLabelStyle ?>';
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
