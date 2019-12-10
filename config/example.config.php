@@ -120,7 +120,7 @@ $enableWeatherIcons = 'false';										// default value for users for weather-i
 $noHighLevelData = false;											// This will activate/deactivate all iv/cp/move data for monsters
 $noMinIV = false;													// This will enable/disable the option for a global minIV
 $minIV = '0';														// "0" for empty or a number
-$noIv100Glow = false;												// Puts a glow on the 100% and put their z-index to highest, also restyles the IV-label part
+$noIv100Glow = false;												// Puts a glow on the 100% and put their z-index to highest, also restyles the IV-label part (in v1 and v2 only, not in classic label)
 $Iv100GlowColor = 'rgba(255, 200, 44, 1)';							// Glow Color - supports rgba, hex, colorname
 
 $noMinLevel = false;												// This will enable/disable the option for a global minLvl
@@ -301,7 +301,7 @@ $forcedTileServer = false;
 
 /*---------Style Settings---------*/
 $noPokemonLabelStyles = true;                                   //enables/disables the choice for users to set their prefered pokemonLabel style
-$pokemonLabelStyle = 'classic';                                 // classic, v1, v2
+$pokemonLabelStyle = 'v2';                                 // classic, v1, v2
 
 $noCostumeIcons = true;												// enable/disable costume forms (label only) (Note: only use icon-sets with costumes if using this)
 
