@@ -492,6 +492,9 @@ $numberOfItem = 1405;
 $numberOfGrunt = 50;
 // Do not enable unless requested
 
+$noLoadingScreen = true;
+$loadingStyle = '';
+
 $enableDebug = false;
 
 //-----------------------------------------------------
