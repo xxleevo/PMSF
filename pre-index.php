@@ -2514,6 +2514,7 @@ if (!$noLoadingScreen) {
     var customTileServerAddress = '<?php echo $customTileServerAddress ?>';
     var forcedTileServer = <?php echo $forcedTileServer === true ? 'true' : 'false' ?>;
     var pokemonLabelStyle = '<?php echo $pokemonLabelStyle ?>';
+	var useIconRepoPokeRewards = <?php echo $usePokeRewardsFromIconRepository === true ? 'true' : 'false' ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

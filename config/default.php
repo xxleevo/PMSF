@@ -317,6 +317,7 @@ $copyrightSafe = true;
 $iconRepository = 'https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/';#
 $noMultipleRepos = true;
 $rewardsIconsRepository = 'static/icons/';
+$usePokeRewardsFromIconRepository = false;
 $iconRepos = [["Standard","$iconRepository"]];
 $noCostumeIcons = true;											// enable/disable costume forms (label only) (Note: use icon-sets with costumes if using this)
 

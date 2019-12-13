@@ -1566,8 +1566,12 @@ function getReward(item) {
         if (reward['shiny'] === true) {
             shinyStr = '_shiny'
         }
-        rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
-    } else if (item['quest_reward_type'] === 3) {
+        if (useIconRepoPokeRewards){
+            rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
+		} else {
+            rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
+        }
+	} else if (item['quest_reward_type'] === 3) {
         rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_stardust.png"/>'
     } else if (item['quest_reward_type'] === 2) {
         rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_' + reward['item_id'] + '_1.png"/>'
@@ -2863,7 +2867,9 @@ function getPokestopMarkerIcon(item) {
             }
             if (!noInvasions && invasion === 1 && invasionExpiration > Date.now() && Store.get('showInvasions') && item['grunt_type'] !== null) {
                 rewardImg = '<img src="static/forts/gruntType/' + item['grunt_type'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
-            } else {
+            } else if (useIconRepoPokeRewards){
+                rewardImg = '<img src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+		    } else {
                 rewardImg = '<img src="' + rewardIcons + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
             }
             if (lure > Date.now()) {

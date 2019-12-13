@@ -76,6 +76,7 @@ $iconRepository = 'https://raw.githubusercontent.com/whitewillem/PogoAssets/resi
 $rewardsIconsRepository = 'static/icons/';						    // URL or folder paths to the "reward"-folder, containing the reward images and a "pokemon" folder containing the pokemon reward images.
 																	// You can also use a an url here for your icons!
 																	// example: $rewardsIconsRepository = 'https://raw.githubusercontent.com/user/repo/branch/.../';
+$usePokeRewardsFromIconRepository = false;                          // If true, the pokemon reward images are pulled from the $iconRepository
 $noMultipleRepos = true;											// To enable Multiple icon packs:
 																	// Each iconpack needs to be in a seperate folder
 																	// for the menu icons, $iconRepository will be used always.
