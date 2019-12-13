@@ -1,55 +1,55 @@
 {
   "1": {
     "protoname": "ITEM_POKE_BALL",
-    "name": "Pokéball"
+    "name": "Poké Ball"
   },
   "2": {
     "protoname": "ITEM_GREAT_BALL",
-    "name": "Superball"
+    "name": "Super Ball"
   },
   "3": {
     "protoname": "ITEM_ULTRA_BALL",
-    "name": "Hyperball"
+    "name": "Hyper Ball"
   },
   "4": {
     "protoname": "ITEM_MASTER_BALL",
-    "name": "Meisterball"
+    "name": "Master Ball"
   },
   "5": {
     "protoname": "ITEM_PREMIER_BALL",
-    "name": "Premierball"
+    "name": "Premier Ball"
   },
   "101": {
     "protoname": "ITEM_POTION",
-    "name": "Trank"
+    "name": "Potion"
   },
   "102": {
     "protoname": "ITEM_SUPER_POTION",
-    "name": "Supertrank"
+    "name": "Super Potion"
   },
   "103": {
     "protoname": "ITEM_HYPER_POTION",
-    "name": "Hypertrank"
+    "name": "Hyper Potion"
   },
   "104": {
     "protoname": "ITEM_MAX_POTION",
-    "name": "Top Trank"
+    "name": "Max Potion"
   },
   "201": {
     "protoname": "ITEM_REVIVE",
-    "name": "Beleber"
+    "name": "Revive"
   },
   "202": {
     "protoname": "ITEM_MAX_REVIVE",
-    "name": "Top Beleber"
+    "name": "Max Revive"
   },
   "301": {
     "protoname": "ITEM_LUCKY_EGG",
-    "name": "Glücksei"
+    "name": "Lucky Egg"
   },
   "401": {
     "protoname": "ITEM_INCENSE_ORDINARY",
-    "name": "Rauch"
+    "name": "Incense"
   },
   "402": {
     "protoname": "ITEM_INCENSE_SPICY",
@@ -65,27 +65,27 @@
   },
   "501": {
     "protoname": "ITEM_TROY_DISK",
-    "name": "Lockmodul"
+    "name": "Lure Module"
   },
   "502": {
     "protoname": "ITEM_TROY_DISK_GLACIAL",
-    "name": "Gletscher-Lockmodul"
+    "name": "Glacial Lure Module"
   },
   "503": {
     "protoname": "ITEM_TROY_DISK_MOSSY",
-    "name": "Moos-Lockmodul"
+    "name": "Mossy Lure Module"
   },
   "504": {
     "protoname": "ITEM_TROY_DISK_MAGNETIC",
-    "name": "Magnet-Lockmodul"
+    "name": "Magnetic Lure Module"
   },
   "602": {
     "protoname": "ITEM_X_ATTACK",
-    "name": "X Angriff"
+    "name": "X Attack"
   },
   "603": {
     "protoname": "ITEM_X_DEFENSE",
-    "name": "X Verteidigung"
+    "name": "X Defense"
   },
   "604": {
     "protoname": "ITEM_X_MIRACLE",
@@ -93,7 +93,7 @@
   },
   "701": {
     "protoname": "ITEM_RAZZ_BERRY",
-    "name": "Himmihbeere"
+    "name": "Razz Berry"
   },
   "702": {
     "protoname": "ITEM_BLUK_BERRY",
@@ -101,7 +101,7 @@
   },
   "703": {
     "protoname": "ITEM_NANAB_BERRY",
-    "name": "Nanabeere"
+    "name": "Nanab Berry"
   },
   "704": {
     "protoname": "ITEM_WEPAR_BERRY",
@@ -109,19 +109,19 @@
   },
   "705": {
     "protoname": "ITEM_PINAP_BERRY",
-    "name": "Sananabeere"
+    "name": "Pinap Berry"
   },
   "706": {
     "protoname": "ITEM_GOLDEN_RAZZ_BERRY",
-    "name": "Goldene Sananabeere"
+    "name": "Golden Razz Berry"
   },
   "707": {
     "protoname": "ITEM_GOLDEN_NANAB_BERRY",
-    "name": "Goldene Nanabeere"
+    "name": "Golden Nana Berry"
   },
   "708": {
     "protoname": "ITEM_GOLDEN_PINAP_BERRY",
-    "name": "Silberne Sananabeere"
+    "name": "Silver Pinap Berry"
   },
   "801": {
     "protoname": "ITEM_SPECIAL_CAMERA",
@@ -133,11 +133,11 @@
   },
   "902": {
     "protoname": "ITEM_INCUBATOR_BASIC",
-    "name": "Brutmaschine"
+    "name": "Incubator"
   },
   "903": {
     "protoname": "ITEM_INCUBATOR_SUPER",
-    "name": "Super Brutmaschine"
+    "name": "Super Incubator"
   },
   "1001": {
     "protoname": "ITEM_POKEMON_STORAGE_UPGRADE",
@@ -149,19 +149,19 @@
   },
   "1101": {
     "protoname": "ITEM_SUN_STONE",
-    "name": "Sonnstein"
+    "name": "Sun Stone"
   },
   "1102": {
     "protoname": "ITEM_KINGS_ROCK",
-    "name": "Kingstein"
+    "name": "Kings Rock"
   },
   "1103": {
     "protoname": "ITEM_METAL_COAT",
-    "name": "Metallmantel"
+    "name": "Metal Coat"
   },
   "1104": {
     "protoname": "ITEM_DRAGON_SCALE",
-    "name": "Drachenklaue"
+    "name": "Dragon Scale"
   },
   "1105": {
     "protoname": "ITEM_UP_GRADE",
@@ -169,23 +169,23 @@
   },
   "1106": {
     "protoname": "ITEM_GEN4_EVOLUTION_STONE",
-    "name": "Sinnohstein"
+    "name": "Sinnoh Stone"
   },
   "1107": {
     "protoname": "ITEM_GEN5_EVOLUTION_STONE",
-    "name": "Unova Stein"
+    "name": "Unova Stone"
   },
   "1201": {
     "protoname": "ITEM_MOVE_REROLL_FAST_ATTACK",
-    "name": "Sofort TM"
+    "name": "Quick TM"
   },
   "1202": {
     "protoname": "ITEM_MOVE_REROLL_SPECIAL_ATTACK",
-    "name": "Lade TM"
+    "name": "Charge TM"
   },
   "1301": {
     "protoname": "ITEM_RARE_CANDY",
-    "name": "Sonderbonbon"
+    "name": "Rare Candy"
   },
   "1401": {
     "protoname": "ITEM_FREE_RAID_TICKET",
@@ -197,14 +197,14 @@
   },
   "1403": {
     "protoname": "ITEM_LEGENDARY_RAID_TICKET",
-    "name": "EX Raid Pass"
+    "name": "Legendary Raid Pass"
   },
   "1404": {
     "protoname": "ITEM_STAR_PIECE",
-    "name": "Sternenstück"
+    "name": "Star Piece"
   },
   "1405": {
     "protoname": "ITEM_FRIEND_GIFT_BOX",
-    "name": "Geschenkbox"
+    "name": "Gift Box"
   }
 }

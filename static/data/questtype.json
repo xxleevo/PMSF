@@ -9,7 +9,7 @@
   },
   "2": {
     "prototext": "QUEST_FIRST_POKESTOP_OF_THE_DAY",
-    "text": "First pokéstop of the day"
+    "text": "First {8} of the day"
   },
   "3": {
     "prototext": "QUEST_MULTI_PART",
@@ -17,35 +17,35 @@
   },
   "4": {
     "prototext": "QUEST_CATCH_POKEMON",
-    "text": "Fange {0} Pokémon"
+    "text": "Catch {0} {1}"
   },
   "5": {
     "prototext": "QUEST_SPIN_POKESTOP",
-    "text": "Drehe {0} Pokéstops"
+    "text": "Spin {0} Pokéstops"
   },
   "6": {
     "prototext": "QUEST_HATCH_EGG",
-    "text": "Brüte {0} Eier aus"
+    "text": "Hatch {0} egg(s)"
   },
   "7": {
     "prototext": "QUEST_COMPLETE_GYM_BATTLE",
-    "text": "Absolviere {0} Arenenkämpfe"
+    "text": "{3} {0} Gymfight(s)"
   },
   "8": {
     "prototext": "QUEST_COMPLETE_RAID_BATTLE",
-    "text": "Absolviere {0} Raids"
+    "text": "{3} {0} {4}"
   },
   "9": {
     "prototext": "QUEST_COMPLETE_QUEST",
-    "text": "Absolviere {0} Quests"
+    "text": "{3} {0} Quests"
   },
   "10": {
     "prototext": "QUEST_TRANSFER_POKEMON",
-    "text": "Verschicke {0} Pokémon"
+    "text": "Transfer {0} {1}"
   },
   "11": {
     "prototext": "QUEST_FAVORITE_POKEMON",
-    "text": "Favorisiere {0} Pokémon"
+    "text": "Favorize {0} {1}"
   },
   "12": {
     "prototext": "QUEST_AUTOCOMPLETE",
@@ -53,78 +53,78 @@
   },
   "13": {
     "prototext": "QUEST_USE_BERRY_IN_ENCOUNTER",
-    "text": "Fange {0} Pokémon mit Beeren"
+    "text": "Catch {0} {1} with {6}"
   },
   "14": {
     "prototext": "QUEST_UPGRADE_POKEMON",
-    "text": "Levle ein Pokémon {0} mal"
+    "text": "Level up a {1} {0} times"
   },
   "15": {
     "prototext": "QUEST_EVOLVE_POKEMON",
-    "text": "Entwickle {0} Pokémon"
+    "text": "Evolve {0} {1}"
   },
   "16": {
     "prototext": "QUEST_LAND_TROW",
-    "text": "Lande {0} Würfe"
+    "text": "Land {0} {5}"
   },
   "17": {
     "prototext": "QUEST_GET_BUDDY_CANDY",
-    "text": "Verdiene {0} Bonbons beim laufen mit deinem Kumpel"
+    "text": "Get {0} candy by walking with your buddy"
   },
   "18": {
     "prototext": "QUEST_BADGE_RANK",
-    "text": "Sammle {0} Medaillen"
+    "text": "Collect {0} badges"
   },
   "19": {
     "prototext": "QUEST_PLAYER_LEVEL",
-    "text": "Werde Level {0}"
+    "text": "Become level {0}"
   },
   "20": {
     "prototext": "QUEST_JOIN_RAID",
-    "text": "Nimm an {0} Raids teil"
+    "text": "Take part of {0} raid(s)"
   },
   "21": {
     "prototext": "QUEST_COMPLETE_BATTLE",
-    "text": "Absolviere {0} Raids"
+    "text": "Complete {0} {4}"
   },
   "22": {
     "prototext": "QUEST_ADD_FRIEND",
-    "text": "Füge {0} neue Freunde hinzu"
+    "text": "Add {0} new friend(s)"
   },
   "23": {
     "prototext": "QUEST_TRADE_POKEMON",
-    "text": "Tausche {0} Pokémon"
+    "text": "Trade {0} {1}"
   },
   "24": {
     "prototext": "QUEST_SEND_GIFT",
-    "text": "Verschicke {0} Geschenke"
+    "text": "Send {0} gift(s)"
   },
   "25": {
     "prototext": "QUEST_EVOLVE_INTO_POKEMON",
-    "text": "Entwickle {0} Pokémon zu"
+    "text": "Evolve {0} Pokemon into"
   },
   "27": {
     "prototext": "QUEST_COMPLETE_COMBAT",
-    "text": "Bestreite {0} Kämpfe"
+    "text": "Complete {0} Fights"
   },
   "28": {
     "prototext": "QUEST_TAKE_SNAPSHOT",
-    "text": "Mache {0} Schnappschüsse"
+    "text": "Take {0} {2}"
   },
   "29": {
     "prototext": "QUEST_BATTLE_TEAM_ROCKET",
-    "text": "Besiege {0} Team GO Rocket Rüpel"
+    "text": "Defeat {0} Team GO {7}"
   },
   "30": {
     "prototext": "QUEST_PURIFY_POKEMON",
-    "text": "Erlöse {0} Pokémon"
+    "text": "Purify {0} {1}"
   },
   "31": {
     "prototext": "QUEST_FIND_TEAM_ROCKET",
-    "text": "Finde {0} Rocket Rüpel"
+    "text": "Find {0} {7}"
   },
   "32": {
     "prototext": "QUEST_FIRST_GRUNT_OF_THE_DAY",
-    "text": "{0} mal erster Rüpel des Tages"
+    "text": "{0} times first {7} of the day"
   }
 }

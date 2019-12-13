@@ -176,7 +176,7 @@ var genderType = ['♂', '♀', 'N/A']
 var forms = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?', i8ln('Normal'), i8ln('Sunny'), i8ln('Rainy'), i8ln('Snowy'), i8ln('Normal'), i8ln('Attack'), i8ln('Defense'), i8ln('Speed'), i8ln('1'), i8ln('2'), i8ln('3'), i8ln('4'), i8ln('5'), i8ln('6'), i8ln('7'), i8ln('8'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Frost'), i8ln('Fan'), i8ln('Mow'), i8ln('Wash'), i8ln('Heat'), i8ln('Plant'), i8ln('Sandy'), i8ln('Trash'), i8ln('Altered'), i8ln('Origin'), i8ln('Sky'), i8ln('Land'), i8ln('Overcast'), i8ln('Sunny'), i8ln('West sea'), i8ln('East sea'), i8ln('West sea'), i8ln('East sea'), i8ln('Arceus Normal'), i8ln('Archeus Fighting'), i8ln('Archeus Flying'), i8ln('Archeus Poison'), i8ln('Archeus Ground'), i8ln('Archeus Rock'), i8ln('Archeus Bug'), i8ln('Archeus Ghost'), i8ln('Archeus Steel'), i8ln('Archeus Fire'), i8ln('Archeus Water'), i8ln('Archeus Grass'), i8ln('Archeus Electric'), i8ln('Archeus Psychic'), i8ln('Archeus Ice'), i8ln('Archeus Dragon'), i8ln('Archeus Dark'), i8ln('Archeus Fairy'), i8ln('Plant'), i8ln('Sandy'), i8ln('Trash'), i8ln('8'), i8ln('9'), i8ln('10'), i8ln('11'), i8ln('12'), i8ln('13'), i8ln('14'), i8ln('15'), i8ln('16'), i8ln('17'), i8ln('18'), i8ln('19'), i8ln('Armored'), i8ln('A-intro'), i8ln('Normal'), i8ln('Red Striped'), i8ln('Blue Striped'), i8ln('Normal'), i8ln('Zen'), i8ln('Incarnate'), i8ln('Therian'), i8ln('Incarnate'), i8ln('Therian'), i8ln('Incarnate'), i8ln('Therian'), i8ln('Normal'), i8ln('Black'), i8ln('White'), i8ln('Ordinary'), i8ln('Resolute'), i8ln('Aria'), i8ln('Pirouette'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Spring'), i8ln('Summer'), i8ln('Autumn'), i8ln('Winter'), i8ln('Spring'), i8ln('Summer'), i8ln('Autumn'), i8ln('Winter'), i8ln('Normal'), i8ln('Schock'), i8ln('Burn'), i8ln('Chill'), i8ln('Douse'), i8ln('Normal'), i8ln('Unknown'), i8ln('Normal'), i8ln('Unknown'), i8ln('Normal'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Fall'), i8ln('Fall'), i8ln('Fall'), i8ln('Fall'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('VS 2019'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Galarian'), i8ln('Normal'), i8ln('Galarian'), i8ln('Normal'), i8ln('Galarian')]
 var formsEn = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?', 'Normal', 'Sunny', 'Rainy', 'Snowy', 'Normal', 'Attack', 'Defense', 'Speed', '1', '2', '3', '4', '5', '6', '7', '8', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Frost', 'Fan', 'Mow', 'Wash', 'Heat', 'Plant', 'Sandy', 'Trash', 'Altered', 'Origin', 'Sky', 'Land', 'Overcast', 'Sunny', 'West sea', 'East sea', 'West sea', 'East sea', 'Arceus Normal', 'Fighting', 'Flying', 'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel', 'Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark', 'Fairy', 'Plant', 'Sandy', 'Trash', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', 'Armored', 'A-intro', 'Normal', 'Red Striped', 'Blue Striped', 'Normal', 'Zen', 'Incarnate', 'Therian', 'Incarnate', 'Therian', 'Incarnate', 'Therian', 'Normal', 'Black', 'White', 'Ordinary', 'Resolute', 'Aria', 'Pirouette', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Spring', 'Summer', 'Autumn', 'Winter', 'Spring', 'Summer', 'Autumn', 'Winter', 'Normal', 'Schock', 'Burn', 'Chill', 'Douse', 'Normal', 'Unknown', 'Normal', 'Unknown', 'Normal', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Fall', 'Fall', 'Fall', 'Fall', 'Normal', 'Shadow', 'Purified', 'VS 2019', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Galarian', 'Normal', 'Galarian', 'Normal', 'Galarian']
 var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.3210876, 0.34921268, 0.37523559, 0.39956728, 0.42250001, 0.44310755, 0.46279839, 0.48168495, 0.49985844, 0.51739395, 0.53435433, 0.55079269, 0.56675452, 0.58227891, 0.59740001, 0.61215729, 0.62656713, 0.64065295, 0.65443563, 0.667934, 0.68116492, 0.69414365, 0.70688421, 0.71939909, 0.7317, 0.73776948, 0.74378943, 0.74976104, 0.75568551, 0.76156384, 0.76739717, 0.7731865, 0.77893275, 0.7846369, 0.79030001]
-var throwType = JSON.parse('{"10": "gute", "11": "großartige", "12": "fabelhafte"}')
+var throwType = JSON.parse('{"10": "good", "11": "great", "12": "excellent"}')
 var weatherLayerGroup = new L.LayerGroup()
 var weatherArray = []
 var weatherPolys = []
@@ -1716,8 +1716,8 @@ function getQuest(item) {
             } else {
                 tstr = pokemonTypes[questinfo['pokemon_type_ids']]
             }
-            str = str.replace('Pokémon', 'Pokémon vom Typ ' + tstr)
-            str = str.replace('Schnappschüsse', 'Schnappschüsse von ' + tstr + ' Pokémon')
+            str = str.replace('{1}', i8ln('{1} with type') + ' ' + tstr)
+            str = str.replace('{2}', i8ln('{2} with type') + ' ' + tstr)
         } else if (item['quest_condition_type'] === 2) {
             var pstr = ''
             if (questinfo['pokemon_ids'].length > 1) {
@@ -1731,53 +1731,53 @@ function getQuest(item) {
             } else {
                 pstr = idToPokemon[questinfo['pokemon_ids']].name
             }
-            str = str.replace('Pokémon', pstr)
+            str = str.replace('{1}', pstr)
         } else if (item['quest_condition_type'] === 3) {
-            str = str.replace('Pokémon', 'Pokémon mit Wetterboost')
+            str = str.replace('{1}', i8ln('{1} with weatherboost'))
         } else if (item['quest_condition_type'] === 6) {
-            str = str.replace('Absolviere', 'Gewinne')
+            str = str.replace('{3}', i8ln('Win'))
         } else if (item['quest_condition_type'] === 7) {
             raidLevel = Math.min.apply(null, questinfo['raid_levels'])
             if (raidLevel > 1) {
-                str = str.replace('Raids', 'Level ' + raidLevel + ' Raids oder höher')
+                str = str.replace('{4}', i8ln('Level') + ' ' + raidLevel + ' ' + i8ln('raid or higher'))
             }
             if (item['quest_condition_type_1'] === 6) {
-                str = str.replace('Absolviere', 'Gewinne')
+                str = str.replace('{3}', i8ln('Win'))
             }
         } else if (item['quest_condition_type'] === 8) {
-            str = str.replace('Würfe', i8ln(throwType[questinfo['throw_type_id']] + ' Würfe'))
+            str = str.replace('{5}', i8ln(throwType[questinfo['throw_type_id']]) + ' {5}')
             if (item['quest_condition_type_1'] === 15) {
-                str = str.replace('Würfe', 'Curveball Würfe')
+                str = str.replace('{5}', i8ln('curveball {5}'))
             }
         } else if (item['quest_condition_type'] === 9) {
-            str = str.replace('Absolviere', 'Gewinne')
+            str = str.replace('{3}', i8ln('Win'))
         } else if (item['quest_condition_type'] === 10) {
-            str = str.replace('Absolviere', 'Nutze eine sehr effektive Ladeattacke in ')
+            str = str.replace('{3}', i8ln('Use a very effective charge move in') + ' ')
         } else if (item['quest_condition_type'] === 11 && questinfo !== null) {
-            str = str.replace('Beeren', 'einer ' + i8ln(idToItem[questinfo['item_id']].name))
+            str = str.replace('{6}', i8ln('a ') + idToItem[questinfo['item_id']].name)
         } else if (item['quest_condition_type'] === 11) {
             str = str.replace('Entwickle', 'Nutze ein Entwicklungsitem und entwickle')
         } else if (item['quest_condition_type'] === 14 && typeof questinfo['throw_type_id'] === 'undefined') {
-            str = str.replace('Würfe', 'Würfe hintereinander')
+            str = str.replace('{5}', i8ln('{5} in a row'))
             if (item['quest_condition_type_1'] === 15) {
-                str = str.replace('Würfe', 'Curveball Würfe')
+                str = str.replace('{5}', i8ln('curveball {5}'))
             }
         } else if (item['quest_condition_type'] === 14) {
-            str = str.replace('Würfe', i8ln(throwType[questinfo['throw_type_id']] + ' Würfe hintereinander'))
+            str = str.replace('{5}', i8ln(throwType[questinfo['throw_type_id']]) + ' ' + i8ln('{5} in a row'))
             if (item['quest_condition_type_1'] === 15) {
-                str = str.replace('Würfe', 'Curveball Würfe')
+                str = str.replace('{5}', i8ln('curveball {5}'))
             }
         } else if (item['quest_condition_type'] === 12) {
-            str = str.replace('Pokéstops', 'neue Pokéstops')
+            str = str.replace('{8}', i8ln('new {8}'))
         } else if (item['quest_condition_type'] === 22) {
-            str = str.replace('Kämpfe', 'NPC-Kämpfe')
+            str = str.replace('{9}', 'NPC-{9}')
         } else if (item['quest_condition_type'] === 23) {
-            str = str.replace('Kämpfe', 'PVP-Kämpfe')
+            str = str.replace('{9}', 'PVP-{9}')
         } else if (item['quest_condition_type'] === 27) { // Grunt Specific Characters
             var gstr = ''
             if (questinfo['character_category_ids'].length > 1) {
                 if (questinfo['character_category_ids'].length === 3 && (questinfo['character_category_ids'].includes(3) && questinfo['character_category_ids'].includes(4) && questinfo['character_category_ids'].includes(5))) {
-                    str = str.replace('Rüpel', 'Teamleiter')
+                    str = str.replace('{7}', i8ln('Team Leader'))
                 } else {
                     $.each(questinfo['character_category_ids'], function (index, charId) {
                         if (index === (questinfo['character_category_ids'].length - 1)) {
@@ -1790,10 +1790,10 @@ function getQuest(item) {
             } else {
                 gstr = gruntCharacterTypes[questinfo['character_category_ids']]
             }
-            str = str.replace('Rüpel', 'Mitglieder: ' + gstr)
+            str = str.replace('{7}', i8ln('Members') + ': ' + gstr)
         } else if (item['quest_condition_type'] === 19) { // "new friend", but no string because its a default
         } else if (item['quest_condition_type'] === 25) {
-            str = str.replace('Pokémon', 'Pokémon mit ' + questinfo['distance'].toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' km Entfernung')
+            str = str.replace('{1}', i8ln('{1} with') + ' ' + questinfo['distance'].toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' ' + i8ln('km Entfernung'))
         } else if (item['quest_condition_type'] !== 0) {
             console.log('Undefined condition type ' + item['quest_condition_type'])
             str += '<div>Undefined condition</div>'
@@ -1805,14 +1805,14 @@ function getQuest(item) {
             reward = JSON.parse(item['quest_rewards'])
             rewardinfo = reward[0]['info']
             str += '<div><center>' +
-            '<b><u>Belohnung:</u></b> ' + i8ln(idToItem[rewardinfo['item_id']]).name + '<br>' +
-            '<b><u>Menge:</u></b>' + ' ' + item['quest_reward_amount'] +
+            '<b><u>' + i8ln('Reward') + ':</u></b> ' + i8ln(idToItem[rewardinfo['item_id']]).name + '<br>' +
+            '<b><u>' + i8ln('Amount') + ':</u></b>' + ' ' + item['quest_reward_amount'] +
             '</center></div>'
         }
         if (item['quest_reward_type'] === 3) {
             str += '<div><center>' +
-            '<b><u>Belohnung:</u></b> Sternenstaub' + '<br>' +
-            '<b><u>Menge:</u></b>' + ' ' + item['quest_reward_amount'] +
+            '<b><u>' + i8ln('Reward') + ': </u></b>' + i8ln('Stardust') + '<br>' +
+            '<b><u>' + i8ln('Amount') + ': </u></b>' + ' ' + item['quest_reward_amount'] +
             '</center></div>'
         }
         if (item['quest_reward_type'] === 7) {
@@ -1823,40 +1823,63 @@ function getQuest(item) {
             if (!noQuestPokemonCP) {
                 var cpMin = getPokemonCP(rewardinfo['pokemon_id'], item['quest_pokemon_form'], item['reward_pokemon_base_atk'], item['reward_pokemon_base_def'], item['reward_pokemon_base_sta'], 15, 10, 10, 10)
                 var cpMax = getPokemonCP(rewardinfo['pokemon_id'], item['quest_pokemon_form'], item['reward_pokemon_base_atk'], item['reward_pokemon_base_def'], item['reward_pokemon_base_sta'], 15, 15, 15, 15)
-                pokemonCPStr = '<b>WP: </b>' + cpMin + '-' + cpMax
+                pokemonCPStr = '<b>' + i8ln('CP') + ': </b>' + cpMin + '-' + cpMax
             }
             str += '<div><center>' +
-            '<b><u>Belohnung:</u></b> ' + i8ln(idToPokemon[rewardinfo['pokemon_id']]).name + '<br>' +
+            '<b><u>' + i8ln('Reward') + ':</u></b> ' + i8ln(idToPokemon[rewardinfo['pokemon_id']]).name + '<br>' +
             pokemonCPStr +
             '</center></div>'
         }
-        // If condition is only 1 item/pokemon/etc
-        if (item['quest_target'] === 1) { // hardcode singulary in german
-            str = str.replace('Würfe', 'Wurf')
-            str = str.replace('Raids', 'Raid')
-            str = str.replace('Arenenkämpfe', 'Arenenkampf')
-            str = str.replace('Eier', 'Ei')
-            str = str.replace('Bonbons', 'Bonbon')
-            str = str.replace('Pokéstops', 'Pokéstop')
-            str = str.replace('Quests', 'Quest')
-            str = str.replace('Medaillen', 'Medaille')
-            str = str.replace('neue Freunde', 'neuen Freund')
-            str = str.replace('gute', 'guten')
-            str = str.replace('großartige', 'großartigen')
-            str = str.replace('fabelhafte', 'fabelhaften')
-            str = str.replace('neue Pokéstops', 'neuen Pokéstop')
-            str = str.replace('Schnappschüsse', 'Schnappschuss')
-            str = str.replace('Kämpfe', 'Kampf')
-            // Condition 1: Pokemon,3:Pokemon,11:entwickle Pokemon
-            if (str.includes('1 Pokémon') || str.includes('1 Ei')) {
-                str = str.replace(item['quest_target'], 'ein')
-            }
-            if (str.includes('1 neuen') || str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss') || str.includes('Kampf') || str.includes('Rüpel')) {
-                str = str.replace(item['quest_target'], 'einen')
-            }
+
+        // Replace the objects with their translated names
+        if (str.includes('{1}') || str.includes('{2}') || str.includes('{3}') || str.includes('{4}') || str.includes('{5}') || str.includes('{6}') || str.includes('{7}') || str.includes('{8}') || str.includes('{9}')) {
+            str = str.replace('{1}', i8ln('{1}'))
+            str = str.replace('{2}', i8ln('{2}'))
+            str = str.replace('{3}', i8ln('{3}'))
+            str = str.replace('{4}', i8ln('{4}'))
+            str = str.replace('{5}', i8ln('{5}'))
+            str = str.replace('{6}', i8ln('{6}'))
+            str = str.replace('{7}', i8ln('{7}'))
+            str = str.replace('{8}', i8ln('{8}'))
+            str = str.replace('{9}', i8ln('{9}'))
         }
-        if (item['quest_condition_type'] === 10) {
-            str = str.replace('Arenenkämpfe', 'Arenenkämpfen')
+        // If condition is only 1 item/pokemon/etc
+        if (language === 'de') {
+            if (item['quest_target'] === 1) { // hardcode singulary in german
+                str = str.replace('Würfe', 'Wurf')
+                str = str.replace('Raids', 'Raid')
+                str = str.replace('Arenenkämpfe', 'Arenenkampf')
+                str = str.replace('Eier', 'Ei')
+                str = str.replace('Bonbons', 'Bonbon')
+                str = str.replace('Pokéstops', 'Pokéstop')
+                str = str.replace('Quests', 'Quest')
+                str = str.replace('Medaillen', 'Medaille')
+                str = str.replace('neue Freunde', 'neuen Freund')
+                str = str.replace('gute', 'guten')
+                str = str.replace('großartige', 'großartigen')
+                str = str.replace('fabelhafte', 'fabelhaften')
+                str = str.replace('neue Pokéstops', 'neuen Pokéstop')
+                str = str.replace('Schnappschüsse', 'Schnappschuss')
+                str = str.replace('Kämpfe', 'Kampf')
+                // Condition 1: Pokemon,3:Pokemon,11:entwickle Pokemon
+                if (str.includes('1 Pokémon') || str.includes('1 Ei')) {
+                    str = str.replace(item['quest_target'], 'ein')
+                }
+                if (str.includes('1 neuen') || str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss') || str.includes('Kampf') || str.includes('Rüpel')) {
+                    str = str.replace(item['quest_target'], 'einen')
+                }
+            }
+            if (item['quest_condition_type'] === 10) {
+                str = str.replace('Arenenkämpfe', 'Arenenkämpfen')
+            }
+        } else if (language === 'en') { // Hardcode singularity in english
+            if (item['quest_target'] === 1) {
+                str = str.replace('(s)', '') // If its singulary, then remove the (s)
+                str = str.replace(item['quest_target'], 'one')
+            } else {
+                str = str.replace('(s)', 's') // If its plural, then remove the brackets
+                str = str.replace('Berrys', 'Berries')
+			}
         }
     } else if (item['quest_type'] !== null) {
         questStr = i8ln(questtypeList[item['quest_type']])
@@ -1864,7 +1887,19 @@ function getQuest(item) {
         i8ln('Task:') + ' ' +
         questStr.replace('{0}', item['quest_target']) +
         '</div>'
+        if (str.includes('{1}') || str.includes('{2}') || str.includes('{3}') || str.includes('{4}') || str.includes('{5}') || str.includes('{6}') || str.includes('{7}') || str.includes('{8}') || str.includes('{9}')) {
+            str = str.replace('{1}', i8ln('{1}'))
+            str = str.replace('{2}', i8ln('{2}'))
+            str = str.replace('{3}', i8ln('{3}'))
+            str = str.replace('{4}', i8ln('{4}'))
+            str = str.replace('{5}', i8ln('{5}'))
+            str = str.replace('{6}', i8ln('{6}'))
+            str = str.replace('{7}', i8ln('{7}'))
+            str = str.replace('{8}', i8ln('{8}'))
+            str = str.replace('{9}', i8ln('{9}'))
+        }
     }
+	
     return str
 }
 
@@ -6208,7 +6243,7 @@ function centerMap(lat, lng, zoom) {
 }
 
 function i8ln(word) {
-    if ($.isEmptyObject(i8lnDictionary) && language !== 'en' && languageLookups < languageLookupThreshold) {
+    if ($.isEmptyObject(i8lnDictionary) && languageLookups < languageLookupThreshold) {
         $.ajax({
             url: 'static/dist/locales/' + language + '.min.json',
             dataType: 'json',
