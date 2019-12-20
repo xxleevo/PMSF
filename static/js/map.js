@@ -622,17 +622,18 @@ function showS2Cells(level, style) {
             })
         }
 
-        var html = ''
+        var nextGymLevel = ''
+		var html = ''
         var filledStyle = {color: 'black', fillOpacity: 0.0}
         if ((cell.level === 14 && Store.get('showGymCellCalculations')) && (totalCount === 1 || totalCount === 5 || totalCount === 19)) {
             filledStyle = {fillColor: 'green', fillOpacity: 0.3}
-            html += '<div><center><b>' + i8ln('1 more Pokéstop until new gym') + '</b></center></div>'
+            nextGymLevel = '<div><center><b>' + i8ln('1 more Pokéstop until new gym') + '</b></center></div>'
         } else if ((cell.level === 14 && Store.get('showGymCellCalculations')) && (totalCount === 4 || totalCount === 18)) {
             filledStyle = {fillColor: 'orange', fillOpacity: 0.3}
-            html += '<div><center><b>' + i8ln('2 more Pokéstops until new gym') + '</b></center></div>'
+            nextGymLevel = '<div><center><b>' + i8ln('2 more Pokéstops until new gym') + '</b></center></div>'
         } else if (cell.level === 14 && totalCount >= 20 && Store.get('showGymCellCalculations')) {
             filledStyle = {fillColor: 'black', fillOpacity: 0.3}
-            html += '<div><center><b>' + i8ln('Max amount of Gyms reached') + '</b></center></div>'
+            nextGymLevel = '<div><center><b>' + i8ln('Max amount of Gyms reached') + '</b></center></div>'
         }
         if (cell.level === 17 && Store.get('showCoveredPokestopCells')) {
             $.each(mapData.pokestops, function (key, value) {
@@ -648,7 +649,9 @@ function showS2Cells(level, style) {
         }
         const poly = L.polygon(vertices, Object.assign({color: 'black', opacity: 0.5, weight: 0.5, fillOpacity: 0.0}, style, filledStyle))
         if (cell.level === 14 && Store.get('showGymCellCalculations')) {
-            html += '<div><b><u>' + i8ln('Gym cell') + '</u></b></div><hr>' +
+            html += '<div><b><u>' + i8ln('Gym cell') + '</u></b></div>' +
+                nextGymLevel +
+                '<hr style="margin:10px;">' +
                 '<div>' + i8ln('Gyms in cell') + ': <b>' + gymCount + '</b></div>' +
                 '<div>' + i8ln('Pokéstops in cell') + ': <b>' + stopCount + '</b></div>'
             if (sponsoredStopCount > 0) {
