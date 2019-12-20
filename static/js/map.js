@@ -3103,16 +3103,21 @@ function nestLabel(item) {
     var nameStr = ''
     var whatsappStr = ''
     if (item.name !== 'Unknown Areaname' && item.name !== null) { // Set the Nest's name if the db has a proper value for it
-        nameStr = '<center><b>' + item.name + '</b></center>'
-        whatsappStr = '<a href="whatsapp://send?text=%2ANest:%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2AOrt:%2A%20' + item.name + '%0A%2ASpawndichte:%2A%20~' + Math.round(item.pokemon_avg) + '/Stunde%0A%0A%2ANavi:%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
+        
+        if (item.name.length > 30){
+            nameStr = '<center><b>' + item.name.substring(0,29) + '..' + '</b></center>'
+        } else{
+            nameStr = '<center><b>' + item.name + '</b></center>'
+        }
+        whatsappStr = '<a href="whatsapp://send?text=%2A' + i8ln('Nest') + ':%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2A' + i8ln('Place') + ':%2A%20' + item.name + '%0A%2A' + i8ln('Spawn Density') + ':%2A%20~' + Math.round(item.pokemon_avg) + '/Stunde%0A%0A%2A' + i8ln('Route') + ':%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
     } else {
-        whatsappStr = '<a href="whatsapp://send?text=%2ANest:%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2ASpawndichte:%2A%20~' + Math.round(item.pokemon_avg) + '/Stunde%0A%0A%2ANavi:%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
+        whatsappStr = '<a href="whatsapp://send?text=%2A' + i8ln('Nest') + ':%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2A' + i8ln('Spawn Density') + ':%2A%20~' + Math.round(item.pokemon_avg) + '/Stunde%0A%0A%2A' + i8ln('Route') + ':%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
     }
     var countAvgStr = ''
     if (item.pokemon_avg > 0 && item.pokemon_avg != null) { // Set the pokemon average spawn if the db has a proper value for it
         countAvgStr = '<div>' +
         '<hr width="50%" style="margin: 1em 0;border-bottom: solid 1px rgba(141, 141, 141, 0.43);">' +
-        '<b>Spawndichte:</b> etwa ' + Math.round(item.pokemon_avg) + ' pro Stunde' +
+        '<b>' + i8ln('Spawn Density') + ':</b> ' + i8ln('approx.') + ' ' + Math.round(item.pokemon_avg) + ' ' + i8ln('per hour') +
         '</div>'
     }
     var str = '<div>'
