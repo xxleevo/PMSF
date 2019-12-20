@@ -3225,10 +3225,10 @@ function communityLabel(item) {
     str +=
         '<center><h3><div><u>' + item.title + '</u></div></h3></center>' +
         '<center><div>' +
-        '<u>Beschreibung:</u><br>' +
+        '<u>' + i8ln('Description') + ':</u><br>' +
         item.description.slice(0, 70) + '</div></center><hr style="margin:1em 0"/>'
     if (item.team_instinct === 1 || item.team_mystic === 1 || item.team_valor === 1) {
-        str += '<center><div>Teams:<br>'
+        str += '<center><div>' + i8ln('Teams') + ':<br>'
         if (item.team_instinct === 1) {
             str +=
             '<img src="static/images/communities/instinct.png" align"middle" style="width:32px;height: auto;"/>'
@@ -3250,14 +3250,14 @@ function communityLabel(item) {
     if (item.has_invite_url === 1 && (item.invite_url !== '#' || item.invite_url !== undefined)) {
         str +=
         '<center><div class="button-container">' +
-            '<a class="button" href="' + item.invite_url + '">' + i8ln('Join Now') + '<i class="fa fa-comments" style="margin-left:10px;"></i>' +
+            '<a class="button" href="' + item.invite_url + '">' + i8ln('Join Now') + '<i class="fa fa-comments" style="margin-left:10px;font-size:20px;vertical-align:middle;"></i>' +
             '</a>' +
         '</div></center>'
     }
     if (!noEditCommunity) {
         str +=
         '<center><div class="button-container">' +
-        '<a class="button" onclick="openEditCommunityModal(event);" data-id="' + item.community_id + '" data-title="' + item.title + '" data-description="' + item.description + '" data-invite="' + item.invite_url + '">' + i8ln('Edit Community') + '<i class="fa fa-edit style="margin-left:10px;"></i></center>' +
+        '<a class="button" onclick="openEditCommunityModal(event);" data-id="' + item.community_id + '" data-title="' + item.title + '" data-description="' + item.description + '" data-invite="' + item.invite_url + '">' + i8ln('Edit Community') + '<i class="fa fa-edit" style="margin-left:10px;font-size:20px;vertical-align:middle;"></i></center>' +
             '</a>' +
         '</div></center>'
     }
