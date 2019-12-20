@@ -1305,9 +1305,9 @@ function gymLabel(item) {
         for (i = 0; i < item['raid_level']; i++) {
             levelStr += '★'
         }
-        raidStr = '<h3 style="margin-bottom: 0">Raid ' + levelStr
+        raidStr = '<h3 style="margin-bottom: 0">' + i8ln('Raid') + ' ' + levelStr
         if (item.is_exclusive !== null && item.is_exclusive === 1) {
-            raidStr += '<span style="background-color:gold;border-radius:10px"><br>' + 'Exklusiver Raid</span>'
+            raidStr += '<span style="background-color:gold;border-radius:10px"><br>' + i8ln('Exclusive Raid') + '</span>'
         }
         var pokemonid = item['raid_pokemon_id']
 
@@ -1331,7 +1331,7 @@ function gymLabel(item) {
         if (raidStarted) {
             var cpStr = ''
             if (item.raid_pokemon_cp > 0) {
-                cpStr = ' WP ' + item.raid_pokemon_cp
+                cpStr = ' ' + i8ln('CP') + ' ' + item.raid_pokemon_cp
             }
             raidStr += '<br>' + item.raid_pokemon_name
             if (form !== null && form > 0 && forms.length > form) {
@@ -1347,7 +1347,7 @@ function gymLabel(item) {
                 var cpMax = getPokemonCP(pokemonid, raidForm, item['raidboss_base_atk'], item['raidboss_base_def'], item['raidboss_base_sta'], 20, 15, 15, 15)
                 var cpMinBoosted = getPokemonCP(pokemonid, raidForm, item['raidboss_base_atk'], item['raidboss_base_def'], item['raidboss_base_sta'], 25, 10, 10, 10)
                 var cpMaxBoosted = getPokemonCP(pokemonid, raidForm, item['raidboss_base_atk'], item['raidboss_base_def'], item['raidboss_base_sta'], 25, 15, 15, 15)
-                raidStr += '<h4 style="margin-bottom: 1px;">Fang-WP: ' + cpMin + '-' + cpMax + ' (' + cpMinBoosted + '-' + cpMaxBoosted + ')</h4>'
+                raidStr += '<h4 style="margin-bottom: 1px;">' + i8ln('Catch CP')+ ': ' + cpMin + '-' + cpMax + ' (' + cpMinBoosted + '-' + cpMaxBoosted + ')</h4>'
             }
         }
         raidStr += '</h3>'
@@ -1480,12 +1480,12 @@ function gymLabel(item) {
                 '<div>'
             if ((!noWhatsappLink && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
                 if (!noWhatsappRaidMoves) {
-                    str += '<a href="whatsapp://send?text=' + '📌%20%2AArena:%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2ARaid:%2A%20%0ALevel%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A👊%20%2AMoveset:%2A%20%0A' + pMove1 + '/' + pMove2 + '%0A%0A🔛%20%2ARaidzeit:%2A%20%0AStart:%20' + raidStartStr + '%0AEnde:%20' + raidEndStr + '%0A%0A🗺%20%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
+                    str += '<a href="whatsapp://send?text=' + '📌%20%2A' + i8ln('Gym') + ':%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2A' + i8ln('Raid') + ':%2A%20%0A' + i8ln('Level') + '%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A👊%20%2A' + i8ln('Moveset') + ':%2A%20%0A' + pMove1 + '/' + pMove2 + '%0A%0A🔛%20%2A' + i8ln('Raidtime') + ':%2A%20%0A' + i8ln('Start') + ':%20' + raidStartStr + '%0A' + i8ln('End') + ':%20' + raidEndStr + '%0A%0A🗺%20%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
                 } else {
-                    str += '<a href="whatsapp://send?text=' + '📌%20%2AArena:%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2ARaid:%2A%20%0ALevel%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A🔛%20%2ARaidzeit:%2A%20%0AStart:%20' + raidStartStr + '%0AEnde:%20' + raidEndStr + '%0A%0A🗺%20%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
+                    str += '<a href="whatsapp://send?text=' + '📌%20%2A' + i8ln('Gym') + ':%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2A' + i8ln('Raid') + ':%2A%20%0A' + i8ln('Level') + '%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A🔛%20%2A' + i8ln('Raidtime') + ':%2A%20%0A' + i8ln('Start') + ':%20' + raidStartStr + '%0A' + i8ln('End') + ':%20' + raidEndStr + '%0A%0A🗺%20%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
                 }
             } else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
-                str += '<a href="whatsapp://send?text=' + '📌%20%2AArena:%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2ARaid:%2A%20%0ALevel%20' + item.raid_level + '%20Ei%20🥚%0A%0A🔛%20%2ARaidzeit:%2A%20%0AStart:%20' + raidStartStr + '%0AEnde:%20' + raidEndStr + '%0A%0A🗺%20%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>'
+                str += '<a href="whatsapp://send?text=' + '📌%20%2A' + i8ln('Gym') + ':%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2A' + i8ln('Raid') + ':%2A%20%0A' + i8ln('Level') + '%20' + item.raid_level + '%20Ei%20🥚%0A%0A🔛%20%2A' + i8ln('Raidtime') + ':%2A%20%0A' + i8ln('Start') + ':%20' + raidStartStr + '%0A' + i8ln('End') + ':%20' + raidEndStr + '%0A%0A🗺%20%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
             }
             if (!noWhatsappLink || (!noRaidCounterGuide && ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)))) {
                 str += hyphen
@@ -1529,13 +1529,13 @@ function gymLabel(item) {
         if (((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
             str += '<center>' +
                 '<div>' +
-                '<a href="whatsapp://send?text=' + '%2AArena:%2A%20' + encodeURIComponent(item.name) + '%0A%2ARaid:%2A%20Level%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>' +
+                '<a href="whatsapp://send?text=' + '%2AArena:%2A%20' + encodeURIComponent(item.name) + '%0A%2ARaid:%2A%20Level%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>' +
                 '</div>' +
                 '</center>'
         } else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
             str += '<center>' +
                 '<div>' +
-                '<a href="whatsapp://send?text=' + '%2AArena:%2A%20' + encodeURIComponent(item.name) + '%0A%2ARaid:%2A%20Level%20' + item.raid_level + '%20Ei%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">Whatsapp Link</a>' +
+                '<a href="whatsapp://send?text=' + '%2AArena:%2A%20' + encodeURIComponent(item.name) + '%0A%2ARaid:%2A%20Level%20' + item.raid_level + '%20Ei%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>' +
                 '</div>' +
                 '</center>'
         }
