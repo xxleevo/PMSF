@@ -921,8 +921,7 @@ class RDM extends Scanner
         foreach ($spawnpoints as $spawnpoint) {
             $spawnpoint["latitude"] = floatval($spawnpoint["latitude"]);
             $spawnpoint["longitude"] = floatval($spawnpoint["longitude"]);
-            $spawnpoint["time"] = !empty($spawnpoint["despawn_time"]) ? $spawnpoint["despawn_time"] : null;
-            $spawnpoint["duration"] = !empty($spawnpoint["duration"]) ? $spawnpoint["duration"] : null;
+            $spawnpoint["despawn_sec"] = !empty($spawnpoint["despawn_sec"]) ? $spawnpoint["despawn_sec"] : null;
             $data[] = $spawnpoint;
             unset($spawnpoints[$i]);
             $i++;

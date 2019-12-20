@@ -1568,10 +1568,10 @@ function getReward(item) {
         }
         if (useIconRepoPokeRewards){
             rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
-		} else {
+        } else {
             rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
         }
-	} else if (item['quest_reward_type'] === 3) {
+    } else if (item['quest_reward_type'] === 3) {
         rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_stardust.png"/>'
     } else if (item['quest_reward_type'] === 2) {
         rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_' + reward['item_id'] + '_1.png"/>'
@@ -1883,7 +1883,7 @@ function getQuest(item) {
             } else {
                 str = str.replace('(s)', 's') // If its plural, then remove the brackets
                 str = str.replace('Berrys', 'Berries')
-			}
+            }
         }
     } else if (item['quest_type'] !== null) {
         questStr = i8ln(questtypeList[item['quest_type']])
@@ -1903,7 +1903,7 @@ function getQuest(item) {
             str = str.replace('{9}', i8ln('{9}'))
         }
     }
-	
+
     return str
 }
 
@@ -2090,14 +2090,14 @@ function pokestopLabel(item) {
         if (Store.get('showQuests') === true) {
             if (item['quest_reward_type'] === 7) {
                 RewardId = reward['pokemon_id']
-                excludeStr = '<a href="javascript:excludePokemonQuest(' + RewardId + ')" title="Alle dieser Spezies ausblenden">' + i8ln('Exclude Questtype') + '</a>'
+                excludeStr = '<a href="javascript:excludePokemonQuest(' + RewardId + ')" title="' + i8ln('Exclude This Species Quests') + '">' + i8ln('Exclude Questtype') + '</a>'
             }
             if (item['quest_reward_type'] === 2) {
                 RewardId = reward['item_id']
-                excludeStr = '<a href="javascript:excludeItemQuest(' + RewardId + ')" title="Alle dieser Sorte ausblenden">' + i8ln('Exclude Questtype') + '</a>'
+                excludeStr = '<a href="javascript:excludeItemQuest(' + RewardId + ')" title="' + i8ln('Exclude This Item Quests') + '">' + i8ln('Exclude Questtype') + '</a>'
             }
             if (item['quest_reward_type'] === 3) {
-                excludeStr = '<a href="javascript:excludeDustQuest()" title="Sternenstaub-Quests ausblenden">' + i8ln('Exclude Questtype') + '</a>'
+                excludeStr = '<a href="javascript:excludeDustQuest()" title="' + i8ln('Exclude Stardust Quests') + '">' + i8ln('Exclude Questtype') + '</a>'
             }
         }
         var rewardImg = '<div style="margin-top:-60px;margin-right:-60px">' +
@@ -2126,7 +2126,7 @@ function pokestopLabel(item) {
             hr +
             lureStr +
             getQuest(item) +
-            '<center><a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="Pokestop (temp.) entfernen"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a></center>' +
+            '<center><a href="javascript:removePokestopMarker(\'' + pokestopId + '\')" title="' + i8ln('Remove Pokestop (temp.)') + '"><i class="fa fa-check" aria-hidden="true" style="font-size:32px"></i></a></center>' +
             '</center>' +
             hr +
             firstSeen +
@@ -2183,7 +2183,7 @@ function pokestopLabel(item) {
     if ((!noWhatsappLinkQuests) && (item['quest_condition_type'] !== null && item['quest_type'] !== null)) {
         str += '<div>' +
             '<center>' +
-            '<a href="whatsapp://send?text=' + '%2APokestop:%2A%20' + encodeURIComponent(item['pokestop_name']) + '%0A%2AQuest:%2A%20' + getRawQuest(item) + '%0A%2AReward:%2A%20' + getRawReward(item) + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item['latitude'] + ',' + item['longitude'] + '" data-action="share/whatsapp/share">Whatsapp Link</a>' +
+            '<a href="whatsapp://send?text=' + '%2A' + i8ln('Pokestop') + ':%2A%20' + encodeURIComponent(item['pokestop_name']) + '%0A%2A' + i8ln('Quest') + ':%2A%20' + getRawQuest(item) + '%0A%2A' + i8ln('Reward') + ':%2A%20' + getRawReward(item) + '%0A%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item['latitude'] + ',' + item['longitude'] + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>' +
             '</center>' +
             '</div>'
     }
@@ -2217,7 +2217,7 @@ function formatSpawnTime(seconds) {
 }
 function spawnpointLabel(item) {
     var timeStr = ''
-    if (item['despawn_sec']) {
+    if (item['despawn_sec'] && item['despawn_sec'] !== null) {
         timeStr = '<b>' + i8ln('Spawn') + '</b>(mm:ss): ' + formatSpawnTime(item['despawn_sec'] - 1800) + ' ' + i8ln('or') + ' ' + formatSpawnTime(item['despawn_sec']) +
         '<br>' +
         '<b>' + i8ln('Despawn') + '</b>(mm:ss): ' + formatSpawnTime(item['despawn_sec'])
@@ -2869,7 +2869,7 @@ function getPokestopMarkerIcon(item) {
                 rewardImg = '<img src="static/forts/gruntType/' + item['grunt_type'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
             } else if (useIconRepoPokeRewards){
                 rewardImg = '<img src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
-		    } else {
+            } else {
                 rewardImg = '<img src="' + rewardIcons + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
             }
             if (lure > Date.now()) {
@@ -3435,24 +3435,10 @@ function deletePoi(event) { // eslint-disable-line no-unused-vars
     }
 }
 
-/* function getColorByDate(value) {
-    // Changes the color from red to green over 15 mins
-    var diff = (Date.now() - value) / 1000 / 60 / 15
-
-    if (diff > 1) {
-        diff = 1
-    }
-    // value from 0 to 1 - Green to Red
-    var hue = ((1 - diff) * 120).toString(10)
-    return ['hsl(', hue, ',100%,50%)'].join('')
-}
-*/
-
-function getColorBySpawnTime(value) {
-    if (value) {
+function getColorBySpawnTime(value,id) {
+    if (value && value !== null) {
         var now = new Date()
         var seconds = now.getMinutes() * 60 + now.getSeconds()
-
         value = parseInt(value)
         // Make the Value not the despawntime but the spawntime
         if (value < 1800) {
@@ -3480,81 +3466,26 @@ function getColorBySpawnTime(value) {
         } else if (diff >= 1680 && diff <= 1800) {
             color = 'red'
         }
-
+        /* Display soon-spawning spawnpoints
         if (diff <= 3600 && diff >= 3540) {
             color = 'blue'
         } else if (diff < 3540 && diff >= 3300) {
             color = 'royalblue'
         }
+        */
         return color
     } else {
-        return '000000'
+        return '#000000'
     }
 }
-/* var colourConversion = (function () {
-    var self = {}
-    self.hsvToHex = function (hue, sat, val) {
-        if (hue > 360 || hue < 0 || sat > 1 || sat < 0 || val > 1 || val < 0) {
-            console.log('{colourConverion.hsvToHex} illegal input')
-            return '#000000'
-        }
-        let rgbArray = hsvToRgb(hue, sat, val)
-        return rgbArrayToHexString(rgbArray)
-    }
-    function rgbArrayToHexString(rgbArray) {
-        let hexString = '#'
-        for (var i = 0; i < rgbArray.length; i++) {
-            let hexOfNumber = rgbArray[i].toString(16)
-            if (hexOfNumber.length === 1) {
-                hexOfNumber = '0' + hexOfNumber
-            }
-            hexString += hexOfNumber
-        }
-        if (hexString.length !== 7) {
-            console.log('Hexstring not complete for colours...')
-        }
-        return hexString
-    }
-    function hsvToRgb(hue, sat, val) {
-        let hder = Math.floor(hue / 60)
-        let f = hue / 60 - hder
-        let p = val * (1 - sat)
-        let q = val * (1 - sat * f)
-        let t = val * (1 - sat * (1 - f))
-        var rgb
-        if (sat === 0) {
-            rgb = [val, val, val]
-        } else if (hder === 0 || hder === 6) {
-            rgb = [val, t, p]
-        } else if (hder === 1) {
-            rgb = [q, val, p]
-        } else if (hder === 2) {
-            rgb = [p, val, t]
-        } else if (hder === 3) {
-            rgb = [p, q, val]
-        } else if (hder === 4) {
-            rgb = [t, p, val]
-        } else if (hder === 5) {
-            rgb = [val, p, q]
-        } else {
-            console.log('Failed converting HSV to RGB')
-        }
-        for (var i = 0; i < rgb.length; i++) {
-            rgb[i] = Math.round(rgb[i] * 255)
-        }
-        return rgb
-    }
-    return self
-})()
-*/
 
 function setupSpawnpointMarker(item) {
-    var hue = getColorBySpawnTime(item['despawn_sec'])
+    var hue = getColorBySpawnTime(item['despawn_sec'],item['spawnpoint_id'])
 
     var rangeCircleOpts = {
         radius: 4,
         weight: 1,
-        color: hue,
+        color: 'black',
         opacity: 1,
         center: [item['latitude'], item['longitude']],
         fillColor: hue,
@@ -5756,8 +5687,8 @@ function updateSpawnPoints() {
 
     $.each(mapData.spawnpoints, function (key, value) {
         if (map.getBounds().contains(value.marker.getLatLng())) {
-            var hue = getColorBySpawnTime(value['despawn_sec'])
-            value.marker.setStyle({color: hue, fillColor: hue})
+            var hue = getColorBySpawnTime(value['despawn_sec'],value['spawnpoint_id'])
+            value.marker.setStyle({color: 'black', fillColor: hue})
         }
     })
 }
