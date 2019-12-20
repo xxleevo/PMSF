@@ -8276,14 +8276,14 @@ function shareCommunitiesWhatsapp(header, secondLine, footer) { // eslint-disabl
         } else if (mapData.communities[key]['type'] === 5) { // Whatsapp
             link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(Whatsapp):%20'
         } else if (mapData.communities[key]['type'] === 6) { // Msg
-            link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(Fb Messenger):%20'
+            link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(FB Messenger):%20'
         } else if (mapData.communities[key]['type'] === 7) { // Fb
-            link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(Fb Gruppe):%20'
+            link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(Facebook):%20'
         } else if (mapData.communities[key]['type'] === 8) { // groupme
             link += '%0A%2A' + mapData.communities[key]['title'] + '%2A(GroupMe):%20'
         }
         if (mapData.communities[key]['has_invite_url'] === 1 && (mapData.communities[key]['invite_url'] !== '#' || mapData.communities[key]['invite_url'] !== undefined)) {
-            link += '%0ALink:%20' + mapData.communities[key]['invite_url'] + '%0A'
+            link += '%0A' + i8ln('Link') + ':%20' + mapData.communities[key]['invite_url'] + '%0A'
         }
     })
     link += '%0A%0A' + footer

@@ -881,7 +881,7 @@ if (!$noLoadingScreen) {
 						<div>
 						'. $communityDescription .'
 							<center>
-								<u><h3 style="margin:0 0 0.5em 0;"> Gruppen teilen</h3></u>
+								<u><h3 style="margin:0 0 0.5em 0;">' . i8ln('Share Groups') . '</h3></u>
 								<a class="settings btn-share-whatsapp" id="shareCommunities" href="#" data-action="share/whatsapp/share" onclick="shareCommunitiesWhatsapp(\''. $communityShareHeader .'\',\''. $communityShareDescription .'\',\''. $communityShareFooter .'\')">
 									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Whatsapp
 								</a>
