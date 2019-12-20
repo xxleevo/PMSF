@@ -8263,7 +8263,7 @@ function shareNestsWhatsapp(mode, header, secondLine, footer) { // eslint-disabl
         }
         // Adding Density
         if (mode === 2 || mode === 3) {
-            link += '%0ASpawns: ~' + Math.round(mapData.nests[key]['pokemon_avg']) + '%20pro%20Stunde'
+            link += '%0A' + i8ln('Spawns') + ': ~' + Math.round(mapData.nests[key]['pokemon_avg']) + '%20' + i8ln('per') + '%20' + i8ln('hour')
         }
         // Adding an extra Space if its not mode 0
         if (mode !== 0) {
