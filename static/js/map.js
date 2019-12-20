@@ -623,7 +623,7 @@ function showS2Cells(level, style) {
         }
 
         var nextGymLevel = ''
-		var html = ''
+        var html = ''
         var filledStyle = {color: 'black', fillOpacity: 0.0}
         if ((cell.level === 14 && Store.get('showGymCellCalculations')) && (totalCount === 1 || totalCount === 5 || totalCount === 19)) {
             filledStyle = {fillColor: 'green', fillOpacity: 0.3}
@@ -1350,7 +1350,7 @@ function gymLabel(item) {
                 var cpMax = getPokemonCP(pokemonid, raidForm, item['raidboss_base_atk'], item['raidboss_base_def'], item['raidboss_base_sta'], 20, 15, 15, 15)
                 var cpMinBoosted = getPokemonCP(pokemonid, raidForm, item['raidboss_base_atk'], item['raidboss_base_def'], item['raidboss_base_sta'], 25, 10, 10, 10)
                 var cpMaxBoosted = getPokemonCP(pokemonid, raidForm, item['raidboss_base_atk'], item['raidboss_base_def'], item['raidboss_base_sta'], 25, 15, 15, 15)
-                raidStr += '<h4 style="margin-bottom: 1px;">' + i8ln('Catch CP')+ ': ' + cpMin + '-' + cpMax + ' (' + cpMinBoosted + '-' + cpMaxBoosted + ')</h4>'
+                raidStr += '<h4 style="margin-bottom: 1px;">' + i8ln('Catch CP') + ': ' + cpMin + '-' + cpMax + ' (' + cpMinBoosted + '-' + cpMaxBoosted + ')</h4>'
             }
         }
         raidStr += '</h3>'
@@ -1569,7 +1569,7 @@ function getReward(item) {
         if (reward['shiny'] === true) {
             shinyStr = '_shiny'
         }
-        if (useIconRepoPokeRewards){
+        if (useIconRepoPokeRewards) {
             rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
         } else {
             rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
@@ -2870,7 +2870,7 @@ function getPokestopMarkerIcon(item) {
             }
             if (!noInvasions && invasion === 1 && invasionExpiration > Date.now() && Store.get('showInvasions') && item['grunt_type'] !== null) {
                 rewardImg = '<img src="static/forts/gruntType/' + item['grunt_type'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
-            } else if (useIconRepoPokeRewards){
+            } else if (useIconRepoPokeRewards) {
                 rewardImg = '<img src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
             } else {
                 rewardImg = '<img src="' + rewardIcons + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
@@ -3103,10 +3103,10 @@ function nestLabel(item) {
     var nameStr = ''
     var whatsappStr = ''
     if (item.name !== 'Unknown Areaname' && item.name !== null) { // Set the Nest's name if the db has a proper value for it
-        
-        if (item.name.length > 30){
-            nameStr = '<center><b>' + item.name.substring(0,29) + '..' + '</b></center>'
-        } else{
+        // Handle the name if its too long
+        if (item.name.length > 30) {
+            nameStr = '<center><b>' + item.name.substring(0, 29) + '..' + '</b></center>'
+        } else {
             nameStr = '<center><b>' + item.name + '</b></center>'
         }
         whatsappStr = '<a href="whatsapp://send?text=%2A' + i8ln('Nest') + ':%2A%20' + encodeURIComponent(item.pokemon_name) + '%0A%2A' + i8ln('Place') + ':%2A%20' + item.name + '%0A%2A' + i8ln('Spawn Density') + ':%2A%20~' + Math.round(item.pokemon_avg) + '/Stunde%0A%0A%2A' + i8ln('Route') + ':%2A%20https://maps.google.com/?q=' + item.lat.toFixed(4) + ',' + item.lon.toFixed(4) + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
@@ -3443,7 +3443,7 @@ function deletePoi(event) { // eslint-disable-line no-unused-vars
     }
 }
 
-function getColorBySpawnTime(value,id) {
+function getColorBySpawnTime(value) {
     if (value && value !== null) {
         var now = new Date()
         var seconds = now.getMinutes() * 60 + now.getSeconds()
@@ -3488,7 +3488,7 @@ function getColorBySpawnTime(value,id) {
 }
 
 function setupSpawnpointMarker(item) {
-    var hue = getColorBySpawnTime(item['despawn_sec'],item['spawnpoint_id'])
+    var hue = getColorBySpawnTime(item['despawn_sec'])
 
     var rangeCircleOpts = {
         radius: 4,
@@ -5695,7 +5695,7 @@ function updateSpawnPoints() {
 
     $.each(mapData.spawnpoints, function (key, value) {
         if (map.getBounds().contains(value.marker.getLatLng())) {
-            var hue = getColorBySpawnTime(value['despawn_sec'],value['spawnpoint_id'])
+            var hue = getColorBySpawnTime(value['despawn_sec'])
             value.marker.setStyle({color: 'black', fillColor: hue})
         }
     })

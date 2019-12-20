@@ -223,6 +223,7 @@
     "noCustomTileServer": true,
 	"customTileServerAddress": true,
 	"pokemonLabelStyle": true,
-    "forcedTileServer": true
+    "forcedTileServer": true,
+	"useIconRepoPokeRewards" : true
   }
 }
