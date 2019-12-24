@@ -514,6 +514,13 @@ $accessLevelsInherit = false;										// Choose if the levels in the access-lev
 $enableDebug = false;
 
 //-----------------------------------------------------
+// Holiday Overlay
+//-----------------------------------------------------
+
+$letItSnow = true;                                                   // Show snow overlay at 24, 25 and 26 December
+$makeItBang = true;                                                  // Show fireworks overlay at 31 December
+
+//-----------------------------------------------------
 // DATABASE CONFIG
 //-----------------------------------------------------
 $db = new Medoo([// required

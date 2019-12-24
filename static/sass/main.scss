@@ -4,6 +4,8 @@
 @import 'libs/skel';
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css);
+@import 'layout/snow';
+@import 'layout/fireworks';
 
 @include skel-breakpoints((
   xlarge: '(max-width: 1680px)',

@@ -398,6 +398,26 @@ function initMap() { // eslint-disable-line no-unused-vars
     L.control.zoom({
         position: 'bottomright'
     }).addTo(map)
+	
+    var d = new Date()
+    if (letItSnow && d.getMonth() === 11 && d.getDate() >= 24 && d.getDate() <= 26) {
+        const snow = '<div class="winter-is-coming">\n' +
+            '<div class="snow snow--near"></div>\n' +
+            '<div class="snow snow--near snow--alt"></div>\n' +
+            '<div class="snow snow--mid"></div>\n' +
+            '<div class="snow snow--mid snow--alt"></div>\n' +
+            '<div class="snow snow--far"></div>\n' +
+            '<div class="snow snow--far snow--alt"></div>\n' +
+            '</div>'
+        $('#map').append(snow)
+    }
+    if (makeItBang && d.getMonth() === 11 && d.getDate() === 31) {
+        const fireworks = '<div class="pyro">' +
+            '<div class="before"></div>' +
+            '<div class="after"></div>' +
+            '</div>'
+        $('#map').append(fireworks)
+    }
 
     map.addLayer(markers)
     markersnotify = L.layerGroup().addTo(map)
