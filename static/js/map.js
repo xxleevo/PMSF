@@ -2430,6 +2430,9 @@ function customizePokemonMarker(marker, item, skipNotification) {
         case 'v2':
             marker.bindPopup(pokemonLabel(item), {className: 'pokeLabelv2', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 300, minWidth: 210})
             break
+        case 'v3':
+            marker.bindPopup(pokemonLabel(item), {className: 'pokeLabelv3', autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 300, minWidth: 210})
+            break
         default:
             marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 300, minWidth: 210})
             break

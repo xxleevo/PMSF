@@ -9,6 +9,11 @@
   background: #000000 url('/static/images/label/v2/label_back.png');
   background-size: cover;
 }
+.pokeLabelv3 .leaflet-popup-content-wrapper{
+  background: black;
+  background: #000000 url('/static/images/label/v3/label_back.png');
+  background-size: cover;
+}
 
 .submit-widget-popup {
   top: 4.5em !important;

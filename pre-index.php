@@ -1723,6 +1723,7 @@ if (!$noLoadingScreen) {
 							<option value="classic">Classic</option>
 							<option value="v1">Restyled(v1)</option>
 							<option value="v2">Restyled(v2)</option>
+							<option value="v3">New Years Edition</option>
 						</select>
 					</div>
 				</div>';
