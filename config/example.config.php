@@ -304,7 +304,7 @@ $forcedTileServer = false;
 
 /*---------Style Settings---------*/
 $noPokemonLabelStyles = true;                                   //enables/disables the choice for users to set their prefered pokemonLabel style
-$pokemonLabelStyle = 'v2';                                 // classic, v1, v2
+$pokemonLabelStyle = 'v2';                                 // classic, v1, v2,v3(New Years theme)
 
 $noCostumeIcons = true;												// enable/disable costume forms (label only) (Note: only use icon-sets with costumes if using this)
 
