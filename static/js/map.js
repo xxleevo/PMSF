@@ -1814,10 +1814,13 @@ function getQuest(item) {
                         }
                     })
                 }
+            str = str.replace('{7}', i8ln('Members') + ': ' + gstr)
             } else {
                 gstr = gruntCharacterTypes[questinfo['character_category_ids']]
+				str = str.replace('{7}', i8ln('Member') + ': ' + gstr)
             }
-            str = str.replace('{7}', i8ln('Members') + ': ' + gstr)
+        } else if (item['quest_condition_type'] === 28) { // Snapshot of Buddy
+            str = str.replace('{2}', i8ln('{2} of your Buddy'))
         } else if (item['quest_condition_type'] === 19) { // "new friend", but no string because its a default
         } else if (item['quest_condition_type'] === 25) {
             str = str.replace('{1}', i8ln('{1} with') + ' ' + questinfo['distance'].toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' ' + i8ln('km Entfernung'))
@@ -1888,11 +1891,12 @@ function getQuest(item) {
                 str = str.replace('neue Pokéstops', 'neuen Pokéstop')
                 str = str.replace('Schnappschüsse', 'Schnappschuss')
                 str = str.replace('Kämpfe', 'Kampf')
+                str = str.replace('Herzen', 'Herz')
                 // Condition 1: Pokemon,3:Pokemon,11:entwickle Pokemon
-                if (str.includes('1 Pokémon') || str.includes('1 Ei')) {
+                if (str.includes('1 Pokémon') || str.includes('1 Ei') || str.includes('1 Herz') || str.includes('1 Team GO')) {
                     str = str.replace(item['quest_target'], 'ein')
                 }
-                if (str.includes('1 neuen') || str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss') || str.includes('Kampf') || str.includes('Rüpel')) {
+                if (str.includes('1 neuen') || str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss') || str.includes('Kampf')) {
                     str = str.replace(item['quest_target'], 'einen')
                 }
             }
