@@ -151,6 +151,7 @@ $noGymFirstseen = true;                                             // Enables/D
 $noGymTeamInfos = false;											// Enables/Disables every information about gym team
 $noOutdatedGyms = false;											// If active, set GymTeams to Harmony when older than 4h(only frontend-side, no db-changes)
 $noNewGymsFilter = true;                                            // Enable/Disables filtering for new Gyms
+$newGymsFilterStart = ['2019','08'];                                // Year, Month
 
 $triggerGyms = '[]';                                                // Add Gyms that the OSM-Query doesn't take care of like '["gym_id", "gym_id"]'
 $onlyTriggerGyms = false;                                           // Only show EX-Gyms that are defined in $triggerGyms
@@ -209,6 +210,7 @@ $noQuests = false;													// Enables/Disables Quests
 $enableQuests = 'false';                                            // default value for users: Show Quests only
 
 $noNewPokestopsFilter = true;                                       // Enable/Disables filtering for new Pokestops
+$newPokestopsFilterStart = ['2019','08'];                           // Year, Month
 
 $noQuestPokemonCP = false;                                          // Enable/Disable min/max cp display for pokemon rewards
 

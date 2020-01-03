@@ -200,6 +200,7 @@ $noExEligible = false;                                              // true/fals
 $exEligible = 'false';                                              // true/false
 $noGymFirstseen = true;                                             // true/false
 $noNewGymsFilter = true;
+$newGymsFilterStart = ['2019','08'];
 
 $noRaids = false;                                                   // true/false
 $enableRaids = 'false';                                             // true/false

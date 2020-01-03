@@ -1171,16 +1171,44 @@ if (!$noLoadingScreen) {
 							</div>';
 						}
 						if ( !$noNewGymsFilter) {
-							echo '<div class="form-control switch-container" id="new-gyms-wrapper">
-								<font size="3">' . i8ln("New Gyms Since") . '</font>
-								<select name="new-gyms-switch" id="new-gyms-switch">
-									<option value="" disabled selected></option>
-									<option value="0">Inaktiv</option>
-									<option value="2019-08-01">August 2019</option>
-									<option value="2019-09-01">September 2019</option>
-									<option value="2019-10-01">Oktober 2019</option>
-									<option value="2019-11-01">November 2019</option>
-									<option value="2019-12-01">Dezember 2019</option>
+						
+						$currentMonth = date("m");
+						$currentYear = intval(date("Y"));
+						echo '<div class="form-control switch-container" id="new-gyms-wrapper">
+							<font size="3">' . i8ln("New Gyms Since") . '</font>
+							<select name="new-gyms-switch" id="new-gyms-switch">
+								<option value="" disabled selected></option>
+								<option value="0">Inaktiv</option>';
+						for($i = intval($newGymsFilterStart[0]); $i <= $currentYear; $i++) {
+							// Starting Year
+							if($i == intval($newGymsFilterStart[0])){
+								for($j = 1; $j <=12; $j++){
+									if($j >= intval($newGymsFilterStart[1])) {
+										$targetMonth = DateTime::createFromFormat('!m', $j) ->format('F');
+										echo '<option value="' . $i . '-' . $j . '-01">'. i8ln($targetMonth) . ' ' . $i . '</option>';
+									}
+								}
+							}
+							// For all Middle Years
+							if($i < $currentYear && $i > intval($newGymsFilterStart[0])){
+								for($j = 1; $j <=12; $j++){
+									$targetMonth = DateTime::createFromFormat('!m', $j) ->format('F');
+									echo '<option value="' . $i . '-' . $j . '-01">'. i8ln($targetMonth) . ' ' . $i . '</option>';
+								}
+							//For current Year
+							} else{
+								for($j = 1; $j <=12; $j++) {
+									if($j <= $currentMonth) {
+										$targetMonth = DateTime::createFromFormat('!m', $j) ->format('F');
+										echo '<option value="' . $i . '-' . $j . '-01">'. i8ln($targetMonth) . ' ' . $i . '</option>';
+									}
+								}
+							}
+						}
+						
+						
+						
+							echo '
 								</select>
 							</div>';
 						}
