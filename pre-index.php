@@ -844,18 +844,42 @@ if (!$noLoadingScreen) {
 						<?php
 						}
 					if ( !$noNewPokestopsFilter) {
+						$currentMonth = date("m");
+						$currentYear = intval(date("Y"));
 						echo '
 						<hr style="padding:0px;margin:10px;" />
 						<div class="form-control switch-container" id="new-pokestops-wrapper">
 							<font size="3">' . i8ln("New Pokestops Since") . ':</font>
 							<select name="new-pokestops-switch" id="new-pokestops-switch">
 								<option value="" disabled selected></option>
-								<option value="0">' . i8ln("Inactive") . '</option>
-								<option value="2019-08-01">'. i8ln("August") . ' 2019</option>
-								<option value="2019-09-01">'. i8ln("September") . ' 2019</option>
-								<option value="2019-10-01">'. i8ln("October") . ' 2019</option>
-								<option value="2019-11-01">'. i8ln("November") . ' 2019</option>
-								<option value="2019-12-01">'. i8ln("December") . ' 2019</option>
+								<option value="0">' . i8ln("Inactive") . '</option>';
+						for($i = intval($newPokestopsFilterStart[0]); $i <= $currentYear; $i++) {
+							// Starting Year
+							if($i == intval($newPokestopsFilterStart[0])){
+								for($j = 1; $j <=12; $j++){
+									if($j >= intval($newPokestopsFilterStart[1])) {
+										$targetMonth = DateTime::createFromFormat('!m', $j) ->format('F');
+										echo '<option value="' . $i . '-' . $j . '-01">'. i8ln($targetMonth) . ' ' . $i . '</option>';
+									}
+								}
+							}
+							// For all Middle Years
+							if($i < $currentYear && $i > intval($newPokestopsFilterStart[0])){
+								for($j = 1; $j <=12; $j++){
+									$targetMonth = DateTime::createFromFormat('!m', $j) ->format('F');
+									echo '<option value="' . $i . '-' . $j . '-01">'. i8ln($targetMonth) . ' ' . $i . '</option>';
+								}
+							//For current Year
+							} else{
+								for($j = 1; $j <=12; $j++) {
+									if($j <= $currentMonth) {
+										$targetMonth = DateTime::createFromFormat('!m', $j) ->format('F');
+										echo '<option value="' . $i . '-' . $j . '-01">'. i8ln($targetMonth) . ' ' . $i . '</option>';
+									}
+								}
+							}
+						}
+						echo '
 							</select>
 						</div>';
 					}?>

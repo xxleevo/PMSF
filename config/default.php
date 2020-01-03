@@ -227,6 +227,7 @@ $enablePokestops = 'false';                                         // true/fals
 
 $noPokestopFirstseen = true;
 $noNewPokestopsFilter = true;
+$newPokestopsFilterStart = ['2019','08'];
 
 $noLures = false;                                                   // true/false
 $enableLured = 'false';                                             // true/false
