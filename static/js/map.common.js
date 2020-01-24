@@ -483,6 +483,11 @@ var StoreOptions = {
         {
             default: enableRaidTimer,
             type: StoreTypes.Boolean
+        },
+    'badgeMode':
+        {
+            default: gymBadgeMode,
+            type: StoreTypes.Boolean
         }
 }
 

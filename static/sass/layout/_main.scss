@@ -1,6 +1,6 @@
 /* Main */
 * {
-  font-family: 'Quicksand', sans-serif !important;
+  font-family: 'Nunito', sans-serif !important;
 }
 
 html, body {
@@ -275,4 +275,44 @@ a.leaflet-popup-close-button {
 	background-color:black;
     position: absolute;
     font-weight: 900;
+}
+.badgeLabelBgMystic{
+	background: white;
+	background: #ffffff url('/static/forts/badges/labels/badge_mystic.png') no-repeat 100%;
+	background-size: 100%;
+}
+.badgeLabelBgValor{
+	background: white;
+	background: #ffffff url('/static/forts/badges/labels/badge_valor.png') no-repeat 100%;
+	background-size: 100%;
+}
+.badgeLabelBgInstinct{
+	background: white;
+	background: #ffffff url('/static/forts/badges/labels/badge_instinct.png') no-repeat 100%;
+	background-size: 100%;
+}
+.badgeLabelBgHarmony{
+	background: white;
+	background: #ffffff url('/static/forts/badges/labels/badge_harmony.png') no-repeat 100%;
+	background-size: 100%;
+}
+.badgeTextName{
+	font-size: 16px;
+	font-weight: bold;
+}
+.badgeText{
+	font-size: 14px;
+	color: #000;
+}
+.badgeTextBold{
+	font-weight: bold;
+}
+.gym-round-img{
+	position: absolute;
+	width: 47px;
+	height: 47px;
+	background-size: cover;
+	border-radius: 50px;
+	left:97px;
+	top:90px;
 }

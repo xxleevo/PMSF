@@ -202,6 +202,9 @@ $noGymFirstseen = true;                                             // true/fals
 $noNewGymsFilter = true;
 $newGymsFilterStart = ['2019','08'];
 
+$noGymBadgeMode = true;
+$gymBadgeMode = 'false';
+
 $noRaids = false;                                                   // true/false
 $enableRaids = 'false';                                             // true/false
 $noRaidTimer = false;

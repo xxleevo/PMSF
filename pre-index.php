@@ -1096,16 +1096,29 @@ if (!$noLoadingScreen) {
                     <?php
                     if ( ! $noGyms ) {
                         echo '<div class="form-control switch-container">
-                    <h3>' . i8ln( 'Gyms' ) . '</h3>
-                    <div class="onoffswitch">
-                        <input id="gyms-switch" type="checkbox" name="gyms-switch" class="onoffswitch-checkbox" checked>
-                        <label class="onoffswitch-label" for="gyms-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>';
-		    } ?>
+							<h3>' . i8ln( 'Gyms' ) . '</h3>
+								<div class="onoffswitch">
+									<input id="gyms-switch" type="checkbox" name="gyms-switch" class="onoffswitch-checkbox" checked>
+									<label class="onoffswitch-label" for="gyms-switch">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+						</div>';
+					} 
+                    if ( ! $noGymBadgeMode) {
+                        echo '<div class="form-control switch-container" id="badge-mode-wrapper">
+                            <font size="3">' . i8ln("Gym Badge Mode") . '</font>
+                            <div class="onoffswitch">
+                                <input id="badge-mode-switch" type="checkbox" name="badge-mode-switch" class="onoffswitch-checkbox" checked>
+                                <label class="onoffswitch-label" for="badge-mode-switch">
+                                    <span class="switch-label" data-on="On" data-off="Off"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                        </div>';
+                    }
+					?>
 			
                     <?php
                     if ( (!$hideIfManual && !$noGymTeamInfos) || !$noGymScannedText || !$noNewGymsFilter) {
@@ -1938,6 +1951,26 @@ if (!$noLoadingScreen) {
             </div>
         </div>
     <?php } ?>
+    <?php if ( ! $noGymBadgeMode ) { ?>
+        <div class="changeGymBadge-modal" style="display: none;">
+		<?php echo i8ln( 'Select the Badge Level' ) . ":"; ?>
+			<div>
+				<input type="radio" id="u" name="badgeType" value="none" selected>
+				<label for="u"> <?php echo i8ln( 'Unset' ); ?></label><br>
+				<input type="radio" id="b" name="badgeType" value="bronze">
+				<label for="b"> <?php echo i8ln( 'Bronze' ); ?></label><br>
+				<input type="radio" id="s" name="badgeType" value="silver">
+				<label for="s"> <?php echo i8ln( 'Silver' ); ?></label><br>
+				<input type="radio" id="g" name="badgeType" value="gold">
+				<label for="g"> <?php echo i8ln( 'Gold' ); ?></label>
+			</div>
+			<div class="button-container">
+                <button type="button" onclick="changeGymBadgeData(event);" class="changebadgegymid">
+					<i class="fa fa-edit" style="margin-right:10px; vertical-align: middle; font-size: 1.5em;"></i><?php echo i8ln( 'Change Badge' ); ?>
+                </button>
+            </div>
+        </div>
+    <?php } ?>
     <?php if ( ! $noConvertPokestops ) { ?>
         <div class="convert-modal" style="display: none;">
              <div class="button-container">
@@ -2570,6 +2603,8 @@ if (!$noLoadingScreen) {
 	var useIconRepoPokeRewards = <?php echo $usePokeRewardsFromIconRepository === true ? 'true' : 'false' ?>;
     var letItSnow = <?php echo $letItSnow === true ? 'true' : 'false' ?>;
     var makeItBang = <?php echo $makeItBang === true ? 'true' : 'false' ?>;
+    var noGymBadgeMode = <?php echo $noGymBadgeMode === true ? 'true' : 'false' ?>;
+    var gymBadgeMode = <?php echo $noGymBadgeMode === true ? 'false' : $gymBadgeMode ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

@@ -2,7 +2,7 @@
 include( 'config/config.php' );
 global $noSubmit;
 
-if ( $noSubmit === true ) {
+if ( $noSubmit === true) {
     http_response_code( 401 );
     die();
 }
@@ -17,7 +17,8 @@ $action 		= ! empty( $_POST['action'] ) ? $_POST['action'] : '';
 $lat    		= ! empty( $_POST['lat'] ) ? $_POST['lat'] : '';
 $lon    		= ! empty( $_POST['lon'] ) ? $_POST['lon'] : '';
 $pokemonId  		= ! empty( $_POST['pokemonId'] ) ? $_POST['pokemonId'] : 0;
-$gymId      		= ! empty( $_POST['gymId'] ) ? $_POST['gymId'] : 0;
+$gymId      		= ! empty( $_POST['gymId'] ) ? $_POST['gymId'] : '';
+$selectedBadgeLevel = ! empty( $_POST['selectedBadgeLevel'] ) ? $_POST['selectedBadgeLevel'] : '';
 $eggTime    		= ! empty( $_POST['eggTime'] ) ? $_POST['eggTime'] : 0;
 $monTime    		= ! empty( $_POST['monTime'] ) ? $_POST['monTime'] : 0;
 $loggedUser 		= ! empty( $_SESSION['user']->user ) ? $_SESSION['user']->user : 'NOLOGIN';
@@ -80,6 +81,76 @@ if ( $action === "pokestop" ) {
 if ( $action === "renamepokestop" ) {
     $submit->modify_pokestop($pokestopId, $pokestopName, $loggedUser);
 }
+if ( $action === "changeBadge" && (!$noDiscordLogin) && !empty($_SESSION['user']->id)) {
+	//Cause mysql cant default jsons to '[]' -_-
+	$tmp_getter = $manualdb->query("
+		SELECT gyms_bronze as bronze,gyms_silver as silver, gyms_gold as gold FROM users
+		WHERE id = :id", [":id" => $_SESSION['user']->id])->fetch();
+	if(is_null($tmp_getter["gold"])){
+	$tmp_setter = $manualdb->query("
+		UPDATE users 
+		SET gyms_gold = '[]'
+		WHERE id = :id", [":id" => $_SESSION['user']->id])->fetch();
+	}
+	if(is_null($tmp_getter["silver"])){
+	$tmp_setter = $manualdb->query("
+		UPDATE users 
+		SET gyms_silver = '[]'
+		WHERE id = :id", [":id" => $_SESSION['user']->id])->fetch();
+	}
+	if(is_null($tmp_getter["bronze"])){
+	$tmp_setter = $manualdb->query("
+		UPDATE users 
+		SET gyms_bronze = '[]'
+		WHERE id = :id", [":id" => $_SESSION['user']->id])->fetch();
+	}
+	// Remove the requested Gym from each bronze,silver,gold column if it exists there(and isnt empty/default)
+	if(!is_null($tmp_getter["gold"]) && $tmp_getter["gold"] !== "[]"){
+		//Gold
+		$result_gold = $manualdb->query("
+			UPDATE users 
+			SET gyms_gold = JSON_REMOVE(gyms_gold,REPLACE(JSON_UNQUOTE(JSON_SEARCH(gyms_gold, 'one', '$gymId')), '.id', ''))
+			WHERE JSON_SEARCH(gyms_gold, 'one', '$gymId') IS NOT NULL AND
+			id = :id", [":id" => $_SESSION['user']->id])->fetch();
+	}
+	if(!is_null($tmp_getter["silver"]) && $tmp_getter["silver"] !== "[]"){
+		//Silver
+		$result_silver = $manualdb->query("
+			UPDATE users 
+			SET gyms_silver = JSON_REMOVE(gyms_silver,REPLACE(JSON_UNQUOTE(JSON_SEARCH(gyms_silver, 'one', '$gymId')), '.id', ''))
+			WHERE JSON_SEARCH(gyms_silver, 'one', '$gymId') IS NOT NULL AND
+			id = :id", [":id" => $_SESSION['user']->id])->fetch();
+	}
+	if(!is_null($tmp_getter["bronze"]) && $tmp_getter["bronze"] !== "[]"){
+		//Bronze
+		$result_bronze = $manualdb->query("
+			UPDATE users 
+			SET gyms_bronze = JSON_REMOVE(gyms_bronze,REPLACE(JSON_UNQUOTE(JSON_SEARCH(gyms_bronze, 'one', '$gymId')), '.id', ''))
+			WHERE JSON_SEARCH(gyms_bronze, 'one', '$gymId') IS NOT NULL AND
+			id = :id", [":id" => $_SESSION['user']->id])->fetch();
+	}
+	switch($selectedBadgeLevel){ // Check the selected level and set it properly.
+		case 'bronze':
+			$change_bronze = $manualdb->query("
+				UPDATE users 
+				SET gyms_bronze=JSON_ARRAY_APPEND(gyms_bronze, '$', JSON_OBJECT('id','$gymId'))
+				WHERE id = :id", [":id" => $_SESSION['user']->id])->fetch();
+			break;
+		case 'silver':
+			$change_silver = $manualdb->query("
+				UPDATE users 
+				SET gyms_silver=JSON_ARRAY_APPEND(gyms_silver, '$', JSON_OBJECT('id','$gymId'))
+				WHERE id = :id", [":id" => $_SESSION['user']->id])->fetch();
+			break;
+		case 'gold':
+			$change_gold = $manualdb->query("
+				UPDATE users 
+				SET gyms_gold=JSON_ARRAY_APPEND(gyms_gold, '$', JSON_OBJECT('id','$gymId'))
+				WHERE id = :id", [":id" => $_SESSION['user']->id])->fetch();
+			break;
+	}
+}
+
 if ( $action === "delete-pokestop" ) {
     $submit->delete_pokestop($pokestopId, $loggedUser);
 }
@@ -133,3 +204,4 @@ if ( $action === "markpoideclined" ) {
 }
 $jaysson = json_encode($d);
 echo $jaysson;
+

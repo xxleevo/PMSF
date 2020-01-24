@@ -39,6 +39,7 @@ var $selectDirectionProvider
 var $switchExEligible
 var $switchBattleStatus
 var $switchWeatherIcons
+var $switchBadgeMode
 var $questsExcludePokemon
 var $questsExcludeItem
 var $excludeGrunts
@@ -140,6 +141,11 @@ var questtypeList = []
 var rewardtypeList = []
 var conditiontypeList = []
 var gymId
+
+var personalBadges = []
+personalBadges['gold'] = []
+personalBadges['silver'] = []
+personalBadges['bronze'] = []
 
 var assetsPath = 'static/sounds/'
 var iconpath = null
@@ -827,6 +833,8 @@ function initSidebar() {
     $('#gym-sidebar-switch').prop('checked', Store.get('useGymSidebar'))
     $('#ex-eligible-switch').prop('checked', Store.get('exEligible'))
     $('#battle-status-switch').prop('checked', Store.get('battleStatus'))
+    $('#badge-mode-switch').prop('checked', Store.get('badgeMode'))
+    $('#badge-mode-wrapper').toggle(Store.get('showGyms'))
     $('#weather-icon-switch').prop('checked', Store.get('showWeatherIcons'))
     $('#gym-sidebar-wrapper').toggle(Store.get('showGyms') || Store.get('showRaids'))
     $('#gyms-filter-wrapper').toggle(Store.get('showGyms'))
@@ -1290,6 +1298,8 @@ function gymLabel(item) {
     var form = item['form']
     var isInBattle = item['battle_status']
     var gymColor = ['0, 0, 0, .4', '74, 138, 202, .6', '240, 68, 58, .6', '254, 217, 40, .6']
+    var gymColorBadge = ['0, 0, 0, .5', '74, 138, 202, .7', '255, 14, 0, .7', '202, 167, 1, 1']
+	var badgeClasses = ['','badgeLabelBgMystic','badgeLabelBgValor','badgeLabelBgInstinct']
     var hr = '<hr style="margin:10px;" />'
     var raidSpawned = item['raid_level'] != null
     var raidStarted = item['raid_pokemon_id'] != null
@@ -1459,110 +1469,163 @@ function gymLabel(item) {
     }
     var nameStr = (name ? '<div><b>' + name + '</b></div>' : '')
     var str
-    /* var gymImage = ''
-    if (url !== null) {
-        gymImage = '<img height="70px" style="padding: 5px;" src="' + url + '">'
-    }
-    */
     var firstSeen = ''
     if (!noGymFirstseen && item['first_seen'] !== null && item['first_seen'] !== 0) {
         firstSeen = '<div><center>' +
             i8ln('Gym First Seen') + ': ' + getDateStrFull(item['first_seen']) +
             '</center></div>'
     }
-    if (teamId === 0 || (((lastScanned / 1000) > ((Date.now() / 1000) - 14400)) || noOutdatedGyms)) {
-        str =
-            '<div class="gym-label">' +
-            '<center>' +
-            nameStr +
-            '<div>' +
-            teamLabel +
-            teamImage +
-            raidIcon +
-            '</div>' + raidStr +
-            gymCp +
-            park +
-            battleStr +
-            hr +
-            '<div>' +
-            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + i8ln('Route') + '</a>' + maplinkText +
-            '</div>' +
-            '<div>' + lastModifiedText + '</div>' +
-            '<div>' + lastScannedStr + '</div>' +
-            firstSeen +
-            '</center>' +
-            '</div>'
-        if (!noWhatsappLink || !noRaidCounterGuide) {
-            var hyphen = ''
-            if ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
-                str += hr
-                hyphen = ' - '
-            }
-            str +=
-                '<center>' +
-                '<div>'
-            if ((!noWhatsappLink && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
-                if (!noWhatsappRaidMoves) {
-                    str += '<a href="whatsapp://send?text=' + '📌%20%2A' + i8ln('Gym') + ':%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2A' + i8ln('Raid') + ':%2A%20%0A' + i8ln('Level') + '%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A👊%20%2A' + i8ln('Moveset') + ':%2A%20%0A' + pMove1 + '/' + pMove2 + '%0A%0A🔛%20%2A' + i8ln('Raidtime') + ':%2A%20%0A' + i8ln('Start') + ':%20' + raidStartStr + '%0A' + i8ln('End') + ':%20' + raidEndStr + '%0A%0A🗺%20%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
-                } else {
-                    str += '<a href="whatsapp://send?text=' + '📌%20%2A' + i8ln('Gym') + ':%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2A' + i8ln('Raid') + ':%2A%20%0A' + i8ln('Level') + '%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A🔛%20%2A' + i8ln('Raidtime') + ':%2A%20%0A' + i8ln('Start') + ':%20' + raidStartStr + '%0A' + i8ln('End') + ':%20' + raidEndStr + '%0A%0A🗺%20%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
-                }
-            } else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
-                str += '<a href="whatsapp://send?text=' + '📌%20%2A' + i8ln('Gym') + ':%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2A' + i8ln('Raid') + ':%2A%20%0A' + i8ln('Level') + '%20' + item.raid_level + '%20Ei%20🥚%0A%0A🔛%20%2A' + i8ln('Raidtime') + ':%2A%20%0A' + i8ln('Start') + ':%20' + raidStartStr + '%0A' + i8ln('End') + ':%20' + raidEndStr + '%0A%0A🗺%20%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
-            }
-            if (!noWhatsappLink || (!noRaidCounterGuide && ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)))) {
-                str += hyphen
-            }
-            if ((!noRaidCounterGuide && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
-                str += raidCounterGuideStr
-            }
-            str +=
-                '</div>' +
-                '</center>'
-        }
-    } else {
-        str =
-            '<div class="gym-label">' +
-            '<center>' +
-            '<div style="padding-bottom: 2px">' +
-            nameStr +
-            '</div>' +
-            '<div>' +
-            teamLabel +
-            teamImage +
-            raidIcon +
-            '</div>' +
-            raidStr +
-            freeSlotsText +
-            park +
-            '<div>' + outdated + '</div>' +
-            hr +
-            '<div>' +
-            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
-            '</div>' +
-            '<div>' +
-            lastModifiedText +
-            '</div>' +
-            '<div>' +
-            lastScannedStr +
-            '</div>' +
-            '</center>' +
-            firstSeen +
-            '</div>'
-        if (((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
-            str += '<center>' +
-                '<div>' +
-                '<a href="whatsapp://send?text=' + '%2AArena:%2A%20' + encodeURIComponent(item.name) + '%0A%2ARaid:%2A%20Level%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>' +
-                '</div>' +
-                '</center>'
-        } else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
-            str += '<center>' +
-                '<div>' +
-                '<a href="whatsapp://send?text=' + '%2AArena:%2A%20' + encodeURIComponent(item.name) + '%0A%2ARaid:%2A%20Level%20' + item.raid_level + '%20Ei%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>' +
-                '</div>' +
-                '</center>'
-        }
-    }
+	
+	if(Store.get('badgeMode')){
+		var gymName = (name ? name : i8ln('Unknown Gymname'))
+		if(gymName.length > 20){
+			gymName = gymName.substring(0,20) + ".."
+		}
+		if (!noGymTeamInfos && (((lastScanned / 1000) > ((Date.now() / 1000) - 14400)) || noOutdatedGyms)) {
+            var freeSlotsBadge = '<div><span class="badgeText"><span class="badgeTextBold">' + i8ln('Spots') + ':</span> ' + freeSlots + '</span></div>'
+			var nameBadge = '<div class="badgeTextName" style="color:rgba(' + gymColorBadge[teamId] + ')">' + gymName + '</div>'
+			var backgroundClass = badgeClasses[teamId]
+		} else{
+			var freeSlotsBadge = ''
+			var nameBadge = '<div class="badgeTextName" style="color:rgba(22, 145, 73, 0.6)">' + gymName + '</div>'
+			var backgroundClass = 'badgeLabelBgHarmony'
+		}
+		
+		var badgeStatus = 'none'
+		var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">Rank:</span> ' + badgeStatus[0].toUpperCase() + badgeStatus.slice(1) + '</span></div>'
+		if(personalBadges['gold'] !== null && personalBadges['gold'].includes(item["gym_id"])){
+			badgeStatus = 'gold'
+			var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">Rank: <span style="color: #d5b24b">' + badgeStatus[0].toUpperCase() + badgeStatus.slice(1) + '</span></span></div>'
+		} else if(personalBadges['silver'] !== null && personalBadges['silver'].includes(item["gym_id"])){
+			badgeStatus = 'silver'
+			var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">Rank: <span style="color: #97999c">' + badgeStatus[0].toUpperCase() + badgeStatus.slice(1) + '</span></span></div>'
+		} else if(personalBadges['bronze'] !== null && personalBadges['bronze'].includes(item["gym_id"])){
+			badgeStatus = 'bronze'
+			var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">Rank: <span style="color: #937153">' + badgeStatus[0].toUpperCase() + badgeStatus.slice(1) + '</span></span></div>'
+		}
+
+		var park = ''
+		if ((item['park'] !== '0' && item['park'] !== 'None' && item['park'] !== undefined && item['park']) && (noParkInfo === false)) {
+			if (item['park'] === 1) {
+				park = '<div class="badgeText badgeTextBold" style="color: purple;">' + i8ln('Ex-Raid Eligible') + '</div>'
+			}
+		}
+		
+        var gymImage = '<img class="gym-round-img" src="' + item['url'] + '">'
+		var badgeImg = '<img style="position:relative;" width="100px" src="static/forts/badges/' + badgeStatus + '_badge_empty.png">'
+		var badgeRoute = '<a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '"><img src="static/forts/badges/routes.png" style="margin-right:25px;" width="36" height="auto" /></a>'
+		var buttonEdit = '<a onclick="openChangeGymBadgeModal(event);"><img data-id="' + item['gym_id'] + '" src="static/forts/badges/edit.png" width="36" height="auto" /></a>'
+		if (!noMaplink) {
+			var maplinkText = '<a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16"><img src="static/forts/badges/maplink.png" style="margin-right:25px;" width="36" height="auto" /></a>'
+		}
+		str =
+			'<div class="' + backgroundClass + '"><center>' +
+			nameBadge +
+			gymImage +
+			badgeImg +
+			badgeText +
+			freeSlotsBadge +
+			park +
+			'<div style="margin-top: 10px;">' +
+			badgeRoute +
+			maplinkText +
+			buttonEdit +
+			'</div>' +
+			'</center></div>'
+		
+	} else if (teamId === 0 || (((lastScanned / 1000) > ((Date.now() / 1000) - 14400)) || noOutdatedGyms)) {
+		str =
+			'<div class="gym-label">' +
+			'<center>' +
+			nameStr +
+			'<div>' +
+			teamLabel +
+			teamImage +
+			raidIcon +
+			'</div>' + raidStr +
+			gymCp +
+			park +
+			battleStr +
+			hr +
+			'<div>' +
+			i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + i8ln('Route') + '</a>' + maplinkText +
+			'</div>' +
+			'<div>' + lastModifiedText + '</div>' +
+			'<div>' + lastScannedStr + '</div>' +
+			firstSeen +
+			'</center>' +
+			'</div>'
+		if (!noWhatsappLink || !noRaidCounterGuide) {
+			var hyphen = ''
+			if ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
+				str += hr
+				hyphen = ' - '
+			}
+			str +=
+				'<center>' +
+				'<div>'
+			if ((!noWhatsappLink && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
+				if (!noWhatsappRaidMoves) {
+					str += '<a href="whatsapp://send?text=' + '📌%20%2A' + i8ln('Gym') + ':%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2A' + i8ln('Raid') + ':%2A%20%0A' + i8ln('Level') + '%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A👊%20%2A' + i8ln('Moveset') + ':%2A%20%0A' + pMove1 + '/' + pMove2 + '%0A%0A🔛%20%2A' + i8ln('Raidtime') + ':%2A%20%0A' + i8ln('Start') + ':%20' + raidStartStr + '%0A' + i8ln('End') + ':%20' + raidEndStr + '%0A%0A🗺%20%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
+				} else {
+					str += '<a href="whatsapp://send?text=' + '📌%20%2A' + i8ln('Gym') + ':%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2A' + i8ln('Raid') + ':%2A%20%0A' + i8ln('Level') + '%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%0A🔛%20%2A' + i8ln('Raidtime') + ':%2A%20%0A' + i8ln('Start') + ':%20' + raidStartStr + '%0A' + i8ln('End') + ':%20' + raidEndStr + '%0A%0A🗺%20%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
+				}
+			} else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
+				str += '<a href="whatsapp://send?text=' + '📌%20%2A' + i8ln('Gym') + ':%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2A' + i8ln('Raid') + ':%2A%20%0A' + i8ln('Level') + '%20' + item.raid_level + '%20Ei%20🥚%0A%0A🔛%20%2A' + i8ln('Raidtime') + ':%2A%20%0A' + i8ln('Start') + ':%20' + raidStartStr + '%0A' + i8ln('End') + ':%20' + raidEndStr + '%0A%0A🗺%20%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
+			}
+			if (!noWhatsappLink || (!noRaidCounterGuide && ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)))) {
+				str += hyphen
+			}
+			if ((!noRaidCounterGuide && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
+				str += raidCounterGuideStr
+			}
+			str +=
+				'</div>' +
+				'</center>'
+		}
+	} else {
+		str =
+			'<div class="gym-label">' +
+			'<center>' +
+			'<div style="padding-bottom: 2px">' +
+			nameStr +
+			'</div>' +
+			'<div>' +
+			teamLabel +
+			teamImage +
+			raidIcon +
+			'</div>' +
+			raidStr +
+			freeSlotsText +
+			park +
+			'<div>' + outdated + '</div>' +
+			hr +
+			'<div>' +
+			i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
+			'</div>' +
+			'<div>' +
+			lastModifiedText +
+			'</div>' +
+			'<div>' +
+			lastScannedStr +
+			'</div>' +
+			'</center>' +
+			firstSeen +
+			'</div>'
+		if (((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
+			str += '<center>' +
+				'<div>' +
+				'<a href="whatsapp://send?text=' + '%2AArena:%2A%20' + encodeURIComponent(item.name) + '%0A%2ARaid:%2A%20Level%20' + item.raid_level + '%20' + item.raid_pokemon_name + '%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>' +
+				'</div>' +
+				'</center>'
+		} else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
+			str += '<center>' +
+				'<div>' +
+				'<a href="whatsapp://send?text=' + '%2AArena:%2A%20' + encodeURIComponent(item.name) + '%0A%2ARaid:%2A%20Level%20' + item.raid_level + '%20Ei%0A%2AStart:%2A%20' + raidStartStr + '%0A%2AEnde:%2A%20' + raidEndStr + '%0A%2ANavi:%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>' +
+				'</div>' +
+				'</center>'
+		}
+	}
 
     return str
 }
@@ -2480,7 +2543,7 @@ function customizePokemonMarker(marker, item, skipNotification) {
     addListeners(marker)
 }
 
-function getGymMarkerIcon(item) {
+function getGymMarkerIcon(item, badgeMode) {
     var park = item['park']
     var level = 6 - item['slots_available']
     var raidForm = item['form']
@@ -2523,6 +2586,8 @@ function getGymMarkerIcon(item) {
     var dynamicFirstseenTop = (-16 / 6) + ((-16 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
     var dynamicFirstseenFontSize = (12 / 6) + ((12 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
 
+    var relativeIconSize = (50 / 6) + ((50 / 6) * (map.getZoom() - 10))
+
     if (raidForm <= 10 || raidForm == null || raidForm === '0') {
         formStr = '00'
     } else {
@@ -2558,7 +2623,6 @@ function getGymMarkerIcon(item) {
     }
 
     var exIcon = ''
-    var fortMarker = ''
     if ((((park !== '0' && park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0)) && noExGyms === false)) {
         exIcon = '<img src="static/images/ex_gym.png" style="width:' + dynamicExSize + 'px;height:auto;position:absolute;right:' + dynamicExPos + 'px;bottom:' + dynamicExPosBot + 'px;"/>'
     }
@@ -2570,129 +2634,151 @@ function getGymMarkerIcon(item) {
     if (noExGyms === false && item['is_exclusive'] === 1) {
         exclusiveIcon = '<img src="static/images/ex_gym_raid.png" style="width:' + dynamicExclusiveSize + 'px;height:auto;position:absolute;right:' + dynamicExclusivePos + 'px;bottom:' + dynamicExclusivePosBot + 'px;"/>'
     }
-
+    var fortMarker = ''
     var html = ''
-    var relativeIconSize = (50 / 6) + ((50 / 6) * (map.getZoom() - 10))
-    if (item['raid_pokemon_id'] != null && item.raid_end > Date.now() && (item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow === 0))) {
-        html = '<div style="position:relative;">' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
-            exIcon +
-            '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png" style="width:' + dynamicRaidBossSize + 'px;height:auto;position:absolute;top:-6px;right:' + dynamicRaidBossPosRight + 'px;"/>' +
-            exclusiveIcon +
-            battleIcon +
-            '</div>'
-        if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Hatched-Known
-            html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>' + generateRemainingTimer(item.raid_end, 'end') + '</span></div>'
-        }
-        if (Store.get('showNewGymsOnly') !== '0' && map.getZoom() > 11) {
-            html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
-        }
-        fortMarker = L.divIcon({
-            iconSize: [relativeIconSize, relativeIconSize],
-            iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
-            popupAnchor: [0, -40],
-            className: 'raid-marker',
-            html: html
-        })
-    } else if (item['raid_level'] !== null && item.raid_start <= Date.now() && item.raid_end > Date.now() && (item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow === 0))) {
-        var hatchedEgg = ''
-        if (item['raid_level'] <= 2) {
-            hatchedEgg = 'hatched_normal'
-        } else if (item['raid_level'] <= 4) {
-            hatchedEgg = 'hatched_rare'
-        } else {
-            hatchedEgg = 'hatched_legendary'
-        }
-
-        html = '<div style="position:relative;">' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
-            exIcon +
-            '<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:' + dynamicEggUnknownSize + 'px;height:auto;position:absolute;top:' + dynamicEggUnknownPosTop + 'px;right:' + dynamicEggUnknownPosRight + 'px;"/>' +
-            exclusiveIcon +
-            battleIcon +
-            '</div>'
-        if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Hatched-unknown
-            html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>' + generateRemainingTimer(item.raid_end, 'end') + '</span></div>'
-        }
-        if (Store.get('showNewGymsOnly') !== '0' && map.getZoom() > 11) {
-            html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
-        }
-        fortMarker = L.divIcon({
-            iconSize: [relativeIconSize, relativeIconSize],
-            iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
-            popupAnchor: [0, -40],
-            className: 'active-egg-marker',
-            html: html
-        })
-    } else if (item['raid_level'] !== null && item.raid_end > Date.now() && (item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow === 0))) {
-        var raidEgg = ''
-        if (item['raid_level'] <= 2) {
-            raidEgg = 'normal'
-        } else if (item['raid_level'] <= 4) {
-            raidEgg = 'rare'
-        } else {
-            raidEgg = 'legendary'
-        }
-        html = '<div style="position:relative;">' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
-            exIcon +
-            '<img src="static/raids/egg_' + raidEgg + '.png" style="width:' + dynamicEggSize + 'px;height:auto;position:absolute;top:' + dynamicEggPosTop + 'px;right:' + dynamicEggPosRight + 'px;"/>' +
-            exclusiveIcon +
-            battleIcon +
-            '</div>'
-        if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Egg
-            html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-egg" disappears-at="' + item.raid_start + '" start>' + generateRemainingTimer(item.raid_start, 'start') + '</span></div>'
-        }
-        if (Store.get('showNewGymsOnly') !== '0' && map.getZoom() > 11) {
-            html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
-        }
-        fortMarker = L.divIcon({
-            iconSize: [relativeIconSize, relativeIconSize],
-            iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
-            popupAnchor: [0, -40],
-            className: 'egg-marker',
-            html: html
-        })
-        // If gyms are older than 4h - unscanned
-    } else if ((lastScanned / 1000) < ((Date.now() / 1000) - 14400)) {
-        html = '<div>' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
-            exIcon
-        if (Store.get('showNewGymsOnly') !== '0' && map.getZoom() > 11) {
-            html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
-        }
-        html +=
-            '</div>'
-        fortMarker = L.divIcon({
-            iconSize: [relativeIconSize, relativeIconSize],
-            iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
-            popupAnchor: [0, -40],
-            className: 'egg-marker',
-            html: html
-        })
-    } else {
-        html = '<div>' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
-            exIcon +
-            battleIcon
-        if (Store.get('showNewGymsOnly') !== '0' && map.getZoom() > 11) {
-            html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
-        }
-        html +=
-            '</div>'
-        fortMarker = L.divIcon({
-            iconSize: [relativeIconSize, relativeIconSize],
-            iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
-            popupAnchor: [0, -40],
-            className: 'egg-marker',
-            html: html
-        })
+    if(badgeMode){
+        // Check which badge the gym has and update it properly
+		var badgeStatus = 'none'
+		if(personalBadges['gold'] !== null && personalBadges['gold'].includes(item["gym_id"])){
+			badgeStatus = 'gold'
+		} else if(personalBadges['silver'] !== null && personalBadges['silver'].includes(item["gym_id"])){
+			badgeStatus = 'silver'
+		} else if(personalBadges['bronze'] !== null && personalBadges['bronze'].includes(item["gym_id"])){
+			badgeStatus = 'bronze'
+		}
+		html = '<div style="position:relative;">' +
+			'<img src="static/forts/badges/' + badgeStatus + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
+			exIcon +
+			'</div>'
+		fortMarker = L.divIcon({
+			iconSize: [relativeIconSize, relativeIconSize],
+			iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
+			popupAnchor: [0, -40],
+			className: 'badge-marker',
+			html: html
+		})
+    } else{
+		if (item['raid_pokemon_id'] != null && item.raid_end > Date.now() && (item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow === 0))) {
+			html = '<div style="position:relative;">' +
+				'<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
+				exIcon +
+				'<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png" style="width:' + dynamicRaidBossSize + 'px;height:auto;position:absolute;top:-6px;right:' + dynamicRaidBossPosRight + 'px;"/>' +
+				exclusiveIcon +
+				battleIcon +
+				'</div>'
+			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Hatched-Known
+				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>' + generateRemainingTimer(item.raid_end, 'end') + '</span></div>'
+			}
+			if (Store.get('showNewGymsOnly') !== '0' && map.getZoom() > 11) {
+				html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
+			}
+			fortMarker = L.divIcon({
+				iconSize: [relativeIconSize, relativeIconSize],
+				iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
+				popupAnchor: [0, -40],
+				className: 'raid-marker',
+				html: html
+			})
+		} else if (item['raid_level'] !== null && item.raid_start <= Date.now() && item.raid_end > Date.now() && (item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow === 0))) {
+			var hatchedEgg = ''
+			if (item['raid_level'] <= 2) {
+				hatchedEgg = 'hatched_normal'
+			} else if (item['raid_level'] <= 4) {
+				hatchedEgg = 'hatched_rare'
+			} else {
+				hatchedEgg = 'hatched_legendary'
+			}
+	
+			html = '<div style="position:relative;">' +
+				'<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
+				exIcon +
+				'<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:' + dynamicEggUnknownSize + 'px;height:auto;position:absolute;top:' + dynamicEggUnknownPosTop + 'px;right:' + dynamicEggUnknownPosRight + 'px;"/>' +
+				exclusiveIcon +
+				battleIcon +
+				'</div>'
+			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Hatched-unknown
+				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-boss" disappears-at="' + item.raid_end + '" end>' + generateRemainingTimer(item.raid_end, 'end') + '</span></div>'
+			}
+			if (Store.get('showNewGymsOnly') !== '0' && map.getZoom() > 11) {
+				html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
+			}
+			fortMarker = L.divIcon({
+				iconSize: [relativeIconSize, relativeIconSize],
+				iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
+				popupAnchor: [0, -40],
+				className: 'active-egg-marker',
+				html: html
+			})
+		} else if (item['raid_level'] !== null && item.raid_end > Date.now() && (item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow === 0))) {
+			var raidEgg = ''
+			if (item['raid_level'] <= 2) {
+				raidEgg = 'normal'
+			} else if (item['raid_level'] <= 4) {
+				raidEgg = 'rare'
+			} else {
+				raidEgg = 'legendary'
+			}
+			html = '<div style="position:relative;">' +
+				'<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
+				exIcon +
+				'<img src="static/raids/egg_' + raidEgg + '.png" style="width:' + dynamicEggSize + 'px;height:auto;position:absolute;top:' + dynamicEggPosTop + 'px;right:' + dynamicEggPosRight + 'px;"/>' +
+				exclusiveIcon +
+				battleIcon +
+				'</div>'
+			if (noRaidTimer === false && Store.get('showRaidTimer') && map.getZoom() > 11) { // Raid Timer:Egg
+				html += '<div><span style="font-size:' + dynamicFontSize + 'px;top:' + dynamicTop + 'px;left:' + dynamicLeft + 'px;padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless raid-icon-countdown-egg" disappears-at="' + item.raid_start + '" start>' + generateRemainingTimer(item.raid_start, 'start') + '</span></div>'
+			}
+			if (Store.get('showNewGymsOnly') !== '0' && map.getZoom() > 11) {
+				html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
+			}
+			fortMarker = L.divIcon({
+				iconSize: [relativeIconSize, relativeIconSize],
+				iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
+				popupAnchor: [0, -40],
+				className: 'egg-marker',
+				html: html
+			})
+			// If gyms are older than 4h - unscanned
+		} else if ((lastScanned / 1000) < ((Date.now() / 1000) - 14400)) {
+			html = '<div>' +
+				'<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
+				exIcon
+			if (Store.get('showNewGymsOnly') !== '0' && map.getZoom() > 11) {
+				html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
+			}
+			html +=
+				'</div>'
+			fortMarker = L.divIcon({
+				iconSize: [relativeIconSize, relativeIconSize],
+				iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
+				popupAnchor: [0, -40],
+				className: 'egg-marker',
+				html: html
+			})
+		} else {
+			html = '<div>' +
+				'<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
+				exIcon +
+				battleIcon
+			if (Store.get('showNewGymsOnly') !== '0' && map.getZoom() > 11) {
+				html += '<div><span style="font-size:' + dynamicFirstseenFontSize + 'px;top:' + dynamicFirstseenTop + 'px;left:' + dynamicFirstseenLeft + 'px;" class="gym-firstseen-label">' + dateFirstSeenStr + '</span></div>'
+			}
+			html +=
+				'</div>'
+			fortMarker = L.divIcon({
+				iconSize: [relativeIconSize, relativeIconSize],
+				iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
+				popupAnchor: [0, -40],
+				className: 'egg-marker',
+				html: html
+			})
+		}
     }
     return fortMarker
 }
 
 function setupGymMarker(item) {
-    var marker = L.marker([item['latitude'], item['longitude']], {icon: getGymMarkerIcon(item), zIndexOffset: 1060, virtual: true})
+    var marker = L.marker([item['latitude'], item['longitude']], {icon: getGymMarkerIcon(item,Store.get('badgeMode')), zIndexOffset: 1060, virtual: true})
     markers.addLayer(marker)
     updateGymMarker(item, marker)
 
@@ -2755,7 +2841,24 @@ function setupGymMarker(item) {
         }
         sendNotification(title, text, icon, item['latitude'], item['longitude'])
     }
-
+	
+	if (Store.get('badgeMode')){
+		var teamClass = ''
+		switch(item.team_id){
+			case 0:
+				teamClass = 'badgeLabelUncontested'
+				break
+			case 1:
+				teamClass = 'badgeLabelMystic'
+				break
+			case 2:
+				teamClass = 'badgeLabelValor'
+				break
+			case 3:
+				teamClass = 'badgeLabelInstinct'
+				break
+		}
+	}
     if (Store.get('useGymSidebar')) {
         marker.on('click', function () {
             var gymSidebar = document.querySelector('#gym-details')
@@ -2769,7 +2872,11 @@ function setupGymMarker(item) {
 
 
         if (!isMobileDevice() && !isTouchDevice()) {
-            marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+			if(Store.get('badgeMode')){
+				marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 200, minWidth: 200})
+			} else{
+				marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+			}
             marker.on('mouseover', function () {
                 marker.openPopup()
                 clearSelection()
@@ -2783,15 +2890,20 @@ function setupGymMarker(item) {
             }
         })
     } else {
-        marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+		if(Store.get('badgeMode')){
+			marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 200, minWidth: 200})
+		} else{
+			marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+		}
         addListeners(marker)
     }
     return marker
 }
 
 function updateGymMarker(item, marker) {
-    marker.setIcon(getGymMarkerIcon(item))
+    marker.setIcon(getGymMarkerIcon(item,Store.get('badgeMode')))
     marker.setPopupContent(gymLabel(item))
+	
     var raidLevel = item.raid_level
     if (raidLevel >= Store.get('remember_raid_notify') && item.raid_end > Date.now() && Store.get('remember_raid_notify') !== 0) {
         if (item.last_scanned > (Date.now() - 5 * 60)) {
@@ -2853,9 +2965,10 @@ function updateGymMarker(item, marker) {
 
 function updateGymIcons() {
     $.each(mapData.gyms, function (key, value) {
-        mapData.gyms[key]['marker'].setIcon(getGymMarkerIcon(mapData.gyms[key]))
+        mapData.gyms[key]['marker'].setIcon(getGymMarkerIcon(mapData.gyms[key], Store.get('badgeMode')))
     })
 }
+
 function getPokestopMarkerIcon(item) {
     var reward = JSON.parse(item['quest_rewards'])
     var lure = item['lure_expiration']
@@ -3626,6 +3739,7 @@ function showInBoundsMarkers(markersInput, type) {
 function loadRawData() {
     var loadPokemon = Store.get('showPokemon')
     var loadGyms = (Store.get('showGyms') || Store.get('showRaids')) ? 'true' : 'false'
+    var loadBadges = Store.get('badgeMode')
     var loadPokestops = Store.get('showPokestops')
     var loadLures = Store.get('showLures')
     var loadQuests = Store.get('showQuests')
@@ -3677,6 +3791,7 @@ function loadRawData() {
             'lastpokestops': lastpokestops,
             'gyms': loadGyms,
             'lastgyms': lastgyms,
+			'badges': loadBadges,
             'exEligible': exEligible,
             'lastslocs': lastslocs,
             'spawnpoints': loadSpawnpoints,
@@ -4227,6 +4342,39 @@ function renamePokestopData(event) { // eslint-disable-line no-unused-vars
                 }
             })
         }
+    }
+}
+function changeGymBadgeData(event) { // eslint-disable-line no-unused-vars
+    var form = $(event.target).parent().parent()
+    var gymId = form.find('.changebadgegymid').val()
+    var selectedBadgeLevel = form.find('[name="badgeType"]:checked').val()
+    if (selectedBadgeLevel && selectedBadgeLevel !== '') {
+        return $.ajax({
+            url: 'submit',
+            type: 'POST',
+            timeout: 300000,
+            dataType: 'json',
+            cache: false,
+            data: {
+                'action': 'changeBadge',
+                'gymId': gymId,
+                'selectedBadgeLevel': selectedBadgeLevel
+            },
+            error: function error() {
+                // Display error toast
+                toastr['error'](i8ln('Please check connectivity or reduce marker settings.'), i8ln('Error changing Badge Level'))
+                toastr.options = toastrOptions
+            },
+            complete: function complete() {
+				setTimeout(function() {
+				lastgyms = false
+				updateGymIcons()
+				redrawGyms(mapData.gyms)
+                jQuery('#gym-details').removeClass('visible')
+				$('.ui-dialog').remove()
+				}, 1000);
+            }
+        })
     }
 }
 function convertPokestopData(event) { // eslint-disable-line no-unused-vars
@@ -4980,12 +5128,27 @@ function openQuestModal(event) { // eslint-disable-line no-unused-vars
 function openRenamePokestopModal(event) { // eslint-disable-line no-unused-vars
     $('.ui-dialog').remove()
     var val = $(event.target).data('id')
+	console.log('picking Val:' + val)
     $('.renamepokestopid').val(val)
     $('.rename-modal').clone().dialog({
         modal: true,
         maxHeight: 600,
         buttons: {},
         title: i8ln('Rename Pokéstop'),
+        classes: {
+            'ui-dialog': 'ui-dialog raid-widget-popup'
+        }
+    })
+}
+function openChangeGymBadgeModal(event) { // eslint-disable-line no-unused-vars
+    $('.ui-dialog').remove()
+    var val = $(event.target).data('id')
+    $('.changebadgegymid').val(val)
+    $('.changeGymBadge-modal').clone().dialog({
+        modal: true,
+        maxHeight: 600,
+        buttons: {},
+        title: i8ln('Change Badge'),
         classes: {
             'ui-dialog': 'ui-dialog raid-widget-popup'
         }
@@ -5531,6 +5694,15 @@ function updatePokestops() {
     }
 }
 
+function processBadges(i,item){
+    if (!Store.get('badgeMode')) {
+        return false // in case the checkbox was unchecked in the meantime.
+    }
+	if(i == 'gold' || i == 'silver' || i == 'bronze'){
+		personalBadges[i] = item
+	}
+}
+
 function processGyms(i, item) {
     if (!Store.get('showGyms') && !Store.get('showRaids')) {
         return false // in case the checkbox was unchecked in the meantime.
@@ -5753,6 +5925,7 @@ function updateMap() {
     loadRawData().done(function (result) {
         $.each(result.pokemons, processPokemons)
         $.each(result.pokestops, processPokestops)
+		$.each(result.badges, processBadges)
         $.each(result.gyms, processGyms)
         $.each(result.spawnpoints, processSpawnpoints)
         $.each(result.nests, processNests)
@@ -5954,6 +6127,15 @@ function redrawPokemon(pokemonList) {
             markersnotify.removeLayer(item.marker)
             pokemonList[key].marker = newMarker
         }
+    })
+}
+function redrawGyms(gymList) {
+    $.each(gymList, function (key, value) {
+        var item = gymList[key]
+        if (item.marker.rangeCircle) markers.removeLayer(item.marker.rangeCircle)
+        var newMarker = setupGymMarker(item)
+        markers.removeLayer(item.marker)
+        gymList[key].marker = newMarker
     })
 }
 
@@ -7083,6 +7265,17 @@ $(function () {
         })
         updateMap()
     })
+	
+    $switchBadgeMode = $('#badge-mode-switch')
+
+    $switchBadgeMode.on('change', function () {
+        Store.set('badgeMode', this.checked)
+        //Do Something
+		Store.set('badgeMode', this.checked)
+		lastgyms = false
+		updateGymIcons()
+		redrawGyms(mapData.gyms)
+    })
 
     $selectLocationIconMarker = $('#locationmarker-style')
 
@@ -7708,6 +7901,7 @@ $(function () {
         var gymSidebarWrapper = $('#gym-sidebar-wrapper')
         var gymRaidsFilterWrapper = $('#gyms-raid-filter-wrapper')
         var raidsWrapper = $('#raidsfilter-wrapper')
+		var badgeModeWrapper = $('#badge-mode-wrapper')
         if (Store.get('showCoveredPokestopCells') || Store.get('showGymCellCalculations')) {
             updateS2Overlay()
         }
@@ -7717,10 +7911,12 @@ $(function () {
             raidsWrapper.show(options)
             gymSidebarWrapper.show(options)
             gymRaidsFilterWrapper.show(options)
+			badgeModeWrapper.show(options)
         } else {
             lastgyms = false
             wrapper.hide(options)
             raidsWrapper.hide(options)
+			badgeModeWrapper.hide(options)
             if (!Store.get('showRaids')) {
                 gymSidebarWrapper.hide(options)
                 gymRaidsFilterWrapper.hide(options)

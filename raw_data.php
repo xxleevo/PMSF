@@ -11,7 +11,7 @@ $now->sub(new DateInterval('PT20S'));
 $d = array();
 
 $d["timestamp"] = $now->getTimestamp();
-
+$badgeMode = !empty($_POST['badges']) ? $_POST['badges'] : false;
 $swLat = !empty($_POST['swLat']) ? $_POST['swLat'] : 0;
 $neLng = !empty($_POST['neLng']) ? $_POST['neLng'] : 0;
 $swLng = !empty($_POST['swLng']) ? $_POST['swLng'] : 0;
@@ -195,6 +195,16 @@ if (!$noPokestops) {
 }
 $debug['3_after_pokestops'] = microtime(true) - $timing['start'];
 
+global $noBadgeMode;
+if(!$noBadgeMode && $badgeMode && (!$noDiscordLogin) && !empty($_SESSION['user']->id)){
+	$d["badges"] = $manualdb->query("
+	SELECT 
+	json_extract(`gyms_gold`, '$[*].id') as gold,
+	json_extract(`gyms_silver`, '$[*].id') as silver,
+	json_extract(`gyms_bronze`, '$[*].id') as bronze 
+	FROM users WHERE id = :id", [":id" => $_SESSION['user']->id])->fetch();
+}
+
 global $noGyms, $noRaids;
 if (!$noGyms || !$noRaids) {
     if ($d["lastgyms"] == "true") {
@@ -202,7 +212,7 @@ if (!$noGyms || !$noRaids) {
 		$reeids = !empty($_POST['reeids']) ? explode(",", $_POST['reeids']) : array();
         if ($lastgyms != "true") {
             $d["gyms"] = $scanner->get_gyms($reeids, $rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible);
-        } else {
+		} else {
             if ($newarea) {
                 $d["gyms"] = $scanner->get_gyms($reeids, $rbeids, $raids, $swLat, $swLng, $neLat, $neLng, $exEligible, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng);
             } else {
