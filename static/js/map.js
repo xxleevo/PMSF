@@ -1492,16 +1492,16 @@ function gymLabel(item) {
 		}
 		
 		var badgeStatus = 'none'
-		var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">Rank:</span> ' + badgeStatus[0].toUpperCase() + badgeStatus.slice(1) + '</span></div>'
+		var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">' + i8ln('Rank') + ':</span> ' + i8ln('none_badge') + '</span></div>'
 		if(personalBadges['gold'] !== null && personalBadges['gold'].includes(item["gym_id"])){
 			badgeStatus = 'gold'
-			var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">Rank: <span style="color: #d5b24b">' + badgeStatus[0].toUpperCase() + badgeStatus.slice(1) + '</span></span></div>'
+			var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">' + i8ln('Rank') + ': <span style="color: #d5b24b">' + i8ln(badgeStatus[0].toUpperCase() + badgeStatus.slice(1)) + '</span></span></div>'
 		} else if(personalBadges['silver'] !== null && personalBadges['silver'].includes(item["gym_id"])){
 			badgeStatus = 'silver'
-			var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">Rank: <span style="color: #97999c">' + badgeStatus[0].toUpperCase() + badgeStatus.slice(1) + '</span></span></div>'
+			var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">' + i8ln('Rank') + ': <span style="color: #97999c">' + i8ln(badgeStatus[0].toUpperCase() + badgeStatus.slice(1)) + '</span></span></div>'
 		} else if(personalBadges['bronze'] !== null && personalBadges['bronze'].includes(item["gym_id"])){
 			badgeStatus = 'bronze'
-			var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">Rank: <span style="color: #937153">' + badgeStatus[0].toUpperCase() + badgeStatus.slice(1) + '</span></span></div>'
+			var badgeText = '<div><span class="badgeText"><span class="badgeTextBold">' + i8ln('Rank') + ': <span style="color: #937153">' + i8ln(badgeStatus[0].toUpperCase() + badgeStatus.slice(1)) + '</span></span></div>'
 		}
 
 		var park = ''
