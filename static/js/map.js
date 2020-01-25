@@ -371,6 +371,18 @@ function removePokestopMarker(pokestopId) { // eslint-disable-line no-unused-var
     markersnotify.removeLayer(mapData.pokestops[pokestopId].marker)
     mapData.pokestops[pokestopId].hidden = true
 }
+// temp remove gym from map
+function removeGymMarker(gymId) { // eslint-disable-line no-unused-vars
+console.log(gymId)
+    if (mapData.gyms[gymId].marker.rangeCircle) {
+        markers.removeLayer(mapData.gyms[gymId].marker.rangeCircle)
+        markersnotify.removeLayer(mapData.gyms[gymId].marker.rangeCircle)
+        delete mapData.gyms[gymId].marker.rangeCircle
+    }
+    markers.removeLayer(mapData.gyms[gymId].marker)
+    markersnotify.removeLayer(mapData.gyms[gymId].marker)
+    mapData.gyms[gymId].hidden = true
+}
 
 function createServiceWorkerReceiver() {
     navigator.serviceWorker.addEventListener('message', function (event) {
@@ -1306,11 +1318,14 @@ function gymLabel(item) {
     var raidStr = ''
     var raidIcon = ''
     var i = 0
+    var raidCounterGuideStr = ''
+	
     var outdated = ''
     if (((lastScanned / 1000) < ((Date.now() / 1000) - 14400)) && !noOutdatedGyms) {
         teamName = 'Harmony'
         outdated = '<b>' + i8ln('Last scan older than 4 hours !') + '</b>'
     }
+	
     var teamLabel = ''
     var teamImage = ''
     var freeSlotsText = ''
@@ -1327,7 +1342,6 @@ function gymLabel(item) {
             raidStr = ''
         }
     }
-    var raidCounterGuideStr = ''
     if (raidSpawned && item.raid_end > Date.now() && item['raid_level'] >= denyRaidLevelsBelow) {
         if (!noGymTeamInfos) {
             teamImage = '<img width="140px" style="padding: 5px;margin-left:-50px" src="static/forts/label/' + teamName + '_raw.png">'
@@ -1556,10 +1570,9 @@ function gymLabel(item) {
 			'</center>' +
 			'</div>'
 		if (!noWhatsappLink || !noRaidCounterGuide) {
-			var hyphen = ''
+			var hyphen = ' - '
 			if ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
 				str += hr
-				hyphen = ' - '
 			}
 			str +=
 				'<center>' +
@@ -1573,13 +1586,17 @@ function gymLabel(item) {
 			} else if ((!noWhatsappLink) && (raidSpawned && item.raid_end > Date.now())) {
 				str += '<a href="whatsapp://send?text=' + '📌%20%2A' + i8ln('Gym') + ':%2A%20%0A' + encodeURIComponent(item.name) + '%0A%0A⭐%20%2A' + i8ln('Raid') + ':%2A%20%0A' + i8ln('Level') + '%20' + item.raid_level + '%20Ei%20🥚%0A%0A🔛%20%2A' + i8ln('Raidtime') + ':%2A%20%0A' + i8ln('Start') + ':%20' + raidStartStr + '%0A' + i8ln('End') + ':%20' + raidEndStr + '%0A%0A🗺%20%2A' + i8ln('Route') + ':%2A%0Ahttps://maps.google.com/?q=' + item.latitude + ',' + item.longitude + '" data-action="share/whatsapp/share">' + i8ln('Whatsapp Link') + '</a>'
 			}
-			if (!noWhatsappLink || (!noRaidCounterGuide && ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)))) {
-				str += hyphen
-			}
-			if ((!noRaidCounterGuide && (raidSpawned && item.raid_end > Date.now())) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)) {
+			if (!noRaidCounterGuide && ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon))) {
+				if(!noWhatsappLink){
+                    str += hyphen
+				}
 				str += raidCounterGuideStr
 			}
+			if((!noWhatsappLink) || (!noRaidCounterGuide && ((raidSpawned && item.raid_end > Date.now()) && (item.raid_pokemon_id > 1 && item.raid_pokemon_id < numberOfPokemon)))){
+				str += hyphen
+			}
 			str +=
+                '<a href="javascript:removeGymMarker(\'' + item["gym_id"] + '\')" title="' + i8ln('Remove Gym(temp.)') + '"><i class="fa fa-check" aria-hidden="true" style="font-size:18px;vertical-align: middle;"></i></a>'
 				'</div>' +
 				'</center>'
 		}
