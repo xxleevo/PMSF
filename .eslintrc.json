@@ -224,6 +224,9 @@
 	"customTileServerAddress": true,
 	"pokemonLabelStyle": true,
     "forcedTileServer": true,
-	"useIconRepoPokeRewards" : true
+	"useIconRepoPokeRewards" : true,
+    "letItSnow": true,
+    "makeItBang": true,
+    "gymBadgeMode": true
   }
 }
