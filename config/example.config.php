@@ -124,6 +124,9 @@ $minIV = '0';														// "0" for empty or a number
 $noIv100Glow = false;												// Puts a glow on the 100% and put their z-index to highest, also restyles the IV-label part (in v1 and v2 only, not in classic label)
 $Iv100GlowColor = 'rgba(255, 200, 44, 1)';							// Glow Color - supports rgba, hex, colorname
 
+$noPokeIVIcons = false;										        // If set to false, this option let users allow to enable/disable iv icons for pokemon on the map
+$enablePokeIVIcons = 'false';                                       // default value for users for iv icons
+
 $noMinLevel = false;												// This will enable/disable the option for a global minLvl
 $minLevel = '0';													// "0" for empty or a number
 
