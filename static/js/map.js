@@ -39,6 +39,7 @@ var $selectDirectionProvider
 var $switchExEligible
 var $switchBattleStatus
 var $switchWeatherIcons
+var $switchPokeIVIcons
 var $switchBadgeMode
 var $questsExcludePokemon
 var $questsExcludeItem
@@ -847,6 +848,7 @@ function initSidebar() {
     $('#badge-mode-switch').prop('checked', Store.get('badgeMode'))
     $('#badge-mode-wrapper').toggle(Store.get('showGyms'))
     $('#weather-icon-switch').prop('checked', Store.get('showWeatherIcons'))
+    $('#iv-icon-switch').prop('checked', Store.get('showIVIcons'))
     $('#gym-sidebar-wrapper').toggle(Store.get('showGyms') || Store.get('showRaids'))
     $('#gyms-filter-wrapper').toggle(Store.get('showGyms'))
     $('#team-gyms-only-switch').val(Store.get('showTeamGymsOnly'))
@@ -7239,9 +7241,14 @@ $(function () {
     })
 
     $switchWeatherIcons = $('#weather-icon-switch')
-
     $switchWeatherIcons.on('change', function () {
         Store.set('showWeatherIcons', this.checked)
+        redrawPokemon(mapData.pokemons)
+    })
+
+    $switchPokeIVIcons = $('#iv-icon-switch')
+    $switchPokeIVIcons.on('change', function () {
+        Store.set('showIVIcons', this.checked)
         redrawPokemon(mapData.pokemons)
     })
 

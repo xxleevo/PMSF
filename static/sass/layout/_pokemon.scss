@@ -15,6 +15,33 @@
   background-size: cover;
 }
 
+.iv-icon{
+	font-weight: bold;
+	border: 3px solid gray;
+	border-radius: 50px;
+	padding: 2px 2px 0px 1px;
+}
+.iv-icon.under80{
+	background-color: white;
+}
+.iv-icon.over80{
+	background-color: green;
+	color:white
+}
+.iv-icon.over90{
+	background-color: limegreen;
+	color:white
+}
+.iv-icon.iv100{
+	background-color: gold;
+	padding: 4px 2px 4px 1px;
+}
+.iv-icon.iv0{
+	background-color: black;
+	color: white;
+	padding: 1px 5px 1px 5px;
+}
+
 .submit-widget-popup {
   top: 4.5em !important;
   max-height: calc(100% - 5.5em);

@@ -324,6 +324,11 @@ var StoreOptions = {
             default: enableWeatherIcons,
             type: StoreTypes.Boolean
         },
+    'showIVIcons':
+        {
+            default: enablePokeIVIcons,
+            type: StoreTypes.Boolean
+        },
     'showSpawnpoints':
         {
             default: enableSpawnpoints,
@@ -530,7 +535,7 @@ var mapData = {
     pois: {}
 }
 
-function getPokemonSprite(index, sprite, displayHeight, weather = 0, encounterForm = 0, attack = 0, defense = 0, stamina = 0) {
+function getPokemonSprite(index, sprite, displayHeight, weather = 0, encounterForm = 0, attack = null, defense = null, stamina = null) {
     displayHeight = Math.max(displayHeight, 3)
     var scale = displayHeight / sprite.iconHeight
     // Crop icon just a tiny bit to avoid bleedover from neighbor
@@ -553,20 +558,46 @@ function getPokemonSprite(index, sprite, displayHeight, weather = 0, encounterFo
     } else {
         pokemonIdStr = pokemonId
     }
-    var iv = 100 * (attack + defense + stamina) / 45
+    var iv = null
+    if (attack !== null && defense !== null && stamina !== null) {
+        iv = 100 * (attack + defense + stamina) / 45
+    }
+    var IvIcon = ''
+    var IvIconFontSize = Math.round(22 * (scale + 0.1))
+    if (iv !== null && Store.get('showIVIcons')) {
+        var ivClass = 'iv-icon under80'
+        if (Math.round(iv) === 100) {
+            ivClass = 'iv-icon iv100'
+        } else if (Math.round(iv) >= 90) {
+            ivClass = 'iv-icon over90'
+        } else if (Math.round(iv) >= 90) {
+            ivClass = 'iv-icon over80'
+        } else if (Math.round(iv) >= 80) {
+            ivClass = 'iv-icon over80'
+        } else if (Math.round(iv) === 0) {
+            ivClass = 'iv-icon iv0'
+        }
+        IvIcon = '<span class="' + ivClass + '" style="font-size: ' + IvIconFontSize + 'px;position:absolute;top:-5px;left:-' + IvIconFontSize + 'px;" >' + Math.round(iv) + '</span>'
+    }
     var html = ''
+    // Without Weather
     if (weather === 0 || boostedMons[weather].indexOf(pokemonId) === -1 || noWeatherIcons || Store.get('showWeatherIcons') === false) {
         html = '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + '.png" style="width:' + scaledIconSizeWidth + 'px;height:auto;'
-        if (!noIvGlow && iv === 100) {
-            html += '-webkit-filter: drop-shadow(-2px 2px 2px ' + glowColor + ') drop-shadow(2px -2px 2px ' + glowColor + ') drop-shadow(2px 2px 2px ' + glowColor + ') drop-shadow(-2px -2px 2px ' + glowColor + ');filter: drop-shadow(-2px 2px 2px ' + glowColor + ')drop-shadow(2px -2px 2px ' + glowColor + ') drop-shadow(2px 2px 2px ' + glowColor + ') drop-shadow(-2px -2px 2px ' + glowColor + ');'
-        }
-        html += '"/>'
-    } else if (!noWeatherIcons && Store.get('showWeatherIcons') === true) {
-        html = '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + '.png" style="width:' + scaledIconSizeWidth + 'px;height:auto;'
+        // With 100IV Glow (& without Weather)
         if (!noIvGlow && iv === 100) {
             html += '-webkit-filter: drop-shadow(-2px 2px 2px ' + glowColor + ') drop-shadow(2px -2px 2px ' + glowColor + ') drop-shadow(2px 2px 2px ' + glowColor + ') drop-shadow(-2px -2px 2px ' + glowColor + ');filter: drop-shadow(-2px 2px 2px ' + glowColor + ')drop-shadow(2px -2px 2px ' + glowColor + ') drop-shadow(2px 2px 2px ' + glowColor + ') drop-shadow(-2px -2px 2px ' + glowColor + ');'
         }
         html += '"/>' +
+            IvIcon // Only Show if its not empty.
+    // With Weather
+    } else if (!noWeatherIcons && Store.get('showWeatherIcons') === true) {
+        html = '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + formStr + '.png" style="width:' + scaledIconSizeWidth + 'px;height:auto;'
+        // With 100IV Glow (& without Weather)
+        if (!noIvGlow && iv === 100) {
+            html += '-webkit-filter: drop-shadow(-2px 2px 2px ' + glowColor + ') drop-shadow(2px -2px 2px ' + glowColor + ') drop-shadow(2px 2px 2px ' + glowColor + ') drop-shadow(-2px -2px 2px ' + glowColor + ');filter: drop-shadow(-2px 2px 2px ' + glowColor + ')drop-shadow(2px -2px 2px ' + glowColor + ') drop-shadow(2px 2px 2px ' + glowColor + ') drop-shadow(-2px -2px 2px ' + glowColor + ');'
+        }
+        html += '"/>' +
+            IvIcon + // Only Show if its not empty.
             '<img src="static/weather/i-' + weather + '.png" style="width:' + scaledWeatherIconSizeWidth + 'px;height:auto;position:absolute;top:0px;left:' + scaledWeatherIconSizeWidth + 'px;"/>'
     }
     var pokemonIcon = L.divIcon({

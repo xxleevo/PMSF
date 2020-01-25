@@ -140,6 +140,9 @@ $noMinLevel = true;                                            // true/false
 $noHighLevelData = true;                                       // true/false
 $noWeatherIcons = false;
 $enableWeatherIcons = 'false';                                 // true/false
+$noPokeIVIcons = false;										   // true/false
+$enablePokeIVIcons = 'false';                                  // true/false
+
 
 /* Hide Specific content */
 $noGymScannedText = false;
