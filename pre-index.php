@@ -649,7 +649,7 @@ if (!$noLoadingScreen) {
 						echo '<p style="font-size:13px">
 						<br>'
 						 . i8ln("The more Pokemon you hide, the less traffic the map will use and loading time will be faster.") . '<br><br>';
-						if( !$noHighLevelData){
+						if( !$noHighLevelData && !$noExcludeMinIV){
 							echo i8ln("At 'Ign. Min IV/Lvl' you can select Pokemon that will ignore the level & iv filter.'");
 						}
 						echo '</p>';
