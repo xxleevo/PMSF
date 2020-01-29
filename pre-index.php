@@ -2607,6 +2607,7 @@ if (!$noLoadingScreen) {
     var numberOfPokemon = <?php echo $numberOfPokemon; ?>;
     var numberOfItem = <?php echo $numberOfItem; ?>;
     var numberOfGrunt = <?php echo $numberOfGrunt; ?>;
+    var noRaids = <?php echo $noRaids === true ? 'true' : 'false' ?>;
 	var hideRaidPokemon = <?php echo $noRaids ? '[]' : $hideRaidPokemon ?>;
 	var raidbossFilterlist = <?php echo $noRaidfilterList === true ? 'true' : $raidbossFilterlist ?>;
 	var filterByRaidlevel = <?php echo $noFilterByRaidlevel === true ? 'true' : $filterByRaidlevel ?>;

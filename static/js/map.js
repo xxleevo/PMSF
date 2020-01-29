@@ -278,6 +278,9 @@ if (location.search.indexOf('login=false') > 0) {
 if (forcedTileServer) {
     Store.set('map_style', 'tileserver')
 }
+if (noRaids && Store.get('showRaids')) {
+    Store.set('showRaids', false)
+}
 function openAccessDeniedModal(event) { // eslint-disable-line no-unused-vars
     $('.ui-dialog').remove()
     $('.accessdenied-modal').clone().dialog({
