@@ -1094,13 +1094,13 @@ if (!$noLoadingScreen) {
 						echo '<div class="form-control switch-container">
 						<h3>' . i8ln("Gym Style") . '</h3>
 						<select name="gym-marker-style" id="gym-marker-style">
-							<option value="classic">Classic</option>
-							<option value="shield">Schilder</option>
-							<option value="tower">Tower</option>
-							<option value="beasts">Biester</option>
-							<option value="idol">Idol</option>
-							<option value="elements">Elemente</option>
-							<option value="ingame">Standard</option>
+							<option value="classic">' . i8ln("Classic") . '</option>
+							<option value="shield">' . i8ln("Shield") . '</option>
+							<option value="tower">' . i8ln("Tower") . '</option>
+							<option value="beasts">' . i8ln("Beast") . '</option>
+							<option value="idol">' . i8ln("Idol") . '</option>
+							<option value="elements">' . i8ln("Element") . '</option>
+							<option value="ingame">' . i8ln("Standard") . '</option>
 						</select>
 					</div>
 					';
@@ -1187,12 +1187,12 @@ if (!$noLoadingScreen) {
 							echo '<div class="form-control switch-container" id="last-update-gyms-wrapper">
 								<font size="3">' . i8ln("Last Scanned") . '</font>
 								<select name="last-update-gyms-switch" id="last-update-gyms-switch">
-									<option value="0">Alle</option>
-									<option value="1">Letzte Stunde</option>
-									<option value="6">Letzten 6 Stunden</option>
-									<option value="12">Letzten 12 Stunden</option>
-									<option value="24">Letzten 24 Stunden</option>
-									<option value="168">Letzte Woche</option>
+									<option value="0">' . i8ln("All") . '</option>
+									<option value="1">' . i8ln("Last Hour") . '</option>
+									<option value="6">' . i8ln("Last 6 Hours") . '</option>
+									<option value="12">' . i8ln("Last 12 Hours") . '</option>
+									<option value="24">' . i8ln("Last 24 Hours") . '</option>
+									<option value="168">' . i8ln("Last Week") . '</option>
 								</select>
 							</div>';
 						}

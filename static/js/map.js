@@ -215,7 +215,7 @@ var notifyNoIvTitle = '<pkm>'
  <dist>  - disappear time
  <udist> - time until disappear
  */
-var notifyText = 'Despawn vorraussichtlich um <dist> (<udist>)'
+var notifyText = i8ln('Until Approx.') + '<dist> (<udist>)'
 
 var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider
 var searchProvider = new OpenStreetMapProvider()
