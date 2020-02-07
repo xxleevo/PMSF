@@ -2050,14 +2050,18 @@ if (!$noLoadingScreen) {
     <?php } ?>
     <?php if ( ! $noDiscordLogin ) { ?>
         <div class="accessdenied-modal" style="display: none;">
+            <center><?php echo i8ln('Access Denied!')?></center>
+            <br>
+			<?php 
+			echo i8ln('It seems that you did not join our Discord Server.') . '<br>';
+			if(!empty($discordUrl)){
+				echo i8ln('Click') . ' <a href="' .$discordUrl .'">' . i8ln('here') . '</a> ' . i8ln('to join our Server') . '<br>';
+			}
+			echo '<br>' . i8ln('If you think this is a bug, please contact an administrator on the Discord.');
+			?>
             <?php if ( $copyrightSafe === false ) { ?>
                 <img src="static/images/accessdenied.png" alt="PikaSquad" width="250">
             <?php } ?>
-            <center><?php echo i8ln('Access Denied!')?></center>
-            <br>
-			<?php echo i8ln('It seems that you did not join our Discord Server.') . '<br>';?>
-			<?php echo i8ln('Click') . '<a href="' .$discordUrl .'">' . i8ln('here') . '</a> ' . i8ln('to join our Server') . '<br><br>';?> 
-			<?php echo i8ln('If you think this is a bug, please contact an administrator on the Discord.');?>
         </div>
     <?php } ?>
     <?php if ( ! $noManualQuests ) { ?>
