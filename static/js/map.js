@@ -907,6 +907,9 @@ function initSidebar() {
     $('#bounce-switch').prop('checked', Store.get('remember_bounce_notify'))
     $('#notification-switch').prop('checked', Store.get('remember_notification_notify'))
 
+    if (Store.get('showDustAmount') === 0){
+    $('#dustvalue').text(i8ln('Disabled'))
+    }
     if (Store.get('showGyms') === true || Store.get('showRaids') === true) {
         $('#gyms-raid-filter-wrapper').toggle(true)
     }
