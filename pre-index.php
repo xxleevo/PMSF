@@ -2053,9 +2053,11 @@ if (!$noLoadingScreen) {
             <?php if ( $copyrightSafe === false ) { ?>
                 <img src="static/images/accessdenied.png" alt="PikaSquad" width="250">
             <?php } ?>
-            <center>Zugriff verweigert</center>
+            <center><?php echo i8ln('Access Denied!')?></center>
             <br>
-            <?php echo 'Du bist entweder noch kein Mitglied unseres Discord-Servers oder du bist auf einem Server, der auf unserer Blacklist steht. Klicke <a href="' .$discordUrl .'">hier</a> um unserem Server beizutreten!'; ?>
+			<?php echo i8ln('It seems that you did not join our Discord Server.') . '<br>';?>
+			<?php echo i8ln('Click') . '<a href="' .$discordUrl .'">' . i8ln('here') . '</a> ' . i8ln('to join our Server') . '<br><br>';?> 
+			<?php echo i8ln('If you think this is a bug, please contact an administrator on the Discord.');?>
         </div>
     <?php } ?>
     <?php if ( ! $noManualQuests ) { ?>
