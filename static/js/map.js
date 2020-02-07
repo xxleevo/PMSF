@@ -341,7 +341,7 @@ function excludeItemQuest(id) { // eslint-disable-line no-unused-vars
 function excludeDustQuest() { // eslint-disable-line no-unused-vars
     dustamount = 0
     Store.set('showDustAmount', dustamount)
-    $('#dustvalue').text('Deaktiviert')
+    $('#dustvalue').text(i8ln('Disabled'))
     setTimeout(function () { updateMap() }, 2000)
     updatePokestops()
 }
@@ -8297,7 +8297,7 @@ $(function () {
         dustamount = $(this).val()
         Store.set('showDustAmount', dustamount)
         if (dustamount === '0') {
-            $('#dustvalue').text('Deaktiviert')
+            $('#dustvalue').text(i8ln('Disabled'))
             setTimeout(function () { updateMap() }, 2000)
         } else {
             $('#dustvalue').text(' ' + dustamount)
