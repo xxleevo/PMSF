@@ -790,11 +790,11 @@ if (!$noLoadingScreen) {
 									<ul>
 										<?php
 										if ( ! $noQuestsPokemon ) {
-											echo '<li><a href="#tabs-1">' . i8ln("Pokemon") . '</a></li>';
+											echo '<li><a href="#tabs-1">' . i8ln("Hide Pokemon") . '</a></li>';
 										} ?>
 										<?php
 										if ( ! $noQuestsItems ) {
-											echo '<li><a href="#tabs-2">' . i8ln("Items") . '</a></li>';
+											echo '<li><a href="#tabs-2">' . i8ln("Hide Items") . '</a></li>';
 										} ?>
 									</ul>
 									<?php
