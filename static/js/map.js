@@ -494,7 +494,7 @@ function initMap() { // eslint-disable-line no-unused-vars
     buildScanPolygonQuest()
     buildScanPolygonPvp()
     buildNestPolygons()
-	createHearts() // Only if enabled for Val-Day
+    createHearts() // Only if enabled for Val-Day
 
     map.on('moveend', function () {
         updateS2Overlay()
@@ -834,9 +834,7 @@ function createHearts() {
         return false
     }
     var d = new Date()
-	console.log(d)
     if (d.getMonth() === 1 && d.getDate() === 14) {
-		console.log(valentine)
         const valentines = '<canvas id="valentine-canvas"></canvas>'
         $('#map').append(valentines)
         var hearts = {
@@ -854,9 +852,9 @@ function createHearts() {
                     var heart = this.hearts[i]
                     heart.image = new Image()
                     heart.image.style.height = heart.height
-                    if(i%2 == 1){
+                    if (i % 2 === 1) {
                         heart.image.src = this.heartImageAlt
-                    } else{
+                    } else {
                         heart.image.src = this.heartImage
                     }
                     this.ctx.globalAlpha = heart.opacity
@@ -984,8 +982,8 @@ function initSidebar() {
     $('#bounce-switch').prop('checked', Store.get('remember_bounce_notify'))
     $('#notification-switch').prop('checked', Store.get('remember_notification_notify'))
 
-    if (Store.get('showDustAmount') === 0){
-    $('#dustvalue').text(i8ln('Disabled'))
+    if (Store.get('showDustAmount') === 0) {
+        $('#dustvalue').text(i8ln('Disabled'))
     }
     if (Store.get('showGyms') === true || Store.get('showRaids') === true) {
         $('#gyms-raid-filter-wrapper').toggle(true)

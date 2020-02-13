@@ -229,6 +229,7 @@
     "makeItBang": true,
 	"valentine": true,
     "gymBadgeMode": true,
-    "enablePokeIVIcons": true
+    "enablePokeIVIcons": true,
+	"noRaids": true
   }
 }
