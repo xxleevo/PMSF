@@ -2628,6 +2628,7 @@ if (!$noLoadingScreen) {
 	var useIconRepoPokeRewards = <?php echo $usePokeRewardsFromIconRepository === true ? 'true' : 'false' ?>;
     var letItSnow = <?php echo $letItSnow === true ? 'true' : 'false' ?>;
     var makeItBang = <?php echo $makeItBang === true ? 'true' : 'false' ?>;
+    var valentine = <?php echo $valentine === true ? 'true' : 'false' ?>;
     var noGymBadgeMode = <?php echo $noGymBadgeMode === true ? 'true' : 'false' ?>;
     var gymBadgeMode = <?php echo $noGymBadgeMode === true ? 'false' : $gymBadgeMode ?>;
 	

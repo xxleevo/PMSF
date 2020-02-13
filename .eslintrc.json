@@ -227,6 +227,7 @@
 	"useIconRepoPokeRewards" : true,
     "letItSnow": true,
     "makeItBang": true,
+	"valentine": true,
     "gymBadgeMode": true,
     "enablePokeIVIcons": true
   }
