@@ -603,6 +603,19 @@ class RDM extends Scanner
             $gym["sponsor"] = !empty($gym["sponsor"]) ? $gym["sponsor"] : null;
             $gym["url"] = ! empty($gym["url"]) ? preg_replace("/^http:/i", "https:", $gym["url"]) : null;
 			
+			global $passwatcherTriggeredGyms;
+			if($passwatcherTriggeredGyms){
+				$triggeredGyms = $this->triggeredGyms["gyms"];
+				$gym["triggered"] = 0;
+				foreach ($triggeredGyms as $triggeredGym) {
+					if($triggeredGym === $gym["gym_id"]){
+						$gym["triggered"] = 1;
+					}
+				}
+			} else{
+				$gym["triggered"] = 0;
+			}
+			
 			if(!empty($raid_pid)){
                 if($gym["form"] == 0){
                         $gym["raidboss_base_atk"] = $this->data[$gym["raid_pokemon_id"]]["baseAttack"];

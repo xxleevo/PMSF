@@ -39,5 +39,9 @@ class Scanner
         $json_grunttype = "static/data/grunttype.json";
         $json_contents = file_get_contents($json_grunttype);
         $this->grunttype = json_decode($json_contents, true);
+		
+        $json_triggeredGyms = "static/data/triggeredgyms.json";
+        $json_contents = file_get_contents($json_triggeredGyms);
+        $this->triggeredGyms = json_decode($json_contents, true);
     }
 }

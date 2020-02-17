@@ -2725,7 +2725,7 @@ function getGymMarkerIcon(item, badgeMode) {
     if ((((park !== '0' && park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0)) && noExGyms === false)) {
         exIcon = '<img src="static/images/ex_gym.png" style="width:' + dynamicExSize + 'px;height:auto;position:absolute;right:' + dynamicExPos + 'px;bottom:' + dynamicExPosBot + 'px;"/>'
     }
-    if ((triggerGyms.includes(item['gym_id'])) && (noExGyms === false)) {
+    if (((triggerGyms.includes(item['gym_id'])) || (item['triggered'] === 1 )) && (noExGyms === false) ) {
         exIcon = '<img src="static/images/ex_gym_triggered.png" style="width:' + dynamicExSize + 'px;height:auto;position:absolute;right:' + dynamicExPos + 'px;bottom:' + dynamicExPosBot + 'px;"/>'
     }
 

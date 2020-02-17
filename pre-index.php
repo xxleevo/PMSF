@@ -1273,7 +1273,7 @@ if (!$noLoadingScreen) {
 						?>
                     </div>
 						<?php
-						if(!empty($triggerGyms)){
+						if(!empty($triggerGyms) || $passwatcherTriggeredGyms){
 							echo i8ln("Already triggered gyms are marked with a <b>golden</b> 'EX'");
 						} ?>
                 </div>
