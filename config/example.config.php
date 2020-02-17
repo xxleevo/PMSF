@@ -164,7 +164,7 @@ $onlyTriggerGyms = false;                                           // Only show
 $passwatcherTriggeredGyms = false;                                  // Needs passwatcher configured properly to work. (https://github.com/ccev/passwatcher)
                                                                     // If enabled, it will take the triggered gyms from static/data/triggeredgyms.json
                                                                     // to show those raids as a triggered ex gym
-																	// For a quick tutorial, check out config/misc/passwatcherTriggered.txt 
+																	// For a quick tutorial, check out tutorials/passwatcherTriggered.txt 
 																	
 $noExGyms = false;                                                  // Do not display EX-Gyms on the map
 $noParkInfo = false;                                                // Do not display Park info on the map
