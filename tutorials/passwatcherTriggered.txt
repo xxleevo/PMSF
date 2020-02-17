@@ -1,0 +1,22 @@
+################################################
+## How to connect passwatcher with PMSF-Leevo ##
+################################################
+This is a quick howto for what the passwatcher is used for and how to use it properly
+
+Check out the github repository to set up the passwatcher:
+https://github.com/ccev/passwatcher
+
+What the connection between passwatcher and pmsf-leevo does:
+the passwatcher will take the gym ids which are triggered to have passes and enters those in the
+static/data/triggeredgyms.json
+With that data, the Map will show these gyms with a golden EX automatically without adding it to the $triggerGyms from the config.
+Result: A fully automated creation of all triggered Gyms so you dont need to put all gym ids into $triggerGyms anymore.
+
+To set it up:
+1) copy the triggeredgyms.json.template and rename it to triggeredgyms.json
+	Copy and paste command if you are in the pmsf folder:
+	cp static/data/triggeredgyms.json.template static/data/triggeredgyms.json
+2) Set up passwatcher properly
+3) In the passwatcher configs, enable the pmsf-leevo in the config and apply your path to the static/data/triggeredgyms.json correctly.
+4) enable $passwatcherTriggeredGyms in the config
+5) have fun with automated triggered gyms display :)

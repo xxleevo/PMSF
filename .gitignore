@@ -40,7 +40,6 @@ geofences/*
 !config/example.config.php
 !config/example.access-config.php
 !config/default.php
-!config/tutorials/*
 cron/*
 !cron/example.PMSF
 !cron/nest_cron.php
