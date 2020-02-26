@@ -800,27 +800,27 @@ function buildScanPolygonPvp() {
             onEachFeature: function (features, featureLayer) {
                 if (features.properties.name === 1) {
                     if (pvptext1 !== null && pvptext1 !== '') {
-                        featureLayer.bindPopup(pvptext1, {autoPan: false, closeOnClick: true, autoClose: false})
+                        featureLayer.bindPopup(pvptext1, {autoPan: false, closeOnClick: true})
                     } else {
-                        featureLayer.bindPopup('no additional information found.', {autoPan: false, closeOnClick: true, autoClose: false})
+                        featureLayer.bindPopup('no additional information found.', {autoPan: false, closeOnClick: true})
                     }
                 } else if (features.properties.name === 2) {
                     if (pvptext2 !== null && pvptext2 !== '') {
-                        featureLayer.bindPopup(pvptext2, {autoPan: false, closeOnClick: true, autoClose: false})
+                        featureLayer.bindPopup(pvptext2, {autoPan: false, closeOnClick: true})
                     } else {
-                        featureLayer.bindPopup('no additional information found.', {autoPan: false, closeOnClick: true, autoClose: false})
+                        featureLayer.bindPopup('no additional information found.', {autoPan: false, closeOnClick: true})
                     }
                 } else if (features.properties.name === 3) {
                     if (pvptext3 !== null && pvptext3 !== '') {
-                        featureLayer.bindPopup(pvptext3, {autoPan: false, closeOnClick: true, autoClose: false})
+                        featureLayer.bindPopup(pvptext3, {autoPan: false, closeOnClick: true})
                     } else {
-                        featureLayer.bindPopup('no additional information found.', {autoPan: false, closeOnClick: true, autoClose: false})
+                        featureLayer.bindPopup('no additional information found.', {autoPan: false, closeOnClick: true})
                     }
                 } else if (features.properties.name === 4) {
                     if (pvptext4 !== null && pvptext4 !== '') {
-                        featureLayer.bindPopup(pvptext4, {autoPan: false, closeOnClick: true, autoClose: false})
+                        featureLayer.bindPopup(pvptext4, {autoPan: false, closeOnClick: true})
                     } else {
-                        featureLayer.bindPopup('no additional information found.', {autoPan: false, closeOnClick: true, autoClose: false})
+                        featureLayer.bindPopup('no additional information found.', {autoPan: false, closeOnClick: true})
                     }
                 }
             }
@@ -2588,19 +2588,19 @@ function customizePokemonMarker(marker, item, skipNotification) {
     // Label customization #01
     switch (Store.get('pokemonLabelStyle')) {
         case 'classic':
-            marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: true, autoClose: false, maxWidth: 300, minWidth: 210})
+            marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: true, maxWidth: 300, minWidth: 210})
             break
         case 'v1':
-            marker.bindPopup(pokemonLabel(item), {className: 'pokeLabelv1', autoPan: false, closeOnClick: true, autoClose: false, maxWidth: 300, minWidth: 210})
+            marker.bindPopup(pokemonLabel(item), {className: 'pokeLabelv1', autoPan: false, closeOnClick: true, maxWidth: 300, minWidth: 210})
             break
         case 'v2':
-            marker.bindPopup(pokemonLabel(item), {className: 'pokeLabelv2', autoPan: false, closeOnClick: true, autoClose: false, maxWidth: 300, minWidth: 210})
+            marker.bindPopup(pokemonLabel(item), {className: 'pokeLabelv2', autoPan: false, closeOnClick: true, maxWidth: 300, minWidth: 210})
             break
         case 'v3':
-            marker.bindPopup(pokemonLabel(item), {className: 'pokeLabelv3', autoPan: false, closeOnClick: true, autoClose: false, maxWidth: 300, minWidth: 210})
+            marker.bindPopup(pokemonLabel(item), {className: 'pokeLabelv3', autoPan: false, closeOnClick: true, maxWidth: 300, minWidth: 210})
             break
         default:
-            marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: true, autoClose: false, maxWidth: 300, minWidth: 210})
+            marker.bindPopup(pokemonLabel(item), {autoPan: false, closeOnClick: true, maxWidth: 300, minWidth: 210})
             break
     }
     if (notifiedPokemon.indexOf(item['pokemon_id']) > -1) {
@@ -2954,9 +2954,9 @@ function setupGymMarker(item) {
 
         if (!isMobileDevice() && !isTouchDevice()) {
             if (Store.get('badgeMode')) {
-                marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: true, autoClose: false, maxWidth: 200, minWidth: 200})
+                marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: true, maxWidth: 200, minWidth: 200})
             } else {
-                marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: true, autoClose: false})
+                marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: true})
             }
             marker.on('mouseover', function () {
                 marker.openPopup()
@@ -2972,9 +2972,9 @@ function setupGymMarker(item) {
         })
     } else {
         if (Store.get('badgeMode')) {
-            marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, autoClose: false, maxWidth: 200, minWidth: 200})
+            marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, maxWidth: 200, minWidth: 200})
         } else {
-            marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false, autoClose: false})
+            marker.bindPopup(gymLabel(item), {autoPan: false, closeOnClick: false})
         }
         addListeners(marker)
     }
@@ -3256,12 +3256,12 @@ function setupPokestopMarker(item) {
     if (!noQuests && reward !== null) {
         var rewardInfo = JSON.parse(item['quest_reward_info'])
         if (rewardInfo['shiny'] === true) {
-            marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper shiny', autoPan: false, closeOnClick: true, autoClose: false, maxWidth: 250})
+            marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper shiny', autoPan: false, closeOnClick: true, maxWidth: 250})
         } else {
-            marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: true, autoClose: false, maxWidth: 250})
+            marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: true, maxWidth: 250})
         }
     } else {
-        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: true, autoClose: false, maxWidth: 250})
+        marker = L.marker([item['latitude'], item['longitude']], {icon: pokestopMarkerIcon, zIndexOffset: 1050, virtual: true}).bindPopup(pokestopLabel(item), {className: 'leaflet-popup-content-wrapper normal', autoPan: false, closeOnClick: true, maxWidth: 250})
     }
     markers.addLayer(marker)
 
@@ -3313,7 +3313,7 @@ function setupNestMarker(item) {
         className: 'marker-nests',
         html: getNestMarkerIcon
     })
-    var marker = L.marker([item['lat'], item['lon']], {icon: nestMarkerIcon, zIndexOffset: 1020, virtal: true}).bindPopup(nestLabel(item), {autoPan: false, closeOnClick: true, autoClose: false})
+    var marker = L.marker([item['lat'], item['lon']], {icon: nestMarkerIcon, zIndexOffset: 1020, virtal: true}).bindPopup(nestLabel(item), {autoPan: false, closeOnClick: true})
     markers.addLayer(marker)
     addListeners(marker)
 
@@ -3412,7 +3412,7 @@ function setupCommunityMarker(item) {
         html: '<img src="static/images/marker-' + item.type + '.png" style="width:36px;height: 36px;"/>'
     })
 
-    var marker = L.marker([item['lat'], item['lon']], {icon: icon, zIndexOffset: 1030, virtual: true}).bindPopup(communityLabel(item), {autoPan: false, closeOnClick: true, autoClose: false, minWidth: 200})
+    var marker = L.marker([item['lat'], item['lon']], {icon: icon, zIndexOffset: 1030, virtual: true}).bindPopup(communityLabel(item), {autoPan: false, closeOnClick: true, minWidth: 200})
     markers.addLayer(marker)
 
     addListeners(marker)
@@ -3530,7 +3530,7 @@ function setupPortalMarker(item) {
             pane: 'portals'
         }
     }
-    var marker = L.circleMarker([item['lat'], item['lon']], circle).bindPopup(portalLabel(item), {autoPan: false, closeOnClick: true, autoClose: false})
+    var marker = L.circleMarker([item['lat'], item['lon']], circle).bindPopup(portalLabel(item), {autoPan: false, closeOnClick: true})
     markers.addLayer(marker)
 
     addListeners(marker)
@@ -3567,7 +3567,7 @@ function setupPoiMarker(item) {
             pane: 'portals'
         }
     }
-    var marker = L.circleMarker([item['lat'], item['lon']], circle).bindPopup(poiLabel(item), {autoPan: false, closeOnClick: true, autoClose: false})
+    var marker = L.circleMarker([item['lat'], item['lon']], circle).bindPopup(poiLabel(item), {autoPan: false, closeOnClick: true})
     markers.addLayer(marker)
 
     addListeners(marker)
@@ -3720,7 +3720,7 @@ function setupSpawnpointMarker(item) {
         fillColor: hue,
         fillOpacity: 0.8
     }
-    var circle = L.circle([item['latitude'], item['longitude']], rangeCircleOpts).bindPopup(spawnpointLabel(item), {autoPan: false, closeOnclick: true, autoClose: false})
+    var circle = L.circle([item['latitude'], item['longitude']], rangeCircleOpts).bindPopup(spawnpointLabel(item), {autoPan: false, closeOnclick: true})
     markersnotify.addLayer(circle)
     addListeners(circle)
 
@@ -3750,13 +3750,14 @@ function addListeners(marker) {
         }
     })
 
-
-    if (!isMobileDevice() && !isTouchDevice()) {
-        marker.on('mouseover', function () {
-            marker.openPopup()
-            clearSelection()
-            updateLabelDiffTime()
-        })
+    if (openPopupOnHovering) {
+        if (!isMobileDevice() && !isTouchDevice()) {
+            marker.on('mouseover', function () {
+                marker.openPopup()
+                clearSelection()
+                updateLabelDiffTime()
+            })
+        }
     }
 
     marker.on('mouseout', function () {
@@ -3764,6 +3765,11 @@ function addListeners(marker) {
             marker.closePopup()
         }
     })
+
+    marker.options.autoClose = false;
+    if (onlyOnePopup){
+        marker.options.autoClose = true;
+    }
 
     return marker
 }

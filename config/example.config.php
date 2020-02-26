@@ -523,6 +523,10 @@ $osmTileServer = 'tile.openstreetmap.org';                          // osm tile 
 $accessLevelsInherit = false;										// Choose if the levels in the access-level config inherit access configurations from lower levels
 																	// If true, the access level will inherit from the last updated configuration
 																	//example: standard config: $noPokemon = false; -- accesslevel 0: $noPokemon = true; -- accesslevel 1: $noPokemon is unset: will inherit from accesslevel 0 instead of standard config.
+/* Popup handling */
+$openPopupOnHovering = false;                                       // For Desktop version: if the popups/labels should be opened upon hovering
+$onlyOnePopup = true;                                               // Only allow one popup at once (recommended hover-opening false)
+
 /* Debugging */
 $enableDebug = false;
 

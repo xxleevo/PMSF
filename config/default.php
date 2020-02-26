@@ -505,17 +505,21 @@ $makeItBang = true;                                                  // Show fir
 $valentine = true;                                                   // Show Hearts on Valentines Day (Feb 14)
 
 //-----------------------------------------------------
-// DEBUGGING
+// DEBUGGING - MISC
 //-----------------------------------------------------
 /* Counts */
 $numberOfPokemon = 649;
 $numberOfItem = 1405;
 $numberOfGrunt = 50;
-// Do not enable unless requested
+
+/* Popup handling */
+$openPopupOnHovering = false;                                       // For Desktop version: if the popups/labels should be opened upon hovering
+$onlyOnePopup = true;                                               // Only allow one popup at once (recommended hover-opening false)
 
 $noLoadingScreen = true;
 $loadingStyle = '';
 
+// Do not enable unless requested
 $enableDebug = false;
 
 //-----------------------------------------------------

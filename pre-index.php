@@ -2631,6 +2631,8 @@ if (!$noLoadingScreen) {
     var valentine = <?php echo $valentine === true ? 'true' : 'false' ?>;
     var noGymBadgeMode = <?php echo $noGymBadgeMode === true ? 'true' : 'false' ?>;
     var gymBadgeMode = <?php echo $noGymBadgeMode === true ? 'false' : $gymBadgeMode ?>;
+    var openPopupOnHovering = <?php echo $openPopupOnHovering === true ? 'true' : 'false' ?>;
+    var onlyOnePopup = <?php echo $onlyOnePopup === true ? 'true' : 'false' ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
