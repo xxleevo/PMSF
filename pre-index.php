@@ -979,7 +979,7 @@ if (!$noLoadingScreen) {
 									</label>
 								</div>
 							</div>';
-						if ($denyRaidLevelsBelow == 0 && !$noFilterByRaidlevel) {
+						if (!$noFilterByRaidlevel) {
 							echo '
 							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
 								<font size="3">' . i8ln('Filter By Level') . '</font>
@@ -1005,7 +1005,7 @@ if (!$noLoadingScreen) {
 								</div>
 							</div>';
 						}
-						if ($denyRaidLevelsBelow == 0 && !$noFilterByRaidlevel){
+						if (!$noFilterByRaidlevel){
 							echo '
 							<div id="raid-level-filter-wrapper" style="display:none">
 								<div class="form-control switch-container" id="min-level-raids-filter-wrapper" style="float:none;height:35px;margin-bottom:0px;">
@@ -2604,7 +2604,6 @@ if (!$noLoadingScreen) {
     var $noOverlayDesign = <?php echo $noOverlayDesign === true ? 'true' : 'false' ?>;
     var overlayDesign = '<?php echo $overlayDesign ?>';
     var noPokestopImages = <?php echo $noPokestopImages === true ? 'true' : 'false' ?>;
-    var denyRaidLevelsBelow = <?php echo ($denyRaidLevelsBelow >= 1 && $denyRaidLevelsBelow <= 6) ? $denyRaidLevelsBelow : 0 ?>;
     var noRaidMoves  = <?php echo $noRaidMoves === true ? 'true' : 'false' ?>;
     var noCostumeIcons = <?php echo $noCostumeIcons === true ? 'true' : 'false' ?>;
     var noInvasionEncounterData = <?php echo $noInvasionEncounterData === true ? 'true' : 'false' ?>;
@@ -2638,6 +2637,7 @@ if (!$noLoadingScreen) {
     var gymBadgeMode = <?php echo $noGymBadgeMode === true ? 'false' : $gymBadgeMode ?>;
     var openPopupOnHovering = <?php echo $openPopupOnHovering === true ? 'true' : 'false' ?>;
     var onlyOnePopup = <?php echo $onlyOnePopup === true ? 'true' : 'false' ?>;
+	var denyRaidLevels = <?php echo $noRaids ? '[1,2,3,4,5]' : $denyRaidLevels ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

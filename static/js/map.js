@@ -439,7 +439,6 @@ function initMap() { // eslint-disable-line no-unused-vars
             '</div>'
         $('#map').append(fireworks)
     }
-
     map.addLayer(markers)
     markersnotify = L.layerGroup().addTo(map)
     map.on('zoom', function () {
@@ -1419,12 +1418,13 @@ function gymLabel(item) {
     } else {
         teamLabel = i8ln('Gym') + '<br>'
         teamImage = '<img height="70px" style="padding: 5px;" src="static/forts/Harmony_large.png">'
-        if (item['raid_level'] < denyRaidLevelsBelow) {
+        if (denyRaidLevels.includes(parseInt(item["raid_level"]))) {
             raidIcon = ''
             raidStr = ''
         }
     }
-    if (raidSpawned && item.raid_end > Date.now() && item['raid_level'] >= denyRaidLevelsBelow) {
+
+    if (raidSpawned && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item["raid_level"]))) {
         if (!noGymTeamInfos) {
             teamImage = '<img width="140px" style="padding: 5px;margin-left:-50px" src="static/forts/label/' + teamName + '_raw.png">'
         } else {
@@ -2757,7 +2757,7 @@ function getGymMarkerIcon(item, badgeMode) {
             html: html
         })
     } else {
-        if (item['raid_pokemon_id'] != null && item.raid_end > Date.now() && (item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow === 0))) {
+        if (item['raid_pokemon_id'] != null && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item["raid_level"]))) {
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
                 exIcon +
@@ -2778,7 +2778,7 @@ function getGymMarkerIcon(item, badgeMode) {
                 className: 'raid-marker',
                 html: html
             })
-        } else if (item['raid_level'] !== null && item.raid_start <= Date.now() && item.raid_end > Date.now() && (item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow === 0))) {
+        } else if (item['raid_level'] !== null && item.raid_start <= Date.now() && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item["raid_level"]))) {
             var hatchedEgg = ''
             if (item['raid_level'] <= 2) {
                 hatchedEgg = 'hatched_normal'
@@ -2808,7 +2808,7 @@ function getGymMarkerIcon(item, badgeMode) {
                 className: 'active-egg-marker',
                 html: html
             })
-        } else if (item['raid_level'] !== null && item.raid_end > Date.now() && (item['raid_level'] >= denyRaidLevelsBelow || (denyRaidLevelsBelow === 0))) {
+        } else if (item['raid_level'] !== null && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item["raid_level"]))) {
             var raidEgg = ''
             if (item['raid_level'] <= 2) {
                 raidEgg = 'normal'
@@ -5833,7 +5833,7 @@ function processGyms(i, item) {
     }
 
     if (!Store.get('showGyms') && Store.get('showRaids')) {
-        if (item.raid_level < denyRaidLevelsBelow) {
+        if (denyRaidLevels.includes(parseInt(item.raid_level)) || item.raid_level === null) {
             removeGymFromMap(item['gym_id'])
             return true
         }
