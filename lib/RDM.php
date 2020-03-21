@@ -984,13 +984,19 @@ class RDM extends Scanner
 	    foreach ($pokestops as $pokestop) {
                 $data[] = $pokestop['quest_item_id'];
             }
-        } else if ($type === 'gruntlist') {
+    } else if ($type === 'gruntlist') {
             $pokestops = $db->query( "SELECT distinct grunt_type FROM pokestop WHERE grunt_type > 0 AND incident_expire_timestamp > UNIX_TIMESTAMP() order by grunt_type;")->fetchAll(\PDO::FETCH_ASSOC);
             $data = array();
 	    foreach ($pokestops as $pokestop) {
                 $data[] = $pokestop['grunt_type'];
             }
-        }
+    } else if ($type === 'raidlist') {
+            $bosses = $db->query( "SELECT distinct raid_pokemon_id FROM gym WHERE raid_pokemon_id > 0 AND raid_end_timestamp > UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY) order by raid_pokemon_id;")->fetchAll(\PDO::FETCH_ASSOC);
+            $data = array();
+	    foreach ($bosses as $boss) {
+                $data[] = $boss['raid_pokemon_id'];
+            }
+    }
 	return $data;
     }
 }

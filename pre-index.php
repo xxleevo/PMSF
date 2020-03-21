@@ -1045,8 +1045,13 @@ if (!$noLoadingScreen) {
 												<div class="raidbosses-container">
 													<input id="exclude-raidbosses" type="text" readonly="true">
 													<?php
-													raidbossFilterImages($noRaidfilterListNumbers, '', $excludeRaidPokemon, 11); 
+														if ($generateRaidbossFilters === true) {
+															pokemonFilterImages($noRaidfilterListNumbers, '', array_diff(range(1, $numberOfPokemon), $getList->generated_exclude_list('raidlist')), 11);
+														} else {
+															raidbossFilterImages($noRaidfilterListNumbers, '', $excludeRaidPokemon, 11); 
+														}
 													?>
+													
 												</div>
 												<a href="#" class="select-all-raidboss"><?php echo i8ln('All') ?>
 												</a><a href="#" class="hide-all-raidboss"><?php echo i8ln('None') ?> </a>

@@ -223,6 +223,7 @@ $noWhatsappRaidMoves = false;
 
 $noRaidfilterList = false;                                          // Allows to filter by raidboss id
 $raidbossFilterlist = 'false';
+$generateRaidbossFilters = false;
 $noRaidfilterListNumbers = false;
 $hideRaidPokemon = '[]';
 $excludeRaidPokemon = [];

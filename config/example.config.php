@@ -188,6 +188,7 @@ $denyRaidLevelsBelow = 0;											// Deny raid levels beeing shown under this 
 																	// To prevent displaying gyms with denied raids on it.		
 $noRaidfilterList = false;                                          // Allows to filter by raidboss id
 $raidbossFilterlist = 'false';                                      // default value for users
+$generateRaidbossFilters = false;                                    // Automatically generates possible raidbosses from the database (last 24 hours)
 $noRaidfilterListNumbers = false;                                   // Enable/Disable Numbers on the filter tab
 $hideRaidPokemon = '[]';                                            // hidden bosses by default
 $excludeRaidPokemon = [];                                           // exclude bosses from the list (for users not changeable)
