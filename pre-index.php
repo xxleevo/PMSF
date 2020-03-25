@@ -1538,6 +1538,18 @@ if (!$noLoadingScreen) {
 						</div>
 					</div>';
                 }
+                if (! $noLiveScanLocation) {
+                    echo '<div class="form-control switch-container">
+                    <h3>' . i8ln('Live scanner location') . '</h3>
+                    <div class="onoffswitch">
+                        <input id="scan-location-switch" type="checkbox" name="scan-location-switch" class="onoffswitch-checkbox">
+                        <label class="onoffswitch-label" for="scan-location-switch">
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>';
+                }
 				if ( ! $noScanPolygonQuest || ! $noScanPolygonPvp || ! $noScanPolygon){
 					echo '<div>
 						<h3><center><u>' . i8ln("Areas") . '</u></center></h3>
@@ -2524,6 +2536,8 @@ if (!$noLoadingScreen) {
     var enableNewPortals = <?php echo $enableNewPortals ?>;
     var enableWeatherOverlay = <?php echo ! $noWeatherOverlay ? $enableWeatherOverlay : 'false' ?>;
     var enableSpawnpoints = <?php echo $noSpawnPoints ? 'false' : $enableSpawnPoints ?>;
+    var enableLiveScan = <?php echo $noLiveScanLocation ? 'false' : $enableLiveScan ?>;
+    var deviceOfflineAfterSeconds = <?php echo $deviceOfflineAfterSeconds ?>;
     var enableRanges = <?php echo $noRanges ? 'false' : $enableRanges ?>;
     var enableScanPolygon = <?php echo $noScanPolygon ? 'false' : $enableScanPolygon ?>;
     var enableScanPolygonQuest = <?php echo $noScanPolygonQuest ? 'false' : $enableScanPolygonQuest ?>;
