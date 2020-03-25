@@ -440,20 +440,20 @@ if (!$noLoadingScreen) {
                 <?php
                 if ( ! $noNests ) {
                     echo '<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-                    <h3>' . i8ln("Nests") . '</h3>
-                    <div class="onoffswitch">
-                        <input id="nests-switch" type="checkbox" name="nests-switch"
-                               class="onoffswitch-checkbox" checked>
-                        <label class="onoffswitch-label" for="nests-switch">
-                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </div>
-					<div id="nests-content-wrapper" style="display:none">
+						<h3>' . i8ln("Nests") . '</h3>
+						<div class="onoffswitch">
+							<input id="nests-switch" type="checkbox" name="nests-switch" class="onoffswitch-checkbox" checked>
+							<label class="onoffswitch-label" for="nests-switch">
+								<span class="switch-label" data-on="On" data-off="Off"></span>
+								<span class="switch-handle"></span>
+							</label>
+						</div>
+					</div>
+					<div id="nests-content-wrapper" style="display:none">';
+					if(!$noWhatsappShareNests){
+						echo '
 						<div>
 							<center>
-							
 								<u><h3 style="margin:0 0 0.5em 0;"> ' . i8ln("Share Nests(Whatsapp)") . '</h3></u>
 								<a class="settings btn-share-whatsapp" id="shareNests0" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(0,\''. $nestShareHeader .'\',\''. $nestShareDescription .'\',\''. $nestShareFooter .'\')">
 									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span>' . i8ln("Park") . ', ' . i8ln("Species") . '
@@ -470,9 +470,11 @@ if (!$noLoadingScreen) {
 							</center>
 						</div>
 						<div>
-						<b>' . i8ln("Info") . ':</b> ' . i8ln("Only current visible nests on the map will be shared.") . '
+							<b>' . i8ln("Info") . ':</b> ' . i8ln("Only current visible nests on the map will be shared.") . '
 						</div>
-						<hr style="margin:0px;margin-top:10px" />
+						<hr style="margin:0px;margin-top:10px" />';
+					}
+					echo '
 					</div>
 				';
                 } ?>
@@ -920,17 +922,24 @@ if (!$noLoadingScreen) {
 					<div id="community-content-wrapper" style="display:none">
 						<div>
 						'. $communityDescription .'
-							<center>
-								<u><h3 style="margin:0 0 0.5em 0;">' . i8ln('Share Groups') . '</h3></u>
-								<a class="settings btn-share-whatsapp" id="shareCommunities" href="#" data-action="share/whatsapp/share" onclick="shareCommunitiesWhatsapp(\''. $communityShareHeader .'\',\''. $communityShareDescription .'\',\''. $communityShareFooter .'\')">
-									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Whatsapp
-								</a>
-							</center>
-						</div>
-						<div>
-							<b>' . i8ln("Info") . ':</b> ' . i8ln("Only current visible communities on the map will be shared.") . '
-						</div>
-						<hr style="margin:0px;" />
+						</div>';
+						
+						if(!$noWhatsappShareCommunities){
+							echo '
+							<hr style="margin:0px;" />
+							<div>
+								<center>
+									<u><h3 style="margin:0 0 0.5em 0;">' . i8ln('Share Groups') . '</h3></u>
+									<a class="settings btn-share-whatsapp" id="shareCommunities" href="#" data-action="share/whatsapp/share" onclick="shareCommunitiesWhatsapp(\''. $communityShareHeader .'\',\''. $communityShareDescription .'\',\''. $communityShareFooter .'\')">
+										<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Whatsapp
+									</a>
+								</center>
+							</div>
+							<div>
+								<b>' . i8ln("Info") . ':</b> ' . i8ln("Only current visible communities on the map will be shared.") . '
+							</div>';
+						}
+					echo '
 					</div>';
 				}
 				echo '</div>';

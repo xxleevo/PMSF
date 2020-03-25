@@ -428,6 +428,7 @@ $noDeleteCommunity = true;
 $noEditCommunity = true;
 
 /* Community share configs */
+$noWhatsappShareCommunities = true;                                 // To Disable/Enable the Whatsapp-Share-Function for Communities
 $communityShareHeader = "Communities in YOURCITY";					// Displays the first line (bold) of the shared text
 $communityShareDescription = "(By ". $mapUrl .")";					// Displays the second line of the shared text
 $communityShareFooter = "For more infos visit our Map %0A(Discord needed: ". $discordUrl .")"; // Disyplays the footer under the shared nests
@@ -443,6 +444,7 @@ $enableNests = 'false';                                             // default v
 $nestJSONfile = 'geofences/nest.json';
 
 /* Nest share configs */
+$noWhatsappShareNests = true;                                       // To Disable/Enable the Whatsapp-Share-Function for Nests
 $nestShareHeader = "Nests in YOURCITY";								// Displays the first line (bold) of the shared text
 $nestShareDescription = "(By ". $mapUrl .")";						// Displays the second line of the shared text
 $nestShareFooter = "For more infos visit our Map %0A(Discord needed: ". $discordUrl .")"; // Disyplays the footer under the shared nests
