@@ -457,7 +457,7 @@ $noDeleteCommunity = true;
 $noEditCommunity = true;
 
 //Custom Nestshare configs
-$noWhatsappShareCommunities = false;
+$noWhatsappShareCommunities = true;
 $communityShareHeader = "Communities in YOURCITY"; // Displays the first line (bold) of the shared text
 $communityShareDescription = "(By ". $mapUrl .")"; // Displays the second line of the shared text
 $communityShareFooter = "For more infos visit our Map %0A(Discord needed: ". $discordUrl .")"; // Disyplays the footer under the shared nests
@@ -478,7 +478,7 @@ $nestCoords = array();                                           //$nestCoords =
 $nestJSONfile = 'geofences/nest.json';
 
 //Custom Nestshare configs
-$noWhatsappShareNests = false;
+$noWhatsappShareNests = true;
 $nestShareHeader = "Nests in YOURCITY"; // Displays the first line (bold) of the shared text
 $nestShareDescription = "(By ". $mapUrl .")"; // Displays the second line of the shared text
 $nestShareFooter = "For more infos visit our Map %0A(Discord needed: ". $discordUrl .")"; // Disyplays the footer under the shared nests
