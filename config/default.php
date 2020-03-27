@@ -403,6 +403,9 @@ $noAddPoi = true;
 $enablePoi = 'false';
 $noDeletePoi = true;
 $noMarkPoi = true;
+$noEditPoi = true;
+/* IMGUR API */
+$imgurCID = "";
 
 $noDiscordSubmitLogChannel = true;                                        // Send webhooks to discord channel upon submission
 

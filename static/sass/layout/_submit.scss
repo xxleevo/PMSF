@@ -37,3 +37,36 @@
     width:100%;
   }
 }
+.dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display:inline-block;
+    margin: 8px;
+
+    &.possible-candidate {
+        background-color: white;
+        border: 2px solid #008000;
+    }
+
+    &.candidate-submitted {
+        background-color: #008000;
+    }
+
+    &.candidate-declined {
+        background-color: #FFA500;
+    }
+
+    &.candidate-resubmit {
+        background-color: #FFA500;
+        border: 2px solid #008000;
+    }
+
+    &.candidate-not-eligible {
+        background-color: red;
+    }
+}
+
+input#margin.button {
+    border-radius: 50px;
+}

@@ -2042,6 +2042,30 @@ if (!$noLoadingScreen) {
             </div>
         </div>
     <?php } ?>
+    <?php if (! $noEditPoi) { ?>
+        <div class="editpoi-modal" style="display: none;">
+            <input type="text" id="poi-name" name="poi-name" placeholder="<?php echo i8ln('Enter New POI Name'); ?>" data-type="poi-name" class="search-input">
+            <input type="text" id="poi-description" name="poi-description" placeholder="<?php echo i8ln('Enter New POI Description'); ?>" data-type="poi-description" class="search-input">
+            <input type="text" id="poi-notes" name="poi-notes"placeholder="<?php echo i8ln('Enter New POI Notes'); ?>" data-type="poi-notes" class="search-input">
+                <?php if (! empty($imgurCID)) {
+                ?>
+                    <div class="upload-button-container">
+                         <button type="button"><i class="fas fa-upload"></i> <?php echo i8ln('Upload POI Image') ?></button>
+                         <input type="file" id="poi-image" name="poi-image" accept="image/*" class="poi-image" data-type="poi-image" class="search-input" onchange='previewPoiImage(event)' >
+                    </div>
+                    <center><img id='preview-poi-image' name='preview-poi-image' width="50px" height="auto"></center>
+                    <div class="upload-button-container">
+                         <button type="button"><i class="fas fa-upload"></i> <?php echo i8ln('Upload POI Surrounding') ?></button>
+                         <input type="file" id="poi-surrounding" name="poi-surrounding" accept="image/*" class="poi-surrounding" data-type="poi-surrounding" class="search-input" onchange='previewPoiSurrounding(event)'>
+                    </div>
+                    <center><img id='preview-poi-surrounding' name='preview-poi-surrounding' width="50px" height="auto"></center>
+                <?php
+            } ?>
+            <div class="button-container">
+                <button type="button" onclick="editPoiData(event);" class="editpoiid"><i class="fas fa-save"></i> <?php echo i8ln('Save Changes'); ?></button>
+            </div>
+        </div>
+    <?php } ?>
     <?php if ( ! $noPortals ) { ?>
         <div class="convert-portal-modal" style="display: none;">
              <div class="button-container">
@@ -2060,17 +2084,13 @@ if (!$noLoadingScreen) {
             </div>
         </div>
     <?php } ?>
-    <?php if ( ! $noPoi ) { ?>
+    <?php if (! $noPoi) { ?>
         <div class="mark-poi-modal" style="display: none;">
-             <div class="button-container">
-                <button type="button" onclick="markPoiSubmitted(event);" class="markpoiid"><i
-                        class="fa fa-refresh"
-                        style="margin-right:10px; vertical-align: middle; font-size: 1.5em;"></i><?php echo i8ln( 'Mark as submitted' ); ?>
-		</button>
-                <button type="button" onclick="markPoiDeclined(event);" class="markpoiid"><i
-                        class="fa fa-times"
-                        style="margin-right:10px; vertical-align: middle; font-size: 1.5em;"></i><?php echo i8ln( 'Mark as declined' ); ?>
-		</button>
+            <div class="button-container">
+                <button type="button" onclick="markPoiSubmitted(event);" class="markpoiid"><i class="fas fa-sync-alt"></i> <?php echo i8ln('Submitted'); ?></button>
+                <button type="button" onclick="markPoiDeclined(event);" class="markpoiid"><i class="fas fa-times"></i> <?php echo i8ln('Declined'); ?></button>
+                <button type="button" onclick="markPoiResubmit(event);" class="markpoiid"><i class="fas fa-times"></i> <?php echo i8ln('Resubmit'); ?></button>
+                <button type="button" onclick="markNotCandidate(event);" class="markpoiid"><i class="fas fa-times"></i> <?php echo i8ln('Not a candidate'); ?></button>
             </div>
         </div>
     <?php } ?>
@@ -2437,24 +2457,33 @@ if (!$noLoadingScreen) {
                         </div>
                     </div>
                 <?php } ?>
-                <?php if ( ! $noAddPoi && !$noPoi ) {
-                    ?>
+                <?php if (! $noAddPoi && !$noPoi) {
+            ?>
                     <div id="tab-poi">
-                        <input type="text" name="poi-name" class="poi-name"
-                               placeholder="<?php echo i8ln( 'Enter POI Name' ); ?>" data-type="name"
-			       class="search-input">
-                        <input type="text" name="poi-description" class="poi-description"
-                               placeholder="<?php echo i8ln( 'Enter description' ); ?>" data-type="description"
-			       class="search-input">
+                        <input type="text" name="poi-name" class="poi-name"placeholder="<?php echo i8ln('Enter candidate Name'); ?>" data-type="name" class="search-input">
+                        <input type="text" name="poi-description" class="poi-description" placeholder="<?php echo i8ln('Enter candidate description'); ?>" data-type="description" class="search-input">
+                        <input type="text" name="poi-notes" class="poi-notes" placeholder="<?php echo i8ln('Enter field notes'); ?>" data-type="description" class="search-input">
+                        <?php if (! empty($imgurCID)) {
+                ?>
+                            <div class="upload-button-container">
+                                <button type="button"><i class="fas fa-upload"></i> <?php echo i8ln('Upload POI Image') ?></button>
+                                <input type="file" id="poi-image" name="poi-image" accept="image/*" class="poi-image" data-type="poi-image" class="search-input" onchange='previewPoiImage(event)'>
+                            </div>
+                            <center><img id='preview-poi-image' name='preview-poi-image' width="50px" height="auto"></center>
+                            <div class="upload-button-container">
+                                <button type="button"><i class="fas fa-upload"></i> <?php echo i8ln('Upload Surrounding Image') ?></button>
+                                <input type="file" id="poi-surrounding" name="poi-surrounding" accept="image/*" class="poi-surrounding" data-type="poi-surrounding" class="search-input" onchange='previewPoiSurrounding(event)'>
+                            </div>
+                            <center><img id='preview-poi-surrounding' name='preview-poi-surrounding' width="50px" height="auto" ></center>
+                        <?php
+            } ?>
                         <div class="button-container">
-			<h6><center><?php echo i8ln( 'If you submit a POI you agree that your discord username will be shown in the marker label' ); ?></center></h6>
-                            <button type="button" onclick="submitPoi(event);" class="submitting-poi"><i
-                                    class="fa fa-comments"
-                                    style="margin-right:10px;"></i><?php echo i8ln( 'Submit POI' ); ?>
-                            </button>
+                            <h6><center><?php echo i8ln('If you submit a POI candidate you agree that your discord username will be shown in the marker label'); ?></center></h6>
+                            <button type="button" onclick="submitPoi(event);" class="submitting-poi"><i class="fas fa-comments"></i> <?php echo i8ln('Submit POI candidate'); ?></button>
                         </div>
                     </div>
-                <?php } ?>
+                <?php
+        } ?>
             </div>
         </div>
         <?php
@@ -2601,6 +2630,7 @@ if (!$noLoadingScreen) {
     var enablePoi = <?php echo $noPoi ? 'false' : $enablePoi ?>;
     var enablePortals = <?php echo $noPortals ? 'false' : $enablePortals ?>;
     var noDeletePoi = <?php echo $noDeletePoi === true ? 'true' : 'false' ?>;
+    var noEditPoi = <?php echo $noEditPoi === true ? 'true' : 'false' ?>;
     var noMarkPoi = <?php echo $noMarkPoi === true ? 'true' : 'false' ?>;
     var noPortals = <?php echo $noPortals === true ? 'true' : 'false' ?>;
     var enableS2Cells = <?php echo $noS2Cells ? 'false' : $enableS2Cells ?>;

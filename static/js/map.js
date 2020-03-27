@@ -282,6 +282,28 @@ if (forcedTileServer) {
 if (noRaids && Store.get('showRaids')) {
     Store.set('showRaids', false)
 }
+function previewPoiImage(event) { // eslint-disable-line no-unused-vars
+    var form = $(event.target).parent().parent()
+    var input = event.target
+    var reader = new FileReader()
+    var fileLoaded = function (event) {
+        var base64 = event.target.result
+        form.find('[name="preview-poi-image"]').attr('src', base64)
+    }
+    reader.readAsDataURL(input.files[0])
+    reader.onload = fileLoaded
+}
+function previewPoiSurrounding(event) { // eslint-disable-line no-unused-vars
+    var form = $(event.target).parent().parent()
+    var input = event.target
+    var reader = new FileReader()
+    var fileLoaded = function (event) {
+        var base64 = event.target.result
+        form.find('[name="preview-poi-surrounding"]').attr('src', base64)
+    }
+    reader.readAsDataURL(input.files[0])
+    reader.onload = fileLoaded
+}
 function openAccessDeniedModal(event) { // eslint-disable-line no-unused-vars
     $('.ui-dialog').remove()
     $('.accessdenied-modal').clone().dialog({
@@ -3540,37 +3562,28 @@ function setupPortalMarker(item) {
 }
 
 function setupPoiMarker(item) {
+    var dot = ''
     if (item.status === '1') {
-        var circle = {
-            color: '#FFA500',
-            radius: 5,
-            fillOpacity: 1,
-            fillColor: '#FFA500',
-            weight: 1,
-            pane: 'portals'
-        }
+        dot = 'dot possible-candidate'
     } else if (item.status === '2') {
-        circle = {
-            color: '#0000FF',
-            radius: 5,
-            fillOpacity: 1,
-            fillColor: '#0000FF',
-            weight: 1,
-            pane: 'portals'
-        }
+        dot = 'dot candidate-submitted'
     } else if (item.status === '3') {
-        circle = {
-            color: '#FF0000',
-            radius: 5,
-            fillOpacity: 1,
-            fillColor: '#FF0000',
-            weight: 1,
-            pane: 'portals'
-        }
+        dot = 'dot candidate-declined'
+    } else if (item.status === '4') {
+        dot = 'dot candidate-resubmit'
+    } else if (item.status === '5') {
+        dot = 'dot candidate-not-eligible'
     }
-    var marker = L.circleMarker([item['lat'], item['lon']], circle).bindPopup(poiLabel(item), {autoPan: false, closeOnClick: true})
+    var html = '<div><span class="' + dot + '" style="width:20px;height:20px;"></span></div>'
+    var poiMarkerIcon = L.divIcon({
+        iconSize: [36, 48],
+        iconAnchor: [10, 16],
+        popupAnchor: [8, -10],
+        className: 'marker-poi',
+        html: html
+    })
+    var marker = L.marker([item['lat'], item['lon']], {icon: poiMarkerIcon, zIndexOffset: 1020}).bindPopup(poiLabel(item), {autoPan: false, closeOnClick: false, autoClose: false, virtual: true})
     markers.addLayer(marker)
-
     addListeners(marker)
 
     return marker
@@ -3594,16 +3607,58 @@ function portalLabel(item) {
 
 function poiLabel(item) {
     var updated = formatDate(new Date(item.updated * 1000))
-    var str = '<center><h3><div>' + item.name + '</div></h3></center>' +
-        '<center><h4><div>' + item.description + '</div></h4></center>' +
-        '<center><div>Added: ' + updated + '</div></center>' +
-        '<center><div>Submitted by: ' + item.submitted_by + '</div></center>'
+    var str = ''
+    var dot = ''
+    if (item.status === '1') {
+        dot = 'dot possible-candidate'
+        str += '<center><div style="font-weight:900;margin-bottom:5px;">' + i8ln('Possible Candidate') + '</div></center>'
+    } else if (item.status === '2') {
+        dot = 'dot candidate-submitted'
+        str += '<center><div style="font-weight:900;margin-bottom:5px;">' + i8ln('Candidate submitted') + '</div></center>'
+    } else if (item.status === '3') {
+        dot = 'dot candidate-declined'
+        str += '<center><div style="font-weight:900;margin-bottom:5px;">' + i8ln('Candidate declined') + '</div></center>'
+    } else if (item.status === '4') {
+        dot = 'dot candidate-resubmit'
+        str += '<center><div style="font-weight:900;margin-bottom:5px;">' + i8ln('Candidate eligible for resubmit') + '</div></center>'
+    } else if (item.status === '5') {
+        dot = 'dot candidate-not-eligible'
+        str += '<center><div style="font-weight:900;margin-bottom:5px;">' + i8ln('Not a eligible candidate') + '</div></center>'
+    }
+    str += '<center><div><b>' + item.name + '</b></div>' +
+        '<div>' + item.description + '</div>'
+    if (item.notes) {
+        str += '<div><b>' + i8ln('Notes') + ':</b> ' + item.notes + '</div>'
+    }
+    if (item.poiimageurl && item.poisurroundingurl) {
+        str += '<center><img id="poi-image"src="' + item.poiimageurl + '" style="float:left;width:45%;margin-right:1%;margin-bottom:0.5em;" onclick="openFullscreenModal(document.getElementById(\'poi-image\').src)"/></center>'
+        str += '<center><img id="poi-surrounding" src="' + item.poisurroundingurl + '" style="float:right;width:45%;margin-right:1%;margin-bottom:0.5em;" onclick="openFullscreenModal(document.getElementById(\'poi-surrounding\').src)"/></center>'
+    }
+    if (item.poiimageurl && !item.poisurroundingurl) {
+        str += '<center><img id="poi-image"src="' + item.poiimageurl + '" style="width:45%;margin-right:1%;margin-bottom:0.5em;" onclick="openFullscreenModal(document.getElementById(\'poi-image\').src)"/></center>'
+    }
+    if (item.poisurroundingurl && !item.poiimageurl) {
+        str += '<center><img id="poi-surrounding" src="' + item.poisurroundingurl + '" style="width:45%;margin-right:1%;margin-bottom:0.5em;" onclick="openFullscreenModal(document.getElementById(\'poi-surrounding\').src)"/></center>'
+    }
+    if (item.poiimageurl || item.poisurroundingurl) {
+        str += '<p style="clear:both;">'
+    }
+    str += '<span class="' + dot + '"></span>' +
+        '<div><b>' + i8ln('Submitted by') + ':</b> ' + item.submitted_by + '</div>'
+    if (item.edited_by) {
+        str += '<div><b>' + i8ln('Last Edited by') + ':</b> ' + item.edited_by + '</div>'
+    }
+    str += '<div><b>' + i8ln('Updated at') + ':</b> ' + updated + '</div></center>'
     if (!noDeletePoi) {
-        str += '<i class="fa fa-trash-o delete-poi" onclick="deletePoi(event);" data-id="' + item.poi_id + '"></i>'
+        str += '<i class="fas fa-trash-alt delete-poi" onclick="deletePoi(event);" data-id="' + item.poi_id + '"></i>'
+    }
+    if (!noEditPoi) {
+        str += '<center><div><button onclick="openEditPoiModal(event);" data-id="' + item.poi_id + '" data-name="' + item.name + '" data-description="' + item.description + '" data-notes="' + item.notes + '" data-poiimage="' + item.poiimageurl + '" data-poisurrounding="' + item.poisurroundingurl + '" class="convertpoi"><i class="fas fa-edit edit-poi"></i> ' + i8ln('Edit POI') + '</button></div></center>'
     }
     if (!noMarkPoi) {
-        str += '<center><div>Mark this poi <i class="fa fa-refresh convert-poi" style="margin-top: 2px; margin-left: 5px; vertical-align: middle; font-size: 1.5em;" onclick="openMarkPoiModal(event);" data-id="' + item.poi_id + '"></i></div></center>'
+        str += '<center><div><button onclick="openMarkPoiModal(event);" data-id="' + item.poi_id + '" class="convertpoi"><i class="fas fa-sync-alt convert-poi"></i> ' + i8ln('Mark POI') + '</button></div></center>'
     }
+    str += '<center><a href="javascript:void(0);" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ');" title="' + i8ln('View in Maps') + '"><i class="fas fa-road"></i> ' + item.lat.toFixed(5) + ' , ' + item.lon.toFixed(5) + '</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16"><i class="far fa-share-square" aria-hidden="true" style="position:relative;top:3px;left:0px;color:#26c300;font-size:20px;"></i></a></center>'
     return str
 }
 
@@ -4920,18 +4975,83 @@ function editCommunityData(event) { // eslint-disable-line no-unused-vars
         }
     }
 }
+function editPoiData(event) { // eslint-disable-line no-unused-vars
+    var form = $(event.target).parent().parent()
+    var poiId = form.find('.editpoiid').val()
+    var poiName = form.find('[name="poi-name"]').val()
+    var poiDescription = form.find('[name="poi-description"]').val()
+    var poiNotes = form.find('[name="poi-notes"]').val()
+    var poiImage = form.find('[name="preview-poi-image"]').attr('src')
+    var poiSurrounding = form.find('[name="preview-poi-surrounding"]').attr('src')
+    if (typeof poiImage !== 'undefined') {
+        poiImage = poiImage.split(',')[1]
+    } else {
+        poiImage = null
+    }
+    if (typeof poiSurrounding !== 'undefined') {
+        poiSurrounding = poiSurrounding.split(',')[1]
+    } else {
+        poiSurrounding = null
+    }
+    if (poiName && poiName !== '' && poiDescription && poiDescription !== '') {
+        if (confirm(i8ln('I confirm this is an eligible POI location'))) {
+            $('.loader').show()
+            return $.ajax({
+                url: 'submit',
+                type: 'POST',
+                timeout: 600000,
+                dataType: 'json',
+                cache: false,
+                data: {
+                    'action': 'edit-poi',
+                    'poiId': poiId,
+                    'poiName': poiName,
+                    'poiDescription': poiDescription,
+                    'poiNotes': poiNotes,
+                    'poiImage': poiImage,
+                    'poiSurrounding': poiSurrounding
+                },
+                error: function error() {
+                    // Display error toast
+                    toastr['error'](i8ln('Unable to update poi'), i8ln('Error Updating poi'))
+                    toastr.options = toastrOptions
+                },
+                complete: function complete() {
+                    lastpois = false
+                    updateMap()
+                    $('.loader').hide()
+                    $('.ui-dialog-content').dialog('close')
+                }
+            })
+        }
+    }
+}
 function submitPoi(event) { // eslint-disable-line no-unused-vars
     var form = $(event.target).parent().parent()
     var lat = $('.submit-modal.ui-dialog-content .submitLatitude').val()
     var lon = $('.submit-modal.ui-dialog-content .submitLongitude').val()
     var poiName = form.find('[name="poi-name"]').val()
     var poiDescription = form.find('[name="poi-description"]').val()
+    var poiNotes = form.find('[name="poi-notes"]').val()
+    var poiImage = form.find('[name="preview-poi-image"]').attr('src')
+    var poiSurrounding = form.find('[name="preview-poi-surrounding"]').attr('src')
+    if (typeof poiImage !== 'undefined') {
+        poiImage = poiImage.split(',')[1]
+    } else {
+        poiImage = null
+    }
+    if (typeof poiSurrounding !== 'undefined') {
+        poiSurrounding = poiSurrounding.split(',')[1]
+    } else {
+        poiSurrounding = null
+    }
     if (poiName && poiName !== '' && poiDescription && poiDescription !== '') {
         if (confirm(i8ln('I confirm this is an eligible POI location'))) {
+            $('.loader').show()
             return $.ajax({
                 url: 'submit',
                 type: 'POST',
-                timeout: 300000,
+                timeout: 600000,
                 dataType: 'json',
                 cache: false,
                 data: {
@@ -4939,7 +5059,10 @@ function submitPoi(event) { // eslint-disable-line no-unused-vars
                     'lat': lat,
                     'lon': lon,
                     'poiName': poiName,
-                    'poiDescription': poiDescription
+                    'poiDescription': poiDescription,
+                    'poiNotes': poiNotes,
+                    'poiImage': poiImage,
+                    'poiSurrounding': poiSurrounding
                 },
                 error: function error() {
                     // Display error toast
@@ -4949,6 +5072,7 @@ function submitPoi(event) { // eslint-disable-line no-unused-vars
                 complete: function complete() {
                     lastpois = false
                     updateMap()
+                    $('.loader').hide()
                     $('.ui-dialog-content').dialog('close')
                 }
             })
@@ -4960,7 +5084,7 @@ function markPoiSubmitted(event) { // eslint-disable-line no-unused-vars
     var form = $(event.target).parent().parent()
     var poiId = form.find('.markpoiid').val()
     if (poiId && poiId !== '') {
-        if (confirm(i8ln('I confirm this POI is submitted to OPR'))) {
+        if (confirm(i8ln('I confirm this candidate is submitted to OPR'))) {
             return $.ajax({
                 url: 'submit',
                 type: 'POST',
@@ -4973,7 +5097,7 @@ function markPoiSubmitted(event) { // eslint-disable-line no-unused-vars
                 },
                 error: function error() {
                     // Display error toast
-                    toastr['error'](i8ln('POI id got lost somewhere.'), i8ln('Error marking portal'))
+                    toastr['error'](i8ln('Candidate id got lost somewhere.'), i8ln('Error marking candidate'))
                     toastr.options = toastrOptions
                 },
                 complete: function complete() {
@@ -4990,7 +5114,7 @@ function markPoiDeclined(event) { // eslint-disable-line no-unused-vars
     var form = $(event.target).parent().parent()
     var poiId = form.find('.markpoiid').val()
     if (poiId && poiId !== '') {
-        if (confirm(i8ln('I confirm this POI is declined by OPR'))) {
+        if (confirm(i8ln('I confirm this candidate is declined by OPR'))) {
             return $.ajax({
                 url: 'submit',
                 type: 'POST',
@@ -5003,7 +5127,67 @@ function markPoiDeclined(event) { // eslint-disable-line no-unused-vars
                 },
                 error: function error() {
                     // Display error toast
-                    toastr['error'](i8ln('POI id got lost somewhere.'), i8ln('Error marking portal'))
+                    toastr['error'](i8ln('Candidate id got lost somewhere.'), i8ln('Error marking candidate'))
+                    toastr.options = toastrOptions
+                },
+                complete: function complete() {
+                    lastpois = false
+                    updateMap()
+                    $('.ui-dialog-content').dialog('close')
+                }
+            })
+        }
+    }
+}
+
+function markPoiResubmit(event) { // eslint-disable-line no-unused-vars
+    var form = $(event.target).parent().parent()
+    var poiId = form.find('.markpoiid').val()
+    if (poiId && poiId !== '') {
+        if (confirm(i8ln('I confirm this candidate is declined by OPR but can be resubmitted as candidate'))) {
+            return $.ajax({
+                url: 'submit',
+                type: 'POST',
+                timeout: 300000,
+                dataType: 'json',
+                cache: false,
+                data: {
+                    'action': 'markpoiresubmit',
+                    'poiId': poiId
+                },
+                error: function error() {
+                    // Display error toast
+                    toastr['error'](i8ln('Candidate id got lost somewhere.'), i8ln('Error marking candidate'))
+                    toastr.options = toastrOptions
+                },
+                complete: function complete() {
+                    lastpois = false
+                    updateMap()
+                    $('.ui-dialog-content').dialog('close')
+                }
+            })
+        }
+    }
+}
+
+function markNotCandidate(event) { // eslint-disable-line no-unused-vars
+    var form = $(event.target).parent().parent()
+    var poiId = form.find('.markpoiid').val()
+    if (poiId && poiId !== '') {
+        if (confirm(i8ln('I confirm this is not a eligible candidate to submit to OPR'))) {
+            return $.ajax({
+                url: 'submit',
+                type: 'POST',
+                timeout: 300000,
+                dataType: 'json',
+                cache: false,
+                data: {
+                    'action': 'marknotcandidate',
+                    'poiId': poiId
+                },
+                error: function error() {
+                    // Display error toast
+                    toastr['error'](i8ln('Candidate id got lost somewhere.'), i8ln('Error marking candidate'))
                     toastr.options = toastrOptions
                 },
                 complete: function complete() {
@@ -5336,6 +5520,31 @@ function openEditCommunityModal(event) { // eslint-disable-line no-unused-vars
         maxHeight: 600,
         buttons: {},
         title: i8ln('Edit Community'),
+        classes: {
+            'ui-dialog': 'ui-dialog raid-widget-popup'
+        }
+    })
+}
+
+function openEditPoiModal(event) { // eslint-disable-line no-unused-vars
+    $('.ui-dialog').remove()
+    var val = $(event.target).data('id')
+    var name = $(event.target).data('name')
+    var description = $(event.target).data('description')
+    var notes = $(event.target).data('notes')
+    var poiimageurl = $(event.target).data('poiimage')
+    var poisurroundingurl = $(event.target).data('poisurrounding')
+    $('.editpoiid').val(val)
+    $('#poi-name').val(name)
+    $('#poi-description').val(description)
+    $('#poi-notes').val(notes)
+    $('#preview-poi-image').attr('src', poiimageurl)
+    $('#preview-poi-surrounding').attr('src', poisurroundingurl)
+    $('.editpoi-modal').clone().dialog({
+        modal: true,
+        maxHeight: 600,
+        buttons: {},
+        title: i8ln('Edit POI'),
         classes: {
             'ui-dialog': 'ui-dialog raid-widget-popup'
         }

@@ -45,8 +45,11 @@ $communityName 		= ! empty( $_POST['communityName'] ) ? $_POST['communityName'] 
 $communityDescription 	= ! empty( $_POST['communityDescription'] ) ? $_POST['communityDescription'] : '';
 $communityInvite 	= ! empty( $_POST['communityInvite'] ) ? $_POST['communityInvite'] : '';
 $poiName		= ! empty( $_POST['poiName'] ) ? $_POST['poiName'] : '';
+$poiNotes		= ! empty($_POST['poiNotes']) ? $_POST['poiNotes'] : '';
 $poiDescription		= ! empty( $_POST['poiDescription'] ) ? $_POST['poiDescription'] : '';
 $poiId			= ! empty( $_POST['poiId'] ) ? $_POST['poiId'] : '';
+$poiImage		= ! empty($_POST['poiImage']) ? $_POST['poiImage'] : '';
+$poiSurrounding		= ! empty($_POST['poiSurrounding']) ? $_POST['poiSurrounding'] : '';
 
 // set content type
 header( 'Content-Type: application/json' );
@@ -191,7 +194,10 @@ if ( $action === "delete-community" ) {
     $submit->delete_community($communityId, $loggedUser);
 }
 if ( $action === "poi-add" ) {
-    $submit->submit_poi($lat, $lon, $poiName, $poiDescription, $loggedUser);
+    $submit->submit_poi($lat, $lon, $poiName, $poiDescription, $poiNotes, $poiImage, $poiSurrounding, $loggedUser);
+}
+if ($action === "edit-poi") {
+    $submitManual->modify_poi($poiId, $poiName, $poiDescription, $poiNotes, $poiImage, $poiSurrounding, $loggedUser);
 }
 if ( $action === "delete-poi" ) {
     $submit->delete_poi($poiId, $loggedUser);
@@ -201,6 +207,12 @@ if ( $action === "markpoisubmitted" ) {
 }
 if ( $action === "markpoideclined" ) {
     $submit->mark_poi_declined($poiId, $loggedUser);
+}
+if ($action === "markpoiresubmit") {
+    $submitManual->mark_poi_resubmit($poiId, $loggedUser);
+}
+if ($action === "marknotcandidate") {
+    $submitManual->mark_not_candidate($poiId, $loggedUser);
 }
 $jaysson = json_encode($d);
 echo $jaysson;

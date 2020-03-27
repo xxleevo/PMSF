@@ -867,28 +867,28 @@ class RDM extends Scanner
     public function query_poi($conds, $params)
     {
         global $manualdb;
-
         $query = "SELECT poi_id,
         lat,
         lon,
         name,
-	description,
-	updated,
-	submitted_by,
-	status
+        description,
+        notes,
+        poiimageurl,
+        poisurroundingurl,
+        updated,
+        submitted_by,
+        edited_by,
+        status
         FROM poi
         WHERE :conditions";
-
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
         $pois = $manualdb->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
-
         $data = array();
         $i = 0;
         foreach ($pois as $poi) {
             $poi["lat"] = floatval($poi["lat"]);
             $poi["lon"] = floatval($poi["lon"]);
             $data[] = $poi;
-
             unset($pois[$i]);
             $i++;
         }
