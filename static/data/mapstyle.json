@@ -1,11 +1,14 @@
 {
-  "tileserver": "Tileserver (Recommended)",
   "openstreetmap": "OpenStreetMap",
   "darkmatter": "Dark Matter",
-  "styleblackandwhite": "Black and White",
   "styletopo": "ToPo Map",
   "stylesatellite": "Satellite",
-  "stylewikipedia": "Wikimedia",
   "googlemapssat": "Google Maps Satellite",
-  "googlemapsroad": "Google Maps Roadmap"
+  "googlemapsroad": "Google Maps Roadmap",
+  "mapbox": "Mapbox Streets",
+  "mapboxDark": "Mapbox Dark",
+  "mapboxPogoDynamic": "Mapbox Pokémon Go Dynamic",
+  "mapboxPogo": "Mapbox Pokémon Go",
+  "mapboxPogoDark": "Mapbox Pokémon Go Dark",
+  "tileserver": "Tileserver"
 }

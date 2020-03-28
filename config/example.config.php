@@ -514,9 +514,32 @@ $zoomToBoundsOnClick = 15;											// Zoomlevel on clusterClick
 $maxClusterRadius = 30;												// The maximum radius that a cluster will cover from the central marker (in pixels).
 $spiderfyOnMaxZoom = 'true';										// Spiderfy cluster markers on click
 
-/* Google Settings & Analytics  */
-$gmapsKey = "";														// ONLY USED FOR TILE LAYERS
-$gAnalyticsId = "";													// "" for empty, "UA-XXXXX-Y" add your Google Analytics tracking ID
+/* Google Analytics  */
+$gAnalyticsId = "";											// "" for empty, "UA-XXXXX-Y" add your Google Analytics tracking ID
+
+/* "Paid" Map Style Settings */
+$gmapsKey = "";
+$mBoxKey = "";
+
+/* How to use multiple Keys: */
+
+//$dayOfTheWeek = date('l');
+
+//if ($dayOfTheWeek === 'Monday' || $dayOfTheWeek === 'Tuesday' || $dayOfTheWeek === 'Wednesday') {
+//    $mBoxKey = "";
+//} else if ($dayOfTheWeek === 'Thursday' || $dayOfTheWeek === 'Friday') {
+//    $mBoxKey = "";
+//} else if ($dayOfTheWeek === 'Saturday' || $dayOfTheWeek === 'Sunday') {
+//    $mBoxKey = "";
+//}
+
+//if ($dayOfTheWeek === 'Monday' || $dayOfTheWeek === 'Tuesday' || $dayOfTheWeek === 'Wednesday') {
+//    $gmapsKey = "";
+//} else if ($dayOfTheWeek === 'Thursday' || $dayOfTheWeek === 'Friday') {
+//    $gmapsKey = "";
+//} else if ($dayOfTheWeek === 'Saturday' || $dayOfTheWeek === 'Sunday') {
+//    $gmapsKey = "";
+//}
 
 /* Piwik Analytics */
 $piwikUrl = "";

@@ -57,13 +57,12 @@ $blockIframe = true;                                                // Block you
 $title = "PMSF Alt";                                                // Title to display in title bar
 $locale = "en";                                                     // Display language
 
-/* Google Maps ONLY USED FOR TILE LAYERS */
+/* Google Analytics  */
+$gAnalyticsId = "";                                                                                     // "" for empty, "UA-XXXXX-Y" add your Google Analytics tracking ID
 
+/* "Paid" Map Style Settings */
 $gmapsKey = "";
-
-/* Google Analytics */
-
-$gAnalyticsId = "";                                                 // "" for empty, "UA-XXXXX-Y" add your Google Analytics tracking ID
+$mBoxKey = "";
 
 /* Piwik Analytics */
 
