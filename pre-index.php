@@ -351,7 +351,7 @@ if (!$noLoadingScreen) {
             <div id="currentWeather"></div>
             <?php
         } ?>
-        
+
         <?php
         if ($noNativeLogin === false || $noDiscordLogin === false) {
             if (isset($_COOKIE["LoginCookie"])) {
@@ -373,23 +373,23 @@ if (!$noLoadingScreen) {
 				//If the session variable does not exist, presume that user suffers from a bug and access config is not used.
 				//If you don't like this, help me fix it.
 				if (!isset($_SESSION['already_refreshed'])) {
-			
+
 					//Number of seconds to refresh the page after.
 					$refreshAfter = 1;
-			
+
 					//Send a Refresh header.
 					header('Refresh: ' . $refreshAfter);
-			
+
 					//Set the session variable so that we don't refresh again.
-					$_SESSION['already_refreshed'] = true; 
+					$_SESSION['already_refreshed'] = true;
 				}
 			}
-				
+
                 if (!empty($_SESSION['user']->updatePwd) && $_SESSION['user']->updatePwd === 1) {
                     header("Location: ./user");
                     die();
                 }
-                
+
 				$color = "red";
                 if ($info['expire_timestamp'] > time()) {
                     $color = "green";
@@ -397,7 +397,7 @@ if (!$noLoadingScreen) {
                     header('Location: ./logout.php');
                 }
 				$userAccessLevel = $manualdb->get( "users", [ 'access_level' ], [ 'expire_timestamp' => $_SESSION['user']->expire_timestamp ] );
-				
+
 				if ($userAccessLevel['access_level'] >= 3) {
 				echo "<span style='color: green;'><i class='fa fa-check fa-fw'></i><i class='fa fa-unlock-alt fa-fw' style='font-weight:normal;'></i></span>";
 				} elseif ($userAccessLevel['access_level'] == 2) {
@@ -814,7 +814,7 @@ if (!$noLoadingScreen) {
 																pokemonFilterImages( $noPokemonNumbers, '', $excludeQuestsPokemon, 8 );
 															}
 														?>
-														
+
 													</div>
 													<?php
 														echo '<a href="#" class="select-all">' . i8ln("All") . '</a>
@@ -845,7 +845,7 @@ if (!$noLoadingScreen) {
 														echo '<a href="#" class="select-all-item">' . i8ln("All") . '</a>
 														<a href="#" class="hide-all-item">' . i8ln("None") . '</a>';
 													?>
-													
+
 												</label>
 											</div>
 										</div>
@@ -923,7 +923,7 @@ if (!$noLoadingScreen) {
 						<div>
 						'. $communityDescription .'
 						</div>';
-						
+
 						if(!$noWhatsappShareCommunities){
 							echo '
 							<hr style="margin:0px;" />
@@ -1060,7 +1060,7 @@ if (!$noLoadingScreen) {
 															raidbossFilterImages($noRaidfilterListNumbers, '', $excludeRaidPokemon, 11); 
 														}
 													?>
-													
+
 												</div>
 												<a href="#" class="select-all-raidboss"><?php echo i8ln('All') ?>
 												</a><a href="#" class="hide-all-raidboss"><?php echo i8ln('None') ?> </a>
@@ -1085,7 +1085,7 @@ if (!$noLoadingScreen) {
 							</div>
 						<?php
 						} ?>
-						
+
 						<?php
 						echo '
 						</div>';
@@ -1135,7 +1135,7 @@ if (!$noLoadingScreen) {
 									</label>
 								</div>
 						</div>';
-					} 
+					}
                     if ( ! $noGymBadgeMode) {
                         echo '<div class="form-control switch-container" id="badge-mode-wrapper">
                             <font size="3">' . i8ln("Gym Badge Mode") . '</font>
@@ -1149,11 +1149,11 @@ if (!$noLoadingScreen) {
                         </div>';
                     }
 					?>
-			
+
                     <?php
                     if ( (!$hideIfManual && !$noGymTeamInfos) || !$noGymScannedText || !$noNewGymsFilter) {
 						echo '<div id="gyms-filter-wrapper" style="display:none">';
-						
+
 						if ( ! $hideIfManual && !$noGymTeamInfos) {
 							echo '<div class="form-control switch-container" id="team-gyms-only-wrapper">
 								<font size="3">Team</font>
@@ -1214,7 +1214,7 @@ if (!$noLoadingScreen) {
 							</div>';
 						}
 						if ( !$noNewGymsFilter) {
-						
+
 						$currentMonth = date("m");
 						$currentYear = intval(date("Y"));
 						echo '<div class="form-control switch-container" id="new-gyms-wrapper">
@@ -1248,9 +1248,9 @@ if (!$noLoadingScreen) {
 								}
 							}
 						}
-						
-						
-						
+
+
+
 							echo '
 								</select>
 							</div>';
@@ -1295,7 +1295,7 @@ if (!$noLoadingScreen) {
             }
             if ( ! $noPortals || ! $noS2Cells || ! $noWeatherOverlay) {
 				if(!$noWeatherOverlay && (! $noPortals || ! $noS2Cells)){
-					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("S2 Cells") . ' &amp; ' . i8ln("Weather") . '</h3>';
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Wayfarer") . ' &amp; ' . i8ln("Weather") . '</h3>';
 				} else if(!$noWeatherOverlay){
 					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Weather") . '</h3>';
 				} else{
@@ -1326,7 +1326,7 @@ if (!$noLoadingScreen) {
 					if ( ! $noPoi ) {
 						echo '
 						<div class="form-control switch-container">
-							<h3>' . i8ln( 'POI' ) . '</h3>
+							<h3>' . i8ln( 'Waystops' ) . '</h3>
 							<div class="onoffswitch">
 								<input id="poi-switch" type="checkbox" name="poi-switch" class="onoffswitch-checkbox" checked>
 								<label class="onoffswitch-label" for="poi-switch">
@@ -1514,7 +1514,7 @@ if (!$noLoadingScreen) {
 							</label>
 						</div>
 					</div>';
-                } 
+                }
                 if ( ! $noSpawnArea ) {
                     echo '
 					<div id="spawn-area-wrapper" class="form-control switch-container">
@@ -1893,7 +1893,7 @@ if (!$noLoadingScreen) {
             <div><center><p>
             <?php
             $time = date("Y-m-d", $_SESSION['user']->expire_timestamp);
-            
+
             echo $_SESSION['user']->user . "<br>";
             if ($_SESSION['user']->expire_timestamp < time()) {
                 echo "<span style='color: green;'>" . i8ln('Membership expires on') . " {$time}</span>";
@@ -1941,17 +1941,17 @@ if (!$noLoadingScreen) {
                 </table>
                 <div id="pokeStatStatus" style="color: black;"></div>
             </div>
-			
+
             <div class="stats-label-container">
                 <center><h1 id="stats-gym-label"></h1></center>
             </div>
             <div id="arenaList" style="color: black;"></div>
-			
+
             <div class="stats-label-container">
                 <center><h1 id="stats-raid-label"></h1></center>
             </div>
             <div id="raidList" style="color: black;"></div>
-			
+
             <div class="stats-label-container">
                 <center><h1 id="stats-pkstop-label"></h1></center>
             </div>
@@ -2044,18 +2044,18 @@ if (!$noLoadingScreen) {
     <?php } ?>
     <?php if (! $noEditPoi) { ?>
         <div class="editpoi-modal" style="display: none;">
-            <input type="text" id="poi-name" name="poi-name" placeholder="<?php echo i8ln('Enter New POI Name'); ?>" data-type="poi-name" class="search-input">
-            <input type="text" id="poi-description" name="poi-description" placeholder="<?php echo i8ln('Enter New POI Description'); ?>" data-type="poi-description" class="search-input">
-            <input type="text" id="poi-notes" name="poi-notes"placeholder="<?php echo i8ln('Enter New POI Notes'); ?>" data-type="poi-notes" class="search-input">
+            <input type="text" id="poi-name" name="poi-name" placeholder="<?php echo i8ln('Enter New Waystop Name'); ?>" data-type="poi-name" class="search-input">
+            <input type="text" id="poi-description" name="poi-description" placeholder="<?php echo i8ln('Enter New Waystop Description'); ?>" data-type="poi-description" class="search-input">
+            <input type="text" id="poi-notes" name="poi-notes"placeholder="<?php echo i8ln('Enter New Waystop Notes'); ?>" data-type="poi-notes" class="search-input">
                 <?php if (! empty($imgurCID)) {
                 ?>
                     <div class="upload-button-container">
-                         <button type="button"><i class="fas fa-upload"></i> <?php echo i8ln('Upload POI Image') ?></button>
+                         <button type="button"><i class="fas fa-upload"></i> <?php echo i8ln('Upload Waystop Image') ?></button>
                          <input type="file" id="poi-image" name="poi-image" accept="image/*" class="poi-image" data-type="poi-image" class="search-input" onchange='previewPoiImage(event)' >
                     </div>
                     <center><img id='preview-poi-image' name='preview-poi-image' width="50px" height="auto"></center>
                     <div class="upload-button-container">
-                         <button type="button"><i class="fas fa-upload"></i> <?php echo i8ln('Upload POI Surrounding') ?></button>
+                         <button type="button"><i class="fas fa-upload"></i> <?php echo i8ln('Upload Surrounding Image') ?></button>
                          <input type="file" id="poi-surrounding" name="poi-surrounding" accept="image/*" class="poi-surrounding" data-type="poi-surrounding" class="search-input" onchange='previewPoiSurrounding(event)'>
                     </div>
                     <center><img id='preview-poi-surrounding' name='preview-poi-surrounding' width="50px" height="auto"></center>
@@ -2089,8 +2089,6 @@ if (!$noLoadingScreen) {
             <div class="button-container">
                 <button type="button" onclick="markPoiSubmitted(event);" class="markpoiid"><i class="fas fa-sync-alt"></i> <?php echo i8ln('Submitted'); ?></button>
                 <button type="button" onclick="markPoiDeclined(event);" class="markpoiid"><i class="fas fa-times"></i> <?php echo i8ln('Declined'); ?></button>
-                <button type="button" onclick="markPoiResubmit(event);" class="markpoiid"><i class="fas fa-times"></i> <?php echo i8ln('Resubmit'); ?></button>
-                <button type="button" onclick="markNotCandidate(event);" class="markpoiid"><i class="fas fa-times"></i> <?php echo i8ln('Not a candidate'); ?></button>
             </div>
         </div>
     <?php } ?>
@@ -2098,7 +2096,7 @@ if (!$noLoadingScreen) {
         <div class="accessdenied-modal" style="display: none;">
             <center><?php echo i8ln('Access Denied!')?></center>
             <br>
-			<?php 
+			<?php
 			echo i8ln('It seems that you did not join our Discord Server.') . '<br>';
 			if(!empty($discordUrl)){
 				echo i8ln('Click') . ' <a href="' .$discordUrl .'">' . i8ln('here') . '</a> ' . i8ln('to join our Server') . '<br>';
@@ -2379,7 +2377,7 @@ if (!$noLoadingScreen) {
                     <?php } ?>
                     <?php if ( ! $noAddPoi && !$noPoi ) {
                         ?>
-                        <li><a href="#tab-poi"><img src="static/images/playground.png"/></a></li>
+                        <li><a href="#tab-poi"><img src="static/images/wayfarer.png"/></a></li>
                     <?php } ?>
                 </ul>
                 <?php if ( ! $noManualPokemon && !$noPokemon  ) {
@@ -2460,13 +2458,13 @@ if (!$noLoadingScreen) {
                 <?php if (! $noAddPoi && !$noPoi) {
             ?>
                     <div id="tab-poi">
-                        <input type="text" name="poi-name" class="poi-name"placeholder="<?php echo i8ln('Enter candidate Name'); ?>" data-type="name" class="search-input">
-                        <input type="text" name="poi-description" class="poi-description" placeholder="<?php echo i8ln('Enter candidate description'); ?>" data-type="description" class="search-input">
-                        <input type="text" name="poi-notes" class="poi-notes" placeholder="<?php echo i8ln('Enter field notes'); ?>" data-type="description" class="search-input">
+                        <input type="text" name="poi-name" class="poi-name"placeholder="<?php echo i8ln('Enter Waystop Name'); ?>" data-type="name" class="search-input">
+                        <input type="text" name="poi-description" class="poi-description" placeholder="<?php echo i8ln('Enter Waystop Description'); ?>" data-type="description" class="search-input">
+                        <input type="text" name="poi-notes" class="poi-notes" placeholder="<?php echo i8ln('Enter Waystop Notes'); ?>" data-type="description" class="search-input">
                         <?php if (! empty($imgurCID)) {
                 ?>
                             <div class="upload-button-container">
-                                <button type="button"><i class="fas fa-upload"></i> <?php echo i8ln('Upload POI Image') ?></button>
+                                <button type="button"><i class="fas fa-upload"></i> <?php echo i8ln('Upload Waystop Image') ?></button>
                                 <input type="file" id="poi-image" name="poi-image" accept="image/*" class="poi-image" data-type="poi-image" class="search-input" onchange='previewPoiImage(event)'>
                             </div>
                             <center><img id='preview-poi-image' name='preview-poi-image' width="50px" height="auto"></center>
@@ -2478,8 +2476,8 @@ if (!$noLoadingScreen) {
                         <?php
             } ?>
                         <div class="button-container">
-                            <h6><center><?php echo i8ln('If you submit a POI candidate you agree that your discord username will be shown in the marker label'); ?></center></h6>
-                            <button type="button" onclick="submitPoi(event);" class="submitting-poi"><i class="fas fa-comments"></i> <?php echo i8ln('Submit POI candidate'); ?></button>
+                            <h6><center><?php echo i8ln('If you submit a Waystop candidate you agree that your discord username will be shown in the marker label'); ?></center></h6>
+                            <button type="button" onclick="submitPoi(event);" class="submitting-poi"><i class="fas fa-comments"></i> <?php echo i8ln('Submit Waystop Candidate'); ?></button>
                         </div>
                     </div>
                 <?php
@@ -2555,7 +2553,7 @@ if (!$noLoadingScreen) {
     var enableLured = <?php echo $noLures ? 'false' : $enableLured ?>;
     var noInvasions = <?php echo $noRocketInvasions === true ? 'true' : 'false' ?>;
     var enableInvasions = <?php echo $noRocketInvasions ? 'false' : $enableInvasions ?>;
-	var hideGrunts = <?php echo $noRocketInvasions ? '[]' : $hideGrunts ?>;
+    var hideGrunts = <?php echo $noRocketInvasions ? '[]' : $hideGrunts ?>;
     var noInvasionTimer = <?php echo $noInvasionTimer === true ? 'true' : 'false' ?>;
     var enableInvasionTimer = <?php echo $noInvasionTimer ? 'false' : $enableInvasionTimer ?>;
     var noQuests = <?php echo $noQuests === true ? 'true' : 'false' ?>;
@@ -2604,7 +2602,7 @@ if (!$noLoadingScreen) {
     var showBigKarp = <?php echo $noBigKarp === true ? 'true' : 'false' ?>;
     var enableBigKarps = <?php echo $noBigKarp ? 'false' : $enableBigKarps ?>;
     var showTinyRat = <?php echo $noTinyRat === true ? 'true' : 'false' ?>;
-	var enableTinyRats = <?php echo $noTinyRat ? 'false' : $enableTinyRats ?>;
+    var enableTinyRats = <?php echo $noTinyRat ? 'false' : $enableTinyRats ?>;
     var hidePokemonCoords = <?php echo $hidePokemonCoords === true ? 'true' : 'false' ?>;
     var directionProvider = '<?php echo $noDirectionProvider === true ? $directionProvider : 'google' ?>';
     var exEligible = <?php echo $noExEligible === true ? 'false' : $exEligible  ?>;
@@ -2667,23 +2665,23 @@ if (!$noLoadingScreen) {
     var noGymFirstseen = <?php echo $noGymFirstseen === true ? 'true' : 'false' ?>;
     var noIvGlow = <?php echo $noIv100Glow === true ? 'true' : 'false' ?>;
     var glowColor = '<?php echo $Iv100GlowColor ?>';
-	var noRaidCounterGuide = <?php echo $noRaidCounterGuide === true ? 'true' : 'false' ?>;
-	var noQuestPokemonCP = <?php echo $noQuestPokemonCP === true ? 'true' : 'false' ?>;
-	var noRaidPokemonCP = <?php echo $noRaidPokemonCP === true ? 'true' : 'false' ?>;
-	var noWhatsappRaidMoves = <?php echo $noWhatsappRaidMoves === true ? 'true' : 'false' ?>;
+    var noRaidCounterGuide = <?php echo $noRaidCounterGuide === true ? 'true' : 'false' ?>;
+    var noQuestPokemonCP = <?php echo $noQuestPokemonCP === true ? 'true' : 'false' ?>;
+    var noRaidPokemonCP = <?php echo $noRaidPokemonCP === true ? 'true' : 'false' ?>;
+    var noWhatsappRaidMoves = <?php echo $noWhatsappRaidMoves === true ? 'true' : 'false' ?>;
     var numberOfPokemon = <?php echo $numberOfPokemon; ?>;
     var numberOfItem = <?php echo $numberOfItem; ?>;
     var numberOfGrunt = <?php echo $numberOfGrunt; ?>;
     var noRaids = <?php echo $noRaids === true ? 'true' : 'false' ?>;
-	var hideRaidPokemon = <?php echo $noRaids ? '[]' : $hideRaidPokemon ?>;
-	var raidbossFilterlist = <?php echo $noRaidfilterList === true ? 'true' : $raidbossFilterlist ?>;
-	var filterByRaidlevel = <?php echo $noFilterByRaidlevel === true ? 'true' : $filterByRaidlevel ?>;
-	var hideRaidEggs = <?php echo $noRaids ? '[]' : $hideRaidEggs ?>;
+    var hideRaidPokemon = <?php echo $noRaids ? '[]' : $hideRaidPokemon ?>;
+    var raidbossFilterlist = <?php echo $noRaidfilterList === true ? 'true' : $raidbossFilterlist ?>;
+    var filterByRaidlevel = <?php echo $noFilterByRaidlevel === true ? 'true' : $filterByRaidlevel ?>;
+    var hideRaidEggs = <?php echo $noRaids ? '[]' : $hideRaidEggs ?>;
     var noCustomTileServer = <?php echo $noCustomTileServer === true ? 'true' : 'false' ?>;
     var customTileServerAddress = '<?php echo $customTileServerAddress ?>';
     var forcedTileServer = <?php echo $forcedTileServer === true ? 'true' : 'false' ?>;
     var pokemonLabelStyle = '<?php echo $pokemonLabelStyle ?>';
-	var useIconRepoPokeRewards = <?php echo $usePokeRewardsFromIconRepository === true ? 'true' : 'false' ?>;
+    var useIconRepoPokeRewards = <?php echo $usePokeRewardsFromIconRepository === true ? 'true' : 'false' ?>;
     var letItSnow = <?php echo $letItSnow === true ? 'true' : 'false' ?>;
     var makeItBang = <?php echo $makeItBang === true ? 'true' : 'false' ?>;
     var valentine = <?php echo $valentine === true ? 'true' : 'false' ?>;
@@ -2691,8 +2689,8 @@ if (!$noLoadingScreen) {
     var gymBadgeMode = <?php echo $noGymBadgeMode === true ? 'false' : $gymBadgeMode ?>;
     var openPopupOnHovering = <?php echo $openPopupOnHovering === true ? 'true' : 'false' ?>;
     var onlyOnePopup = <?php echo $onlyOnePopup === true ? 'true' : 'false' ?>;
-	var denyRaidLevels = <?php echo $noRaids ? '[1,2,3,4,5]' : $denyRaidLevels ?>;
-	
+    var denyRaidLevels = <?php echo $noRaids ? '[1,2,3,4,5]' : $denyRaidLevels ?>;
+
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="static/dist/js/map.common.min.js"></script>

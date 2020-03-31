@@ -223,7 +223,7 @@ class RDM extends Submit
 				die();
 			}
 			if ( ! empty( $gymId ) ) {
-				$fortName = $db->get( "forts", [ 'name' ], [ 'external_id' => $gymId ] );    
+				$fortName = $db->get( "forts", [ 'name' ], [ 'external_id' => $gymId ] );
 				$db->delete( 'gym', [
 					"AND" => [
 						'id' => $gymId
@@ -739,16 +739,16 @@ class RDM extends Submit
                 'poi_id'                    => $poiId,
                 'name'                      => $poiName,
                 'description'               => $poiDescription,
-        'notes'                     => $poiNotes,
-        'poiimageurl'               => $poiImageUrl,
-        'poiimagedeletehash'         => $poiImageDeleteHash,
-        'poisurroundingurl'         => $poiSurroundingUrl,
-        'poisurroundingdeletehash'   => $poiSurroundingDeleteHash,
+	        'notes'                     => $poiNotes,
+        	'poiimageurl'               => $poiImageUrl,
+	        'poiimagedeletehash'        => $poiImageDeleteHash,
+        	'poisurroundingurl'         => $poiSurroundingUrl,
+	        'poisurroundingdeletehash'  => $poiSurroundingDeleteHash,
                 'lat'                       => $lat,
                 'lon'                       => $lon,
                 'status'                    => 1,
-                'updated'                   => time(),
-                'submitted_by'              => $loggedUser
+                'submitted_by'              => $loggedUser,
+		'submitted'                 => time(),
             ];
             $manualdb->insert("poi", $cols);
             if ($noDiscordSubmitLogChannel === false) {
@@ -765,23 +765,19 @@ class RDM extends Submit
                 "fields" => array(
                     array(
                         "name" => 'Manual Action:',
-                        "value" => 'Submit POI'
+                        "value" => 'New Potential Waystop (not sent to Wayfarer)'
                     ),
                     array(
-                        "name" => 'POI Title:',
+                        "name" => 'Waystop Title:',
                         "value" => $poiName
                     ),
                     array(
-                        "name" => 'POI Description:',
+                        "name" => 'Waystop Description:',
                         "value" => $poiDescription
                     ),
                     array(
-                        "name" => 'POI ID:',
-                        "value" => $poiId
-                    ),
-                    array(
                         "name" => 'Map link',
-                        "value" => '[View POI on Map](' . $submitMapUrl . '/?lat=' . $lat . '&lon=' . $lon . '&zoom=18)'
+                        "value" => '[View Waystop on Map](' . $submitMapUrl . '/?lat=' . $lat . '&lon=' . $lon . '&zoom=18)'
                     )
                 )
             ))
@@ -790,7 +786,7 @@ class RDM extends Submit
             }
         }
     }
-  
+
     public function modify_poi($poiId, $poiName, $poiDescription, $poiNotes, $poiImage, $poiSurrounding, $loggedUser)
     {
         global $manualdb, $noPoi, $noEditPoi, $noDiscordSubmitLogChannel, $discordPOISubmitLogChannelUrl, $submitMapUrl, $imgurCID;
@@ -848,39 +844,35 @@ class RDM extends Submit
             ;
             if ($noDiscordSubmitLogChannel === false) {
                 $data = array(
-            "username" => $loggedUser,
-            "embeds" => array(array(
-                "color" => 15105570,
-                "image" => array(
-                    "url" => $poiImageUrl
-                ),
-                "thumbnail" => array(
-                    "url" => $poiSurroundingUrl
-                ),
-                "fields" => array(
-                    array(
-                        "name" => 'Manual Action:',
-                        "value" => 'Edit POI'
-                    ),
-                    array(
-                        "name" => 'POI Title:',
-                        "value" => $poiName
-                    ),
-                    array(
-                        "name" => 'POI Description:',
-                        "value" => $poiDescription
-                    ),
-                    array(
-                        "name" => 'POI ID:',
-                        "value" => $poiId
-                    ),
-                    array(
-                        "name" => 'Map link',
-                        "value" => '[View POI on Map](' . $submitMapUrl . '/?lat=' . $lat . '&lon=' . $lon . '&zoom=18)'
-                    )
-                )
-            ))
-        );
+                    "username" => $loggedUser,
+                    "embeds" => array(array(
+                        "color" => 15105570,
+                        "image" => array(
+                            "url" => $poiImageUrl
+                        ),
+                        "thumbnail" => array(
+                            "url" => $poiSurroundingUrl
+                        ),
+                        "fields" => array(
+                            array(
+                                "name" => 'Manual Action:',
+                                "value" => 'Edit Waystop'
+                            ),
+                            array(
+                                "name" => 'Waystop Title:',
+                                "value" => $poiName
+                            ),
+                            array(
+                                "name" => 'Waystop Description:',
+                                "value" => $poiDescription
+                            ),
+                            array(
+                                "name" => 'Map link',
+                                "value" => '[View Waystop on Map](' . $submitMapUrl . '/?lat=' . $lat . '&lon=' . $lon . '&zoom=18)'
+                            )
+                        )
+                    ))
+                );
                 sendToWebhook($discordPOISubmitLogChannelUrl, ($data));
             }
         }
@@ -909,128 +901,130 @@ class RDM extends Submit
         }
         if ($noDiscordSubmitLogChannel === false) {
             $data = array(
-        "username" => $loggedUser,
-        "embeds" => array(array(
-            "color" => 15158332,
-            "fields" => array(
-                array(
-                    "name" => 'Manual Action:',
-                    "value" => 'Delete POI'
-                ),
-                array(
-                    "name" => 'POI Title:',
-                    "value" => $poi['name']
-                ),
-                array(
-                    "name" => 'POI Description:',
-                    "value" => $poi['description']
-                ),
-                array(
-                    "name" => 'POI ID:',
-                    "value" => $poiId
-                ),
-                array(
-                    "name" => 'Map link',
-                    "value" => '[View POI on Map](' . $submitMapUrl . '/?lat=' . $poi['lat'] . '&lon=' . $poi['lon'] . '&zoom=18)'
-                )
-            )
-        ))
+                "username" => $loggedUser,
+                "embeds" => array(array(
+                    "color" => 15158332,
+                    "fields" => array(
+                        array(
+                            "name" => 'Manual Action:',
+                            "value" => 'Delete Waystop'
+                        ),
+                        array(
+                            "name" => 'Waystop Title:',
+                            "value" => $poi['name']
+                        ),
+                        array(
+                            "name" => 'Waystop Description:',
+                            "value" => $poi['description']
+                        ),
+                        array(
+                            "name" => 'Map link',
+                            "value" => '[View Former Location on Map](' . $submitMapUrl . '/?lat=' . $poi['lat'] . '&lon=' . $poi['lon'] . '&zoom=18)'
+                        )
+                    )
+                ))
             );
             sendToWebhook($discordPOISubmitLogChannelUrl, ($data));
         }
     }
 
-    public function mark_poi_submitted($poiId, $loggedUser)
+    public function mark_poi_submitted($poiId, $poiName, $poiDescription, $poiNotes, $poiImage, $poiSurrounding, $loggedUser)
     {
-        global $manualdb, $noPoi, $noDiscordSubmitLogChannel, $discordPOISubmitLogChannelUrl;
+        global $manualdb, $noPoi, $noMarkPoi, $noDiscordSubmitLogChannel, $discordPOISubmitLogChannelUrl, $submitMapUrl;
         if ($noPoi === true) {
             http_response_code(401);
             die();
         }
-        $poiName = $manualdb->get("poi", [ 'name' ], [ 'poi_id' => $poiId ]);
+        $poiName = $manualdb->get("poi", [ "poiimageurl", "poisurroundingurl", "name", "description", "lat", "lon", "edited_by" ], [ 'poi_id' => $poiId ]);
         if (! empty($poiId)) {
             $cols     = [
                 'updated'      => time(),
-                'status'       => 2
+                'status'       => 2,
+		'edited_by'   => $loggedUser
             ];
             $where    = [
-                'poi_id' => $poiId
+            'poi_id' => $poiId
             ];
             $manualdb->update("poi", $cols, $where);
             if ($noDiscordSubmitLogChannel === false) {
-                $data = array("content" => '```Marked poi with id "' . $poiId . '." As submitted. PoiName: "' . $poiName['name'] . '". ```', "username" => $loggedUser);
+                $data = array(
+                    "username" => $loggedUser,
+                    "embeds" => array(array(
+                        "color" => 65280,
+                        "image" => array(
+                            "url" => $poiImageUrl
+                        ),
+                        "thumbnail" => array(
+                            "url" => $poiSurroundingUrl
+                        ),
+                        "fields" => array(
+                            array(
+                                "name" => 'Manual Action:',
+                                "value" => 'Waystop Candidate Submitted to Wayfarer'
+                            ),
+                            array(
+                                "name" => 'Waystop Title:',
+                                "value" => $poi['name']
+                            ),
+                            array(
+                                "name" => 'Waystop Description:',
+                                "value" => $poi['description']
+                            ),
+                            array(
+                                "name" => 'Map link',
+                                "value" => '[View Waystop on Map](' . $submitMapUrl . '/?lat=' . $poi['lat'] . '&lon=' . $poi['lon'] . '&zoom=18)'
+                            )
+                        )
+                    ))
+                );
                 sendToWebhook($discordPOISubmitLogChannelUrl, ($data));
             }
         }
     }
 
-    public function mark_poi_declined($poiId, $loggedUser)
+    public function mark_poi_declined($poiId, $poiName, $poiDescription, $poiNotes, $poiImage, $poiSurrounding, $loggedUser)
     {
-        global $manualdb, $noPoi, $noDiscordSubmitLogChannel, $discordPOISubmitLogChannelUrl;
+        global $manualdb, $noPoi, $noMarkPoi, $noDiscordSubmitLogChannel, $discordPOISubmitLogChannelUrl, $submitMapUrl;
         if ($noPoi === true) {
             http_response_code(401);
             die();
         }
-        $poiName = $manualdb->get("poi", [ 'name' ], [ 'poi_id' => $poiId ]);
+        $poiName = $manualdb->get("poi", [ "poiimageurl", "poisurroundingurl", "name", "description", "lat", "lon", "edited_by" ], [ 'poi_id' => $poiId ]);
         if (! empty($poiId)) {
             $cols     = [
                 'updated'      => time(),
-                'status'       => 3
+                'status'       => 3,
+                'edited_by'   => $loggedUser
             ];
             $where    = [
                 'poi_id' => $poiId
             ];
             $manualdb->update("poi", $cols, $where);
             if ($noDiscordSubmitLogChannel === false) {
-                $data = array("content" => '```Marked poi with id "' . $poiId . '." As declined. PoiName: "' . $poiName['name'] . '". ```', "username" => $loggedUser);
-                sendToWebhook($discordPOISubmitLogChannelUrl, ($data));
-            }
-        }
-    }
-
-    public function mark_poi_resubmit($poiId, $loggedUser)
-    {
-        global $manualdb, $noPoi, $noDiscordSubmitLogChannel, $discordPOISubmitLogChannelUrl;
-        if ($noPoi === true) {
-            http_response_code(401);
-            die();
-        }
-        $poiName = $manualdb->get("poi", [ 'name' ], [ 'poi_id' => $poiId ]);
-        if (! empty($poiId)) {
-            $cols     = [
-                'updated'      => time(),
-                'status'       => 4
-            ];
-            $where    = [
-                'poi_id' => $poiId
-            ];
-            $manualdb->update("poi", $cols, $where);
-            if ($noDiscordSubmitLogChannel === false) {
-                $data = array("content" => '```Marked poi with id "' . $poiId . '." As declined but eligible to be resubmitted. PoiName: "' . $poiName['name'] . '". ```', "username" => $loggedUser);
-                sendToWebhook($discordPOISubmitLogChannelUrl, ($data));
-            }
-        }
-    }
-
-    public function mark_not_candidate($poiId, $loggedUser)
-    {
-        global $manualdb, $noPoi, $noDiscordSubmitLogChannel, $discordPOISubmitLogChannelUrl;
-        if ($noPoi === true) {
-            http_response_code(401);
-            die();
-        }
-        $poiName = $manualdb->get("poi", [ 'name' ], [ 'poi_id' => $poiId ]);
-        if (! empty($poiId)) {
-            $cols     = [
-                'updated'      => time(),
-                'status'       => 5
-            ];
-            $where    = [
-                'poi_id' => $poiId
-            ];
-            $manualdb->update("poi", $cols, $where);
-            if ($noDiscordSubmitLogChannel === false) {
-                $data = array("content" => '```Marked poi with id "' . $poiId . '." As non eligible candidate. PoiName: "' . $poiName['name'] . '". ```', "username" => $loggedUser);
+                $data = array(
+                    "username" => $loggedUser,
+                    "embeds" => array(array(
+                        "color" => 15158332,
+                        "fields" => array(
+                            array(
+                                "name" => 'Manual Action:',
+                                "value" => 'Waystop Declined by Wayfarer'
+                            ),
+                            array(
+                                "name" => 'Waystop Title:',
+                                "value" => $poi['name']
+                            ),
+                            array(
+                                "name" => 'Waystop Description:',
+                                "value" => $poi['description']
+                            ),
+                            array(
+                                "name" => 'Map link',
+                                "value" => '[View Waystop on Map](' . $submitMapUrl . '/?lat=' . $poi['lat'] . '&lon=' . $poi['lon'] . '&zoom=18)'
+                            )
+                        )
+                    ))
+                );
                 sendToWebhook($discordPOISubmitLogChannelUrl, ($data));
             }
         }

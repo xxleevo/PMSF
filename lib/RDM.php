@@ -10,14 +10,14 @@ class RDM extends Scanner
         $conds = array();
         $params = array();
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
-		
+
 	    $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weather AS weather_boosted_condition, costume, expire_timestamp_verified AS is_verified_despawn, display_pokemon_id";
 
         global $noHighLevelData;
         if (!$noHighLevelData) {
             $select .= ", weight,size AS height, atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level";
         }
-		
+
         $conds[] = "lat > :swLat AND lon > :swLng AND lat < :neLat AND lon < :neLng AND expire_timestamp > :time";
         $params[':swLat'] = $swLat;
         $params[':swLng'] = $swLng;
@@ -71,8 +71,8 @@ class RDM extends Scanner
                 $conds[] = '(level >= ' . $minLevel . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
-		
-		
+
+
         $encSql = '';
         if ($encId != 0) {
             $encSql = " OR (id = " . $encId . " AND lat > '" . $swLat . "' AND lon > '" . $swLng . "' AND lat < '" . $neLat . "' AND lon < '" . $neLng . "' AND expire_timestamp > '" . $params[':time'] . "')";
@@ -93,7 +93,7 @@ class RDM extends Scanner
         if (!$noHighLevelData) {
             $select .= ", weight, size AS height, atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level";
         }
-		
+
         $conds[] = "lat > :swLat AND lon > :swLng AND lat < :neLat AND lon < :neLng AND expire_timestamp > :time";
         $params[':swLat'] = $swLat;
         $params[':swLng'] = $swLng;
@@ -148,7 +148,7 @@ class RDM extends Scanner
         global $db;
 
         $query = "SELECT :select
-        FROM pokemon 
+        FROM pokemon
         WHERE :conditions ORDER BY lat,lon ";
 
         $query = str_replace(":select", $select, $query);
@@ -159,7 +159,7 @@ class RDM extends Scanner
         $lastlat = 0;
         $lastlon=0;
         $lasti = 0;
-        
+
         foreach ($pokemons as $pokemon) {
             // Jitter pokemon when they have no spawn_id
             if ( empty($pokemon['spawn_id'])) {
@@ -379,17 +379,17 @@ class RDM extends Scanner
         name AS pokestop_name,
         url,
         lure_expire_timestamp AS lure_expiration,
-		lure_id,
-		grunt_type,
+	lure_id,
+	grunt_type,
         quest_type,
         quest_timestamp,
         quest_target,
         quest_rewards,
         quest_pokemon_id,
         quest_item_id,
-		pokestop_display AS invasion,
-		first_seen_timestamp as first_seen,
-		incident_expire_timestamp AS invasion_expiration,
+	pokestop_display AS invasion,
+	first_seen_timestamp as first_seen,
+	incident_expire_timestamp AS invasion_expiration,
         json_extract(json_extract(`quest_conditions`,'$[*].type'),'$[0]') AS quest_condition_type,
         json_extract(json_extract(`quest_conditions`,'$[*].type'),'$[1]') AS quest_condition_type_1,
         json_extract(json_extract(`quest_conditions`,'$[*].info'),'$[0]') AS quest_condition_info,
@@ -397,7 +397,7 @@ class RDM extends Scanner
         json_extract(json_extract(`quest_rewards`,'$[*].info'),'$[0]') AS quest_reward_info,
         json_extract(json_extract(`quest_rewards`,'$[*].info.amount'),'$[0]') AS quest_reward_amount,
         json_extract(json_extract(`quest_rewards`,'$[*].info.form_id'),'$[0]') AS quest_pokemon_form
-		FROM pokestop
+	FROM pokestop
         WHERE :conditions";
 
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
@@ -422,23 +422,23 @@ class RDM extends Scanner
                 $grunttype_pid = null;
                 $pokestop["grunt_type"] = null;
             }
-			$pokestop["url"] = ! empty($pokestop["url"]) ? str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]) : null;
+            $pokestop["url"] = ! empty($pokestop["url"]) ? str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]) : null;
             //$pokestop["url"] = str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]);
-			$pokestop["url"] = ! empty($pokestop["url"]) ? preg_replace("/^http:/i", "https:", $pokestop["url"]) : null;
+            $pokestop["url"] = ! empty($pokestop["url"]) ? preg_replace("/^http:/i", "https:", $pokestop["url"]) : null;
             $pokestop["lure_id"] = intval($pokestop["lure_id"]);
-			$pokestop["lure_expiration"] = $pokestop["lure_expiration"] * 1000;
+            $pokestop["lure_expiration"] = $pokestop["lure_expiration"] * 1000;
             $pokestop["first_seen"] = $pokestop["first_seen"] * 1000;
             $pokestop["invasion"] = intval($pokestop["invasion"]);
-			$pokestop["invasion_expiration"] = $pokestop["invasion_expiration"] * 1000;
+            $pokestop["invasion_expiration"] = $pokestop["invasion_expiration"] * 1000;
             $pokestop["grunt_type_name"] = empty($grunttype_pid) ? null : i8ln($this->grunttype[$grunttype_pid]["type"]);
             $pokestop["grunt_type_gender"] = empty($grunttype_pid) ? null : i8ln($this->grunttype[$grunttype_pid]["grunt"]);
-			$pokestop["encounters"] = empty($this->grunttype[$grunttype_pid]["encounters"]) ? null : $this->grunttype[$grunttype_pid]["encounters"];
+            $pokestop["encounters"] = empty($this->grunttype[$grunttype_pid]["encounters"]) ? null : $this->grunttype[$grunttype_pid]["encounters"];
             $pokestop["second_reward"] = empty($this->grunttype[$grunttype_pid]["second_reward"]) ? null : $this->grunttype[$grunttype_pid]["second_reward"];
 
-			//Get Stats of Reward Pokemon
-			if(!empty($pokestop["quest_pokemon_id"])){
+            //Get Stats of Reward Pokemon
+            if(!empty($pokestop["quest_pokemon_id"])){
                 if($pokestop["quest_pokemon_form"] == 0){
-				        $pokestop["reward_pokemon_base_atk"] = 3;
+		        $pokestop["reward_pokemon_base_atk"] = 3;
                         $pokestop["reward_pokemon_base_atk"] = $this->data[$pokestop["quest_pokemon_id"]]["baseAttack"];
                         $pokestop["reward_pokemon_base_def"] = $this->data[$pokestop["quest_pokemon_id"]]["baseDefense"];
                         $pokestop["reward_pokemon_base_sta"] = $this->data[$pokestop["quest_pokemon_id"]]["baseStamina"];
@@ -452,10 +452,9 @@ class RDM extends Scanner
                             $pokestop["reward_pokemon_base_sta"] = $v["baseStamina"];
                         }
                     }
-			    }
+		}
             }
-			$data[] = $pokestop;
-
+            $data[] = $pokestop;
             unset($pokestops[$i]);
             $i++;
         }
@@ -547,7 +546,7 @@ class RDM extends Scanner
         name,
         url,
         last_modified_timestamp AS last_modified,
-		first_seen_timestamp as first_seen,
+	first_seen_timestamp as first_seen,
         raid_end_timestamp AS raid_end,
         raid_battle_timestamp AS raid_start,
         updated AS last_scanned,
@@ -555,15 +554,15 @@ class RDM extends Scanner
         guarding_pokemon_id AS guard_pokemon_id,
         availble_slots AS slots_available,
         team_id,
-		total_cp,
+	total_cp,
         raid_level,
         raid_pokemon_move_1,
         raid_pokemon_move_2,
         raid_pokemon_form AS form,
         raid_pokemon_cp,
         ex_raid_eligible AS park,
-		in_battle as battle_status,
-		raid_is_exclusive as is_exclusive
+	in_battle as battle_status,
+	raid_is_exclusive as is_exclusive
         FROM gym
         WHERE :conditions";
 
@@ -602,37 +601,37 @@ class RDM extends Scanner
             $gym["raid_end"] = $gym["raid_end"] * 1000;
             $gym["sponsor"] = !empty($gym["sponsor"]) ? $gym["sponsor"] : null;
             $gym["url"] = ! empty($gym["url"]) ? preg_replace("/^http:/i", "https:", $gym["url"]) : null;
-			
-			global $passwatcherTriggeredGyms;
-			if($passwatcherTriggeredGyms){
-				$triggeredGyms = $this->triggeredGyms["gyms"];
-				$gym["triggered"] = 0;
-				foreach ($triggeredGyms as $triggeredGym) {
-					if($triggeredGym === $gym["gym_id"]){
-						$gym["triggered"] = 1;
+
+            global $passwatcherTriggeredGyms;
+		if($passwatcherTriggeredGyms){
+			$triggeredGyms = $this->triggeredGyms["gyms"];
+			$gym["triggered"] = 0;
+			foreach ($triggeredGyms as $triggeredGym) {
+				if($triggeredGym === $gym["gym_id"]){
+					$gym["triggered"] = 1;
 					}
 				}
 			} else{
 				$gym["triggered"] = 0;
 			}
-			
-			if(!empty($raid_pid)){
-                if($gym["form"] == 0){
-                        $gym["raidboss_base_atk"] = $this->data[$gym["raid_pokemon_id"]]["baseAttack"];
-                        $gym["raidboss_base_def"] = $this->data[$gym["raid_pokemon_id"]]["baseDefense"];
-                        $gym["raidboss_base_sta"] = $this->data[$gym["raid_pokemon_id"]]["baseStamina"];
+
+		if(!empty($raid_pid)){
+	                if($gym["form"] == 0){
+        	                $gym["raidboss_base_atk"] = $this->data[$gym["raid_pokemon_id"]]["baseAttack"];
+                	        $gym["raidboss_base_def"] = $this->data[$gym["raid_pokemon_id"]]["baseDefense"];
+				$gym["raidboss_base_sta"] = $this->data[$gym["raid_pokemon_id"]]["baseStamina"];
                 }else{
-                    $forms = $this->data[$gym["raid_pokemon_id"]]["forms"];
-                    foreach ($forms as $f => $v) {
-                        if($gym["form"] === $v['protoform']) {
-                            $gym["raidboss_base_atk"] = $v["baseAttack"];
-                            $gym["raidboss_base_def"] = $v["baseDefense"];
-                            $gym["raidboss_base_sta"] = $v["baseStamina"];
-                        }
-                    }
-			    }
-            }
-			
+                	$forms = $this->data[$gym["raid_pokemon_id"]]["forms"];
+                    		foreach ($forms as $f => $v) {
+                        		if($gym["form"] === $v['protoform']) {
+                            			$gym["raidboss_base_atk"] = $v["baseAttack"];
+                            			$gym["raidboss_base_def"] = $v["baseDefense"];
+                            			$gym["raidboss_base_sta"] = $v["baseStamina"];
+                        			}
+                    			}
+				}
+            		}
+
             $data[] = $gym;
 
             unset($gyms[$i]);
@@ -878,7 +877,8 @@ class RDM extends Scanner
         updated,
         submitted_by,
         edited_by,
-        status
+        status,
+	submitted
         FROM poi
         WHERE :conditions";
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
@@ -1030,7 +1030,7 @@ public function get_scanlocation($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $o
 	    foreach ($pokestops as $pokestop) {
                 $data[] = $pokestop['quest_item_id'];
             }
-    } else if ($type === 'gruntlist') {
+    	} else if ($type === 'gruntlist') {
             $pokestops = $db->query( "SELECT distinct grunt_type FROM pokestop WHERE grunt_type > 0 AND incident_expire_timestamp > UNIX_TIMESTAMP() order by grunt_type;")->fetchAll(\PDO::FETCH_ASSOC);
             $data = array();
 	    foreach ($pokestops as $pokestop) {

@@ -54,15 +54,6 @@
     }
 
     &.candidate-declined {
-        background-color: #FFA500;
-    }
-
-    &.candidate-resubmit {
-        background-color: #FFA500;
-        border: 2px solid #008000;
-    }
-
-    &.candidate-not-eligible {
         background-color: red;
     }
 }

@@ -150,7 +150,7 @@ function createUserAccount($user, $password, $newExpireTimestamp)
                 "expire_timestamp" => $newExpireTimestamp,
                 "login_system" => 'native'
             ]);
-            
+
             $logMsg = "INSERT INTO users (id, user, expire_timestamp, login_system) VALUES ('{$getId}', '{$user}', '{$newExpireTimestamp}', 'native'); -- " . date('Y-m-d H:i:s') . "\r\n";
             file_put_contents($logfile, $logMsg, FILE_APPEND);
 
@@ -166,7 +166,7 @@ function createUserAccount($user, $password, $newExpireTimestamp)
 function resetUserPassword($user, $password, $resetType)
 {
     global $manualdb, $logfile;
-    
+
     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
     if ($resetType === 0) {
         $manualdb->update("users", [
@@ -216,7 +216,7 @@ function updateExpireTimestamp($user, $login_system, $newExpireTimestamp)
 function destroyCookiesAndSessions()
 {
     global $manualdb;
-    
+
     $manualdb->update("users", [
         "session_id" => null
     ], [
@@ -246,7 +246,7 @@ function validateCookie($cookie)
         $_SESSION['user']->user = $info['user'];
         $_SESSION['user']->login_system = $info['login_system'];
         $_SESSION['user']->expire_timestamp = $info['expire_timestamp'];
-        
+
         if (empty($info['password']) && $info['login_system'] == 'native') {
             $_SESSION['user']->updatePwd = 1;
         }
@@ -258,19 +258,19 @@ function validateCookie($cookie)
     }
 }
 
-if (!function_exists('getallheaders')) 
+if (!function_exists('getallheaders'))
 {
-    function getallheaders() 
+    function getallheaders()
     {
-        $headers = array (); 
-        foreach ($_SERVER as $name => $value) 
+        $headers = array ();
+        foreach ($_SERVER as $name => $value)
         {
-            if (substr($name, 0, 5) == 'HTTP_') 
-            { 
-                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value; 
+            if (substr($name, 0, 5) == 'HTTP_')
+            {
+                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
             }
         }
-        return $headers; 
+        return $headers;
     }
 }
 function randomGymId() {

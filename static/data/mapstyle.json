@@ -10,5 +10,6 @@
   "mapboxPogoDynamic": "Mapbox Pokémon Go Dynamic",
   "mapboxPogo": "Mapbox Pokémon Go",
   "mapboxPogoDark": "Mapbox Pokémon Go Dark",
-  "tileserver": "Tileserver"
+  "tileserver": "Tileserver",
+  "blanktiles": "Blank Tiles"
 }
