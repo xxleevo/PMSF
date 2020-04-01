@@ -233,6 +233,8 @@
     "denyRaidLevels": true,
     "openPopupOnHovering": true,
     "onlyOnePopup": true,
+    "enableLiveScan": true,
+    "deviceOfflineAfterSeconds": true,
 	"noRaids": true
   }
 }

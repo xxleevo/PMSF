@@ -1537,6 +1537,18 @@ if (!$noLoadingScreen) {
 							</label>
 						</div>
 					</div>';
+				}
+                if (! $noLiveScanLocation) {
+                    echo '<div class="form-control switch-container">
+                    <h3>' . i8ln('Live Scanner Location') . '</h3>
+                    <div class="onoffswitch">
+                        <input id="scan-location-switch" type="checkbox" name="scan-location-switch" class="onoffswitch-checkbox">
+                        <label class="onoffswitch-label" for="scan-location-switch">
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>';
                 }
 				if ( ! $noScanPolygonQuest || ! $noScanPolygonPvp || ! $noScanPolygon){
 					echo '<div>
@@ -2647,6 +2659,8 @@ if (!$noLoadingScreen) {
     var openPopupOnHovering = <?php echo $openPopupOnHovering === true ? 'true' : 'false' ?>;
     var onlyOnePopup = <?php echo $onlyOnePopup === true ? 'true' : 'false' ?>;
 	var denyRaidLevels = <?php echo $noRaids ? '[1,2,3,4,5]' : $denyRaidLevels ?>;
+    var enableLiveScan = <?php echo $noLiveScanLocation ? 'false' : $enableLiveScan ?>;
+    var deviceOfflineAfterSeconds = <?php echo $deviceOfflineAfterSeconds ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

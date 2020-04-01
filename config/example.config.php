@@ -307,6 +307,11 @@ $pvptext2 = '';								// font size 4 good for header - name your marker "2" in 
 $pvptext3 = '';								// font size 4 good for header - name your marker "3" in the geojson, this text will be the popup text. if no text is given, it will be "no further information"
 $pvptext4 = '';								// font size 4 good for header - name your marker "4" in the geojson, this text will be the popup text. if no text is given, it will be "no further information"
 
+$noLiveScanLocation = false;                                         // Show scan devices on the map
+$enableLiveScan = 'false';
+$hideDeviceAfterMinutes = 0;                                        // Hide scan devices from map after x amount of minutes not being updated in database. 0 to disable.
+$deviceOfflineAfterSeconds = 300;                                   // Mark scan devices offline (red color) after x amount of seconds not being updated in database.
+
 /* Custom Tileserver.  */
 // (Only tested with https://github.com/123FLO321/SwiftTileserverCache ) */
 

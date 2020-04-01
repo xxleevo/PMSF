@@ -334,6 +334,11 @@ var StoreOptions = {
             default: enableSpawnpoints,
             type: StoreTypes.Boolean
         },
+    'showScanLocation':
+        {
+            default: enableLiveScan,
+            type: StoreTypes.Boolean
+        },
     'showRanges':
         {
             default: enableRanges,
