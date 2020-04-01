@@ -31,25 +31,25 @@ class RDM extends Search
 	if (!empty($presids)) {
 		$conds[] = "quest_pokemon_id IN (" . implode(',',$presids) . ")";
 	}
-	if (!empty($iresids)) {
-		$conds[] = "quest_item_id IN (" . implode(',',$iresids) . ")";
-	}
-	$query = "SELECT id,
+    if (!empty($iresids)) {
+        $conds[] = "quest_item_id IN (" . implode(',',$iresids) . ")";
+    }
+    $query = "SELECT id,
     name,
-	lat,
-	lon,
-	url,
-	quest_type,
-	json_extract(json_extract(`quest_rewards`,'$[*].info.pokemon_id'),'$[0]') AS quest_pokemon_id,
-	json_extract(json_extract(`quest_rewards`,'$[*].info.item_id'),'$[0]') AS quest_item_id, 
-	ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ),2) AS distance 
-	FROM pokestop
-	WHERE :conditions
-	ORDER BY distance LIMIT " . $maxSearchResults . "";
-	$query = str_replace(":conditions", join(" OR ", $conds), $query);
-	$rewards = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
-	$data = array();
-	foreach($rewards as $reward){
+    lat,
+    lon,
+    url,
+    quest_type,
+    json_extract(json_extract(`quest_rewards`,'$[*].info.pokemon_id'),'$[0]') AS quest_pokemon_id,
+    json_extract(json_extract(`quest_rewards`,'$[*].info.item_id'),'$[0]') AS quest_item_id, 
+    ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ),2) AS distance 
+    FROM pokestop
+    WHERE :conditions
+    ORDER BY distance LIMIT " . $maxSearchResults . "";
+    $query = str_replace(":conditions", join(" OR ", $conds), $query);
+    $rewards = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
+    $data = array();
+    foreach($rewards as $reward){
         $reward['pokemon_name'] = !empty($reward['pokemon_name']) ? $prewardsjson[$reward['quest_pokemon_id']]['name'] : null;
 	    $reward['quest_pokemon_id'] = intval($reward['quest_pokemon_id']);
         $reward['item_name'] = !empty($reward['item_name']) ? $irewardsjson[$reward['quest_item_id']]['name'] : null;
@@ -58,10 +58,10 @@ class RDM extends Search
 	    $reward['name'] = ($maxSearchNameLength > 0) ? htmlspecialchars(substr($reward['name'], 0, $maxSearchNameLength)) : htmlspecialchars($reward['name']);
             if($defaultUnit === "km"){
                 $reward['distance'] = round($reward['distance'] * 1.60934,2);
-	    }
+	        }
 	    $data[] = $reward;
-	}
-        return $data;
+        }
+    return $data;
     }
     public function search_nests($lat, $lon, $term)
     {
@@ -95,7 +95,7 @@ class RDM extends Search
             if($defaultUnit === "km"){
                 $data[$k]['distance'] = round($data[$k]['distance'] * 1.60934,2);
             }
-	}
+        }
         return $data;
     }
     public function search_portals($lat, $lon, $term)
@@ -107,16 +107,16 @@ class RDM extends Search
             $query = "SELECT id,name,lat,lon,url, ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ),2) AS distance FROM ingress_portals WHERE LOWER(name) LIKE :name ORDER BY distance LIMIT " . $maxSearchResults . "";
         }
         $searches = $manualdb->query( $query, [ ':name' => "%" . strtolower( $term ) . "%",  ':lat' => $lat, ':lon' => $lon ] )->fetchAll();
-	$data = array();
+    $data = array();
 	$i = 0;
         foreach($searches as $search){
             $search['url'] = preg_replace("/^http:/i", "https:", $search['url']);
             if($defaultUnit === "km"){
                 $search['distance'] = round($search['distance'] * 1.60934,2);
 	    }
-	    $data[] = $search;
-	    unset($searches[$i]);
-	    $i++;
+         $data[] = $search;
+        unset($searches[$i]);
+        $i++;
         }
         return $data;
     }
@@ -129,8 +129,8 @@ class RDM extends Search
             $query = "SELECT id,name,lat,lon,url, ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ),2) AS distance FROM " . $dbname . " WHERE LOWER(name) LIKE :name ORDER BY distance LIMIT " . $maxSearchResults . "";
         }
         $searches = $db->query( $query, [ ':name' => "%" . strtolower( $term ) . "%",  ':lat' => $lat, ':lon' => $lon ] )->fetchAll();
-	$data = array();
-	$i = 0;
+    $data = array();
+    $i = 0;
         foreach($searches as $search){
             $search['url'] = preg_replace("/^http:/i", "https:", $search['url']);
             if($defaultUnit === "km"){

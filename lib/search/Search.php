@@ -27,7 +27,6 @@ class Search
         $json_poke = "static/data/pokemon.json";
         $json_contents = file_get_contents($json_poke);
         $this->data = json_decode($json_contents, true);
-
         $json_moves = "static/data/moves.json";
         $json_contents = file_get_contents($json_moves);
         $this->moves = json_decode($json_contents, true);

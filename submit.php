@@ -197,7 +197,7 @@ if ( $action === "poi-add" ) {
     $submit->submit_poi($lat, $lon, $poiName, $poiDescription, $poiNotes, $poiImage, $poiSurrounding, $loggedUser);
 }
 if ($action === "edit-poi") {
-    $submitManual->modify_poi($poiId, $poiName, $poiDescription, $poiNotes, $poiImage, $poiSurrounding, $loggedUser);
+    $submit->modify_poi($lat, $lon, $poiId, $poiName, $poiDescription, $poiNotes, $poiImage, $poiSurrounding, $loggedUser);
 }
 if ( $action === "delete-poi" ) {
     $submit->delete_poi($poiId, $loggedUser);
@@ -210,4 +210,3 @@ if ( $action === "markpoideclined" ) {
 }
 $jaysson = json_encode($d);
 echo $jaysson;
-
