@@ -230,6 +230,9 @@
 	"valentine": true,
     "gymBadgeMode": true,
     "enablePokeIVIcons": true,
+    "denyRaidLevels": true,
+    "openPopupOnHovering": true,
+    "onlyOnePopup": true,
 	"noRaids": true
   }
 }

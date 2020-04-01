@@ -1418,13 +1418,13 @@ function gymLabel(item) {
     } else {
         teamLabel = i8ln('Gym') + '<br>'
         teamImage = '<img height="70px" style="padding: 5px;" src="static/forts/Harmony_large.png">'
-        if (denyRaidLevels.includes(parseInt(item["raid_level"]))) {
+        if (denyRaidLevels.includes(parseInt(item['raid_level']))) {
             raidIcon = ''
             raidStr = ''
         }
     }
 
-    if (raidSpawned && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item["raid_level"]))) {
+    if (raidSpawned && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item['raid_level']))) {
         if (!noGymTeamInfos) {
             teamImage = '<img width="140px" style="padding: 5px;margin-left:-50px" src="static/forts/label/' + teamName + '_raw.png">'
         } else {
@@ -1492,7 +1492,7 @@ function gymLabel(item) {
 
         if (raidStarted) {
             raidIcon = '<img style="width: 68px;margin-left:-105px;margin-bottom: 50px; --webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/>'
-            if (form !== null && form > 0 && forms.length > form && formsEn[item['form']] != '') {
+            if (form !== null && form > 0 && forms.length > form && formsEn[item['form']] !== '') {
                 raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '_' + (formsEn[item['form']]).toUpperCase() + '_FORM/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
             } else {
                 raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
@@ -2725,7 +2725,7 @@ function getGymMarkerIcon(item, badgeMode) {
     if ((((park !== '0' && park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0)) && noExGyms === false)) {
         exIcon = '<img src="static/images/ex_gym.png" style="width:' + dynamicExSize + 'px;height:auto;position:absolute;right:' + dynamicExPos + 'px;bottom:' + dynamicExPosBot + 'px;"/>'
     }
-    if (((triggerGyms.includes(item['gym_id'])) || (item['triggered'] === 1 )) && (noExGyms === false) ) {
+    if (((triggerGyms.includes(item['gym_id'])) || (item['triggered'] === 1)) && (noExGyms === false)) {
         exIcon = '<img src="static/images/ex_gym_triggered.png" style="width:' + dynamicExSize + 'px;height:auto;position:absolute;right:' + dynamicExPos + 'px;bottom:' + dynamicExPosBot + 'px;"/>'
     }
 
@@ -2757,7 +2757,7 @@ function getGymMarkerIcon(item, badgeMode) {
             html: html
         })
     } else {
-        if (item['raid_pokemon_id'] != null && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item["raid_level"]))) {
+        if (item['raid_pokemon_id'] != null && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item['raid_level']))) {
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
                 exIcon +
@@ -2778,7 +2778,7 @@ function getGymMarkerIcon(item, badgeMode) {
                 className: 'raid-marker',
                 html: html
             })
-        } else if (item['raid_level'] !== null && item.raid_start <= Date.now() && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item["raid_level"]))) {
+        } else if (item['raid_level'] !== null && item.raid_start <= Date.now() && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item['raid_level']))) {
             var hatchedEgg = ''
             if (item['raid_level'] <= 2) {
                 hatchedEgg = 'hatched_normal'
@@ -2808,7 +2808,7 @@ function getGymMarkerIcon(item, badgeMode) {
                 className: 'active-egg-marker',
                 html: html
             })
-        } else if (item['raid_level'] !== null && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item["raid_level"]))) {
+        } else if (item['raid_level'] !== null && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item['raid_level']))) {
             var raidEgg = ''
             if (item['raid_level'] <= 2) {
                 raidEgg = 'normal'
@@ -3766,9 +3766,9 @@ function addListeners(marker) {
         }
     })
 
-    marker.options.autoClose = false;
-    if (onlyOnePopup){
-        marker.options.autoClose = true;
+    marker.options.autoClose = false
+    if (onlyOnePopup) {
+        marker.options.autoClose = true
     }
 
     return marker
