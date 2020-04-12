@@ -560,6 +560,7 @@ var googlemapsroad = L.gridLayer.googleMutant({type: 'roadmap'}) // eslint-disab
 
 var tileserver = L.tileLayer(customTileServerAddress, {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
 
+
 function setTileLayer(layername) {
     if (map.hasLayer(window[_oldlayer])) { map.removeLayer(window[_oldlayer]) }
     map.addLayer(window[layername])
@@ -1093,6 +1094,7 @@ function pokemonLabel(item) {
     var latitude = item['latitude']
     var longitude = item['longitude']
     var disappearTime = item['disappear_time']
+    var firstSeenTime = item['first_seen']
     var verifiedDespawn = item['is_verified_despawn']
     var dittoDisguise = item['display_pokemon_name']
     var reportTime = disappearTime - 1800000
@@ -1247,6 +1249,14 @@ function pokemonLabel(item) {
                     '<div style="clear:both;"><font size="1" style="font-weight: normal;">(' + i8ln('Until Approx.') + ' ' + getTimeStr(disappearTime) + ')' + '</font>' +
                     '<span style="float:right"><span style="padding-bottom: 8px;">' + i8ln('Not Verified') + '</span><img src="static/images/label/' + labelStyle + '/cross.png" style="height:16px;vertical-align:middle;margin-bottom: 3px;padding-left: 3px;" /></span></div>'
             }
+            // First Seen
+            contentstring +=
+                '<div style="clear:both;margin-bottom:0px;">' +
+                '<span style="padding-left: 5px;font-size: 14px;font-weight: bold;">' + i8ln('First Seen') + '</span><img src="static/images/label/' + labelStyle + '/firstSeen.png" style="height:23px;float:left;" />' +
+                '<span style="margin-right: 3px;font-size: 13px;float:right;vertical-align:middle" >' + getTimeStr(firstSeenTime) + '</span><br>' +
+                '</div>'
+
+
             contentstring += '</div>'
         }
         contentstring +=
@@ -1279,12 +1289,12 @@ function pokemonLabel(item) {
             }
             // IV, CP, Moves & Details
             details +=
-                '<div style="position:absolute;top:90px;left:100px;">' +
+                '<div style="position:absolute;top:105px;left:100px;">' +
                 '<div style="font-size:14px;">' + i8ln('IV') + ': <b>' + iv.toFixed(1) + '%</b> (<b>' + atk + '</b>/<b>' + def + '</b>/<b>' + sta + '</b>)' +
                 '</div>' +
                 '<div style="font-size:14px;">' + i8ln('CP') + ': <b>' + cp + '</b> | ' + i8ln('Level') + ': <b>' + pokemonLevel + '</b></div>' +
                 '</div><br>' +
-                '<div style="position:absolute;top:135px;font-size:14px;">' +
+                '<div style="position:absolute;top:145px;font-size:14px;">' +
                 '<div>' + i8ln('Quick') + ': <b>' + pMove1 + '</b>' + pMoveType1 + '</div>' +
                 '<div>' + i8ln('Charge') + ': <b>' + pMove2 + '</b>' + pMoveType2 + '</div>' +
                 '<div>' + i8ln('Weight') + ': <b>' + weight.toFixed(3) + '</b>' + ' | ' + i8ln('Height') + ': <b>' + height.toFixed(3) + '</b></div>' +
@@ -1335,23 +1345,29 @@ function pokemonLabel(item) {
         // Despawn timer
         if (verifiedDespawn === 1) {
             contentstring += '<span style="top:63px;left:95px;position:absolute;font-size:13px;">' +
+                ' <img src="static/images/label/v2/firstSeen.png" height="16" width="auto" style="vertical-align:middle;" />' + ' ' + getTimeStr(firstSeenTime) +
+                ' <br>' +
                 ' <img src="static/images/label/v2/clock.png" height="16" width="auto" style="vertical-align:middle;" />' + ' ' + getTimeStr(disappearTime) +
                 ' <b><span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
                 ' <img src="static/images/label/v2/check.png" height="12" width="auto" title="' + i8ln('Despawntime verified') + '" style="vertical-align:middle;" />' +
-                '</b></span></div>'
+                ' </b>'
         } else if (pokemonReportTime === true) {
             contentstring += '<b style="top:-20px;position:relative;font-size:13px;">' +
                 ' <img src="static/images/label/v2/clock.png" height="16" width="auto" style="vertical-align:middle;" />' + ' ' + getTimeStr(reportTime) +
-                '</b></div>'
+                ' </b>'
         } else {
             contentstring += '<span style="top:63px;left:95px;position:absolute;font-size:13px;">' +
+                ' <img src="static/images/label/v2/firstSeen.png" height="16" width="auto" style="vertical-align:middle;" />' + ' ' + getTimeStr(firstSeenTime) +
+                ' <br>' +
                 ' <img src="static/images/label/v2/clock.png" height="16" width="auto" style="vertical-align:middle;" />' + ' ' + getTimeStr(disappearTime) +
                 ' <b><span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
                 ' <img src="static/images/label/v2/cross.png" height="12" width="auto" title="' + i8ln('Despawntime not verified') + '" style="vertical-align:middle;" />' +
-                '</b></span></div>'
+                ' </b>'
         }
 
-        //
+        // Close the disappear/appear div
+        contentstring += '</span></div>'
+
         contentstring += '<br>' + details
         if (atk != null && def != null && sta != null) {
             contentstring += '<div style="position:relative;top:45px;font-size:21px;"><center>'
@@ -7131,6 +7147,20 @@ $(function () {
                     id: key,
                     text: i8ln(value)
                 })
+                // TODO: Custom Tileserver Styles
+                // if(customStyles !== null){
+                //    for(var i=0;i<customStyles.length;i++){
+                //        styleList.push({
+                //            id: customStyles[i][0],
+                //            text: i8ln('Tiles') + ' - ' + customStyles[i][1]
+                //        })
+                //    }
+                //    styleList.push({
+                //        id: key,
+                //        text: i8ln(value)
+                //    })
+                // }else{
+                // }
             } else if (!googleMaps && !googleStyle && !customTileServerStyle) {
                 styleList.push({
                     id: key,
@@ -7152,6 +7182,22 @@ $(function () {
         })
         $selectStyle.on('change', function (e) {
             selectedStyle = $selectStyle.val()
+            // TODO detect if a tileserver-style was selected
+            // if(customStyles !== null){
+            //    var isTileserverStyle = false
+            //    for(var i=0;i<customStyles.length;i++){
+            //        if(selectedStyle == customStyles[i][0]){
+            //            isTileserverStyle = true
+            //            console.log('its a tileserver')
+            //        }
+            //    }
+            // }
+            // if(isTileserverStyle){
+            //    var newCustomAdress = customTileServerAddress.replace(customStyles[0][0],selectedStyle)
+            //    tileserver = L.tileLayer(newCustomAdress, {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
+            //    selectedStyle = 'tileserver'
+            // }
+            //
             setTileLayer(selectedStyle)
             Store.set('map_style', selectedStyle)
         })

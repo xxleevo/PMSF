@@ -11,7 +11,7 @@ class RDM extends Scanner
         $params = array();
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
 		
-	    $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weather AS weather_boosted_condition, costume, expire_timestamp_verified AS is_verified_despawn, display_pokemon_id";
+	    $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weather AS weather_boosted_condition, costume, expire_timestamp_verified AS is_verified_despawn, display_pokemon_id, first_seen_timestamp AS first_seen";
 
         global $noHighLevelData;
         if (!$noHighLevelData) {
@@ -87,7 +87,7 @@ class RDM extends Scanner
         $params = array();
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
 
-        $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weather AS weather_boosted_condition, costume, expire_timestamp_verified AS is_verified_despawn, display_pokemon_id";
+        $select = "pokemon_id, expire_timestamp AS disappear_time, id AS encounter_id, spawn_id, lat AS latitude, lon AS longitude, gender, form, weather AS weather_boosted_condition, costume, expire_timestamp_verified AS is_verified_despawn, display_pokemon_id, first_seen_timestamp AS first_seen";
 
         global $noHighLevelData;
         if (!$noHighLevelData) {
@@ -178,6 +178,7 @@ class RDM extends Scanner
                 $pokemon["latitude"] = floatval($pokemon["latitude"]);
 				$pokemon["longitude"] = floatval($pokemon["longitude"]);
             }
+			$pokemon["first_seen"] = $pokemon["first_seen"] * 1000;
             $pokemon["disappear_time"] = $pokemon["disappear_time"] * 1000;
             $pokemon["weight"] = isset($pokemon["weight"]) ? floatval($pokemon["weight"]) : null;
             $pokemon["height"] = isset($pokemon["height"]) ? floatval($pokemon["height"]) : null;
