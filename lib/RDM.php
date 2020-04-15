@@ -874,9 +874,14 @@ class RDM extends Scanner
         lon,
         name,
 	description,
+        notes,
+        poiimageurl,
+        poisurroundingurl,
 	updated,
 	submitted_by,
-	status
+        edited_by,
+	status,
+        submitted
         FROM poi
         WHERE :conditions";
 
