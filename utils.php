@@ -60,18 +60,60 @@ function validateToken($token)
     }
 }
 
-
-function sendToWebhook($webhookUrl, $webhook) {
-    $c = curl_init($webhookUrl);
-    curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($c, CURLOPT_POST, true);
-    curl_setopt($c, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($c, CURLOPT_HTTPHEADER, ['Content-type: application/json', 'User-Agent: python-requests/2.18.4']);
-    curl_setopt($c, CURLOPT_POSTFIELDS, json_encode($webhook));
-    curl_exec($c);
-    curl_close($c);
+function sendToWebhook($webhookUrl, $webhook)
+{
+    if (is_array($webhookUrl)) {
+        foreach ($webhookUrl as $hook) {
+            $c = curl_init($hook);
+            curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($c, CURLOPT_POST, true);
+            curl_setopt($c, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($c, CURLOPT_HTTPHEADER, ['Content-type: application/json', 'User-Agent: python-requests/2.18.4']);
+            curl_setopt($c, CURLOPT_POSTFIELDS, json_encode($webhook));
+            curl_exec($c);
+            curl_close($c);
+        }
+    } else {
+        $c = curl_init($webhookUrl);
+        curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($c, CURLOPT_POST, true);
+        curl_setopt($c, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($c, CURLOPT_HTTPHEADER, ['Content-type: application/json', 'User-Agent: python-requests/2.18.4']);
+        curl_setopt($c, CURLOPT_POSTFIELDS, json_encode($webhook));
+        curl_exec($c);
+        curl_close($c);
+    }
 }
+
+function uploadImage($imgurCID, $data)
+{
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, 'https://api.imgur.com/3/image');
+    curl_setopt($c, CURLOPT_POST, true);
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($c, CURLOPT_HTTPHEADER, ["Authorization: Client-ID $imgurCID"]);
+    curl_setopt($c, CURLOPT_POSTFIELDS, $data);
+    $result = curl_exec($c);
+    curl_close($c);
+
+    return $result;
+}
+
+function deleteImage($imgurCID, $data)
+{
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, 'https://api.imgur.com/3/image/' . $data);
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($c, CURLOPT_HTTPHEADER, ["Authorization: Client-ID $imgurCID"]);
+    curl_setopt($c, CURLOPT_CUSTOMREQUEST, 'DELETE');
+    $result = curl_exec($c);
+    curl_close($c);
+
+    return $result;
+}
+
 function generateRandomString($length = 8)
 {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
