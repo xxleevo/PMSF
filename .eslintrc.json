@@ -235,6 +235,7 @@
     "onlyOnePopup": true,
     "enableLiveScan": true,
     "deviceOfflineAfterSeconds": true,
-	"noRaids": true
+	"noRaids": true,
+    "noEditPoi": true
   }
 }

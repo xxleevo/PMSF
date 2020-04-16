@@ -1293,13 +1293,25 @@ if (!$noLoadingScreen) {
                 </div>
                 <?php
             }
-            if ( ! $noPortals || ! $noS2Cells || ! $noWeatherOverlay) {
-				if(!$noWeatherOverlay && (! $noPortals || ! $noS2Cells)){
-					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Wayfarer") . ' &amp; ' . i8ln("Weather") . '</h3>';
+            if (!$noPortals || ! $noS2Cells || ! $noWeatherOverlay || !$noPoi) {
+				if(!$noWeatherOverlay && !$noS2Cells && !$noPoi){
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Weather") . ' / ' . i8ln("Cells") . ' / ' . i8ln("Wayfarer") . '</h3>';
+				} else if(!$noWeatherOverlay && !$noS2Cells){
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Weather") . ' &amp; ' . i8ln("S2 Cells") . '</h3>';
+				} else if(!$noWeatherOverlay && !$noPoi){
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Weather") . ' &amp; ' . i8ln("Wayfarer") . '</h3>';
+				} else if(!$noS2Cells && !$noPoi){
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("S2 Cells") . ' &amp; ' . i8ln("Wayfarer") . '</h3>';
 				} else if(!$noWeatherOverlay){
 					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Weather") . '</h3>';
-				} else{
+				} else if(!$noS2Cells){
 					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("S2 Cells") . '</h3>';
+				} else if(!$noPoi){
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Wayfarer") . '</h3>';
+				} else if(!$noPortals){
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Portals") . '</h3>';
+				} else{
+					echo '<h3 style="font-weight: bold"><i class="fa fa-hashtag fa-fw"></i>&nbsp;' . i8ln("Misc") . '</h3>';
 				} ?>
 				<div>
                 <?php
@@ -1326,7 +1338,7 @@ if (!$noLoadingScreen) {
 					if ( ! $noPoi ) {
 						echo '
 						<div class="form-control switch-container">
-							<h3>' . i8ln( 'Waystops' ) . '</h3>
+							<h3>' . i8ln( 'Waystops' ) . ' &amp; ' . i8ln( 'Candidates' ) .'</h3>
 							<div class="onoffswitch">
 								<input id="poi-switch" type="checkbox" name="poi-switch" class="onoffswitch-checkbox" checked>
 								<label class="onoffswitch-label" for="poi-switch">
