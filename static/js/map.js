@@ -148,6 +148,8 @@ personalBadges['gold'] = []
 personalBadges['silver'] = []
 personalBadges['bronze'] = []
 
+var deviceLocation = []
+
 var assetsPath = 'static/sounds/'
 var iconpath = null
 
@@ -3796,9 +3798,10 @@ function setupSpawnpointMarker(item) {
 function setupScanLocationMarker(item) {
     var html = ''
     if (item['last_seen'] < Math.round((new Date()).getTime() / 1000) - deviceOfflineAfterSeconds) {
-        html = '<img src="static/images/device-offline.png" style="width:36px;height: auto;"/>'
+        html = '<img src="static/images/device-offline.png" style="width:36px;height: auto;"/>' +
+            '<img src="static/images/fire.gif" style="width:48px;height: auto;position:absolute;top: -52px;left: -7px;"/>'
     } else {
-        html = '<img src="static/images/device-online.png" style="width:36px;height: auto;"/>'
+        html = '<img src="static/images/device-online.png" style="width:32px;height: auto;"/>'
     }
     var icon = L.divIcon({
         iconSize: [36, 48],
@@ -6171,10 +6174,32 @@ function processScanlocation(i, item) {
     if (!Store.get('showScanLocation')) {
         return false
     }
-    // TODO: Flickering of Devices fix (Only Update Locations if changed, not on every raw-data request)
-    setupScanLocationMarker(item)
-}
 
+    // Hotfix: No more Flickering
+    var name = item['uuid']
+    var newLoc = [item['latitude'], item['longitude']]
+    var oldLoc = null
+    if (typeof deviceLocation[name] !== 'undefined') {
+        oldLoc = deviceLocation[name]
+    }
+
+    if (oldLoc === null) { // Draw devices if they are not drawn yet and also draw them (+ delete them) if the location changed
+        setupScanLocationMarker(item)
+    }
+    if ((oldLoc !== null) && (oldLoc[0] !== newLoc[0] || oldLoc[1] !== newLoc[1])) { // Update Device Location Marker if changed
+        var deviceMarkers = liveScanGroup.getLayers()
+        for (i = 0; i < deviceMarkers.length; i++) {
+            var lat = deviceMarkers[i].getLatLng().lat
+            var lon = deviceMarkers[i].getLatLng().lng
+            if (lat === oldLoc[0] && lon === oldLoc[1]) {
+                liveScanGroup.removeLayer(deviceMarkers[i]) // Delete the old Device Marker
+            }
+        }
+        setupScanLocationMarker(item)
+    }
+    // Overwrite the Location of the device
+    deviceLocation[name] = [item['latitude'], item['longitude']]
+}
 
 function updateSpawnPoints() {
     if (!Store.get('showSpawnpoints')) {
@@ -6210,7 +6235,6 @@ function updateMap() {
             }
         })
     }
-    liveScanGroup.clearLayers()
     loadRawData().done(function (result) {
         $.each(result.pokemons, processPokemons)
         $.each(result.pokestops, processPokestops)
