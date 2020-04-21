@@ -62,3 +62,4 @@ vendor/*
 composer.lock
 custom/*
 static/data/triggeredgyms.json
+static/css/custom.css
