@@ -330,6 +330,7 @@ $customTileServerAddress = '';                                      // TileServe
 $forcedTileServer = false;
 
 /* Style Settings */
+$noCustomCss = true;
 
 $copyrightSafe = true;
 $iconRepository = 'https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/';#

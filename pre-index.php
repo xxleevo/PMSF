@@ -309,8 +309,10 @@ $getList = new \Scanner\RDM();
     <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css" />
     <link href='static/css/leaflet.fullscreen.css' rel='stylesheet' />
     <?php if (file_exists('static/css/custom.css')) {
-        echo '<link rel="stylesheet" href="static/css/custom.css?' . time() . '">';
-    } ?>
+		if(!$noCustomCss){
+			echo '<link rel="stylesheet" href="static/css/custom.css?' . time() . '">';
+		}
+	} ?>
 	<!-- font awesome icons -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
@@ -882,13 +884,12 @@ if (!$noLoadingScreen) {
 								}
 							}
 							// For all Middle Years
-							if($i < $currentYear && $i > intval($newPokestopsFilterStart[0])){
+							else if($i < $currentYear && $i > intval($newPokestopsFilterStart[0])){
 								for($j = 1; $j <=12; $j++){
 									$targetMonth = DateTime::createFromFormat('!m', $j) ->format('F');
-									echo '<option value="' . $i . '-' . $j . '-01">'. i8ln($targetMonth) . ' ' . $i . '</option>';
+									echo '<option value="' . $i . '-' . $j . '-01">'. i8ln($targetMonth) . '-' . $i . '</option>';
 								}
-							//For current Year
-							} else{
+							} else{ //For current Year
 								for($j = 1; $j <=12; $j++) {
 									if($j <= $currentMonth) {
 										$targetMonth = DateTime::createFromFormat('!m', $j) ->format('F');
@@ -1233,13 +1234,12 @@ if (!$noLoadingScreen) {
 								}
 							}
 							// For all Middle Years
-							if($i < $currentYear && $i > intval($newGymsFilterStart[0])){
+							else if($i < $currentYear && $i > intval($newGymsFilterStart[0])){
 								for($j = 1; $j <=12; $j++){
 									$targetMonth = DateTime::createFromFormat('!m', $j) ->format('F');
 									echo '<option value="' . $i . '-' . $j . '-01">'. i8ln($targetMonth) . ' ' . $i . '</option>';
 								}
-							//For current Year
-							} else{
+							} else{ //For current Year
 								for($j = 1; $j <=12; $j++) {
 									if($j <= $currentMonth) {
 										$targetMonth = DateTime::createFromFormat('!m', $j) ->format('F');
