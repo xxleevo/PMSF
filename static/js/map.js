@@ -2095,11 +2095,13 @@ function getQuest(item) {
                 str = str.replace('Schnappschüsse', 'Schnappschuss')
                 str = str.replace('Kämpfe', 'Kampf')
                 str = str.replace('Herzen', 'Herz')
+                str = str.replace('Snacks', 'Snack')
+                str = str.replace('Trainerkämpfe', 'Trainerkampf')
                 // Condition 1: Pokemon,3:Pokemon,11:entwickle Pokemon
                 if (str.includes('1 Pokémon') || str.includes('1 Ei') || str.includes('1 Herz') || str.includes('1 Team GO')) {
                     str = str.replace(item['quest_target'], 'ein')
                 }
-                if (str.includes('1 neuen') || str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss') || str.includes('Kampf')) {
+                if (str.includes('1 neuen') || str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss') || str.includes('Kampf') || str.includes('Snack') || str.includes('Trainerkampf')) {
                     str = str.replace(item['quest_target'], 'einen')
                 }
             }

@@ -105,7 +105,7 @@
   },
   "27": {
     "prototext": "QUEST_COMPLETE_COMBAT",
-    "text": "Complete {0} Fights"
+    "text": "Complete {0} Trainer fights"
   },
   "28": {
     "prototext": "QUEST_TAKE_SNAPSHOT",
@@ -129,7 +129,7 @@
   },
   "33": {
     "prototext": "QUEST_BUDDY_FEED",
-    "text": ""
+    "text": "Give your buddy {0} treat(s)"
   },
   "34": {
     "prototext": "QUEST_BUDDY_EARN_AFFECTION_POINTS",
@@ -137,7 +137,7 @@
   },
   "35": {
     "prototext": "QUEST_BUDDY_PET",
-    "text": ""
+    "text": "Play with your Buddy {0} times"
   },
   "36": {
     "prototext": "QUEST_BUDDY_LEVEL",
