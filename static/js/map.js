@@ -1211,6 +1211,27 @@ function pokemonLabel(item) {
             details +=
                 '</div>'
         }
+		
+        // Catch Probability
+        var catchChances = ''
+        if (item['catch_pokeball'] !== undefined && item['catch_superball'] !== undefined && item['catch_hyperball'] !== undefined) {
+            catchChances +=
+			    '<div style="width:75px;position: absolute;top: 38px;margin: 10px;left: 0px;color: #333;background: rgba(255,255,255,.6);border-radius: 12px;box-shadow: inset 0 0 4px #000;padding: 3px;">' +
+                    '<div style="clear:both;">' +
+                        '<span style="padding-left: 5px;padding-right: 0px;font-size: 11px;"><img src="' + rewardIcons + 'rewards/reward_1_1.png" style="height:20px;float:left;" /></span>' +
+                        '<span style="font-size: 12px;font-weight: bold;border-radius:10px;float:right;padding: 1px 0px 1px 0px;" >' + (item['catch_pokeball'] * 100).toFixed(1) + '%</span>' +
+                    '</div>' + 
+                    '<div style="clear:both;">' +
+                        '<span style="padding-left: 5px;padding-right: 0px;font-size: 11px;"><img src="' + rewardIcons + 'rewards/reward_2_1.png" style="height:20px;float:left;" /></span>' +
+                        '<span style="font-size: 12px;font-weight: bold;border-radius:10px;float:right;padding: 1px 0px 1px 0px;" >' + (item['catch_superball'] * 100).toFixed(1) + '%</span>' +
+                    '</div>' +
+                    '<div style="clear:both;">' +
+                        '<span style="padding-left: 5px;padding-right: 0px;font-size: 11px;"><img src="' + rewardIcons + 'rewards/reward_3_1.png" style="height:20px;float:left;" /></span>' +
+                        '<span style="font-size: 12px;font-weight: bold;border-radius:10px;float:right;padding: 1px 0px 1px 0px;" >' + (item['catch_hyperball'] * 100).toFixed(1) + '%</span>' +
+                    '</div>' +
+                '</div>'
+        }
+		
         var costumeString = ''
         if (item['costume'] > 0 && noCostumeIcons === false) {
             costumeString = '_' + item['costume']
@@ -1249,6 +1270,10 @@ function pokemonLabel(item) {
             contentstring +=
                 '<center><img style="width: 80px;filter: drop-shadow(5px 5px 5px #222);margin:10px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + costumeString + '.png"/></center>'
         }
+        contentstring +=
+            catchChances
+        
+        //Pokemon Label
         if (pokemonReportTime === true) {
             contentstring += '<div style="background:rgba(255,255,255,0.8);border-radius:12px;box-shadow: inset 0 0 4px #000;padding: 5px;margin: 0px -10px -5px -10px;">'
             contentstring += '<div><center><b>' +
@@ -1314,21 +1339,28 @@ function pokemonLabel(item) {
             // IV, CP, Moves & Details
             details +=
                 '<div style="position:absolute;top:105px;left:100px;">' +
-                '<div style="font-size:14px;">' + i8ln('IV') + ': <b>' + iv.toFixed(1) + '%</b> (<b>' + atk + '</b>/<b>' + def + '</b>/<b>' + sta + '</b>)' +
+                    '<div style="font-size:14px;">' + i8ln('IV') + ': <b>' + iv.toFixed(1) + '%</b> (<b>' + atk + '</b>/<b>' + def + '</b>/<b>' + sta + '</b>)' +
                 '</div>' +
-                '<div style="font-size:14px;">' + i8ln('CP') + ': <b>' + cp + '</b> | ' + i8ln('Level') + ': <b>' + pokemonLevel + '</b></div>' +
+                    '<div style="font-size:14px;">' + i8ln('CP') + ': <b>' + cp + '</b> | ' + i8ln('Level') + ': <b>' + pokemonLevel + '</b></div>' +
                 '</div><br>' +
                 '<div style="position:absolute;top:145px;font-size:14px;">' +
-                '<div>' + i8ln('Quick') + ': <b>' + pMove1 + '</b>' + pMoveType1 + '</div>' +
-                '<div>' + i8ln('Charge') + ': <b>' + pMove2 + '</b>' + pMoveType2 + '</div>' +
-                '<div>' + i8ln('Weight') + ': <b>' + weight.toFixed(3) + '</b>' + ' | ' + i8ln('Height') + ': <b>' + height.toFixed(3) + '</b></div>' +
-                '</div>'
+                    '<div>' + i8ln('Quick') + ': <b>' + pMove1 + '</b>' + pMoveType1 + '</div>' +
+                    '<div>' + i8ln('Charge') + ': <b>' + pMove2 + '</b>' + pMoveType2 + '</div>' +
+                    '<div>' + i8ln('Weight') + ': <b>' + weight.toFixed(3) + '</b>' + ' | ' + i8ln('Height') + ': <b>' + height.toFixed(3) + '</b></div>' +
+                    '<div>' + i8ln('Catch Chances') + ':<br>' +
+					    '<b>' +
+                            '<img src="' + rewardIcons + 'rewards/reward_1_1.png" style="height:24px;vertical-align: bottom;" /><span>' + (item['catch_pokeball'] * 100).toFixed(1) + '% </span>' +
+                            '<img src="' + rewardIcons + 'rewards/reward_2_1.png" style="height:24px;vertical-align: bottom;" /><span>' + (item['catch_superball'] * 100).toFixed(1) + '% </span>' +
+                            '<img src="' + rewardIcons + 'rewards/reward_3_1.png" style="height:24px;vertical-align: bottom;" /><span>' + (item['catch_hyperball'] * 100).toFixed(1) + '%</span>' +
+                        '</b>' +
+					'</div>' +
+                '</div><br><br>'
         }
 
         // Weather
         if (weatherBoostedCondition !== 0) {
             details +=
-                '<img style="height:30px;position:absolute;top:20px;left:10px;" src="static/weather/i-' + weatherBoostedCondition + '.png"></div>'
+                '<img style="height:30px;position:absolute;top:55px;left:15px;" src="static/weather/i-' + weatherBoostedCondition + '.png"></div>'
         }
 
         // Name
@@ -1370,10 +1402,10 @@ function pokemonLabel(item) {
         if (verifiedDespawn === 1) {
             contentstring += '<span style="top:63px;left:95px;position:absolute;font-size:13px;">' +
                 ' <img src="static/images/label/v2/firstSeen.png" height="16" width="auto" style="vertical-align:middle;" />' + ' ' + getTimeStr(firstSeenTime) +
+                ' <img src="static/images/label/v2/check.png" height="12" width="auto" title="' + i8ln('Despawntime verified') + '" style="vertical-align:middle;" />' +
                 ' <br>' +
                 ' <img src="static/images/label/v2/clock.png" height="16" width="auto" style="vertical-align:middle;" />' + ' ' + getTimeStr(disappearTime) +
-                ' <b><span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
-                ' <img src="static/images/label/v2/check.png" height="12" width="auto" title="' + i8ln('Despawntime verified') + '" style="vertical-align:middle;" />' +
+                ' <b><span style="font-size:10px"class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
                 ' </b>'
         } else if (pokemonReportTime === true) {
             contentstring += '<b style="top:-20px;position:relative;font-size:13px;">' +
@@ -1394,7 +1426,7 @@ function pokemonLabel(item) {
 
         contentstring += '<br>' + details
         if (atk != null && def != null && sta != null) {
-            contentstring += '<div style="position:relative;top:45px;font-size:21px;"><center>'
+            contentstring += '<div style="position:relative;top:60px;font-size:21px;"><center>'
         } else {
             contentstring += '<div style="font-position:relative;font-size:21px;"><center>'
         }
@@ -1405,7 +1437,7 @@ function pokemonLabel(item) {
         ' | <a href="javascript:void(0);" onclick="javascript:toggleOtherPokemon(' + id + ');" title="' + i8ln('Toggle Species Only (temp)') + '"><img src="static/images/label/v2/flip.png" height="24" width="auto" style="vertical-align:middle;" /></a>' +
         '</center></div>'
         if (atk != null && def != null && sta != null) {
-            contentstring += '<div style="position:relative;top:55px;font-size:15px;"><center>'
+            contentstring += '<div style="position:relative;top:60px;font-size:15px;"><center>'
         } else {
             contentstring += '<div style="position:relative;font-size:15px;margin-top:5px;"><center>'
         }
