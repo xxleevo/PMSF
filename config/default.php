@@ -57,9 +57,10 @@ $blockIframe = true;                                                // Block you
 $title = "PMSF Alt";                                                // Title to display in title bar
 $locale = "en";                                                     // Display language
 
-/* Google Maps ONLY USED FOR TILE LAYERS */
+/* Google Maps / Mapbox ONLY USED FOR TILE LAYERS */
 
 $gmapsKey = "";
+$mBoxKey = "";
 
 /* Google Analytics */
 
@@ -329,6 +330,12 @@ $noCustomTileServer = true;                                         // Enable/Di
 $customTileServerAddress = '';                                      // TileServer URL: http://ipAddress:port/tile/klokantech-basic/{z}/{x}/{y}/1/png
 $forcedTileServer = false;
 
+/* Self-Hosted OSM */
+/* Default Values to use Normal OSM stored here, see example for custom */
+
+$osmTileServer = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+$maxNativeZoomOSM = 19;
+
 /* Style Settings */
 $noCustomCss = true;
 
@@ -356,8 +363,6 @@ $gymStyle = 'ingame';                                               // ingame, s
 
 $noLocationStyle = false;                                           // true/false
 $locationStyle = 'none';                                            // none, google, red, red_animated, blue, blue_animated, yellow, yellow_animated, pokesition, pokeball
-
-$osmTileServer = 'tile.openstreetmap.org';                          // osm tile server (no trailing slash)
 
 $triggerGyms = '[]';                                                // Add Gyms that the OSM-Query doesn't take care of like '["gym_id", "gym_id"]'
 $onlyTriggerGyms = false;                                           // Only show EX-Gyms that are defined in $triggerGyms

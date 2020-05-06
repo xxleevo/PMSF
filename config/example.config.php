@@ -319,7 +319,18 @@ $noCustomTileServer = true;                                        // Enable/Dis
 $customTileServerAddress = '';                                      // TileServer URL: http://ipAddress:port/tile/klokantech-basic/{z}/{x}/{y}/1/png
 $forcedTileServer = false;
 
+/* Self-Hosted OSM */
+/* Tested with Switch2OSM docker setup found at https://switch2osm.org/serving-tiles/using-a-docker-container/ */
+/* Should work with any Apache mod_tile based tileserver, adjust URL as needed */
+/* SETUP IS RESOURCE INTENSIVE, recommendations+tools at  https://github.com/SenorKarlos/switch2OSMinfo */
+
+$osmTileServer = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+//DEFAULT URL: https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png CUSTOM URL ex: https://your.domain.com/tile/{z}/{x}/{y}.png
+$maxNativeZoomOSM = 19;			/* Leave at 19 for OSM Servers, or set to your higest rendered zoom level */
+
 /*---------Style Settings---------*/
+$noCustomCss = true;
+
 $noPokemonLabelStyles = true;                                   //enables/disables the choice for users to set their prefered pokemonLabel style
 $pokemonLabelStyle = 'v2';                                 // classic, v1, v2,v3(New Years theme)
 
@@ -515,8 +526,31 @@ $maxClusterRadius = 30;												// The maximum radius that a cluster will cov
 $spiderfyOnMaxZoom = 'true';										// Spiderfy cluster markers on click
 
 /* Google Settings & Analytics  */
-$gmapsKey = "";														// ONLY USED FOR TILE LAYERS
 $gAnalyticsId = "";													// "" for empty, "UA-XXXXX-Y" add your Google Analytics tracking ID
+
+/* Google Maps / Mapbox ONLY USED FOR TILE LAYERS */
+$gmapsKey = "";
+$mBoxKey = "";
+
+/* How to use multiple Keys: */
+
+//$dayOfTheWeek = date('l');
+
+//if ($dayOfTheWeek === 'Monday' || $dayOfTheWeek === 'Tuesday' || $dayOfTheWeek === 'Wednesday') {
+//    $mBoxKey = "";
+//} else if ($dayOfTheWeek === 'Thursday' || $dayOfTheWeek === 'Friday') {
+//    $mBoxKey = "";
+//} else if ($dayOfTheWeek === 'Saturday' || $dayOfTheWeek === 'Sunday') {
+//    $mBoxKey = "";
+//}
+
+//if ($dayOfTheWeek === 'Monday' || $dayOfTheWeek === 'Tuesday' || $dayOfTheWeek === 'Wednesday') {
+//    $gmapsKey = "";
+//} else if ($dayOfTheWeek === 'Thursday' || $dayOfTheWeek === 'Friday') {
+//    $gmapsKey = "";
+//} else if ($dayOfTheWeek === 'Saturday' || $dayOfTheWeek === 'Sunday') {
+//    $gmapsKey = "";
+//}
 
 /* Piwik Analytics */
 $piwikUrl = "";
@@ -527,9 +561,6 @@ $faviconPath = '';                                                  // Upload fa
 
 /* StatsToggle */
 $noStatsToggle = false;                                             // Enables or disables the stats button in the header.
-
-/* OSM */
-$osmTileServer = 'tile.openstreetmap.org';                          // osm tile server (no trailing slash)
 
 /* Access-config Settings */
 $accessLevelsInherit = false;										// Choose if the levels in the access-level config inherit access configurations from lower levels
