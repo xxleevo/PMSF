@@ -1092,6 +1092,13 @@ function getTimeStr(t) {
     }
     return dateStr
 }
+function getTimeStrEnchant(t, format) {
+    var dateStr = 'Unknown'
+    if (t) {
+        dateStr = moment(t).format(format)
+    }
+    return dateStr
+}
 
 function toggleOtherPokemon(pokemonId) { // eslint-disable-line no-unused-vars
     onlyPokemon = onlyPokemon === 0 ? pokemonId : 0
@@ -1211,16 +1218,16 @@ function pokemonLabel(item) {
             details +=
                 '</div>'
         }
-		
+
         // Catch Probability
         var catchChances = ''
         if (item['catch_pokeball'] !== undefined && item['catch_superball'] !== undefined && item['catch_hyperball'] !== undefined) {
             catchChances +=
-			    '<div style="width:75px;position: absolute;top: 38px;margin: 10px;left: 0px;color: #333;background: rgba(255,255,255,.6);border-radius: 12px;box-shadow: inset 0 0 4px #000;padding: 3px;">' +
+                '<div style="width:78px;position: absolute;top: 38px;margin: 10px;left: 0px;color: #333;background: rgba(255,255,255,.6);border-radius: 12px;box-shadow: inset 0 0 4px #000;padding: 3px;">' +
                     '<div style="clear:both;">' +
                         '<span style="padding-left: 5px;padding-right: 0px;font-size: 11px;"><img src="' + rewardIcons + 'rewards/reward_1_1.png" style="height:20px;float:left;" /></span>' +
                         '<span style="font-size: 12px;font-weight: bold;border-radius:10px;float:right;padding: 1px 0px 1px 0px;" >' + (item['catch_pokeball'] * 100).toFixed(1) + '%</span>' +
-                    '</div>' + 
+                    '</div>' +
                     '<div style="clear:both;">' +
                         '<span style="padding-left: 5px;padding-right: 0px;font-size: 11px;"><img src="' + rewardIcons + 'rewards/reward_2_1.png" style="height:20px;float:left;" /></span>' +
                         '<span style="font-size: 12px;font-weight: bold;border-radius:10px;float:right;padding: 1px 0px 1px 0px;" >' + (item['catch_superball'] * 100).toFixed(1) + '%</span>' +
@@ -1231,7 +1238,6 @@ function pokemonLabel(item) {
                     '</div>' +
                 '</div>'
         }
-		
         var costumeString = ''
         if (item['costume'] > 0 && noCostumeIcons === false) {
             costumeString = '_' + item['costume']
@@ -1272,8 +1278,8 @@ function pokemonLabel(item) {
         }
         contentstring +=
             catchChances
-        
-        //Pokemon Label
+
+        // Pokemon Label
         if (pokemonReportTime === true) {
             contentstring += '<div style="background:rgba(255,255,255,0.8);border-radius:12px;box-shadow: inset 0 0 4px #000;padding: 5px;margin: 0px -10px -5px -10px;">'
             contentstring += '<div><center><b>' +
@@ -1348,12 +1354,12 @@ function pokemonLabel(item) {
                     '<div>' + i8ln('Charge') + ': <b>' + pMove2 + '</b>' + pMoveType2 + '</div>' +
                     '<div>' + i8ln('Weight') + ': <b>' + weight.toFixed(3) + '</b>' + ' | ' + i8ln('Height') + ': <b>' + height.toFixed(3) + '</b></div>' +
                     '<div>' + i8ln('Catch Chances') + ':<br>' +
-					    '<b>' +
+                        '<b>' +
                             '<img src="' + rewardIcons + 'rewards/reward_1_1.png" style="height:24px;vertical-align: bottom;" /><span>' + (item['catch_pokeball'] * 100).toFixed(1) + '% </span>' +
                             '<img src="' + rewardIcons + 'rewards/reward_2_1.png" style="height:24px;vertical-align: bottom;" /><span>' + (item['catch_superball'] * 100).toFixed(1) + '% </span>' +
                             '<img src="' + rewardIcons + 'rewards/reward_3_1.png" style="height:24px;vertical-align: bottom;" /><span>' + (item['catch_hyperball'] * 100).toFixed(1) + '%</span>' +
                         '</b>' +
-					'</div>' +
+                    '</div>' +
                 '</div><br><br>'
         }
 
@@ -6414,10 +6420,16 @@ function drawWeatherOverlay(weather) {
                 bounds.extend(weatherArray[0][i])
             }
             center = bounds.getCenter()
-            var icon = L.icon({
+
+            var html = '<div style="position:relative;">' +
+                '<img src="static/weather/i-' + item.condition + '.png" style="width:32px;" /><br>' +
+                '<div class="weather-description"><center><i class="fa fa-refresh" aria-hidden="true"></i> ' + getTimeStrEnchant(item.updated, 'LT') + '</center></div>' +
+                '</div>'
+            var icon = L.divIcon({
                 iconSize: [30, 30],
                 iconAnchor: [15, 15],
-                iconUrl: 'static/weather/i-' + item.condition + '.png'
+                className: 'marker-weather',
+                html: html
             })
             var marker = L.marker([center.lat, center.lng], {icon})
             weatherPolys.push(poly)

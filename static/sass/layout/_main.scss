@@ -336,3 +336,17 @@ a.leaflet-popup-close-button {
   100% { transform: rotate(360deg); }
 }
 
+/* Weather label Styling */
+.weather-description{
+position: relative;
+left: -12px;
+top: -2px;
+font-size: 10px;
+width: 54px;
+border: 1px solid rgba(36,98,118,255);
+color: rgba(36,98,118,255);
+background-color: rgba(255,255,255,0.5);
+border-radius: 10px;
+font-weight: bold;
+}
+

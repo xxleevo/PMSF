@@ -965,12 +965,13 @@ class RDM extends Scanner
     public function get_weather($updated = null)
     {
         global $db;
-        $query = "SELECT id AS s2_cell_id, gameplay_condition AS gameplay_weather FROM weather";
+        $query = "SELECT id AS s2_cell_id, gameplay_condition AS gameplay_weather, updated FROM weather";
         $weathers = $db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
         $data = array();
         foreach ($weathers as $weather) {
             $data["weather_" . $weather['s2_cell_id']] = $weather;
             $data["weather_" . $weather['s2_cell_id']]['condition'] = $data["weather_" . $weather['s2_cell_id']]['gameplay_weather'];
+            $data["weather_" . $weather['s2_cell_id']]['updated'] = $data["weather_" . $weather['s2_cell_id']]['updated'] * 1000;
             unset($data["weather_" . $weather['s2_cell_id']]['gameplay_weather']);
         }
         return $data;
