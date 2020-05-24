@@ -2735,16 +2735,45 @@ function getGymMarkerIcon(item, badgeMode) {
     // Dynamic Sizes
     // Raid,Gym,Eggsizes
     // If you want to keep the scaling on mapzoom, dont touch these settings
-    var dynamicRaidBossSize = (40 / 6) + ((40 / 6) * (map.getZoom() - 10)) // RaidbossSize - Depends on Zoom - 40=Initial
-    var dynamicRaidBossPosRight = (12 / 6) + ((12 / 6) * (map.getZoom() - 10)) // Position from the raidboss from Right - Depends on Zoom - 12 = Initial
-    var dynamicEggUnknownSize = (35 / 6) + ((35 / 6) * (map.getZoom() - 10)) // Unknown Egg Size - Depends on Zoom - 35=Initial
-    var dynamicEggUnknownPosRight = (18 / 6) + ((18 / 6) * (map.getZoom() - 10)) // Unknown Egg right position - Depends on Zoom - 18=Initial
-    var dynamicEggUnknownPosTop = (-11 / 6) + ((-11 / 6) * (map.getZoom() - 10)) // Unknown Egg Top position - Depends on Zoom - (-11)=Initial
+    var dynamicRaidBossSize = (34 / 6) + ((34 / 6) * (map.getZoom() - 10)) // RaidbossSize - Depends on Zoom - 40=Initial
+    var dynamicRaidBossPosRight = (13 / 6) + ((13 / 6) * (map.getZoom() - 10)) // Position from the raidboss from Right - Depends on Zoom - 12 = Initial
+	var dynamicRaidBossPosTop = (-6 / 6) + ((-6 / 6) * (map.getZoom() - 10)) // Position from the raidboss from Top - Depends on Zoom - 6 = Initial
+    var dynamicEggUnknownSize = (32 / 6) + ((32 / 6) * (map.getZoom() - 10)) // Unknown Egg Size - Depends on Zoom - 35=Initial
+    var dynamicEggUnknownPosRight = (11 / 6) + ((11 / 6) * (map.getZoom() - 10)) // Unknown Egg right position - Depends on Zoom - 18=Initial
+    var dynamicEggUnknownPosTop = (-9 / 6) + ((-9 / 6) * (map.getZoom() - 10)) // Unknown Egg Top position - Depends on Zoom - (-11)=Initial
     var dynamicGymSize = (48 / 6) + ((48 / 6) * (map.getZoom() - 10)) // Gym Size - Depends on Zoomlevel - 48=Initial
     // Egg icon Sizes
     var dynamicEggSize = (30 / 6) + ((30 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-    var dynamicEggPosTop = (2 / 6) + ((2 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-    var dynamicEggPosRight = (14 / 6) + ((14 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+    var dynamicEggPosTop = (-3.5 / 6) + ((-3.5 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+    var dynamicEggPosRight = (12 / 6) + ((12 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
+    // Extra Sizes for ComicTower - Offsets for Bosses, Eggs 
+    if(Store.get('gymMarkerStyle') === 'comictower'){
+        if(level === 0 || level === 1){
+            dynamicRaidBossPosTop = (-6 / 6) + ((-6 / 6) * (map.getZoom() - 10))
+            dynamicEggPosTop = (-5 / 6) + ((-5 / 6) * (map.getZoom() - 10))
+            dynamicEggUnknownPosTop = (-9 / 6) + ((-9 / 6) * (map.getZoom() - 10))
+        }
+        if(level === 2){
+            dynamicRaidBossPosTop = (-10 / 6) + ((-10 / 6) * (map.getZoom() - 10))
+            dynamicEggPosTop = (-7 / 6) + ((-7 / 6) * (map.getZoom() - 10))
+            dynamicEggUnknownPosTop = (-11 / 6) + ((-11 / 6) * (map.getZoom() - 10))
+        }
+        if(level === 3 || level === 4){
+            dynamicRaidBossPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
+            dynamicEggPosTop = (-10 / 6) + ((-10 / 6) * (map.getZoom() - 10))
+            dynamicEggUnknownPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
+        }
+        else if(level === 5){
+            dynamicRaidBossPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
+            dynamicEggPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
+            dynamicEggUnknownPosTop = (-17 / 6) + ((-17 / 6) * (map.getZoom() - 10))
+        }
+        else if(level === 6){
+            dynamicRaidBossPosTop = (-16 / 6) + ((-16 / 6) * (map.getZoom() - 10))
+            dynamicEggPosTop = (-14.5 / 6) + ((-14.5 / 6) * (map.getZoom() - 10))
+            dynamicEggUnknownPosTop = (-17 / 6) + ((-17 / 6) * (map.getZoom() - 10))
+        }
+    }
     // Ex icon sizes
     var dynamicExSize = (38 / 6) + ((38 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
     var dynamicExPos = (25 / 6) + ((25 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
@@ -2842,7 +2871,7 @@ function getGymMarkerIcon(item, badgeMode) {
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
                 exIcon +
-                '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png" style="width:' + dynamicRaidBossSize + 'px;height:auto;position:absolute;top:-6px;right:' + dynamicRaidBossPosRight + 'px;"/>' +
+                '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png" style="width:' + dynamicRaidBossSize + 'px;height:auto;position:absolute;top:' + dynamicRaidBossPosTop + 'px;right:' + dynamicRaidBossPosRight + 'px;"/>' +
                 exclusiveIcon +
                 battleIcon +
                 '</div>'

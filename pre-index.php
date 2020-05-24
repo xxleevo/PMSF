@@ -1115,6 +1115,7 @@ if (!$noLoadingScreen) {
 							<option value="classic">' . i8ln("Classic") . '</option>
 							<option value="shield">' . i8ln("Shield") . '</option>
 							<option value="tower">' . i8ln("Tower") . '</option>
+							<option value="comictower">' . i8ln("ComicTower") . '</option>
 							<option value="beasts">' . i8ln("Beast") . '</option>
 							<option value="idol">' . i8ln("Idol") . '</option>
 							<option value="elements">' . i8ln("Element") . '</option>
