@@ -496,7 +496,7 @@ $weatherCellsFillOpacity = 0.2;   // FillOpacity of the weather cells. 10% = 0.1
 // Only change settings from this block if you know what they exactly do. Use some of them carefully!
 //-----------------------------------------------------
 /* Counts */
-$numberOfPokemon = 649;
+$numberOfPokemon = 890;
 $numberOfItem = 1405;
 $numberOfGrunt = 50;
 

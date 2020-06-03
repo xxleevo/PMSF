@@ -524,7 +524,7 @@ $valentine = true;                                                   // Show Hea
 // DEBUGGING - MISC
 //-----------------------------------------------------
 /* Counts */
-$numberOfPokemon = 649;
+$numberOfPokemon = 890;
 $numberOfItem = 1405;
 $numberOfGrunt = 50;
 

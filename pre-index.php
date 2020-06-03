@@ -84,7 +84,7 @@ $getList = new \Scanner\RDM();
             }
 
             if ( ! in_array( $k, $pokemonToExclude ) ) {
-                if ( $k > 649 ) {
+                if ( $k > 890 ) {
                     break;
 				}
 				if ( $k <= 9 ) {
