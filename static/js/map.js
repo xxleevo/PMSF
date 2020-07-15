@@ -282,9 +282,6 @@ if (location.search.indexOf('login=false') > 0) {
 if (forcedTileServer) {
     Store.set('map_style', 'tileserver')
 }
-if (noRaids && Store.get('showRaids')) {
-    Store.set('showRaids', false)
-}
 function previewPoiImage(event) { // eslint-disable-line no-unused-vars
     var form = $(event.target).parent().parent()
     var input = event.target
@@ -957,7 +954,7 @@ function initSidebar() {
     $('#gyms-filter-wrapper').toggle(Store.get('showGyms'))
     $('#team-gyms-only-switch').val(Store.get('showTeamGymsOnly'))
     $('#open-gyms-only-switch').prop('checked', Store.get('showOpenGymsOnly'))
-    $('#raids-switch').prop('checked', Store.get('showRaids'))
+    $('#raids-switch').prop('checked', (Store.get('showRaids') && !noRaids))
     $('#raidboss-filter-switch').prop('checked', Store.get('filterRaidboss'))
     $('#raid-level-filter-switch').prop('checked', Store.get('filterRaidlevel'))
     $('#raid-timer-switch').prop('checked', Store.get('showRaidTimer'))
