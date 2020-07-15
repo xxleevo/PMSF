@@ -1560,19 +1560,19 @@ function gymLabel(item) {
             }
         }
         raidStr += '</h3>'
-        if (raidStarted && item['raid_gender'] !== null){
-			var genderString = ''
-			switch(item['raid_gender']){
-				case 1:
-					genderString = i8ln('Male') + '(' + raidGenderType[item['raid_gender']] + ')'
-					break;
-				case 2:
-					genderString = i8ln('Female') + '(' + raidGenderType[item['raid_gender']] + ')'
-					break;
-				default:
-					genderString = i8ln(raidGenderType[item['raid_gender']])
-					break;
-			}
+        if (raidStarted && item['raid_gender'] !== null) {
+            var genderString = ''
+            switch (item['raid_gender']) {
+                case 1:
+                    genderString = i8ln('Male') + '(' + raidGenderType[item['raid_gender']] + ')'
+                    break
+                case 2:
+                    genderString = i8ln('Female') + '(' + raidGenderType[item['raid_gender']] + ')'
+                    break
+                default:
+                    genderString = i8ln(raidGenderType[item['raid_gender']])
+                    break
+            }
             var raidGender = '<div><b>' + i8ln('Gender') + ': ' + genderString + '</b></div>'
             raidStr += raidGender
         }
@@ -2738,7 +2738,7 @@ function getGymMarkerIcon(item, badgeMode) {
     // If you want to keep the scaling on mapzoom, dont touch these settings
     var dynamicRaidBossSize = (34 / 6) + ((34 / 6) * (map.getZoom() - 10)) // RaidbossSize - Depends on Zoom - 40=Initial
     var dynamicRaidBossPosRight = (13 / 6) + ((13 / 6) * (map.getZoom() - 10)) // Position from the raidboss from Right - Depends on Zoom - 12 = Initial
-	var dynamicRaidBossPosTop = (-6 / 6) + ((-6 / 6) * (map.getZoom() - 10)) // Position from the raidboss from Top - Depends on Zoom - 6 = Initial
+    var dynamicRaidBossPosTop = (-6 / 6) + ((-6 / 6) * (map.getZoom() - 10)) // Position from the raidboss from Top - Depends on Zoom - 6 = Initial
     var dynamicEggUnknownSize = (32 / 6) + ((32 / 6) * (map.getZoom() - 10)) // Unknown Egg Size - Depends on Zoom - 35=Initial
     var dynamicEggUnknownPosRight = (11 / 6) + ((11 / 6) * (map.getZoom() - 10)) // Unknown Egg right position - Depends on Zoom - 18=Initial
     var dynamicEggUnknownPosTop = (-9 / 6) + ((-9 / 6) * (map.getZoom() - 10)) // Unknown Egg Top position - Depends on Zoom - (-11)=Initial
@@ -2747,29 +2747,25 @@ function getGymMarkerIcon(item, badgeMode) {
     var dynamicEggSize = (30 / 6) + ((30 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
     var dynamicEggPosTop = (-3.5 / 6) + ((-3.5 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
     var dynamicEggPosRight = (12 / 6) + ((12 / 6) * (map.getZoom() - 10)) // Depends on Zoomlevel
-    // Extra Sizes for ComicTower - Offsets for Bosses, Eggs 
-    if(Store.get('gymMarkerStyle') === 'comictower'){
-        if(level === 0 || level === 1){
+    // Extra Sizes for ComicTower - Offsets for Bosses, Eggs
+    if (Store.get('gymMarkerStyle') === 'comictower') {
+        if (level === 0 || level === 1) {
             dynamicRaidBossPosTop = (-6 / 6) + ((-6 / 6) * (map.getZoom() - 10))
             dynamicEggPosTop = (-5 / 6) + ((-5 / 6) * (map.getZoom() - 10))
             dynamicEggUnknownPosTop = (-9 / 6) + ((-9 / 6) * (map.getZoom() - 10))
-        }
-        if(level === 2){
+        } else if (level === 2) {
             dynamicRaidBossPosTop = (-10 / 6) + ((-10 / 6) * (map.getZoom() - 10))
             dynamicEggPosTop = (-7 / 6) + ((-7 / 6) * (map.getZoom() - 10))
             dynamicEggUnknownPosTop = (-11 / 6) + ((-11 / 6) * (map.getZoom() - 10))
-        }
-        if(level === 3 || level === 4){
+        } else if (level === 3 || level === 4) {
             dynamicRaidBossPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
             dynamicEggPosTop = (-10 / 6) + ((-10 / 6) * (map.getZoom() - 10))
             dynamicEggUnknownPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
-        }
-        else if(level === 5){
+        } else if (level === 5) {
             dynamicRaidBossPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
             dynamicEggPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
             dynamicEggUnknownPosTop = (-17 / 6) + ((-17 / 6) * (map.getZoom() - 10))
-        }
-        else if(level === 6){
+        } else if (level === 6) {
             dynamicRaidBossPosTop = (-16 / 6) + ((-16 / 6) * (map.getZoom() - 10))
             dynamicEggPosTop = (-14.5 / 6) + ((-14.5 / 6) * (map.getZoom() - 10))
             dynamicEggUnknownPosTop = (-17 / 6) + ((-17 / 6) * (map.getZoom() - 10))
@@ -2890,31 +2886,10 @@ function getGymMarkerIcon(item, badgeMode) {
                 html: html
             })
         } else if (item['raid_level'] !== null && item.raid_start <= Date.now() && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item['raid_level']))) {
-            var hatchedEgg = ''
-            switch(item['raid_level']){
-                case 1:
-                    hatchedEgg = 'hatched_1'
-                    break;
-                case 2:
-                    hatchedEgg = 'hatched_2'
-                    break;
-                case 3:
-                    hatchedEgg = 'hatched_3'
-                    break;
-                case 4:
-                    hatchedEgg = 'hatched_4'
-                    break;
-                case 5:
-                    hatchedEgg = 'hatched_5'
-                    break;
-                default:
-                    hatchedEgg = 'hatched_1'
-                    break;
-            }
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
                 exIcon +
-                '<img src="static/raids/egg_' + hatchedEgg + '.png" style="width:' + dynamicEggUnknownSize + 'px;height:auto;position:absolute;top:' + dynamicEggUnknownPosTop + 'px;right:' + dynamicEggUnknownPosRight + 'px;"/>' +
+                '<img src="static/raids/egg_hatched_' + item['raid_level'] + '.png" style="width:' + dynamicEggUnknownSize + 'px;height:auto;position:absolute;top:' + dynamicEggUnknownPosTop + 'px;right:' + dynamicEggUnknownPosRight + 'px;"/>' +
                 exclusiveIcon +
                 battleIcon +
                 '</div>'
