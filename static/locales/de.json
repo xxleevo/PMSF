@@ -1,4 +1,8 @@
 {
+  "Male": "Männlich",
+  "Female": "Weiblich",
+  "Genderless": "Ohne Geschlecht",
+  "N/A": "N/V",
   "Fly": "Fliegen",
   "Catch Chances": "Fangchancen",
   "Weather Ball Fire": "Meteorologe (Feuer)",

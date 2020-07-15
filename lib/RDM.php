@@ -564,7 +564,8 @@ class RDM extends Scanner
         raid_pokemon_cp,
         ex_raid_eligible AS park,
 		in_battle as battle_status,
-		raid_is_exclusive as is_exclusive
+		raid_is_exclusive as is_exclusive,
+		raid_pokemon_gender as raid_gender
         FROM gym
         WHERE :conditions";
 
@@ -596,6 +597,7 @@ class RDM extends Scanner
             $gym["park"] = intval($gym["park"]);
             $gym["battle_status"] = intval($gym["battle_status"]);
             $gym["is_exclusive"] = intval($gym["is_exclusive"]);
+            $gym["raid_gender"] = intval($gym["raid_gender"]);
             $gym["last_modified"] = $gym["last_modified"] * 1000;
             $gym["last_scanned"] = $gym["last_scanned"] * 1000;
             $gym["first_seen"] = $gym["first_seen"] * 1000;

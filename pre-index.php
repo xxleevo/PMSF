@@ -237,15 +237,8 @@ $getList = new \Scanner\RDM();
         $z = 0;
 		for ($e = 1; $e <= 5; $e++) {
 			$level = $e;
-			if($e === 1 || $e === 2){
-				$egg = 'normal';
-			} else if($e === 3 || $e === 4){
-				$egg = 'rare';
-			} else if($e === 5){
-				$egg = 'legendary';
-			}
             if (! in_array($e, $raidEggsToExclude)) {
-                echo '<span class="raideggs-icon-sprite" data-value="' . $e . '" onclick="' . $onClick . '"><span style="display:none" class="level">' . $level . '</span><img src="static/raids/egg_' . $egg . '.png" style="width:48px;height:56px;"/>';
+                echo '<span class="raideggs-icon-sprite" data-value="' . $e . '" onclick="' . $onClick . '"><span style="display:none" class="level">' . $level . '</span><img src="static/raids/egg_' . $level . '.png" style="width:48px;height:56px;"/>';
                 if (! $noRaidfilterListNumbers) {
                     echo '<span class="raidboss-number">' . $e . '</span>';
                 }
