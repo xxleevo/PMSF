@@ -792,6 +792,12 @@
       }
     }
   }
+  .area-header{
+	background-color: #202020;
+	border: 1px solid lightgray;
+	text-align: center;
+	color: lightgray;
+  }
   .area-container{
     padding:0!important;
     ul{
@@ -815,7 +821,7 @@
       }
     }
     a{
-      padding: 10px 5px;
+      padding: 6px 5px;
       display: block;
       text-decoration: none;
     }

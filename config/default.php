@@ -495,6 +495,7 @@ $nestShareFooter = "For more infos visit our Map %0A(Discord needed: ". $discord
 //-----------------------------------------------------
 
 $noAreas = true;
+$multipleAreas = false;
 $areas = [];                                                        // [[latitude,longitude,zoom,"name"],[latitude,longitude,zoom,"name"]]
 
 //-----------------------------------------------------

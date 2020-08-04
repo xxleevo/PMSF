@@ -1859,11 +1859,26 @@ if (!$noLoadingScreen) {
 			echo '<h3 style="font-weight: bold"><i class="fa fa-globe fa-fw"></i>&nbsp;' . i8ln("Map Locations") . '</h3>';
                 $count = sizeof( $areas );
                 if ( $count > 0 ) {
-                    echo '<div class="form-control switch-container area-container"><ul>';
-                    for ( $i = 0; $i <= $count - 1; $i ++ ) {
-                        echo '<li><a href="" data-lat="' . $areas[ $i ][0] . '" data-lng="' . $areas[ $i ][1] . '" data-zoom="' . $areas[ $i ][2] . '" class="area-go-to">' . $areas[ $i ][3] . '</a></li>';
-                    }
-                    echo '</ul></div>';
+					echo '<div class="form-control switch-container area-container">';
+					if($multiAreas){
+						for ( $j = 0; $j <= $count - 1; $j ++) {
+							echo '<div class="area-header">' . $areas[$j][0] . '</div>';
+							$innerCount = sizeOf($areas[$j]);
+							echo '<ul>';
+							for ( $i = 1; $i <= $innerCount - 1; $i ++ ) {
+								echo '<li><a href="" data-lat="' . $areas[$j][$i][0] . '" data-lng="' . $areas[$j][$i][1] . '" data-zoom="' . $areas[$j][$i][2] . '" class="area-go-to">' . $areas[$j][$i][3] . '</a></li>';
+							}
+							echo '</ul>';
+						}
+					}
+					else{
+						echo '<ul>';
+						for ( $i = 0; $i <= $count - 1; $i ++ ) {
+							echo '<li><a href="" data-lat="' . $areas[ $i ][0] . '" data-lng="' . $areas[ $i ][1] . '" data-zoom="' . $areas[ $i ][2] . '" class="area-go-to">' . $areas[ $i ][3] . '</a></li>';
+						}
+						echo '</ul>';
+					}
+					echo '</div>';
                 }
             }
         ?>

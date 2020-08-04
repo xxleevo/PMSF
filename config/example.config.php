@@ -473,8 +473,25 @@ $nestCoords = array();												//$nestCoords = array(array('lat1' => 42.83077
 //-----------------------------------------------------
 
 $noAreas = true;
+$multiAreas = false;												// use multi-area design(to have headers for specific areas - see example below)
 $areas = [];                                                        // [[latitude,longitude,zoom,"name"],[latitude,longitude,zoom,"name"]]
-
+//##SingleArea Example:## In this example you will just have the listed Areas ($multiAreas must be false here)
+//$areas = [
+//			[0.0,1.1,15,"area1"],
+//			[1.0,2.1,15,"area2"],
+//		];
+//
+//##multiArea example:## In this example you will have a area list of 2 points for each header ($multiAreas must be true here)
+//$areas = [
+//			["Subarea one",
+//				[0.1,1.3,15,"subarea point 1"],
+//				[0.2,1.4,15,"subarea point 2"]
+//			],
+//			["Subarea two",
+//				[1.0,3.1,15,"subarea(2) point 1"],
+//				[2.0,4.1,15,"subarea(2) point 2"]
+//			]
+//		];
 //-----------------------------------------------------
 // Weather Config
 //-----------------------------------------------------
