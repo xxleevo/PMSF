@@ -315,7 +315,6 @@ $deviceOfflineAfterSeconds = 300;                                   // Mark scan
 /* Custom Tileserver.  */
 // (Only tested with https://github.com/123FLO321/SwiftTileserverCache ) */
 
-$noCustomTileServer = true;                                        // Enable/Disable Custom TileServer
 $customTileServers = '';											// Option for Tileservers (multiple layers supported) - For example check below
 //$customTileServers = [
 //						["Tileserver Basic","http://ipAddress:port/tile/klokantech-basic/{z}/{x}/{y}/1/png"],
