@@ -433,7 +433,7 @@ function initMap() { // eslint-disable-line no-unused-vars
     if(Store.get('map_style').includes("tileservers")){
         if(customTileServers !== '' || customTileServers !== null && customTileServers.length > 0){
             customTileServer(Store.get('map_style'))
-		} else {
+        } else {
             Store.set('map_style', mapStyle)
             setTileLayer(Store.get('map_style'))
         }
@@ -574,12 +574,18 @@ function initMap() { // eslint-disable-line no-unused-vars
 function toggleFullscreenMap() { // eslint-disable-line no-unused-vars
     map.toggleFullscreen()
 }
-var openstreetmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}) // eslint-disable-line no-unused-vars
-var darkmatter = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://carto.com/">Carto</a>'}) // eslint-disable-line no-unused-vars
-var styleblackandwhite = L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}) // eslint-disable-line no-unused-vars
-var styletopo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}) // eslint-disable-line no-unused-vars
-var stylesatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'}) // eslint-disable-line no-unused-vars
-var stylewikipedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>'}) // eslint-disable-line no-unused-vars
+var openstreetmap = L.tileLayer(osmTileServer, {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom: maxZoom,maxNativeZoom: maxNativeZoomOSM}) // eslint-disable-line no-unused-vars
+var darkmatter = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://carto.com/">Carto</a>', maxZoom: maxZoom, maxNativeZoom: 20}) // eslint-disable-line no-unused-vars
+var styletopo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: maxZoom, maxNativeZoom: 17}) // eslint-disable-line no-unused-vars
+var stylesatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community', maxZoom: maxZoom, maxNativeZoom: 19}) // eslint-disable-line no-unused-vars
+var mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}?access_token=' + mBoxKey, {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: maxZoom, maxNativeZoom: 20}) // eslint-disable-line no-unused-vars
+var mapboxDark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/256/{z}/{x}/{y}?access_token=' + mBoxKey, {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: maxZoom, maxNativeZoom: 20}) // eslint-disable-line no-unused-vars
+var mapboxPogo = L.tileLayer('https://api.mapbox.com/styles/v1/anonymous89/ck2uz9d5t09qm1cl66b9giwun/tiles/256/{z}/{x}/{y}@2x?access_token=' + mBoxKey, {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: maxZoom, maxNativeZoom: 20}) // eslint-disable-line no-unused-vars
+var mapboxPogoDark = L.tileLayer('https://api.mapbox.com/styles/v1/anonymous89/ck2xw3j6h0e0v1dqtlcx9c4od/tiles/256/{z}/{x}/{y}@2x?access_token=' + mBoxKey, {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: maxZoom, maxNativeZoom: 20}) // eslint-disable-line no-unused-vars
+// dynamic Pogo Mapbox handling
+var currentHour = new Date().getHours()
+var mapboxPogoDynamic = currentHour >= 6 && currentHour < 19 ? mapboxPogo : mapboxPogoDark // eslint-disable-line no-unused-vars
+
 var googlemapssat = L.gridLayer.googleMutant({type: 'satellite'}) // eslint-disable-line no-unused-vars
 var googlemapsroad = L.gridLayer.googleMutant({type: 'roadmap'}) // eslint-disable-line no-unused-vars
 
@@ -594,7 +600,9 @@ function customTileServer(style){ // If the selected Style is a custom one, serv
     setTileLayer("tileservers")
 }
 function setTileLayer(layername) {
-    if (map.hasLayer(window[_oldlayer])) { map.removeLayer(window[_oldlayer]) }
+    if (map.hasLayer(window[_oldlayer]) && window[_oldlayer] !== window[layername]) {
+        map.removeLayer(window[_oldlayer]) 
+    }
     map.addLayer(window[layername])
     _oldlayer = layername
 }
@@ -7319,19 +7327,29 @@ $(function () {
         }
         if (!forcedTileServer) {
             $.each(data, function (key, value) {
-                var googleMaps
-                if (gmapsKey === '') {
-                    googleMaps = false
-                } else {
+                var googleStyle = key.includes('google') // Google
+                var googleMaps = false
+                if (gmapsKey !== '') {
                     googleMaps = true
+                    if(googleStyle){
+                        styleList.push({
+                            id: key,
+                            text: i8ln(value)
+                        })
+                    }
                 }
-                var googleStyle = value.includes('Google')
-                if (!googleMaps && !googleStyle) {
-                    styleList.push({
-                        id: key,
-                        text: i8ln(value)
-                    })
-                } else if (googleMaps) {
+                var mapBoxStyle = key.includes('mapbox') // MapBox
+                var mapBox = false 
+                if (mBoxKey !== '') {
+                    mapBox = true
+                    if(mapBoxStyle){
+                        styleList.push({
+                            id: key,
+                            text: i8ln(value)
+                        })
+                    }
+                }
+                if(!mapBoxStyle && !googleStyle){ // Other Styles without a Key
                     styleList.push({
                         id: key,
                         text: i8ln(value)
@@ -7349,7 +7367,7 @@ $(function () {
         $selectStyle.on('change', function (e) {
             // If the Selected Style isnt available (anymore), reset to default
             if($selectStyle.val() !== null){
-				selectedStyle = $selectStyle.val()
+                selectedStyle = $selectStyle.val()
                 if (selectedStyle.includes("tileservers")){
                     var matches = selectedStyle.match(/(\d+)/)
                     var tileNumber = parseInt(matches)
@@ -7361,7 +7379,7 @@ $(function () {
             } else {
                 selectedStyle = mapStyle //Default mapstyle
                 setTileLayer(selectedStyle)
-			}
+            }
             // If one of the Multiple Tileservers is selected store the tileservernumber, set the tileservers variable and serve it.
 
             Store.set('map_style', selectedStyle)

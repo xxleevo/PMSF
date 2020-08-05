@@ -2498,8 +2498,10 @@ if (!$noLoadingScreen) {
     var maxClusterRadius = <?= $maxClusterRadius; ?>;
     var spiderfyOnMaxZoom = <?= $spiderfyOnMaxZoom; ?>;
     var osmTileServer = '<?php echo $osmTileServer; ?>';
+    var maxNativeZoomOSM = <?= $maxNativeZoomOSM; ?>;
     var mapStyle = '<?php echo $mapStyle ?>';
     var gmapsKey = '<?php echo $gmapsKey ?>';
+	var mBoxKey = '<?php echo $mBoxKey ?>';
     var hidePokemon = <?php echo $noHidePokemon ? '[]' : $hidePokemon ?>;
     var excludeMinIV = <?php echo $noExcludeMinIV ? '[]' : $excludeMinIV ?>;
     var minIV = <?php echo $noMinIV ? '""' : $minIV ?>;

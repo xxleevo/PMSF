@@ -61,6 +61,9 @@ $locale = "en";                                                     // Display l
 
 $gmapsKey = "";
 
+/* Mapbox */
+$mBoxKey = "";														//mapbox key
+
 /* Google Analytics */
 
 $gAnalyticsId = "";                                                 // "" for empty, "UA-XXXXX-Y" add your Google Analytics tracking ID
@@ -328,6 +331,12 @@ $questscanInfotext = "some text for quest information supporting<br>html";
 $customTileServers = '';
 $forcedTileServer = false;
 
+/* Self-Hosted OSM */
+/* Default Values to use Normal OSM stored here, see example for custom */
+
+$osmTileServer = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+$maxNativeZoomOSM = 19;
+
 /* Style Settings */
 $noCustomCss = true;
 
@@ -355,8 +364,6 @@ $gymStyle = 'ingame';                                               // ingame, s
 
 $noLocationStyle = false;                                           // true/false
 $locationStyle = 'none';                                            // none, google, red, red_animated, blue, blue_animated, yellow, yellow_animated, pokesition, pokeball
-
-$osmTileServer = 'tile.openstreetmap.org';                          // osm tile server (no trailing slash)
 
 $triggerGyms = '[]';                                                // Add Gyms that the OSM-Query doesn't take care of like '["gym_id", "gym_id"]'
 $onlyTriggerGyms = false;                                           // Only show EX-Gyms that are defined in $triggerGyms
