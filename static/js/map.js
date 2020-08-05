@@ -601,9 +601,11 @@ function customTileServer(style){ // If the selected Style is a custom one, serv
 }
 function setTileLayer(layername) {
     if (map.hasLayer(window[_oldlayer]) && window[_oldlayer] !== window[layername]) {
-        map.removeLayer(window[_oldlayer]) 
+        map.removeLayer(window[_oldlayer])
     }
-    map.addLayer(window[layername])
+    if(!layername.includes('blank')){
+        map.addLayer(window[layername])
+    }
     _oldlayer = layername
 }
 
