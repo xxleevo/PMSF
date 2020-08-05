@@ -591,12 +591,12 @@ var googlemapsroad = L.gridLayer.googleMutant({type: 'roadmap'}) // eslint-disab
 
 var tileservers = ''
 if (customTileServers !== null && customTileServers.length > 0 && customTileServers !== ''){
-    tileservers = L.tileLayer(customTileServers[0][1], {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
+    tileservers = L.tileLayer(customTileServers[0][1], {attribution: 'Tileserver',}) // eslint-disable-line no-unused-vars
 }
 function customTileServer(style){ // If the selected Style is a custom one, server it properly.
     var matches = style.match(/(\d+)/)
     var tileNumber = parseInt(matches)
-    tileservers = L.tileLayer(customTileServers[tileNumber][1], {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
+    tileservers = L.tileLayer(customTileServers[tileNumber][1], {attribution: 'Tileserver', maxZoom: maxZoom, maxNativeZoom: 18}) // eslint-disable-line no-unused-vars
     setTileLayer("tileservers")
 }
 function setTileLayer(layername) {
