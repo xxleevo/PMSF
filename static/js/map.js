@@ -429,8 +429,17 @@ function initMap() { // eslint-disable-line no-unused-vars
         preferCanvas: true,
         layers: [weatherLayerGroup, exLayerGroup, gymLayerGroup, stopLayerGroup, liveScanGroup, scanAreaGroup, scanAreaGroupQuest, scanAreaGroupPvp, nestPolygonGroup]
     })
-
-    setTileLayer(Store.get('map_style'))
+    // Check if we have a custom Tileserver Adress in the Store and if so, handle the adress properly.
+    if(Store.get('map_style').includes("tileservers")){
+        if(customTileServers !== '' || customTileServers !== null && customTileServers.length > 0){
+            customTileServer(Store.get('map_style'))
+		} else {
+            Store.set('map_style', mapStyle)
+            setTileLayer(Store.get('map_style'))
+        }
+    } else {
+        setTileLayer(Store.get('map_style'))
+    }
     markers = L.markerClusterGroup({
         disableClusteringAtZoom: disableClusteringAtZoom,
         spiderfyOnMaxZoom: spiderfyOnMaxZoom,
@@ -566,23 +575,25 @@ function toggleFullscreenMap() { // eslint-disable-line no-unused-vars
     map.toggleFullscreen()
 }
 var openstreetmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}) // eslint-disable-line no-unused-vars
-
 var darkmatter = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://carto.com/">Carto</a>'}) // eslint-disable-line no-unused-vars
-
 var styleblackandwhite = L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}) // eslint-disable-line no-unused-vars
-
 var styletopo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}) // eslint-disable-line no-unused-vars
-
 var stylesatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'}) // eslint-disable-line no-unused-vars
-
 var stylewikipedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>'}) // eslint-disable-line no-unused-vars
-
 var googlemapssat = L.gridLayer.googleMutant({type: 'satellite'}) // eslint-disable-line no-unused-vars
 var googlemapsroad = L.gridLayer.googleMutant({type: 'roadmap'}) // eslint-disable-line no-unused-vars
 
 var tileserver = L.tileLayer(customTileServerAddress, {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
-
-
+var tileservers = ''
+if (customTileServers !== null && customTileServers.length > 0 && customTileServers !== ''){
+    tileservers = L.tileLayer(customTileServers[0][1], {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
+}
+function customTileServer(style){ // If the selected Style is a custom one, server it properly.
+    var matches = style.match(/(\d+)/)
+    var tileNumber = parseInt(matches)
+    tileservers = L.tileLayer(customTileServers[tileNumber][1], {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
+    setTileLayer("tileservers")
+}
 function setTileLayer(layername) {
     if (map.hasLayer(window[_oldlayer])) { map.removeLayer(window[_oldlayer]) }
     map.addLayer(window[layername])
@@ -7297,7 +7308,15 @@ $(function () {
     // Load Stylenames, translate entries, and populate lists
     $.getJSON('static/dist/data/mapstyle.min.json').done(function (data) {
         var styleList = []
-
+        // If its a custom Tileserver adress, set the id individually and handle the variable later on
+        if(customTileServers !== null && customTileServers && customTileServers.length > 0){
+            for(var i = 0; i<=customTileServers.length-1; i++){
+                styleList.push({
+                    id: "tileservers" + i,
+                    text: customTileServers[i][0]
+                })
+            }
+        }
         $.each(data, function (key, value) {
             var googleMaps
             if (gmapsKey === '') {
@@ -7318,20 +7337,6 @@ $(function () {
                     id: key,
                     text: i8ln(value)
                 })
-                // TODO: Custom Tileserver Styles
-                // if(customStyles !== null){
-                //    for(var i=0;i<customStyles.length;i++){
-                //        styleList.push({
-                //            id: customStyles[i][0],
-                //            text: i8ln('Tiles') + ' - ' + customStyles[i][1]
-                //        })
-                //    }
-                //    styleList.push({
-                //        id: key,
-                //        text: i8ln(value)
-                //    })
-                // }else{
-                // }
             } else if (!googleMaps && !googleStyle && !customTileServerStyle) {
                 styleList.push({
                     id: key,
@@ -7352,24 +7357,23 @@ $(function () {
             minimumResultsForSearch: Infinity
         })
         $selectStyle.on('change', function (e) {
-            selectedStyle = $selectStyle.val()
-            // TODO detect if a tileserver-style was selected
-            // if(customStyles !== null){
-            //    var isTileserverStyle = false
-            //    for(var i=0;i<customStyles.length;i++){
-            //        if(selectedStyle == customStyles[i][0]){
-            //            isTileserverStyle = true
-            //            console.log('its a tileserver')
-            //        }
-            //    }
-            // }
-            // if(isTileserverStyle){
-            //    var newCustomAdress = customTileServerAddress.replace(customStyles[0][0],selectedStyle)
-            //    tileserver = L.tileLayer(newCustomAdress, {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
-            //    selectedStyle = 'tileserver'
-            // }
-            //
-            setTileLayer(selectedStyle)
+            // If the Selected Style isnt available (anymore), reset to default
+            if($selectStyle.val() !== null){
+				selectedStyle = $selectStyle.val()
+                if (selectedStyle.includes("tileservers")){
+                    var matches = selectedStyle.match(/(\d+)/)
+                    var tileNumber = parseInt(matches)
+                    selectedStyle = "tileservers" + tileNumber
+                    customTileServer(selectedStyle)
+                } else{
+                    setTileLayer(selectedStyle)
+                }
+            } else {
+                selectedStyle = mapStyle //Default mapstyle
+                setTileLayer(selectedStyle)
+			}
+            // If one of the Multiple Tileservers is selected store the tileservernumber, set the tileservers variable and serve it.
+
             Store.set('map_style', selectedStyle)
         })
 

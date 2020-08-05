@@ -1,7 +1,7 @@
 <?php
 if ( ! file_exists( 'config/config.php' ) ) {
-    http_response_code( 500 );
-    die( "<h1>Config file missing</h1><p>Please ensure you have created your config file (<code>config/config.php</code>).</p>" );
+	http_response_code( 500 );
+	die( "<h1>Config file missing</h1><p>Please ensure you have created your config file (<code>config/config.php</code>).</p>" );
 }
 include( 'config/config.php' );
 $zoom        = ! empty( $_GET['zoom'] ) ? $_GET['zoom'] : null;
@@ -23,66 +23,44 @@ $getList = new \Scanner\RDM();
 <head>
     <meta charset="utf-8">
     <title><?= $title ?></title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="PokeMap">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#3b3b3b">
-    <!-- Fav- & Apple-Touch-Icons -->
     <!-- Favicon -->
     <?php
     if ( $faviconPath != "" ) {
-       echo '<link rel="shortcut icon" href="' . $faviconPath . '"
-             type="image/x-icon">';
+       echo '<link rel="shortcut icon" href="' . $faviconPath . '" type="image/x-icon">';
     } else {
-       echo '<link rel="shortcut icon" href="static/appicons/favicon.ico"
-             type="image/x-icon">';
+       echo '<link rel="shortcut icon" href="static/appicons/favicon.ico" type="image/x-icon">';
     }
     ?>
-    <!-- non-retina iPhone pre iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/114x114.png"
-          sizes="57x57">
-    <!-- non-retina iPad pre iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/144x144.png"
-          sizes="72x72">
-    <!-- non-retina iPad iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/152x152.png"
-          sizes="76x76">
-    <!-- retina iPhone pre iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/114x114.png"
-          sizes="114x114">
-    <!-- retina iPhone iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/120x120.png"
-          sizes="120x120">
-    <!-- retina iPad pre iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/144x144.png"
-          sizes="144x144">
-    <!-- retina iPad iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/152x152.png"
-          sizes="152x152">
-    <!-- retina iPhone 6 iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/180x180.png"
-          sizes="180x180">
+    <link rel="apple-touch-icon" href="static/appicons/114x114.png" sizes="57x57"> <!-- non-retina iPhone pre iOS 7 -->
+    <link rel="apple-touch-icon" href="static/appicons/144x144.png" sizes="72x72"> <!-- non-retina iPad pre iOS 7 -->
+    <link rel="apple-touch-icon" href="static/appicons/152x152.png" sizes="76x76"> <!-- non-retina iPad iOS 7 -->
+    <link rel="apple-touch-icon" href="static/appicons/114x114.png" sizes="114x114"> <!-- retina iPhone pre iOS 7 -->
+    <link rel="apple-touch-icon" href="static/appicons/120x120.png" sizes="120x120"> <!-- retina iPhone iOS 7 -->
+    <link rel="apple-touch-icon" href="static/appicons/144x144.png" sizes="144x144"> <!-- retina iPad pre iOS 7 -->
+    <link rel="apple-touch-icon" href="static/appicons/152x152.png" sizes="152x152"> <!-- retina iPad iOS 7 -->
+    <link rel="apple-touch-icon" href="static/appicons/180x180.png" sizes="180x180"> <!-- retina iPhone 6 iOS 7 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.js"></script>
     <?php
     function pokemonFilterImages( $noPokemonNumbers, $onClick = '', $pokemonToExclude = array(), $num = 0 ) {
         global $mons, $copyrightSafe, $iconRepository;
-        if ( empty( $mons ) ) {
+        if (empty($mons)) {
             $json = file_get_contents( 'static/dist/data/pokemon.min.json' );
             $mons = json_decode( $json, true );
         }
         echo '<div class="pokemon-list-cont" id="pokemon-list-cont-' . $num . '"><input type="hidden" class="search-number" value="' . $num . '" /><input class="search search-input" placeholder="' . i8ln( "Search Name, ID & Type" ) . '" /><div class="pokemon-list list">';
-        $i = 0;
-        $z = 0;
+        $i = $z = 0;
         foreach ( $mons as $k => $pokemon ) {
             $type = '';
             $name = $pokemon['name'];
             foreach ( $pokemon['types'] as $t ) {
                 $type .= $t['type'];
             }
-
             if ( ! in_array( $k, $pokemonToExclude ) ) {
                 if ( $k > 890 ) {
                     break;
@@ -94,16 +72,15 @@ $getList = new \Scanner\RDM();
                 } else {
                     $id = $k;
 				}
-				if ( ! $copyrightSafe ) {
+				if (!$copyrightSafe) {
                     echo '<span class="pokemon-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . i8ln( $type ) . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="' . $iconRepository . 'pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
 				} else {
                     echo '<span class="pokemon-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . i8ln( $type ) . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="static/icons-safe/pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
                 }
-                if ( ! $noPokemonNumbers ) {
+                if (!$noPokemonNumbers) {
                     echo "<span class='pokemon-number'>" . $k . "</span>";
                 }
                 echo "</span>";
-
             }
         }
         echo '</div></div>';
@@ -116,30 +93,27 @@ $getList = new \Scanner\RDM();
         </script>
         <?php
     }
-
-    function itemFilterImages( $noItemNumbers, $onClick = '', $itemsToExclude = array(), $num = 0 ) {
+    function itemFilterImages($noItemNumbers, $onClick = '', $itemsToExclude = array(), $num = 0) {
         global $items, $copyrightSafe, $iconRepository, $rewardsIconsRepository;
-        if ( empty( $items ) ) {
+        if (empty($items)) {
             $json = file_get_contents( 'static/dist/data/items.min.json' );
             $items = json_decode( $json, true );
         }
         echo '<div class="item-list-cont" id="item-list-cont-' . $num . '"><input type="hidden" class="search-number" value="' . $num . '" /><input class="search search-input" placeholder="' . i8ln( "Search Name & ID" ) . '" /><div class="item-list list">';
-        $i = 0;
-        $z = 0;
-        foreach ( $items as $k => $item ) {
+        $i = $z = 0;
+        foreach ($items as $k => $item) {
             $name = $item['name'];
 
-            if ( ! in_array( $k, $itemsToExclude ) ) {
-		if ( ! $copyrightSafe ) {
+            if (!in_array( $k, $itemsToExclude)) {
+				if (!$copyrightSafe) {
                     echo '<span class="item-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="' . $rewardsIconsRepository . 'rewards/reward_' . $k . '_1.png" style="width:48px;height:48px;"/>';
-		} else {
+				} else {
                     echo '<span class="item-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="static/icons-safe/rewards/reward_' . $k . '_1.png" style="width:48px;height:48px;"/>';
                 }
-                if ( ! $noItemNumbers ) {
+                if (!$noItemNumbers) {
                     echo '<span class="item-number">' . $k . '</span>';
                 }
                 echo "</span>";
-
             }
         }
         echo '</div></div>';
@@ -152,16 +126,14 @@ $getList = new \Scanner\RDM();
         </script>
         <?php
     }
-    function gruntFilterImages($noGruntNumbers, $onClick = '', $gruntsToExclude = array(), $num = 0)
-    {
+    function gruntFilterImages($noGruntNumbers, $onClick = '', $gruntsToExclude = array(), $num = 0) {
         global $grunts;
         if (empty($grunts)) {
             $json = file_get_contents('static/dist/data/grunttype.min.json');
             $grunts = json_decode($json, true);
         }
         echo '<div class="grunt-list-cont" id="grunt-list-cont-' . $num . '"><input type="hidden" class="search-number" value="' . $num . '" /><input class="search search-input" placeholder="' . i8ln("Search Name & ID") . '" /><div class="grunt-list list">';
-        $i = 0;
-        $z = 0;
+        $i = $z = 0;
         foreach ($grunts as $g => $grunt) {
             $type = $grunt['type'];
             $gender = $grunt['grunt'];
@@ -182,16 +154,14 @@ $getList = new \Scanner\RDM();
         </script>
         <?php
     }
-	function raidbossFilterImages($noRaidfilterListNumbers, $onClick = '', $raidbossesToExclude = array(), $num = 0)
-    {
+	function raidbossFilterImages($noRaidfilterListNumbers, $onClick = '', $raidbossesToExclude = array(), $num = 0){
         global $raids, $copyrightSafe, $iconRepository;
         if (empty($raids)) {
             $json = file_get_contents('static/dist/data/pokemon.min.json');
             $raidbosses = json_decode($json, true);
         }
         echo '<div class="raidboss-list-cont" id="raidboss-list-cont-' . $num . '"><input type="hidden" class="search-number" value="' . $num . '" /><input class="search search-input" placeholder="' . i8ln("Search Name & ID") . '" /><div class="raidboss-list list">';
-        $i = 0;
-        $z = 0;
+        $i = $z = 0;
         foreach ($raidbosses as $rb => $raidboss) {
             $type = '';
             $name = $raidboss['name'];
@@ -199,22 +169,22 @@ $getList = new \Scanner\RDM();
                 $type .= $t['type'];
             }
             if (! in_array($rb, $raidbossesToExclude)) {
-                if ( $rb > 649 ) {
+                if ($rb > 649) {
                     break;
 				}
-				if ( $rb <= 9 ) {
+				if ($rb <= 9) {
                     $id = "00$rb";
-                } else if ( $rb <= 99 ) {
+                } else if ($rb <= 99) {
                     $id = "0$rb";
                 } else {
                     $id = $rb;
 				}
-				if ( ! $copyrightSafe ) {
+				if (!$copyrightSafe) {
                     echo '<span class="raidboss-icon-sprite" data-value="' . $rb . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . i8ln( $type ) . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">' . $id . '</span><img src="' . $iconRepository . 'pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
 				} else {
                     echo '<span class="raidboss-icon-sprite" data-value="' . $rb . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . i8ln( $type ) . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">' . $id . '</span><img src="static/icons-safe/pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
                 }
-                if (! $noRaidfilterListNumbers) {
+                if (!$noRaidfilterListNumbers) {
                     echo '<span class="raidboss-number">' . $rb . '</span>';
                 }
                 echo "</span>";
@@ -229,17 +199,15 @@ $getList = new \Scanner\RDM();
         </script>
         <?php
     }
-	function raidEggsFilterImages($noRaidfilterListNumbers, $onClick = '', $raidEggsToExclude = array(), $num = 0)
-    {
+	function raidEggsFilterImages($noRaidfilterListNumbers, $onClick = '', $raidEggsToExclude = array(), $num = 0){
         global $raids, $copyrightSafe, $iconRepository;
         echo '<div class="raidbeggs-list-cont" id="raideggs-list-cont-' . $num . '"><input type="hidden" class="search-number" value="' . $num . '" /><input class="search search-input" placeholder="' . i8ln("Search Level") . '" /><div class="raideggs-list list">';
-        $i = 0;
-        $z = 0;
+        $i = $z = 0;
 		for ($e = 1; $e <= 5; $e++) {
 			$level = $e;
-            if (! in_array($e, $raidEggsToExclude)) {
+            if (!in_array($e, $raidEggsToExclude)) {
                 echo '<span class="raideggs-icon-sprite" data-value="' . $e . '" onclick="' . $onClick . '"><span style="display:none" class="level">' . $level . '</span><img src="static/raids/egg_' . $level . '.png" style="width:48px;height:56px;"/>';
-                if (! $noRaidfilterListNumbers) {
+                if (!$noRaidfilterListNumbers) {
                     echo '<span class="raidboss-number">' . $e . '</span>';
                 }
                 echo "</span>";
@@ -254,36 +222,27 @@ $getList = new \Scanner\RDM();
         </script>
         <?php
     }
-    ?>
-
-    <?php
-    if ( $gAnalyticsId != "" ) {
-        echo '<!-- Google Analytics -->
-            <script>
-                window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-                ga("create", "' . $gAnalyticsId . '", "auto");
-                ga("send", "pageview");
-            </script>
-            <script async src="https://www.google-analytics.com/analytics.js"></script>
-            <!-- End Google Analytics -->';
+    if ( $gAnalyticsId != "" ) { // Google Analytics
+        echo '<script>
+				window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+				ga("create", "' . $gAnalyticsId . '", "auto");
+				ga("send", "pageview");
+			</script>
+            <script async src="https://www.google-analytics.com/analytics.js"></script>';
     }
-    ?>
-    <?php
-    if ( $piwikUrl != "" && $piwikSiteId != "" ) {
-        echo '<!-- Piwik -->
-            <script type="text/javascript">
-              var _paq = _paq || [];
-              _paq.push(["trackPageView"]);
-              _paq.push(["enableLinkTracking"]);
-              (function() {
-                var u="//' . $piwikUrl . '/";
-                _paq.push(["setTrackerUrl", u+"piwik.php"]);
-                _paq.push(["setSiteId", "' . $piwikSiteId . '"]);
-                var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
-                g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
-              })();
-            </script>
-            <!-- End Piwik Code -->';
+    if ( $piwikUrl != "" && $piwikSiteId != "" ) { // Piwik
+        echo '<script type="text/javascript">
+				var _paq = _paq || [];
+				_paq.push(["trackPageView"]);
+				_paq.push(["enableLinkTracking"]);
+				(function() {
+					var u="//' . $piwikUrl . '/";
+					_paq.push(["setTrackerUrl", u+"piwik.php"]);
+					_paq.push(["setSiteId", "' . $piwikSiteId . '"]);
+					var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
+					g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+				})();
+            </script>';
     }
     ?>
     <script>
@@ -293,10 +252,8 @@ $getList = new \Scanner\RDM();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css">
     <link rel="stylesheet" href="node_modules/datatables/media/css/jquery.dataTables.min.css">
     <script src="static/js/vendor/modernizr.custom.js"></script>
-    <!-- Toastr -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> <!-- Toastr -->
+    <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" /> <!-- Leaflet -->
     <link rel="stylesheet" href="static/dist/css/app.min.css">
     <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css" />
@@ -306,8 +263,7 @@ $getList = new \Scanner\RDM();
 			echo '<link rel="stylesheet" href="static/css/custom.css?' . time() . '">';
 		}
 	} ?>
-	<!-- font awesome icons -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> <!-- font awesome -->
 </head>
 <?php
 if (!$noLoadingScreen) {
@@ -318,106 +274,90 @@ if (!$noLoadingScreen) {
     echo $loadingStyle . '&nbsp;' . i8ln('Loading') . '...</p></app-root>';
 } ?>
 <body id="top">
-<div class="wrapper">
-    <!-- Header -->
-    <header id="header" style = "background-image: <?php echo $overlayDesign ?>">
-        <a href="#nav"><b><span class="label" style="color:white"><?php echo i8ln('Menu') ?></span></b></a>
-
-        <h1><a href="#"><?= $title ?><img src="<?= $raidmapLogo ?>" height="35" width="auto" border="0" style="float: right; margin-left: 5px; margin-top: 10px;"></a></h1>
-        <?php
-        if ( $discordUrl != "" ) {
-            echo '<a href="' . $discordUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle;padding:0 2px;">
-            <img src="static/images/header/discord126x.png" border="0" style="float: right; width: 42px; height: auto;">
-        </a>';
-        }
-        if ( $telegramUrl != "" ) {
-            echo '<a href="' . $telegramUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle;padding:0 2px;">
-            <img src="static/images/header/telegram126x.png" border="0" style="float: right; width: 42px; height: auto;">
-        </a>';
-        }
-        if ( $paypalUrl != "" ) {
-            echo '<a href="' . $paypalUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle; padding:0 2px;">
-            <img src="static/images/header/paypal126x.png" border="0" alt="Donate" style="float: right;width: 42px; height: auto;">
-        </a>';
-        }
-        ?>
-        <?php if ( ! $noWeatherOverlay ) {
-            ?>
-            <div id="currentWeather"></div>
-            <?php
-        } ?>
-        
-        <?php
-        if ($noNativeLogin === false || $noDiscordLogin === false) {
-            if (isset($_COOKIE["LoginCookie"])) {
-                if (validateCookie($_COOKIE["LoginCookie"]) === false) {
-                    header("Location: .");
-                }
-            }
-            if (!empty($_SESSION['user']->id)) {
-                $info = $manualdb->query(
-                    "SELECT expire_timestamp FROM users WHERE id = :id AND login_system = :login_system", [
-                        ":id" => $_SESSION['user']->id,
-                        ":login_system" => $_SESSION['user']->login_system
-                    ]
-                )->fetch();
-
-                $_SESSION['user']->expire_timestamp = $info['expire_timestamp'];
-
-			if (($noNativeLogin === false || $noDiscordLogin === false) && $info['expire_timestamp'] > time()) {
-				//If the session variable does not exist, presume that user suffers from a bug and access config is not used.
-				//If you don't like this, help me fix it.
-				if (!isset($_SESSION['already_refreshed'])) {
-			
-					//Number of seconds to refresh the page after.
-					$refreshAfter = 1;
-			
-					//Send a Refresh header.
-					header('Refresh: ' . $refreshAfter);
-			
-					//Set the session variable so that we don't refresh again.
-					$_SESSION['already_refreshed'] = true; 
+	<div class="wrapper">
+		<!-- Header -->
+		<header id="header" style = "background-image: <?php echo $overlayDesign ?>">
+			<a href="#nav"><b><span class="label" style="color:white"><?php echo i8ln('Menu') ?></span></b></a>
+			<h1><a href="#"><?= $title ?><img src="<?= $raidmapLogo ?>" height="35" width="auto" border="0" style="float: right; margin-left: 5px; margin-top: 10px;"></a></h1>
+			<?php
+			if ( $discordUrl != "" ) {
+				echo '<a href="' . $discordUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle;padding:0 2px;">
+					<img src="static/images/header/discord126x.png" border="0" style="float: right; width: 42px; height: auto;">
+				</a>';
+			}
+			if ( $telegramUrl != "" ) {
+				echo '<a href="' . $telegramUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle;padding:0 2px;">
+					<img src="static/images/header/telegram126x.png" border="0" style="float: right; width: 42px; height: auto;">
+				</a>';
+			}
+			if ( $paypalUrl != "" ) {
+				echo '<a href="' . $paypalUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle; padding:0 2px;">
+					<img src="static/images/header/paypal126x.png" border="0" alt="Donate" style="float: right;width: 42px; height: auto;">
+				</a>';
+			}
+			if (!$noWeatherOverlay) {
+				echo '<div id="currentWeather"></div>';
+			}
+			if ($noNativeLogin === false || $noDiscordLogin === false) {
+				if (isset($_COOKIE["LoginCookie"])) {
+					if (validateCookie($_COOKIE["LoginCookie"]) === false) {
+						header("Location: .");
+					}
+				}
+				if (!empty($_SESSION['user']->id)) {
+					$info = $manualdb->query(
+						"SELECT expire_timestamp FROM users WHERE id = :id AND login_system = :login_system", [
+							":id" => $_SESSION['user']->id,
+							":login_system" => $_SESSION['user']->login_system
+						]
+					)->fetch();
+	
+					$_SESSION['user']->expire_timestamp = $info['expire_timestamp'];
+	
+					if (($noNativeLogin === false || $noDiscordLogin === false) && $info['expire_timestamp'] > time()) {
+					//If the session variable does not exist, presume that user suffers from a bug and access config is not used.
+					//If you don't like this, help me fix it.
+						if (!isset($_SESSION['already_refreshed'])) {
+							$refreshAfter = 2; //Number of seconds to refresh the page after.
+							header('Refresh: ' . $refreshAfter); //Send a Refresh header.
+							$_SESSION['already_refreshed'] = true; //Set the session variable so that we don't refresh again.
+						}
+					}
+	
+					if (!empty($_SESSION['user']->updatePwd) && $_SESSION['user']->updatePwd === 1) {
+						header("Location: ./user");
+						die();
+					}
+	
+					if ($info['expire_timestamp'] < time()) {
+						header('Location: ./logout.php');
+					}
+					$userAccessLevel = $manualdb->get( "users", [ 'access_level' ], [ 'expire_timestamp' => $_SESSION['user']->expire_timestamp ] );
+					if ($userAccessLevel['access_level'] >= 3) {
+						echo "<span style='color: green;'><i class='fa fa-check fa-fw'></i><i class='fa fa-unlock-alt fa-fw' style='font-weight:normal;'></i></span>";
+					} elseif ($userAccessLevel['access_level'] == 2) {
+						echo "<span style='color: green;'><i class='fa fa-check fa-fw'></i><i class='fa fa-pencil fa-fw' style='font-weight:normal;'></i></span>";
+					} elseif ($userAccessLevel['access_level'] == 1) {
+						echo "<span style='color: green;'><i class='fa fa-check fa-fw'></i></span>";
+					} elseif ($userAccessLevel['access_level'] == 0) {
+						echo "<span style='color: yellow;'><i class='fa fa-check fa-fw'></i></span>";
+					} else{
+						echo "<span style='color: red;'><i class='fa fa-times fa-fw'></i></span>";
+					}
+				} elseif ($forcedDiscordLogin === true) {
+					header("Location: ./discord-login");
+				} else {
+					echo "<a href='./user' style='display:inline;border: 1px solid white;border-radius:6px;padding:2px 6px 2px 6px;font-weight:bold;'> Login </a>";
 				}
 			}
-				
-                if (!empty($_SESSION['user']->updatePwd) && $_SESSION['user']->updatePwd === 1) {
-                    header("Location: ./user");
-                    die();
-                }
-                
-				$color = "red";
-                if ($info['expire_timestamp'] > time()) {
-                    $color = "green";
-                } else {
-                    header('Location: ./logout.php');
-                }
-				$userAccessLevel = $manualdb->get( "users", [ 'access_level' ], [ 'expire_timestamp' => $_SESSION['user']->expire_timestamp ] );
-				
-				if ($userAccessLevel['access_level'] >= 3) {
-				echo "<span style='color: green;'><i class='fa fa-check fa-fw'></i><i class='fa fa-unlock-alt fa-fw' style='font-weight:normal;'></i></span>";
-				} elseif ($userAccessLevel['access_level'] == 2) {
-				echo "<span style='color: green;'><i class='fa fa-check fa-fw'></i><i class='fa fa-pencil fa-fw' style='font-weight:normal;'></i></span>";
-				} elseif ($userAccessLevel['access_level'] == 1) {
-				echo "<span style='color: green;'><i class='fa fa-check fa-fw'></i></span>";
-				} elseif ($userAccessLevel['access_level'] == 0) {
-				echo "<span style='color: yellow;'><i class='fa fa-check fa-fw'></i></span>";
-				} else{
-				echo "<span style='color: red;'><i class='fa fa-times fa-fw'></i></span>";
-				}
-            } elseif ($forcedDiscordLogin === true) {
-                header("Location: ./discord-login");
-            } else {
-                echo "<a href='./user' style='display:inline;border: 1px solid white;border-radius:6px;padding:2px 6px 2px 6px;font-weight:bold;'> Login </a>";
-            }
-        }
-        ?>
-        <?php if ( ! $noStatsToggle ) {
+			if ( ! $noStatsToggle ) {
             ?>
-        <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span
-                class="label"><?php echo i8ln( 'Stats' ) ?></span></a>
+			<a href="#stats" id="statsToggle" class="statsNav" style="float: right;">
+				<span class="label"><?php echo i8ln( 'Stats' ) ?></span>
+			</a>
             <?php
-        } ?>
-    </header>
+			} ?>
+		</header>
     <!-- NAV -->
     <nav id="nav">
         <div id="nav-accordion">
@@ -2708,6 +2648,7 @@ if (!$noLoadingScreen) {
 	var hideRaidEggs = <?php echo $noRaids ? '[]' : $hideRaidEggs ?>;
     var noCustomTileServer = <?php echo $noCustomTileServer === true ? 'true' : 'false' ?>;
     var customTileServerAddress = '<?php echo $customTileServerAddress ?>';
+	var customTileServers = <?php echo json_encode($customTileServers);?>;
     var forcedTileServer = <?php echo $forcedTileServer === true ? 'true' : 'false' ?>;
     var pokemonLabelStyle = '<?php echo $pokemonLabelStyle ?>';
 	var useIconRepoPokeRewards = <?php echo $usePokeRewardsFromIconRepository === true ? 'true' : 'false' ?>;

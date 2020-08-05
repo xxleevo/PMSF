@@ -317,6 +317,12 @@ $deviceOfflineAfterSeconds = 300;                                   // Mark scan
 
 $noCustomTileServer = true;                                        // Enable/Disable Custom TileServer
 $customTileServerAddress = '';                                      // TileServer URL: http://ipAddress:port/tile/klokantech-basic/{z}/{x}/{y}/1/png
+$customTileServers = '';											// Option for Tileservers (multiple layers supported) - For example check below
+//$customTileServers = [
+//						["Tileserver Basic","http://ipAddress:port/tile/klokantech-basic/{z}/{x}/{y}/1/png"],
+//						["Tileserver Bright","http://ipAddress:port/tile/osm-bright/{z}/{x}/{y}/1/png"]
+//					];
+
 $forcedTileServer = false;
 
 /*---------Style Settings---------*/
