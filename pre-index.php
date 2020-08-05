@@ -1646,7 +1646,7 @@ if (!$noLoadingScreen) {
                 echo '<h3 style="font-weight: bold"><i class="fa fa-map-o fa-fw"></i>&nbsp;' . i8ln("Style") . '</h3>
 				<div>';
             }
-            if ( !$noMapStyle && !$forcedTileServer) {
+            if ( !$noMapStyle) {
                 echo '<div class="form-control switch-container">
 					<h3>' . i8ln("Map Style") . '</h3>
 					<select id="map-style"></select>
@@ -2646,8 +2646,6 @@ if (!$noLoadingScreen) {
 	var raidbossFilterlist = <?php echo $noRaidfilterList === true ? 'true' : $raidbossFilterlist ?>;
 	var filterByRaidlevel = <?php echo $noFilterByRaidlevel === true ? 'true' : $filterByRaidlevel ?>;
 	var hideRaidEggs = <?php echo $noRaids ? '[]' : $hideRaidEggs ?>;
-    var noCustomTileServer = <?php echo $noCustomTileServer === true ? 'true' : 'false' ?>;
-    var customTileServerAddress = '<?php echo $customTileServerAddress ?>';
 	var customTileServers = <?php echo json_encode($customTileServers);?>;
     var forcedTileServer = <?php echo $forcedTileServer === true ? 'true' : 'false' ?>;
     var pokemonLabelStyle = '<?php echo $pokemonLabelStyle ?>';

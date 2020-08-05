@@ -280,7 +280,7 @@ if (location.search.indexOf('login=false') > 0) {
     openAccessDeniedModal()
 }
 if (forcedTileServer) {
-    Store.set('map_style', 'tileserver')
+    Store.set('map_style', 'tileservers0')
 }
 function previewPoiImage(event) { // eslint-disable-line no-unused-vars
     var form = $(event.target).parent().parent()
@@ -583,7 +583,6 @@ var stylewikipedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y
 var googlemapssat = L.gridLayer.googleMutant({type: 'satellite'}) // eslint-disable-line no-unused-vars
 var googlemapsroad = L.gridLayer.googleMutant({type: 'roadmap'}) // eslint-disable-line no-unused-vars
 
-var tileserver = L.tileLayer(customTileServerAddress, {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
 var tileservers = ''
 if (customTileServers !== null && customTileServers.length > 0 && customTileServers !== ''){
     tileservers = L.tileLayer(customTileServers[0][1], {attribution: 'Tileserver'}) // eslint-disable-line no-unused-vars
@@ -7308,6 +7307,7 @@ $(function () {
     // Load Stylenames, translate entries, and populate lists
     $.getJSON('static/dist/data/mapstyle.min.json').done(function (data) {
         var styleList = []
+
         // If its a custom Tileserver adress, set the id individually and handle the variable later on
         if(customTileServers !== null && customTileServers && customTileServers.length > 0){
             for(var i = 0; i<=customTileServers.length-1; i++){
@@ -7317,38 +7317,28 @@ $(function () {
                 })
             }
         }
-        $.each(data, function (key, value) {
-            var googleMaps
-            if (gmapsKey === '') {
-                googleMaps = false
-            } else {
-                googleMaps = true
-            }
-            var googleStyle = value.includes('Google')
-            var customTileServer
-            if (noCustomTileServer) {
-                customTileServer = false
-            } else {
-                customTileServer = true
-            }
-            var customTileServerStyle = value.includes('Tileserver')
-            if (customTileServer && customTileServerStyle) {
-                styleList.push({
-                    id: key,
-                    text: i8ln(value)
-                })
-            } else if (!googleMaps && !googleStyle && !customTileServerStyle) {
-                styleList.push({
-                    id: key,
-                    text: i8ln(value)
-                })
-            } else if (googleMaps) {
-                styleList.push({
-                    id: key,
-                    text: i8ln(value)
-                })
-            }
-        })
+        if (!forcedTileServer) {
+            $.each(data, function (key, value) {
+                var googleMaps
+                if (gmapsKey === '') {
+                    googleMaps = false
+                } else {
+                    googleMaps = true
+                }
+                var googleStyle = value.includes('Google')
+                if (!googleMaps && !googleStyle) {
+                    styleList.push({
+                        id: key,
+                        text: i8ln(value)
+                    })
+                } else if (googleMaps) {
+                    styleList.push({
+                        id: key,
+                        text: i8ln(value)
+                    })
+                }
+            })
+        }
 
         // setup the stylelist
         $selectStyle.select2({

@@ -325,8 +325,7 @@ $questscanInfotext = "some text for quest information supporting<br>html";
 /* Custom Tileserver.  */
 // (Only tested with https://github.com/123FLO321/SwiftTileserverCache ) */
 
-$noCustomTileServer = true;                                         // Enable/Disable Custom TileServer
-$customTileServerAddress = '';                                      // TileServer URL: http://ipAddress:port/tile/klokantech-basic/{z}/{x}/{y}/1/png
+$customTileServers = '';
 $forcedTileServer = false;
 
 /* Style Settings */

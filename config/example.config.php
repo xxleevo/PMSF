@@ -316,24 +316,24 @@ $deviceOfflineAfterSeconds = 300;                                   // Mark scan
 // (Only tested with https://github.com/123FLO321/SwiftTileserverCache ) */
 
 $noCustomTileServer = true;                                        // Enable/Disable Custom TileServer
-$customTileServerAddress = '';                                      // TileServer URL: http://ipAddress:port/tile/klokantech-basic/{z}/{x}/{y}/1/png
 $customTileServers = '';											// Option for Tileservers (multiple layers supported) - For example check below
 //$customTileServers = [
 //						["Tileserver Basic","http://ipAddress:port/tile/klokantech-basic/{z}/{x}/{y}/1/png"],
 //						["Tileserver Bright","http://ipAddress:port/tile/osm-bright/{z}/{x}/{y}/1/png"]
 //					];
 
-$forcedTileServer = false;
+$forcedTileServer = false;											// if true, only tileservers from above will be shown. Default forced layer will be the first one
 
 /*---------Style Settings---------*/
-$noPokemonLabelStyles = true;                                   //enables/disables the choice for users to set their prefered pokemonLabel style
-$pokemonLabelStyle = 'v2';                                 // classic, v1, v2,v3(New Years theme)
+$noPokemonLabelStyles = true;                                   	//enables/disables the choice for users to set their prefered pokemonLabel style
+$pokemonLabelStyle = 'v2';                                			// classic, v1, v2,v3(New Years theme)
 
 $noCostumeIcons = true;												// enable/disable costume forms (label only) (Note: only use icon-sets with costumes if using this)
 
 $noMapStyle = false;												// Enables/Disables Mapstyle changing
 $mapStyle = 'openstreetmap';                                        // openstreetmap, darkmatter, styleblackandwhite, styletopo, stylesatellite, stylewikipedia, (tileserver)
                                                                     // For Tileserver adresses also possible: tileservers1, tileservers2 [...]
+
 $noDirectionProvider = false;										// Enables/Disables MapProvider changing
 $directionProvider = 'google';                                      // google, waze, apple, bing, google_pin
 
