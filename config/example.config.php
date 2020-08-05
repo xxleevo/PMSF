@@ -333,7 +333,7 @@ $noCostumeIcons = true;												// enable/disable costume forms (label only) 
 
 $noMapStyle = false;												// Enables/Disables Mapstyle changing
 $mapStyle = 'openstreetmap';                                        // openstreetmap, darkmatter, styleblackandwhite, styletopo, stylesatellite, stylewikipedia, (tileserver)
-
+                                                                    // For Tileserver adresses also possible: tileservers1, tileservers2 [...]
 $noDirectionProvider = false;										// Enables/Disables MapProvider changing
 $directionProvider = 'google';                                      // google, waze, apple, bing, google_pin
 
