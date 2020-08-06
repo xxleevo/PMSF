@@ -797,6 +797,10 @@
 	border: 1px solid lightgray;
 	text-align: center;
 	color: lightgray;
+	clear: both;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 3px 0px;
   }
   .area-container{
     padding:0!important;
@@ -813,6 +817,7 @@
       border-top: 1px solid #d8d8d8;
       border-left: 1px solid #d8d8d8;
       border-right: 1px solid #d8d8d8;
+	  line-height: 24px;
       &:hover{
         background:grey;
         a{
