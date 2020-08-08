@@ -147,7 +147,8 @@ $noWeatherIcons = false;
 $enableWeatherIcons = 'false';                                 // true/false
 $noPokeIVIcons = false;										   // true/false
 $enablePokeIVIcons = 'false';                                  // true/false
-
+$noPokePVPStats = false;
+$enablePokePVPStats = 'false';
 
 /* Hide Specific content */
 $noGymScannedText = false;

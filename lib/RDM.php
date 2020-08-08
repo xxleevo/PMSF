@@ -15,7 +15,7 @@ class RDM extends Scanner
 
         global $noHighLevelData;
         if (!$noHighLevelData) {
-            $select .= ", weight,size AS height, atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level, capture_1 AS catch_pokeball, capture_2 AS catch_superball,capture_3 AS catch_hyperball";
+            $select .= ", weight,size AS height, atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level, capture_1 AS catch_pokeball, capture_2 AS catch_superball,capture_3 AS catch_hyperball, pvp_rankings_great_league as pvp_gl, pvp_rankings_ultra_league as pvp_ul";
         }
 		
         $conds[] = "lat > :swLat AND lon > :swLng AND lat < :neLat AND lon < :neLng AND expire_timestamp > :time";

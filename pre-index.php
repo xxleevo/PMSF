@@ -509,6 +509,20 @@ if (!$noLoadingScreen) {
                                 </div>
                             </div>
                             <?php
+                        }
+                        if (! $noHighLevelData && ! $noPokePVPStats ) {
+                            ?>
+                            <div class="form-control switch-container">
+                                <font size="3"><?php echo i8ln( 'PVP Stats' ) ?></font>
+                                <div class="onoffswitch">
+                                    <input id="pvp-stats-switch" type="checkbox" name="pvp-stats-switch" class="onoffswitch-checkbox">
+                                    <label class="onoffswitch-label" for="pvp-stats-switch">
+                                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                                        <span class="switch-handle"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <?php
                         } ?>
                         <div class="form-row min-stats-row">
                             <?php
@@ -2662,6 +2676,8 @@ if (!$noLoadingScreen) {
 	var denyRaidLevels = <?php echo $noRaids ? '[1,2,3,4,5]' : $denyRaidLevels ?>;
     var enableLiveScan = <?php echo $noLiveScanLocation ? 'false' : $enableLiveScan ?>;
     var deviceOfflineAfterSeconds = <?php echo $deviceOfflineAfterSeconds ?>;
+    var noPokePVPStats = <?php echo $noPokePVPStats === true ? 'true' : 'false' ?>;
+    var enablePokePVPStats = <?php echo $noPokePVPStats ? 'false' : $enablePokePVPStats ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

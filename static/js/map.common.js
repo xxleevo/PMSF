@@ -329,6 +329,11 @@ var StoreOptions = {
             default: enablePokeIVIcons,
             type: StoreTypes.Boolean
         },
+    'showPokePVPStats':
+        {
+            default: enablePokePVPStats,
+            type: StoreTypes.Boolean
+        },
     'showSpawnpoints':
         {
             default: enableSpawnpoints,

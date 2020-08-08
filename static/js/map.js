@@ -40,6 +40,7 @@ var $switchExEligible
 var $switchBattleStatus
 var $switchWeatherIcons
 var $switchPokeIVIcons
+var $switchPokePVPStats
 var $switchBadgeMode
 var $questsExcludePokemon
 var $questsExcludeItem
@@ -970,6 +971,7 @@ function initSidebar() {
     $('#badge-mode-wrapper').toggle(Store.get('showGyms'))
     $('#weather-icon-switch').prop('checked', Store.get('showWeatherIcons'))
     $('#iv-icon-switch').prop('checked', Store.get('showIVIcons'))
+    $('#pvp-stats-switch').prop('checked', Store.get('showPokePVPStats'))
     $('#gym-sidebar-wrapper').toggle(Store.get('showGyms') || Store.get('showRaids'))
     $('#gyms-filter-wrapper').toggle(Store.get('showGyms'))
     $('#team-gyms-only-switch').val(Store.get('showTeamGymsOnly'))
@@ -1162,7 +1164,44 @@ function pokemonLabel(item) {
     var level = item['level']
     var formStr = ''
     var labelStyle = Store.get('pokemonLabelStyle')
-
+    var pvpGreatLeague = JSON.parse(item['pvp_gl'])
+    var pvpUltraLeague = JSON.parse(item['pvp_ul'])
+	var pvpIncludeEvolutions = true
+	
+	var pvpMonStringGreat = ''
+	var pvpMonStringUltra = ''
+	if(Store.get('showPokePVPStats') === true && pvpGreatLeague !== null && pvpUltraLeague !== null && pvpGreatLeague !== undefined && pvpUltraLeague !== undefined){
+		// We have pvp data - parse them to everything we need
+		var iterationLength = pvpIncludeEvolutions ? pvpGreatLeague.length : 1 // If Allow to include evolutions, set length accordingly, if not, set to 1
+		
+		//Great League Iteration
+		pvpMonStringGreat = '<div style="font-size:9px;">'
+		for(var i = 0; i < iterationLength; i++){
+			if(pvpGreatLeague[i]['rank'] !== null){
+				pvpMonStringGreat += 
+					'<div>Pokemon No.' + pvpGreatLeague[i]['pokemon'] + '-' + pvpGreatLeague[i]['form'] + ': ' + parseFloat(pvpGreatLeague[i]['percentage'] * 100).toFixed(1) + '%(#' + pvpGreatLeague[i]['rank'] + ') @ ' + pvpGreatLeague[i]['cp'] + i8ln('CP') + ', ' + i8ln('Level') + pvpGreatLeague[i]['level'] + '</div>'
+			} else {
+				pvpMonStringGreat += 
+					'<div>Pokemon No. ' + pvpGreatLeague[i]['pokemon'] + '-' + pvpGreatLeague[i]['form'] + ': ' + i8ln('CP too high') + '</div>'
+			}
+		}
+		pvpMonStringGreat += '</div>'
+		
+		//Ultra League Iteration
+		pvpMonStringUltra = '<div style="font-size:9px;">'
+		for(var i = 0; i < iterationLength; i++){
+			if(pvpUltraLeague[i]['rank'] !== null){
+				pvpMonStringUltra += 
+					'<div>Pokemon No.' + pvpUltraLeague[i]['pokemon'] + '-' + pvpUltraLeague[i]['form'] + ': ' + parseFloat(pvpUltraLeague[i]['percentage'] * 100).toFixed(1) + '%(#' + pvpUltraLeague[i]['rank'] + ') @ ' + pvpUltraLeague[i]['cp'] + i8ln('CP') + ', ' + i8ln('Level') + pvpUltraLeague[i]['level'] + '</div>'
+			} else {
+				pvpMonStringUltra += 
+					'<div>Pokemon No. ' + pvpUltraLeague[i]['pokemon'] + '-' + pvpUltraLeague[i]['form'] + ': ' + i8ln('CP too high') + '</div>'
+			}
+		}
+		pvpMonStringUltra += '</div>'
+		
+	}
+		
     if (form === 0 || form === '0' || form == null) {
         formStr = '00'
     } else {
@@ -1239,7 +1278,7 @@ function pokemonLabel(item) {
 
         // Catch Probability
         var catchChances = ''
-        if (item['catch_pokeball'] !== undefined && item['catch_superball'] !== undefined && item['catch_hyperball'] !== undefined) {
+        if ((item['catch_pokeball'] !== undefined && item['catch_pokeball'] !== null) && (item['catch_superball'] !== undefined && item['catch_superball'] !== null) && (item['catch_hyperball'] !== undefined && item['catch_hyperball'] !== null)) {
             catchChances +=
                 '<div style="width:78px;position: absolute;top: 38px;margin: 10px;left: 0px;color: #333;background: rgba(255,255,255,.6);border-radius: 12px;box-shadow: inset 0 0 4px #000;padding: 3px;">' +
                     '<div style="clear:both;">' +
@@ -1380,7 +1419,14 @@ function pokemonLabel(item) {
                     '</div>' +
                 '</div><br><br>'
         }
-
+		var pvpDetails = ''
+		if (pvpMonStringGreat !== '' && pvpMonStringUltra !== ''){
+			pvpDetails = 
+				'<div style="position: relative;top: 35px;font-size:15px;">' +
+					'Great League:<br>' + pvpMonStringGreat +
+					'Ultra League:<br>' + pvpMonStringUltra +
+				'</div>'
+		}
         // Weather
         if (weatherBoostedCondition !== 0) {
             details +=
@@ -1448,9 +1494,9 @@ function pokemonLabel(item) {
         // Close the disappear/appear div
         contentstring += '</span></div>'
 
-        contentstring += '<br>' + details
+        contentstring += '<br>' + details + '<br>' + pvpDetails
         if (atk != null && def != null && sta != null) {
-            contentstring += '<div style="position:relative;top:60px;font-size:21px;"><center>'
+            contentstring += '<div style="position:relative;top:45px;font-size:21px;"><center>'
         } else {
             contentstring += '<div style="font-position:relative;font-size:21px;"><center>'
         }
@@ -1461,7 +1507,7 @@ function pokemonLabel(item) {
         ' | <a href="javascript:void(0);" onclick="javascript:toggleOtherPokemon(' + id + ');" title="' + i8ln('Toggle Species Only (temp)') + '"><img src="static/images/label/v2/flip.png" height="24" width="auto" style="vertical-align:middle;" /></a>' +
         '</center></div>'
         if (atk != null && def != null && sta != null) {
-            contentstring += '<div style="position:relative;top:60px;font-size:15px;"><center>'
+            contentstring += '<div style="position:relative;top:45px;font-size:15px;"><center>'
         } else {
             contentstring += '<div style="position:relative;font-size:15px;margin-top:5px;"><center>'
         }
@@ -1470,7 +1516,7 @@ function pokemonLabel(item) {
         '<i class="fa fa-road"></i> ' + coordText + '</a>' +
         '</a></center></div>'
         if (atk != null && def != null && sta != null) {
-            contentstring += '<br><br><br>'
+            contentstring += '<br><br>'
         }
     }
     return contentstring
@@ -7610,6 +7656,12 @@ $(function () {
     $switchPokeIVIcons = $('#iv-icon-switch')
     $switchPokeIVIcons.on('change', function () {
         Store.set('showIVIcons', this.checked)
+        redrawPokemon(mapData.pokemons)
+    })
+	
+    $switchPokePVPStats = $('#pvp-stats-switch')
+    $switchPokePVPStats.on('change', function () {
+        Store.set('showPokePVPStats', this.checked)
         redrawPokemon(mapData.pokemons)
     })
 
