@@ -987,6 +987,7 @@ if (!$noLoadingScreen) {
 										<option value="3">3</option>
 										<option value="4">4</option>
 										<option value="5">5</option>
+										<option value="6">6 (MegaRaids)</option>
 									</select>
 								</div>
 								<div class="form-control switch-container" id="max-level-raids-filter-wrapper" style="float:none;height:75px;margin-bottom:0px;">
@@ -998,6 +999,7 @@ if (!$noLoadingScreen) {
 										<option value="3">3</option>
 										<option value="4">4</option>
 										<option value="5">5</option>
+										<option value="6">6 (MegaRaids)</option>
 									</select>
 								</div>
 							</div>';
