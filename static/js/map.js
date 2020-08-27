@@ -1577,11 +1577,15 @@ function gymLabel(item) {
         } else {
             teamImage = '<img width="140px" style="padding: 5px;margin-left:-50px" src="static/forts/label/Harmony_raw.png">'
         }
-        var levelStr = ''
-        for (i = 0; i < item['raid_level']; i++) {
-            levelStr += '★'
+        if (item['raid_level'] >= 6) { // Handle if its a Mega Raid or not
+            raidStr = '<h3 style="margin-bottom: 0">' + i8ln('Mega Raid')
+        } else {
+            var levelStr = ''
+            for (i = 0; i < item['raid_level']; i++) {
+                levelStr += '★'
+            }
+            raidStr = '<h3 style="margin-bottom: 0">' + i8ln('Raid') + ' ' + levelStr
         }
-        raidStr = '<h3 style="margin-bottom: 0">' + i8ln('Raid') + ' ' + levelStr
         if (item.is_exclusive !== null && item.is_exclusive === 1) {
             raidStr += '<span style="background-color:gold;border-radius:10px"><br>' + i8ln('Exclusive Raid') + '</span>'
         }
