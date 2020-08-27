@@ -540,8 +540,21 @@ if (!$noLoadingScreen) {
 										<h3>' . i8ln("Min. Lvl") . '</h3>
 										<input id="min-level" type="number" min="0" max="100" name="min-level" placeholder="' . i8ln( 'Min Lvl' ) . '"/>
 									</label>
-								</div></p>';
-                            } ?>
+								</div>';
+                            }
+							?>
+                        </div>
+                        <div class="form-row min-stats-row">
+                            <?php
+                            if ( ! $noMinPVPPerc ) {
+                                echo '<div class="form-control">
+									<label for="min-pvp">
+										<h3>' . i8ln("Min. PVP %") . '</h3>
+										<input id="min-pvp" type="number" min="0" max="100" name="min-pvp" placeholder="' . i8ln( 'Min PVP %' ) . '"/>
+									</label>
+								</div>';
+                            }
+							?>
                         </div>
                         <div id="tabs">
                             <ul>
@@ -2520,6 +2533,7 @@ if (!$noLoadingScreen) {
     var excludeMinIV = <?php echo $noExcludeMinIV ? '[]' : $excludeMinIV ?>;
     var minIV = <?php echo $noMinIV ? '""' : $minIV ?>;
     var minLevel = <?php echo $noMinLevel ? '""' : $minLevel ?>;
+    var minPVP = <?php echo $noMinPVPPerc ? '""' : $minPVP ?>;
     var notifyPokemon = <?php echo $noNotifyPokemon ? '[]' : $notifyPokemon ?>;
     var notifyIv = <?php echo $noNotifyIv ? '""' : $notifyIv ?>;
     var notifyLevel = <?php echo $noNotifyLevel ? '""' : $notifyLevel ?>;

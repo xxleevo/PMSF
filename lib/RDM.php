@@ -4,7 +4,7 @@ namespace Scanner;
 
 class RDM extends Scanner
 {
-    public function get_active($eids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $encId = 0)
+    public function get_active($eids, $minIv, $minLevel, $minPVP, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $encId = 0)
     {
         global $db;
         $conds = array();
@@ -64,6 +64,9 @@ class RDM extends Scanner
                 $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
+        if (!empty($minPVP) && !is_nan((float)$minPVP) && $minPVP != 0) {
+			$conds[] = "((json_extract(pvp_rankings_great_league,'$[0].percentage')*100 >=" . $minPVP . ") OR (json_extract(pvp_rankings_ultra_league,'$[0].percentage')*100 >=". $minPVP . "))";
+		}
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if (empty($exMinIv)) {
                 $conds[] = 'level >= ' . $minLevel;
@@ -80,7 +83,7 @@ class RDM extends Scanner
         return $this->query_active($select, $conds, $params, $encSql);
     }
 
-    public function get_active_by_id($ids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng)
+    public function get_active_by_id($ids, $minIv, $minPVP, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng)
     {
         global $db;
         $conds = array();
@@ -133,6 +136,9 @@ class RDM extends Scanner
                 $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
+        if (!empty($minPVP) && !is_nan((float)$minPVP) && $minPVP != 0) {
+			$conds[] = "((json_extract(pvp_rankings_great_league,'$[0].percentage')*100 >=" . $minPVP . ") OR (json_extract(pvp_rankings_ultra_league,'$[0].percentage')*100 >=". $minPVP . "))";
+		}
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if (empty($exMinIv)) {
                 $conds[] = 'level >= ' . $minLevel;

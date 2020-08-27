@@ -31,6 +31,8 @@ $minIv = isset($_POST['minIV']) ? floatval($_POST['minIV']) : false;
 $prevMinIv = !empty($_POST['prevMinIV']) ? $_POST['prevMinIV'] : false;
 $minLevel = isset($_POST['minLevel']) ? intval($_POST['minLevel']) : false;
 $prevMinLevel = !empty($_POST['prevMinLevel']) ? $_POST['prevMinLevel'] : false;
+$minPVP = isset($_POST['minPVP']) ? floatval($_POST['minPVP']) : false;
+$prevMinPVP = !empty($_POST['prevMinPVP']) ? $_POST['prevMinPVP'] : false;
 $exMinIv = !empty($_POST['exMinIV']) ? $_POST['exMinIV'] : '';
 $bigKarp = !empty($_POST['bigKarp']) ? $_POST['bigKarp'] : false;
 $tinyRat = !empty($_POST['tinyRat']) ? $_POST['tinyRat'] : false;
@@ -54,7 +56,7 @@ $d["lastnests"] = !empty($_POST['nests']) ? $_POST['nests'] : false;
 $d["lastcommunities"] = !empty($_POST['communities']) ? $_POST['communities'] : false;
 $d["lastportals"] = !empty($_POST['portals']) ? $_POST['portals'] : false;
 $d["lastpois"] = !empty($_POST['pois']) ? $_POST['pois'] : false;
-if ($minIv < $prevMinIv || $minLevel < $prevMinLevel) {
+if ($minIv < $prevMinIv || $minLevel < $prevMinLevel || $minPVP < $prevMinPVP) {
     $lastpokemon = false;
 }
 $enc_id = !empty($_POST['encId']) ? $_POST['encId'] : null;
@@ -122,22 +124,23 @@ if (!$noPokemon) {
     if ($d["lastpokemon"] == "true") {
         $eids = !empty($_POST['eids']) ? explode(",", $_POST['eids']) : array();
         if ($lastpokemon != 'true') {
-            $d["pokemons"] = $scanner->get_active($eids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, 0, 0, 0, 0, 0, $enc_id);
+            $d["pokemons"] = $scanner->get_active($eids, $minIv, $minLevel, $minPVP, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, 0, 0, 0, 0, 0, $enc_id);
         } else {
             if ($newarea) {
-                $d["pokemons"] = $scanner->get_active($eids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng, $enc_id);
+                $d["pokemons"] = $scanner->get_active($eids, $minIv, $minLevel, $minPVP, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng, $enc_id);
             } else {
-                $d["pokemons"] = $scanner->get_active($eids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, $timestamp, 0, 0, 0, 0, $enc_id);
+                $d["pokemons"] = $scanner->get_active($eids, $minIv, $minLevel, $minPVP, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, $timestamp, 0, 0, 0, 0, $enc_id);
             }
         }
         $d["preMinIV"] = $minIv;
         $d["preMinLevel"] = $minLevel;
+		$d["preMinPVP"] = $minPVP;
         if (!empty($_POST['reids'])) {
             $reids = !empty($_POST['reids']) ? array_unique(explode(",", $_POST['reids'])) : array();
 
             $reidsDiff = array_diff($reids, $eids);
             if (count($reidsDiff)) {
-                $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_id($reidsDiff, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng));
+                $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_id($reidsDiff, $minIv, $minLevel, $minPVP, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng));
             }
 
             $d["reids"] = $reids;

@@ -12,6 +12,7 @@ var $textPerfectionNotify
 var $textLevelNotify
 var $textMinIV
 var $textMinLevel
+var $textMinPVP
 var $raidNotify
 var $selectStyle
 var $selectIconSize
@@ -71,8 +72,11 @@ var excludedRaideggs = []
 var notifiedMinPerfection = null
 var notifiedMinLevel = null
 var minIV = null
+var minLevel = null
+var minPVP = null
 var prevMinIV = null
 var prevMinLevel = null
+var prevMinPVP = null
 var onlyPokemon = 0
 var directionProvider
 
@@ -3954,7 +3958,9 @@ function addListeners(marker) {
 
 function clearStaleMarkers() {
     $.each(mapData.pokemons, function (key, value) {
-        if (((mapData.pokemons[key]['disappear_time'] < new Date().getTime() || ((excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || ((((mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV) || ((mapType === 'monocle' && mapData.pokemons[key]['level'] < minLevel) || (mapType === 'rm' && !isNaN(minLevel) && (mapData.pokemons[key]['cp_multiplier'] < cpMultiplier[minLevel - 1])))) && !excludedMinIV.includes(mapData.pokemons[key]['pokemon_id'])) || (Store.get('showBigKarp') === true && mapData.pokemons[key]['pokemon_id'] === 129 && (mapData.pokemons[key]['weight'] < 13.14 || mapData.pokemons[key]['weight'] === null)) || (Store.get('showTinyRat') === true && mapData.pokemons[key]['pokemon_id'] === 19 && (mapData.pokemons[key]['weight'] > 2.40 || mapData.pokemons[key]['weight'] === null))) && encounterId !== mapData.pokemons[key]['encounter_id'])) || (encounterId && encounterId === mapData.pokemons[key]['encounter_id'] && mapData.pokemons[key]['disappear_time'] < new Date().getTime()))) {
+        var pvpGreatLeague = JSON.parse(mapData.pokemons[key]['pvp_gl'])
+        var pvpUltraLeague = JSON.parse(mapData.pokemons[key]['pvp_ul'])
+        if (((mapData.pokemons[key]['disappear_time'] < new Date().getTime() || ((excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || ((((mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV) || (mapData.pokemons[key]['level'] < minLevel) || (((pvpGreatLeague !== null && ((pvpGreatLeague[0]['percentage']*100) < minPVP)) || (pvpGreatLeague == null && (minPVP !== null && minPVP > 0))) || ((pvpUltraLeague !== null && ((pvpUltraLeague[0]['percentage']*100) < minPVP)) || (pvpUltraLeague == null && (minPVP !== null && minPVP > 0))))) && !excludedMinIV.includes(mapData.pokemons[key]['pokemon_id'])) || (Store.get('showBigKarp') === true && mapData.pokemons[key]['pokemon_id'] === 129 && (mapData.pokemons[key]['weight'] < 13.14 || mapData.pokemons[key]['weight'] === null)) || (Store.get('showTinyRat') === true && mapData.pokemons[key]['pokemon_id'] === 19 && (mapData.pokemons[key]['weight'] > 2.40 || mapData.pokemons[key]['weight'] === null))) && encounterId !== mapData.pokemons[key]['encounter_id'])) || (encounterId && encounterId === mapData.pokemons[key]['encounter_id'] && mapData.pokemons[key]['disappear_time'] < new Date().getTime()))) {
             if (mapData.pokemons[key].marker.rangeCircle) {
                 markers.removeLayer(mapData.pokemons[key].marker.rangeCircle)
                 markersnotify.removeLayer(mapData.pokemons[key].marker.rangeCircle)
@@ -4019,6 +4025,7 @@ function loadRawData() {
     var loadScanLocation = Store.get('showScanLocation')
     var loadMinIV = Store.get('remember_text_min_iv')
     var loadMinLevel = Store.get('remember_text_min_level')
+    var loadMinPVP = Store.get('remember_text_min_pvp')
     var bigKarp = Boolean(Store.get('showBigKarp'))
     var tinyRat = Boolean(Store.get('showTinyRat'))
     var exEligible = Boolean(Store.get('exEligible'))
@@ -4067,6 +4074,8 @@ function loadRawData() {
             'prevMinIV': prevMinIV,
             'minLevel': loadMinLevel,
             'prevMinLevel': prevMinLevel,
+            'minPVP': loadMinPVP,
+            'prevMinPVP': prevMinPVP,
             'bigKarp': bigKarp,
             'tinyRat': tinyRat,
             'swLat': swLat,
@@ -6361,6 +6370,7 @@ function updateMap() {
 
         prevMinIV = result.preMinIV
         prevMinLevel = result.preMinLevel
+		prevMinPVP = result.preMinPVP
         reids = result.reids
         qpreids = result.qpreids
         qireids = result.qireids
@@ -7837,6 +7847,7 @@ $(function () {
     $textPerfectionNotify = $('#notify-perfection')
     $textMinIV = $('#min-iv')
     $textMinLevel = $('#min-level')
+    $textMinPVP = $('#min-pvp')
     $textLevelNotify = $('#notify-level')
     $raidNotify = $('#notify-raid')
     $switchTinyRat = $('#tiny-rat-switch')
@@ -8060,6 +8071,17 @@ $(function () {
             $textMinLevel.val(minLevel)
             Store.set('remember_text_min_level', minLevel)
         })
+        $textMinPVP.on('change', function (e) {
+            minPVP = parseInt($textMinPVP.val(), 10)
+            if (isNaN(minPVP) || minPVP < 0) {
+                minPVP = ''
+            }
+            if (minPVP > 100) {
+                minPVP = 100
+            }
+            $textMinPVP.val(minPVP)
+            Store.set('remember_text_min_pvp', minPVP)
+        })
         $switchTinyRat.on('change', function (e) {
             Store.set('showTinyRat', this.checked)
             lastpokemon = false
@@ -8118,6 +8140,7 @@ $(function () {
         $textLevelNotify.val(Store.get('remember_text_level_notify')).trigger('change')
         $textMinIV.val(Store.get('remember_text_min_iv')).trigger('change')
         $textMinLevel.val(Store.get('remember_text_min_level')).trigger('change')
+        $textMinPVP.val(Store.get('remember_text_min_pvp')).trigger('change')
         $raidNotify.val(Store.get('remember_raid_notify')).trigger('change')
         $questsExcludePokemon.val(Store.get('remember_quests_exclude_pokemon')).trigger('change')
         $excludeRaidbosses.val(Store.get('remember_exclude_raidbosses')).trigger('change')

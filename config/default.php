@@ -142,12 +142,13 @@ $logFailedLogin = '';                                               // File loca
 $noExcludeMinIV = true;                                        // true/false
 $noMinIV = true;                                               // true/false
 $noMinLevel = true;                                            // true/false
+$noMinPVPPerc = true;
 $noHighLevelData = true;                                       // true/false
 $noWeatherIcons = false;
 $enableWeatherIcons = 'false';                                 // true/false
 $noPokeIVIcons = false;										   // true/false
 $enablePokeIVIcons = 'false';                                  // true/false
-$noPokePVPStats = false;
+$noPokePVPStats = true;
 $enablePokePVPStats = 'false';
 
 /* Hide Specific content */
@@ -195,6 +196,7 @@ $excludeMinIV = '[131, 143, 147, 148, 149, 248]';                   // [] for em
 
 $minIV = '0';                                                       // "0" for empty or a number
 $minLevel = '0';                                                    // "0" for empty or a number
+$minPVP = '0';
 $noIv100Glow = false;
 $Iv100GlowColor = 'rgba(255, 200, 44, 1)';							// Glow Color
 

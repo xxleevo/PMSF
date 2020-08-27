@@ -94,6 +94,11 @@ var StoreOptions = {
             default: minLevel,
             type: StoreTypes.Number
         },
+    'remember_text_min_pvp':
+        {
+            default: minPVP,
+            type: StoreTypes.Number
+        },
     'remember_raid_notify':
         {
             default: notifyRaid,
