@@ -1665,9 +1665,9 @@ function gymLabel(item) {
                 raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
             }
         } else if (item.raid_start <= Date.now()) {
-            raidIcon = '<img src="static/raids/egg_hatched_' + item['raid_level'] + '.png" style="width:60px;margin-left:-100px;margin-bottom: 50px;">'
+            raidIcon = '<img src="static/raids/egg_hatched_' + item['raid_level'] + '.png" style="margin-left:-100px;margin-bottom: 45px;width:60px;">'
         } else {
-            raidIcon = '<img src="static/raids/egg_' + item['raid_level'] + '.png" style="margin-left:-102px;margin-bottom: 35px;width:60px;">'
+            raidIcon = '<img src="static/raids/egg_' + item['raid_level'] + '.png" style="margin-left:-100px;margin-bottom: 45px;width:60px;">'
         }
     }
     if (manualRaids && item['scanArea'] === false) {
@@ -2822,24 +2822,24 @@ function getGymMarkerIcon(item, badgeMode) {
     if (Store.get('gymMarkerStyle') === 'comictower') {
         if (level === 0 || level === 1) {
             dynamicRaidBossPosTop = (-6 / 6) + ((-6 / 6) * (map.getZoom() - 10))
-            dynamicEggPosTop = (-5 / 6) + ((-5 / 6) * (map.getZoom() - 10))
-            dynamicEggUnknownPosTop = (-9 / 6) + ((-9 / 6) * (map.getZoom() - 10))
+            dynamicEggPosTop = (-7 / 6) + ((-7 / 6) * (map.getZoom() - 10))
+            dynamicEggUnknownPosTop = (-7 / 6) + ((-7 / 6) * (map.getZoom() - 10))
         } else if (level === 2) {
             dynamicRaidBossPosTop = (-10 / 6) + ((-10 / 6) * (map.getZoom() - 10))
-            dynamicEggPosTop = (-7 / 6) + ((-7 / 6) * (map.getZoom() - 10))
+            dynamicEggPosTop = (-11 / 6) + ((-11 / 6) * (map.getZoom() - 10))
             dynamicEggUnknownPosTop = (-11 / 6) + ((-11 / 6) * (map.getZoom() - 10))
         } else if (level === 3 || level === 4) {
             dynamicRaidBossPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
-            dynamicEggPosTop = (-10 / 6) + ((-10 / 6) * (map.getZoom() - 10))
-            dynamicEggUnknownPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
+            dynamicEggPosTop = (-14 / 6) + ((-14 / 6) * (map.getZoom() - 10))
+            dynamicEggUnknownPosTop = (-14 / 6) + ((-14 / 6) * (map.getZoom() - 10))
         } else if (level === 5) {
             dynamicRaidBossPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
-            dynamicEggPosTop = (-12 / 6) + ((-12 / 6) * (map.getZoom() - 10))
-            dynamicEggUnknownPosTop = (-17 / 6) + ((-17 / 6) * (map.getZoom() - 10))
+            dynamicEggPosTop = (-15 / 6) + ((-15 / 6) * (map.getZoom() - 10))
+            dynamicEggUnknownPosTop = (-15 / 6) + ((-15 / 6) * (map.getZoom() - 10))
         } else if (level === 6) {
             dynamicRaidBossPosTop = (-16 / 6) + ((-16 / 6) * (map.getZoom() - 10))
-            dynamicEggPosTop = (-14.5 / 6) + ((-14.5 / 6) * (map.getZoom() - 10))
-            dynamicEggUnknownPosTop = (-17 / 6) + ((-17 / 6) * (map.getZoom() - 10))
+            dynamicEggPosTop = (-20 / 6) + ((-20 / 6) * (map.getZoom() - 10))
+            dynamicEggUnknownPosTop = (-20 / 6) + ((-20 / 6) * (map.getZoom() - 10))
         }
     }
     // Ex icon sizes
