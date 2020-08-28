@@ -2689,7 +2689,7 @@ if (!$noLoadingScreen) {
     var gymBadgeMode = <?php echo $noGymBadgeMode === true ? 'false' : $gymBadgeMode ?>;
     var openPopupOnHovering = <?php echo $openPopupOnHovering === true ? 'true' : 'false' ?>;
     var onlyOnePopup = <?php echo $onlyOnePopup === true ? 'true' : 'false' ?>;
-	var denyRaidLevels = <?php echo $noRaids ? '[1,2,3,4,5]' : $denyRaidLevels ?>;
+	var denyRaidLevels = <?php echo $noRaids ? '[1,2,3,4,5,6]' : $denyRaidLevels ?>;
     var enableLiveScan = <?php echo $noLiveScanLocation ? 'false' : $enableLiveScan ?>;
     var deviceOfflineAfterSeconds = <?php echo $deviceOfflineAfterSeconds ?>;
     var noPokePVPStats = <?php echo $noPokePVPStats === true ? 'true' : 'false' ?>;
