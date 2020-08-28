@@ -1659,7 +1659,7 @@ function gymLabel(item) {
 
         if (raidStarted) {
             raidIcon = '<img style="width: 68px;margin-left:-105px;margin-bottom: 50px; --webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/>'
-            if (form !== null && form > 0 && forms.length > form && formsEn[item['form']] !== '') {
+            if (form !== null && form > 0 && forms.length > form && formsEn[item['form']] !== '' && formsEn[item['form']] !== 'Normal') {
                 raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '_' + (formsEn[item['form']]).toUpperCase() + '_FORM/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
             } else {
                 raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
@@ -6900,7 +6900,7 @@ function createUpdateWorker() {
     }
 }
 
-function showGymDetails(id) { // eslint-disable-line no-unused-vars
+function showGymDetails(id) { // eslint-disable-line no-unused-vars - GYMSIDEBAR
     var sidebar = document.querySelector('#gym-details')
     var sidebarClose
 
@@ -6928,7 +6928,6 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
                 '</div>'
         }
 
-        // var pokemon = result.pokemon !== undefined ? result.pokemon : []
         var freeSlots = result.slots_available
         var gymLevelStr = ''
         if (result.team_id !== 0) {
@@ -6959,19 +6958,24 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
 
         var raidStr = ''
         var raidIcon = ''
+        var raidCounterGuideStr = ''
         if (manualRaids) {
             var rbList = generateRaidBossList()
         }
         if (raidSpawned && result.raid_end > Date.now()) {
             var levelStr = ''
-            for (var i = 0; i < result['raid_level']; i++) {
-                levelStr += '★'
+            if (result['raid_level'] >= 6) {
+                raidStr = '<h3 style="margin-bottom: 0">Mega Raid'
+            } else{
+                for (var i = 0; i < result['raid_level']; i++) {
+                    levelStr += '★'
+                }
+                raidStr = '<h3 style="margin-bottom: 0">Raid ' + levelStr
             }
-            raidStr = '<h3 style="margin-bottom: 0">Raid ' + levelStr
             if (raidStarted) {
                 var cpStr = ''
                 if (result.raid_pokemon_cp > 0) {
-                    cpStr = ' WP ' + result.raid_pokemon_cp
+                    cpStr = ' ' + i8ln('CP') + ' ' + result.raid_pokemon_cp
                 }
                 raidStr += '<br>' + result.raid_pokemon_name
                 if (form !== null && form > 0 && forms.length > form) {
@@ -6980,6 +6984,13 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
                         raidStr += ' (' + idToPokemon[result['form']].name + ')'
                     } else {
                         raidStr += ' (' + forms[result['form']] + ')'
+                    }
+                }
+                if(!noRaidCounterGuide){
+                    if ( form !== null && form > 0 && forms.length > form && formsEn[result['form']] !== '' && formsEn[result['form']] !== 'Normal') {
+                    	raidCounterGuideStr = ' - <a href="https://www.pokebattler.com/raids/defenders/' + result['raid_pokemon_name_en'].toUpperCase() + '_' + (formsEn[result['form']]).toUpperCase() + '_FORM/levels/RAID_LEVEL_' + result['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
+                    } else {
+                    	raidCounterGuideStr = ' - <a href="https://www.pokebattler.com/raids/defenders/' + result['raid_pokemon_name_en'].toUpperCase() + '/levels/RAID_LEVEL_' + result['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
                     }
                 }
                 raidStr += cpStr
@@ -7016,9 +7027,9 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
 
                 raidIcon = '<img style="width: 80px; -webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/>'
             } else if (result.raid_start <= Date.now()) {
-                raidIcon = '<img style="width: 80px; -webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="static/raids/egg_hatched' + result['raid_level'] + '.png">'
+                raidIcon = '<img style="width: 60px; -webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="static/raids/egg_hatched_' + result['raid_level'] + '.png">'
             } else {
-                raidIcon = '<img src="static/raids/egg_' + result['raid_level'] + '.png">'
+                raidIcon = '<img style="width: 60px; -webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);"src="static/raids/egg_' + result['raid_level'] + '.png">'
             }
         }
         if (!noDeleteGyms) {
@@ -7069,7 +7080,8 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             lastScannedStr +
             '<div>' +
             '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Route') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">' + i8ln('Maplink') + '</a>' +
-            '</div>' +
+            raidCounterGuideStr +
+			'</div>' +
             '</center>'
 
         var pokemonIdStr = ''

@@ -203,7 +203,7 @@ $getList = new \Scanner\RDM();
         global $raids, $copyrightSafe, $iconRepository;
         echo '<div class="raidbeggs-list-cont" id="raideggs-list-cont-' . $num . '"><input type="hidden" class="search-number" value="' . $num . '" /><input class="search search-input" placeholder="' . i8ln("Search Level") . '" /><div class="raideggs-list list">';
         $i = $z = 0;
-		for ($e = 1; $e <= 5; $e++) {
+		for ($e = 1; $e <= 6; $e++) {
 			$level = $e;
             if (!in_array($e, $raidEggsToExclude)) {
                 echo '<span class="raideggs-icon-sprite" data-value="' . $e . '" onclick="' . $onClick . '"><span style="display:none" class="level">' . $level . '</span><img src="static/raids/egg_' . $level . '.png" style="width:48px;height:56px;"/>';
@@ -832,7 +832,7 @@ if (!$noLoadingScreen) {
 							<font size="3">' . i8ln("New Pokestops Since") . ':</font>
 							<select name="new-pokestops-switch" id="new-pokestops-switch">
 								<option value="" disabled selected></option>
-								<option value="0">' . i8ln("Inactive") . '</option>';
+								<option value="0">' . i8ln("No Filter") . '</option>';
 						for($i = intval($newPokestopsFilterStart[0]); $i <= $currentYear; $i++) {
 							// Starting Year
 							if($i == intval($newPokestopsFilterStart[0])){
@@ -1185,7 +1185,7 @@ if (!$noLoadingScreen) {
 							<font size="3">' . i8ln("New Gyms Since") . '</font>
 							<select name="new-gyms-switch" id="new-gyms-switch">
 								<option value="" disabled selected></option>
-								<option value="0">Inaktiv</option>';
+								<option value="0">' . i8ln("No Filter") . '</option>';
 						for($i = intval($newGymsFilterStart[0]); $i <= $currentYear; $i++) {
 							// Starting Year
 							if($i == intval($newGymsFilterStart[0])){
@@ -1615,6 +1615,7 @@ if (!$noLoadingScreen) {
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
+                            <option value="6">6(MegaRaids)</option>
                         </select>
                     </div>';
             }
@@ -1765,7 +1766,7 @@ if (!$noLoadingScreen) {
 				echo '
 				<h3 style="font-weight: bold"><i class="fa fa-sliders fa-fw"></i>&nbsp;' . i8ln("Settings") . '</h3>
 				<div>
-					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Reset") . ':</b><br>' . i8ln("All settings will be resettet to factory settings") . '</span>
+					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Reset") . ':</b><br>' . i8ln("All settings will be reset to factory settings") . '</span>
 					<div>
 						<center>
 							<button id="reset-button" class="settings" onclick="confirm(\'' . i8ln("Are you sure you want to reset all settings?") . '\') ? (localStorage.clear(), window.location.reload()) : false">
@@ -1774,7 +1775,7 @@ if (!$noLoadingScreen) {
 						</center>
 					</div>
 					<br>
-					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Export") . ':</b><br>' . i8ln("Save your current settings with downloading them as a file") . '<br><br></span>
+					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Export") . ':</b><br>' . i8ln("Save your current settings by downloading them as a file") . '<br><br></span>
 					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Import") . ':</b><br>' . i8ln("Upload a setting file to restore your settings") . '</span>
 					<div>
 						<center>

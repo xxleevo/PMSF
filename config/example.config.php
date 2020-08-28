@@ -192,8 +192,8 @@ $generateRaidbossFilters = false;                                   		// Automat
 $noRaidfilterListNumbers = false;                                   		// Enable/Disable Numbers on the filter tab
 $hideRaidPokemon = '[]';                                            		// hidden bosses by default
 $excludeRaidPokemon = [];                                           		// exclude bosses from the list (for users not changeable)
-$hideRaidEggs = '[]'; 														// hidden eggs by default
-$excludeRaidEggs = [];														// exclude eggs from the list (for users not changeable)												
+$hideRaidEggs = '[]'; 													    // hidden eggs by default 
+$excludeRaidEggs = [2,4];													// exclude eggs from the list (for users not changeable)- 2+4 hidden because we dont have 2 & 4 raids anymore											
 /*---------Pokestop Settings---------*/
 $noPokestops = false;                                               		// Enables/Disables Pokestops & the whole Pokestop menu
 $enablePokestops = 'false';                                         		// default value for users
@@ -547,6 +547,9 @@ $spiderfyOnMaxZoom = 'true';												// Spiderfy cluster markers on click
 $gmapsKey = "";																// ONLY USED FOR TILE LAYERS
 $gAnalyticsId = "";															// "" for empty, "UA-XXXXX-Y" add your Google Analytics tracking ID
 
+/* Mapbox */												
+$mBoxKey = "";														//mapbox key
+
 /* Piwik Analytics */
 $piwikUrl = "";
 $piwikSiteId = "";
@@ -556,9 +559,6 @@ $faviconPath = '';                                                  		// Upload 
 
 /* StatsToggle */
 $noStatsToggle = false;                                             		// Enables or disables the stats button in the header.
-
-/* OSM */
-$osmTileServer = 'tile.openstreetmap.org';                          		// osm tile server (no trailing slash)
 
 /* Access-config Settings */
 $accessLevelsInherit = false;												// Choose if the levels in the access-level config inherit access configurations from lower levels

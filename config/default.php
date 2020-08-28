@@ -235,7 +235,7 @@ $generateRaidbossFilters = false;
 $noRaidfilterListNumbers = false;
 $hideRaidPokemon = '[]';
 $excludeRaidPokemon = [];
-$hideRaidEggs = '[]';
+$hideRaidEggs = '[2,4]';
 $excludeRaidEggs = [];
 
 $noPokestops = false;                                               // true/false
