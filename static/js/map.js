@@ -1168,13 +1168,15 @@ function pokemonLabel(item) {
     var level = item['level']
     var formStr = ''
     var labelStyle = Store.get('pokemonLabelStyle')
-    var pvpGreatLeague = JSON.parse(item['pvp_gl'])
-    var pvpUltraLeague = JSON.parse(item['pvp_ul'])
 	var pvpIncludeEvolutions = true
-	
+
+    var pvpGreatLeague = ''
+    var pvpUltraLeague = ''
 	var pvpMonStringGreat = ''
 	var pvpMonStringUltra = ''
-	if(Store.get('showPokePVPStats') === true && pvpGreatLeague !== null && pvpUltraLeague !== null && pvpGreatLeague !== undefined && pvpUltraLeague !== undefined){
+	if(!noPokePVPStats && Store.get('showPokePVPStats') === true && pvpGreatLeague !== null && pvpUltraLeague !== null && pvpGreatLeague !== undefined && pvpUltraLeague !== undefined){
+    var pvpGreatLeague = JSON.parse(item['pvp_gl'])
+    var pvpUltraLeague = JSON.parse(item['pvp_ul'])
 		// We have pvp data - parse them to everything we need
 		var iterationLength = pvpIncludeEvolutions ? pvpGreatLeague.length : 1 // If Allow to include evolutions, set length accordingly, if not, set to 1
 		
