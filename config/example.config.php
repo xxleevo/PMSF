@@ -15,6 +15,19 @@ $startingLat = 52.084992;													// Starting latitude
 $startingLng = 5.302366;													// Starting longitude
 $startingZoom = 15;															//Starting Zoom - should be between $maxZoomIn & $maxZoomOut
 
+/* Boundaries */
+$noBoundaries = true;                                           		    // Enable/Disable boundaries to pull data from. Requires $boundaries to be set.
+$boundaries = '51.9258236369112 5.4520494625403,
+               51.8982915107015 5.4808885738685,
+               51.8715904160174 5.4630357906653,
+               51.8525084938523 5.4211504146888,
+               51.8427523855973 5.3504259273841,
+               51.8448734585841 5.2645952389075,
+               51.8635345916882 5.1952440426185,
+               51.9033756353006 5.2254564449622,
+               51.9304812498708 5.4032976314857,
+               51.9258236369112 5.4520494625403';
+
 /* Title and language */
 $title = "POGOmap";                                                 		// Title to display in title bar
 $locale = "de";                                                   			// Display language
