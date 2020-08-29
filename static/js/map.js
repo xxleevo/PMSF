@@ -3964,8 +3964,12 @@ function addListeners(marker) {
 
 function clearStaleMarkers() {
     $.each(mapData.pokemons, function (key, value) {
-        var pvpGreatLeague = JSON.parse(mapData.pokemons[key]['pvp_gl'])
-        var pvpUltraLeague = JSON.parse(mapData.pokemons[key]['pvp_ul'])
+        var pvpGreatLeague = null
+        var pvpUltraLeague = null
+        if (!noPokePVPStats) {
+            var pvpGreatLeague = JSON.parse(mapData.pokemons[key]['pvp_gl'])
+            var pvpUltraLeague = JSON.parse(mapData.pokemons[key]['pvp_ul'])
+        }
         if (((mapData.pokemons[key]['disappear_time'] < new Date().getTime() || ((excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || ((((mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV) || (mapData.pokemons[key]['level'] < minLevel) || (((pvpGreatLeague !== null && ((pvpGreatLeague[0]['percentage']*100) < minPVP)) || (pvpGreatLeague == null && (minPVP !== null && minPVP > 0))) || ((pvpUltraLeague !== null && ((pvpUltraLeague[0]['percentage']*100) < minPVP)) || (pvpUltraLeague == null && (minPVP !== null && minPVP > 0))))) && !excludedMinIV.includes(mapData.pokemons[key]['pokemon_id'])) || (Store.get('showBigKarp') === true && mapData.pokemons[key]['pokemon_id'] === 129 && (mapData.pokemons[key]['weight'] < 13.14 || mapData.pokemons[key]['weight'] === null)) || (Store.get('showTinyRat') === true && mapData.pokemons[key]['pokemon_id'] === 19 && (mapData.pokemons[key]['weight'] > 2.40 || mapData.pokemons[key]['weight'] === null))) && encounterId !== mapData.pokemons[key]['encounter_id'])) || (encounterId && encounterId === mapData.pokemons[key]['encounter_id'] && mapData.pokemons[key]['disappear_time'] < new Date().getTime()))) {
             if (mapData.pokemons[key].marker.rangeCircle) {
                 markers.removeLayer(mapData.pokemons[key].marker.rangeCircle)
