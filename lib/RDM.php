@@ -19,7 +19,7 @@ class RDM extends Scanner
         }
 		
 		global $noPokePVPStats;
-		if (!noPokePVPStats){
+		if (!$noPokePVPStats){
 			$select .= ",pvp_rankings_great_league as pvp_gl, pvp_rankings_ultra_league as pvp_ul";
 		}
 		
@@ -103,7 +103,7 @@ class RDM extends Scanner
         }
 		
 		global $noPokePVPStats;
-		if (!noPokePVPStats){
+		if (!$noPokePVPStats){
 			$select .= ",pvp_rankings_great_league as pvp_gl, pvp_rankings_ultra_league as pvp_ul";
 		}
 		
