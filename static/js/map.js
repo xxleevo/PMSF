@@ -1929,6 +1929,8 @@ function getReward(item) {
         rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_stardust.png"/>'
     } else if (item['quest_reward_type'] === 2) {
         rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_' + reward['item_id'] + '_1.png"/>'
+    } else if (item['quest_reward_type'] === 12) {
+        rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_mega_energy.png"/>'
     }
     return rewardImage
 }
@@ -2127,6 +2129,8 @@ function getQuest(item) {
             }
         } else if (item['quest_condition_type'] === 12) {
             str = str.replace('{8}', i8ln('new {8}'))
+        } else if (item['quest_condition_type'] === 21) {
+            str = str.replace('{1}', i8ln('unique {1}'))
         } else if (item['quest_condition_type'] === 22) {
             str = str.replace('{9}', 'NPC-{9}')
         } else if (item['quest_condition_type'] === 23) {
@@ -2189,6 +2193,12 @@ function getQuest(item) {
             str += '<div><center>' +
             '<b><u>' + i8ln('Reward') + ':</u></b> ' + i8ln(idToPokemon[rewardinfo['pokemon_id']]).name + '<br>' +
             pokemonCPStr +
+            '</center></div>'
+        }
+        if (item['quest_reward_type'] === 12) {
+            str += '<div><center>' +
+            '<b><u>' + i8ln('Reward') + ': </u></b>' + i8ln('Mega Energy') + '<br>' +
+            '<b><u>' + i8ln('Amount') + ': </u></b>' + ' ' + item['quest_reward_amount'] +
             '</center></div>'
         }
 
@@ -3247,6 +3257,36 @@ function getPokestopMarkerIcon(item) {
             } else {
                 rewardImg = '<img src="' + rewardIcons + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
             }
+            if (lure > Date.now()) {
+                html = '<div style="position:relative;">' +
+                    '<img src="static/forts/Pstop-Lured_' + lureType + invasionString + '.png" style="width:50px;height:auto;top:-35px;right:10px;"/>' +
+                    rewardImg +
+                    '</div>'
+            } else {
+                html = '<div style="position:relative;">' +
+                    '<img src="static/forts/Pstop-quest-small' + invasionString + '.png" style="width:50px;height:auto;top:-35px;right:10px;"/>' +
+                    rewardImg +
+                    '</div>'
+            }
+            if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion === 1 && invasionExpiration > Date.now()) {
+                html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>' + generateRemainingTimer(item['invasion_expiration'], 'end') + '</span></div>'
+            }
+            stopMarker = L.divIcon({
+                iconSize: [31, 31],
+                iconAnchor: [24, 38],
+                popupAnchor: [0, -35],
+                className: 'stop-quest-marker',
+                html: html
+            })
+        } else if (reward[0]['type'] === 12) { // Mega Energy
+            if (!noInvasions && invasion === 1 && invasionExpiration > Date.now() && Store.get('showInvasions') && item['grunt_type'] !== null) {
+                rewardImg = '<img src="static/forts/gruntType/' + item['grunt_type'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+            } else if (Store.get('showItemAmounts')) {
+                rewardImg = '<img src="' + rewardIcons + 'rewards/reward_mega_energy_' + item['quest_reward_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+            } else {
+                rewardImg = '<img src="' + rewardIcons + 'rewards/reward_mega_energy.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+            }
+
             if (lure > Date.now()) {
                 html = '<div style="position:relative;">' +
                     '<img src="static/forts/Pstop-Lured_' + lureType + invasionString + '.png" style="width:50px;height:auto;top:-35px;right:10px;"/>' +

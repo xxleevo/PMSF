@@ -1,4 +1,5 @@
 {
+  "Mega Energy": "Mega-Energie",
   "No Filter" : "Kein Filter",
   "None - Blank": "Keine - Blank",
   "Male": "Männlich",
@@ -94,6 +95,7 @@
   "Team Leader" : "Teamleiter",
   "Grunt": "Rüpel",
   "new {8}" : "neue {8}",
+  "unique {8}" : "verschiedene {8}",
   "Complete {0} Trainer fights": "Bestreite {0} Trainerkämpfe",
   "Give your buddy {0} treat(s)": "Gib deinem Kumpel {0} Snacks",
   "Play with your Buddy {0} times": "Spiele {0} mal mit deinem Kumpel",
