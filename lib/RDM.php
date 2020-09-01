@@ -634,13 +634,14 @@ class RDM extends Scanner
 			} else{
 				$gym["triggered"] = 0;
 			}
-			
+
+			$gym["evolutionform"] = null;
 			if(!empty($raid_pid)){
                 if($gym["form"] == 0){
                         $gym["raidboss_base_atk"] = $this->data[$gym["raid_pokemon_id"]]["baseAttack"];
                         $gym["raidboss_base_def"] = $this->data[$gym["raid_pokemon_id"]]["baseDefense"];
                         $gym["raidboss_base_sta"] = $this->data[$gym["raid_pokemon_id"]]["baseStamina"];
-                }else{
+                } else {
                     $forms = $this->data[$gym["raid_pokemon_id"]]["forms"];
                     foreach ($forms as $f => $v) {
                         if($gym["form"] === $v['protoform']) {
@@ -648,8 +649,19 @@ class RDM extends Scanner
                             $gym["raidboss_base_def"] = $v["baseDefense"];
                             $gym["raidboss_base_sta"] = $v["baseStamina"];
                         }
+						//Handle Mega Raid Forms
+						if ($gym["raid_level"] == 6 && $v["nameform"] == "Normal"){
+							$evolutions = $v["megaEvolutions"];
+							$gym["evolutionform"] = 1;
+							foreach ($evolutions as $e => $c) {
+								if ($gym["raid_pokemon_cp"] == $c["cp"]) { // Compare to find the correct Mega Evolution
+									$gym["evolutionform"] = $c["protonum"];
+								}
+							}
+						}
                     }
 			    }
+
             }
 			
             $data[] = $gym;

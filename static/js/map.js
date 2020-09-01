@@ -1575,12 +1575,12 @@ function gymLabel(item) {
 
     if (raidSpawned && item.raid_end > Date.now() && !denyRaidLevels.includes(parseInt(item['raid_level']))) {
         if (!noGymTeamInfos) {
-            teamImage = '<img width="140px" style="padding: 5px;margin-left:-50px" src="static/forts/label/' + teamName + '_raw.png">'
+            teamImage = '<img width="140px" style="margin-left:-30px" src="static/forts/label/' + teamName + '_raw.png">'
         } else {
-            teamImage = '<img width="140px" style="padding: 5px;margin-left:-50px" src="static/forts/label/Harmony_raw.png">'
+            teamImage = '<img width="140px" style="margin-left:-30px" src="static/forts/label/Harmony_raw.png">'
         }
         if (item['raid_level'] >= 6) { // Handle if its a Mega Raid or not
-            raidStr = '<h3 style="margin-bottom: 0">' + i8ln('Mega Raid')
+            raidStr = '<h3 style="margin-bottom: 0">★' + i8ln('Mega Raid') + '★'
         } else {
             var levelStr = ''
             for (i = 0; i < item['raid_level']; i++) {
@@ -1615,8 +1615,24 @@ function gymLabel(item) {
             if (item.raid_pokemon_cp > 0) {
                 cpStr = ' ' + i8ln('CP') + ' ' + item.raid_pokemon_cp
             }
-            raidStr += '<br>' + item.raid_pokemon_name
-            if (form !== null && form > 0 && forms.length > form) {
+			var evolutionForm = ''
+            if (item['raid_level'] >= 6) { // Change Pokename if its a Megaraid
+                var evolutionForm = '_' + item['evolutionform']
+				raidStr += '<br> Mega ' + item.raid_pokemon_name
+				switch(evolutionForm){
+				    case 2:
+				        raidStr += " X"
+				        break
+				    case 3:
+				        raidStr += " Y"
+				        break
+				    default:
+				        break
+				}
+            } else{
+                raidStr += '<br>' + item.raid_pokemon_name
+            }
+            if (form !== null && form > 0 && forms.length > form && item['raid_level'] <= 5) {
                 if (item['raid_pokemon_id'] === 132) {
                     raidStr += ' (' + idToPokemon[item['form']].name + ')'
                 } else {
@@ -1660,7 +1676,7 @@ function gymLabel(item) {
         raidStr += '<div>' + i8ln('End') + ': <b>' + raidEndStr + '</b> <span class="label-countdown" disappears-at="' + item['raid_end'] + '" end>(00m00s)</span></div>'
 
         if (raidStarted) {
-            raidIcon = '<img style="width: 68px;margin-left:-105px;margin-bottom: 50px; --webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222);" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png"/>'
+            raidIcon = '<img style="width: 80px;margin-left:-110px;margin-bottom: 30px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + evolutionForm + '.png"/>'
             if (form !== null && form > 0 && forms.length > form && formsEn[item['form']] !== '' && formsEn[item['form']] !== 'Normal') {
                 raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '_' + (formsEn[item['form']]).toUpperCase() + '_FORM/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
             } else {
@@ -2809,9 +2825,9 @@ function getGymMarkerIcon(item, badgeMode) {
     // Dynamic Sizes
     // Raid,Gym,Eggsizes
     // If you want to keep the scaling on mapzoom, dont touch these settings
-    var dynamicRaidBossSize = (34 / 6) + ((34 / 6) * (map.getZoom() - 10)) // RaidbossSize - Depends on Zoom - 40=Initial
-    var dynamicRaidBossPosRight = (13 / 6) + ((13 / 6) * (map.getZoom() - 10)) // Position from the raidboss from Right - Depends on Zoom - 12 = Initial
-    var dynamicRaidBossPosTop = (-6 / 6) + ((-6 / 6) * (map.getZoom() - 10)) // Position from the raidboss from Top - Depends on Zoom - 6 = Initial
+    var dynamicRaidBossSize = (40 / 6) + ((40 / 6) * (map.getZoom() - 10)) // RaidbossSize - Depends on Zoom - 40=Initial
+    var dynamicRaidBossPosRight = (10 / 6) + ((10 / 6) * (map.getZoom() - 10)) // Position from the raidboss from Right - Depends on Zoom - 12 = Initial
+    var dynamicRaidBossPosTop = (-5 / 6) + ((-5 / 6) * (map.getZoom() - 10)) // Position from the raidboss from Top - Depends on Zoom - 6 = Initial
     var dynamicEggUnknownSize = (32 / 6) + ((32 / 6) * (map.getZoom() - 10)) // Unknown Egg Size - Depends on Zoom - 35=Initial
     var dynamicEggUnknownPosRight = (11 / 6) + ((11 / 6) * (map.getZoom() - 10)) // Unknown Egg right position - Depends on Zoom - 18=Initial
     var dynamicEggUnknownPosTop = (-9 / 6) + ((-9 / 6) * (map.getZoom() - 10)) // Unknown Egg Top position - Depends on Zoom - (-11)=Initial
@@ -2882,6 +2898,11 @@ function getGymMarkerIcon(item, badgeMode) {
         pokemonidStr = pokemonid
     }
 
+	var evolutionForm = ''
+    if (item['raid_level'] >= 6) { // Change evolution if its a Megaraid
+        var evolutionForm = '_' + item['evolutionform']
+	}
+
     var teamStr = ''
     var team = ''
     if (!noGymTeamInfos && (noOutdatedGyms || ((lastScanned / 1000) > ((Date.now() / 1000) - 14400)))) {
@@ -2941,7 +2962,7 @@ function getGymMarkerIcon(item, badgeMode) {
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
                 exIcon +
-                '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + '.png" style="width:' + dynamicRaidBossSize + 'px;height:auto;position:absolute;top:' + dynamicRaidBossPosTop + 'px;right:' + dynamicRaidBossPosRight + 'px;"/>' +
+                '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + evolutionForm + '.png" style="width:' + dynamicRaidBossSize + 'px;height:auto;position:absolute;top:' + dynamicRaidBossPosTop + 'px;right:' + dynamicRaidBossPosRight + 'px;"/>' +
                 exclusiveIcon +
                 battleIcon +
                 '</div>'

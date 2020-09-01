@@ -211,7 +211,13 @@
                         "color": "#a040a0",
                         "type": "Poison"
                     }
-                ]
+                ],
+				"megaEvolutions": [
+					{
+						"cp": 50653,
+						"protonum": 1
+					}
+				]
             },
             {
                 "nameform": "Purified",
@@ -427,7 +433,17 @@
                         "color": "#a890f0",
                         "type": "Flying"
                     }
-                ]
+                ],
+				"megaEvolutions": [
+					{
+						"cp": 53260,
+						"protonum": 2
+					},
+					{
+						"cp": 61631,
+						"protonum": 3
+					}
+				]
             },
             {
                 "nameform": "Purified",
@@ -631,7 +647,13 @@
                         "color": "#6890f0",
                         "type": "Water"
                     }
-                ]
+                ],
+				"megaEvolutions": [
+					{
+						"cp": 54243,
+						"protonum": 1
+					}
+				]
             },
             {
                 "nameform": "Purified",
