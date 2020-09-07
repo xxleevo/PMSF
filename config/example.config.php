@@ -235,6 +235,12 @@ $hideQuestsItem = '[4, 5, 301, 401, 402, 403, 404, 501, 502, 503, 504, 602, 603,
 $excludeQuestsItem = [4, 5, 301, 401, 402, 403, 404, 501, 502, 503, 504, 602, 603, 604, 702, 704, 707, 801, 901, 902, 903, 1001, 1002, 1401, 1402, 1402, 1403, 1404, 1405];   // All excluded item wil not be shown in the filter.
 $generateExcludeItems = true;
 
+$noQuestsEnergy = false;                                           // true/false - Mega Energy Quest filter
+$noEnergyNumbers = true;
+$hideQuestsEnergy = '[18,15,94,115,127,130,142,150,181,208,212,214,229,248,254,257,260,282,302,303,306,308,310,319,323,328,334,354,359,362,373,376,380,381,384,445,448,460,475,531,849]';  // Pokemon ids
+$excludeQuestsEnergy = [18,15,94,115,127,130,142,150,181,208,212,214,229,248,254,257,260,282,302,303,306,308,310,319,323,328,334,354,359,362,373,376,380,381,384,445,448,460,475,531,849];
+$generateExcludeEnergy = true;
+
 $noQuestsPokemon = false;													// Enables/Disables Quest Pokemon
 $generateExcludeQuestsPokemon = true;                               		// Generate $excludeQuestsPokemon based on active quests in database
 //Dont change this if $generateExcludeQuestsPokemon is true

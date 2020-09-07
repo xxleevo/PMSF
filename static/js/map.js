@@ -45,6 +45,7 @@ var $switchPokePVPStats
 var $switchBadgeMode
 var $questsExcludePokemon
 var $questsExcludeItem
+var $questsExcludeEnergy
 var $excludeGrunts
 var $excludeRaidbosses
 var $excludeRaideggs
@@ -66,6 +67,7 @@ var excludedMinIV = []
 var notifiedPokemon = []
 var questsExcludedPokemon = []
 var questsExcludedItem = []
+var questsExcludedEnergy = []
 var excludedGrunts = []
 var excludedRaidbosses = []
 var excludedRaideggs = []
@@ -84,12 +86,14 @@ var buffer = []
 var reincludedPokemon = []
 var reincludedQuestsPokemon = []
 var reincludedQuestsItem = []
+var reincludedQuestsEnergy = []
 var reincludedGrunts = []
 var reincludedRaidbosses = []
 var reincludedRaideggs = []
 var reids = []
 var qpreids = []
 var qireids = []
+var qereids = []
 var greids = []
 var rbreids = []
 var rereids = []
@@ -140,6 +144,7 @@ var cries
 var pokeList = []
 var raidBoss = {} // eslint-disable-line no-unused-vars
 var itemList = []
+var energyList = []
 var gruntList = []
 var raidbossList = []
 var raideggsList = []
@@ -188,6 +193,8 @@ var pokemonTypes = [i8ln('unset'), i8ln('Normal'), i8ln('Fighting'), i8ln('Flyin
 var gruntCharacterTypes = [i8ln('unset'), i8ln('Team Leader'), i8ln('Grunt'), i8ln('Arlo'), i8ln('Cliff'), i8ln('Sierra'), i8ln('Giovanni')]
 var genderType = ['♂', '♀', 'N/A', 'N/A']
 var raidGenderType = ['N/A', '♂', '♀', 'Genderless']
+var raidMegaEvolutions = [i8ln('unset'),'',i8ln('X'),i8ln('Y')]
+var megaPokemonIds = [3,6,9,18,15,94,115,127,130,142,150,181,208,212,214,229,248,254,257,260,282,302,303,306,308,310,319,323,328,334,354,359,362,373,376,380,381,384,445,448,460,475,531,849]
 var forms = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?', i8ln('Normal'), i8ln('Sunny'), i8ln('Rainy'), i8ln('Snowy'), i8ln('Normal'), i8ln('Attack'), i8ln('Defense'), i8ln('Speed'), i8ln('1'), i8ln('2'), i8ln('3'), i8ln('4'), i8ln('5'), i8ln('6'), i8ln('7'), i8ln('8'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Frost'), i8ln('Fan'), i8ln('Mow'), i8ln('Wash'), i8ln('Heat'), i8ln('Plant'), i8ln('Sandy'), i8ln('Trash'), i8ln('Altered'), i8ln('Origin'), i8ln('Sky'), i8ln('Land'), i8ln('Overcast'), i8ln('Sunny'), i8ln('West sea'), i8ln('East sea'), i8ln('West sea'), i8ln('East sea'), i8ln('Arceus Normal'), i8ln('Archeus Fighting'), i8ln('Archeus Flying'), i8ln('Archeus Poison'), i8ln('Archeus Ground'), i8ln('Archeus Rock'), i8ln('Archeus Bug'), i8ln('Archeus Ghost'), i8ln('Archeus Steel'), i8ln('Archeus Fire'), i8ln('Archeus Water'), i8ln('Archeus Grass'), i8ln('Archeus Electric'), i8ln('Archeus Psychic'), i8ln('Archeus Ice'), i8ln('Archeus Dragon'), i8ln('Archeus Dark'), i8ln('Archeus Fairy'), i8ln('Plant'), i8ln('Sandy'), i8ln('Trash'), i8ln('8'), i8ln('9'), i8ln('10'), i8ln('11'), i8ln('12'), i8ln('13'), i8ln('14'), i8ln('15'), i8ln('16'), i8ln('17'), i8ln('18'), i8ln('19'), i8ln('Armored'), i8ln('A-intro'), i8ln('Normal'), i8ln('Red Striped'), i8ln('Blue Striped'), i8ln('Normal'), i8ln('Zen'), i8ln('Incarnate'), i8ln('Therian'), i8ln('Incarnate'), i8ln('Therian'), i8ln('Incarnate'), i8ln('Therian'), i8ln('Normal'), i8ln('Black'), i8ln('White'), i8ln('Ordinary'), i8ln('Resolute'), i8ln('Aria'), i8ln('Pirouette'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Spring'), i8ln('Summer'), i8ln('Autumn'), i8ln('Winter'), i8ln('Spring'), i8ln('Summer'), i8ln('Autumn'), i8ln('Winter'), i8ln('Normal'), i8ln('Schock'), i8ln('Burn'), i8ln('Chill'), i8ln('Douse'), i8ln('Normal'), i8ln('Unknown'), i8ln('Normal'), i8ln('Unknown'), i8ln('Normal'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Fall'), i8ln('Fall'), i8ln('Fall'), i8ln('Fall'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('VS 2019'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Galarian'), i8ln('Normal'), i8ln('Galarian'), i8ln('Normal'), i8ln('Galarian'), i8ln('Unknown'), i8ln('Clone'), i8ln('Clone'), i8ln('Clone')]
 var formsEn = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?', 'Normal', 'Sunny', 'Rainy', 'Snowy', 'Normal', 'Attack', 'Defense', 'Speed', '1', '2', '3', '4', '5', '6', '7', '8', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Frost', 'Fan', 'Mow', 'Wash', 'Heat', 'Plant', 'Sandy', 'Trash', 'Altered', 'Origin', 'Sky', 'Land', 'Overcast', 'Sunny', 'West sea', 'East sea', 'West sea', 'East sea', 'Arceus Normal', 'Fighting', 'Flying', 'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel', 'Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark', 'Fairy', 'Plant', 'Sandy', 'Trash', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', 'Armored', 'A-intro', 'Normal', 'Red Striped', 'Blue Striped', 'Normal', 'Zen', 'Incarnate', 'Therian', 'Incarnate', 'Therian', 'Incarnate', 'Therian', 'Normal', 'Black', 'White', 'Ordinary', 'Resolute', 'Aria', 'Pirouette', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Spring', 'Summer', 'Autumn', 'Winter', 'Spring', 'Summer', 'Autumn', 'Winter', 'Normal', 'Schock', 'Burn', 'Chill', 'Douse', 'Normal', 'Unknown', 'Normal', 'Unknown', 'Normal', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Fall', 'Fall', 'Fall', 'Fall', 'Normal', 'Shadow', 'Purified', 'VS 2019', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Galarian', 'Normal', 'Galarian', 'Normal', 'Galarian', '', '', '', '']
 var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.3210876, 0.34921268, 0.37523559, 0.39956728, 0.42250001, 0.44310755, 0.46279839, 0.48168495, 0.49985844, 0.51739395, 0.53435433, 0.55079269, 0.56675452, 0.58227891, 0.59740001, 0.61215729, 0.62656713, 0.64065295, 0.65443563, 0.667934, 0.68116492, 0.69414365, 0.70688421, 0.71939909, 0.7317, 0.73776948, 0.74378943, 0.74976104, 0.75568551, 0.76156384, 0.76739717, 0.7731865, 0.77893275, 0.7846369, 0.79030001]
@@ -1615,23 +1622,14 @@ function gymLabel(item) {
             if (item.raid_pokemon_cp > 0) {
                 cpStr = ' ' + i8ln('CP') + ' ' + item.raid_pokemon_cp
             }
-			var evolutionForm = ''
-            if (item['raid_level'] >= 6) { // Change Pokename if its a Megaraid
-                var evolutionForm = '_' + item['evolutionform']
-				raidStr += '<br> Mega ' + item.raid_pokemon_name
-				switch(evolutionForm){
-				    case 2:
-				        raidStr += " X"
-				        break
-				    case 3:
-				        raidStr += " Y"
-				        break
-				    default:
-				        break
-				}
+			var evolutionStr = ''
+            if (item['raid_level'] >= 6 && item['raid_evolution'] >= 1) { // Megaraid Evolution handling
+                var evolutionStr = '_' + item['raid_evolution']
+				raidStr += '<br> Mega ' + item.raid_pokemon_name + ' ' + raidMegaEvolutions[item['raid_evolution']]
             } else{
                 raidStr += '<br>' + item.raid_pokemon_name
             }
+
             if (form !== null && form > 0 && forms.length > form && item['raid_level'] <= 5) {
                 if (item['raid_pokemon_id'] === 132) {
                     raidStr += ' (' + idToPokemon[item['form']].name + ')'
@@ -1639,6 +1637,7 @@ function gymLabel(item) {
                     raidStr += ' (' + forms[item['form']] + ')'
                 }
             }
+
             raidStr += cpStr
             if (!noRaidPokemonCP) {
                 var cpMin = getPokemonCP(pokemonid, raidForm, item['raidboss_base_atk'], item['raidboss_base_def'], item['raidboss_base_sta'], 20, 10, 10, 10)
@@ -1676,7 +1675,7 @@ function gymLabel(item) {
         raidStr += '<div>' + i8ln('End') + ': <b>' + raidEndStr + '</b> <span class="label-countdown" disappears-at="' + item['raid_end'] + '" end>(00m00s)</span></div>'
 
         if (raidStarted) {
-            raidIcon = '<img style="width: 80px;margin-left:-110px;margin-bottom: 30px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + evolutionForm + '.png"/>'
+            raidIcon = '<img style="width: 80px;margin-left:-110px;margin-bottom: 30px;" src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + evolutionStr + '.png"/>'
             if (form !== null && form > 0 && forms.length > form && formsEn[item['form']] !== '' && formsEn[item['form']] !== 'Normal') {
                 raidCounterGuideStr = '<a href="https://www.pokebattler.com/raids/defenders/' + item['raid_pokemon_name_en'].toUpperCase() + '_' + (formsEn[item['form']]).toUpperCase() + '_FORM/levels/RAID_LEVEL_' + item['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
             } else {
@@ -1930,7 +1929,7 @@ function getReward(item) {
     } else if (item['quest_reward_type'] === 2) {
         rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_' + reward['item_id'] + '_1.png"/>'
     } else if (item['quest_reward_type'] === 12) {
-        rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_mega_energy.png"/>'
+        rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/mega_energy/reward_mega_energy_' + item['quest_energy_pokemon_id'] + '.png"/>'
     }
     return rewardImage
 }
@@ -2197,7 +2196,7 @@ function getQuest(item) {
         }
         if (item['quest_reward_type'] === 12) {
             str += '<div><center>' +
-            '<b><u>' + i8ln('Reward') + ': </u></b>' + i8ln('Mega Energy') + '<br>' +
+            '<b><u>' + i8ln('Reward') + ': </u></b>' + item['quest_energy_pokemon_name'] + ' ' + i8ln('Mega Energy') + '<br>' +
             '<b><u>' + i8ln('Amount') + ': </u></b>' + ' ' + item['quest_reward_amount'] +
             '</center></div>'
         }
@@ -2468,6 +2467,9 @@ function pokestopLabel(item) {
             }
             if (item['quest_reward_type'] === 3) {
                 excludeStr = '<a href="javascript:excludeDustQuest()" title="' + i8ln('Exclude Stardust Quests') + '">' + i8ln('Exclude Questtype') + '</a>'
+            }
+            if (item['quest_reward_type'] === 12) {
+                excludeStr = '<a href="javascript:excludeEnergyQuest()" title="' + i8ln('Exclude Energy Quests') + '">' + i8ln('Exclude Questtype') + '</a>'
             }
         }
         var rewardImg = '<div style="margin-top:-60px;margin-right:-60px">' +
@@ -2908,9 +2910,9 @@ function getGymMarkerIcon(item, badgeMode) {
         pokemonidStr = pokemonid
     }
 
-	var evolutionForm = ''
-    if (item['raid_level'] >= 6) { // Change evolution if its a Megaraid
-        var evolutionForm = '_' + item['evolutionform']
+	var evolutionStr = '' // Megaraid & Evolution handling
+    if (item['raid_level'] >= 6 && item['raid_evolution'] >= 1) { // Change evolution if its a Megaraid
+        var evolutionStr = '_' + item['raid_evolution']
 	}
 
     var teamStr = ''
@@ -2972,7 +2974,7 @@ function getGymMarkerIcon(item, badgeMode) {
             html = '<div style="position:relative;">' +
                 '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:' + dynamicGymSize + 'px;height:auto;"/>' +
                 exIcon +
-                '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + evolutionForm + '.png" style="width:' + dynamicRaidBossSize + 'px;height:auto;position:absolute;top:' + dynamicRaidBossPosTop + 'px;right:' + dynamicRaidBossPosRight + 'px;"/>' +
+                '<img src="' + iconpath + 'pokemon_icon_' + pokemonidStr + '_' + formStr + evolutionStr + '.png" style="width:' + dynamicRaidBossSize + 'px;height:auto;position:absolute;top:' + dynamicRaidBossPosTop + 'px;right:' + dynamicRaidBossPosRight + 'px;"/>' +
                 exclusiveIcon +
                 battleIcon +
                 '</div>'
@@ -3283,9 +3285,11 @@ function getPokestopMarkerIcon(item) {
                 rewardImg = '<img src="static/forts/gruntType/' + item['grunt_type'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
             } else if (Store.get('showItemAmounts')) {
                 rewardImg = '<img src="' + rewardIcons + 'rewards/reward_mega_energy_' + item['quest_reward_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
-            } else {
-                rewardImg = '<img src="' + rewardIcons + 'rewards/reward_mega_energy.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+
+			} else {
+                rewardImg = '<img src="' + rewardIcons + 'rewards/mega_energy/reward_mega_energy_' + item['quest_energy_pokemon_id'] + '.png" style="width:40px;height:auto;position:absolute;top:-5px;left:-8px;"/>'
             }
+			//item['quest_reward_amount']
 
             if (lure > Date.now()) {
                 html = '<div style="position:relative;">' +
@@ -4164,6 +4168,8 @@ function loadRawData() {
             'qpeids': String(questsExcludedPokemon),
             'qireids': String(reincludedQuestsItem),
             'qieids': String(questsExcludedItem),
+			'qereids': String(reincludedQuestsEnergy),
+            'qeeids': String(questsExcludedEnergy),
             'geids': String(excludedGrunts),
             'greids': String(reincludedGrunts),
             'rbeids': String(excludedRaidbosses),
@@ -6118,7 +6124,7 @@ function updatePokestops() {
     }
     if (Store.get('showQuests')) {
         $.each(mapData.pokestops, function (key, value) {
-            if (value['quest_type'] === 0 || ((value['quest_pokemon_id'] > 0 && questsExcludedPokemon.indexOf(value['quest_pokemon_id']) > -1) || (value['quest_item_id'] > 0 && questsExcludedItem.indexOf(value['quest_item_id']) > -1) || ((value['quest_reward_type'] === 3 && (Number(value['quest_reward_amount']) < Number(Store.get('showDustAmount')))) || (value['quest_reward_type'] === 3 && Store.get('showDustAmount') === 0)))) {
+            if (value['quest_type'] === 0 || ((value['quest_pokemon_id'] > 0 && questsExcludedPokemon.indexOf(value['quest_pokemon_id']) > -1) || (value['quest_item_id'] > 0 && questsExcludedItem.indexOf(value['quest_item_id']) > -1) || (value['quest_energy_pokemon_id'] > 0 && value['quest_reward_type'] == 12 && questsExcludedEnergy.indexOf(value['quest_energy_pokemon_id']) > -1) || ((value['quest_reward_type'] === 3 && (Number(value['quest_reward_amount']) < Number(Store.get('showDustAmount')))) || (value['quest_reward_type'] === 3 && Store.get('showDustAmount') === 0)))) {
                 removeStops.push(key)
             }
         })
@@ -6445,6 +6451,7 @@ function updateMap() {
         reids = result.reids
         qpreids = result.qpreids
         qireids = result.qireids
+        qereids = result.qereids
         greids = result.greids
         rbreids = result.rbreids
         rereids = result.rereids
@@ -6462,6 +6469,11 @@ function updateMap() {
             reincludedQuestsItem = qireids.filter(function (e) {
                 return this.indexOf(e) < 0
             }, reincludedQuestsItem)
+        }
+        if (qereids instanceof Array) {
+            reincludedQuestsEnergy = qereids.filter(function (e) {
+                return this.indexOf(e) < 0
+            }, reincludedQuestsEnergy)
         }
         if (greids instanceof Array) {
             reincludedGrunts = greids.filter(function (e) {
@@ -7305,6 +7317,26 @@ function itemSpritesFilter() {
     })
 }
 
+function energySpritesFilter() {
+    jQuery('.energy-list').parent().find('.select2').hide()
+    loadDefaultImages()
+    jQuery('#nav .energy-list .energy-icon-sprite').on('click', function () {
+        var img = jQuery(this)
+        var select = jQuery(this).parent().parent().parent().find('.select2-hidden-accessible')
+        var value = select.val().split(',')
+        var id = img.data('value').toString()
+        if (img.hasClass('active')) {
+            select.val(value.filter(function (elem) {
+                return elem !== id
+            }).join(',')).trigger('change')
+            img.removeClass('active')
+        } else {
+            select.val((value.concat(id).join(','))).trigger('change')
+            img.addClass('active')
+        }
+    })
+}
+
 function gruntSpritesFilter() {
     jQuery('.grunt-list').parent().find('.select2').hide()
     loadDefaultImages()
@@ -7368,6 +7400,7 @@ function loadDefaultImages() {
     var en = Store.get('remember_select_notify')
     var eqp = Store.get('remember_quests_exclude_pokemon')
     var eqi = Store.get('remember_quests_exclude_item')
+    var eqe = Store.get('remember_quests_exclude_energy')
     var eg = Store.get('remember_exclude_grunts')
     var erb = Store.get('remember_exclude_raidbosses')
     var ere = Store.get('remember_exclude_raideggs')
@@ -7393,6 +7426,11 @@ function loadDefaultImages() {
     })
     $('label[for="exclude-quests-item"] .item-icon-sprite').each(function () {
         if (eqi.indexOf($(this).data('value')) !== -1) {
+            $(this).addClass('active')
+        }
+    })
+    $('label[for="exclude-quests-energy"] .energy-icon-sprite').each(function () {
+        if (eqe.indexOf($(this).data('value')) !== -1) {
             $(this).addClass('active')
         }
     })
@@ -7841,6 +7879,7 @@ $(function () {
     $selectGymMarkerStyle.val(Store.get('gymMarkerStyle')).trigger('change')
     pokemonSpritesFilter()
     itemSpritesFilter()
+	energySpritesFilter()
 
     // Overlay Styling
     $selectOverlayStyle = $('#design-style')
@@ -7937,6 +7976,7 @@ $(function () {
     $switchBigKarp = $('#big-karp-switch')
     $questsExcludePokemon = $('#exclude-quests-pokemon')
     $questsExcludeItem = $('#exclude-quests-item')
+    $questsExcludeEnergy = $('#exclude-quests-energy')
     $excludeGrunts = $('#exclude-grunts')
     $excludeRaidbosses = $('#exclude-raidbosses')
     $excludeRaideggs = $('#exclude-raideggs')
@@ -8040,6 +8080,12 @@ $(function () {
             idToPokemon[key] = value
         })
 
+        $.each(megaPokemonIds, function (key, value) {
+            energyList.push({
+                id: value,
+                name: idToPokemon[value]
+            })
+        })
         // setup the filter lists
         $selectExclude.select2({
             placeholder: i8ln('Select Pokémon'),
@@ -8063,6 +8109,13 @@ $(function () {
         $questsExcludePokemon.select2({
             placeholder: i8ln('Select Pokémon'),
             data: pokeList,
+            templateResult: formatState,
+            multiple: true,
+            maximumSelectionSize: 1
+        })
+        $questsExcludeEnergy.select2({
+            placeholder: i8ln('Select Item'),
+            data: energyList,
             templateResult: formatState,
             multiple: true,
             maximumSelectionSize: 1
@@ -8215,6 +8268,18 @@ $(function () {
             updateMap()
             Store.set('remember_quests_exclude_pokemon', questsExcludedPokemon)
         })
+        $questsExcludeEnergy.on('change', function (e) {
+            buffer = questsExcludedEnergy
+            questsExcludedEnergy = $questsExcludeEnergy.val().split(',').map(Number).sort(function (a, b) {
+                return parseInt(a) - parseInt(b)
+            })
+            buffer = buffer.filter(function (e) {
+                return this.indexOf(e) < 0
+            }, questsExcludedEnergy)
+            reincludedQuestsEnergy = reincludedQuestsEnergy.concat(buffer).map(String)
+            updateMap()
+            Store.set('remember_quests_exclude_energy', questsExcludedEnergy)
+        })
         // recall saved lists
         $selectExclude.val(Store.get('remember_select_exclude')).trigger('change')
         $selectExcludeMinIV.val(Store.get('remember_select_exclude_min_iv')).trigger('change')
@@ -8226,6 +8291,7 @@ $(function () {
         $textMinPVP.val(Store.get('remember_text_min_pvp')).trigger('change')
         $raidNotify.val(Store.get('remember_raid_notify')).trigger('change')
         $questsExcludePokemon.val(Store.get('remember_quests_exclude_pokemon')).trigger('change')
+        $questsExcludeEnergy.val(Store.get('remember_quests_exclude_energy')).trigger('change')
         $excludeRaidbosses.val(Store.get('remember_exclude_raidbosses')).trigger('change')
         $excludeRaideggs.val(Store.get('remember_exclude_raideggs')).trigger('change')
 
@@ -8265,6 +8331,19 @@ $(function () {
         e.preventDefault()
         var parent = $(this).parent()
         parent.find('.item-list .item-icon-sprite').removeClass('active')
+        parent.find('input').val('').trigger('change')
+    })
+    $('.select-all-energy').on('click', function (e) {
+        e.preventDefault()
+        var parent = $(this).parent()
+        parent.find('.energy-list .energy-icon-sprite').addClass('active')
+        parent.find('input').val(Array.from(Array(numberOfPokemon + 1).keys()).slice(1).join(',')).trigger('change')
+    })
+
+    $('.hide-all-energy').on('click', function (e) {
+        e.preventDefault()
+        var parent = $(this).parent()
+        parent.find('.energy-list .energy-icon-sprite').removeClass('active')
         parent.find('input').val('').trigger('change')
     })
 
