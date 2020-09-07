@@ -2,18 +2,17 @@
 namespace Search;
 class RDM extends Search
 {
-    public function search_reward($lat, $lon, $term)
-    {
+    public function search_reward($lat, $lon, $term){
         global $db, $defaultUnit, $maxSearchResults, $maxSearchNameLength;
-	$conds = array();
-	$params = array();
-	$params[':lat'] = $lat;
-	$params[':lon'] = $lon;
+		$conds = array();
+		$params = array();
+		$params[':lat'] = $lat;
+		$params[':lon'] = $lon;
         $pjson = file_get_contents( 'static/dist/data/pokemon.min.json' );
         $prewardsjson = json_decode( $pjson, true );
         $presids = array();
         foreach($prewardsjson as $p => $preward){
-            if( $p > 649){
+            if( $p > 890){
                 break;
             }
             if(strpos(strtolower(i8ln($preward['name'])), strtolower($term)) !== false){
@@ -28,39 +27,49 @@ class RDM extends Search
                 $iresids[] = $i;
             }
         }
-	if (!empty($presids)) {
+		if (!empty($presids)) {
 		$conds[] = "quest_pokemon_id IN (" . implode(',',$presids) . ")";
-	}
-	if (!empty($iresids)) {
+		}
+		if (!empty($iresids)) {
 		$conds[] = "quest_item_id IN (" . implode(',',$iresids) . ")";
-	}
-	$query = "SELECT id,
-    name,
-	lat,
-	lon,
-	url,
-	quest_type,
-	json_extract(json_extract(`quest_rewards`,'$[*].info.pokemon_id'),'$[0]') AS quest_pokemon_id,
-	json_extract(json_extract(`quest_rewards`,'$[*].info.item_id'),'$[0]') AS quest_item_id, 
-	ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ),2) AS distance 
-	FROM pokestop
-	WHERE :conditions
-	ORDER BY distance LIMIT " . $maxSearchResults . "";
-	$query = str_replace(":conditions", join(" OR ", $conds), $query);
-	$rewards = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
-	$data = array();
-	foreach($rewards as $reward){
-        $reward['pokemon_name'] = !empty($reward['pokemon_name']) ? $prewardsjson[$reward['quest_pokemon_id']]['name'] : null;
-	    $reward['quest_pokemon_id'] = intval($reward['quest_pokemon_id']);
-        $reward['item_name'] = !empty($reward['item_name']) ? $irewardsjson[$reward['quest_item_id']]['name'] : null;
-	    $reward['quest_item_id'] = intval($reward['quest_item_id']);
-	    $reward['url'] = preg_replace("/^http:/i", "https:", $reward['url']);
-	    $reward['name'] = ($maxSearchNameLength > 0) ? htmlspecialchars(substr($reward['name'], 0, $maxSearchNameLength)) : htmlspecialchars($reward['name']);
-            if($defaultUnit === "km"){
-                $reward['distance'] = round($reward['distance'] * 1.60934,2);
-	    }
-	    $data[] = $reward;
-	}
+		}
+        if (strpos(strtolower(i8ln('Mega')), strtolower($term)) !== false || strpos(strtolower(i8ln('Energy')), strtolower($term)) !== false || strpos(strtolower(i8ln('Mega Energy')), strtolower($term)) !== false) {
+            $conds[] = "quest_reward_type = 12";
+        }
+		$query = "SELECT id,
+		name,
+		lat,
+		lon,
+		url,
+		quest_type,
+		quest_reward_type,
+		quest_pokemon_id,
+		quest_item_id,
+		json_extract(json_extract(`quest_rewards`,'$[*].info.form_id'),'$[0]') AS quest_pokemon_formid,
+		json_extract(json_extract(`quest_rewards`,'$[*].info.pokemon_id'),'$[0]') AS quest_energy_pokemon_id,
+		ROUND(( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * cos( radians( lon ) - radians(:lon) ) + sin( radians(:lat) ) * sin( radians( lat ) ) ) ),2) AS distance 
+		FROM pokestop
+		WHERE :conditions
+		ORDER BY distance LIMIT " . $maxSearchResults . "";
+
+		$query = str_replace(":conditions", join(" OR ", $conds), $query);
+		$rewards = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
+		$data = array();
+		foreach($rewards as $reward){
+			$reward['pokemon_name'] = !empty($reward['pokemon_name']) ? $prewardsjson[$reward['quest_pokemon_id']]['name'] : null;
+			$reward['quest_pokemon_id'] = intval($reward['quest_pokemon_id']);
+			$reward['item_name'] = !empty($reward['item_name']) ? $irewardsjson[$reward['quest_item_id']]['name'] : null;
+			$reward['quest_item_id'] = intval($reward['quest_item_id']);
+			$reward['quest_pokemon_formid'] = intval($reward['quest_pokemon_formid']);
+			$reward['quest_energy_pokemon_id'] = intval($reward['quest_energy_pokemon_id']);
+			$reward['quest_reward_type'] = intval($reward['quest_reward_type']);
+			$reward['url'] = preg_replace("/^http:/i", "https:", $reward['url']);
+			$reward['name'] = ($maxSearchNameLength > 0) ? htmlspecialchars(substr($reward['name'], 0, $maxSearchNameLength)) : htmlspecialchars($reward['name']);
+				if($defaultUnit === "km"){
+					$reward['distance'] = round($reward['distance'] * 1.60934,2);
+			}
+			$data[] = $reward;
+		}
         return $data;
     }
     public function search_nests($lat, $lon, $term)
