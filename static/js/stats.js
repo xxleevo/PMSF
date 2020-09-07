@@ -178,19 +178,6 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         var raidListString = '<table><th>' + i8ln('Icon') + '</th><th>' + i8ln('Level') + '</th><th>' + i8ln('Count') + '</th><th>%</th><tr><td></td></tr>'
         for (i = 0; i < raidCount.length; i++) {
             if (raidCount[i] > 0) {
-				/*
-                if (i === 1) {
-                    raidListString += '<tr><td><img src="static/raids/egg_normal.png" style="height:48px;"/></td><td style="vertical-align:middle;">1</td><td style="vertical-align:middle;">' + raidCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(raidCount[i] * 100 / raidTotal * 10) / 10 + '%</td></tr>'
-                } else if (i === 2) {
-                    raidListString += '<tr><td><img src="static/raids/egg_normal.png" style="height:48px;"/></td><td style="vertical-align:middle;">2</td><td style="vertical-align:middle;">' + raidCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(raidCount[i] * 100 / raidTotal * 10) / 10 + '%</td></tr>'
-                } else if (i === 3) {
-                    raidListString += '<tr><td><img src="static/raids/egg_rare.png" style="height:48px;"/></td><td style="vertical-align:middle;">3</td><td style="vertical-align:middle;">' + raidCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(raidCount[i] * 100 / raidTotal * 10) / 10 + '%</td></tr>'
-                } else if (i === 4) {
-                    raidListString += '<tr><td><img src="static/raids/egg_rare.png" style="height:48px;"/></td><td style="vertical-align:middle;">4</td><td style="vertical-align:middle;">' + raidCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(raidCount[i] * 100 / raidTotal * 10) / 10 + '%</td></tr>'
-                } else if (i === 5) {
-                    raidListString += '<tr><td><img src="static/raids/egg_legendary.png" style="height:48px;"/></td><td style="vertical-align:middle;">5</td><td style="vertical-align:middle;">' + raidCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(raidCount[i] * 100 / raidTotal * 10) / 10 + '%</td></tr>'
-                }
-				*/
                 raidListString += '<tr><td><img src="static/raids/egg_' + i + '.png" style="height:48px;"/></td><td style="vertical-align:middle;">' + i + '</td><td style="vertical-align:middle;">' + raidCount[i] + '</td><td style="vertical-align:middle;">' + Math.round(raidCount[i] * 100 / raidTotal * 10) / 10 + '%</td></tr>'
             }
         }

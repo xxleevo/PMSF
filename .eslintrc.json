@@ -236,6 +236,15 @@
     "enableLiveScan": true,
     "deviceOfflineAfterSeconds": true,
 	"noRaids": true,
-    "noEditPoi": true
+    "noEditPoi": true,
+	"minPVP": true,
+	"hideQuestsEnergy": true,
+	"enablePokePVPStats": true,
+	"customTileServers": true,
+	"osmTileServer": true,
+	"maxNativeZoomOSM": true,
+	"mBoxKey": true,
+	"noPokePVPStats": true
+	
   }
 }

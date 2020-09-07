@@ -193,8 +193,8 @@ var pokemonTypes = [i8ln('unset'), i8ln('Normal'), i8ln('Fighting'), i8ln('Flyin
 var gruntCharacterTypes = [i8ln('unset'), i8ln('Team Leader'), i8ln('Grunt'), i8ln('Arlo'), i8ln('Cliff'), i8ln('Sierra'), i8ln('Giovanni')]
 var genderType = ['♂', '♀', 'N/A', 'N/A']
 var raidGenderType = ['N/A', '♂', '♀', 'Genderless']
-var raidMegaEvolutions = [i8ln('unset'),'',i8ln('X'),i8ln('Y')]
-var megaPokemonIds = [3,6,9,18,15,94,115,127,130,142,150,181,208,212,214,229,248,254,257,260,282,302,303,306,308,310,319,323,328,334,354,359,362,373,376,380,381,384,445,448,460,475,531,849]
+var raidMegaEvolutions = [i8ln('unset'), '', i8ln('X'), i8ln('Y')]
+var megaPokemonIds = [3, 6, 9, 18, 15, 94, 115, 127, 130, 142, 150, 181, 208, 212, 214, 229, 248, 254, 257, 260, 282, 302, 303, 306, 308, 310, 319, 323, 328, 334, 354, 359, 362, 373, 376, 380, 381, 384, 445, 448, 460, 475, 531, 849]
 var forms = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?', i8ln('Normal'), i8ln('Sunny'), i8ln('Rainy'), i8ln('Snowy'), i8ln('Normal'), i8ln('Attack'), i8ln('Defense'), i8ln('Speed'), i8ln('1'), i8ln('2'), i8ln('3'), i8ln('4'), i8ln('5'), i8ln('6'), i8ln('7'), i8ln('8'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Alola'), i8ln('Normal'), i8ln('Frost'), i8ln('Fan'), i8ln('Mow'), i8ln('Wash'), i8ln('Heat'), i8ln('Plant'), i8ln('Sandy'), i8ln('Trash'), i8ln('Altered'), i8ln('Origin'), i8ln('Sky'), i8ln('Land'), i8ln('Overcast'), i8ln('Sunny'), i8ln('West sea'), i8ln('East sea'), i8ln('West sea'), i8ln('East sea'), i8ln('Arceus Normal'), i8ln('Archeus Fighting'), i8ln('Archeus Flying'), i8ln('Archeus Poison'), i8ln('Archeus Ground'), i8ln('Archeus Rock'), i8ln('Archeus Bug'), i8ln('Archeus Ghost'), i8ln('Archeus Steel'), i8ln('Archeus Fire'), i8ln('Archeus Water'), i8ln('Archeus Grass'), i8ln('Archeus Electric'), i8ln('Archeus Psychic'), i8ln('Archeus Ice'), i8ln('Archeus Dragon'), i8ln('Archeus Dark'), i8ln('Archeus Fairy'), i8ln('Plant'), i8ln('Sandy'), i8ln('Trash'), i8ln('8'), i8ln('9'), i8ln('10'), i8ln('11'), i8ln('12'), i8ln('13'), i8ln('14'), i8ln('15'), i8ln('16'), i8ln('17'), i8ln('18'), i8ln('19'), i8ln('Armored'), i8ln('A-intro'), i8ln('Normal'), i8ln('Red Striped'), i8ln('Blue Striped'), i8ln('Normal'), i8ln('Zen'), i8ln('Incarnate'), i8ln('Therian'), i8ln('Incarnate'), i8ln('Therian'), i8ln('Incarnate'), i8ln('Therian'), i8ln('Normal'), i8ln('Black'), i8ln('White'), i8ln('Ordinary'), i8ln('Resolute'), i8ln('Aria'), i8ln('Pirouette'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Spring'), i8ln('Summer'), i8ln('Autumn'), i8ln('Winter'), i8ln('Spring'), i8ln('Summer'), i8ln('Autumn'), i8ln('Winter'), i8ln('Normal'), i8ln('Schock'), i8ln('Burn'), i8ln('Chill'), i8ln('Douse'), i8ln('Normal'), i8ln('Unknown'), i8ln('Normal'), i8ln('Unknown'), i8ln('Normal'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Unknown'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Fall'), i8ln('Fall'), i8ln('Fall'), i8ln('Fall'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('VS 2019'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Normal'), i8ln('Shadow'), i8ln('Purified'), i8ln('Galarian'), i8ln('Normal'), i8ln('Galarian'), i8ln('Normal'), i8ln('Galarian'), i8ln('Unknown'), i8ln('Clone'), i8ln('Clone'), i8ln('Clone')]
 var formsEn = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?', 'Normal', 'Sunny', 'Rainy', 'Snowy', 'Normal', 'Attack', 'Defense', 'Speed', '1', '2', '3', '4', '5', '6', '7', '8', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Alola', 'Normal', 'Frost', 'Fan', 'Mow', 'Wash', 'Heat', 'Plant', 'Sandy', 'Trash', 'Altered', 'Origin', 'Sky', 'Land', 'Overcast', 'Sunny', 'West sea', 'East sea', 'West sea', 'East sea', 'Arceus Normal', 'Fighting', 'Flying', 'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel', 'Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark', 'Fairy', 'Plant', 'Sandy', 'Trash', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', 'Armored', 'A-intro', 'Normal', 'Red Striped', 'Blue Striped', 'Normal', 'Zen', 'Incarnate', 'Therian', 'Incarnate', 'Therian', 'Incarnate', 'Therian', 'Normal', 'Black', 'White', 'Ordinary', 'Resolute', 'Aria', 'Pirouette', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Spring', 'Summer', 'Autumn', 'Winter', 'Spring', 'Summer', 'Autumn', 'Winter', 'Normal', 'Schock', 'Burn', 'Chill', 'Douse', 'Normal', 'Unknown', 'Normal', 'Unknown', 'Normal', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Fall', 'Fall', 'Fall', 'Fall', 'Normal', 'Shadow', 'Purified', 'VS 2019', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Normal', 'Shadow', 'Purified', 'Galarian', 'Normal', 'Galarian', 'Normal', 'Galarian', '', '', '', '']
 var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.3210876, 0.34921268, 0.37523559, 0.39956728, 0.42250001, 0.44310755, 0.46279839, 0.48168495, 0.49985844, 0.51739395, 0.53435433, 0.55079269, 0.56675452, 0.58227891, 0.59740001, 0.61215729, 0.62656713, 0.64065295, 0.65443563, 0.667934, 0.68116492, 0.69414365, 0.70688421, 0.71939909, 0.7317, 0.73776948, 0.74378943, 0.74976104, 0.75568551, 0.76156384, 0.76739717, 0.7731865, 0.77893275, 0.7846369, 0.79030001]
@@ -442,8 +442,8 @@ function initMap() { // eslint-disable-line no-unused-vars
         layers: [weatherLayerGroup, exLayerGroup, gymLayerGroup, stopLayerGroup, liveScanGroup, scanAreaGroup, scanAreaGroupQuest, scanAreaGroupPvp, nestPolygonGroup]
     })
     // Check if we have a custom Tileserver Adress in the Store and if so, handle the adress properly.
-    if(Store.get('map_style').includes("tileservers")){
-        if(customTileServers !== '' || customTileServers !== null && customTileServers.length > 0){
+    if (Store.get('map_style').includes('tileservers')) {
+        if ((customTileServers !== '' || customTileServers !== null) && customTileServers.length > 0) {
             customTileServer(Store.get('map_style'))
         } else {
             Store.set('map_style', mapStyle)
@@ -586,7 +586,7 @@ function initMap() { // eslint-disable-line no-unused-vars
 function toggleFullscreenMap() { // eslint-disable-line no-unused-vars
     map.toggleFullscreen()
 }
-var openstreetmap = L.tileLayer(osmTileServer, {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom: maxZoom,maxNativeZoom: maxNativeZoomOSM}) // eslint-disable-line no-unused-vars
+var openstreetmap = L.tileLayer(osmTileServer, {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: maxZoom, maxNativeZoom: maxNativeZoomOSM}) // eslint-disable-line no-unused-vars
 var darkmatter = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://carto.com/">Carto</a>', maxZoom: maxZoom, maxNativeZoom: 20}) // eslint-disable-line no-unused-vars
 var styletopo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: maxZoom, maxNativeZoom: 17}) // eslint-disable-line no-unused-vars
 var stylesatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community', maxZoom: maxZoom, maxNativeZoom: 19}) // eslint-disable-line no-unused-vars
@@ -601,21 +601,21 @@ var mapboxPogoDynamic = currentHour >= 6 && currentHour < 19 ? mapboxPogo : mapb
 var googlemapssat = L.gridLayer.googleMutant({type: 'satellite'}) // eslint-disable-line no-unused-vars
 var googlemapsroad = L.gridLayer.googleMutant({type: 'roadmap'}) // eslint-disable-line no-unused-vars
 
-var tileservers = ''
-if (customTileServers !== null && customTileServers.length > 0 && customTileServers !== ''){
-    tileservers = L.tileLayer(customTileServers[0][1], {attribution: 'Tileserver',}) // eslint-disable-line no-unused-vars
+var tileservers = '' // eslint-disable-line no-unused-vars
+if (customTileServers !== null && customTileServers.length > 0 && customTileServers !== '') {
+    tileservers = L.tileLayer(customTileServers[0][1], {attribution: 'Tileserver'})
 }
-function customTileServer(style){ // If the selected Style is a custom one, server it properly.
+function customTileServer(style) { // If the selected Style is a custom one, server it properly.
     var matches = style.match(/(\d+)/)
     var tileNumber = parseInt(matches)
     tileservers = L.tileLayer(customTileServers[tileNumber][1], {attribution: 'Tileserver', maxZoom: maxZoom, maxNativeZoom: 18}) // eslint-disable-line no-unused-vars
-    setTileLayer("tileservers")
+    setTileLayer('tileservers')
 }
 function setTileLayer(layername) {
     if (map.hasLayer(window[_oldlayer]) && window[_oldlayer] !== window[layername]) {
         map.removeLayer(window[_oldlayer])
     }
-    if(!layername.includes('blank')){
+    if (!layername.includes('blank')) {
         map.addLayer(window[layername])
     }
     _oldlayer = layername
@@ -1175,46 +1175,45 @@ function pokemonLabel(item) {
     var level = item['level']
     var formStr = ''
     var labelStyle = Store.get('pokemonLabelStyle')
-	var pvpIncludeEvolutions = true
+    var pvpIncludeEvolutions = true
 
     var pvpGreatLeague = ''
     var pvpUltraLeague = ''
-	var pvpMonStringGreat = ''
-	var pvpMonStringUltra = ''
-	if(!noPokePVPStats && Store.get('showPokePVPStats') === true && pvpGreatLeague !== null && pvpUltraLeague !== null && pvpGreatLeague !== undefined && pvpUltraLeague !== undefined){
-    var pvpGreatLeague = JSON.parse(item['pvp_gl'])
-    var pvpUltraLeague = JSON.parse(item['pvp_ul'])
-		// We have pvp data - parse them to everything we need
-		var iterationLength = pvpIncludeEvolutions ? pvpGreatLeague.length : 1 // If Allow to include evolutions, set length accordingly, if not, set to 1
-		
-		//Great League Iteration
-		pvpMonStringGreat = '<div style="font-size:9px;">'
-		for(var i = 0; i < iterationLength; i++){
-			if(pvpGreatLeague[i]['rank'] !== null){
-				pvpMonStringGreat += 
-					'<div>Pokemon No.' + pvpGreatLeague[i]['pokemon'] + '-' + pvpGreatLeague[i]['form'] + ': ' + parseFloat(pvpGreatLeague[i]['percentage'] * 100).toFixed(1) + '%(#' + pvpGreatLeague[i]['rank'] + ') @ ' + pvpGreatLeague[i]['cp'] + i8ln('CP') + ', ' + i8ln('Level') + pvpGreatLeague[i]['level'] + '</div>'
-			} else {
-				pvpMonStringGreat += 
-					'<div>Pokemon No. ' + pvpGreatLeague[i]['pokemon'] + '-' + pvpGreatLeague[i]['form'] + ': ' + i8ln('CP too high') + '</div>'
-			}
-		}
-		pvpMonStringGreat += '</div>'
-		
-		//Ultra League Iteration
-		pvpMonStringUltra = '<div style="font-size:9px;">'
-		for(var i = 0; i < iterationLength; i++){
-			if(pvpUltraLeague[i]['rank'] !== null){
-				pvpMonStringUltra += 
-					'<div>Pokemon No.' + pvpUltraLeague[i]['pokemon'] + '-' + pvpUltraLeague[i]['form'] + ': ' + parseFloat(pvpUltraLeague[i]['percentage'] * 100).toFixed(1) + '%(#' + pvpUltraLeague[i]['rank'] + ') @ ' + pvpUltraLeague[i]['cp'] + i8ln('CP') + ', ' + i8ln('Level') + pvpUltraLeague[i]['level'] + '</div>'
-			} else {
-				pvpMonStringUltra += 
-					'<div>Pokemon No. ' + pvpUltraLeague[i]['pokemon'] + '-' + pvpUltraLeague[i]['form'] + ': ' + i8ln('CP too high') + '</div>'
-			}
-		}
-		pvpMonStringUltra += '</div>'
-		
-	}
-		
+    var pvpMonStringGreat = ''
+    var pvpMonStringUltra = ''
+    if (!noPokePVPStats && Store.get('showPokePVPStats') === true && pvpGreatLeague !== null && pvpUltraLeague !== null && pvpGreatLeague !== undefined && pvpUltraLeague !== undefined) {
+        pvpGreatLeague = JSON.parse(item['pvp_gl'])
+        pvpUltraLeague = JSON.parse(item['pvp_ul'])
+        // We have pvp data - parse them to everything we need
+        var iterationLength = pvpIncludeEvolutions ? pvpGreatLeague.length : 1 // If Allow to include evolutions, set length accordingly, if not, set to 1
+
+        // Great League Iteration
+        pvpMonStringGreat = '<div style="font-size:9px;">'
+        for (var i = 0; i < iterationLength; i++) {
+            if (pvpGreatLeague[i]['rank'] !== null) {
+                pvpMonStringGreat +=
+                    '<div>Pokemon No.' + pvpGreatLeague[i]['pokemon'] + '-' + pvpGreatLeague[i]['form'] + ': ' + parseFloat(pvpGreatLeague[i]['percentage'] * 100).toFixed(1) + '%(#' + pvpGreatLeague[i]['rank'] + ') @ ' + pvpGreatLeague[i]['cp'] + i8ln('CP') + ', ' + i8ln('Level') + pvpGreatLeague[i]['level'] + '</div>'
+            } else {
+                pvpMonStringGreat +=
+                    '<div>Pokemon No. ' + pvpGreatLeague[i]['pokemon'] + '-' + pvpGreatLeague[i]['form'] + ': ' + i8ln('CP too high') + '</div>'
+            }
+        }
+        pvpMonStringGreat += '</div>'
+
+        // Ultra League Iteration
+        pvpMonStringUltra = '<div style="font-size:9px;">'
+        for (var j = 0; j < iterationLength; j++) {
+            if (pvpUltraLeague[j]['rank'] !== null) {
+                pvpMonStringUltra +=
+                    '<div>Pokemon No.' + pvpUltraLeague[j]['pokemon'] + '-' + pvpUltraLeague[j]['form'] + ': ' + parseFloat(pvpUltraLeague[j]['percentage'] * 100).toFixed(1) + '%(#' + pvpUltraLeague[j]['rank'] + ') @ ' + pvpUltraLeague[j]['cp'] + i8ln('CP') + ', ' + i8ln('Level') + pvpUltraLeague[j]['level'] + '</div>'
+            } else {
+                pvpMonStringUltra +=
+                    '<div>Pokemon No. ' + pvpUltraLeague[j]['pokemon'] + '-' + pvpUltraLeague[j]['form'] + ': ' + i8ln('CP too high') + '</div>'
+            }
+        }
+        pvpMonStringUltra += '</div>'
+    }
+
     if (form === 0 || form === '0' || form == null) {
         formStr = '00'
     } else {
@@ -1432,14 +1431,14 @@ function pokemonLabel(item) {
                     '</div>' +
                 '</div><br><br>'
         }
-		var pvpDetails = ''
-		if (pvpMonStringGreat !== '' && pvpMonStringUltra !== ''){
-			pvpDetails = 
-				'<div style="position: relative;top: 35px;font-size:15px;">' +
-					'Great League:<br>' + pvpMonStringGreat +
-					'Ultra League:<br>' + pvpMonStringUltra +
-				'</div>'
-		}
+        var pvpDetails = ''
+        if (pvpMonStringGreat !== '' && pvpMonStringUltra !== '') {
+            pvpDetails =
+                '<div style="position: relative;top: 35px;font-size:15px;">' +
+                    'Great League:<br>' + pvpMonStringGreat +
+                    'Ultra League:<br>' + pvpMonStringUltra +
+                '</div>'
+        }
         // Weather
         if (weatherBoostedCondition !== 0) {
             details +=
@@ -1622,11 +1621,11 @@ function gymLabel(item) {
             if (item.raid_pokemon_cp > 0) {
                 cpStr = ' ' + i8ln('CP') + ' ' + item.raid_pokemon_cp
             }
-			var evolutionStr = ''
+            var evolutionStr = ''
             if (item['raid_level'] >= 6 && item['raid_evolution'] >= 1) { // Megaraid Evolution handling
-                var evolutionStr = '_' + item['raid_evolution']
-				raidStr += '<br> Mega ' + item.raid_pokemon_name + ' ' + raidMegaEvolutions[item['raid_evolution']]
-            } else{
+                evolutionStr = '_' + item['raid_evolution']
+                raidStr += '<br> Mega ' + item.raid_pokemon_name + ' ' + raidMegaEvolutions[item['raid_evolution']]
+            } else {
                 raidStr += '<br>' + item.raid_pokemon_name
             }
 
@@ -2910,10 +2909,10 @@ function getGymMarkerIcon(item, badgeMode) {
         pokemonidStr = pokemonid
     }
 
-	var evolutionStr = '' // Megaraid & Evolution handling
+    var evolutionStr = '' // Megaraid & Evolution handling
     if (item['raid_level'] >= 6 && item['raid_evolution'] >= 1) { // Change evolution if its a Megaraid
-        var evolutionStr = '_' + item['raid_evolution']
-	}
+        evolutionStr = '_' + item['raid_evolution']
+    }
 
     var teamStr = ''
     var team = ''
@@ -3285,11 +3284,9 @@ function getPokestopMarkerIcon(item) {
                 rewardImg = '<img src="static/forts/gruntType/' + item['grunt_type'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
             } else if (Store.get('showItemAmounts')) {
                 rewardImg = '<img src="' + rewardIcons + 'rewards/reward_mega_energy_' + item['quest_reward_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
-
-			} else {
+            } else {
                 rewardImg = '<img src="' + rewardIcons + 'rewards/mega_energy/reward_mega_energy_' + item['quest_energy_pokemon_id'] + '.png" style="width:40px;height:auto;position:absolute;top:-5px;left:-8px;"/>'
             }
-			//item['quest_reward_amount']
 
             if (lure > Date.now()) {
                 html = '<div style="position:relative;">' +
@@ -4032,10 +4029,10 @@ function clearStaleMarkers() {
         var pvpGreatLeague = null
         var pvpUltraLeague = null
         if (!noPokePVPStats) {
-            var pvpGreatLeague = JSON.parse(mapData.pokemons[key]['pvp_gl'])
-            var pvpUltraLeague = JSON.parse(mapData.pokemons[key]['pvp_ul'])
+            pvpGreatLeague = JSON.parse(mapData.pokemons[key]['pvp_gl'])
+            pvpUltraLeague = JSON.parse(mapData.pokemons[key]['pvp_ul'])
         }
-        if (((mapData.pokemons[key]['disappear_time'] < new Date().getTime() || ((excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || ((((mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV) || (mapData.pokemons[key]['level'] < minLevel) || (((pvpGreatLeague !== null && ((pvpGreatLeague[0]['percentage']*100) < minPVP)) || (pvpGreatLeague == null && (minPVP !== null && minPVP > 0))) || ((pvpUltraLeague !== null && ((pvpUltraLeague[0]['percentage']*100) < minPVP)) || (pvpUltraLeague == null && (minPVP !== null && minPVP > 0))))) && !excludedMinIV.includes(mapData.pokemons[key]['pokemon_id'])) || (Store.get('showBigKarp') === true && mapData.pokemons[key]['pokemon_id'] === 129 && (mapData.pokemons[key]['weight'] < 13.14 || mapData.pokemons[key]['weight'] === null)) || (Store.get('showTinyRat') === true && mapData.pokemons[key]['pokemon_id'] === 19 && (mapData.pokemons[key]['weight'] > 2.40 || mapData.pokemons[key]['weight'] === null))) && encounterId !== mapData.pokemons[key]['encounter_id'])) || (encounterId && encounterId === mapData.pokemons[key]['encounter_id'] && mapData.pokemons[key]['disappear_time'] < new Date().getTime()))) {
+        if (((mapData.pokemons[key]['disappear_time'] < new Date().getTime() || ((excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || ((((mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV) || (mapData.pokemons[key]['level'] < minLevel) || (((pvpGreatLeague !== null && ((pvpGreatLeague[0]['percentage'] * 100) < minPVP)) || (pvpGreatLeague == null && (minPVP !== null && minPVP > 0))) || ((pvpUltraLeague !== null && ((pvpUltraLeague[0]['percentage'] * 100) < minPVP)) || (pvpUltraLeague == null && (minPVP !== null && minPVP > 0))))) && !excludedMinIV.includes(mapData.pokemons[key]['pokemon_id'])) || (Store.get('showBigKarp') === true && mapData.pokemons[key]['pokemon_id'] === 129 && (mapData.pokemons[key]['weight'] < 13.14 || mapData.pokemons[key]['weight'] === null)) || (Store.get('showTinyRat') === true && mapData.pokemons[key]['pokemon_id'] === 19 && (mapData.pokemons[key]['weight'] > 2.40 || mapData.pokemons[key]['weight'] === null))) && encounterId !== mapData.pokemons[key]['encounter_id'])) || (encounterId && encounterId === mapData.pokemons[key]['encounter_id'] && mapData.pokemons[key]['disappear_time'] < new Date().getTime()))) {
             if (mapData.pokemons[key].marker.rangeCircle) {
                 markers.removeLayer(mapData.pokemons[key].marker.rangeCircle)
                 markersnotify.removeLayer(mapData.pokemons[key].marker.rangeCircle)
@@ -4168,7 +4165,7 @@ function loadRawData() {
             'qpeids': String(questsExcludedPokemon),
             'qireids': String(reincludedQuestsItem),
             'qieids': String(questsExcludedItem),
-			'qereids': String(reincludedQuestsEnergy),
+            'qereids': String(reincludedQuestsEnergy),
             'qeeids': String(questsExcludedEnergy),
             'geids': String(excludedGrunts),
             'greids': String(reincludedGrunts),
@@ -6124,7 +6121,7 @@ function updatePokestops() {
     }
     if (Store.get('showQuests')) {
         $.each(mapData.pokestops, function (key, value) {
-            if (value['quest_type'] === 0 || ((value['quest_pokemon_id'] > 0 && questsExcludedPokemon.indexOf(value['quest_pokemon_id']) > -1) || (value['quest_item_id'] > 0 && questsExcludedItem.indexOf(value['quest_item_id']) > -1) || (value['quest_energy_pokemon_id'] > 0 && value['quest_reward_type'] == 12 && questsExcludedEnergy.indexOf(value['quest_energy_pokemon_id']) > -1) || ((value['quest_reward_type'] === 3 && (Number(value['quest_reward_amount']) < Number(Store.get('showDustAmount')))) || (value['quest_reward_type'] === 3 && Store.get('showDustAmount') === 0)))) {
+            if (value['quest_type'] === 0 || ((value['quest_pokemon_id'] > 0 && questsExcludedPokemon.indexOf(value['quest_pokemon_id']) > -1) || (value['quest_item_id'] > 0 && questsExcludedItem.indexOf(value['quest_item_id']) > -1) || (value['quest_energy_pokemon_id'] > 0 && value['quest_reward_type'] === 12 && questsExcludedEnergy.indexOf(value['quest_energy_pokemon_id']) > -1) || ((value['quest_reward_type'] === 3 && (Number(value['quest_reward_amount']) < Number(Store.get('showDustAmount')))) || (value['quest_reward_type'] === 3 && Store.get('showDustAmount') === 0)))) {
                 removeStops.push(key)
             }
         })
@@ -6447,7 +6444,7 @@ function updateMap() {
 
         prevMinIV = result.preMinIV
         prevMinLevel = result.preMinLevel
-		prevMinPVP = result.preMinPVP
+        prevMinPVP = result.preMinPVP
         reids = result.reids
         qpreids = result.qpreids
         qireids = result.qireids
@@ -6978,8 +6975,8 @@ function createUpdateWorker() {
         console.log('Webworker error: ' + ex.message)
     }
 }
-
-function showGymDetails(id) { // eslint-disable-line no-unused-vars - GYMSIDEBAR
+// GYMSIDEBAR
+function showGymDetails(id) { // eslint-disable-line no-unused-vars
     var sidebar = document.querySelector('#gym-details')
     var sidebarClose
 
@@ -7045,7 +7042,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars - GYMSIDEBAR
             var levelStr = ''
             if (result['raid_level'] >= 6) {
                 raidStr = '<h3 style="margin-bottom: 0">Mega Raid'
-            } else{
+            } else {
                 for (var i = 0; i < result['raid_level']; i++) {
                     levelStr += '★'
                 }
@@ -7065,11 +7062,11 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars - GYMSIDEBAR
                         raidStr += ' (' + forms[result['form']] + ')'
                     }
                 }
-                if(!noRaidCounterGuide){
-                    if ( form !== null && form > 0 && forms.length > form && formsEn[result['form']] !== '' && formsEn[result['form']] !== 'Normal') {
-                    	raidCounterGuideStr = ' - <a href="https://www.pokebattler.com/raids/defenders/' + result['raid_pokemon_name_en'].toUpperCase() + '_' + (formsEn[result['form']]).toUpperCase() + '_FORM/levels/RAID_LEVEL_' + result['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
+                if (!noRaidCounterGuide) {
+                    if (form !== null && form > 0 && forms.length > form && formsEn[result['form']] !== '' && formsEn[result['form']] !== 'Normal') {
+                        raidCounterGuideStr = ' - <a href="https://www.pokebattler.com/raids/defenders/' + result['raid_pokemon_name_en'].toUpperCase() + '_' + (formsEn[result['form']]).toUpperCase() + '_FORM/levels/RAID_LEVEL_' + result['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
                     } else {
-                    	raidCounterGuideStr = ' - <a href="https://www.pokebattler.com/raids/defenders/' + result['raid_pokemon_name_en'].toUpperCase() + '/levels/RAID_LEVEL_' + result['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
+                        raidCounterGuideStr = ' - <a href="https://www.pokebattler.com/raids/defenders/' + result['raid_pokemon_name_en'].toUpperCase() + '/levels/RAID_LEVEL_' + result['raid_level'] + '/attackers/levels/30/strategies/CINEMATIC_ATTACK_WHEN_POSSIBLE/DEFENSE_RANDOM_MC?sort=ESTIMATOR&weatherCondition=NO_WEATHER&dodgeStrategy=DODGE_REACTION_TIME&aggregation=AVERAGE&randomAssistants=-1" target="_blank" >' + i8ln('Raid Counter Guide') + '</a>'
                     }
                 }
                 raidStr += cpStr
@@ -7160,7 +7157,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars - GYMSIDEBAR
             '<div>' +
             '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Route') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">' + i8ln('Maplink') + '</a>' +
             raidCounterGuideStr +
-			'</div>' +
+            '</div>' +
             '</center>'
 
         var pokemonIdStr = ''
@@ -7496,10 +7493,10 @@ $(function () {
         var styleList = []
 
         // If its a custom Tileserver adress, set the id individually and handle the variable later on
-        if(customTileServers !== null && customTileServers && customTileServers.length > 0){
-            for(var i = 0; i<=customTileServers.length-1; i++){
+        if (customTileServers !== null && customTileServers && customTileServers.length > 0) {
+            for (var i = 0; i <= customTileServers.length - 1; i++) {
                 styleList.push({
-                    id: "tileservers" + i,
+                    id: 'tileservers' + i,
                     text: customTileServers[i][0]
                 })
             }
@@ -7507,10 +7504,10 @@ $(function () {
         if (!forcedTileServer) {
             $.each(data, function (key, value) {
                 var googleStyle = key.includes('google') // Google
-                var googleMaps = false
+                var googleMaps = false // eslint-disable-line no-unused-vars
                 if (gmapsKey !== '') {
                     googleMaps = true
-                    if(googleStyle){
+                    if (googleStyle) {
                         styleList.push({
                             id: key,
                             text: i8ln(value)
@@ -7518,17 +7515,17 @@ $(function () {
                     }
                 }
                 var mapBoxStyle = key.includes('mapbox') // MapBox
-                var mapBox = false 
+                var mapBox = false // eslint-disable-line no-unused-vars
                 if (mBoxKey !== '') {
                     mapBox = true
-                    if(mapBoxStyle){
+                    if (mapBoxStyle) {
                         styleList.push({
                             id: key,
                             text: i8ln(value)
                         })
                     }
                 }
-                if(!mapBoxStyle && !googleStyle){ // Other Styles without a Key
+                if (!mapBoxStyle && !googleStyle) { // Other Styles without a Key
                     styleList.push({
                         id: key,
                         text: i8ln(value)
@@ -7545,18 +7542,18 @@ $(function () {
         })
         $selectStyle.on('change', function (e) {
             // If the Selected Style isnt available (anymore), reset to default
-            if($selectStyle.val() !== null){
+            if ($selectStyle.val() !== null) {
                 selectedStyle = $selectStyle.val()
-                if (selectedStyle.includes("tileservers")){
+                if (selectedStyle.includes('tileservers')) {
                     var matches = selectedStyle.match(/(\d+)/)
                     var tileNumber = parseInt(matches)
-                    selectedStyle = "tileservers" + tileNumber
+                    selectedStyle = 'tileservers' + tileNumber
                     customTileServer(selectedStyle)
-                } else{
+                } else {
                     setTileLayer(selectedStyle)
                 }
             } else {
-                selectedStyle = mapStyle //Default mapstyle
+                selectedStyle = mapStyle // Default mapstyle
                 setTileLayer(selectedStyle)
             }
             // If one of the Multiple Tileservers is selected store the tileservernumber, set the tileservers variable and serve it.
@@ -7789,7 +7786,7 @@ $(function () {
         Store.set('showIVIcons', this.checked)
         redrawPokemon(mapData.pokemons)
     })
-	
+
     $switchPokePVPStats = $('#pvp-stats-switch')
     $switchPokePVPStats.on('change', function () {
         Store.set('showPokePVPStats', this.checked)
@@ -7879,7 +7876,7 @@ $(function () {
     $selectGymMarkerStyle.val(Store.get('gymMarkerStyle')).trigger('change')
     pokemonSpritesFilter()
     itemSpritesFilter()
-	energySpritesFilter()
+    energySpritesFilter()
 
     // Overlay Styling
     $selectOverlayStyle = $('#design-style')
