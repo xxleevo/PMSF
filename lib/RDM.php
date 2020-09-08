@@ -484,7 +484,7 @@ class RDM extends Scanner
             $pokestop["quest_energy_pokemon_id"] = intval($pokestop["quest_energy_pokemon_id"]);
             $pokestop["quest_item_id"] = intval($pokestop["quest_item_id"]);
             $pokestop["quest_reward_amount"] = intval($pokestop["quest_reward_amount"]);
-			$pokestop["quest_energy_pokemon_name"] = empty($energy_mon_pid) && $pokestop["quest_reward_type"] === 7 ? null : i8ln($this->data[$energy_mon_pid]["name"]);
+			$pokestop["quest_energy_pokemon_name"] = empty($energy_mon_pid) && $pokestop["quest_reward_type"] === 7 && $pokestop["quest_energy_pokemon_id"] > 0 ? null : i8ln($this->data[$energy_mon_pid]["name"]);
 			$pokestop["url"] = ! empty($pokestop["url"]) ? str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]) : null;
 			$pokestop["url"] = ! empty($pokestop["url"]) ? preg_replace("/^http:/i", "https:", $pokestop["url"]) : null;
             $pokestop["lure_id"] = intval($pokestop["lure_id"]);
