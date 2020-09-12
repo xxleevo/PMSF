@@ -150,5 +150,13 @@
   "38": {
     "prototext": "QUEST_BUDDY_YATTA",
     "text": ""
-	}
+	},
+  "39": {
+    "prototext": "",
+    "text": "Use Incense {0} times"
+  },
+  "43": {
+    "prototext": "",
+    "text": "Mega-Evolve {0} {1}"
+  }
 }

@@ -2054,7 +2054,7 @@ function getRawQuest(item) { // eslint-disable-line no-unused-vars
 function getQuest(item) {
     var str
     var raidLevel
-    if (item['quest_condition_type'] !== null) {
+    if (item['quest_condition_type'] !== null && questtypeList[item['quest_type']] !== undefined && questtypeList[item['quest_type']] !== null ) {
         var questinfo = JSON.parse(item['quest_condition_info'])
         var questStr = '' + i8ln(questtypeList[item['quest_type']]) + ''
         str = '<div><center><b><u>' +
@@ -2253,7 +2253,7 @@ function getQuest(item) {
                 str = str.replace('Berrys', 'Berries')
             }
         }
-    } else if (item['quest_type'] !== null) {
+    } else if (item['quest_type'] !== null && questtypeList[item['quest_type']] !== undefined && questtypeList[item['quest_type']] !== null) {
         questStr = i8ln(questtypeList[item['quest_type']])
         str += '<div>' +
         i8ln('Task:') + ' ' +
@@ -2270,8 +2270,9 @@ function getQuest(item) {
             str = str.replace('{8}', i8ln('{8}'))
             str = str.replace('{9}', i8ln('{9}'))
         }
+    } else {
+        str = i8ln('Unknown Questtype') + ' (' + item['quest_type'] + ')'
     }
-
     return str
 }
 

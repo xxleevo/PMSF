@@ -1,4 +1,5 @@
 {
+  "Unknown Questtype": "Unbekannter Questtyp",
   "Energy": "Energie",
   "Mega Energy": "Mega Energie",
   "Mega": "Mega",
@@ -96,6 +97,8 @@
   "Member" : "Mitglied",
   "Team Leader" : "Teamleiter",
   "Grunt": "Rüpel",
+  "Mega-Evolve {0} {1}": "Mega-Entwickle {0} {1}",
+  "Use Incense {0} times": "Benutze {} mal Rauch",
   "new {8}" : "neue {8}",
   "unique {8}" : "verschiedene {8}",
   "Complete {0} Trainer fights": "Bestreite {0} Trainerkämpfe",
