@@ -291,9 +291,7 @@ if (location.search.indexOf('login=true') > 0) {
 if (location.search.indexOf('login=false') > 0) {
     openAccessDeniedModal()
 }
-if (forcedTileServer) {
-    Store.set('map_style', 'tileservers0')
-}
+
 function previewPoiImage(event) { // eslint-disable-line no-unused-vars
     var form = $(event.target).parent().parent()
     var input = event.target
@@ -448,8 +446,12 @@ function initMap() { // eslint-disable-line no-unused-vars
         } else {
             Store.set('map_style', mapStyle)
             setTileLayer(Store.get('map_style'))
+            console.log('The Mapstyle from your store wasnt found, set to defaults.')
         }
-    } else {
+    } else if (forcedTileServer) { // If user isnt on tileservers but tileserver is forced.
+		Store.set('map_style', 'tileservers0')
+        setTileLayer(Store.get('map_style'))
+    } else { // If no tileserver is selected & forced isnt active.
         setTileLayer(Store.get('map_style'))
     }
     markers = L.markerClusterGroup({
@@ -605,20 +607,24 @@ var tileservers = '' // eslint-disable-line no-unused-vars
 if (customTileServers !== null && customTileServers.length > 0 && customTileServers !== '') {
     tileservers = L.tileLayer(customTileServers[0][1], {attribution: 'Tileserver'})
 }
+
 function customTileServer(style) { // If the selected Style is a custom one, server it properly.
     var matches = style.match(/(\d+)/)
     var tileNumber = parseInt(matches)
     tileservers = L.tileLayer(customTileServers[tileNumber][1], {attribution: 'Tileserver', maxZoom: maxZoom, maxNativeZoom: 18}) // eslint-disable-line no-unused-vars
     setTileLayer('tileservers')
 }
+
 function setTileLayer(layername) {
-    if (map.hasLayer(window[_oldlayer]) && window[_oldlayer] !== window[layername]) {
-        map.removeLayer(window[_oldlayer])
+    if (map !== null && map !== undefined) {
+        if (map.hasLayer(window[_oldlayer]) && window[_oldlayer] !== window[layername]) {
+            map.removeLayer(window[_oldlayer])
+        }
+        if (!layername.includes('blank')) {
+            map.addLayer(window[layername])
+        }
+        _oldlayer = layername
     }
-    if (!layername.includes('blank')) {
-        map.addLayer(window[layername])
-    }
-    _oldlayer = layername
 }
 
 function updateLocationMarker(style) {
