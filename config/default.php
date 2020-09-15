@@ -29,32 +29,41 @@ setSessionCsrfToken();
 //-----------------------------------------------------
 
 /* Access-config Settings */
-$accessLevelsInherit = false;
+$accessLevelsInherit = false;										// If you use the access-levels and this is true, the higher levels inherit the configs from the lower ones so you dont need to give higher levels the configs you gave the lower levels.
 
 /* Location Settings */
 
-$startingLat = 52.084992;                                          // Starting latitude
-$startingLng = 5.302366;                                        // Starting longitude
-$startingZoom = 15;												//Starting Zoom
+$startingLat = 52.084992;											// Starting latitude
+$startingLng = 5.302366;											// Starting longitude
+$startingZoom = 15;													//Starting Zoom
 
 /* Zoom and Cluster Settings */
 
 $maxLatLng = 1;                                                     // Max latitude and longitude size (1 = ~110km, 0 to disable)
 $maxZoomOut = 0;                                                    // Max zoom out level (11 ~= $maxLatLng = 1, 0 to disable, lower = the further you can zoom out)
 $maxZoomIn = 18;                                                    // Max zoom in level 18 
-$disableClusteringAtZoom = 0;					    // Disable clustering above this value. 0 to disable
-$zoomToBoundsOnClick = 15;					    // Zoomlevel on clusterClick
-$maxClusterRadius = 30;						    // The maximum radius that a cluster will cover from the central marker (in pixels).
-$spiderfyOnMaxZoom = 'true';					    // Spiderfy cluster markers on click
+$disableClusteringAtZoom = 0;										// Disable clustering above this value. 0 to disable
+$zoomToBoundsOnClick = 15;											// Zoomlevel on clusterClick
+$maxClusterRadius = 30;												// The maximum radius that a cluster will cover from the central marker (in pixels).
+$spiderfyOnMaxZoom = 'true';										// Spiderfy cluster markers on click
 
 /* Anti scrape Settings */
 $enableCsrf = true;                                                 // Don't disable this unless you know why you need to :)
 $sessionLifetime = 43200;                                           // Session lifetime, in seconds
 $blockIframe = true;                                                // Block your map being loaded in an iframe
 
-/* Map Title + Language */
+/* Boundaries */
+$noBoundaries = true;                                               // Enable/Disable boundaries to pull data from. Requires $boundaries to be set.
+$boundaries =  '52.71147 13.03893,
+				52.53501 12.89848,
+				52.30793 13.09119,
+				52.30393 13.68564,
+				52.51513 13.80976,
+				52.71345 13.59746,
+				52.71147 13.03893';
 
-$title = "PMSF Alt";                                                // Title to display in title bar
+/* Map Title + Language */
+$title = "PMSF-Leevo";                                                // Title to display in title bar
 $locale = "en";                                                     // Display language
 
 /* Google Maps ONLY USED FOR TILE LAYERS */

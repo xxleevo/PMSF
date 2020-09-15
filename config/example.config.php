@@ -15,8 +15,19 @@ $startingLat = 52.084992;													// Starting latitude
 $startingLng = 5.302366;													// Starting longitude
 $startingZoom = 15;															//Starting Zoom - should be between $maxZoomIn & $maxZoomOut
 
+/* Boundaries */
+$noBoundaries = true;                                               // If enabled, only data from the boundaries (polygon) is pulled.
+																	// NOTICE: Keep the Format and syntax as in the example, first & last point is the same
+$boundaries =  '52.71147 13.03893,
+				52.53501 12.89848,
+				52.30793 13.09119,
+				52.30393 13.68564,
+				52.51513 13.80976,
+				52.71345 13.59746,
+				52.71147 13.03893';
+
 /* Title and language */
-$title = "POGOmap";                                                 		// Title to display in title bar
+$title = "PMSF-Leevo";                                                 		// Title to display in title bar
 $locale = "de";                                                   			// Display language
 $raidmapLogo = '';                                                			// Upload logo to custom folder, leave '' for empty ( $raidmapLogo = 'custom/logo.png'; )
 
