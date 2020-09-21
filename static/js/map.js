@@ -1773,15 +1773,18 @@ function gymLabel(item) {
 
     if (Store.get('badgeMode')) {
         var gymName = name !== null ? name : i8ln('Unknown Gymname')
-        if (gymName.length > 20) {
-            gymName = gymName.substring(0, 20) + '..'
+        if (gymName.length > 30) {
+            gymName = gymName.substring(0, 30) + '..'
         }
         var freeSlotsBadge = ''
         var nameBadge = ''
         var backgroundClass = ''
         if (!noGymTeamInfos && (((lastScanned / 1000) > ((Date.now() / 1000) - 14400)) || noOutdatedGyms)) {
             freeSlotsBadge = '<div><span class="badgeText"><span class="badgeTextBold">' + i8ln('Spots') + ':</span> ' + freeSlots + '</span></div>'
-            nameBadge = '<div class="badgeTextName" style="color:rgba(' + gymColorBadge[teamId] + ')">' + gymName + '</div>'
+			nameBadge = '<div class="badgeTextName" style="color:rgba(' + gymColorBadge[teamId] + ')">' + gymName + '</div>'
+			if (gymName.length > 20) {
+			    nameBadge = '<div class="badgeTextNameLong" style="color:rgba(' + gymColorBadge[teamId] + ')">' + gymName + '</div>'
+            }
             backgroundClass = badgeClasses[teamId]
         } else {
             nameBadge = '<div class="badgeTextName" style="color:rgba(22, 145, 73, 0.6)">' + gymName + '</div>'
