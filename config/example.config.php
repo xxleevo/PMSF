@@ -169,6 +169,7 @@ $newGymsFilterStart = ['2019','08'];                                		// Year, M
 
 $noGymBadgeMode = true;														// Requires: Discord Login, $noSubmit = false, Manualdb(up to date)
 $gymBadgeMode = 'false';													// Careful: The Badge-Mode has no anti-troll system, so use it carefully because it changes the values in the manualdb. (suggested: A proper paywall to only give premium users access)
+$enableStandardBadges = 'false';									// Default for new users - Show badges on normal gym mode
 
 $triggerGyms = '[]';                                                		// Add Gyms that the OSM-Query doesn't take care of like '["gym_id", "gym_id"]'
 $onlyTriggerGyms = false;                                           		// Only show EX-Gyms that are defined in $triggerGyms

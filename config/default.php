@@ -224,6 +224,7 @@ $newGymsFilterStart = ['2019','08'];
 
 $noGymBadgeMode = true;
 $gymBadgeMode = 'false';
+$enableStandardBadges = 'false';
 
 $noRaids = false;                                                   // true/false
 $enableRaids = 'false';                                             // true/false
