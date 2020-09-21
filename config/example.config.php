@@ -348,6 +348,9 @@ $maxNativeZoomOSM = 19;														// Leave at 19 for OSM Servers, or set to y
 
 
 /*--------- Style Settings ---------*/
+$noDarkMode = false;														// Enable/Disables the Darkmode-Option
+$enableDarkMode = 'false';													// Default option for new users
+
 $noPokemonLabelStyles = true;                                   			//enables/disables the choice for users to set their prefered pokemonLabel style
 $pokemonLabelStyle = 'v2';                                					// classic, v1, v2,v3(New Years theme)
 

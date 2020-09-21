@@ -419,7 +419,7 @@ if (!$noLoadingScreen) {
 						echo '
 						<div>
 							<center>
-								<u><h3 style="margin:0 0 0.5em 0;"> ' . i8ln("Share Nests(Whatsapp)") . '</h3></u>
+								<u><h3 class="content-txt" style="margin:0 0 0.5em 0;"> ' . i8ln("Share Nests (Whatsapp)") . '</h3></u>
 								<a class="settings btn-share-whatsapp" id="shareNests0" href="#" data-action="share/whatsapp/share" onclick="shareNestsWhatsapp(0,\''. $nestShareHeader .'\',\''. $nestShareDescription .'\',\''. $nestShareFooter .'\')">
 									<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span>' . i8ln("Park") . ', ' . i8ln("Species") . '
 								</a>
@@ -435,7 +435,7 @@ if (!$noLoadingScreen) {
 							</center>
 						</div>
 						<div>
-							<b>' . i8ln("Info") . ':</b> ' . i8ln("Only current visible nests on the map will be shared.") . '
+							<b class="content-txt">' . i8ln("Info") . ':</b> ' . i8ln("Only current visible nests on the map will be shared.") . '
 						</div>
 						<hr style="margin:0px;margin-top:10px" />';
 					}
@@ -945,14 +945,14 @@ if (!$noLoadingScreen) {
 							<hr style="margin:0px;" />
 							<div>
 								<center>
-									<u><h3 style="margin:0 0 0.5em 0;">' . i8ln('Share Groups') . '</h3></u>
+									<u><h3 class="content-txt" style="margin:0 0 0.5em 0;">' . i8ln('Share Groups') . '</h3></u>
 									<a class="settings btn-share-whatsapp" id="shareCommunities" href="#" data-action="share/whatsapp/share" onclick="shareCommunitiesWhatsapp(\''. $communityShareHeader .'\',\''. $communityShareDescription .'\',\''. $communityShareFooter .'\')">
 										<span style="float:left;"><i class="fa fa-upload" aria-hidden="true"></i></span> Whatsapp
 									</a>
 								</center>
 							</div>
 							<div>
-								<b>' . i8ln("Info") . ':</b> ' . i8ln("Only current visible communities on the map will be shared.") . '
+								<b class="content-txt">' . i8ln("Info") . ':</b> ' . i8ln("Only current visible communities on the map will be shared.") . '
 							</div>';
 						}
 					echo '
@@ -1306,7 +1306,7 @@ if (!$noLoadingScreen) {
                     </div>
 						<?php
 						if(!empty($triggerGyms) || $passwatcherTriggeredGyms){
-							echo i8ln("Already triggered gyms are marked with a <b>golden</b> 'EX'");
+							echo i8ln("Already triggered gyms are marked with a <b class='content-txt'>golden</b> 'EX'");
 						} ?>
                 </div>
                 <?php
@@ -1384,7 +1384,7 @@ if (!$noLoadingScreen) {
 								(' . i8ln('Some options need a specific zoom') . ')
 							</div>
 							<div class="form-control switch-container">
-								<font size="3"><b>' . i8ln( 'EX Trigger Cells' ) . '</b></font>
+								<font size="3"><b class="content-txt">' . i8ln( 'EX Trigger Cells' ) . '</b></font>
 								<div class="onoffswitch">
 									<input id="s2-level13-switch" type="checkbox" name="s2-level13-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="s2-level13-switch">
@@ -1394,7 +1394,7 @@ if (!$noLoadingScreen) {
 								</div>
 							</div>
 							<div class="form-control switch-container">
-								<font size="3"><b>' . i8ln( 'Gym Placement Cells' ) . '</b></font>
+								<font size="3""><b class="content-txt">' . i8ln( 'Gym Placement Cells' ) . '</b></font>
 								<div class="onoffswitch">
 									<input id="s2-level14-switch" type="checkbox" name="s2-level14-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="s2-level14-switch">
@@ -1406,7 +1406,7 @@ if (!$noLoadingScreen) {
 							if ( ! $noGymCellCalculations) {
 								echo '
 								<div id="fill-busy-gym-cell-wrapper" class="form-control switch-container" >
-									<font size="3">' . i8ln('Calculate Gym Cell Objects') . '</font>
+									<font size="3" class="content-txt">' . i8ln('Calculate Gym Cell Objects') . '</font>
 									<div class="onoffswitch">
 										<input id="fill-busy-gym-cell-switch" type="checkbox" name="fill-busy-gym-cell-switch" class="onoffswitch-checkbox" checked>
 										<label class="onoffswitch-label" for="fill-busy-gym-cell-switch">
@@ -1421,7 +1421,7 @@ if (!$noLoadingScreen) {
 							}
 							echo '
 							<div class="form-control switch-container">
-								<font size="3"><b>' . i8ln( 'Pokestop Placement Cells' ) . '</b></font>
+								<font size="3"><b class="content-txt">' . i8ln( 'Pokestop Placement Cells' ) . '</b></font>
 								<div class="onoffswitch">
 									<input id="s2-level17-switch" type="checkbox" name="s2-level17-switch" class="onoffswitch-checkbox" checked>
 									<label class="onoffswitch-label" for="s2-level17-switch">
@@ -1582,7 +1582,7 @@ if (!$noLoadingScreen) {
                 }
 				if ( ! $noScanPolygonQuest || ! $noScanPolygonPvp || ! $noScanPolygon){
 					echo '<div>
-						<h3><center><u>' . i8ln("Areas") . '</u></center></h3>
+						<h3 class="content-txt"><center><u>' . i8ln("Areas") . '</u></center></h3>
 					</div>';
 				}
                 if ( ! $noScanPolygon ) {
@@ -1648,7 +1648,7 @@ if (!$noLoadingScreen) {
                 echo '<div class="form-control">
 					<label for="notify-perfection">
 						<h3>' . i8ln( "IV Favs" ) . '</h3>
-						<input id="notify-perfection" type="text" name="notify-perfection" placeholder="Min %" style="float: right;width: 75px;text-align:center"/>
+						<input id="notify-perfection" type="text" name="notify-perfection" placeholder="Min %" style="float: right;width: 75px;height: 35px;text-align:center"/>
 					</label>
 				</div>';
             }
@@ -1727,9 +1727,21 @@ if (!$noLoadingScreen) {
             }
 
 			# Styling
-            if ( !$noMapStyle || !$noDirectionProvider || !$noIconSize || !$noIconNotifySizeModifier || !$noGymStyle || !$noLocationStyle ) {
+            if (!$noDarkMode || !$noMapStyle || !$noDirectionProvider || !$noIconSize || !$noIconNotifySizeModifier || !$noLocationStyle || !$noOverlayDesign || !$noOverlayDesign || !$noPokemonLabelStyles) {
                 echo '<h3 style="font-weight: bold"><i class="fa fa-map-o fa-fw"></i>&nbsp;' . i8ln("Style") . '</h3>
 				<div>';
+            }
+            if (!$noDarkMode) {
+                echo '<div class="form-control switch-container">
+					<h3>' . i8ln("Darkmode") . ' </h3>
+					<div class="onoffswitch">
+						<input id="darkmode-switch" type="checkbox" name="darkmode-switch" class="onoffswitch-checkbox">
+						<label class="onoffswitch-label" for="darkmode-switch">
+							<span class="switch-label" data-on="On" data-off="Off"></span>
+							<span class="switch-handle"></span>
+						</label>
+					</div>
+				</div>';
             }
             if ( !$noMapStyle) {
                 echo '<div class="form-control switch-container">
@@ -1783,6 +1795,8 @@ if (!$noLoadingScreen) {
 					<div>
 						<select name="design-style" id="design-style">
 							<option value="'. $overlayDesign .'">Classic</option>
+							<option value="linear-gradient(to top, #000 0%,#333 40%, #000 100%)">Dark</option>
+							<option value="linear-gradient(to top, #555 0%,#999 40%, #555 100%)">Light</option>
 							<option value="linear-gradient(to top, black 1%,white 2%,white 25%, black 50%, #cc0000 85%)">Pokeball</option>
 							<option value="linear-gradient(to top, yellow 0%,black 80%)">BVB</option>
 							<option value="linear-gradient(to top, yellow 20%,red 50%,black 80%)">Germany</option>
@@ -1814,14 +1828,14 @@ if (!$noLoadingScreen) {
 					</div>
 				</div>';
 			}
-            if ( ! $noMapStyle || ! $noDirectionProvider || ! $noIconSize || ! $noIconNotifySizeModifier || ! $noGymStyle || ! $noLocationStyle ) {
+            if (!$noDarkMode || !$noMapStyle || !$noDirectionProvider || !$noIconSize || !$noIconNotifySizeModifier || !$noLocationStyle || !$noOverlayDesign || !$noOverlayDesign || !$noPokemonLabelStyles) {
                 echo '</div>';
             }
 			if (!$noExportImport){
 				echo '
 				<h3 style="font-weight: bold"><i class="fa fa-sliders fa-fw"></i>&nbsp;' . i8ln("Settings") . '</h3>
 				<div>
-					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Reset") . ':</b><br>' . i8ln("All settings will be reset to factory settings") . '</span>
+					<span style="color: #3b3b3b" class="content-txt"><b style="font-size:17px" class="content-txt">' . i8ln("Reset") . ':</b><br>' . i8ln("All settings will be reset to factory settings") . '</span>
 					<div>
 						<center>
 							<button id="reset-button" class="settings" onclick="confirm(\'' . i8ln("Are you sure you want to reset all settings?") . '\') ? (localStorage.clear(), window.location.reload()) : false">
@@ -1830,8 +1844,8 @@ if (!$noLoadingScreen) {
 						</center>
 					</div>
 					<br>
-					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Export") . ':</b><br>' . i8ln("Save your current settings by downloading them as a file") . '<br><br></span>
-					<span style="color: #3b3b3b"><b style="font-size:17px">' . i8ln("Import") . ':</b><br>' . i8ln("Upload a setting file to restore your settings") . '</span>
+					<span style="color: #3b3b3b" class="content-txt"><b style="font-size:17px" class="content-txt">' . i8ln("Export") . ':</b><br>' . i8ln("Save your current settings by downloading them as a file") . '<br><br></span>
+					<span style="color: #3b3b3b" class="content-txt"><b style="font-size:17px" class="content-txt">' . i8ln("Import") . ':</b><br>' . i8ln("Upload a setting file to restore your settings") . '</span>
 					<div>
 						<center>
 							<button id="export-button" class="settings"
@@ -1865,8 +1879,8 @@ if (!$noLoadingScreen) {
 					<div>
 						<center>
 							<p>
-								<b>' . i8ln("You are currently logged in") . '</b><br>
-								<b>' . i8ln("User") . ':</b> ' . $_SESSION['user']->user . "" . '
+								<b class="content-txt">' . i8ln("You are currently logged in") . '</b><br>
+								<b class="content-txt">' . i8ln("User") . ':</b> ' . $_SESSION['user']->user . "" . '
 							</p>
 						</center>
 					</div>
@@ -2751,6 +2765,8 @@ if (!$noLoadingScreen) {
     var deviceOfflineAfterSeconds = <?php echo $deviceOfflineAfterSeconds ?>;
     var noPokePVPStats = <?php echo $noPokePVPStats === true ? 'true' : 'false' ?>;
     var enablePokePVPStats = <?php echo $noPokePVPStats ? 'false' : $enablePokePVPStats ?>;
+    var noDarkMode = <?php echo $noDarkMode === true ? 'true' : 'false' ?>;
+	var enableDarkMode = <?php echo $noDarkMode === true ? 'false' : $enableDarkMode ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

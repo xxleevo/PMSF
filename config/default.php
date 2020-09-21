@@ -357,6 +357,8 @@ $maxNativeZoomOSM = 19;
 
 /* Style Settings */
 $noCustomCss = true;
+$noDarkMode = false;
+$enableDarkMode = 'false';
 
 $copyrightSafe = true;
 $iconRepository = 'https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/';#

@@ -1,18 +1,21 @@
 .pokeLabelv1 .leaflet-popup-content-wrapper{
   background: black;
-  background: #000000 url('/static/images/label/v1/label_back.png');
-  background-size: cover;
+  color: #333 !important;
+  background: #000000 url('/static/images/label/v1/label_back.png') !important;
+  background-size: cover !important;
 }
 
 .pokeLabelv2 .leaflet-popup-content-wrapper{
   background: black;
-  background: #000000 url('/static/images/label/v2/label_back.png');
-  background-size: cover;
+  color: #333 !important;
+  background: #000000 url('/static/images/label/v2/label_back.png') !important;
+  background-size: cover !important;
 }
 .pokeLabelv3 .leaflet-popup-content-wrapper{
   background: black;
-  background: #000000 url('/static/images/label/v3/label_back.png');
-  background-size: cover;
+  color: #333 !important;
+  background: #000000 url('/static/images/label/v3/label_back.png') !important;
+  background-size: cover !important;
 }
 
 .iv-icon{
