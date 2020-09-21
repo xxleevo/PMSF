@@ -519,7 +519,7 @@ var StoreOptions = {
             default: enableStandardBagdes,
             type: StoreTypes.Boolean
         },
-	'darkMode':
+    'darkMode':
         {
             default: enableDarkMode,
             type: StoreTypes.Boolean

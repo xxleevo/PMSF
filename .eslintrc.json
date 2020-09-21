@@ -244,7 +244,9 @@
 	"osmTileServer": true,
 	"maxNativeZoomOSM": true,
 	"mBoxKey": true,
-	"noPokePVPStats": true
-	
+	"noPokePVPStats": true,
+	"noDarkMode": true,
+	"enableDarkMode": true,
+	"enableStandardBagdes": true
   }
 }

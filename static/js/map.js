@@ -452,7 +452,7 @@ function initMap() { // eslint-disable-line no-unused-vars
             console.log('The Mapstyle from your store wasnt found, set to defaults.')
         }
     } else if (forcedTileServer) { // If user isnt on tileservers but tileserver is forced.
-		Store.set('map_style', 'tileservers0')
+        Store.set('map_style', 'tileservers0')
         setTileLayer(Store.get('map_style'))
     } else { // If no tileserver is selected & forced isnt active.
         setTileLayer(Store.get('map_style'))
@@ -1054,9 +1054,8 @@ function initSidebar() {
     $('#cries-type-filter-wrapper').toggle(Store.get('playCries'))
     $('#bounce-switch').prop('checked', Store.get('remember_bounce_notify'))
     $('#notification-switch').prop('checked', Store.get('remember_notification_notify'))
-	$('#darkmode-switch').prop('checked', Store.get('darkMode'))
-	$('#scan-location-switch').prop('checked', Store.get('showScanLocation'))
-	
+    $('#darkmode-switch').prop('checked', Store.get('darkMode'))
+    $('#scan-location-switch').prop('checked', Store.get('showScanLocation'))
 
     if (Store.get('showDustAmount') === 0) {
         $('#dustvalue').text(i8ln('Disabled'))
@@ -1583,7 +1582,7 @@ function gymLabel(item) {
     }
 
     var smallBadge = ''
-    if(Store.get('badgeModeDual')){
+    if (Store.get('badgeModeDual')) {
         var badge = 'none'
         if (personalBadges['gold'] !== null && personalBadges['gold'].includes(item['gym_id'])) {
             badge = 'gold'
@@ -1591,8 +1590,8 @@ function gymLabel(item) {
             badge = 'silver'
         } else if (personalBadges['bronze'] !== null && personalBadges['bronze'].includes(item['gym_id'])) {
             badge = 'bronze'
-        }	
-		smallBadge = '<a onclick="openChangeGymBadgeModal(event);"><img style="position:absolute;top:50px;right:35px;" width="60px" height="auto" data-id="' + item['gym_id'] + '" src="static/forts/badges/' + badge + '.png" /></a>'
+        }
+        smallBadge = '<a onclick="openChangeGymBadgeModal(event);"><img style="position:absolute;top:50px;right:35px;" width="60px" height="auto" data-id="' + item['gym_id'] + '" src="static/forts/badges/' + badge + '.png" /></a>'
     }
     var teamLabel = ''
     var teamImage = ''
@@ -1781,9 +1780,9 @@ function gymLabel(item) {
         var backgroundClass = ''
         if (!noGymTeamInfos && (((lastScanned / 1000) > ((Date.now() / 1000) - 14400)) || noOutdatedGyms)) {
             freeSlotsBadge = '<div><span class="badgeText"><span class="badgeTextBold">' + i8ln('Spots') + ':</span> ' + freeSlots + '</span></div>'
-			nameBadge = '<div class="badgeTextName" style="color:rgba(' + gymColorBadge[teamId] + ')">' + gymName + '</div>'
-			if (gymName.length > 20) {
-			    nameBadge = '<div class="badgeTextNameLong" style="color:rgba(' + gymColorBadge[teamId] + ')">' + gymName + '</div>'
+            nameBadge = '<div class="badgeTextName" style="color:rgba(' + gymColorBadge[teamId] + ')">' + gymName + '</div>'
+            if (gymName.length > 20) {
+                nameBadge = '<div class="badgeTextNameLong" style="color:rgba(' + gymColorBadge[teamId] + ')">' + gymName + '</div>'
             }
             backgroundClass = badgeClasses[teamId]
         } else {
@@ -1840,7 +1839,7 @@ function gymLabel(item) {
             teamLabel +
             teamImage +
             raidIcon +
-			smallBadge +
+            smallBadge +
             '</div>' + raidStr +
             gymCp +
             freeSlotsText +
@@ -1897,7 +1896,7 @@ function gymLabel(item) {
             teamLabel +
             teamImage +
             raidIcon +
-			badge +
+            badge +
             '</div>' +
             raidStr +
             freeSlotsText +
@@ -2092,7 +2091,7 @@ function getRawQuest(item) { // eslint-disable-line no-unused-vars
 function getQuest(item) {
     var str
     var raidLevel
-    if (item['quest_condition_type'] !== null && questtypeList[item['quest_type']] !== undefined && questtypeList[item['quest_type']] !== null ) {
+    if (item['quest_condition_type'] !== null && questtypeList[item['quest_type']] !== undefined && questtypeList[item['quest_type']] !== null) {
         var questinfo = JSON.parse(item['quest_condition_info'])
         var questStr = '' + i8ln(questtypeList[item['quest_type']]) + ''
         str = '<div><center><b><u>' +
@@ -4311,7 +4310,7 @@ function searchForItem(lat, lon, term, type, field) {
                     } else {
                         pokemonIdStr = element.quest_pokemon_id
                     }
-                    var formStr = ''
+                    var formStr = '' // eslint-disable-line no-unused-vars
                     if (element.quest_pokemon_formid === 0) {
                         formStr = '00'
                     } else {
@@ -4330,9 +4329,9 @@ function searchForItem(lat, lon, term, type, field) {
                     if (sr.hasClass('reward-results')) {
                         if (element.quest_pokemon_id !== 0 && element.quest_reward_type === 7) {
                             html += '<span style="background:url(' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_00.png) no-repeat;" class="i-icon" ></span>'
-                        }else if (element.quest_item_id !== 0) {
+                        } else if (element.quest_item_id !== 0) {
                             html += '<span style="background:url(' + '' + rewardIcons + 'rewards/reward_' + element.quest_item_id + '_1.png) no-repeat;" class="i-icon" ></span>'
-                        }else if (element.quest_reward_type === 12) {
+                        } else if (element.quest_reward_type === 12) {
                             html += '<span style="background:url(' + rewardIcons + 'rewards/mega_energy/reward_mega_energy_' + element.quest_energy_pokemon_id + '.png) no-repeat;" class="i-icon" ></span>'
                         }
                     }
@@ -7871,7 +7870,7 @@ $(function () {
         redrawGyms(mapData.gyms)
     })
 
-	$switchBadgeModeDual = $('#badge-dualmode-switch')
+    $switchBadgeModeDual = $('#badge-dualmode-switch')
     $switchBadgeModeDual.on('change', function () {
         Store.set('badgeModeDual', this.checked)
         if ((this.checked)) {
