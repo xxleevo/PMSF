@@ -43,6 +43,7 @@ var $switchWeatherIcons
 var $switchPokeIVIcons
 var $switchPokePVPStats
 var $switchBadgeMode
+var $switchBadgeModeDual
 var $questsExcludePokemon
 var $questsExcludeItem
 var $questsExcludeEnergy
@@ -994,6 +995,7 @@ function initSidebar() {
     $('#ex-eligible-switch').prop('checked', Store.get('exEligible'))
     $('#battle-status-switch').prop('checked', Store.get('battleStatus'))
     $('#badge-mode-switch').prop('checked', Store.get('badgeMode'))
+    $('#badge-dualmode-switch').prop('checked', Store.get('badgeModeDual'))
     $('#badge-mode-wrapper').toggle(Store.get('showGyms'))
     $('#weather-icon-switch').prop('checked', Store.get('showWeatherIcons'))
     $('#iv-icon-switch').prop('checked', Store.get('showIVIcons'))
@@ -1580,6 +1582,18 @@ function gymLabel(item) {
         outdated = '<b>' + i8ln('Last scan older than 4 hours !') + '</b>'
     }
 
+    var smallBadge = ''
+    if(Store.get('badgeModeDual')){
+        var badge = 'none'
+        if (personalBadges['gold'] !== null && personalBadges['gold'].includes(item['gym_id'])) {
+            badge = 'gold'
+        } else if (personalBadges['silver'] !== null && personalBadges['silver'].includes(item['gym_id'])) {
+            badge = 'silver'
+        } else if (personalBadges['bronze'] !== null && personalBadges['bronze'].includes(item['gym_id'])) {
+            badge = 'bronze'
+        }	
+		smallBadge = '<a onclick="openChangeGymBadgeModal(event);"><img style="position:absolute;top:50px;right:35px;" width="60px" height="auto" data-id="' + item['gym_id'] + '" src="static/forts/badges/' + badge + '.png" /></a>'
+    }
     var teamLabel = ''
     var teamImage = ''
     var freeSlotsText = ''
@@ -1823,8 +1837,10 @@ function gymLabel(item) {
             teamLabel +
             teamImage +
             raidIcon +
+			smallBadge +
             '</div>' + raidStr +
             gymCp +
+            freeSlotsText +
             park +
             battleStr +
             hr +
@@ -1878,6 +1894,7 @@ function gymLabel(item) {
             teamLabel +
             teamImage +
             raidIcon +
+			badge +
             '</div>' +
             raidStr +
             freeSlotsText +
@@ -4101,7 +4118,7 @@ function showInBoundsMarkers(markersInput, type) {
 function loadRawData() {
     var loadPokemon = Store.get('showPokemon')
     var loadGyms = (Store.get('showGyms') || Store.get('showRaids')) ? 'true' : 'false'
-    var loadBadges = Store.get('badgeMode')
+    var loadBadges = Store.get('badgeMode') || Store.get('badgeModeDual')
     var loadPokestops = Store.get('showPokestops')
     var loadLures = Store.get('showLures')
     var loadQuests = Store.get('showQuests')
@@ -6166,7 +6183,7 @@ function updatePokestops() {
 }
 
 function processBadges(i, item) {
-    if (!Store.get('badgeMode')) {
+    if (!Store.get('badgeMode') && !Store.get('badgeModeDual')) {
         return false // in case the checkbox was unchecked in the meantime.
     }
     if (i === 'gold' || i === 'silver' || i === 'bronze') {
@@ -7838,12 +7855,26 @@ $(function () {
         updateMap()
     })
 
+    // Badge Mode Functions
     $switchBadgeMode = $('#badge-mode-switch')
-
     $switchBadgeMode.on('change', function () {
         Store.set('badgeMode', this.checked)
+        if ((this.checked)) {
+            Store.set('badgeModeDual', false)
+            $('#badge-dualmode-switch').prop('checked', false)
+        }
         lastgyms = false
         updateGymIcons()
+        redrawGyms(mapData.gyms)
+    })
+
+	$switchBadgeModeDual = $('#badge-dualmode-switch')
+    $switchBadgeModeDual.on('change', function () {
+        Store.set('badgeModeDual', this.checked)
+        if ((this.checked)) {
+            Store.set('badgeMode', false)
+            $('#badge-mode-switch').prop('checked', false)
+        }
         redrawGyms(mapData.gyms)
     })
 

@@ -514,6 +514,11 @@ var StoreOptions = {
             default: gymBadgeMode,
             type: StoreTypes.Boolean
         },
+    'badgeModeDual':
+        {
+            default: enableStandardBagdes,
+            type: StoreTypes.Boolean
+        },
 	'darkMode':
         {
             default: enableDarkMode,
