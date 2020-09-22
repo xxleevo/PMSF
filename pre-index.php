@@ -58,8 +58,8 @@ $getList = new \Scanner\RDM();
         foreach ( $mons as $k => $pokemon ) {
             $type = '';
             $name = $pokemon['name'];
-            foreach ( $pokemon['types'] as $t ) {
-                $type .= $t['type'];
+            foreach ($pokemon['types'] as $t) {
+                $type .= i8ln($t['type']);
             }
             if ( ! in_array( $k, $pokemonToExclude ) ) {
                 if ( $k > 890 ) {
@@ -73,9 +73,9 @@ $getList = new \Scanner\RDM();
                     $id = $k;
 				}
 				if (!$copyrightSafe) {
-                    echo '<span class="pokemon-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . i8ln( $type ) . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="' . $iconRepository . 'pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
+                    echo '<span class="pokemon-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . $type . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="' . $iconRepository . 'pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
 				} else {
-                    echo '<span class="pokemon-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . i8ln( $type ) . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="static/icons-safe/pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
+                    echo '<span class="pokemon-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . $type . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="static/icons-safe/pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
                 }
                 if (!$noPokemonNumbers) {
                     echo "<span class='pokemon-number'>" . $k . "</span>";
