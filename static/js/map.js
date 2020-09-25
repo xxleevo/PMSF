@@ -1896,7 +1896,7 @@ function gymLabel(item) {
             teamLabel +
             teamImage +
             raidIcon +
-            badge +
+            smallBadge +
             '</div>' +
             raidStr +
             freeSlotsText +
@@ -2932,6 +2932,23 @@ function getGymMarkerIcon(item, badgeMode) {
 
     var relativeIconSize = (50 / 6) + ((50 / 6) * (map.getZoom() - 10))
 
+    // Dynamic Anchor
+    var gymStyle = Store.get('gymMarkerStyle')
+    var dynamicAnchor = [dynamicGymSize / 2, dynamicGymSize / 2] // Fallback for Centered Styles & Custom Styles
+
+    // var centeredStyles = ['shield', 'tower', 'beasts', 'idol', 'elements', ''] // Anchor in center, not handled by code because its the fallback
+    var bottomAchoredStyles = ['comictower', 'ingame']
+    var specificAnchor = ['classic']
+    if (bottomAchoredStyles.includes(gymStyle)) { // For Bottom Styled Gyms
+        if (gymStyle === 'comictower' && level === 6) { // Special Case: ComicTower
+            dynamicAnchor = [dynamicGymSize / 2, ((dynamicGymSize * 1.41 / 100) * 94)] // Special case for lvl 6 Comictower
+        } else {
+            dynamicAnchor = [dynamicGymSize / 2, ((dynamicGymSize / 100) * 94)] // 94% from the bottom, centered left/right
+        }
+    } else if (specificAnchor.includes(gymStyle)) { // Classic, specific Anchor
+        dynamicAnchor = [((dynamicGymSize / 100) * 68), ((dynamicGymSize / 100) * 84)] // 84% bottom, 68% right
+    }
+
     if (raidForm <= 0 || raidForm == null || raidForm === '0') {
         formStr = '00'
     } else {
@@ -3023,8 +3040,8 @@ function getGymMarkerIcon(item, badgeMode) {
             }
             fortMarker = L.divIcon({
                 iconSize: [relativeIconSize, relativeIconSize],
-                iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
-                popupAnchor: [0, -40],
+                iconAnchor: dynamicAnchor,
+                popupAnchor: [0, -(dynamicAnchor[1])],
                 className: 'raid-marker',
                 html: html
             })
@@ -3044,8 +3061,8 @@ function getGymMarkerIcon(item, badgeMode) {
             }
             fortMarker = L.divIcon({
                 iconSize: [relativeIconSize, relativeIconSize],
-                iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
-                popupAnchor: [0, -40],
+                iconAnchor: dynamicAnchor,
+                popupAnchor: [0, -(dynamicAnchor[1])],
                 className: 'active-egg-marker',
                 html: html
             })
@@ -3065,8 +3082,8 @@ function getGymMarkerIcon(item, badgeMode) {
             }
             fortMarker = L.divIcon({
                 iconSize: [relativeIconSize, relativeIconSize],
-                iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
-                popupAnchor: [0, -40],
+                iconAnchor: dynamicAnchor,
+                popupAnchor: [0, -(dynamicAnchor[1])],
                 className: 'egg-marker',
                 html: html
             })
@@ -3082,8 +3099,8 @@ function getGymMarkerIcon(item, badgeMode) {
                 '</div>'
             fortMarker = L.divIcon({
                 iconSize: [relativeIconSize, relativeIconSize],
-                iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
-                popupAnchor: [0, -40],
+                iconAnchor: dynamicAnchor,
+                popupAnchor: [0, -(dynamicAnchor[1])],
                 className: 'egg-marker',
                 html: html
             })
@@ -3099,8 +3116,8 @@ function getGymMarkerIcon(item, badgeMode) {
                 '</div>'
             fortMarker = L.divIcon({
                 iconSize: [relativeIconSize, relativeIconSize],
-                iconAnchor: [dynamicGymSize / 2, dynamicGymSize / 2],
-                popupAnchor: [0, -40],
+                iconAnchor: dynamicAnchor,
+                popupAnchor: [0, -(dynamicAnchor[1])],
                 className: 'egg-marker',
                 html: html
             })
