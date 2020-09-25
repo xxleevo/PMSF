@@ -401,6 +401,15 @@
     top: 0;
     left: 0;
     border-top-left-radius: 0px;
+	text-shadow: 1px 1px 1px #000;
+	font-weight: normal !important;
+  }
+  .rename-gym{
+    top: 31;
+    left: 0;
+    border-left-radius: 0px;
+	text-shadow: 1px 1px 1px #000;
+	font-weight: normal !important;
   }
 }
 
@@ -417,6 +426,22 @@
   padding: 5px;
   color: rgb(255, 255, 255);
   cursor: pointer;
+  width:30px;
+  text-shadow: 1px 1px 1px #000;
+  font-weight: normal !important;
+}
+.rename-gym{
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  font-size: 20px;
+  background: rgb(255, 180, 0);
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  width:30px;
+  text-shadow: 1px 1px 1px #000;
+  font-weight: normal !important;
 }
 .toggle-ex-gym{
   position: absolute;

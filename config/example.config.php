@@ -395,6 +395,7 @@ $pokemonTimer = 900;														// Time in seconds before a submitted Pokémon
 $noManualGyms = true;
 $noManualPokestops = true;
 $noRenamePokestops = true;
+$noRenameGyms = true;
 $noConvertPokestops = true;
 $noManualQuests = true;
 
@@ -420,9 +421,9 @@ $imgurCID = "";
 $pokemonReportTime = false;
 $pokemonToExclude = [];
 
-$noDeleteGyms = false;
-$noToggleExGyms = false;
-$noDeletePokestops = false;
+$noDeleteGyms = true;
+$noToggleExGyms = true;
+$noDeletePokestops = true;
 
 $raidBosses = [1, 4, 7, 129, 138, 140, 147, 82, 108, 125, 126, 185, 303, 65, 68, 95, 106, 107, 123, 135, 142, 76, 112, 131, 143, 248, 359, 144, 145, 146, 377];
 

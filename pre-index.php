@@ -2048,16 +2048,22 @@ if (!$noLoadingScreen) {
             </div>
         </div>
     <?php } ?>
-    <?php if ( ! $noRenamePokestops ) { ?>
-        <div class="rename-modal" style="display: none;">
+    <?php if (!$noRenamePokestops) { ?>
+        <div class="renamepokestop-modal" style="display: none;">
 	   <input type="text" id="pokestop-name" name="pokestop-name"
 		  placeholder="<?php echo i8ln( 'Enter New Pokéstop Name' ); ?>" data-type="pokestop"
                   class="search-input">
              <div class="button-container">
-                <button type="button" onclick="renamePokestopData(event);" class="renamepokestopid"><i
-                        class="fa fa-edit"
-                        style="margin-right:10px; vertical-align: middle; font-size: 1.5em;"></i><?php echo i8ln( 'Rename Pokestop' ); ?>
-                </button>
+                <button type="button" onclick="renamePokestopData(event);" class="renamepokestopid"><i class="fas fa-edit"></i> <?php echo i8ln( 'Rename Pokestop' ); ?></button>
+            </div>
+        </div>
+    <?php } ?>
+    <?php if ( ! $noRenameGyms ) { ?>
+        <div class="renamegym-modal" style="display: none;">
+            <input type="text" id="gym-name" name="gym-name" 
+                placeholder="<?php echo i8ln( 'Enter New Gym Name' ); ?>" data-type="gym" class="search-input">
+            <div class="button-container">
+                <button type="button" onclick="renameGymData(event);" class="renamegymid"><i class="fa fa-edit"></i> <?php echo i8ln( 'Rename Gym' ); ?></button>
             </div>
         </div>
     <?php } ?>
@@ -2703,6 +2709,7 @@ if (!$noLoadingScreen) {
     var expireTimestamp = <?php echo isset($_SESSION['user']->expire_timestamp) ? $_SESSION['user']->expire_timestamp : 0 ?>;
     var timestamp = <?php echo time() ?>;
     var noRenamePokestops = <?php echo $noRenamePokestops === true ? 'true' : 'false' ?>;
+    var noRenameGyms = <?php echo $noRenameGyms === true ? 'true' : 'false' ?>;
     var noConvertPokestops = <?php echo $noConvertPokestops === true ? 'true' : 'false' ?>;
     var noWhatsappLink = <?php echo $noWhatsappLink === true ? 'true' : 'false' ?>;
     var noWhatsappLinkQuests = <?php echo $noWhatsappLinkQuests === true ? 'true' : 'false' ?>;

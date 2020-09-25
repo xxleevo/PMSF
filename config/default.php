@@ -407,6 +407,7 @@ $pokemonTimer = 900;                                                // Time in s
 $noManualGyms = true;
 $noManualPokestops = true;
 $noRenamePokestops = true;
+$noRenameGyms = true;
 $noConvertPokestops = true;
 $noManualQuests = true;
 

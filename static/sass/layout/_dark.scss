@@ -385,4 +385,25 @@ $popup-color-dark: #111;
 	#encounterSpoiler.grunt-encounters-wrapper,#gruntRewardSpoiler.grunt-rewards-wrapper{
 		color:black;
 	}
+	#gym-details {
+		background-color: $background-color-dark-content;
+		h3, b{
+			color:$text-color-dark;
+		}
+		.badgeText{
+			color: $text-color-dark;
+		}
+		.team-0-text {
+			color: #A9A9A9;
+		}
+		.team-1-text {
+			color: #4A8ACA;
+		}
+		.team-2-text {
+			color: #F0443A;
+		}
+		.team-3-text {
+			color: #c6c600;
+		}
+	}
 }

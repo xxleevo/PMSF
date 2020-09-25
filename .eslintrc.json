@@ -247,6 +247,7 @@
 	"noPokePVPStats": true,
 	"noDarkMode": true,
 	"enableDarkMode": true,
-	"enableStandardBagdes": true
+	"enableStandardBagdes": true,
+	"noRenameGyms": true
   }
 }

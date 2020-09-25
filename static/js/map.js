@@ -1724,6 +1724,9 @@ function gymLabel(item) {
     if (!noDeleteGyms) {
         raidStr += '<i class="fa fa-trash-o delete-gym" onclick="deleteGym(event);" data-id="' + item['gym_id'] + '"></i>'
     }
+    if (!noRenameGyms) {
+        raidStr += '<i class="fa fa-edit rename-gym" onclick="openRenameGymModal(event);" data-id="' + item['gym_id'] + '"></i>'
+    }
     if (!noToggleExGyms) {
         raidStr += '<i class="fa fa-trophy toggle-ex-gym" onclick="toggleExGym(event);" data-id="' + item['gym_id'] + '"></i>'
     }
@@ -4666,6 +4669,39 @@ function deleteGym(event) { // eslint-disable-line no-unused-vars
         }
     }
 }
+function renameGymData(event) { // eslint-disable-line no-unused-vars
+    var form = $(event.target).parent().parent()
+    var gymId = form.find('.renamegymid').val()
+    var gymName = form.find('[name="gym-name"]').val()
+    if (gymName && gymName !== '') {
+        if (confirm(i8ln('I confirm this is an accurate new name for this gym'))) {
+            return $.ajax({
+                url: 'submit',
+                type: 'POST',
+                timeout: 300000,
+                dataType: 'json',
+                cache: false,
+                data: {
+                    'action': 'renamegym',
+                    'gymId': gymId,
+                    'gymName': gymName
+                },
+                error: function error() {
+                    // Display error toast
+                    toastr['error'](i8ln('Please check connectivity or reduce marker settings.'), i8ln('Error changing gym name'))
+                    toastr.options = toastrOptions
+                },
+                complete: function complete() {
+                    jQuery('label[for="gyms-switch"]').click()
+                    jQuery('label[for="gyms-switch"]').click()
+                    lastgyms = false
+                    updateMap()
+                    $('.ui-dialog-content').dialog('close')
+                }
+            })
+        }
+    }
+}
 function toggleExGym(event) { // eslint-disable-line no-unused-vars
     var button = $(event.target)
     var gymId = button.data('id')
@@ -5612,11 +5648,25 @@ function openRenamePokestopModal(event) { // eslint-disable-line no-unused-vars
     var val = $(event.target).data('id')
     console.log('picking Val:' + val)
     $('.renamepokestopid').val(val)
-    $('.rename-modal').clone().dialog({
+    $('.renamepokestop-modal').clone().dialog({
         modal: true,
         maxHeight: 600,
         buttons: {},
-        title: i8ln('Rename Pokéstop'),
+        title: i8ln('Rename Pokestop'),
+        classes: {
+            'ui-dialog': 'ui-dialog raid-widget-popup'
+        }
+    })
+}
+function openRenameGymModal(event) { // eslint-disable-line no-unused-vars
+    $('.ui-dialog').remove()
+    var val = $(event.target).data('id')
+    $('.renamegymid').val(val)
+    $('.renamegym-modal').clone().dialog({
+        modal: true,
+        maxHeight: 600,
+        buttons: {},
+        title: i8ln('Rename Gym'),
         classes: {
             'ui-dialog': 'ui-dialog raid-widget-popup'
         }
@@ -7057,6 +7107,27 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
     })
 
     data.done(function (result) {
+        var badgeTitle = ''
+        var badgeText = ''
+        var badgeImg = ''
+        if (Store.get('badgeMode') || Store.get('badgeModeDual')) {
+            badgeTitle = '<b class="team-' + result.team_id + '-text">' + i8ln('Badge') + ':</b><br>'
+            var badgeStatus = 'none'
+            badgeText = '<div><span class="badgeTextBold">' + i8ln('Rank') + ':</span> ' + i8ln('none_badge') + '</div>'
+            if (personalBadges['gold'] !== null && personalBadges['gold'].includes(result['gym_id'])) {
+                badgeStatus = 'gold'
+                badgeText = '<div><span class="badgeTextBold">' + i8ln('Rank') + ': <span style="color: #d5b24b">' + i8ln(badgeStatus[0].toUpperCase() + badgeStatus.slice(1)) + '</span></div>'
+            } else if (personalBadges['silver'] !== null && personalBadges['silver'].includes(result['gym_id'])) {
+                badgeStatus = 'silver'
+                badgeText = '<div><span class="badgeTextBold">' + i8ln('Rank') + ': <span style="color: #97999c">' + i8ln(badgeStatus[0].toUpperCase() + badgeStatus.slice(1)) + '</span></div>'
+            } else if (personalBadges['bronze'] !== null && personalBadges['bronze'].includes(result['gym_id'])) {
+                badgeStatus = 'bronze'
+                badgeText = '<div><span class="badgeTextBold">' + i8ln('Rank') + ': <span style="color: #937153">' + i8ln(badgeStatus[0].toUpperCase() + badgeStatus.slice(1)) + '</span></div>'
+            }
+            badgeImg = '<a onclick="openChangeGymBadgeModal(event);"><img width="64" height="auto" data-id="' + result['gym_id'] + '" src="static/forts/badges/' + badgeStatus + '.png" /></a>'
+            badgeText += '<br />'
+        }
+
         var lastModifiedStr = getDateStr(result.last_modified) + ' ' + getTimeStr(result.last_modified)
         var lastScannedStr = ''
         if (result.last_scanned != null) {
@@ -7173,6 +7244,9 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         if (!noDeleteGyms) {
             raidStr += '<i class="fa fa-trash-o delete-gym" onclick="deleteGym(event);" data-id="' + id + '"></i>'
         }
+        if (!noRenameGyms) {
+            raidStr += '<i class="fa fa-edit rename-gym" onclick="openRenameGymModal(event);" data-id="' + id + '"></i>'
+        }
         if (!noToggleExGyms) {
             raidStr += '<i class="fa fa-trophy toggle-ex-gym" onclick="toggleExGym(event);" data-id="' + id + '"></i>'
         }
@@ -7202,15 +7276,19 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             '<b class="team-' + result.team_id + '-text">' + (result.name || '') + '</b>' +
             '</div>' +
             '<div>' +
-            '<img height="70px" style="padding: 5px;" src="static/forts/' + gymTypes[result.team_id] + '_large.png">' +
+            '<img height="70px" style="padding: 5px;-webkit-filter: drop-shadow(4px 4px 2px #222);filter: drop-shadow(4px 4px 2px #000);" src="static/forts/' + gymTypes[result.team_id] + '_large.png">' +
             raidIcon +
             '</div>' +
             raidStr +
             gymLevelStr +
             '<div>' +
             battleStr +
-            '<br>' +
             park +
+            '<br>' +
+            '</div><div>' +
+            badgeTitle +
+            badgeImg +
+            badgeText +
             '</div>' +
             '<div style="font-size: .7em">' +
             i8ln('Last Modified') + ' : ' + lastModifiedStr +
@@ -7239,7 +7317,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         pokemonHtml =
                 '<center class="team-' + result.team_id + '-text">' +
                 i8ln('Defender') + ':<br>' +
-                '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + guardFormStr + '.png"/><br>' +
+                '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + guardFormStr + '.png" width="80" height="auto" /><br>' +
                 '<b class="team-' + result.team_id + '-text">' + result.guard_pokemon_name + '</b>' +
                 '</center>'
 
