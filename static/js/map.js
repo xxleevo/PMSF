@@ -4972,76 +4972,6 @@ function deleteNest(event) { // eslint-disable-line no-unused-vars
     }
 }
 
-function submitNewNest(event) { // eslint-disable-line no-unused-vars
-    var cont = $(event.target).parent().parent()
-    var pokemonId = cont.find('.pokemonID').val()
-    var lat = $('.submit-modal.ui-dialog-content .submitLatitude').val()
-    var lon = $('.submit-modal.ui-dialog-content .submitLongitude').val()
-    if (lat && lat !== '' && lon && lon !== '') {
-        if (confirm(i8ln('I confirm this is an new nest'))) {
-            return $.ajax({
-                url: 'submit',
-                type: 'POST',
-                timeout: 300000,
-                dataType: 'json',
-                cache: false,
-                data: {
-                    'action': 'new-nest',
-                    'lat': lat,
-                    'lon': lon,
-                    'pokemonId': pokemonId
-                },
-                error: function error() {
-                    // Display error toast
-                    toastr['error'](i8ln('Please check connectivity or reduce marker settings.'), i8ln('Error Submitting Nest'))
-                    toastr.options = toastrOptions
-                },
-                complete: function complete() {
-                    lastnests = false
-                    updateMap()
-                    jQuery('label[for="nests-switch"]').click()
-                    jQuery('label[for="nests-switch"]').click()
-                    $('.ui-dialog-content').dialog('close')
-                }
-            })
-        }
-    }
-}
-
-function manualNestData(event) { // eslint-disable-line no-unused-vars
-    var cont = $(event.target).parent().parent().parent()
-    var nestId = cont.find('.submitting-nests').data('nest')
-    var pokemonId = cont.find('.pokemonID').val()
-    if (nestId && nestId !== '' && pokemonId && pokemonId !== '') {
-        if (confirm(i8ln('I confirm this is an accurate sighting of a quest'))) {
-            return $.ajax({
-                url: 'submit',
-                type: 'POST',
-                timeout: 300000,
-                dataType: 'json',
-                cache: false,
-                data: {
-                    'action': 'nest',
-                    'nestId': nestId,
-                    'pokemonId': pokemonId
-                },
-                error: function error() {
-                    // Display error toast
-                    toastr['error'](i8ln('Please check connectivity or reduce marker settings.'), i8ln('Error Submitting Nest'))
-                    toastr.options = toastrOptions
-                },
-                complete: function complete() {
-                    lastnests = false
-                    updateMap()
-                    jQuery('label[for="nests-switch"]').click()
-                    jQuery('label[for="nests-switch"]').click()
-                    $('.ui-dialog-content').dialog('close')
-                }
-            })
-        }
-    }
-}
-
 function manualQuestData(event) { // eslint-disable-line no-unused-vars
     var cont = $(event.target).parent().parent()
     var questType = cont.find('.questTypeList').val()
@@ -5368,29 +5298,6 @@ function markPoiDeclined(event) { // eslint-disable-line no-unused-vars
     }
 }
 
-function openNestModal(event) { // eslint-disable-line no-unused-vars
-    $('.ui-dialog').remove()
-    var val = $(event.target).data('id')
-    $('.submitting-nests').attr('data-nest', val)
-    $('.global-nest-modal').clone().dialog({
-        modal: true,
-        maxHeight: 600,
-        title: i8ln('Submit a Nest'),
-        buttons: {},
-        classes: {
-            'ui-dialog': 'ui-dialog nest-widget-popup'
-        },
-        open: function (event, ui) {
-            $('.nest-widget-popup .pokemon-list-cont').each(function (index) {
-                $(this).attr('id', 'pokemon-list-cont-7' + index)
-                var options = {
-                    valueNames: ['name', 'types', 'id']
-                }
-                var monList = new List('pokemon-list-cont-7' + index, options) // eslint-disable-line no-unused-vars
-            })
-        }
-    })
-}
 function openRaidModal(event) { // eslint-disable-line no-unused-vars
     $('.ui-dialog').remove()
     var val = $(event.target).data('id')

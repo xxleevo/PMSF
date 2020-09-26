@@ -389,41 +389,6 @@ class RDM extends Submit {
 			sendToWebhook($discordSubmitLogChannelUrl, ($data));
 		}
 	}
-	public function modify_nest($nestId, $pokemonId, $loggedUser) {
-		global $manualdb, $noManualNests, $noNests, $noDiscordSubmitLogChannel, $discordSubmitLogChannelUrl;
-		if ( $noManualNests === true || $noNests === true ) {
-			http_response_code( 401 );
-			die();
-		}
-		if ( ! empty( $pokemonId ) && ! empty( $nestId ) ) {
-			$cols  = [
-				'pokemon_id' => $pokemonId,
-				'nest_submitted_by' => $loggedUser
-			];
-			$where = [
-				'nest_id' => $nestId
-			];
-			$manualdb->update( "nests", $cols, $where );
-		}
-	}
-	public function submit_nest($lat, $lon, $pokemonId, $loggedUser) {
-		global $manualdb, $noAddNewNests, $noNests, $noDiscordSubmitLogChannel, $discordSubmitLogChannelUrl;
-		if ( $noAddNewNests === true || $noNests === true ) {
-			http_response_code( 401 );
-			die();
-		}
-		if ( ! empty( $lat ) && ! empty( $lon ) && ! empty( $pokemonId ) ) {
-			$cols = [
-				'pokemon_id' 	=> $pokemonId,
-				'lat'        	=> $lat,
-				'lon'        	=> $lon,
-				'type'       	=> 0,
-				'updated'    	=> time(),
-				'nest_submitted_by'	=> $loggedUser
-			];
-			$manualdb->insert( "nests", $cols );
-		}
-	}
 	public function delete_nest($nestId) {
 		global $manualdb, $noDeleteNests, $noNests, $noDiscordSubmitLogChannel, $discordSubmitLogChannelUrl;
 		if ( $noDeleteNests === true || $noNests === true ) {

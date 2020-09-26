@@ -2033,18 +2033,6 @@ if (!$noLoadingScreen) {
     <div id="motd" title=""></div>
 
     <div id="map"></div>
-    <?php if ( ! $noManualNests ) { ?>
-        <div class="global-nest-modal" style="display:none;">
-            <input type="hidden" name="pokemonID" class="pokemonID"/>
-            <?php pokemonFilterImages( $noPokemonNumbers, 'pokemonSubmitFilter(event)', $excludeNestMons, 5 ); ?>
-            <div class="button-container">
-                <button type="button" onclick="manualNestData(event);" class="submitting-nests"><i
-                        class="fa fa-binoculars"
-                        style="margin-right:10px;"></i><?php echo i8ln( 'Submit Nest' ); ?>
-                </button>
-            </div>
-        </div>
-    <?php } ?>
     <?php if (!$noRenamePokestops) { ?>
         <div class="renamepokestop-modal" style="display: none;">
 	   <input type="text" id="pokestop-name" name="pokestop-name"
@@ -2422,7 +2410,7 @@ if (!$noLoadingScreen) {
         </div>
     <?php } ?>
     <?php
-    if ( (!$noGyms && ! $noManualGyms) || (!$noPokestops && ! $noManualPokestops) || (!$noAddNewNests && ! $noNests) || (!$noAddNewCommunity && !$noCommunity) || (!$noAddPoi && ! $noPoi) ) {
+    if ( (!$noGyms && ! $noManualGyms) || (!$noPokestops && ! $noManualPokestops) || (!$noAddNewCommunity && !$noCommunity) || (!$noAddPoi && ! $noPoi) ) {
         ?>
         <button class="submit-on-off-button" onclick="$('.submit-on-off-button').toggleClass('on');">
             <i class="fa fa-map-marker submit-to-map" aria-hidden="true"></i>
@@ -2440,10 +2428,6 @@ if (!$noLoadingScreen) {
                         ?>
                         <li><a href="#tab-pokestop"><img src="static/forts/Pstop-large.png"/></a></li>
                     <?php } ?>
-                    <?php if ( ! $noAddNewNests && !$noNests ) {
-                        ?>
-                        <li><a href="#tab-nests"><img src="static/images/nest.png"/></a></li>
-		    <?php } ?>
                     <?php if ( ! $noAddNewCommunity && !$noCommunity ) {
                         ?>
                         <li><a href="#tab-communities"><img src="static/images/community.png"/></a></li>
@@ -2452,8 +2436,8 @@ if (!$noLoadingScreen) {
                         ?>
                         <li><a href="#tab-poi"><img src="static/images/waystop-red.png"/></a></li>
                     <?php } ?>
-                </ul>
-                <?php if ( ! $noManualGyms && !$noGyms ) {
+						</ul>
+					<?php if ( ! $noManualGyms && !$noGyms ) {
                     ?>
                     <div id="tab-gym">
                         <input type="text" id="gym-name" name="gym-name"
@@ -2477,19 +2461,6 @@ if (!$noLoadingScreen) {
                             <button type="button" onclick="manualPokestopData(event);" class="submitting-pokestop"><i
                                     class="fa fa-binoculars"
                                     style="margin-right:10px;"></i><?php echo i8ln( 'Submit Pokestop' ); ?>
-                            </button>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if ( ! $noAddNewNests && !$noNests ) {
-                    ?>
-                    <div id="tab-nests">
-                        <input type="hidden" name="pokemonID" class="pokemonID"/>
-                        <?php pokemonFilterImages( $noPokemonNumbers, 'pokemonSubmitFilter(event)', $excludeNestMons, 7 ); ?>
-                        <div class="button-container">
-                            <button type="button" onclick="submitNewNest(event);" class="submitting-nest"><i
-                                    class="fa fa-binoculars"
-                                    style="margin-right:10px;"></i><?php echo i8ln( 'Submit Nest' ); ?>
                             </button>
                         </div>
                     </div>
