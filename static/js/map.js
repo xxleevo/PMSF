@@ -1717,10 +1717,6 @@ function gymLabel(item) {
             raidIcon = '<img src="static/raids/egg_' + item['raid_level'] + '.png" style="margin-left:-100px;margin-bottom: 45px;width:60px;">'
         }
     }
-    if (manualRaids && item['scanArea'] === false) {
-        raidStr += '<div class="raid-container">' + i8ln('Add raid ') + '<i class="fa fa-binoculars submit-raid" onclick="openRaidModal(event);" data-id="' + item['gym_id'] + '"></i>' +
-            '</div>'
-    }
     if (!noDeleteGyms) {
         raidStr += '<i class="fa fa-trash-o delete-gym" onclick="deleteGym(event);" data-id="' + item['gym_id'] + '"></i>'
     }
@@ -4391,9 +4387,6 @@ function searchForItem(lat, lon, term, type, field) {
                     html += '<div class="cont">' +
                     '<span class="name" style="font-weight:bold">' + element.name + '</span>' + '<span class="distance" style="font-weight:bold">&nbsp;-&#32;' + element.distance + defaultUnit + '</span>' +
                     '</div></div>'
-                    if (sr.hasClass('gym-results') && manualRaids && !scanArea) {
-                        html += '<div class="right-column"><i class="fa fa-binoculars submit-raid"  onClick="openRaidModal(event);" data-id="' + element.external_id + '"></i></div>'
-                    }
                     html += '</li>'
                     sr.append(html)
                 })
@@ -5107,44 +5100,6 @@ function manualQuestData(event) { // eslint-disable-line no-unused-vars
     }
 }
 
-function manualRaidData(event) { // eslint-disable-line no-unused-vars
-    var form = $(event.target).parent().parent()
-    var pokemonId = form.find('[name="pokemonId"]').val()
-    gymId = form.find('[name="gymId"]').val()
-    var monTime = form.find('[name="mon_time"]').val()
-    var eggTime = form.find('[name="egg_time"]').val()
-    if (pokemonId && pokemonId !== '' && gymId && gymId !== '' && eggTime && eggTime !== '' && monTime && monTime !== '') {
-        if (confirm(i8ln('I confirm this is an accurate sighting of a raid'))) {
-            return $.ajax({
-                url: 'submit',
-                type: 'POST',
-                timeout: 300000,
-                dataType: 'json',
-                cache: false,
-                data: {
-                    'action': 'raid',
-                    'pokemonId': pokemonId,
-                    'gymId': gymId,
-                    'monTime': monTime,
-                    'eggTime': eggTime
-                },
-                error: function error() {
-                    // Display error toast
-                    toastr['error'](i8ln('Please check connectivity or reduce marker settings.'), i8ln('Error Submitting Raid'))
-                    toastr.options = toastrOptions
-                },
-                complete: function complete() {
-                    lastgyms = false
-                    updateMap()
-                    if (Store.get('useGymSidebar')) {
-                        showGymDetails(form.find('[name="gymId"]').val())
-                    }
-                    $('.ui-dialog-content').dialog('close')
-                }
-            })
-        }
-    }
-}
 function submitNewCommunity(event) { // eslint-disable-line no-unused-vars
     var form = $(event.target).parent().parent()
     var lat = $('.submit-modal.ui-dialog-content .submitLatitude').val()
@@ -5776,23 +5731,6 @@ function openEditPoiModal(event) { // eslint-disable-line no-unused-vars
             'ui-dialog': 'ui-dialog raid-widget-popup'
         }
     })
-}
-
-function generateRaidModal() {
-    var raidStr = '<form class="raid-modal" style="display:none;" title="' + i8ln('Submit a Raid Report') + '">'
-    raidStr += '<input type="hidden" value="" id="raidModalGymId" name="gymId" autofocus>'
-    raidStr += '<div class=" switch-container">' +
-        generateRaidBossList() +
-        '</div>' +
-        '<div class="mon-name" style="display:none;"></div>' +
-        '<div class="switch-container timer-cont" style="text-align:center;display:none">' +
-        '<h5 class="timer-name" style="margin-bottom:0;"></h5>' +
-        generateTimerLists() +
-        '</div>' +
-        '<button type="button" onclick="manualRaidData(event);" class="submitting-raid"><i class="fa fa-binoculars" style="margin-right:10px;"></i>' + i8ln('Submit Raid') + '</button>' +
-        '<button type="button" onclick="$(\'.ui-dialog-content\').dialog(\'close\');" class="close-modal"><i class="fa fa-times" aria-hidden="true"></i></button>' +
-        '</form>'
-    return raidStr
 }
 
 function generateTimerLists() {
@@ -7168,9 +7106,6 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         var raidStr = ''
         var raidIcon = ''
         var raidCounterGuideStr = ''
-        if (manualRaids) {
-            var rbList = generateRaidBossList()
-        }
         if (raidSpawned && result.raid_end > Date.now()) {
             var levelStr = ''
             if (result['raid_level'] >= 6) {
@@ -7249,24 +7184,6 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         }
         if (!noToggleExGyms) {
             raidStr += '<i class="fa fa-trophy toggle-ex-gym" onclick="toggleExGym(event);" data-id="' + id + '"></i>'
-        }
-        if (manualRaids) {
-            raidStr += '<i class="fa fa-binoculars submit-raid" onclick="$(this).toggleClass(\'open\');$(\'.raid-report\').slideToggle()" ></i>'
-            raidStr += '<div class="raid-report">'
-            raidStr += '<div style="margin:0px 10px;"><form>'
-            raidStr += '<input type="hidden" value="' + id + '" id="gymId" name="gymId">'
-            raidStr += '<div class=" switch-container">' +
-                rbList +
-                '</div>' +
-                '<div class="mon-name" style="display:none;"></div>' +
-                '<div class="switch-container timer-cont" style="display:none;">' +
-                '<h5 class="timer-name" style="margin-bottom:0;"></h5>' +
-                generateTimerLists() +
-                '</div>' +
-                '<button type="button" onclick="manualRaidData(event);" class="submitting-raid"><i class="fa fa-binoculars" style="margin-right:10px;"></i> ' + i8ln('Submit Raid') + '</button>' +
-                '</form>' +
-                '</div>' +
-                '</div>'
         }
 
         var pokemonHtml = ''
@@ -8453,9 +8370,6 @@ $(function () {
         $('#quests-tabs').tabs()
         $('#grunt-tabs').tabs()
         $('#raidboss-tabs').tabs()
-        if (manualRaids) {
-            $('.global-raid-modal').html(generateRaidModal())
-        }
     })
 
     $('.select-all').on('click', function (e) {

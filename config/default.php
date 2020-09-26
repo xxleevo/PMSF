@@ -400,10 +400,6 @@ $noParkInfo = false;                                                // Do not di
 // Manual Submissions
 //-----------------------------------------------------
 $noSubmit = true;
-$hideIfManual = false;
-$noManualRaids = true;
-$noManualPokemon = true;
-$pokemonTimer = 900;                                                // Time in seconds before a submitted Pokémon despawns.
 $noManualGyms = true;
 $noManualPokestops = true;
 $noRenamePokestops = true;

@@ -1178,10 +1178,10 @@ if (!$noLoadingScreen) {
                     }?>
 			
                     <?php
-                    if ( (!$hideIfManual && !$noGymTeamInfos) || !$noGymScannedText || !$noNewGymsFilter) {
+                    if (!$noGymTeamInfos || !$noGymScannedText || !$noNewGymsFilter) {
 						echo '<div id="gyms-filter-wrapper" style="display:none">';
 						
-						if ( ! $hideIfManual && !$noGymTeamInfos) {
+						if (!$noGymTeamInfos) {
 							echo '<div class="form-control switch-container" id="team-gyms-only-wrapper">
 								<font size="3">Team</font>
 								<select name="team-gyms-filter-switch" id="team-gyms-only-switch">
@@ -2033,9 +2033,6 @@ if (!$noLoadingScreen) {
     <div id="motd" title=""></div>
 
     <div id="map"></div>
-    <div class="global-raid-modal">
-
-    </div>
     <?php if ( ! $noManualNests ) { ?>
         <div class="global-nest-modal" style="display:none;">
             <input type="hidden" name="pokemonID" class="pokemonID"/>
@@ -2425,7 +2422,7 @@ if (!$noLoadingScreen) {
         </div>
     <?php } ?>
     <?php
-    if ( ( ! $noPokemon && ! $noManualPokemon ) || ( ! $noGyms && ! $noManualGyms ) || ( ! $noPokestops && ! $noManualPokestops ) || ( ! $noAddNewNests && ! $noNests ) || ( !$noAddNewCommunity && ! $noCommunity ) || ( !$noAddPoi && ! $noPoi ) ) {
+    if ( (!$noGyms && ! $noManualGyms) || (!$noPokestops && ! $noManualPokestops) || (!$noAddNewNests && ! $noNests) || (!$noAddNewCommunity && !$noCommunity) || (!$noAddPoi && ! $noPoi) ) {
         ?>
         <button class="submit-on-off-button" onclick="$('.submit-on-off-button').toggleClass('on');">
             <i class="fa fa-map-marker submit-to-map" aria-hidden="true"></i>
@@ -2435,10 +2432,6 @@ if (!$noLoadingScreen) {
             <input type="hidden" value="" name="submitLongitude" class="submitLongitude"/>
             <div id="submit-tabs">
                 <ul>
-                    <?php if ( ! $noManualPokemon && !$noPokemon ) {
-                        ?>
-                        <li><a href="#tab-pokemon"><img src="static/images/pokeball.png"/></a></li>
-                    <?php } ?>
                     <?php if ( ! $noManualGyms && !$noGyms ) {
                         ?>
                         <li><a href="#tab-gym"><img src="static/forts/ingame/Uncontested.png"/></a></li>
@@ -2460,19 +2453,6 @@ if (!$noLoadingScreen) {
                         <li><a href="#tab-poi"><img src="static/images/waystop-red.png"/></a></li>
                     <?php } ?>
                 </ul>
-                <?php if ( ! $noManualPokemon && !$noPokemon  ) {
-                    ?>
-                    <div id="tab-pokemon">
-                        <input type="hidden" name="pokemonID" class="pokemonID"/>
-                        <?php pokemonFilterImages( $noPokemonNumbers, 'pokemonSubmitFilter(event)', $pokemonToExclude, 6 ); ?>
-                        <div class="button-container">
-                            <button type="button" onclick="manualPokemonData(event);" class="submitting-pokemon"><i
-                                    class="fa fa-binoculars"
-                                    style="margin-right:10px;"></i><?php echo i8ln( 'Submit Pokemon' ); ?>
-                            </button>
-                        </div>
-                    </div>
-                <?php } ?>
                 <?php if ( ! $noManualGyms && !$noGyms ) {
                     ?>
                     <div id="tab-gym">
@@ -2693,7 +2673,6 @@ if (!$noLoadingScreen) {
     var directionProvider = '<?php echo $noDirectionProvider === true ? $directionProvider : 'google' ?>';
     var exEligible = <?php echo $noExEligible === true ? 'false' : $exEligible  ?>;
     var raidBossActive = <?php echo json_encode( $raidBosses ); ?>;
-    var manualRaids = <?php echo $noManualRaids === true ? 'false' : 'true' ?>;
     var pokemonReportTime = <?php echo $pokemonReportTime === true ? 'true' : 'false' ?>;
     var noDeleteGyms = <?php echo $noDeleteGyms === true ? 'true' : 'false' ?>;
     var noToggleExGyms = <?php echo $noToggleExGyms === true ? 'true' : 'false' ?>;

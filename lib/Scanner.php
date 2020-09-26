@@ -1,18 +1,12 @@
 <?php
-
 namespace Scanner;
-
-class Scanner
-{
-    // Common functions for both RM and Monocle
+class Scanner {
     /**
-     * $data
      * Used for Pokemon data
      * @var array|mixed
      */
     public $data = [];
     /**
-     * $moves
      * Used for Pokemon moves
      * @var array|mixed
      */
@@ -22,8 +16,7 @@ class Scanner
      * Scanner constructor.
      * Loads in the JSON arrays for Pokemon and moves
      */
-    public function __construct()
-    {
+    public function __construct() {
         $json_poke = "static/data/pokemon.json";
         $json_contents = file_get_contents($json_poke);
         $this->data = json_decode($json_contents, true);

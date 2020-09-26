@@ -19,8 +19,6 @@ $lon    		= ! empty( $_POST['lon'] ) ? $_POST['lon'] : '';
 $pokemonId  		= ! empty( $_POST['pokemonId'] ) ? $_POST['pokemonId'] : 0;
 $gymId      		= ! empty( $_POST['gymId'] ) ? $_POST['gymId'] : '';
 $selectedBadgeLevel = ! empty( $_POST['selectedBadgeLevel'] ) ? $_POST['selectedBadgeLevel'] : '';
-$eggTime    		= ! empty( $_POST['eggTime'] ) ? $_POST['eggTime'] : 0;
-$monTime    		= ! empty( $_POST['monTime'] ) ? $_POST['monTime'] : 0;
 $loggedUser 		= ! empty( $_SESSION['user']->user ) ? $_SESSION['user']->user : 'NOLOGIN';
 $gymName    		= ! empty( $_POST['gymName'] ) ? $_POST['gymName'] : '';
 $pokestopId 		= ! empty( $_POST['pokestopId'] ) ? $_POST['pokestopId'] : '';
@@ -61,13 +59,6 @@ $d["timestamp"] = $now->getTimestamp();
 //create Submit
 $submit = new \Submit\RDM();
 
-
-if ( $action === "raid" ) {
-    $submit->submit_raid($pokemonId, $gymId, $eggTime, $monTime, $loggedUser);
-}
-if ( $action === "pokemon" ) {
-    $submit->submit_pokemon($lat, $lon, $pokemonId);
-}
 if ( $action === "gym" ) {
     $submit->submit_gym($lat, $lon, $gymName, $loggedUser);
 }
