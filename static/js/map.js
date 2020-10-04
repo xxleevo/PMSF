@@ -2569,7 +2569,7 @@ function pokestopLabel(item) {
             '</div>'
     }
     if (!noDeletePokestops) {
-        str += '<i class="fa fa-trash-o delete-pokestop" onclick="deletePokestop(event);" data-id="' + item['pokestop_id'] + '"></i>'
+        str += '<center><i class="fa fa-trash-o delete-pokestop" onclick="deletePokestop(event);" data-id="' + item['pokestop_id'] + '"></i></center>'
     }
     if (!noQuests && item['quest_type'] !== 0) {
         str += '<div><center>' +
@@ -2580,7 +2580,7 @@ function pokestopLabel(item) {
         str += '<center><div>' + i8ln('Add Quest') + '<i class="fa fa-binoculars submit-quest" onclick="openQuestModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'
     }
     if (!noRenamePokestops) {
-        str += '<center><div>' + i8ln('Rename Pokestop') + '<i class="fa fa-edit rename-pokestop" style="margin-top: 2px; vertical-align: middle; font-size: 1.5em;" onclick="openRenamePokestopModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'
+        str += '<center><i class="fa fa-edit rename-pokestop" onclick="openRenamePokestopModal(event);" data-id="' + item['pokestop_id'] + '"></i></center>'
     }
     if (!noConvertPokestops) {
         str += '<center><div>' + i8ln('Convert to Gym') + '<i class="fa fa-refresh convert-pokestop" style="margin-top: 2px; vertical-align: middle; font-size: 1.5em;" onclick="openConvertPokestopModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'

@@ -133,3 +133,30 @@
 	left:-5px;
 	border: 1px solid black;
 }
+.delete-pokestop{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 20px;
+  border-top-left-radius: 10px;
+  background: rgb(255, 0, 0);
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  width:30px;
+  text-shadow: 1px 1px 1px #000;
+  font-weight: normal !important;
+}
+.rename-pokestop{
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  font-size: 20px;
+  background: rgb(255, 180, 0);
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  width:30px;
+  text-shadow: 1px 1px 1px #000;
+  font-weight: normal !important;
+}
