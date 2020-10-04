@@ -7138,8 +7138,8 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         pokemonHtml =
                 '<center class="team-' + result.team_id + '-text">' +
                 i8ln('Defender') + ':<br>' +
-                '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + guardFormStr + '.png" width="80" height="auto" /><br>' +
-                '<b class="team-' + result.team_id + '-text">' + result.guard_pokemon_name + '</b>' +
+                (result.guard_pokemon_id !== null ? '<img src="' + iconpath + 'pokemon_icon_' + pokemonIdStr + '_' + guardFormStr + '.png" width="80" height="auto" /><br>' : '' ) +
+                '<b class="team-' + result.team_id + '-text">' + (result.guard_pokemon_name !== null ? result.guard_pokemon_name : i8ln('No Defender') ) + '</b>' +
                 '</center>'
 
         sidebar.innerHTML = headerHtml + pokemonHtml
