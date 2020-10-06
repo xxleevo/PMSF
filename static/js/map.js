@@ -1478,8 +1478,8 @@ function pokemonLabel(item) {
         }
 
         // Coords
-        var coordText = latitude.toFixed(6) + ', ' + longitude.toFixed(7)
-        if (hidePokemonCoords === true) {
+        var coordText = latitude.toFixed(5) + ', ' + longitude.toFixed(5)
+        if (hideCoords[0] === true) {
             coordText = i8ln('Route')
         }
 
@@ -1769,6 +1769,11 @@ function gymLabel(item) {
             '</center></div>'
     }
 
+    var coordText = latitude.toFixed(5) + ', ' + longitude.toFixed(5)
+    if (hideCoords[1] === true) {
+        coordText = i8ln('Route')
+    }
+
     if (Store.get('badgeMode')) { // If Badgemode is active
         var gymName = name !== null ? name : i8ln('Unknown Gymname')
         if (gymName.length > 30) {
@@ -1871,7 +1876,7 @@ function gymLabel(item) {
             battleStr +
             hr +
             '<div>' +
-            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + i8ln('Route') + '</a>' + maplinkText +
+            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + coordText + '</a>' + maplinkText +
             '</div>' +
             '<div>' + lastModifiedText + '</div>' +
             '<div>' + lastScannedStr + '</div>' +
@@ -1903,7 +1908,7 @@ function gymLabel(item) {
             '<div>' + outdated + '</div>' +
             hr +
             '<div>' +
-            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">Route ansehen</a>' + maplinkText +
+            i8ln('Location') + ': <a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + coordText + '</a>' + maplinkText +
             '</div>' +
             '<div>' +
             lastModifiedText +
@@ -2585,8 +2590,12 @@ function pokestopLabel(item) {
     if (!noConvertPokestops) {
         str += '<center><div>' + i8ln('Convert to Gym') + '<i class="fa fa-refresh convert-pokestop" style="margin-top: 2px; vertical-align: middle; font-size: 1.5em;" onclick="openConvertPokestopModal(event);" data-id="' + item['pokestop_id'] + '"></i></div></center>'
     }
+    var coordText = item['latitude'].toFixed(5) + ', ' + item["longitude"].toFixed(5)
+    if (hideCoords[3] === true) {
+        coordText = i8ln('Route')
+    }
     str += '<div><center>' +
-        '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item['latitude'] + ',' + item['longitude'] + ')" title="' + i8ln('View in Maps') + '">' + i8ln('Route') + '</a>' + maplinkText +
+        '<a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item['latitude'] + ',' + item['longitude'] + ')" title="' + i8ln('View in Maps') + '">' + coordText + '</a>' + maplinkText +
         '</center></div>'
     if ((!noWhatsappLinkQuests) && (item['quest_condition_type'] !== null && item['quest_type'] !== null)) {
         str += '<div>' +
@@ -3632,8 +3641,15 @@ function nestLabel(item) {
     if (!noDeleteNests) {
         str += '<center><i class="fa fa-trash-o delete-nest" onclick="deleteNest(event);" data-id="' + item['nest_id'] + '"></i></center>'
     }
+
+    // Coords
+    var coordText = item['lat'].toFixed(5) + ', ' + item['lon'].toFixed(5)
+    if (hideCoords[4] === true) {
+        coordText = i8ln('Route')
+    }
+
     str += '<div>' +
-        '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">' + i8ln('Route') + '</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">' + i8ln('Maplink') + '</a></center>' +
+        '<center><a href="javascript:void(0)" onclick="javascript:openMapDirections(' + item.lat + ',' + item.lon + ')" title="' + i8ln('View in Maps') + '">' + coordText + '</a> - <a href="./?lat=' + item.lat + '&lon=' + item.lon + '&zoom=16">' + i8ln('Maplink') + '</a></center>' +
         '</div>'
 
     if ((!noWhatsappLink) && (item.pokemon_id > 0)) {
@@ -7003,6 +7019,12 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             }
         }
 
+        // Coords
+        var coordText = result['latitude'].toFixed(5) + ', ' + result['longitude'].toFixed(5)
+        if (hideCoords[2] === true) {
+            coordText = i8ln('Route')
+        }
+
         var raidSpawned = result['raid_level'] != null
         var raidStarted = result['raid_pokemon_id'] != null
         var form = result['form']
@@ -7116,7 +7138,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             '</div>' +
             lastScannedStr +
             '<div>' +
-            '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + i8ln('Route') + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">' + i8ln('Maplink') + '</a>' +
+            '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'' + i8ln('View in Maps') + '\'>' + coordText + '</a> - <a href="./?lat=' + result.latitude + '&lon=' + result.longitude + '&zoom=16">' + i8ln('Maplink') + '</a>' +
             raidCounterGuideStr +
             '</div>' +
             '</center>'

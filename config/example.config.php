@@ -80,6 +80,7 @@ $sellyWebhookSecret = '';													// Add a secret key at https://selly.gg/se
 // FRONTEND SETTINGS
 //-----------------------------------------------------
 /*---------General Frontend Settings---------*/
+$hideCoords = [true,true,true,true,true];                        			// Array for: Pokemon, Gyms, Gyms(Sidebar), Pokestops, Nests 
 $copyrightSafe = true;														// If you want to use icons, set to false (you will need your own icons)
 $iconRepository = 'https://raw.githubusercontent.com/whitewillem/PogoAssets/resized/icons_large/';												// URLs or folder paths are allowed - if noMultipleRepos=false, this is also the default icon pack
 																			// You can also use a relative path here for your icons!
@@ -121,7 +122,6 @@ $noHidePokemon = false;														//If False, the array below will be the hid
 $hidePokemon = '[10, 13, 16, 19, 21, 29, 32, 41, 46, 48, 50, 52, 56, 74, 77, 96, 111, 133,
                   161, 163, 167, 177, 183, 191, 194, 168]';         		// [] for empty
 
-$hidePokemonCoords = true;													// Against Spoofer: Hide the coordinates, put "Navigation" instead of coords
 $noPokemonNumbers = false;                                          		// For the Filters, hide or show Pokemon numbers 
 
 $noWeatherIcons = false;													// If set to false, this option let users allow to enable/disable weather icons for pokemon

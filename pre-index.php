@@ -2640,7 +2640,6 @@ if (!$noLoadingScreen) {
     var enableBigKarps = <?php echo $noBigKarp ? 'false' : $enableBigKarps ?>;
     var showTinyRat = <?php echo $noTinyRat === true ? 'true' : 'false' ?>;
 	var enableTinyRats = <?php echo $noTinyRat ? 'false' : $enableTinyRats ?>;
-    var hidePokemonCoords = <?php echo $hidePokemonCoords === true ? 'true' : 'false' ?>;
     var directionProvider = '<?php echo $noDirectionProvider === true ? $directionProvider : 'google' ?>';
     var exEligible = <?php echo $noExEligible === true ? 'false' : $exEligible  ?>;
     var raidBossActive = <?php echo json_encode( $raidBosses ); ?>;
@@ -2732,6 +2731,7 @@ if (!$noLoadingScreen) {
     var enablePokePVPStats = <?php echo $noPokePVPStats ? 'false' : $enablePokePVPStats ?>;
     var noDarkMode = <?php echo $noDarkMode === true ? 'true' : 'false' ?>;
 	var enableDarkMode = <?php echo $noDarkMode === true ? 'false' : $enableDarkMode ?>;
+    var hideCoords = <?php echo json_encode($hideCoords); ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
