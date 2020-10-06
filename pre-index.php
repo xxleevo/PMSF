@@ -1152,7 +1152,7 @@ if (!$noLoadingScreen) {
 								</div>
 						</div>';
 					} 
-                    if ( ! $noGymBadgeMode) {
+                    if (!$noGymBadgeMode) {
                         echo '<div class="form-control switch-container" id="badge-mode-wrapper">
 							<div class="form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
 								<font size="3">' . i8ln("Gym Badge Mode") . '</font>
@@ -2052,7 +2052,7 @@ if (!$noLoadingScreen) {
             </div>
         </div>
     <?php } ?>
-    <?php if ( ! $noGymBadgeMode ) { ?>
+    <?php if (!$noGymBadgeMode) { ?>
         <div class="changeGymBadge-modal" style="display: none;">
 		<?php echo i8ln( 'Select the Badge Level' ) . ":"; ?>
 			<div>
@@ -2650,7 +2650,6 @@ if (!$noLoadingScreen) {
     var defaultUnit = '<?php echo $defaultUnit ?>';
     var noDeletePokestops = <?php echo $noDeletePokestops === true ? 'true' : 'false' ?>;
     var noDeleteNests = <?php echo $noDeleteNests === true ? 'true' : 'false' ?>;
-    var noManualNests = <?php echo $noManualNests === true ? 'true' : 'false' ?>;
     var noManualQuests = <?php echo $noManualQuests === true ? 'true' : 'false' ?>;
     var noAddNewCommunity = <?php echo $noAddNewCommunity === true ? 'true' : 'false' ?>;
     var noDeleteCommunity = <?php echo $noDeleteCommunity === true ? 'true' : 'false' ?>;
@@ -2723,7 +2722,7 @@ if (!$noLoadingScreen) {
     var valentine = <?php echo $valentine === true ? 'true' : 'false' ?>;
     var noGymBadgeMode = <?php echo $noGymBadgeMode === true ? 'true' : 'false' ?>;
     var gymBadgeMode = <?php echo $noGymBadgeMode === true ? 'false' : $gymBadgeMode ?>;
-    var enableStandardBagdes = <?php echo noGymBadgeMode ? 'false' : $enableStandardBadges ?>;
+    var enableStandardBagdes = <?php echo $noGymBadgeMode ? 'false' : $enableStandardBadges ?>;
     var openPopupOnHovering = <?php echo $openPopupOnHovering === true ? 'true' : 'false' ?>;
     var onlyOnePopup = <?php echo $onlyOnePopup === true ? 'true' : 'false' ?>;
 	var denyRaidLevels = <?php echo $noRaids ? '[1,2,3,4,5,6]' : $denyRaidLevels ?>;

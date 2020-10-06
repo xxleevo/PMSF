@@ -1,7 +1,6 @@
 <?php
-
+//file_put_contents('php://stderr', '<INFO> ' .  . "\r\n");
 namespace Scanner;
-
 class RDM extends Scanner {
     public function get_active($eids, $minIv, $minLevel, $minPVP, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $encId = 0) {
         global $db;
@@ -487,11 +486,10 @@ class RDM extends Scanner {
             $pokestop["quest_reward_type"] = intval($pokestop["quest_reward_type"]);
             $pokestop["quest_target"] = intval($pokestop["quest_target"]);
             $pokestop["quest_pokemon_id"] = intval($pokestop["quest_pokemon_id"]);
-            $pokestop["quest_energy_pokemon_id"] = intval($pokestop["quest_energy_pokemon_id"]);
-            $pokestop["quest_item_id"] = intval($pokestop["quest_item_id"]);
-            $pokestop["quest_reward_amount"] = intval($pokestop["quest_reward_amount"]);
-			$pokestop["quest_energy_pokemon_name"] = empty($energy_mon_pid) && $pokestop["quest_reward_type"] === 7 && $pokestop["quest_energy_pokemon_id"] > 0 ? null : i8ln($this->data[$energy_mon_pid]["name"]);
-			$pokestop["url"] = ! empty($pokestop["url"]) ? str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]) : null;
+            $pokestop["quest_energy_pokemon_id"] = $pokestop["quest_reward_type"] == 12 ? intval($pokestop["quest_energy_pokemon_id"]) : null;
+			$pokestop["quest_item_id"] = intval($pokestop["quest_item_id"]);
+            $pokestop["quest_reward_amount"] = intval($pokestop["quest_reward_amount"]);			
+			$pokestop["quest_energy_pokemon_name"] = $pokestop["quest_energy_pokemon_id"] !== null && $pokestop["quest_energy_pokemon_id"] > 0 && !empty($pokestop["quest_energy_pokemon_id"]) && isset($pokestop["quest_energy_pokemon_id"]) ? i8ln($this->data[$energy_mon_pid]["name"]) : null;
 			$pokestop["url"] = ! empty($pokestop["url"]) ? preg_replace("/^http:/i", "https:", $pokestop["url"]) : null;
             $pokestop["lure_id"] = intval($pokestop["lure_id"]);
 			$pokestop["lure_expiration"] = $pokestop["lure_expiration"] * 1000;
