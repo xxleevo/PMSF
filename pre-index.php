@@ -2631,7 +2631,6 @@ if (!$noLoadingScreen) {
     var rewardIcons = '<?php echo $copyrightSafe ? 'static/icons-safe/' : $rewardsIconsRepository ?>';
     var weatherColors = <?php echo json_encode( $weatherColors ); ?>;
     var weatherCellsFillOpacity = <?php echo $noWeatherOverlay === true ? 0 : $weatherCellsFillOpacity ?>;
-    var mapType = '<?php echo 'rdm'; ?>';
     var triggerGyms = <?php echo $triggerGyms ?>;
     var noExGyms = <?php echo $noExGyms === true ? 'true' : 'false' ?>;
     var noParkInfo = <?php echo $noParkInfo === true ? 'true' : 'false' ?>;
