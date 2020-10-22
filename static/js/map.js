@@ -2261,7 +2261,7 @@ function getQuest(item) {
                 str = str.replace('Arenenkämpfe', 'Arenenkampf')
                 str = str.replace('Eier', 'Ei')
                 str = str.replace('Bonbons', 'Bonbon')
-                str = str.replace('Pokéstops', 'Pokéstop')
+                str = str.replace('Pokéstop(s)', 'Pokéstop')
                 str = str.replace('Quests', 'Quest')
                 str = str.replace('Medaillen', 'Medaille')
                 str = str.replace('neue Freunde', 'neuen Freund')
@@ -2278,7 +2278,7 @@ function getQuest(item) {
                 if (str.includes('1 Pokémon') || str.includes('1 Ei') || str.includes('1 Herz') || str.includes('1 Team GO')) {
                     str = str.replace(item['quest_target'], 'ein')
                 }
-                if (str.includes('1 neuen') || str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss') || str.includes('Kampf') || str.includes('Snack') || str.includes('Trainerkampf')) {
+                if (str.includes('AR-Scan') || str.includes('1 neuen') || str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss') || str.includes('Kampf') || str.includes('Snack') || str.includes('Trainerkampf')) {
                     str = str.replace(item['quest_target'], 'einen')
                 }
             }
@@ -5521,7 +5521,6 @@ function openQuestModal(event) { // eslint-disable-line no-unused-vars
 function openRenamePokestopModal(event) { // eslint-disable-line no-unused-vars
     $('.ui-dialog').remove()
     var val = $(event.target).data('id')
-    console.log('picking Val:' + val)
     $('.renamepokestopid').val(val)
     $('.renamepokestop-modal').clone().dialog({
         modal: true,

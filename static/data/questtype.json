@@ -21,7 +21,7 @@
   },
   "5": {
     "prototext": "QUEST_SPIN_POKESTOP",
-    "text": "Spin {0} Pokéstops"
+    "text": "Spin {0} Pokéstop(s)"
   },
   "6": {
     "prototext": "QUEST_HATCH_EGG",
@@ -158,5 +158,9 @@
   "43": {
     "prototext": "",
     "text": "Mega-Evolve {0} {1}"
+  },
+  "46": {
+    "prototext": "",
+    "text": "AR-Scan {0} Pokéstop(s)"
   }
 }
