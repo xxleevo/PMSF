@@ -123,6 +123,10 @@
     "protoname": "ITEM_GOLDEN_PINAP_BERRY",
     "name": "Silver Pinap Berry"
   },
+  "709": {
+    "protoname": "ITEM_POFFIN",
+    "name": "Poffin"
+  },
   "801": {
     "protoname": "ITEM_SPECIAL_CAMERA",
     "name": "Camera"
