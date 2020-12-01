@@ -29,7 +29,7 @@ setSessionCsrfToken();
 //-----------------------------------------------------
 
 /* Access-config Settings */
-$accessLevelsInherit = false;										// If you use the access-levels and this is true, the higher levels inherit the configs from the lower ones so you dont need to give higher levels the configs you gave the lower levels.
+$accessLevelsInherit = false;
 
 /* Location Settings */
 
