@@ -348,7 +348,7 @@ if (!$noLoadingScreen) {
 					//If the session variable does not exist, presume that user suffers from a bug and access config is not used.
 					//If you don't like this, help me fix it.
 						if (!isset($_SESSION['already_refreshed'])) {
-							$refreshAfter = 2; //Number of seconds to refresh the page after.
+							$refreshAfter = 5; //Number of seconds to refresh the page after.
 							header('Refresh: ' . $refreshAfter); //Send a Refresh header.
 							$_SESSION['already_refreshed'] = true; //Set the session variable so that we don't refresh again.
 						}

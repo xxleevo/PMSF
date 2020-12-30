@@ -49,7 +49,7 @@ $spiderfyOnMaxZoom = 'true';										// Spiderfy cluster markers on click
 
 /* Anti scrape Settings */
 $enableCsrf = true;                                                 // Don't disable this unless you know why you need to :)
-$sessionLifetime = 43200;                                           // Session lifetime, in seconds
+$sessionLifetime = 604800;                                           // Session lifetime, in seconds - default is 7 days now to prevent logouts too often
 $blockIframe = true;                                                // Block your map being loaded in an iframe
 
 /* Boundaries */
