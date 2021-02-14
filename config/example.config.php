@@ -591,7 +591,12 @@ $enableDebug = false;
 $letItSnow = true;                                                   		// Show snow overlay at 24, 25 and 26 December
 $makeItBang = true;                                                  		// Show fireworks overlay at 31 December
 $valentine = true;                                                   		// Show Hearts on Valentines Day (Feb 14)
-
+$valentineSettings = [
+    25,			// maxHeight
+    25,			// maxWidth
+    40,     	// maxAmount
+    0.4         // minScale
+];
 //-----------------------------------------------------
 // DATABASE CONFIG
 //-----------------------------------------------------
