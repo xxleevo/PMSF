@@ -205,6 +205,7 @@ var weatherArray = []
 var weatherPolys = []
 var weatherMarkers = []
 var weatherColors
+var valentineSettings
 
 var S2
 var exLayerGroup = new L.LayerGroup()
@@ -902,13 +903,13 @@ function createHearts() {
         const valentines = '<canvas id="valentine-canvas"></canvas>'
         $('#map').append(valentines)
         var hearts = {
-            heartHeight: 25,
-            heartWidth: 25,
+            heartHeight: valentineSettings[0],
+            heartWidth: valentineSettings[1],
             hearts: [],
             heartImage: 'static/images/misc/heart-0.png',
             heartImageAlt: 'static/images/misc/heart-1.png',
-            maxHearts: 50,
-            minScale: 0.4,
+            maxHearts: valentineSettings[2],
+            minScale: valentineSettings[3],
             draw: function () {
                 this.setCanvasSize()
                 this.ctx.clearRect(0, 0, this.w, this.h)

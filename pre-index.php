@@ -2731,6 +2731,7 @@ if (!$noLoadingScreen) {
     var noDarkMode = <?php echo $noDarkMode === true ? 'true' : 'false' ?>;
 	var enableDarkMode = <?php echo $noDarkMode === true ? 'false' : $enableDarkMode ?>;
     var hideCoords = <?php echo json_encode($hideCoords); ?>;
+	var valentineSettings = <?php echo json_encode( $valentineSettings ); ?>;
 	
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
