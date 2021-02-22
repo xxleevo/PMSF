@@ -232,6 +232,7 @@ $generateExcludeGrunts = true;
 
 $noQuests = false;															// Enables/Disables Quests
 $enableQuests = 'false';                                            		// default value for users: Show Quests only
+$noARInfobanner = false;												// Enable/Disable the info about keeping one AR-Quest for the quests on the map
 
 $noNewPokestopsFilter = true;                                       		// Enable/Disables filtering for new Pokestops
 $newPokestopsFilterStart = ['2019','08'];                           		// Year, Month

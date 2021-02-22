@@ -780,6 +780,15 @@ if (!$noLoadingScreen) {
 							</div>';
 							} ?>
 							<div id="quests-filter-wrapper" style="display:none">
+							<?php
+								if (!$noARInfobanner) {
+									if ($locale == 'de') {
+										echo '<img src="static/images/ar_banner_de.png" alt="Behalte eine AR-Quest für die gelisteten Quests!" width="100%">';	
+									} else{
+										echo '<img src="static/images/ar_banner_en.png" alt="Keep one AR-Quest for the listed Quests!" width="100%">';
+									}
+								}
+							?>
 								<div id="quests-tabs">
 									<ul>
 										<?php

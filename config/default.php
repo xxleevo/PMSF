@@ -271,6 +271,7 @@ $generateExcludeGrunts = true;
 
 $noQuests = false;                                                  // true/false
 $noQuestPokemonCP = false;                                          // true/false
+$noARInfobanner = false;												// Enable/Disable the info about keeping one AR-Quest for the quests on the map
 $enableQuests = 'false';                                            // true/false
 $noQuestsItemsAmounts = false;										// true/false
 $enableQuestsItemsAmounts = 'false';
