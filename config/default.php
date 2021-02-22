@@ -552,7 +552,7 @@ $valentineSettings = [
 /* Counts */
 $numberOfPokemon = 890;
 $numberOfItem = 1405;
-$numberOfGrunt = 50;
+$numberOfGrunt = 510;
 
 /* Popup handling */
 $openPopupOnHovering = false;                                       // For Desktop version: if the popups/labels should be opened upon hovering

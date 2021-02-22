@@ -102,7 +102,6 @@
   "25": {
     "prototext": "WITH_DISTANCE",
     "text": ""
-
   },
   "26": {
     "prototext": "WITH_POKEMON_ALIGNMENT",
@@ -122,6 +121,54 @@
   },
   "30": {
     "prototext": "WITH_DAILY_BUDDY_EFFECTION",
+    "text": ""
+  },
+  "31": {
+    "prototext": "WITH_POKEMON_LEVEL",
+    "text": ""
+  },
+  "32": {
+    "prototext": "WITH_SINGLE_DAY",
+    "text": ""
+  },
+  "33": {
+    "prototext": "WITH_UNIQUE_POKEMON_TEAM",
+    "text": ""
+  },
+  "34": {
+    "prototext": "WITH_MAX_CP",
+    "text": ""
+  },
+  "35": {
+    "prototext": "WITH_LUCKY_POKEMON",
+    "text": ""
+  },
+  "36": {
+    "prototext": "WITH_LEGENDARY_POKEMON",
+    "text": ""
+  },
+  "37": {
+    "prototext": "WITH_TEMP_EVO_POKEMON",
+    "text": ""
+  },
+  "38": {
+    "prototext": "WITH_GBL_RANK",
+    "text": ""
+  },
+  "39": {
+    "prototext": "WITH_CATCHES_IN_A_ROW",
+    "text": ""
+  },
+  "40": {
+    "prototext": "WITH_ENCOUNTER_TYPE",
+    "text": ""
+  },
+  "41": {
+    "prototext": "WITH_COMBAT_TYPE",
+    "text": ""
+  },
+  "42": {
+    "prototext": "WITH_GEOTARGETED_POI",
     "text": ""
   }
 }

@@ -2199,6 +2199,9 @@ function getQuest(item) {
         } else if (item['quest_condition_type'] === 19) { // "new friend", but no string because its a default
         } else if (item['quest_condition_type'] === 25) {
             str = str.replace('{1}', i8ln('{1} with') + ' ' + questinfo['distance'].toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' ' + i8ln('km Entfernung'))
+        } else if (item['quest_condition_type'] === 41) { // Snapshot of Buddy
+            str = str.replace('Complete', i8ln('Win'))
+			str = str.replace('Trainer fights',i8ln('battle league fight(s)'))
         } else if (item['quest_condition_type'] !== 0) {
             console.log('Undefined condition type ' + item['quest_condition_type'])
             str += '<div>Undefined condition</div>'
@@ -2275,11 +2278,12 @@ function getQuest(item) {
                 str = str.replace('Herzen', 'Herz')
                 str = str.replace('Snacks', 'Snack')
                 str = str.replace('Trainerkämpfe', 'Trainerkampf')
+                str = str.replace('Ligakämpfe', 'Ligakampf')
                 // Condition 1: Pokemon,3:Pokemon,11:entwickle Pokemon
                 if (str.includes('1 Pokémon') || str.includes('1 Ei') || str.includes('1 Herz') || str.includes('1 Team GO')) {
                     str = str.replace(item['quest_target'], 'ein')
                 }
-                if (str.includes('AR-Scan') || str.includes('1 neuen') || str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss') || str.includes('Kampf') || str.includes('Snack') || str.includes('Trainerkampf')) {
+                if (str.includes('AR-Scan') || str.includes('1 neuen') || str.includes('1 Arenenkampf') || str.includes('und höher') || str.includes('Wurf') || str.includes('1 Raid') || str.includes('1 Level') || str.includes('Pokéstop') || str.includes('Schnappschuss') || str.includes('Kampf') || str.includes('Snack') || str.includes('Trainerkampf') || str.includes('Ligakampf')) {
                     str = str.replace(item['quest_target'], 'einen')
                 }
             }
