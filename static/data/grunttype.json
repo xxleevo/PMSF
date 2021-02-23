@@ -501,7 +501,9 @@
     "encounters": {
       "first": [
         "150_00"
-      ]
+      ],
+      "second": [],
+      "third": []
     }
   },
   "45": {
