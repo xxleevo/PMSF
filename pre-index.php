@@ -129,7 +129,7 @@ $getList = new \Scanner\RDM();
     }
     function energyFilterImages($noEnergyNumbers,$onClick = '', $energyToExclude = array(), $num = 0) {
         global $copyrightSafe, $iconRepository, $rewardsIconsRepository;
-		$energyPokemonIds = [3,6,9,18,15,94,115,127,130,142,150,181,208,212,214,229,248,254,257,260,282,302,303,306,308,310,319,323,328,334,354,359,362,373,376,380,381,384,445,448,460,475,531,849];
+		$energyPokemonIds = [3,6,9,18,15,94,115,127,130,142,150,181,208,212,214,229,248,254,257,260,282,302,303,306,308,310,319,323,334,354,359,362,373,376,380,381,384,428,445,448,460,475,531,849];
 
         echo '<div class="energy-list-cont" id="energy-list-cont-' . $num . '"><input type="hidden" class="search-number" value="' . $num . '" /><input class="search search-input" placeholder="' . i8ln( "Search Name & ID" ) . '" /><div class="energy-list list">';
         foreach ($energyPokemonIds as $energy_pokemon_id) {
