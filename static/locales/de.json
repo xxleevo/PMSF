@@ -200,6 +200,7 @@
   "{2} with type": "{2} vom Typ",
   "{2} of your Buddy": "{2} von deinem Kumpel",
   "Take {0} {2}" : "Mache {0} {2}",
+  "Take {0} {2} of wild {1}" : "Mache {0} {2} von wilden {1}",
   "Hatch {0} egg(s)" : "Brüte {0} Eier aus",
   "{1}" : "Pokémon",
   "{1} with weatherboost" : "{1} mit Wetterboost",
