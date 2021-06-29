@@ -278,17 +278,22 @@ $enableQuestsItemsAmounts = 'false';
 $noQuestsItems = false;
 $noQuestsPokemon = false;
 $noQuestsEnergy = false;
+$noQuestsCandy = false;
 $hideQuestsPokemon = '[]';  // Pokemon ids
 $excludeQuestsPokemon = [];  // Pokemon ids
 $hideQuestsItem = '[4, 5, 301, 401, 402, 403, 404, 501, 602, 603, 604, 702, 704, 708, 801, 901, 902, 903, 1001, 1002, 1401, 1402, 1403, 1404, 1405]';    // Item ids "See protos https://github.com/Furtif/POGOProtos/blob/master/src/POGOProtos/Inventory/Item/ItemId.proto"
 $excludeQuestsItem = [4, 5, 301, 401, 402, 403, 404, 501, 602, 603, 604, 702, 704, 708, 801, 901, 902, 903, 1001, 1002, 1401, 1402, 1403, 1404, 1405];
-$hideQuestsEnergy = '[18,15,94,115,127,130,142,150,181,208,212,214,229,248,254,257,260,282,302,303,306,308,310,319,323,328,334,354,359,362,373,376,380,381,384,445,448,460,475,531,849]';  // Pokemon ids
-$excludeQuestsEnergy = [18,15,94,115,127,130,142,150,181,208,212,214,229,248,254,257,260,282,302,303,306,308,310,319,323,328,334,354,359,362,373,376,380,381,384,445,448,460,475,531,849];
+$hideQuestsEnergy = '[]';  // Pokemon ids
+$excludeQuestsEnergy = [];
+
+$hideQuestsCandy = '[]';
+$excludeQuestsCandy = [];
 
 $noItemNumbers = true;                                             // true/false
 $noEnergyNumbers = true;                                             // true/false
 $generateExcludeItems = true;
 $generateExcludeEnergy = true;
+$generateExcludeCandy = true;
 
 // Manual quest hide options
 $hideQuestTypes = [0, 1, 2, 3, 12, 18, 19, 22, 24, 25];

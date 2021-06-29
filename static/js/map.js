@@ -47,6 +47,7 @@ var $switchBadgeModeDual
 var $questsExcludePokemon
 var $questsExcludeItem
 var $questsExcludeEnergy
+var $questsExcludeCandy
 var $excludeGrunts
 var $excludeRaidbosses
 var $excludeRaideggs
@@ -69,6 +70,7 @@ var notifiedPokemon = []
 var questsExcludedPokemon = []
 var questsExcludedItem = []
 var questsExcludedEnergy = []
+var questsExcludedCandy = []
 var excludedGrunts = []
 var excludedRaidbosses = []
 var excludedRaideggs = []
@@ -88,6 +90,7 @@ var reincludedPokemon = []
 var reincludedQuestsPokemon = []
 var reincludedQuestsItem = []
 var reincludedQuestsEnergy = []
+var reincludedQuestsCandy = []
 var reincludedGrunts = []
 var reincludedRaidbosses = []
 var reincludedRaideggs = []
@@ -95,6 +98,7 @@ var reids = []
 var qpreids = []
 var qireids = []
 var qereids = []
+var qcreids = []
 var greids = []
 var rbreids = []
 var rereids = []
@@ -1944,7 +1948,7 @@ function getReward(item) {
     var pokemonIdStr = ''
     var formStr = ''
     var shinyStr = ''
-    if (item['quest_reward_type'] === 7) {
+    if (item['quest_reward_type'] === 7 || item['quest_reward_type'] === 4) {
         if (reward['pokemon_id'] <= 9) {
             pokemonIdStr = '00' + reward['pokemon_id']
         } else if (reward['pokemon_id'] <= 99) {
@@ -1952,19 +1956,26 @@ function getReward(item) {
         } else {
             pokemonIdStr = reward['pokemon_id']
         }
-        if (reward['form_id'] === 0) {
-            formStr = '00'
-        } else {
-            formStr = reward['form_id']
-        }
-        if (reward['shiny'] === true) {
-            shinyStr = '_shiny'
-        }
-        if (useIconRepoPokeRewards) {
-            rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
-        } else {
-            rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
-        }
+		if (item['quest_reward_type'] === 4) {
+            rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_candy_pokemon.png"/>' + 
+                '<img height="40px" style="margin-left:-35px;margin-bottom:25px;" src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_00.png"/>'
+			
+		}
+		if (item['quest_reward_type'] === 7){
+            if (reward['form_id'] === 0) {
+                formStr = '00'
+            } else {
+                formStr = reward['form_id']
+            }
+            if (reward['shiny'] === true) {
+                shinyStr = '_shiny'
+            }
+            if (useIconRepoPokeRewards) {
+                rewardImage = '<img height="70px" style="padding: 5px;" src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
+            } else {
+                rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/pokemon/' + pokemonIdStr + '_' + formStr + shinyStr + '.png"/>'
+            }
+		}
     } else if (item['quest_reward_type'] === 3) {
         rewardImage = '<img height="70px" style="padding: 5px;" src="' + rewardIcons + 'rewards/reward_stardust.png"/>'
     } else if (item['quest_reward_type'] === 2) {
@@ -2216,14 +2227,20 @@ function getQuest(item) {
             '<b><u>' + i8ln('Reward') + ':</u></b> ' + i8ln(idToItem[rewardinfo['item_id']]).name + '<br>' +
             '<b><u>' + i8ln('Amount') + ':</u></b>' + ' ' + item['quest_reward_amount'] +
             '</center></div>'
-        }
-        if (item['quest_reward_type'] === 3) {
+        } else if (item['quest_reward_type'] === 3) {
             str += '<div><center>' +
             '<b><u>' + i8ln('Reward') + ': </u></b>' + i8ln('Stardust') + '<br>' +
             '<b><u>' + i8ln('Amount') + ': </u></b>' + ' ' + item['quest_reward_amount'] +
             '</center></div>'
-        }
-        if (item['quest_reward_type'] === 7) {
+        } else if (item['quest_reward_type'] === 4) {
+            reward = JSON.parse(item['quest_rewards'])
+            rewardinfo = reward[0]['info']
+            // Min / Max cp Calculations for monster reward
+            str += '<div><center>' +
+            '<b><u>' + i8ln('Reward') + ':</u></b> ' + i8ln(idToPokemon[rewardinfo['pokemon_id']]).name + ' ' + i8ln('Candy') + '<br>' +
+            '<b><u>' + i8ln('Amount') + ': </u></b>' + ' ' + item['quest_reward_amount'] +
+            '</center></div>'
+        } else if (item['quest_reward_type'] === 7) {
             reward = JSON.parse(item['quest_rewards'])
             rewardinfo = reward[0]['info']
             // Min / Max cp Calculations for monster reward
@@ -2237,13 +2254,23 @@ function getQuest(item) {
             '<b><u>' + i8ln('Reward') + ':</u></b> ' + i8ln(idToPokemon[rewardinfo['pokemon_id']]).name + '<br>' +
             pokemonCPStr +
             '</center></div>'
-        }
-        if (item['quest_reward_type'] === 12) {
+        } else if (item['quest_reward_type'] === 12) {
             str += '<div><center>' +
             '<b><u>' + i8ln('Reward') + ': </u></b>' + item['quest_energy_pokemon_name'] + ' ' + i8ln('Mega Energy') + '<br>' +
             '<b><u>' + i8ln('Amount') + ': </u></b>' + ' ' + item['quest_reward_amount'] +
             '</center></div>'
-        }
+        } else {
+			str += '<div><center>' +
+			'<b><u>' + i8ln('Reward') + ': </u></b> Unknown <br>' 
+			if(item['quest_reward_amount'] != null && item['quest_reward_amount'] != undefined){
+				str +='<b><u>' + i8ln('Amount') + ': </u></b>' + ' Unknown '
+			} else {
+				str +='<b><u>' + i8ln('Amount') + ': </u></b>' + ' ' + item['quest_reward_amount']
+			}
+			str += '</center></div>'
+
+		}
+			
 
         // Replace the objects with their translated names
         if (str.includes('{1}') || str.includes('{2}') || str.includes('{3}') || str.includes('{4}') || str.includes('{5}') || str.includes('{6}') || str.includes('{7}') || str.includes('{8}') || str.includes('{9}')) {
@@ -2513,6 +2540,9 @@ function pokestopLabel(item) {
             }
             if (item['quest_reward_type'] === 3) {
                 excludeStr = '<a href="javascript:excludeDustQuest()" title="' + i8ln('Exclude Stardust Quests') + '">' + i8ln('Exclude Questtype') + '</a>'
+            }
+            if (item['quest_reward_type'] === 4) {
+                excludeStr = '<a href="javascript:excludeCandyQuest()" title="' + i8ln('Exclude Candy Quests') + '">' + i8ln('Exclude Questtype') + '</a>'
             }
             if (item['quest_reward_type'] === 12) {
                 excludeStr = '<a href="javascript:excludeEnergyQuest()" title="' + i8ln('Exclude Energy Quests') + '">' + i8ln('Exclude Questtype') + '</a>'
@@ -3354,6 +3384,46 @@ function getPokestopMarkerIcon(item) {
                 rewardImg = '<img src="' + rewardIcons + 'rewards/reward_mega_energy_' + item['quest_reward_amount'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
             } else {
                 rewardImg = '<img src="' + rewardIcons + 'rewards/mega_energy/reward_mega_energy_' + item['quest_energy_pokemon_id'] + '.png" style="width:40px;height:auto;position:absolute;top:-5px;left:-8px;"/>'
+            }
+
+            if (lure > Date.now()) {
+                html = '<div style="position:relative;">' +
+                    '<img src="static/forts/Pstop-Lured_' + lureType + invasionString + '.png" style="width:50px;height:auto;top:-35px;right:10px;"/>' +
+                    rewardImg +
+                    '</div>'
+            } else {
+                html = '<div style="position:relative;">' +
+                    '<img src="static/forts/Pstop-quest-small' + invasionString + '.png" style="width:50px;height:auto;top:-35px;right:10px;"/>' +
+                    rewardImg +
+                    '</div>'
+            }
+            if (noInvasionTimer === false && Store.get('showInvasionTimer') && invasion === 1 && invasionExpiration > Date.now()) {
+                html += '<div><span style="padding: 0px 2px 0px 2px;border: 1px solid black;border-radius: 8px;" class="label-countdown-bracketless invasion-icon-countdown" disappears-at="' + item['invasion_expiration'] + '" end>' + generateRemainingTimer(item['invasion_expiration'], 'end') + '</span></div>'
+            }
+            stopMarker = L.divIcon({
+                iconSize: [31, 31],
+                iconAnchor: [24, 38],
+                popupAnchor: [0, -35],
+                className: 'stop-quest-marker',
+                html: html
+            })
+        } else if (reward[0]['type'] === 4) { // Candy Reward
+            var pokemonIdStr = ''
+            if (rewardinfo['pokemon_id'] <= 9) {
+                pokemonIdStr = '00' + rewardinfo['pokemon_id']
+            } else if (rewardinfo['pokemon_id'] <= 99) {
+                pokemonIdStr = '0' + rewardinfo['pokemon_id']
+            } else {
+                pokemonIdStr = rewardinfo['pokemon_id']
+            }
+            if (!noInvasions && invasion === 1 && invasionExpiration > Date.now() && Store.get('showInvasions') && item['grunt_type'] !== null) {
+                rewardImg = '<img src="static/forts/gruntType/' + item['grunt_type'] + '.png" style="width:30px;height:auto;position:absolute;top:4px;left:0px;"/>'
+            } else if (Store.get('showItemAmounts')) {
+                rewardImg = '<img src="' + rewardIcons + 'rewards/reward_candy_pokemon_' + item['quest_reward_amount'] + '.png" style="width:40px;height:auto;position:absolute;top:4px;left:-3px;"/>' +
+                '<img src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_00.png" style="width:25px;height:auto;position:absolute;top:2px;left:3px;"/>'
+            } else {
+                rewardImg = '<img src="' + rewardIcons + 'rewards/reward_candy_pokemon.png" style="width:40px;height:auto;position:absolute;top:4px;left:-3px;"/>' +
+                '<img src="' + iconpath + '/pokemon_icon_' + pokemonIdStr + '_00.png" style="width:25px;height:auto;position:absolute;top:2px;left:3px;"/>'
             }
 
             if (lure > Date.now()) {
@@ -4239,6 +4309,8 @@ function loadRawData() {
             'qieids': String(questsExcludedItem),
             'qereids': String(reincludedQuestsEnergy),
             'qeeids': String(questsExcludedEnergy),
+            'qcreids': String(reincludedQuestsCandy),
+            'qceids': String(questsExcludedCandy),
             'geids': String(excludedGrunts),
             'greids': String(reincludedGrunts),
             'rbeids': String(excludedRaidbosses),
@@ -6423,6 +6495,7 @@ function updateMap() {
         qpreids = result.qpreids
         qireids = result.qireids
         qereids = result.qereids
+        qcreids = result.qcreids
         greids = result.greids
         rbreids = result.rbreids
         rereids = result.rereids
@@ -6445,6 +6518,11 @@ function updateMap() {
             reincludedQuestsEnergy = qereids.filter(function (e) {
                 return this.indexOf(e) < 0
             }, reincludedQuestsEnergy)
+        }
+        if (qcreids instanceof Array) {
+            reincludedQuestsCandy = qcreids.filter(function (e) {
+                return this.indexOf(e) < 0
+            }, reincludedQuestsCandy)
         }
         if (greids instanceof Array) {
             reincludedGrunts = greids.filter(function (e) {
@@ -7321,6 +7399,26 @@ function energySpritesFilter() {
     })
 }
 
+function candySpritesFilter() {
+    jQuery('.candy-list').parent().find('.select2').hide()
+    loadDefaultImages()
+    jQuery('#nav .candy-list .candy-icon-sprite').on('click', function () {
+        var img = jQuery(this)
+        var select = jQuery(this).parent().parent().parent().find('.select2-hidden-accessible')
+        var value = select.val().split(',')
+        var id = img.data('value').toString()
+        if (img.hasClass('active')) {
+            select.val(value.filter(function (elem) {
+                return elem !== id
+            }).join(',')).trigger('change')
+            img.removeClass('active')
+        } else {
+            select.val((value.concat(id).join(','))).trigger('change')
+            img.addClass('active')
+        }
+    })
+}
+
 function gruntSpritesFilter() {
     jQuery('.grunt-list').parent().find('.select2').hide()
     loadDefaultImages()
@@ -7385,6 +7483,7 @@ function loadDefaultImages() {
     var eqp = Store.get('remember_quests_exclude_pokemon')
     var eqi = Store.get('remember_quests_exclude_item')
     var eqe = Store.get('remember_quests_exclude_energy')
+    var eqc = Store.get('remember_quests_exclude_candy')
     var eg = Store.get('remember_exclude_grunts')
     var erb = Store.get('remember_exclude_raidbosses')
     var ere = Store.get('remember_exclude_raideggs')
@@ -7414,6 +7513,11 @@ function loadDefaultImages() {
         }
     })
     $('label[for="exclude-quests-energy"] .energy-icon-sprite').each(function () {
+        if (eqe.indexOf($(this).data('value')) !== -1) {
+            $(this).addClass('active')
+        }
+    })
+    $('label[for="exclude-quests-candy"] .candy-icon-sprite').each(function () {
         if (eqe.indexOf($(this).data('value')) !== -1) {
             $(this).addClass('active')
         }
@@ -7878,6 +7982,7 @@ $(function () {
     pokemonSpritesFilter()
     itemSpritesFilter()
     energySpritesFilter()
+	candySpritesFilter()
 
     // Overlay Styling
     $selectOverlayStyle = $('#design-style')
@@ -7975,6 +8080,7 @@ $(function () {
     $questsExcludePokemon = $('#exclude-quests-pokemon')
     $questsExcludeItem = $('#exclude-quests-item')
     $questsExcludeEnergy = $('#exclude-quests-energy')
+    $questsExcludeCandy = $('#exclude-quests-candy')
     $excludeGrunts = $('#exclude-grunts')
     $excludeRaidbosses = $('#exclude-raidbosses')
     $excludeRaideggs = $('#exclude-raideggs')
@@ -8114,6 +8220,13 @@ $(function () {
         $questsExcludeEnergy.select2({
             placeholder: i8ln('Select Item'),
             data: energyList,
+            templateResult: formatState,
+            multiple: true,
+            maximumSelectionSize: 1
+        })
+        $questsExcludeCandy.select2({
+            placeholder: i8ln('Select Pokemon'),
+            data: pokeList,
             templateResult: formatState,
             multiple: true,
             maximumSelectionSize: 1
@@ -8278,6 +8391,18 @@ $(function () {
             updateMap()
             Store.set('remember_quests_exclude_energy', questsExcludedEnergy)
         })
+        $questsExcludeCandy.on('change', function (e) {
+            buffer = questsExcludedCandy
+            questsExcludedCandy = $questsExcludeCandy.val().split(',').map(Number).sort(function (a, b) {
+                return parseInt(a) - parseInt(b)
+            })
+            buffer = buffer.filter(function (e) {
+                return this.indexOf(e) < 0
+            }, questsExcludedCandy)
+            reincludedQuestsCandy = reincludedQuestsCandy.concat(buffer).map(String)
+            updateMap()
+            Store.set('remember_quests_exclude_candy', questsExcludedCandy)
+        })
         // recall saved lists
         $selectExclude.val(Store.get('remember_select_exclude')).trigger('change')
         $selectExcludeMinIV.val(Store.get('remember_select_exclude_min_iv')).trigger('change')
@@ -8290,6 +8415,7 @@ $(function () {
         $raidNotify.val(Store.get('remember_raid_notify')).trigger('change')
         $questsExcludePokemon.val(Store.get('remember_quests_exclude_pokemon')).trigger('change')
         $questsExcludeEnergy.val(Store.get('remember_quests_exclude_energy')).trigger('change')
+        $questsExcludeCandy.val(Store.get('remember_quests_exclude_candy')).trigger('change')
         $excludeRaidbosses.val(Store.get('remember_exclude_raidbosses')).trigger('change')
         $excludeRaideggs.val(Store.get('remember_exclude_raideggs')).trigger('change')
 
@@ -8339,6 +8465,19 @@ $(function () {
         e.preventDefault()
         var parent = $(this).parent()
         parent.find('.energy-list .energy-icon-sprite').removeClass('active')
+        parent.find('input').val('').trigger('change')
+    })
+    $('.select-all-candy').on('click', function (e) {
+        e.preventDefault()
+        var parent = $(this).parent()
+        parent.find('.candy-list .candy-icon-sprite').addClass('active')
+        parent.find('input').val(Array.from(Array(numberOfPokemon + 1).keys()).slice(1).join(',')).trigger('change')
+    })
+
+    $('.hide-all-candy').on('click', function (e) {
+        e.preventDefault()
+        var parent = $(this).parent()
+        parent.find('.candy-list .candy-icon-sprite').removeClass('active')
         parent.find('input').val('').trigger('change')
     })
 

@@ -156,6 +156,54 @@ $getList = new \Scanner\RDM();
         </script>
         <?php
     }
+	
+    function candyFilterImages($noPokemonNumbers, $onClick = '', $candyToExclude = array(), $num = 0)
+    {
+        global $mons, $iconRepository, $numberOfPokemon, $copyrightSafe;
+        if (empty($mons)) {
+            $json = file_get_contents('static/dist/data/pokemon.min.json');
+            $mons = json_decode($json, true);
+        }
+		echo '<div class="candy-list-cont" id="candy-list-cont-' . $num . '"><input type="hidden" class="search-number" value="' . $num . '" /><input class="search search-input" placeholder="' . i8ln( "Search Name, ID & Type" ) . '" /><div class="candy-list list">';
+        $i = $z = 0;
+        foreach ($mons as $k => $pokemon) {
+            $type = '';
+            $name = $pokemon['name'];
+            foreach ($pokemon['types'] as $t) {
+                $type .= i8ln($t['type']);
+            }
+            if (! in_array($k, $candyToExclude)) {
+                if ( $k > 890 ) {
+                    break;
+				}
+				if ( $k <= 9 ) {
+                    $id = "00$k";
+                } else if ( $k <= 99 ) {
+                    $id = "0$k";
+                } else {
+                    $id = $k;
+				}
+				if (!$copyrightSafe) {
+                    echo '<span class="candy-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . $type . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="' . $iconRepository . 'pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
+				} else {
+                    echo '<span class="candy-icon-sprite" data-value="' . $k . '" onclick="' . $onClick . '"><span style="display:none" class="types">' . $type . '</span><span style="display:none" class="name">' . i8ln( $name ) . '</span><span style="display:none" class="id">$k</span><img src="static/icons-safe/pokemon_icon_' . $id . '_00.png" style="width:48px;height:48px;"/>';
+                }
+                if (!$noPokemonNumbers) {
+                    echo "<span class='candy-number'>" . $k . "</span>";
+                }
+                echo "</span>";
+            }
+        }
+        echo '</div></div>';
+        ?>
+        <script>
+            var options = {
+                valueNames: ['name', 'types', 'id']
+            };
+            var candyList = new List('candy-list-cont-<?php echo $num;?>', options);
+        </script>
+    <?php }
+	
     function gruntFilterImages($noGruntNumbers, $onClick = '', $gruntsToExclude = array(), $num = 0) {
         global $grunts;
         if (empty($grunts)) {
@@ -803,6 +851,10 @@ if (!$noLoadingScreen) {
 										if ( ! $noQuestsItems ) {
 											echo '<li><a href="#tabs-3">' . i8ln("Energy") . '</a></li>';
 										} ?>
+										<?php
+										if ( ! $noQuestsEnergy ) {
+											echo '<li><a href="#tabs-4">' . i8ln("Candy") . '</a></li>';
+										} ?>
 									</ul>
 									<?php
 									if ( ! $noQuestsPokemon ) {
@@ -854,6 +906,11 @@ if (!$noLoadingScreen) {
 												</label>
 											</div>
 										</div>
+										<?php
+									} ?>
+									<?php
+									if ( ! $noQuestsEnergy ) {
+										?>
 										<div id="tabs-3">
 											<div class="form-control hide-select-2">
 												<label for="exclude-quests-energy">
@@ -870,6 +927,32 @@ if (!$noLoadingScreen) {
 													<?php
 														echo '<a href="#" class="select-all-energy">' . i8ln("All") . '</a>
 														<a href="#" class="hide-all-energy">' . i8ln("None") . '</a>';
+													?>
+													
+												</label>
+											</div>
+										</div>
+										<?php
+									} ?>
+									<?php
+									if ( ! $noQuestsCandy ) {
+										?>
+										<div id="tabs-4">
+											<div class="form-control hide-select-2">
+												<label for="exclude-quests-candy">
+													<div class="quest-candy-container">
+														<input id="exclude-quests-candy" type="text" readonly="true">
+														<?php
+															if($generateExcludeCandy){
+																candyFilterImages($noPokemonNumbers, '', array_diff(range(1, $numberOfPokemon), $getList->generated_exclude_list('candylist')), 13);
+															} else {
+																candyFilterImages($noPokemonNumbers, '', $excludeQuestsCandy, 13);
+															}
+															?>
+													</div>
+													<?php
+														echo '<a href="#" class="select-all-candy">' . i8ln("All") . '</a>
+														<a href="#" class="hide-all-candy">' . i8ln("None") . '</a>';
 													?>
 													
 												</label>
@@ -2609,6 +2692,7 @@ if (!$noLoadingScreen) {
     var hideQuestsPokemon = <?php echo $noQuestsPokemon ? '[]' : $hideQuestsPokemon ?>;
     var hideQuestsItem = <?php echo $noQuestsItems ? '[]' : $hideQuestsItem ?>;
     var hideQuestsEnergy = <?php echo $noQuestsEnergy ? '[]' : $hideQuestsEnergy ?>;
+	var hideQuestsCandy = <?php echo $noQuestsCandy ? '[]' : $hideQuestsCandy ?>;
     var enableNewPortals = <?php echo $enableNewPortals ?>;
     var enableWeatherOverlay = <?php echo ! $noWeatherOverlay ? $enableWeatherOverlay : 'false' ?>;
     var enableSpawnpoints = <?php echo $noSpawnPoints ? 'false' : $enableSpawnPoints ?>;
